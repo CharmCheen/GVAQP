@@ -120,7 +120,10 @@ def make_boxplot(results_df, metric_col, methods, target_line, title, ylabel, ou
     if not data_for_plot:
         plt.close(fig)
         return
-    ax.boxplot(data_for_plot, tick_labels=labels_for_plot, patch_artist=True)
+    try:
+        ax.boxplot(data_for_plot, tick_labels=labels_for_plot, patch_artist=True)
+    except TypeError:
+        ax.boxplot(data_for_plot, labels=labels_for_plot, patch_artist=True)
     ax.axhline(y=target_line, color="red", linestyle="--", linewidth=1.5, label=f"target = {target_line}")
     ax.set_title(title)
     ax.set_ylabel(ylabel)

@@ -8,11 +8,9 @@ from .base import FrameScore, FrameScorer
 class YOLOFrameScorer(FrameScorer):
     """Score frames using a YOLO model from ultralytics.
 
-    For each frame, finds all boxes of `target_class` and returns:
-    - score = highest confidence among matched boxes
-    - count = number of matched boxes
-    - max_conf = same as score (single-class)
-    If no detection: score=0.0, count=0.
+    For each frame, finds all boxes of `target_class` and returns score
+    fields derived from the matched confidences. `score` remains the max
+    confidence for backward compatibility.
     """
 
     def __init__(
@@ -75,7 +73,20 @@ class YOLOFrameScorer(FrameScorer):
             for fid, pred in zip(batch_ids, preds):
                 boxes = pred.boxes
                 if boxes is None or len(boxes) == 0:
-                    results.append(FrameScore(id=fid, score=0.0, count=0, max_conf=0.0))
+                    results.append(
+                        FrameScore(
+                            id=fid,
+                            score=0.0,
+                            count=0,
+                            max_conf=0.0,
+                            extra={
+                                "conf_sum": 0.0,
+                                "conf_mean": 0.0,
+                                "conf_top3_sum": 0.0,
+                                "conf_top5_sum": 0.0,
+                            },
+                        )
+                    )
                     continue
 
                 cls_ids = boxes.cls.cpu().numpy().astype(int)
@@ -84,15 +95,36 @@ class YOLOFrameScorer(FrameScorer):
                 matched_confs = confs[mask]
 
                 if len(matched_confs) == 0:
-                    results.append(FrameScore(id=fid, score=0.0, count=0, max_conf=0.0))
+                    results.append(
+                        FrameScore(
+                            id=fid,
+                            score=0.0,
+                            count=0,
+                            max_conf=0.0,
+                            extra={
+                                "conf_sum": 0.0,
+                                "conf_mean": 0.0,
+                                "conf_top3_sum": 0.0,
+                                "conf_top5_sum": 0.0,
+                            },
+                        )
+                    )
                 else:
                     max_c = float(matched_confs.max())
+                    sorted_confs = sorted((float(c) for c in matched_confs), reverse=True)
+                    conf_sum = float(sum(sorted_confs))
                     results.append(
                         FrameScore(
                             id=fid,
                             score=max_c,
                             count=int(len(matched_confs)),
                             max_conf=max_c,
+                            extra={
+                                "conf_sum": conf_sum,
+                                "conf_mean": float(conf_sum / len(sorted_confs)),
+                                "conf_top3_sum": float(sum(sorted_confs[:3])),
+                                "conf_top5_sum": float(sum(sorted_confs[:5])),
+                            },
                         )
                     )
 

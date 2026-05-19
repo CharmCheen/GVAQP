@@ -1,0 +1,47 @@
+project:
+  name: kitti_0005_count5_supg_smoke
+  seed: 42
+
+paths:
+  garc_home: ${GARC_HOME}
+  model_dir: ${GARC_MODEL_DIR}
+  data_dir: ${GARC_DATA_DIR}
+  output_dir: ${GARC_OUTPUT_DIR}
+
+data:
+  video_path: null
+  video_id: kitti_2011_09_26_drive_0005
+  frames_dir: ${GARC_DATA_DIR}/frames/kitti_0005
+  frame_table_path: ${GARC_OUTPUT_DIR}/kitti_0005_smoke/frame_metadata.parquet
+  sample_fps: 10.0
+  max_frames: 1000
+
+query:
+  target_class: car
+  predicate: count_at_least
+  count_threshold: 5
+  oracle_threshold: 0.5
+
+proxy:
+  type: yolo
+  model_name: yolov8n.pt
+  model_path: ${GARC_MODEL_DIR}/yolo/yolov8n.pt
+  device: cuda:0
+  batch_size: 32
+  score_field: proxy_score
+
+oracle:
+  type: yolo
+  model_name: yolov8x.pt
+  model_path: ${GARC_MODEL_DIR}/yolo/yolov8x.pt
+  device: cuda:0
+  batch_size: 16
+  score_field: oracle_score
+  label_rule: oracle_count >= 5
+
+supg:
+  source_csv: ${GARC_OUTPUT_DIR}/kitti_0005_count5_smoke/supg_source.csv
+  budget: 30
+  gamma: 0.9
+  delta: 0.05
+  trials: 5

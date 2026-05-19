@@ -54,12 +54,22 @@ def dry_run(cfg: dict) -> None:
         print(f"  {k}: {v}  (exists: {p.exists()})")
 
     data = cfg["data"]
+    query = cfg.get("query", {})
+    predicate = query.get("predicate", "contains_class")
     print(f"\n[dry-run] Data:")
-    print(f"  video_path:      {data['video_path']}  (exists: {pathlib.Path(data['video_path']).exists()})")
+    video_path = data.get("video_path")
+    video_exists = pathlib.Path(video_path).exists() if video_path else "n/a"
+    print(f"  video_path:      {video_path}  (exists: {video_exists})")
     print(f"  frames_dir:      {data['frames_dir']}  (exists: {pathlib.Path(data['frames_dir']).exists()})")
     print(f"  frame_table_path:{data['frame_table_path']}")
     print(f"  sample_fps:      {data['sample_fps']}")
     print(f"  max_frames:      {data['max_frames']}")
+    print(f"\n[dry-run] Query:")
+    print(f"  target_class:    {query.get('target_class')}")
+    print(f"  predicate:       {predicate}")
+    if predicate == "count_at_least":
+        print(f"  count_threshold: {query.get('count_threshold')}")
+    print(f"  oracle_threshold:{query.get('oracle_threshold')}")
 
     proxy = cfg["proxy"]
     oracle = cfg["oracle"]
@@ -120,12 +130,12 @@ def materialize(cfg: dict, skip_proxy: bool, skip_oracle: bool,
     print(f"Loaded {len(meta)} frames from {frame_table_path}")
 
     frame_rows = meta.to_dict("records")
-    outdir = pathlib.Path(cfg["paths"]["output_dir"]) / "real_frames"
+    outdir = pathlib.Path(cfg["supg"]["source_csv"]).parent
     outdir.mkdir(parents=True, exist_ok=True)
 
     # Proxy scores
     proxy_scores_path = str(outdir / "proxy_scores.parquet")
-    if skip_proxy and existing_proxy:
+    if existing_proxy:
         proxy_scores_path = existing_proxy
         print(f"Using existing proxy scores: {proxy_scores_path}")
     elif skip_proxy:
@@ -143,10 +153,23 @@ def materialize(cfg: dict, skip_proxy: bool, skip_oracle: bool,
             conf_threshold=proxy_cfg.get("conf_threshold", 0.25),
         )
         proxy_results = proxy_scorer.score_frames(frame_rows)
-        proxy_df = pd.DataFrame([
-            {"id": r.id, "proxy_score": r.score, "proxy_count": r.count}
-            for r in proxy_results
-        ])
+        proxy_rows = []
+        for r in proxy_results:
+            row = {
+                "id": r.id,
+                "proxy_score": r.score,
+                "proxy_max_conf": r.max_conf,
+                "proxy_count": r.count,
+            }
+            if r.extra:
+                row.update({
+                    "proxy_conf_sum": r.extra.get("conf_sum", 0.0),
+                    "proxy_conf_mean": r.extra.get("conf_mean", 0.0),
+                    "proxy_conf_top3_sum": r.extra.get("conf_top3_sum", 0.0),
+                    "proxy_conf_top5_sum": r.extra.get("conf_top5_sum", 0.0),
+                })
+            proxy_rows.append(row)
+        proxy_df = pd.DataFrame(proxy_rows)
         proxy_df.to_parquet(proxy_scores_path, index=False)
         print(f"Saved proxy scores: {proxy_scores_path}")
 
@@ -154,7 +177,7 @@ def materialize(cfg: dict, skip_proxy: bool, skip_oracle: bool,
     oracle_scores_path = str(outdir / "oracle_scores.parquet")
     oracle_cfg = cfg["oracle"]
 
-    if skip_oracle and existing_oracle:
+    if existing_oracle:
         oracle_scores_path = existing_oracle
         print(f"Using existing oracle scores: {oracle_scores_path}")
     elif skip_oracle:
@@ -177,10 +200,18 @@ def materialize(cfg: dict, skip_proxy: bool, skip_oracle: bool,
             conf_threshold=oracle_cfg.get("conf_threshold", 0.25),
         )
         oracle_results = oracle_scorer.score_frames(frame_rows)
-        oracle_df = pd.DataFrame([
-            {"id": r.id, "oracle_score": r.score, "oracle_count": r.count}
-            for r in oracle_results
-        ])
+        oracle_rows = []
+        for r in oracle_results:
+            row = {"id": r.id, "oracle_score": r.score, "oracle_count": r.count}
+            if r.extra:
+                row.update({
+                    "oracle_conf_sum": r.extra.get("conf_sum", 0.0),
+                    "oracle_conf_mean": r.extra.get("conf_mean", 0.0),
+                    "oracle_conf_top3_sum": r.extra.get("conf_top3_sum", 0.0),
+                    "oracle_conf_top5_sum": r.extra.get("conf_top5_sum", 0.0),
+                })
+            oracle_rows.append(row)
+        oracle_df = pd.DataFrame(oracle_rows)
         oracle_df.to_parquet(oracle_scores_path, index=False)
         print(f"Saved oracle scores: {oracle_scores_path}")
 
@@ -194,7 +225,10 @@ def materialize(cfg: dict, skip_proxy: bool, skip_oracle: bool,
         proxy_scores_path=proxy_scores_path or "",
         oracle_scores_path=oracle_scores_path,
         gt_labels_path=gt_labels_path,
-        oracle_threshold=cfg["query"]["oracle_threshold"],
+        oracle_threshold=cfg["query"].get("oracle_threshold", 0.5),
+        predicate=cfg["query"].get("predicate", "contains_class"),
+        count_threshold=cfg["query"].get("count_threshold"),
+        proxy_score_rule=cfg["query"].get("proxy_score_rule", "count_ratio"),
         output_frames_path=frames_out,
         output_source_csv=source_out,
     )

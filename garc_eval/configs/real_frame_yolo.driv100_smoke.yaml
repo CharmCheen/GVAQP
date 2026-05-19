@@ -1,0 +1,46 @@
+project:
+  name: driv100_supg_smoke
+  seed: 42
+
+paths:
+  garc_home: ${GARC_HOME}
+  model_dir: ${GARC_MODEL_DIR}
+  data_dir: ${GARC_DATA_DIR}
+  output_dir: ${GARC_OUTPUT_DIR}
+
+data:
+  video_path: ${GARC_DATA_DIR}/videos/driv100_sample.mp4
+  video_id: driv100_sample
+  frames_dir: ${GARC_DATA_DIR}/frames/driv100_smoke
+  frame_table_path: ${GARC_OUTPUT_DIR}/driv100_smoke/frame_metadata.parquet
+  sample_fps: 1.0
+  max_frames: 1000
+
+query:
+  target_class: car
+  predicate: contains_class
+  oracle_threshold: 0.5
+
+proxy:
+  type: yolo
+  model_name: yolov8n.pt
+  model_path: ${GARC_MODEL_DIR}/yolo/yolov8n.pt
+  device: cuda:0
+  batch_size: 32
+  score_field: proxy_score
+
+oracle:
+  type: yolo
+  model_name: yolov8x.pt
+  model_path: ${GARC_MODEL_DIR}/yolo/yolov8x.pt
+  device: cuda:0
+  batch_size: 16
+  score_field: oracle_score
+  label_rule: oracle_score >= 0.5
+
+supg:
+  source_csv: ${GARC_OUTPUT_DIR}/driv100_smoke/supg_source.csv
+  budget: 200
+  gamma: 0.9
+  delta: 0.05
+  trials: 5
