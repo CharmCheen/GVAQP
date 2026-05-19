@@ -1,0 +1,119 @@
+# =========================
+# Python cache / build
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# =========================
+# Virtual environments
+# =========================
+.venv/
+venv/
+env/
+ENV/
+.conda/
+conda-env/
+site-packages/
+
+# =========================
+# IDE / OS
+# =========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+*.tmp
+*.temp
+
+# =========================
+# Secrets / local configs
+# =========================
+.env
+.env.*
+*.local.yaml
+*.local.yml
+*.private.yaml
+*.private.yml
+secrets/
+credentials/
+
+# =========================
+# Third-party repositories
+# Do not commit cloned external repos.
+# Record their commit hashes instead.
+# =========================
+refe_repos/
+
+# =========================
+# Local data / models
+# =========================
+data/
+models/
+
+# Video / frame / model artifacts
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+*.flv
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.tif
+*.tiff
+
+# ML model weights / inference artifacts
+*.pt
+*.pth
+*.onnx
+*.engine
+*.ckpt
+*.safetensors
+
+# Large generated arrays / tables
+*.npy
+*.npz
+*.feather
+
+# =========================
+# Generated experiment outputs
+# Keep only lightweight reports/metadata.
+# =========================
+garc_eval/outputs/*
+!garc_eval/outputs/.gitkeep
+!garc_eval/outputs/report.md
+!garc_eval/outputs/repo_commits.json
+
+# Large experiment result folders
+garc_eval/outputs/supg_*/
+garc_eval/outputs/real_frame_tables/
+garc_eval/outputs/real_frames/
+
+# =========================
+# Generated datasets inside garc_eval
+# =========================
+garc_eval/**/synthetic_beta.csv
+garc_eval/**/*.parquet
+garc_eval/**/*.csv
+garc_eval/**/*.png
+
+# But allow test fixtures if you create them later
+!garc_eval/tests/fixtures/**

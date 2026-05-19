@@ -1,0 +1,59 @@
+project:
+  name: supg_real_frames_yolo
+  seed: 42
+
+paths:
+  garc_home: ${GARC_HOME}
+  model_dir: ${GARC_MODEL_DIR}
+  data_dir: ${GARC_DATA_DIR}
+  output_dir: ${GARC_OUTPUT_DIR}
+
+data:
+  video_path: ${GARC_DATA_DIR}/videos/sample.mp4
+  video_id: sample
+  frames_dir: ${GARC_DATA_DIR}/frames/sample
+  frame_table_path: ${GARC_OUTPUT_DIR}/real_frames/frame_metadata.parquet
+  sample_fps: 1.0
+  max_frames: null  # null = all frames
+
+query:
+  target_class: person  # COCO class name or integer id
+  predicate: "proxy_score >= threshold"
+  oracle_threshold: 0.5
+
+proxy:
+  type: yolo
+  model_name: yolov8n.pt
+  model_path: ${GARC_MODEL_DIR}/yolo/yolov8n.pt
+  device: cuda:0
+  batch_size: 32
+  conf_threshold: 0.25
+  score_field: proxy_score
+
+oracle:
+  # --- Option A: YOLO oracle (run model on server) ---
+  type: yolo
+  model_name: yolov8x.pt
+  model_path: ${GARC_MODEL_DIR}/yolo/yolov8x.pt
+  device: cuda:0
+  batch_size: 16
+  conf_threshold: 0.25
+  score_field: oracle_score
+  label_rule: "oracle_score >= 0.5"
+
+  # --- Option B: Ground-truth labels (no model, read CSV/parquet) ---
+  # To use GT instead of a model, change `type` to `gt` and set `label_path`:
+  #
+  # type: gt
+  # label_path: ${GARC_DATA_DIR}/labels/gt_labels.csv
+  #
+  # The file must have columns: id,label  (label is 0 or 1).
+  # When type=gt, materialize_frame_scores.py reads labels directly
+  # and does NOT run any oracle model.
+
+supg:
+  source_csv: ${GARC_OUTPUT_DIR}/real_frames/supg_source.csv
+  budget: 10000
+  gamma: 0.9
+  delta: 0.05
+  trials: 100
