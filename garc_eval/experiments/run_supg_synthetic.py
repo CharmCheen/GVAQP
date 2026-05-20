@@ -111,7 +111,10 @@ def make_boxplot(
         plt.close(fig)
         return
 
-    bp = ax.boxplot(data_for_plot, tick_labels=labels_for_plot, patch_artist=True)
+    try:
+        bp = ax.boxplot(data_for_plot, tick_labels=labels_for_plot, patch_artist=True)
+    except TypeError:
+        bp = ax.boxplot(data_for_plot, labels=labels_for_plot, patch_artist=True)
     ax.axhline(y=target_line, color="red", linestyle="--", linewidth=1.5, label=f"target = {target_line}")
     ax.set_title(title)
     ax.set_ylabel(ylabel)
