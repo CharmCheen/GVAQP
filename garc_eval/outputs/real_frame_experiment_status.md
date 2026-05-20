@@ -85,3 +85,82 @@ Current KITTI combined is a pipeline benchmark, not a usable non-degenerate SUPG
 4. Run a 5-trial smoke.
 5. If non-vacuous, run 20 trials.
 6. Then run 100 trials.
+
+## 10. BDD100K Smoke (2026-05-20)
+
+### Dataset
+- **Source**: BDD100K Hirundo validation subset (HuggingFace)
+- **N**: 10,000 images (1280x720 JPEG, driving/dashcam scenes)
+- **License**: BSD-3-Clause
+- **Download**: Non-interactive via curl from HuggingFace CDN
+
+### Query
+- **Predicate**: count_car(frame) >= 13
+- **Calibrated K**: 13 (from oracle counts)
+- **Positive rate**: 9.92% (992 / 10,000)
+- **proxy_score unique**: 9,287 / 10,000
+
+### SUPG Results (20 trials, gamma=0.9, delta=0.05, budget=1000)
+
+| method | qtype | failure_rate | mean_precision | mean_recall | mean_selected_n | selected_n/N | vacuous |
+|--------|-------|-------------|----------------|-------------|-----------------|-------------|---------|
+| U-NOCI-RT | rt | 0.50 | 0.343 | 0.903 | 2,723 | 0.272 | no |
+| U-CI-RT | rt | 0.00 | 0.099 | 1.000 | 10,000 | 1.000 | yes |
+| **SUPG-RT** | **rt** | **0.00** | **0.196** | **0.973** | **5,048** | **0.505** | **no** |
+| U-NOCI-PT | pt | 0.80 | 0.487 | 0.140 | 161 | 0.016 | no |
+| SUPG-PT | pt | 0.00 | 1.000 | 0.274 | 272 | 0.027 | no |
+
+### Key Outcome
+**SUPG-RT is non-vacuous on BDD100K.** This is the first real-video benchmark where SUPG-RT
+demonstrates non-trivial selection behavior:
+- selected_n/N = 0.505 (selects ~50% of frames)
+- recall = 97.3% (well above gamma=0.9)
+- failure_rate = 0.0 (no guarantee violations)
+
+SUPG-PT is also stable: precision = 1.0, recall = 27.4%, low variance across seeds.
+
+### Comparison with KITTI Combined
+| Metric | KITTI combined | BDD100K |
+|--------|---------------|---------|
+| N | 1,176 | 10,000 |
+| K | 15 | 13 |
+| positive rate | 13.78% | 9.92% |
+| proxy_score unique | 1,102 | 9,287 |
+| SUPG-RT selected_n/N | 1.000 (vacuous) | 0.505 (non-vacuous) |
+| SUPG-PT precision | 1.0 | 1.0 |
+
+### Conclusion
+BDD100K is a suitable benchmark for G-ARC SUPG experiments. The larger N and higher proxy
+score diversity enable non-vacuous SUPG-RT behavior. Recommended as the primary real-frame
+benchmark going forward.
+
+Full report: [bdd100k_smoke/report.md](bdd100k_smoke/report.md)
+
+## 11. BDD100K Formal 100-Trial Run (2026-05-20)
+
+100-trial formal experiment confirming the 20-trial smoke results.
+
+### SUPG Results (100 trials, gamma=0.9, delta=0.05, budget=1000)
+
+| method | qtype | failure_rate | mean_precision | mean_recall | mean_selected_n | selected_n/N | vacuous |
+|--------|-------|-------------|----------------|-------------|-----------------|-------------|---------|
+| U-NOCI-RT | rt | 0.40 | 0.336 | 0.907 | 2,769 | 0.277 | no |
+| U-CI-RT | rt | 0.00 | 0.099 | 1.000 | 10,000 | 1.000 | yes |
+| **SUPG-RT** | **rt** | **0.00** | **0.185** | **0.977** | **5,417** | **0.542** | **no** |
+| U-NOCI-PT | pt | 0.85 | 0.440 | 0.128 | 148 | 0.015 | no |
+| SUPG-PT | pt | 0.00 | 1.000 | 0.275 | 273 | 0.027 | no |
+
+### Key Confirmations
+- **SUPG-RT non-vacuous**: selected_n/N = 0.542 over 100 trials (consistent with 20-trial 0.505)
+- **SUPG-RT recall guarantee**: failure_rate = 0.0, mean_recall = 0.977 > gamma = 0.9
+- **SUPG-PT stable**: precision = 1.0, recall = 0.275, low variance
+- **No errors**: error_count = 0 across all 500 method-trial combinations
+
+### Status
+BDD100K is now the primary frame-level real-road benchmark for G-ARC.
+The non-vacuous SUPG-RT benchmark problem is resolved.
+
+**Limitation**: BDD100K val is an image-level benchmark. Temporal video/clip-level
+benchmarking still requires UA-DETRAC or other continuous video datasets.
+
+Full report: [bdd100k_formal_100trials/report.md](bdd100k_formal_100trials/report.md)

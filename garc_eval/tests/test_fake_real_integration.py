@@ -72,10 +72,11 @@ def make_fake_data(outdir: pathlib.Path, n: int = 2000, seed: int = 42) -> dict:
     }
 
 
-def test_build_frame_table(paths: dict) -> pd.DataFrame:
+def test_build_frame_table(tmp_path) -> None:
     """Test build_frame_table with fake data."""
     from garc_eval.datasets.build_frame_table import build_frame_table
 
+    paths = make_fake_data(tmp_path)
     frames_df, source_df = build_frame_table(
         frame_metadata_path=paths["meta_path"],
         proxy_scores_path=paths["proxy_path"],
@@ -96,14 +97,24 @@ def test_build_frame_table(paths: dict) -> pd.DataFrame:
     assert pathlib.Path(paths["source_csv"]).exists(), "supg_source.csv not written"
 
     print(f"  build_frame_table: {len(frames_df)} rows, label_rate={source_df['label'].mean():.4f}")
-    return source_df
 
 
-def test_run_supg_real_frames(paths: dict, trials: int = 3) -> None:
+def test_run_supg_real_frames(tmp_path, trials: int = 3) -> None:
     """Test run_supg_real_frames with a small number of trials."""
+    from garc_eval.datasets.build_frame_table import build_frame_table
     from garc_eval.experiments.run_supg_real_frames import main as run_main
 
-    outdir = str(pathlib.Path(paths["source_csv"]).parent / "supg_test_results")
+    paths = make_fake_data(tmp_path)
+    build_frame_table(
+        frame_metadata_path=paths["meta_path"],
+        proxy_scores_path=paths["proxy_path"],
+        gt_labels_path=paths["gt_path"],
+        oracle_threshold=0.5,
+        output_frames_path=paths["frames_parquet"],
+        output_source_csv=paths["source_csv"],
+    )
+
+    outdir = str(tmp_path / "supg_test_results")
 
     # Simulate CLI args
     sys.argv = [
@@ -135,11 +146,11 @@ def test_run_supg_real_frames(paths: dict, trials: int = 3) -> None:
     print(f"  run_supg_real_frames: {len(per_trial)} trials, {len(summary)} methods, 0 errors")
 
 
-def test_schema_validation_rejects_bad_csv(paths: dict) -> None:
+def test_schema_validation_rejects_bad_csv(tmp_path) -> None:
     """Test that schema validation catches bad inputs."""
     from garc_eval.experiments.run_supg_real_frames import _validate_source_csv
 
-    outdir = pathlib.Path(paths["source_csv"]).parent
+    outdir = tmp_path
 
     # Missing column
     bad_csv = outdir / "bad_missing_col.csv"

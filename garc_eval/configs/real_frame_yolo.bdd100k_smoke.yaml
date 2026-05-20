@@ -1,0 +1,50 @@
+project:
+  name: bdd100k_supg_smoke
+  seed: 42
+
+paths:
+  garc_home: ${GARC_HOME}
+  model_dir: ${GARC_MODEL_DIR}
+  data_dir: ${GARC_DATA_DIR}
+  output_dir: ${GARC_OUTPUT_DIR}
+
+data:
+  video_path: null
+  video_id: bdd100k_val
+  frames_dir: ${GARC_DATA_DIR}/bdd100k/bdd100k/images/100k/val
+  frame_table_path: ${GARC_OUTPUT_DIR}/bdd100k_smoke/frame_metadata.parquet
+  sample_fps: 1.0
+  max_frames: 10000
+
+query:
+  target_class: car
+  predicate: count_at_least
+  count_threshold: 13  # calibrated for ~10% positive rate
+  oracle_threshold: 0.5
+  proxy_score_rule: count_conf_hybrid
+
+proxy:
+  type: yolo
+  model_name: yolov8n.pt
+  model_path: ${GARC_MODEL_DIR}/yolo/yolov8n.pt
+  device: cuda:0
+  batch_size: 32
+  conf_threshold: 0.25
+  score_field: proxy_score
+
+oracle:
+  type: yolo
+  model_name: yolov8x.pt
+  model_path: ${GARC_MODEL_DIR}/yolo/yolov8x.pt
+  device: cuda:0
+  batch_size: 16
+  conf_threshold: 0.25
+  score_field: oracle_score
+  label_rule: oracle_count >= count_threshold
+
+supg:
+  source_csv: ${GARC_OUTPUT_DIR}/bdd100k_smoke/supg_source.csv
+  budget: 1000
+  gamma: 0.9
+  delta: 0.05
+  trials: 5
