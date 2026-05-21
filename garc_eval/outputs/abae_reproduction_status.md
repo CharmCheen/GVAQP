@@ -126,11 +126,16 @@ Equal weight per stratum (baseline only).
 
 ## 8. Reproduction Completeness
 
-**Status**: ABae minimal single-predicate reproduction is **COMPLETE**.
+**Status**: ABae synthetic subset reproduced. ABae-paper narrows CI width vs Uniform on
+synthetic data and BDD100K cached data (G-ARC extension). Full original paper reproduction
+remains incomplete; real-dataset experiments from the ABae paper (night-street, taipei,
+celeba, Amazon movie posters, trec05p, Amazon office) are blocked by missing datasets and
+oracle artifacts.
 
 - Algorithm: Implemented with 3 allocation modes (paper default, full_variance, uniform)
 - Synthetic: ABae-paper narrows CI width vs Uniform
-- BDD100K: ABae-paper significantly narrows CI width vs Uniform
+- BDD100K: ABae-paper significantly narrows CI width vs Uniform (G-ARC extension, not original paper)
 - COUNT coverage: 89% (**WARNING**: below 95% target, CI is anti-conservative)
 - Tests: 15/15 passing
 - No YOLO rerun, no refe_repos modification
+- **Blocked**: MultiPred, GroupBy, proxy combination, K sensitivity, C sensitivity, lesion experiments

@@ -1,9 +1,9 @@
 # G-ARC Extension Baseline Summary
 
-**IMPORTANT**: These experiments use BDD100K data and are G-ARC extensions.
-They are NOT from the original SUPG or ABae papers. The original papers used
-different datasets (ImageNet, OntoNotes, TACRED for SUPG; night-street, taipei,
-celeba, Amazon, trec05p for ABae).
+**IMPORTANT**: G-ARC BDD100K is an extension benchmark, not an original paper experiment.
+These experiments use BDD100K data and are G-ARC extensions. They are NOT from the original
+SUPG or ABae papers. The original papers used different datasets (ImageNet, OntoNotes, TACRED
+for SUPG; night-street, taipei, celeba, Amazon, trec05p for ABae).
 
 ---
 

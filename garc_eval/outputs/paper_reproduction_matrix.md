@@ -60,10 +60,15 @@ original SUPG/ABae papers. They are listed separately.
 
 ## Summary
 
-- **SUPG runnable now**: S1, S2, S4 (extension), S10, S12
-- **SUPG blocked**: S3, S5, S6, S7, S8, S9, S11 (partial)
-- **ABae runnable now**: A1-A5, A6 (extension), A15, A16, A17
-- **ABae blocked**: A7-A14, A18
-- **G-ARC extension**: E1-E3 (cached BDD100K)
+- **SUPG synthetic Beta experiments reproduced**: S1, S2, S10, S12 (synthetic only)
+- **SUPG blocked real-dataset experiments**: S3 (ImageNet), S5 (OntoNotes), S6 (TACRED), S7 (drift), S8 (proxy noise), S9 (class imbalance), S11 (CI comparison — partial)
+- **ABae synthetic subset reproduced**: A1-A5, A15, A16, A17 (synthetic only)
+- **ABae blocked real/original experiments**: A7 (taipei), A8 (celeba), A9 (Amazon movie posters), A10 (trec05p), A11 (Amazon office), A12 (MultiPred), A13 (GroupBy single), A14 (GroupBy multiple), A18 (proxy combination)
+- **G-ARC extension** (NOT from original papers): E1-E3 (cached BDD100K)
+
+**Note**: G-ARC BDD100K experiments (S4, A6, E1-E3) are extension benchmarks using cached
+BDD100K data. They are not from the original SUPG/ABae papers. Full paper reproduction remains
+incomplete; the blocked real-dataset/model-dependent experiments listed above are pending
+dataset acquisition, oracle implementation, or proxy model development.
 
 Generated: 2026-05-20

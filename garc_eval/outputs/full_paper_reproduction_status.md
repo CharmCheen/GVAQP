@@ -1,4 +1,4 @@
-# Full Paper Reproduction Status
+# SUPG and ABae Reproduction Status
 
 ## Overview
 
@@ -6,8 +6,9 @@ This document tracks the reproduction status of experiments from two papers:
 1. **SUPG** (Selection using Proxy Guarantees) — selection queries
 2. **ABae** (Aggregation with Budget allocation and estimation) — aggregation queries
 
-**Scope**: Only experiments from the original papers. BDD100K experiments are G-ARC extensions,
-clearly separated.
+**Scope**: Only synthetic/runnable subsets are reproduced here. Full original paper reproduction
+is not complete because many real-dataset experiments are blocked by missing datasets, proxy
+models, or oracle artifacts. BDD100K experiments are G-ARC extensions, clearly separated.
 
 ---
 
@@ -17,8 +18,8 @@ clearly separated.
 
 | Experiment | Status | Notes |
 |------------|--------|-------|
-| Beta(0.01,1) 100-trial | **SMOKE** | 30 trials completed, upgrading to 100 |
-| Beta(0.01,2) 100-trial | **SMOKE** | 30 trials completed, upgrading to 100 |
+| Beta(0.01,1) 100-trial | **DONE** | Synthetic only — does not cover real-dataset experiments |
+| Beta(0.01,2) 100-trial | **DONE** | Synthetic only — does not cover real-dataset experiments |
 | U-NOCI-RT, U-CI-RT, SUPG-RT | **RUNNABLE** | All 5 methods implemented |
 | U-NOCI-PT, SUPG-PT | **RUNNABLE** | Implemented |
 | Gamma sensitivity (0.5/0.7/0.9/0.95) | **RUNNABLE** | Script supports --gamma flag |
@@ -91,9 +92,9 @@ clearly separated.
 
 ---
 
-## Completed Experiments
+## Completed Synthetic Experiments
 
-### SUPG Synthetic Formal (DONE)
+### SUPG Synthetic Beta Experiments (DONE — synthetic only)
 
 **Beta(0.01, 1)** — N=1M, positive rate=0.976%, budget=10000, 100 trials:
 
@@ -115,9 +116,11 @@ clearly separated.
 | U-NOCI-PT | 0.89 | 0.753 | 0.075 | No |
 | **SUPG-PT** | **0.00** | **1.000** | **0.415** | **No** |
 
-**Conclusion**: SUPG achieves 0% failure rate (matching paper). U-NOCI has 47-57% failure. U-CI is vacuous.
+**Conclusion**: SUPG synthetic Beta experiments reproduced. SUPG achieves 0% failure rate
+(matching paper). U-NOCI has 47-57% failure. U-CI is vacuous. These are synthetic experiments
+only; real-dataset experiments (ImageNet, OntoNotes, TACRED) remain blocked.
 
-### ABae Synthetic Reproduction (DONE)
+### ABae Synthetic Subset (DONE — synthetic only)
 
 N=100K, 30 trials, 300 bootstrap, alpha=0.05:
 
@@ -134,8 +137,10 @@ N=100K, 30 trials, 300 bootstrap, alpha=0.05:
 | 10000 | Uniform | 0.0187 | 90.00% | 1334.5 | 100.00% |
 | 10000 | ABae-paper | 0.0169 | 83.33% | 1006.8 | 90.00% |
 
-**Conclusion**: ABae-paper narrows CI width vs Uniform (especially COUNT). COUNT coverage is
-anti-conservative (below 95% for most budgets). AVG coverage is variable.
+**Conclusion**: ABae synthetic subset reproduced. ABae-paper narrows CI width vs Uniform
+(especially COUNT). COUNT coverage is anti-conservative (below 95% for most budgets). AVG
+coverage is variable. These are synthetic experiments only; real-dataset experiments
+(night-street, taipei, celeba, Amazon, trec05p) remain blocked.
 
 **WARNING**: COUNT CIs are anti-conservative for ABae methods. See report for details.
 
@@ -149,6 +154,32 @@ ABae bootstrap CI for COUNT is anti-conservative with stratified sampling:
 - Uniform baseline COUNT coverage: 96-97% (well-calibrated)
 
 **Interpret COUNT CIs with caution for ABae methods.**
+
+---
+
+---
+
+## Remaining Blocked Experiments
+
+### SUPG Blocked
+- ImageNet hummingbird selection (need ImageNet subset + oracle labels)
+- OntoNotes entity selection (need OntoNotes + NER oracle)
+- TACRED relation selection (need TACRED + RE oracle)
+- Model drift robustness (need drift simulation script)
+- Proxy noise sensitivity (need noise injection script)
+- Class imbalance sensitivity (need imbalance sweep script)
+- CI method comparison — BCa/bootstrap variants (need implementation)
+
+### ABae Blocked
+- Night-street car (need original night-street dataset, not BDD100K)
+- Taipei intersection (need dataset + oracle)
+- CelebA attribute (need CelebA subset)
+- Amazon movie posters (need dataset)
+- trec05p spam (need dataset)
+- Amazon office (need dataset)
+- MultiPred aggregation (need multi-predicate implementation)
+- GroupBy single/multiple oracle (need GroupBy implementation)
+- Proxy combination (need multi-proxy extension)
 
 ---
 

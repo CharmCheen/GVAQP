@@ -76,7 +76,8 @@ The SUPG paper (Fig 2/3) shows:
 - U-CI is vacuous (selects all)
 - SUPG achieves 0% failure with meaningful selection
 
-Our reproduction confirms these findings on both Beta(0.01, 1) and Beta(0.01, 2) with N=1M:
+Our synthetic reproduction confirms these findings on both Beta(0.01, 1) and Beta(0.01, 2) with N=1M.
+Real-dataset experiments (ImageNet, OntoNotes, TACRED) remain blocked and are not covered here:
 
 | Dataset | Method | Failure Rate | Recall | Precision | Vacuous? |
 |---------|--------|-------------|--------|-----------|----------|
