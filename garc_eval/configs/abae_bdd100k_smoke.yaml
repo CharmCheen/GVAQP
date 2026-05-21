@@ -1,0 +1,26 @@
+# ABae BDD100K smoke experiment config
+# Single-predicate aggregation: AVG/COUNT WHERE count_car(frame) >= 13
+
+# Data paths (relative to project root)
+supg_source: garc_eval/outputs/bdd100k_smoke/supg_source.csv
+oracle_scores: garc_eval/outputs/bdd100k_smoke/oracle_scores.parquet
+proxy_scores: garc_eval/outputs/bdd100k_smoke/proxy_scores.parquet
+
+# Query metadata
+predicate: "count_car(frame) >= 13"
+K_predicate: 13
+statistic_value_col: oracle_count  # preference order: oracle_count > proxy_count > label
+
+# ABae parameters
+budget: 1000
+num_strata: 10
+stage1_per_stratum: null  # auto: max(5, budget*0.1/num_strata)
+
+# Experiment parameters
+trials: 30
+bootstrap_trials: 300
+alpha: 0.05
+random_seed: 42
+
+# Output
+output_dir: garc_eval/outputs/abae_bdd100k_smoke

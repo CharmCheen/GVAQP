@@ -164,3 +164,11 @@ The non-vacuous SUPG-RT benchmark problem is resolved.
 benchmarking still requires UA-DETRAC or other continuous video datasets.
 
 Full report: [bdd100k_formal_100trials/report.md](bdd100k_formal_100trials/report.md)
+
+## 12. ABae Side Reproduction Note
+
+ABae (Aggregation with Expensive Predicates) minimal reproduction was completed as a
+side track using the same cached BDD100K data. ABae is for aggregation queries
+(AVG/COUNT WHERE predicate), not selection queries (SUPG). The ABae modules, synthetic
+experiments, and BDD100K real-frame experiments are documented separately in
+[abae_reproduction_status.md](abae_reproduction_status.md). No SUPG results were modified.
