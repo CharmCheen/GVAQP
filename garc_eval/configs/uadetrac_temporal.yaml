@@ -1,0 +1,50 @@
+project:
+  name: uadetrac_temporal
+  seed: 42
+
+paths:
+  garc_home: ${GARC_HOME}
+  model_dir: ${GARC_MODEL_DIR}
+  data_dir: ${GARC_DATA_DIR}
+  output_dir: ${GARC_OUTPUT_DIR}
+
+data:
+  video_path: null
+  video_id: uadetrac_combined
+  frames_dir: ${GARC_DATA_DIR}/frames/uadetrac
+  frame_table_path: ${GARC_OUTPUT_DIR}/uadetrac_temporal/frame_metadata.parquet
+  sample_fps: 25.0  # UA-DETRAC native fps
+  max_frames: null
+
+query:
+  target_class: car
+  predicate: count_at_least
+  count_threshold: null  # will be calibrated
+  oracle_threshold: 0.5
+  proxy_score_rule: count_conf_hybrid
+
+proxy:
+  type: yolo
+  model_name: yolov8n.pt
+  model_path: ${GARC_MODEL_DIR}/yolo/yolov8n.pt
+  device: cuda:0
+  batch_size: 32
+  conf_threshold: 0.25
+  score_field: proxy_score
+
+oracle:
+  type: yolo
+  model_name: yolov8x.pt
+  model_path: ${GARC_MODEL_DIR}/yolo/yolov8x.pt
+  device: cuda:0
+  batch_size: 16
+  conf_threshold: 0.25
+  score_field: oracle_score
+  label_rule: oracle_count >= count_threshold
+
+supg:
+  source_csv: ${GARC_OUTPUT_DIR}/uadetrac_temporal/supg_source.csv
+  budget: 1000
+  gamma: 0.9
+  delta: 0.05
+  trials: 20
