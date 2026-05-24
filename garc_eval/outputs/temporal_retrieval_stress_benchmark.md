@@ -6,6 +6,38 @@ Benchmark: 70 configurations x 3 trials = 210 total runs
 
 ---
 
+## 中文摘要（组会汇报用）
+
+### 当前结论
+
+在 UA-DETRAC 上进行了 5 轴参数扫描（proxy 质量、budget、clip 长度、coverage 阈值、正样本率），共 70 配置 × 3 trials = 210 次运行：
+- Clip collapse 是真实存在的，但是有条件的：24.8% 的配置显示 >5% gap，4.8% 显示 >20% gap。
+- 三个主导变量：clip 长度（r=0.45）、正样本率、coverage 阈值。
+- 关键发现：clip 长度在 15 帧处存在 phase transition——低于 15 帧 gap < 4%，高于 15 帧 gap 跳至 13-22%。
+- 最坏情况：20 帧 clips + 95% coverage + 弱 proxy → 40.3% gap。
+- SUPG-RT 在正常条件下中位 gap = 2.1%，鲁棒性较好。
+
+### 证据边界
+
+- 单一数据集（UA-DETRAC），YOLOv8x pseudo-oracle 标签。
+- 每个配置仅 3 个 trial，统计精度有限。
+- Proxy 降级是通过注入噪声模拟的，不是真实 proxy 退化。
+- 结论限定于：count_car >= 25 谓词、YOLOv8n/x 模型对、UA-DETRAC 视频特征。
+
+### 不能过度宣称的内容
+
+- 不能说这是"第一个系统性经验地图"——仅在一个数据集上完成。
+- 不能从 phase transition 位置（15 帧）推断普适阈值——这取决于数据集和 proxy。
+- 不能说 SUPG 天然鲁棒就无需 clip-aware 方法——在长 clips + 严格 coverage 下 gap 可达 40%。
+
+### 下一步动作
+
+- 在更大数据集（100K+ 帧）上复现参数扫描，验证 phase transition 位置是否稳定。
+- 测试真实 proxy 退化场景（不同大小的 YOLO 模型），而非注入噪声。
+- 如果 15 帧 phase transition 在多数据集上一致，可作为论文核心贡献点。
+
+---
+
 ## Executive Summary
 
 This report presents an exploratory empirical study of temporal robustness in approximate video retrieval on the UA-DETRAC controlled local subset. Through a parameter sweep across 5 axes — proxy quality, oracle budget, clip definitions, coverage thresholds, and positive-rate regimes — we characterize when and how frame-level retrieval guarantees fail to translate to clip-level performance on this specific dataset with YOLOv8x pseudo-oracle labels.

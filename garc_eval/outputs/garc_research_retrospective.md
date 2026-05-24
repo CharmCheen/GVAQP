@@ -6,6 +6,47 @@ Total Experiments: 10 major studies, 500+ individual runs
 
 ---
 
+## 中文摘要（组会汇报用）
+
+### 当前结论
+
+本项目围绕一个核心问题展开：frame-level 统计保证（如 SUPG 的 recall guarantee）在合并为 temporal clips 后是否仍然成立？
+
+主要发现（均基于 UA-DETRAC + YOLOv8n/x，非一般性结论）：
+1. SUPG-RT 在当前设置下表现鲁棒，frame-to-clip gap 仅 1.1%。
+2. Importance correction（重要性修正是关键稳定机制）：所有不使用 importance correction 的自适应方法（temporal heuristics、adaptive querying）全部失败（disappearance rate 96-100%）。
+3. Clip collapse 是有条件的：需要长 clips + 严格 coverage + proxy 退化的组合。
+4. 反直觉发现：IID miss 比 burst miss 破坏性大 6-10 倍。
+5. ABae（聚合查询）比 SUPG（选择查询）更脆弱。
+
+项目成熟度评估：30-40% toward a publishable paper。核心 G-ARC clip-level 保证机制零实现。
+
+### 证据边界
+
+- 所有实验基于单一数据集（UA-DETRAC，13,932 帧）和单一 proxy-oracle 对（YOLOv8n/x）。
+- 标签是 YOLOv8x pseudo-oracle，不是人工标注。
+- SUPG 合成复现仅覆盖 Beta 分布实验，未覆盖原论文的真实数据集实验。
+- ABae 复现是基于论文描述的自定义实现，不是基于原代码仓库。
+- 探索性实验（stress benchmark、collapse boundary）每配置仅 3-5 个 trial。
+
+### 不能过度宣称的内容
+
+- 不能说"IID 假设对 SUPG 不必要"——只能说"在已测试设置中未观察到破坏"。
+- 不能说"importance correction 是根本性稳定机制"——只能说"在已测试设置中观察到稳定效果"。
+- 不能说"temporal heuristics 总是失败"——只能说"在已测试的 naive 实现中全部失败"。
+- 不能说项目完成度 60-70%——实际是 30-40%（核心 clip-level 保证机制未实现）。
+- 不能将探索性结果标记为"paper-ready"——它们是"exploratory, not yet publication-grade"。
+
+### 下一步动作
+
+1. **数据集扩展**：在更大数据集（100K+ 帧）或多数据集上复现核心发现。
+2. **Ground truth 验证**：用人工标注替代 YOLOv8x pseudo-oracle。
+3. **G-ARC 机制实现**：实现 clip-level 保证机制（boundary-aware allocation、temporal dependence handling）。
+4. **理论支撑**：形式化证明 importance correction 在 temporal dependence 下的性质。
+5. **投稿策略**：当前证据支撑 workshop paper 或 short paper；full conference paper 需要上述 1-4 步完成。
+
+---
+
 ## 1. Project Origin and Motivation
 
 ### 1.1 Original Hypothesis

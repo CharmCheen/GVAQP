@@ -5,6 +5,38 @@ Dataset: UA-DETRAC (8 sequences, 13,932 frames, 126 GT clips)
 
 ---
 
+## 中文摘要（组会汇报用）
+
+### 当前结论
+
+通过 6 阶段压力测试（proxy 退化、budget 扫描、稀有事件、burst miss 模拟、失败案例挖掘、综合分析），系统性地识别了 frame recall 无法转移到 clip recall 的条件：
+- Clip collapse 是真实的，但仅在特定条件下出现。
+- 反直觉发现：IID（随机）miss 比 burst（时域相关）miss 破坏性大 6-10 倍。原因是 IID miss 均匀打击所有 clips，而 burst miss 只局部破坏少数 clips。
+- SUPG-RT 在正常条件下天然鲁棒：baseline gap 仅 1.2%。
+- 有意义的 collapse 需要多个条件同时满足：严格 coverage（≥80%）+ 显著 proxy 退化 + 低 budget 或高 miss rate。
+- 长 clips（20+ 帧）最脆弱：gap 可达 18.3%。
+
+### 证据边界
+
+- 单一数据集（UA-DETRAC），YOLOv8x pseudo-oracle。
+- Burst miss 是通过模拟注入的，不是真实时域故障。
+- 每个配置 3-5 个 trial。
+- 结论限定于：当前 proxy/oracle 模型对、count_car >= 25 谓词、126 个 GT clips。
+
+### 不能过度宣称的内容
+
+- 不能说"IID miss 总是比 burst miss 更有害"——这可能取决于数据集的时域结构。
+- 不能说"SUPG 天然鲁棒就足够了"——在长 clips + 严格 coverage 下 gap 可达 18%。
+- 不能从模拟 miss 推断真实系统故障模式。
+
+### 下一步动作
+
+- 在更长 clips 的数据集上验证 IID vs burst miss 的差异是否一致。
+- 测试真实 proxy 退化（如运动模糊、遮挡）而非注入噪声。
+- 如果 IID > burst 的发现在多数据集上一致，可作为方法论贡献点。
+
+---
+
 ## Executive Summary
 
 This report systematically identifies the conditions under which high frame recall fails to translate into high clip recall. Through six phases of empirical stress testing — proxy degradation, budget sweeping, rare-event regimes, burst miss simulation, failure case mining, and integrated analysis — we find that:

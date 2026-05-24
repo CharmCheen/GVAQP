@@ -2,6 +2,34 @@
 
 Generated: 2026-05-23
 
+---
+
+## 中文摘要（组会汇报用）
+
+### 当前结论
+
+UA-DETRAC 控制子集（8 个序列，13,932 帧）通过了非退化工程烟雾测试：SUPG-RT 选择约 60% 的帧（非全选），recall 约 98%，failure rate = 0（5 trials）。SUPG-PT 精度 1.0、recall 约 11%。Clip merge 烟雾同样通过：SUPG-RT clip recall coverage = 1.0，mIoU ≈ 0.98。
+
+### 证据边界
+
+- 这是工程烟雾结果（engineering smoke），不是研究级有效证据（research-valid evidence）。
+- 标签来自 YOLOv8x pseudo-oracle，不是人工标注。
+- 仅 5 个 trial，不足以做形式化保证评估。
+- proxy（YOLOv8n）和 pseudo-oracle（YOLOv8x）是同族模型，可能高估 benchmark 可行性。
+
+### 不能过度宣称的内容
+
+- 不能说"UA-DETRAC 是经过验证的 benchmark"——只能说"通过了非退化烟雾测试"。
+- 不能把 YOLOv8x pseudo-oracle 标签等同于 ground truth。
+- 不能从 5-trial smoke 推断 formal guarantee 性质。
+
+### 下一步动作
+
+- 进行 20-trial smoke 确认稳定性 → 已完成（见 uadetrac_temporal_supg_smoke_20_report.md）。
+- 在确认 non-vacuous 后考虑 100-trial formal，但需先理解 seed 15 的 RT failure。
+
+---
+
 ## Status
 
 Selected dataset: **UA-DETRAC controlled local subset**.

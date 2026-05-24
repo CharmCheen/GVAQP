@@ -4,6 +4,37 @@ Generated: 2026-05-22
 
 ---
 
+## 中文摘要（组会汇报用）
+
+### 当前结论
+
+在 UA-DETRAC（13,932 帧，126 个 GT clips）上，frame-level recall 与 clip-level recall 之间存在可测量的 gap：
+- U-NOCI-RT（均匀随机采样）：gap = 7.6 个百分点（frame recall 89.2% → clip recall 81.7%），23 个 clips 未充分覆盖。
+- SUPG-RT（importance sampling）：gap = 1.1 个百分点（frame recall 97.9% → clip recall 96.7%），仅 4 个 clips 未充分覆盖。
+- Gap 随 coverage threshold 收紧而增大：95% coverage 时 U-NOCI gap = 8.8%，SUPG gap = 2.0%。
+
+### 证据边界
+
+- 数据集：单一 UA-DETRAC 子集，YOLOv8x pseudo-oracle 标签。
+- Clips 较短（均值 0.32s，约 12 个正帧），可能低估 gap。
+- 仅 10 个 trial，统计稳定性有限。
+- Proxy（YOLOv8n）与 pseudo-oracle（YOLOv8x）高度相关，可能掩盖真实 gap。
+
+### 不能过度宣称的内容
+
+- 不能说"frame-level 保证可以自动转移到 clip-level"——gap 是真实存在的。
+- 也不能说"gap 很大，需要全新系统"——SUPG-RT 的 gap 仅 1.1%，在当前设置下很小。
+- 不能从单一数据集推断一般性结论。
+- 当前证据支持"workshop paper 或 short paper"级别的贡献，不是 full conference paper。
+
+### 下一步动作
+
+- 在更长 clips（10+ 帧）、更低正样本率（1-5%）、更弱 proxy 上复现 gap 分析。
+- 如果更严苛设置下 gap 显著增大，可支撑 full paper 的 motivation。
+- 如果 gap 始终很小，需要重新评估 G-ARC 的研究价值。
+
+---
+
 ## 1. Experiment Setup
 
 - **Dataset**: UA-DETRAC traffic surveillance video (8 sequences)
