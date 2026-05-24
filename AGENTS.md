@@ -36,10 +36,14 @@ The current stage is benchmark construction and SUPG/ARC-related reproduction. D
 
 ## Current Validated Findings
 
-- SUPG synthetic reproduction is complete at the algorithm level.
-- KITTI 0005 and combined KITTI are not valid non-degenerate SUPG-RT benchmarks because they are too small, too positive, and SUPG-RT selects all.
+- SUPG synthetic reproduction is complete at the algorithm level (algorithm-level reproduction, not full paper reproduction).
+- KITTI 0005 and combined KITTI are degenerate for SUPG-RT: too small, too positive, SUPG-RT selects all. Do not present as successful non-degenerate benchmarks.
 - KITTI should only be kept as a pipeline smoke benchmark.
 - DRIV100 was blocked because the accessible record lacks raw videos.
+- BDD100K is a valid non-vacuous frame-level SUPG-RT benchmark (image-level only, no temporal continuity).
+- UA-DETRAC is a valid temporal smoke/pipeline benchmark; SUPG-RT often selects all on current settings.
+- SUPG-PT works under tested settings but is a high-precision/low-recall operating point.
+- Do not claim G-ARC theory is complete or formal guarantees beyond what has been implemented and tested.
 - Do not spend more time tuning KITTI unless explicitly asked.
 
 ## Current Target

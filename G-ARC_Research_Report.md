@@ -14,7 +14,7 @@
 
 2. **G-ARC 不是对现有工作的简单拼接**。SUPG 的保证机制不能直接迁移到 clip level，原因是 clip 不是 i.i.d. records、IoU hit 定义与 frame-level match 不等价、clip 边界本身具有统计不确定性。ARC 的 confidence 不等价于 SUPG 式的高概率保证。
 
-3. **项目可行性高**。核心理论工具（置信区间、importance sampling、conservative threshold 选取）已有扎实基础，主要挑战在于将其正确扩展到 clip 语义，这是有解决路径的技术问题。
+3. **项目可行性合理**。核心理论工具（置信区间、importance sampling、conservative threshold 选取）已有扎实基础，主要挑战在于将其正确扩展到 clip 语义，这是有解决路径的技术问题，但尚未有经过验证的实现或形式化证明。
 
 4. **推荐优先投稿 VLDB/SIGMOD**。G-ARC 的 query semantics 扩展和统计保证设计更符合数据库/数据管理系统的顶级会议定位；若侧重检索语义也可考虑 SIGIR/MM。
 
@@ -380,12 +380,14 @@ CR_LB = CR_hat - z_{1-δ} · σ_hat / √(n_clusters)
 
 ### 6.4 理论保证设计
 
-**命题（Recall Target）**:  
-给定采样方案 (cluster-aware blocking，B oracle 调用)，G-ARC 满足:
+**命题（Recall Target，待证明）**:
+给定采样方案 (cluster-aware blocking，B oracle 调用)，G-ARC 的目标是满足:
 ```
 Pr[ CR(C̃) ≥ γ_r ] ≥ 1-δ
 ```
-**推导路线**:
+注意：以上是研究目标（hypothesis），尚未被证明或实现。以下推导路线仅为设计草案。
+
+**推导路线（草案，未实现）**:
 1. 在 block bootstrap/CLT 框架下，CR_LB 是 CR 的 (1-δ) 置信下界
 2. G-ARC 只在 CR_LB ≥ γ_r 时才终止并声称保证，否则继续采样
 3. 这等价于：当算法终止时，以 1-δ 的概率 CR ≥ CR_LB ≥ γ_r
@@ -395,9 +397,11 @@ Pr[ CR(C̃) ≥ γ_r ] ≥ 1-δ
 - Clip merge/split 的非单调性需要保守估计（例如，不对 boundary 区域的 label propagation 使用在 guarantee 计算中，只在 recall recovery 中使用）
 - δ 的分裂（union bound）：Boundary adjustment + oracle sampling + CI 三个步骤各消耗部分 δ
 
-**简化路线**（MVP 版本）: 
+**简化路线**（MVP 版本）:
 - 假设 cluster 间独立（ARC 已做此假设）
 - 在 G-ARC 中验证此假设的 guarantee violation rate 实验表现
+
+**理论完整性说明**: G-ARC 的理论保证设计目前处于概念阶段（conceptual stage）。上述命题、推导路线和简化路线均为研究假设和设计草案，尚未经过形式化证明或实验验证。当前仓库中的实验工作仅覆盖了 SUPG/ABae 的算法级复现（algorithm-level reproduction）和帧级（frame-level）管线验证，不包含任何已实现的 clip-level 保证机制。
 
 ---
 

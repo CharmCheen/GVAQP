@@ -158,7 +158,7 @@ Full report: [bdd100k_smoke/report.md](bdd100k_smoke/report.md)
 
 ### Status
 BDD100K is now the primary frame-level real-road benchmark for G-ARC.
-The non-vacuous SUPG-RT benchmark problem is resolved.
+The non-vacuous SUPG-RT frame-level benchmark problem is resolved on BDD100K (image-level, no temporal continuity).
 
 **Limitation**: BDD100K val is an image-level benchmark. Temporal video/clip-level
 benchmarking still requires UA-DETRAC or other continuous video datasets.
