@@ -1,0 +1,2434 @@
+{
+  "config": {
+    "seed": 42,
+    "num_frames": 300,
+    "K": 3,
+    "tau": 30,
+    "budget": 0.1,
+    "iou_threshold": 0.5,
+    "sample_size": 20
+  },
+  "per_video": [
+    {
+      "video_id": "synthetic_000",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 68,
+      "perturbation_oracle_calls": 68,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 3,
+          "pred_clip_lengths": [
+            170,
+            71,
+            48
+          ],
+          "avg_pred_clip_length": 96.33333333333333,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 0.3333333333333333,
+          "mean_iou": 0.5666666666666667,
+          "mean_start_error": 0.0,
+          "mean_end_error": 130.0,
+          "fragmentation_rate": 2.0,
+          "frame_recall": 0.9833333333333333,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 4,
+          "pred_clip_lengths": [
+            60,
+            56,
+            67,
+            45
+          ],
+          "avg_pred_clip_length": 57.0,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 3.0,
+          "frame_recall": 0.9566666666666667,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_001",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 54,
+      "perturbation_oracle_calls": 54,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            111,
+            95
+          ],
+          "avg_pred_clip_length": 103.0,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 1.0,
+          "frame_recall": 0.9666666666666667,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 3,
+          "pred_clip_lengths": [
+            62,
+            42,
+            95
+          ],
+          "avg_pred_clip_length": 66.33333333333333,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 2.0,
+          "frame_recall": 0.92,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_002",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 92,
+      "perturbation_oracle_calls": 92,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 3,
+          "pred_clip_lengths": [
+            63,
+            40,
+            58
+          ],
+          "avg_pred_clip_length": 53.666666666666664,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 2.0,
+          "frame_recall": 0.93,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            58
+          ],
+          "avg_pred_clip_length": 58.0,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 0.84,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_003",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 74,
+      "perturbation_oracle_calls": 74,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 4,
+          "pred_clip_lengths": [
+            57,
+            47,
+            39,
+            78
+          ],
+          "avg_pred_clip_length": 55.25,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 3.0,
+          "frame_recall": 0.9566666666666667,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 4,
+          "pred_clip_lengths": [
+            39,
+            43,
+            39,
+            66
+          ],
+          "avg_pred_clip_length": 46.75,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 3.0,
+          "frame_recall": 0.9,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_004",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 51,
+      "perturbation_oracle_calls": 51,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 3,
+          "pred_clip_lengths": [
+            161,
+            60,
+            59
+          ],
+          "avg_pred_clip_length": 93.33333333333333,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 0.3333333333333333,
+          "mean_iou": 0.5366666666666666,
+          "mean_start_error": 18.0,
+          "mean_end_error": 121.0,
+          "fragmentation_rate": 2.0,
+          "frame_recall": 0.99,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 5,
+          "pred_clip_lengths": [
+            87,
+            40,
+            32,
+            60,
+            35
+          ],
+          "avg_pred_clip_length": 50.8,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 4.0,
+          "frame_recall": 0.98,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_005",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        239
+      ],
+      "avg_gt_clip_length": 239.0,
+      "num_gt_positive_frames": 240,
+      "perturbed_label_diffs": 94,
+      "perturbation_oracle_calls": 94,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            239
+          ],
+          "avg_pred_clip_length": 239.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            240
+          ],
+          "avg_pred_clip_length": 240.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 0.9958333333333333,
+          "mean_start_error": 0.0,
+          "mean_end_error": 1.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 0.9958333333333333,
+          "frame_precision": 0.9958333333333333
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            241
+          ],
+          "avg_pred_clip_length": 241.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 0.991701244813278,
+          "mean_start_error": 0.0,
+          "mean_end_error": 2.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 0.9958333333333333,
+          "frame_precision": 0.991701244813278
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            35,
+            66
+          ],
+          "avg_pred_clip_length": 50.5,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 1.0,
+          "frame_recall": 0.9166666666666666,
+          "frame_precision": 0.8906882591093117
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            66
+          ],
+          "avg_pred_clip_length": 66.0,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 26,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.08666666666666667,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 0.8208333333333333,
+          "frame_precision": 0.9425837320574163
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_006",
+      "num_frames": 300,
+      "num_gt_clips": 2,
+      "gt_clip_lengths": [
+        160,
+        128
+      ],
+      "avg_gt_clip_length": 144.0,
+      "num_gt_positive_frames": 290,
+      "perturbed_label_diffs": 72,
+      "perturbation_oracle_calls": 72,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            160,
+            128
+          ],
+          "avg_pred_clip_length": 144.0,
+          "num_matched_clips": 2,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            160,
+            130
+          ],
+          "avg_pred_clip_length": 145.0,
+          "num_matched_clips": 2,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 0.9923076923076923,
+          "mean_start_error": 1.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 0.996551724137931,
+          "frame_precision": 0.996551724137931
+        },
+        "uniform_random": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            158,
+            123
+          ],
+          "avg_pred_clip_length": 140.5,
+          "num_matched_clips": 2,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 0.97421875,
+          "mean_start_error": 2.5,
+          "mean_end_error": 1.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 0.9689655172413794,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 3,
+          "pred_clip_lengths": [
+            39,
+            42,
+            103
+          ],
+          "avg_pred_clip_length": 61.333333333333336,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 0.5,
+          "clip_precision": 0.3333333333333333,
+          "mean_iou": 0.8046875,
+          "mean_start_error": 23.0,
+          "mean_end_error": 2.0,
+          "fragmentation_rate": 0.5,
+          "frame_recall": 0.9413793103448276,
+          "frame_precision": 0.9820143884892086
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            45,
+            58
+          ],
+          "avg_pred_clip_length": 51.5,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 0.5,
+          "frame_recall": 0.8551724137931035,
+          "frame_precision": 0.9802371541501976
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_007",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 70,
+      "perturbation_oracle_calls": 70,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            77,
+            47
+          ],
+          "avg_pred_clip_length": 62.0,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 1.0,
+          "frame_recall": 0.9466666666666667,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            76,
+            45
+          ],
+          "avg_pred_clip_length": 60.5,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 1.0,
+          "frame_recall": 0.8633333333333333,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_008",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 63,
+      "perturbation_oracle_calls": 63,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            277
+          ],
+          "avg_pred_clip_length": 277.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 0.9233333333333333,
+          "mean_start_error": 23.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 0.9933333333333333,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            277
+          ],
+          "avg_pred_clip_length": 277.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 0.9233333333333333,
+          "mean_start_error": 23.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 0.9933333333333333,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_009",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 69,
+      "perturbation_oracle_calls": 69,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 3,
+          "pred_clip_lengths": [
+            98,
+            63,
+            43
+          ],
+          "avg_pred_clip_length": 68.0,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 2.0,
+          "frame_recall": 0.9733333333333334,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            45,
+            63
+          ],
+          "avg_pred_clip_length": 54.0,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 1.0,
+          "frame_recall": 0.92,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_010",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 47,
+      "perturbation_oracle_calls": 47,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            296
+          ],
+          "avg_pred_clip_length": 296.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 0.9866666666666667,
+          "mean_start_error": 1.0,
+          "mean_end_error": 3.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 0.99,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 3,
+          "pred_clip_lengths": [
+            98,
+            108,
+            35
+          ],
+          "avg_pred_clip_length": 80.33333333333333,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 13,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.043333333333333335,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 2.0,
+          "frame_recall": 0.9733333333333334,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_011",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 51,
+      "perturbation_oracle_calls": 51,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            123,
+            137
+          ],
+          "avg_pred_clip_length": 130.0,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 1.0,
+          "frame_recall": 0.99,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 4,
+          "pred_clip_lengths": [
+            58,
+            64,
+            80,
+            56
+          ],
+          "avg_pred_clip_length": 64.5,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 3.0,
+          "frame_recall": 0.9666666666666667,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_012",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 71,
+      "perturbation_oracle_calls": 71,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            60,
+            140
+          ],
+          "avg_pred_clip_length": 100.0,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 1.0,
+          "frame_recall": 0.9533333333333334,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 3,
+          "pred_clip_lengths": [
+            60,
+            77,
+            52
+          ],
+          "avg_pred_clip_length": 63.0,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 2.0,
+          "frame_recall": 0.9,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_013",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 76,
+      "perturbation_oracle_calls": 76,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 4,
+          "pred_clip_lengths": [
+            36,
+            51,
+            73,
+            66
+          ],
+          "avg_pred_clip_length": 56.5,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 3.0,
+          "frame_recall": 0.9666666666666667,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            54,
+            39
+          ],
+          "avg_pred_clip_length": 46.5,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 1.0,
+          "frame_recall": 0.8966666666666666,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_014",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 57,
+      "perturbation_oracle_calls": 57,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 3,
+          "pred_clip_lengths": [
+            156,
+            36,
+            60
+          ],
+          "avg_pred_clip_length": 84.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 0.3333333333333333,
+          "mean_iou": 0.52,
+          "mean_start_error": 17.0,
+          "mean_end_error": 127.0,
+          "fragmentation_rate": 2.0,
+          "frame_recall": 0.9733333333333334,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 3,
+          "pred_clip_lengths": [
+            36,
+            103,
+            51
+          ],
+          "avg_pred_clip_length": 63.333333333333336,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 13,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.043333333333333335,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 2.0,
+          "frame_recall": 0.92,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_015",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 74,
+      "perturbation_oracle_calls": 74,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 4,
+          "pred_clip_lengths": [
+            111,
+            35,
+            31,
+            54
+          ],
+          "avg_pred_clip_length": 57.75,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 3.0,
+          "frame_recall": 0.9366666666666666,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 4,
+          "pred_clip_lengths": [
+            56,
+            54,
+            35,
+            46
+          ],
+          "avg_pred_clip_length": 47.75,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 3.0,
+          "frame_recall": 0.86,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_016",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 83,
+      "perturbation_oracle_calls": 83,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 3,
+          "pred_clip_lengths": [
+            42,
+            38,
+            33
+          ],
+          "avg_pred_clip_length": 37.666666666666664,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 2.0,
+          "frame_recall": 0.9033333333333333,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            42,
+            38
+          ],
+          "avg_pred_clip_length": 40.0,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 1.0,
+          "frame_recall": 0.84,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_017",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 65,
+      "perturbation_oracle_calls": 65,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            164,
+            120
+          ],
+          "avg_pred_clip_length": 142.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 0.5,
+          "mean_iou": 0.5466666666666666,
+          "mean_start_error": 15.0,
+          "mean_end_error": 121.0,
+          "fragmentation_rate": 1.0,
+          "frame_recall": 0.9933333333333333,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 4,
+          "pred_clip_lengths": [
+            83,
+            71,
+            50,
+            69
+          ],
+          "avg_pred_clip_length": 68.25,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 3.0,
+          "frame_recall": 0.97,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_018",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 44,
+      "perturbation_oracle_calls": 44,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 3,
+          "pred_clip_lengths": [
+            62,
+            179,
+            53
+          ],
+          "avg_pred_clip_length": 98.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 0.3333333333333333,
+          "mean_iou": 0.5966666666666667,
+          "mean_start_error": 67.0,
+          "mean_end_error": 54.0,
+          "fragmentation_rate": 2.0,
+          "frame_recall": 0.99,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 4,
+          "pred_clip_lengths": [
+            66,
+            113,
+            59,
+            53
+          ],
+          "avg_pred_clip_length": 72.75,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 3.0,
+          "frame_recall": 0.9766666666666667,
+          "frame_precision": 1.0
+        }
+      }
+    },
+    {
+      "video_id": "synthetic_019",
+      "num_frames": 300,
+      "num_gt_clips": 1,
+      "gt_clip_lengths": [
+        300
+      ],
+      "avg_gt_clip_length": 300.0,
+      "num_gt_positive_frames": 300,
+      "perturbed_label_diffs": 69,
+      "perturbation_oracle_calls": 69,
+      "baselines": {
+        "full_oracle": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 300,
+          "expected_budget": 300,
+          "budget_used_fraction": 1.0,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "fixed_rate": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "uniform_random": {
+          "num_predicted_clips": 1,
+          "pred_clip_lengths": [
+            300
+          ],
+          "avg_pred_clip_length": 300.0,
+          "num_matched_clips": 1,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 1.0,
+          "clip_precision": 1.0,
+          "mean_iou": 1.0,
+          "mean_start_error": 0.0,
+          "mean_end_error": 0.0,
+          "fragmentation_rate": 0.0,
+          "frame_recall": 1.0,
+          "frame_precision": 1.0
+        },
+        "proxy_threshold": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            120,
+            76
+          ],
+          "avg_pred_clip_length": 98.0,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 30,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.1,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 1.0,
+          "frame_recall": 0.94,
+          "frame_precision": 1.0
+        },
+        "arc_clustering": {
+          "num_predicted_clips": 2,
+          "pred_clip_lengths": [
+            61,
+            70
+          ],
+          "avg_pred_clip_length": 65.5,
+          "num_matched_clips": 0,
+          "iou_threshold_used": 0.5,
+          "oracle_calls": 12,
+          "expected_budget": 30,
+          "budget_used_fraction": 0.04,
+          "clip_recall": 0.0,
+          "clip_precision": 0.0,
+          "mean_iou": 0.0,
+          "mean_start_error": Infinity,
+          "mean_end_error": Infinity,
+          "fragmentation_rate": 1.0,
+          "frame_recall": 0.89,
+          "frame_precision": 1.0
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "full_oracle": {
+      "avg_oracle_calls": 300.0,
+      "total_oracle_calls": 6000,
+      "avg_matched_clips": 1.05,
+      "avg_predicted_clips": 1.05,
+      "avg_clip_recall": 1.0,
+      "avg_clip_precision": 1.0,
+      "avg_mean_iou": 1.0,
+      "avg_fragmentation_rate": 0.0,
+      "avg_frame_recall": 1.0,
+      "avg_frame_precision": 1.0
+    },
+    "fixed_rate": {
+      "avg_oracle_calls": 30.0,
+      "total_oracle_calls": 600,
+      "avg_matched_clips": 1.05,
+      "avg_predicted_clips": 1.05,
+      "avg_clip_recall": 1.0,
+      "avg_clip_precision": 1.0,
+      "avg_mean_iou": 0.9994070512820514,
+      "avg_fragmentation_rate": 0.0,
+      "avg_frame_recall": 0.9996192528735632,
+      "avg_frame_precision": 0.9996192528735632
+    },
+    "uniform_random": {
+      "avg_oracle_calls": 30.0,
+      "total_oracle_calls": 600,
+      "avg_matched_clips": 1.05,
+      "avg_predicted_clips": 1.05,
+      "avg_clip_recall": 1.0,
+      "avg_clip_precision": 1.0,
+      "avg_mean_iou": 0.9982959997406639,
+      "avg_fragmentation_rate": 0.0,
+      "avg_frame_recall": 0.9982399425287356,
+      "avg_frame_precision": 0.9995850622406639
+    },
+    "proxy_threshold": {
+      "avg_oracle_calls": 30.0,
+      "total_oracle_calls": 600,
+      "avg_matched_clips": 0.4,
+      "avg_predicted_clips": 2.6,
+      "avg_clip_recall": 0.375,
+      "avg_clip_precision": 0.20833333333333331,
+      "avg_mean_iou": 0.2740677083333333,
+      "avg_fragmentation_rate": 1.525,
+      "avg_frame_recall": 0.9617356321839079,
+      "avg_frame_precision": 0.9936351323799262
+    },
+    "arc_clustering": {
+      "avg_oracle_calls": 12.8,
+      "total_oracle_calls": 256,
+      "avg_matched_clips": 0.05,
+      "avg_predicted_clips": 2.8,
+      "avg_clip_recall": 0.05,
+      "avg_clip_precision": 0.05,
+      "avg_mean_iou": 0.04616666666666667,
+      "avg_fragmentation_rate": 1.775,
+      "avg_frame_recall": 0.9121336206896553,
+      "avg_frame_precision": 0.9961410443103806
+    }
+  },
+  "gt_aggregate": {
+    "avg_num_gt_clips": 1.05,
+    "total_gt_clips": 21,
+    "avg_gt_clip_length_overall": 289.15,
+    "avg_perturbed_label_diffs": 67.2,
+    "total_perturbed_label_diffs": 1344
+  }
+}

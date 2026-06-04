@@ -1,0 +1,566 @@
+{
+  "config": {
+    "seed": 42,
+    "num_videos": 50,
+    "num_frames": 300,
+    "K": 3,
+    "tau": 30,
+    "budget": 0.1
+  },
+  "summary_table": {
+    "clean": {
+      "full_oracle": {
+        "frame_recall": 1.0,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 1.0,
+        "mean_start_error": 0.0,
+        "mean_end_error": 0.0,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 300.0
+      },
+      "fixed_rate": {
+        "frame_recall": 0.999593,
+        "frame_precision": 0.998488,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 0.997543,
+        "mean_start_error": 0.05,
+        "mean_end_error": 0.19,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "uniform_random": {
+        "frame_recall": 0.997077,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 0.997021,
+        "mean_start_error": 0.05,
+        "mean_end_error": 0.39,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "proxy_threshold": {
+        "frame_recall": 1.0,
+        "frame_precision": 0.993118,
+        "clip_recall": 0.98,
+        "clip_precision": 1.0,
+        "mean_iou": 0.980409,
+        "mean_start_error": 0.0,
+        "mean_end_error": 5.66,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "arc_clustering": {
+        "frame_recall": 1.0,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 1.0,
+        "mean_start_error": 0.0,
+        "mean_end_error": 0.0,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 12.72
+      }
+    },
+    "proxy_noise_only": {
+      "full_oracle": {
+        "frame_recall": 1.0,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 1.0,
+        "mean_start_error": 0.0,
+        "mean_end_error": 0.0,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 300.0
+      },
+      "fixed_rate": {
+        "frame_recall": 0.999593,
+        "frame_precision": 0.998488,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 0.997543,
+        "mean_start_error": 0.05,
+        "mean_end_error": 0.19,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "uniform_random": {
+        "frame_recall": 0.997077,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 0.997021,
+        "mean_start_error": 0.05,
+        "mean_end_error": 0.39,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "proxy_threshold": {
+        "frame_recall": 0.974795,
+        "frame_precision": 0.994819,
+        "clip_recall": 0.31,
+        "clip_precision": 0.206667,
+        "mean_iou": 0.238752,
+        "mean_start_error": 23.40625,
+        "mean_end_error": 46.5,
+        "fragmentation_rate": 2.01,
+        "oracle_calls": 30.0
+      },
+      "arc_clustering": {
+        "frame_recall": 0.952846,
+        "frame_precision": 0.99705,
+        "clip_recall": 0.07,
+        "clip_precision": 0.056667,
+        "mean_iou": 0.059791,
+        "mean_start_error": 14.0,
+        "mean_end_error": 37.75,
+        "fragmentation_rate": 2.15,
+        "oracle_calls": 12.8
+      }
+    },
+    "short_positive_gaps_only": {
+      "full_oracle": {
+        "frame_recall": 1.0,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 1.0,
+        "mean_start_error": 0.0,
+        "mean_end_error": 0.0,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 300.0
+      },
+      "fixed_rate": {
+        "frame_recall": 0.999593,
+        "frame_precision": 0.998488,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 0.997543,
+        "mean_start_error": 0.05,
+        "mean_end_error": 0.19,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "uniform_random": {
+        "frame_recall": 0.997077,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 0.997021,
+        "mean_start_error": 0.05,
+        "mean_end_error": 0.39,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "proxy_threshold": {
+        "frame_recall": 1.0,
+        "frame_precision": 0.993118,
+        "clip_recall": 0.98,
+        "clip_precision": 1.0,
+        "mean_iou": 0.980409,
+        "mean_start_error": 0.0,
+        "mean_end_error": 5.66,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "arc_clustering": {
+        "frame_recall": 1.0,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 1.0,
+        "mean_start_error": 0.0,
+        "mean_end_error": 0.0,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 12.72
+      }
+    },
+    "boundary_jitter_only": {
+      "full_oracle": {
+        "frame_recall": 1.0,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 1.0,
+        "mean_start_error": 0.0,
+        "mean_end_error": 0.0,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 300.0
+      },
+      "fixed_rate": {
+        "frame_recall": 0.999593,
+        "frame_precision": 0.998488,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 0.997543,
+        "mean_start_error": 0.05,
+        "mean_end_error": 0.19,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "uniform_random": {
+        "frame_recall": 0.997077,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 0.997021,
+        "mean_start_error": 0.05,
+        "mean_end_error": 0.39,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "proxy_threshold": {
+        "frame_recall": 1.0,
+        "frame_precision": 0.993118,
+        "clip_recall": 0.98,
+        "clip_precision": 1.0,
+        "mean_iou": 0.980409,
+        "mean_start_error": 0.0,
+        "mean_end_error": 5.66,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "arc_clustering": {
+        "frame_recall": 1.0,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 1.0,
+        "mean_start_error": 0.0,
+        "mean_end_error": 0.0,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 12.72
+      }
+    },
+    "visibility_drop_only": {
+      "full_oracle": {
+        "frame_recall": 1.0,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 1.0,
+        "mean_start_error": 0.0,
+        "mean_end_error": 0.0,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 300.0
+      },
+      "fixed_rate": {
+        "frame_recall": 0.999593,
+        "frame_precision": 0.998488,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 0.997543,
+        "mean_start_error": 0.05,
+        "mean_end_error": 0.19,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "uniform_random": {
+        "frame_recall": 0.997077,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 0.997021,
+        "mean_start_error": 0.05,
+        "mean_end_error": 0.39,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "proxy_threshold": {
+        "frame_recall": 0.989303,
+        "frame_precision": 0.993546,
+        "clip_recall": 0.88,
+        "clip_precision": 0.783333,
+        "mean_iou": 0.819764,
+        "mean_start_error": 1.044444,
+        "mean_end_error": 24.444444,
+        "fragmentation_rate": 0.42,
+        "oracle_calls": 30.0
+      },
+      "arc_clustering": {
+        "frame_recall": 0.953288,
+        "frame_precision": 1.0,
+        "clip_recall": 0.62,
+        "clip_precision": 0.438333,
+        "mean_iou": 0.492919,
+        "mean_start_error": 29.354839,
+        "mean_end_error": 29.580645,
+        "fragmentation_rate": 1.23,
+        "oracle_calls": 12.72
+      }
+    },
+    "all_perturbations": {
+      "full_oracle": {
+        "frame_recall": 1.0,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 1.0,
+        "mean_start_error": 0.0,
+        "mean_end_error": 0.0,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 300.0
+      },
+      "fixed_rate": {
+        "frame_recall": 0.999593,
+        "frame_precision": 0.998488,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 0.997543,
+        "mean_start_error": 0.05,
+        "mean_end_error": 0.19,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "uniform_random": {
+        "frame_recall": 0.997077,
+        "frame_precision": 1.0,
+        "clip_recall": 1.0,
+        "clip_precision": 1.0,
+        "mean_iou": 0.997021,
+        "mean_start_error": 0.05,
+        "mean_end_error": 0.39,
+        "fragmentation_rate": 0.0,
+        "oracle_calls": 30.0
+      },
+      "proxy_threshold": {
+        "frame_recall": 0.959284,
+        "frame_precision": 0.995241,
+        "clip_recall": 0.23,
+        "clip_precision": 0.13,
+        "mean_iou": 0.158552,
+        "mean_start_error": 17.458333,
+        "mean_end_error": 76.0,
+        "fragmentation_rate": 1.99,
+        "oracle_calls": 30.0
+      },
+      "arc_clustering": {
+        "frame_recall": 0.911705,
+        "frame_precision": 0.997247,
+        "clip_recall": 0.04,
+        "clip_precision": 0.04,
+        "mean_iou": 0.030585,
+        "mean_start_error": 11.5,
+        "mean_end_error": 26.5,
+        "fragmentation_rate": 1.99,
+        "oracle_calls": 13.22
+      }
+    }
+  },
+  "delta_table": {
+    "proxy_noise_only": {
+      "full_oracle": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "fixed_rate": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "uniform_random": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "proxy_threshold": {
+        "frame_recall_drop": 0.025205,
+        "clip_recall_drop": 0.67,
+        "mean_iou_drop": 0.741657,
+        "mean_start_error_increase": 23.40625,
+        "mean_end_error_increase": 40.84,
+        "fragmentation_rate_increase": 2.01
+      },
+      "arc_clustering": {
+        "frame_recall_drop": 0.047154,
+        "clip_recall_drop": 0.93,
+        "mean_iou_drop": 0.940209,
+        "mean_start_error_increase": 14.0,
+        "mean_end_error_increase": 37.75,
+        "fragmentation_rate_increase": 2.15
+      }
+    },
+    "short_positive_gaps_only": {
+      "full_oracle": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "fixed_rate": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "uniform_random": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "proxy_threshold": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "arc_clustering": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      }
+    },
+    "boundary_jitter_only": {
+      "full_oracle": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "fixed_rate": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "uniform_random": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "proxy_threshold": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "arc_clustering": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      }
+    },
+    "visibility_drop_only": {
+      "full_oracle": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "fixed_rate": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "uniform_random": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "proxy_threshold": {
+        "frame_recall_drop": 0.010697,
+        "clip_recall_drop": 0.1,
+        "mean_iou_drop": 0.160646,
+        "mean_start_error_increase": 1.044444,
+        "mean_end_error_increase": 18.784444,
+        "fragmentation_rate_increase": 0.42
+      },
+      "arc_clustering": {
+        "frame_recall_drop": 0.046712,
+        "clip_recall_drop": 0.38,
+        "mean_iou_drop": 0.507081,
+        "mean_start_error_increase": 29.354839,
+        "mean_end_error_increase": 29.580645,
+        "fragmentation_rate_increase": 1.23
+      }
+    },
+    "all_perturbations": {
+      "full_oracle": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "fixed_rate": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "uniform_random": {
+        "frame_recall_drop": 0.0,
+        "clip_recall_drop": 0.0,
+        "mean_iou_drop": 0.0,
+        "mean_start_error_increase": 0.0,
+        "mean_end_error_increase": 0.0,
+        "fragmentation_rate_increase": 0.0
+      },
+      "proxy_threshold": {
+        "frame_recall_drop": 0.040716,
+        "clip_recall_drop": 0.75,
+        "mean_iou_drop": 0.821857,
+        "mean_start_error_increase": 17.458333,
+        "mean_end_error_increase": 70.34,
+        "fragmentation_rate_increase": 1.99
+      },
+      "arc_clustering": {
+        "frame_recall_drop": 0.088295,
+        "clip_recall_drop": 0.96,
+        "mean_iou_drop": 0.969415,
+        "mean_start_error_increase": 11.5,
+        "mean_end_error_increase": 26.5,
+        "fragmentation_rate_increase": 1.99
+      }
+    }
+  }
+}
