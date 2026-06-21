@@ -1,0 +1,21 @@
+# Frame-level diagnostics
+metric,pearson_r,spearman_r,tp,fp,fn,tn,precision,recall,f1,proxy_positive_frames,oracle_positive_frames,proxy_runs_tau30,oracle_runs_tau30
+frame_level,0.7884,0.7957,298,139,748,3815,0.6819,0.2849,0.4019,437,1046,0,5
+
+# GT clip diagnostics
+gt_idx,start,end,length,max_iou_proxy_candidate,n_clusters_spanned,in_single_cluster
+0,359,401,43,0.0,4,False
+1,405,455,51,0.0,3,False
+2,2260,2290,31,0.0,2,False
+3,2356,2420,65,0.0,5,False
+4,2527,2560,34,0.0,3,False
+
+# Cluster diagnostics
+n_clusters,avg_cluster_len,median_cluster_len,p90_cluster_len,gt_in_single_cluster,boundaries_inside_gt_clips
+250,20.0,20.0,20.0,0,12
+
+# Candidate clip diagnostics
+clip_idx,start,end,length,same_cluster,cluster_range_empty,n_clusters_in_clip
+0,463,512,50,False,True,3
+1,519,573,55,False,True,4
+2,2039,2070,32,False,True,3

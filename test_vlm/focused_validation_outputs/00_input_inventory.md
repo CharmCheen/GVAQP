@@ -1,0 +1,206 @@
+# Input Inventory
+
+## Selected Inputs
+
+- input_dir: `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded`
+- labels: `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/vlm_labels_conservative.csv` exists=True
+- proxy: `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/proxy_scores.csv` exists=True
+- proxy_learned: `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/proxy_scores_with_learned.csv` exists=True
+- budget_curve: `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/vlm_oracle_budget_curve.csv` exists=True
+- target_recall: `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/target_recall_cost_saving.csv` exists=True
+- final_report: `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/final_vlm_oracle_acceleration_report.md` exists=True
+
+## Detected Fields
+
+### labels
+- rows: 1000
+- columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'conservative_positive', 'risk_level', 'affected_ego', 'event_type', 'starts_outside_ego_path', 'enters_ego_path', 'requires_ego_attention', 'negative_reason', 'confidence', 'evidence', 'raw_response', 'runtime_sec', 'status', 'error_message']`
+- missing required fields: `[]`
+
+### proxy
+- rows: 1000
+- columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'score_count', 'score_naive', 'score_kinematic', 'mean_vehicle_count', 'max_vehicle_count', 'max_area_growth', 'max_center_motion', 'max_ego_path_overlap', 'max_predicted_entry', 'max_lateral_toward_ego_path', 'max_temporal_persistence', 'track_count', 'stable_track_count', 'vlm_label', 'event_type', 'negative_reason', 'score_count_norm', 'score_naive_norm', 'score_kinematic_norm', 'ensemble_count_naive_score', 'ensemble_all_proxy_score', 'score_learned_logreg', 'score_learned_rf']`
+- missing required fields: `[]`
+
+## Candidate Files
+
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve.csv`
+  - columns: `['label_variant', 'metric_level', 'method', 'budget_ratio', 'budget', 'recall_mean', 'recall_std', 'precision_mean', 'precision_std', 'f1_mean', 'f1_std', 'positives_found_mean', 'selected_n_mean', 'total_positives', 'event_recall', 'event_recall_std', 'num_events', 'num_events_hit', 'calls_saved_vs_full_scan', 'calls_saved_fraction']`
+  - has_labels=False has_proxy=False has_budget_curve={'recall_mean', 'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve.csv`
+  - columns: `['label_variant', 'metric_level', 'method', 'budget_ratio', 'budget', 'recall_mean', 'recall_std', 'precision_mean', 'precision_std', 'f1_mean', 'f1_std', 'positives_found_mean', 'selected_n_mean', 'total_positives', 'event_recall', 'event_recall_std', 'num_events', 'num_events_hit', 'calls_saved_vs_full_scan', 'calls_saved_fraction']`
+  - has_labels=False has_proxy=False has_budget_curve={'recall_mean', 'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve_conservative_exact_102.csv`
+  - columns: `['label_variant', 'metric_level', 'method', 'budget_ratio', 'budget', 'recall_mean', 'recall_std', 'precision_mean', 'precision_std', 'f1_mean', 'f1_std', 'positives_found_mean', 'selected_n_mean', 'total_positives', 'event_recall', 'event_recall_std', 'num_events', 'num_events_hit', 'calls_saved_vs_full_scan', 'calls_saved_fraction']`
+  - has_labels=False has_proxy=False has_budget_curve={'recall_mean', 'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve_conservative_exact_102.csv`
+  - columns: `['label_variant', 'metric_level', 'method', 'budget_ratio', 'budget', 'recall_mean', 'recall_std', 'precision_mean', 'precision_std', 'f1_mean', 'f1_std', 'positives_found_mean', 'selected_n_mean', 'total_positives', 'event_recall', 'event_recall_std', 'num_events', 'num_events_hit', 'calls_saved_vs_full_scan', 'calls_saved_fraction']`
+  - has_labels=False has_proxy=False has_budget_curve={'recall_mean', 'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve_exact_102.csv`
+  - columns: `['label_variant', 'metric_level', 'method', 'budget_ratio', 'budget', 'recall_mean', 'recall_std', 'precision_mean', 'precision_std', 'f1_mean', 'f1_std', 'positives_found_mean', 'selected_n_mean', 'total_positives', 'event_recall', 'event_recall_std', 'num_events', 'num_events_hit', 'calls_saved_vs_full_scan', 'calls_saved_fraction']`
+  - has_labels=False has_proxy=False has_budget_curve={'recall_mean', 'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve_exact_102.csv`
+  - columns: `['label_variant', 'metric_level', 'method', 'budget_ratio', 'budget', 'recall_mean', 'recall_std', 'precision_mean', 'precision_std', 'f1_mean', 'f1_std', 'positives_found_mean', 'selected_n_mean', 'total_positives', 'event_recall', 'event_recall_std', 'num_events', 'num_events_hit', 'calls_saved_vs_full_scan', 'calls_saved_fraction']`
+  - has_labels=False has_proxy=False has_budget_curve={'recall_mean', 'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve_raw.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'calls_saved_vs_full_scan', 'calls_saved_fraction', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall', 'metric_level', 'metric_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve_raw.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'calls_saved_vs_full_scan', 'calls_saved_fraction', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall', 'metric_level', 'metric_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve_raw_conservative_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'calls_saved_vs_full_scan', 'calls_saved_fraction', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall', 'metric_level', 'metric_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve_raw_conservative_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'calls_saved_vs_full_scan', 'calls_saved_fraction', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall', 'metric_level', 'metric_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve_raw_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'calls_saved_vs_full_scan', 'calls_saved_fraction', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall', 'metric_level', 'metric_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve_raw_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'calls_saved_vs_full_scan', 'calls_saved_fraction', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall', 'metric_level', 'metric_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve_raw_strict_variants_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'calls_saved_vs_full_scan', 'calls_saved_fraction', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall', 'metric_level', 'metric_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve_raw_strict_variants_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'calls_saved_vs_full_scan', 'calls_saved_fraction', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall', 'metric_level', 'metric_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve_strict_variants_exact_102.csv`
+  - columns: `['label_variant', 'metric_level', 'method', 'budget_ratio', 'budget', 'recall_mean', 'recall_std', 'precision_mean', 'precision_std', 'f1_mean', 'f1_std', 'positives_found_mean', 'selected_n_mean', 'total_positives', 'event_recall', 'event_recall_std', 'num_events', 'num_events_hit', 'calls_saved_vs_full_scan', 'calls_saved_fraction']`
+  - has_labels=False has_proxy=False has_budget_curve={'recall_mean', 'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_curve_strict_variants_exact_102.csv`
+  - columns: `['label_variant', 'metric_level', 'method', 'budget_ratio', 'budget', 'recall_mean', 'recall_std', 'precision_mean', 'precision_std', 'f1_mean', 'f1_std', 'positives_found_mean', 'selected_n_mean', 'total_positives', 'event_recall', 'event_recall_std', 'num_events', 'num_events_hit', 'calls_saved_vs_full_scan', 'calls_saved_fraction']`
+  - has_labels=False has_proxy=False has_budget_curve={'recall_mean', 'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_policy_sweep.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'expansion_radius', 'anchor_fraction', 'temporal_nms_gap_sec', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_policy_sweep.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'expansion_radius', 'anchor_fraction', 'temporal_nms_gap_sec', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_policy_sweep_conservative_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'expansion_radius', 'anchor_fraction', 'temporal_nms_gap_sec', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_policy_sweep_conservative_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'expansion_radius', 'anchor_fraction', 'temporal_nms_gap_sec', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_policy_sweep_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'expansion_radius', 'anchor_fraction', 'temporal_nms_gap_sec', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_policy_sweep_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'expansion_radius', 'anchor_fraction', 'temporal_nms_gap_sec', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_policy_sweep_strict_variants_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'expansion_radius', 'anchor_fraction', 'temporal_nms_gap_sec', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_policy_sweep_strict_variants_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'expansion_radius', 'anchor_fraction', 'temporal_nms_gap_sec', 'selected_n', 'positives_found', 'total_positives', 'recall', 'precision', 'f1', 'num_events', 'num_events_hit', 'event_recall']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_selected_clips.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'selection_rank', 'clip_id', 'start_time', 'end_time', 'vlm_label', 'score_count', 'score_naive', 'score_kinematic', 'ensemble_count_naive_score', 'ensemble_all_proxy_score']`
+  - has_labels=False has_proxy=True has_budget_curve=set()
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_selected_clips.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'selection_rank', 'clip_id', 'start_time', 'end_time', 'vlm_label', 'score_count', 'score_naive', 'score_kinematic', 'ensemble_count_naive_score', 'ensemble_all_proxy_score']`
+  - has_labels=False has_proxy=True has_budget_curve=set()
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_selected_clips_conservative_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'selection_rank', 'clip_id', 'start_time', 'end_time', 'vlm_label', 'score_count', 'score_naive', 'score_kinematic', 'ensemble_count_naive_score', 'ensemble_all_proxy_score']`
+  - has_labels=False has_proxy=True has_budget_curve=set()
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_selected_clips_conservative_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'selection_rank', 'clip_id', 'start_time', 'end_time', 'vlm_label', 'score_count', 'score_naive', 'score_kinematic', 'ensemble_count_naive_score', 'ensemble_all_proxy_score']`
+  - has_labels=False has_proxy=True has_budget_curve=set()
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_selected_clips_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'selection_rank', 'clip_id', 'start_time', 'end_time', 'vlm_label', 'score_count', 'score_naive', 'score_kinematic', 'ensemble_count_naive_score', 'ensemble_all_proxy_score']`
+  - has_labels=False has_proxy=True has_budget_curve=set()
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_selected_clips_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'selection_rank', 'clip_id', 'start_time', 'end_time', 'vlm_label', 'score_count', 'score_naive', 'score_kinematic', 'ensemble_count_naive_score', 'ensemble_all_proxy_score']`
+  - has_labels=False has_proxy=True has_budget_curve=set()
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_selected_clips_strict_variants_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'selection_rank', 'clip_id', 'start_time', 'end_time', 'vlm_label', 'score_count', 'score_naive', 'score_kinematic', 'ensemble_count_naive_score', 'ensemble_all_proxy_score']`
+  - has_labels=False has_proxy=True has_budget_curve=set()
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/budget_selected_clips_strict_variants_exact_102.csv`
+  - columns: `['label_variant', 'method', 'budget_ratio', 'budget', 'seed', 'selection_rank', 'clip_id', 'start_time', 'end_time', 'vlm_label', 'score_count', 'score_naive', 'score_kinematic', 'ensemble_count_naive_score', 'ensemble_all_proxy_score']`
+  - has_labels=False has_proxy=True has_budget_curve=set()
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/proxy_scores.csv`
+  - columns: `['clip_id', 'start_time', 'end_time', 'clip_path', 'score_count', 'score_naive', 'score_kinematic', 'mean_vehicle_count', 'max_vehicle_count', 'max_area_growth', 'max_center_motion', 'max_ego_path_overlap', 'max_predicted_entry', 'max_lateral_toward_ego_path', 'max_temporal_persistence', 'track_count', 'stable_track_count']`
+  - has_labels=False has_proxy=True has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/proxy_scores.csv`
+  - columns: `['clip_id', 'start_time', 'end_time', 'clip_path', 'score_count', 'score_naive', 'score_kinematic', 'mean_vehicle_count', 'max_vehicle_count', 'max_area_growth', 'max_center_motion', 'max_ego_path_overlap', 'max_predicted_entry', 'max_lateral_toward_ego_path', 'max_temporal_persistence', 'track_count', 'stable_track_count']`
+  - has_labels=False has_proxy=True has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/review_pool.csv`
+  - columns: `['clip_id', 'clip_path', 'selected_by', 'score_count', 'score_naive', 'score_kinematic', 'label', 'notes']`
+  - has_labels=False has_proxy=True has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/review_pool.csv`
+  - columns: `['clip_id', 'clip_path', 'selected_by', 'score_count', 'score_naive', 'score_kinematic', 'label', 'notes']`
+  - has_labels=False has_proxy=True has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/audit_package/audit_manifest.csv`
+  - columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'local_clip_filename', 'sample_reason', 'conservative_positive', 'risk_level', 'affected_ego', 'event_type', 'negative_reason', 'confidence', 'evidence', 'score_count', 'score_naive', 'score_kinematic', 'human_label', 'human_event_type', 'human_reason', 'human_confidence', 'error_type']`
+  - has_labels=True has_proxy=True has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/audit_package/audit_manifest.csv`
+  - columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'local_clip_filename', 'sample_reason', 'conservative_positive', 'risk_level', 'affected_ego', 'event_type', 'negative_reason', 'confidence', 'evidence', 'score_count', 'score_naive', 'score_kinematic', 'human_label', 'human_event_type', 'human_reason', 'human_confidence', 'error_type']`
+  - has_labels=True has_proxy=True has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/budget_curve.csv`
+  - columns: `['method', 'budget_ratio', 'budget', 'recall_mean', 'recall_std', 'precision_mean', 'precision_std', 'f1_mean', 'f1_std', 'event_recall', 'event_recall_std', 'num_events', 'num_events_hit', 'total_positives', 'calls_saved_fraction']`
+  - has_labels=False has_proxy=False has_budget_curve={'recall_mean', 'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/budget_curve.csv`
+  - columns: `['method', 'budget_ratio', 'budget', 'recall_mean', 'recall_std', 'precision_mean', 'precision_std', 'f1_mean', 'f1_std', 'event_recall', 'event_recall_std', 'num_events', 'num_events_hit', 'total_positives', 'calls_saved_fraction']`
+  - has_labels=False has_proxy=False has_budget_curve={'recall_mean', 'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/budget_curve_raw.csv`
+  - columns: `['method', 'budget_ratio', 'budget', 'seed', 'recall', 'precision', 'f1', 'positives_found', 'event_recall', 'num_events', 'num_events_hit']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/budget_curve_raw.csv`
+  - columns: `['method', 'budget_ratio', 'budget', 'seed', 'recall', 'precision', 'f1', 'positives_found', 'event_recall', 'num_events', 'num_events_hit']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/budget_policy_sweep.csv`
+  - columns: `['method', 'budget_ratio', 'budget', 'temporal_nms_gap_sec', 'expansion_radius', 'anchor_fraction', 'recall', 'precision', 'f1', 'positives_found', 'event_recall', 'num_events', 'num_events_hit']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/budget_policy_sweep.csv`
+  - columns: `['method', 'budget_ratio', 'budget', 'temporal_nms_gap_sec', 'expansion_radius', 'anchor_fraction', 'recall', 'precision', 'f1', 'positives_found', 'event_recall', 'num_events', 'num_events_hit']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/proxy_scores.csv`
+  - columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'score_count', 'score_naive', 'score_kinematic', 'mean_vehicle_count', 'max_vehicle_count', 'max_area_growth', 'max_center_motion', 'max_ego_path_overlap', 'max_predicted_entry', 'max_lateral_toward_ego_path', 'max_temporal_persistence', 'track_count', 'stable_track_count']`
+  - has_labels=False has_proxy=True has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/proxy_scores.csv`
+  - columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'score_count', 'score_naive', 'score_kinematic', 'mean_vehicle_count', 'max_vehicle_count', 'max_area_growth', 'max_center_motion', 'max_ego_path_overlap', 'max_predicted_entry', 'max_lateral_toward_ego_path', 'max_temporal_persistence', 'track_count', 'stable_track_count']`
+  - has_labels=False has_proxy=True has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_labels_conservative.csv`
+  - columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'conservative_positive', 'risk_level', 'affected_ego', 'event_type', 'starts_outside_ego_path', 'enters_ego_path', 'requires_ego_attention', 'negative_reason', 'confidence', 'evidence', 'raw_response', 'runtime_sec', 'status', 'error_message']`
+  - has_labels=True has_proxy=False has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_labels_conservative.csv`
+  - columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'conservative_positive', 'risk_level', 'affected_ego', 'event_type', 'starts_outside_ego_path', 'enters_ego_path', 'requires_ego_attention', 'negative_reason', 'confidence', 'evidence', 'raw_response', 'runtime_sec', 'status', 'error_message']`
+  - has_labels=True has_proxy=False has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/audit_package/audit_manifest.csv`
+  - columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'local_clip_filename', 'sample_reason', 'conservative_positive', 'risk_level', 'affected_ego', 'event_type', 'negative_reason', 'confidence', 'evidence', 'score_count', 'score_naive', 'score_kinematic', 'human_label', 'human_event_type', 'human_reason', 'human_confidence', 'error_type']`
+  - has_labels=True has_proxy=True has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/audit_package/audit_manifest.csv`
+  - columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'local_clip_filename', 'sample_reason', 'conservative_positive', 'risk_level', 'affected_ego', 'event_type', 'negative_reason', 'confidence', 'evidence', 'score_count', 'score_naive', 'score_kinematic', 'human_label', 'human_event_type', 'human_reason', 'human_confidence', 'error_type']`
+  - has_labels=True has_proxy=True has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/proxy_scores.csv`
+  - columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'score_count', 'score_naive', 'score_kinematic', 'mean_vehicle_count', 'max_vehicle_count', 'max_area_growth', 'max_center_motion', 'max_ego_path_overlap', 'max_predicted_entry', 'max_lateral_toward_ego_path', 'max_temporal_persistence', 'track_count', 'stable_track_count']`
+  - has_labels=False has_proxy=True has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/proxy_scores.csv`
+  - columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'score_count', 'score_naive', 'score_kinematic', 'mean_vehicle_count', 'max_vehicle_count', 'max_area_growth', 'max_center_motion', 'max_ego_path_overlap', 'max_predicted_entry', 'max_lateral_toward_ego_path', 'max_temporal_persistence', 'track_count', 'stable_track_count']`
+  - has_labels=False has_proxy=True has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/proxy_scores_with_learned.csv`
+  - columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'score_count', 'score_naive', 'score_kinematic', 'mean_vehicle_count', 'max_vehicle_count', 'max_area_growth', 'max_center_motion', 'max_ego_path_overlap', 'max_predicted_entry', 'max_lateral_toward_ego_path', 'max_temporal_persistence', 'track_count', 'stable_track_count', 'vlm_label', 'event_type', 'negative_reason', 'score_count_norm', 'score_naive_norm', 'score_kinematic_norm', 'ensemble_count_naive_score', 'ensemble_all_proxy_score', 'score_learned_logreg', 'score_learned_rf']`
+  - has_labels=False has_proxy=True has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/proxy_scores_with_learned.csv`
+  - columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'score_count', 'score_naive', 'score_kinematic', 'mean_vehicle_count', 'max_vehicle_count', 'max_area_growth', 'max_center_motion', 'max_ego_path_overlap', 'max_predicted_entry', 'max_lateral_toward_ego_path', 'max_temporal_persistence', 'track_count', 'stable_track_count', 'vlm_label', 'event_type', 'negative_reason', 'score_count_norm', 'score_naive_norm', 'score_kinematic_norm', 'ensemble_count_naive_score', 'ensemble_all_proxy_score', 'score_learned_logreg', 'score_learned_rf']`
+  - has_labels=False has_proxy=True has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/vlm_labels_conservative.csv`
+  - columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'conservative_positive', 'risk_level', 'affected_ego', 'event_type', 'starts_outside_ego_path', 'enters_ego_path', 'requires_ego_attention', 'negative_reason', 'confidence', 'evidence', 'raw_response', 'runtime_sec', 'status', 'error_message']`
+  - has_labels=True has_proxy=False has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/vlm_labels_conservative.csv`
+  - columns: `['clip_id', 'video_id', 'segment_id', 'start_time', 'end_time', 'clip_path', 'conservative_positive', 'risk_level', 'affected_ego', 'event_type', 'starts_outside_ego_path', 'enters_ego_path', 'requires_ego_attention', 'negative_reason', 'confidence', 'evidence', 'raw_response', 'runtime_sec', 'status', 'error_message']`
+  - has_labels=True has_proxy=False has_budget_curve=False
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/vlm_oracle_budget_curve.csv`
+  - columns: `['method', 'budget_ratio', 'budget', 'recall_mean', 'recall_std', 'precision_mean', 'precision_std', 'f1_mean', 'f1_std', 'event_recall', 'event_recall_std', 'num_events', 'num_events_hit', 'total_positives', 'calls_saved_fraction']`
+  - has_labels=False has_proxy=False has_budget_curve={'recall_mean', 'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/vlm_oracle_budget_curve.csv`
+  - columns: `['method', 'budget_ratio', 'budget', 'recall_mean', 'recall_std', 'precision_mean', 'precision_std', 'f1_mean', 'f1_std', 'event_recall', 'event_recall_std', 'num_events', 'num_events_hit', 'total_positives', 'calls_saved_fraction']`
+  - has_labels=False has_proxy=False has_budget_curve={'recall_mean', 'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/vlm_oracle_budget_curve_raw.csv`
+  - columns: `['method', 'budget_ratio', 'budget', 'seed', 'recall', 'precision', 'f1', 'positives_found', 'event_recall', 'num_events', 'num_events_hit']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}
+- `/qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2/vlm_oracle_expanded/vlm_oracle_budget_curve_raw.csv`
+  - columns: `['method', 'budget_ratio', 'budget', 'seed', 'recall', 'precision', 'f1', 'positives_found', 'event_recall', 'num_events', 'num_events_hit']`
+  - has_labels=False has_proxy=False has_budget_curve={'event_recall'}

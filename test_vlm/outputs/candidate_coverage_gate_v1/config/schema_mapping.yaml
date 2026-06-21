@@ -1,0 +1,12 @@
+clip_id: clip_id
+source_video: segment_id
+start_time: start_time
+end_time: end_time
+pseudo_oracle_label: conservative_positive (evaluation only)
+main_scores:
+  - score_count
+  - score_naive
+  - score_kinematic
+  - ego_path_score
+  - rank_fusion_score
+learned_scores: reference only, excluded from decision

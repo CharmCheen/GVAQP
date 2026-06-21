@@ -1,0 +1,42 @@
+{
+  "csv": "outputs/garc_meeting_pack/real_video_csv_pipeline/realcar_5k.csv",
+  "budgets": [
+    200,
+    800,
+    1200
+  ],
+  "trials": 30,
+  "seed": 42,
+  "valid_settings": [
+    {
+      "label_col": "label_K10",
+      "min_len": 15,
+      "true_clip_count": 18,
+      "positive_frame_ratio": 0.3736
+    },
+    {
+      "label_col": "label_K10",
+      "min_len": 30,
+      "true_clip_count": 12,
+      "positive_frame_ratio": 0.3736
+    },
+    {
+      "label_col": "label_K10",
+      "min_len": 60,
+      "true_clip_count": 8,
+      "positive_frame_ratio": 0.3736
+    }
+  ],
+  "filtered_settings": [
+    {
+      "label_col": "label_K5",
+      "reason": "positive_ratio=0.7384 > 0.6"
+    },
+    {
+      "label_col": "label_K20",
+      "reason": "only 3 positive frames < 5 clips"
+    }
+  ],
+  "judgment": "C",
+  "judgment_text": "Stop: joint allocation does not beat candidate-only reliably."
+}

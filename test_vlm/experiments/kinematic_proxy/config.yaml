@@ -1,0 +1,63 @@
+project_root: /qiuyeqing/llama_prl/G-ARC
+workspace: /qiuyeqing/llama_prl/G-ARC/test_vlm
+input_video: /qiuyeqing/llama_prl/G-ARC/try_or_no/videos/realcartest_5k.mp4
+output_dir: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy
+yolo_model: /qiuyeqing/llama_prl/G-ARC/models/yolo/yolov8n.pt
+clip_len_sec: 5
+stride_sec: 2
+top_n: 50
+roi_x1: 0.35
+roi_x2: 0.65
+roi_y1: 0.45
+roi_y2: 1.0
+prediction_horizon_sec: 1.0
+vehicle_classes:
+  - car
+  - truck
+  - bus
+  - motorcycle
+  - bicycle
+vlm_labels:
+  path: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/vlm_labels.csv
+  source_review_csv: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/qwen3_vl_32b_round2_5k_raw_fps1_review.csv
+  source_name: qwen3_vl_32b_round2_5k_raw_fps1_review
+  min_overlap_ratio: 0.5
+exact_vlm_labels:
+  model_path: /qiuyeqing/llama_prl/G-ARC/models/vlm/qwen3_vl/Qwen3-VL-32B-Instruct
+  output_csv: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/vlm_labels_exact_102.csv
+  failed_csv: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/vlm_labels_exact_102_failed.csv
+  fps: 1.0
+  retries: 1
+strict_variant_labels:
+  output_csv: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/vlm_labels_strict_variants_exact_102.csv
+  diagnostics_md: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/strict_v2_label_diagnostics.md
+conservative_vlm_calibration:
+  model_path: /qiuyeqing/llama_prl/G-ARC/models/vlm/qwen3_vl/Qwen3-VL-32B-Instruct
+  calibration_set_csv: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/conservative_calibration_set.csv
+  output_csv: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/vlm_labels_conservative_calibration_20.csv
+  failed_csv: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/vlm_labels_conservative_calibration_20_failed.csv
+  report_md: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/conservative_vlm_calibration_report.md
+  full_set_csv: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/conservative_full_set_102.csv
+  full_output_csv: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/vlm_labels_conservative_exact_102.csv
+  full_failed_csv: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/vlm_labels_conservative_exact_102_failed.csv
+  full_report_md: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/conservative_vlm_full_102_report.md
+  fps: 1.0
+  retries: 1
+budget_ratios: [0.05, 0.10, 0.15, 0.20, 0.30, 0.50]
+temporal_nms_gap_sec: 4.0
+expansion_radius: 2
+random_seeds: 20
+event_merge_gap_sec: 4.0
+policy_sweep:
+  expansion_radius: [1, 2, 3]
+  anchor_fraction: [0.25, 0.5, 0.75]
+  temporal_nms_gap_sec: [0, 2, 4, 6, 8]
+learned_anomaly_proxy:
+  search_dirs:
+    - /qiuyeqing/llama_prl/G-ARC/test_vlm
+    - /qiuyeqing/llama_prl/G-ARC/refe_repos
+    - /qiuyeqing/llama_prl/G-ARC/models
+    - /qiuyeqing/llama_prl/G-ARC/try_or_no
+  scores_csv: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/learned_anomaly_scores.csv
+  augmented_proxy_scores_csv: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/proxy_scores_augmented.csv
+  blocked_report_md: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/kinematic_proxy/BLOCKED_learned_anomaly_proxy.md

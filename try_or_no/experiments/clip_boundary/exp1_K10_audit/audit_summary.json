@@ -1,0 +1,171 @@
+{
+  "csv": "/qiuyeqing/llama_prl/G-ARC/try_or_no/outputs/garc_meeting_pack/real_video_csv_pipeline/realcar_5k.csv",
+  "label_col": "label_K10",
+  "min_len": 15,
+  "exp_dir": "/qiuyeqing/llama_prl/G-ARC/try_or_no/experiments/clip_boundary/exp1_K10",
+  "num_frames": 5000,
+  "num_positive_frames": 1868,
+  "num_all_positive_runs": 232,
+  "num_true_clips_minlen": 18,
+  "task1_seed_boundary_audit": {
+    "total_positive_seeds": 1868,
+    "exact_match_rate": 0.170236,
+    "exact_match_count": 318,
+    "wrong_left_count": 1313,
+    "wrong_right_count": 1292,
+    "internal_negative_count": 1550,
+    "merged_multiple_runs_count": 1550,
+    "note": "Low exact_match_rate is expected: expbin over-expands past short zero-gaps. seed_boundary post-splits to recover correct sub-clips.",
+    "first_failure_examples": [
+      {
+        "seed": 146,
+        "expbin_left": 146,
+        "expbin_right": 615,
+        "expbin_len": 470,
+        "gt_left": 146,
+        "gt_right": 153,
+        "gt_len": 8,
+        "internal_neg_frames": 10,
+        "spans_multiple_runs": true,
+        "num_runs_spanned": 9
+      },
+      {
+        "seed": 148,
+        "expbin_left": 146,
+        "expbin_right": 622,
+        "expbin_len": 477,
+        "gt_left": 146,
+        "gt_right": 153,
+        "gt_len": 8,
+        "internal_neg_frames": 13,
+        "spans_multiple_runs": true,
+        "num_runs_spanned": 10
+      },
+      {
+        "seed": 149,
+        "expbin_left": 146,
+        "expbin_right": 900,
+        "expbin_len": 755,
+        "gt_left": 146,
+        "gt_right": 153,
+        "gt_len": 8,
+        "internal_neg_frames": 117,
+        "spans_multiple_runs": true,
+        "num_runs_spanned": 45
+      },
+      {
+        "seed": 150,
+        "expbin_left": 146,
+        "expbin_right": 788,
+        "expbin_len": 643,
+        "gt_left": 146,
+        "gt_right": 153,
+        "gt_len": 8,
+        "internal_neg_frames": 69,
+        "spans_multiple_runs": true,
+        "num_runs_spanned": 24
+      },
+      {
+        "seed": 152,
+        "expbin_left": 146,
+        "expbin_right": 641,
+        "expbin_len": 496,
+        "gt_left": 146,
+        "gt_right": 153,
+        "gt_len": 8,
+        "internal_neg_frames": 21,
+        "spans_multiple_runs": true,
+        "num_runs_spanned": 13
+      }
+    ]
+  },
+  "task2_pred_clip_audit": {
+    "total_predicted_clips": 81851,
+    "invalid_pred_clip_rate_overall": 0.185997,
+    "mean_internal_negative_frames": 1.0036,
+    "max_internal_negative_frames": 108,
+    "multi_run_pred_clip_rate": 0.185997,
+    "per_method": {
+      "uniform_frame_stitch": {
+        "total": 51410,
+        "invalid": 15224,
+        "invalid_rate": 0.296129,
+        "max_internal_neg": 108
+      },
+      "uniform_seed_boundary_linear": {
+        "total": 5313,
+        "invalid": 0,
+        "invalid_rate": 0.0,
+        "max_internal_neg": 0
+      },
+      "uniform_seed_boundary_expbin": {
+        "total": 25128,
+        "invalid": 0,
+        "invalid_rate": 0.0,
+        "max_internal_neg": 0
+      }
+    },
+    "first_invalid_examples": [
+      {
+        "method": "uniform_frame_stitch",
+        "budget": 50,
+        "trial": 4,
+        "clip_id": 8,
+        "start": 1829,
+        "end": 1890,
+        "length": 62,
+        "internal_negative_frames": 1,
+        "overlaps_runs": 2,
+        "overlaps_true_clips": 1
+      },
+      {
+        "method": "uniform_frame_stitch",
+        "budget": 50,
+        "trial": 4,
+        "clip_id": 9,
+        "start": 2220,
+        "end": 2241,
+        "length": 22,
+        "internal_negative_frames": 1,
+        "overlaps_runs": 2,
+        "overlaps_true_clips": 1
+      },
+      {
+        "method": "uniform_frame_stitch",
+        "budget": 50,
+        "trial": 4,
+        "clip_id": 11,
+        "start": 2687,
+        "end": 2691,
+        "length": 5,
+        "internal_negative_frames": 1,
+        "overlaps_runs": 2,
+        "overlaps_true_clips": 0
+      },
+      {
+        "method": "uniform_frame_stitch",
+        "budget": 50,
+        "trial": 4,
+        "clip_id": 12,
+        "start": 2802,
+        "end": 2820,
+        "length": 19,
+        "internal_negative_frames": 6,
+        "overlaps_runs": 4,
+        "overlaps_true_clips": 0
+      },
+      {
+        "method": "uniform_frame_stitch",
+        "budget": 50,
+        "trial": 7,
+        "clip_id": 8,
+        "start": 2027,
+        "end": 2079,
+        "length": 53,
+        "internal_negative_frames": 1,
+        "overlaps_runs": 2,
+        "overlaps_true_clips": 2
+      }
+    ]
+  }
+}

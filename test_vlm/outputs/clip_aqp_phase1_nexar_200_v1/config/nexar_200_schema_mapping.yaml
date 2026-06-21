@@ -1,0 +1,24 @@
+dataset: nexar
+source_metadata:
+  positive: /qiuyeqing/llama_prl/G-ARC/datasets/casq_external/nexar/hf_metadata_probe/train/positive/metadata.csv
+  negative: /qiuyeqing/llama_prl/G-ARC/datasets/casq_external/nexar/hf_metadata_probe/train/negative/metadata.csv
+event_mapping:
+  video_id: file_name
+  event_moment: time_of_event
+  alert_time: time_of_alert
+  event_start: time_of_alert
+  event_end: time_of_event
+  event_type: collision_or_near_collision_precursor
+  boundary_source: derived_from_alert_time_to_event_moment
+  boundary_confidence: medium
+  human_adjudicated: false
+unit_mapping:
+  unit_lengths_seconds:
+    - 5
+    - 10
+    - 15
+  has_event_overlap: interval_overlap_with_derived_event
+validity_notes:
+  - Derived boundaries are not original human event_start/event_end annotations.
+  - Videos were not downloaded for this benchmark construction run.
+  - Metadata-only hash/random candidate generators do not use event labels or derived boundaries for ranking.

@@ -1,0 +1,8 @@
+check,passes,detail
+100pct_budget_deterministic_recall_near_one,True,min_clip=1.000000; min_event=1.000000
+random_mean_recall_monotonic,True,gap_failures=0
+event_count_nonincreasing_with_gap,True,"counts=[61, 32, 29]"
+temporal_nms_no_suppression_matches_top_count,True,gap=-1 disables suppression by making abs(delta)>gap always true
+coverage_without_novelty_near_cluster_representative,True,top100_set_overlap=1.000
+static_selection_functions_do_not_reference_labels,True,top_order:none; uniform_order:none; temporal_nms_order:none; build_candidate_clusters:none; cluster_representative_order:none; coverage_aware_order:none; select_order:none
+cluster_methods_no_duplicate_calls,True,checked complete method orders

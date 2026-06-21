@@ -80,6 +80,19 @@ Use staged evaluation:
 
 Do not run experiments or download datasets unless the user explicitly asks.
 
+## AQP / VLM Budget Experiment Constraints
+
+- Any new experiment must write to a new independent output directory. Do not overwrite existing CSV files, videos, VLM labels, or formal results.
+- Conservative VLM full-scan labels are evaluation-only pseudo-oracle labels. Do not use them for ranking, candidate cluster construction, hyperparameter selection, feature training, or learned proxy training.
+- Learned proxy train/validation/test splits must be grouped by source video or original video group. Do not randomly split adjacent clips from the same source video across splits.
+- Current-stage results must be described as pseudo-oracle or VLM-defined evaluation. Do not describe them as real risk-event ground truth.
+- Before implementing a new method, search for and reuse existing scripts, CSV schemas, budget simulation code, and temporal NMS implementations.
+- Every experiment must run a smoke test before a full run and must record commands, random seeds, input files, runtime, and failure reasons.
+- Random baselines must run at least 100 repeats and report mean, standard deviation, and 95% intervals.
+- Every newly added algorithm must include sanity checks. If sanity checks fail, fix the implementation before interpreting results.
+- The current stage does not require human audit, audit package generation, or new large-scale VLM inference.
+- Final experiment outputs must include a Markdown report, CSV tables, figures, reproducible commands, and a clear `GO`, `WEAK GO`, or `NO-GO` decision.
+
 ## Reporting Requirements
 
 - Always write lightweight markdown reports under `garc_eval/outputs/`.

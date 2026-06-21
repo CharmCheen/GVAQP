@@ -1,0 +1,42 @@
+project_root: /qiuyeqing/llama_prl/G-ARC
+workspace: /qiuyeqing/llama_prl/G-ARC/test_vlm
+video_dir: /qiuyeqing/llama_prl/G-ARC/try_or_no/videos
+output_dir: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/roadclip_budget_v2
+yolo_model: /qiuyeqing/llama_prl/G-ARC/models/yolo/yolov8n.pt
+vlm_model_path: /qiuyeqing/llama_prl/G-ARC/models/vlm/qwen3_vl/Qwen3-VL-32B-Instruct
+
+scene_filter:
+  window_len_sec: 10
+  stride_sec: 10
+  fps: 1.0
+  retries: 1
+
+clips:
+  clip_len_sec: 5
+  stride_sec: 2
+  target_min_clips: 200
+  target_max_clips: 500
+
+proxy:
+  roi_x1: 0.35
+  roi_x2: 0.65
+  roi_y1: 0.45
+  roi_y2: 1.0
+  prediction_horizon_sec: 1.0
+  vehicle_classes: [car, truck, bus, motorcycle, bicycle]
+
+vlm:
+  fps: 1.0
+  retries: 1
+
+budget:
+  budget_ratios: [0.05, 0.10, 0.15, 0.20, 0.30, 0.50]
+  random_seeds: 20
+  event_merge_gap_sec: 4.0
+  temporal_nms_gap_sec: 4.0
+  expansion_radius: 2
+  anchor_fraction: 0.25
+  policy_sweep:
+    expansion_radius: [1, 2, 3]
+    anchor_fraction: [0.25, 0.5, 0.75]
+    temporal_nms_gap_sec: [0, 2, 4, 6, 8]

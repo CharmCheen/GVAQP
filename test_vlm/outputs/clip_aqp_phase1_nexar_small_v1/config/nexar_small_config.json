@@ -1,0 +1,24 @@
+{
+  "phase": "phase1_1_nexar_small_v1",
+  "approved_scope": {
+    "metadata_annotation_files": true,
+    "positive_videos_max": 25,
+    "normal_videos_max": 25,
+    "full_dataset_download": false
+  },
+  "unit_lengths_seconds": [
+    5,
+    10,
+    15
+  ],
+  "boundary_mapping_rules": {
+    "original_event_start_end": "use directly; boundary_source=original_annotation",
+    "alert_time_and_event_moment": "event_start=alert_time; event_end=event_moment; boundary_source=derived_from_alert_time_to_event_moment; confidence=medium",
+    "event_moment_only": "event_start=max(0,event_moment-2.5); event_end=event_moment+2.5; boundary_source=derived_from_event_moment; confidence=low",
+    "alert_time_only": "event_start=alert_time; event_end=alert_time+5.0; boundary_source=derived_from_alert_time; confidence=low"
+  },
+  "do_not_run_vlm": true,
+  "do_not_train_models": true,
+  "do_not_build_perception_stack": true,
+  "do_not_fabricate_boundaries": true
+}
