@@ -127,6 +127,7 @@ garc_eval/outputs/*
 !garc_eval/outputs/uadetrac_temporal_gap_diagnosis.md
 !garc_eval/outputs/supg_paper_synthetic_reproduction/
 !garc_eval/outputs/abae_paper_synthetic_reproduction/
+!garc_eval/outputs/v13_*_summary.md
 
 # Large experiment result folders
 garc_eval/outputs/supg_*/
@@ -140,6 +141,7 @@ garc_eval/outputs/real_frames/
 garc_eval/**/synthetic_beta.csv
 garc_eval/**/*.parquet
 garc_eval/**/*.csv
+!garc_eval/outputs/v13_*
 garc_eval/**/*.png
 
 # But allow test fixtures if you create them later
@@ -147,8 +149,11 @@ garc_eval/**/*.png
 
 try_or_no/arc_source/data/
 
-# Large generated outputs
-test_vlm/outputs/
+# Large generated outputs (V13 experiments are tracked)
+test_vlm/outputs/*
+!test_vlm/outputs/v13_*/
+!test_vlm/outputs/v13_*/*
+!test_vlm/outputs/agent_loop_center10_v13_*
 try_or_no/outputs/
 *.tar
-*.tar.gz
+test_vlm_outputs_v13_experiments.tar.gz
