@@ -1,4 +1,22 @@
 # =========================
+# Secrets
+# =========================
+.env
+.env.*
+*.pem
+*.key
+*token*
+*secret*
+*apikey*
+*api_key*
+*.local.yaml
+*.local.yml
+*.private.yaml
+*.private.yml
+secrets/
+credentials/
+
+# =========================
 # Python cache / build
 # =========================
 __pycache__/
@@ -29,12 +47,13 @@ site-packages/
 # =========================
 .vscode/
 .idea/
+.claude/
 .DS_Store
 Thumbs.db
 desktop.ini
 
 # =========================
-# Logs
+# Logs / temp
 # =========================
 *.log
 logs/
@@ -42,31 +61,17 @@ logs/
 *.temp
 
 # =========================
-# Secrets / local configs
-# =========================
-.env
-.env.*
-*.local.yaml
-*.local.yml
-*.private.yaml
-*.private.yml
-secrets/
-credentials/
-
-# =========================
 # Third-party repositories
-# Do not commit cloned external repos.
-# Record their commit hashes instead.
 # =========================
 /refe_repos/
 
 # =========================
-# Local data / models
+# Local data / models (root-level only)
 # =========================
 /data/
 /models/
 
-# Video / frame / model artifacts
+# Video / image files
 *.mp4
 *.avi
 *.mov
@@ -79,81 +84,131 @@ credentials/
 *.bmp
 *.tif
 *.tiff
+*.svg
 
-# ML model weights / inference artifacts
+# Model weights
 *.pt
 *.pth
 *.onnx
 *.engine
 *.ckpt
 *.safetensors
+*.bin
 
-# Large generated arrays / tables
+# Archives
+*.tar
+*.tar.gz
+*.zip
+*.gz
+
+# Large generated arrays
 *.npy
 *.npz
 *.feather
+*.pkl
+*.pickle
+*.parquet
 
 # =========================
-# Generated experiment outputs
-# Keep only lightweight reports/metadata.
+# experiment/ — all generated data, keep only code
 # =========================
-garc_eval/outputs/*
-!garc_eval/outputs/.gitkeep
-!garc_eval/outputs/report.md
-!garc_eval/outputs/repo_commits.json
-!garc_eval/outputs/real_frame_experiment_status.md
-!garc_eval/outputs/abae_reproduction_status.md
-!garc_eval/outputs/abae_synthetic_smoke/
-!garc_eval/outputs/abae_bdd100k_smoke/
-!garc_eval/outputs/paper_reproduction_matrix.md
-!garc_eval/outputs/full_paper_reproduction_status.md
-!garc_eval/outputs/garc_extension_baseline_summary.md
-!garc_eval/outputs/garc_experiment_protocol.md
-!garc_eval/outputs/temporal_dataset_acquisition_plan.md
-!garc_eval/outputs/garc_research_retrospective.md
-!garc_eval/outputs/temporal_retrieval_stress_benchmark.md
-!garc_eval/outputs/collapse_boundary_analysis.md
-!garc_eval/outputs/research_infrastructure_audit.md
-!garc_eval/outputs/frame_to_clip_gap_analysis.md
-!garc_eval/outputs/nondegenerate_benchmark_smoke.md
-!garc_eval/outputs/dataset_acquisition_audit.md
-!garc_eval/outputs/uadetrac_dataset_audit.md
-!garc_eval/outputs/uadetrac_temporal_supg_smoke_20_report.md
-!garc_eval/outputs/uadetrac_temporal_clip_smoke_20_report.md
-!garc_eval/outputs/uadetrac_temporal_k_stress_report.md
-!garc_eval/outputs/uadetrac_temporal_k_stress_validity_note.md
-!garc_eval/outputs/uadetrac_temporal_boundary_stress_report.md
-!garc_eval/outputs/uadetrac_temporal_budget_search_report.md
-!garc_eval/outputs/uadetrac_temporal_gap_diagnosis.md
-!garc_eval/outputs/supg_paper_synthetic_reproduction/
-!garc_eval/outputs/abae_paper_synthetic_reproduction/
-!garc_eval/outputs/v13_*_summary.md
+experiments/**/*.csv
+experiments/**/*.json
+experiments/**/*.jsonl
+experiments/**/*.mp4
+experiments/**/*.jpg
+experiments/**/*.png
+experiments/**/*.pdf
+experiments/**/*.tar
+experiments/**/*.tar.gz
+experiments/**/*.parquet
+experiments/**/__pycache__/
 
-# Large experiment result folders
-garc_eval/outputs/supg_*/
-!garc_eval/outputs/supg_paper_synthetic_reproduction/
-garc_eval/outputs/real_frame_tables/
-garc_eval/outputs/real_frames/
+# But allow .py, .sh, .md, .yaml, .log
+!experiments/**/*.py
+!experiments/**/*.sh
+!experiments/**/*.md
+!experiments/**/*.yaml
+!experiments/**/*.yml
+!experiments/**/*.log
+!experiments/**/*.cfg
+!experiments/**/*.txt
 
 # =========================
-# Generated datasets inside garc_eval
+# src/garc_eval/outputs/ — large replay directories
 # =========================
+src/garc_eval/outputs/*/replay/
+src/garc_eval/outputs/*/state/
+src/garc_eval/outputs/*/analysis/
+src/garc_eval/outputs/*/tables/*.csv
+src/garc_eval/outputs/*/raw_outputs/
+
+# =========================
+# try_or_no/ — ignore generated data, keep code
+# =========================
+try_or_no/*.mov
+try_or_no/videos/
+try_or_no/outputs/
+try_or_no/arc_source/data/
+try_or_no/**/*.csv
+try_or_no/**/*.json
+try_or_no/**/*.mp4
+try_or_no/**/*.jpg
+try_or_no/**/*.png
+try_or_no/**/*.pdf
+try_or_no/**/__pycache__/
+
+# But allow .py, .sh, .md, .yaml, .json
+!try_or_no/**/*.py
+!try_or_no/**/*.sh
+!try_or_no/**/*.md
+!try_or_no/**/*.yaml
+!try_or_no/**/*.yml
+!try_or_no/**/*.log
+!try_or_no/**/*.txt
+!try_or_no/.gitignore
+!try_or_no/requirements.txt
+
+# =========================
+# datasets/ — ignore large data, keep manifests
+# =========================
+datasets/DrivingDojo-mini/
+datasets/clips/
+datasets/casq_external/nexar/videos_hf/
+datasets/casq_external/nexar/raw/
+datasets/casq_external/nexar/metadata/
+datasets/casq_external/nexar/download_logs/
+datasets/**/.cache/
+datasets/**/huggingface/
+datasets/**/*.mp4
+datasets/**/*.jpg
+datasets/**/*.png
+
+# But allow lightweight manifests and scripts
+!datasets/manifests/
+!datasets/**/*.csv
+!datasets/**/*.py
+!datasets/**/*.md
+!datasets/**/*.yaml
+
+# =========================
+# test_vlm/ — follow symlinks, ignore generated
+# =========================
+test_vlm/outputs/*/v13_*/*.jpg
+test_vlm/outputs/*/v13_*/*.png
+
+# =========================
+# Generated experiment outputs (legacy garc_eval/ symlink path)
+# =========================
+garc_eval/outputs/*/replay/
+garc_eval/outputs/*/state/
+garc_eval/outputs/*/analysis/
+garc_eval/outputs/*/raw_outputs/
 garc_eval/**/synthetic_beta.csv
 garc_eval/**/*.parquet
 garc_eval/**/*.csv
-!garc_eval/outputs/v13_*
 garc_eval/**/*.png
 
-# But allow test fixtures if you create them later
-!garc_eval/tests/fixtures/**
-
-try_or_no/arc_source/data/
-
-# Large generated outputs (V13 experiments are tracked)
-test_vlm/outputs/*
-!test_vlm/outputs/v13_*/
-!test_vlm/outputs/v13_*/*
-!test_vlm/outputs/agent_loop_center10_v13_*
-try_or_no/outputs/
-*.tar
+# Miscellaneous large files
+archive/
 test_vlm_outputs_v13_experiments.tar.gz

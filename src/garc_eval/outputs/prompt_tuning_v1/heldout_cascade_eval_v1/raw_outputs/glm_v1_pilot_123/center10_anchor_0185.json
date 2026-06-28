@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0185",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, I need to check each frame for non-ego dynamic road users near the ego path. Looking at the frames, there are cyclists and possibly pedestrians? Wait, let's check each one. \n\nFirst row: frames show overpasses, roads, but do we see any road users entering the path? Second row: there are bicycles. Let's check the cyclist presence. In some frames, there are cyclists near the ego path. The target event is about a non-ego dynamic road user entering, crossing, etc. If there are cyclists approaching the ego path, that would count. \n\nLooking at the frames, there are cyclists (cyclist type) moving near the ego path. So the event is positive. Let's check each frame's content. The frames show cyclists, so the primary actor type is cyclist. Interaction type could be near conflict or path encroachment. \n\nNow, let's structure the JSON. The event_label would be positive. Ego_relevant is true. Primary_actor_type is cyclist. Interaction_type could be near_conflict. Temporal_evidence: cyclists appear in frames, moving toward the ego path. Spatial_evidence: cyclists are near the ego path. Confidence is high since there are clear cyclists. Failure reason is none.</think><answer>{\n  \"event_label\": \"positive\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"cyclist\",\n  \"interaction_type\": \"near_conflict\",\n  \"temporal_evidence\": \"Cyclists appear in multiple frames moving near the ego vehicle's path\",\n  \"spatial_evidence\": \"Cyclists are positioned close to the ego vehicle's driving corridor\",\n  \"confidence\": 0.9,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "positive",
+    "ego_relevant": true,
+    "primary_actor_type": "cyclist",
+    "interaction_type": "near_conflict",
+    "temporal_evidence": "Cyclists appear in multiple frames moving near the ego vehicle's path",
+    "spatial_evidence": "Cyclists are positioned close to the ego vehicle's driving corridor",
+    "confidence": 0.9,
+    "failure_reason": "none"
+  },
+  "latency_s": 15.861979961395264,
+  "output_tokens": 369,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

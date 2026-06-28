@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0118",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, check each frame for any non-ego dynamic road users. The frames show a highway with some vehicles, but do any enter the ego's path? Let's check each frame:\n\nFirst row: frames show vehicles on the road, but no clear indication of a road user entering the path. Second row also shows the road with vehicles, but no dynamic road user entering the ego's path. The scenes seem to have moving vehicles, but none appear to be cutting in, crossing, or encroaching. The road appears clear of any such interactions. So, since there's no visible interaction, I'll mark as negative.</think><answer>{\n  \"event_label\": \"negative\",\n  \"ego_relevant\": false,\n  \"primary_actor_type\": \"none\",\n  \"interaction_type\": \"none\",\n  \"temporal_evidence\": \"No visible road users entering or encroaching on ego path across frames\",\n  \"spatial_evidence\": \"Road appears clear of non-ego dynamic road users near ego path\",\n  \"confidence\": 1.0,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "negative",
+    "ego_relevant": false,
+    "primary_actor_type": "none",
+    "interaction_type": "none",
+    "temporal_evidence": "No visible road users entering or encroaching on ego path across frames",
+    "spatial_evidence": "Road appears clear of non-ego dynamic road users near ego path",
+    "confidence": 1.0,
+    "failure_reason": "none"
+  },
+  "latency_s": 10.05181884765625,
+  "output_tokens": 237,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

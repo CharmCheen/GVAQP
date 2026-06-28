@@ -1,0 +1,87 @@
+# P0 New-Video Scout Gate configuration
+# Cheap signals only. No VLM / LLM oracle. No semantic event labels.
+task: "P0 New-Video Scout Gate"
+purpose: >
+  Low-cost data-availability and event-density screening for dataset2 / dataset3
+  to decide whether each is worth a center10 pilot (the next, more expensive step).
+  This scout produces NECESSARY non-degeneracy conditions only; it does NOT estimate
+  positive rate or proxy AUC (those require oracle labels, which are forbidden here).
+
+outputs_root: /qiuyeqing/llama_prl/G-ARC/garc_eval/outputs/new_video_scout_gate_v1
+
+videos:
+  dataset2:
+    path: /qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset2.mp4
+  dataset3:
+    path: /qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4
+
+reference_video:
+  realcartest:
+    path: /qiuyeqing/llama_prl/G-ARC/try_or_no/videos/realcartest.mp4
+    note: "V13.8 reference: 1920x1080 24fps 66.5min, 51 stitched events, proxy AUC ~0.74"
+
+cheap_signals:
+  - ffprobe_metadata
+  - low_freq_frame_sampling
+  - contact_sheet
+  - motion_energy              # cv2.absdiff @2fps, 320x180, per 5s window
+  - yolo_vehicle_person_bike   # YOLOv8n on 1 midpoint frame per 5s window
+  - near_ego_occupancy         # lower-center band ROI 0.35-0.65 x, 0.45-1.0 y
+  - bbox_lateral_activity      # cx std (normalized) + lateral-presence count
+
+forbidden:
+  - vlm_oracle_calls
+  - llm_oracle_calls
+  - semantic_event_labels
+  - interpreting_proxy_high_score_windows_as_real_events
+
+parameters:
+  window_seconds: 5.0          # V13.5 coarse clip grid
+  motion_fps: 2                # motion sampling
+  motion_resize: [320, 180]
+  yolo_model: /qiuyeqing/llama_prl/G-ARC/models/yolo/yolov8n.pt
+  yolo_frame_per_window: 1     # midpoint
+  yolo_batch: 16
+  yolo_device: cuda            # A800 80GB
+  contact_interval_s: 60.0
+  vehicle_coco_ids: [2, 3, 5, 7]   # car, motorcycle, bus, truck (matches V13.5)
+  person_coco_id: 0
+  bicycle_coco_id: 1
+
+rois:
+  v13_5_center_thirds: {x: [0.333, 0.667], y: [0.333, 0.667]}
+  v13_5_bottom_thirds: {y: [0.667, 1.0]}
+  near_ego_band: {x: [0.35, 0.65], y: [0.45, 1.0]}   # kinematic ego-path ROI
+
+schema_note: >
+  Output window_features_*.csv is a SUPERSET of V13.5 proxy_features_5s.csv
+  (same first 18 columns, extra class/ROI/lateral columns appended) so downstream
+  V13.9/V13.10/diversity_prefilter code can consume it without modification.
+  Bug fix vs V13.5: ROI cy uses true bbox vertical center (y1+y2)/2, not the
+  original (y2+y2)/2 which referenced the bbox bottom.
+
+gate_criteria:   # necessary cheap-signal conditions; NOT sufficient for event density
+  data_availability:
+    - "duration >= 30 min and >= 10000 frames"
+    - "frame read success rate > 99.5% (no large corrupt gaps)"
+    - "contact sheet confirms continuous dashcam driving footage"
+  non_degeneracy:
+    - "motion_energy not degenerate (non-zero in most windows, std > 0)"
+    - "YOLO vehicle count shows temporal variation (CV > 0.3)"
+    - "object_count_mean distribution has a non-trivial spread"
+  predicate_relevance:   # for O_enter_ego_path_v0 (object-type-heterogeneous)
+    - "vehicles present in a meaningful fraction of windows"
+    - "person OR bicycle/motorcycle present in at least some windows "
+      "(realcartest positives split vehicle=67/pedestrian=13/cyclist=13)"
+    - "lateral activity non-trivial (bbox_cx_std > 0; objects appear at varied x)"
+  scene_distinctness_from_realcartest:
+    - "different resolution and/or scene type (assessed via contact sheet + class mix)"
+
+decision_scale:
+  GO: "all data_availability + non_degeneracy + predicate_relevance met; recommend center10 pilot"
+  WEAK_GO: "data_availability met; some non_degeneracy/predicate signals weak but non-vacuous; pilot with caution"
+  NO_GO: "data_availability fails OR signals degenerate (no variation / no objects)"
+
+reproducible_commands:
+  smoke: "python garc_eval/outputs/new_video_scout_gate_v1/scripts/scout_pipeline.py --mode smoke --videos both"
+  full: "python garc_eval/outputs/new_video_scout_gate_v1/scripts/scout_pipeline.py --mode full --videos both"

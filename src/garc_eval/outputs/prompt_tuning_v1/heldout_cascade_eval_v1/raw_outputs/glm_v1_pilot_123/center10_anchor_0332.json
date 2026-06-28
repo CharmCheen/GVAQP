@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0332",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, I need to check each frame for any non-ego dynamic road user that might interact with the ego's path. Let's look at each frame:\n\nFirst, check if there's any vehicle, pedestrian, etc., moving toward the ego's path. The frames show various vehicles, but do any of them have a trajectory that would cut in, cross, or encroach? Let's check each frame's content.\n\nLooking at the frames, there's no clear indication of a non-ego road user entering the ego's path. The vehicles seem to be maintaining their lanes, and there's no visible pedestrian or vehicle changing trajectory toward the ego. The scene appears to have regular traffic without any immediate conflicts. So, since there's no clear interaction, I'd mark as negative. Wait, but need to make sure. Wait, the task says err on the side of positive, but if there's no interaction, then negative. Let me check again.\n\nWait, the frames show different positions of vehicles, but none seem to be about to cut in or cross. So the event_label would be negative.</think><answer>{\n  \"event_label\": \"negative\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"none\",\n  \"interaction_type\": \"none\",\n  \"temporal_evidence\": \"No visible road users entering or encroaching on ego path across frames\",\n  \"spatial_evidence\": \"No road users in proximity to ego path; vehicles maintain lane positions without trajectory toward ego path\",\n  \"confidence\": 1.0,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "negative",
+    "ego_relevant": true,
+    "primary_actor_type": "none",
+    "interaction_type": "none",
+    "temporal_evidence": "No visible road users entering or encroaching on ego path across frames",
+    "spatial_evidence": "No road users in proximity to ego path; vehicles maintain lane positions without trajectory toward ego path",
+    "confidence": 1.0,
+    "failure_reason": "none"
+  },
+  "latency_s": 14.514363765716553,
+  "output_tokens": 338,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

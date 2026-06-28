@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0075",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, look for non-ego dynamic road users entering the ego's path. In the bottom row, there's a cyclist (bicyclist) moving near the ego vehicle's path. Let's check each frame. The cyclist appears in some frames, moving through the intersection area. The ego vehicle is the black car, and the cyclist is approaching the path. So there's a potential interaction. Let's check the definitions: \"enters, crosses, cuts into, or materially encroaches on the ego vehicle's likely path\". The cyclist is moving in a way that could encroach. So the event is positive.</think><answer>{\n  \"event_label\": \"positive\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"cyclist\",\n  \"interaction_type\": \"path_encroachment\",\n  \"temporal_evidence\": \"A cyclist appears in later frames moving through the intersection area near the ego vehicle's path\",\n  \"spatial_evidence\": \"The cyclist is positioned in the intersection area, approaching the ego vehicle's driving corridor\",\n  \"confidence\": 0.8,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "positive",
+    "ego_relevant": true,
+    "primary_actor_type": "cyclist",
+    "interaction_type": "path_encroachment",
+    "temporal_evidence": "A cyclist appears in later frames moving through the intersection area near the ego vehicle's path",
+    "spatial_evidence": "The cyclist is positioned in the intersection area, approaching the ego vehicle's driving corridor",
+    "confidence": 0.8,
+    "failure_reason": "none"
+  },
+  "latency_s": 10.667401790618896,
+  "output_tokens": 246,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

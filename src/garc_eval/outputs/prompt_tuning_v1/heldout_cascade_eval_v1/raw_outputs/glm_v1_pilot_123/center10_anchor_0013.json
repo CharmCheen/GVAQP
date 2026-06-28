@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0013",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, check each frame for non-ego dynamic road users. The frames show a city street with various vehicles. Let's look for any vehicle or pedestrian that might enter the ego's path. \n\nLooking at the frames, do we see any non-ego dynamic road user entering the path? Let's check each frame:\n\nFirst row: frames show mostly empty roads with some vehicles in the distance, but no immediate interaction. Second row: similar, mostly clear roads. Wait, but the task is to check if any non-ego dynamic road user enters, crosses, etc. If there's no visible road user interacting, then maybe negative? Wait, but let's check again. Wait, the frames show a driving scenario with mostly clear lanes. Are there any vehicles or pedestrians that would encroach? Let me check each frame's content.\n\nLooking at all frames, the road appears clear of any non-ego dynamic road users that would interact with the ego's path. There are no visible vehicles or pedestrians entering the path, crossing, or encroaching. So the event is negative.</think><answer>{\n  \"event_label\": \"negative\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"none\",\n  \"interaction_type\": \"none\",\n  \"temporal_evidence\": \"No visible road users enter, cross, or encroach on the ego path across frames\",\n  \"spatial_evidence\": \"No road users are near or in the ego's driving corridor\",\n  \"confidence\": 1.0,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "negative",
+    "ego_relevant": true,
+    "primary_actor_type": "none",
+    "interaction_type": "none",
+    "temporal_evidence": "No visible road users enter, cross, or encroach on the ego path across frames",
+    "spatial_evidence": "No road users are near or in the ego's driving corridor",
+    "confidence": 1.0,
+    "failure_reason": "none"
+  },
+  "latency_s": 14.18928599357605,
+  "output_tokens": 331,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

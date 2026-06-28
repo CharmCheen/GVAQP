@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0057",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, check each frame for non-ego dynamic road users. Looking at the frames, there's a pedestrian in the rightmost top frame wearing orange, which might be crossing or encroaching. Also, check other frames. Wait, the target event is about entering, crossing, cutting into, or encroaching. Let's check each frame:\n\nTop row, rightmost frame (574.2s) has a pedestrian in orange crossing the crosswalk, which is near the ego path. So that's a potential interaction. Also, check other frames\u2014do any other road users approach? Let's see. The pedestrian in orange is a non-ego dynamic road user entering the crosswalk, which is near the ego's path. So the event is positive.</think><answer>{\n  \"event_label\": \"positive\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"pedestrian\",\n  \"interaction_type\": \"crossing\",\n  \"temporal_evidence\": \"Pedestrian in orange clothing appears in the rightmost top frame, moving across the crosswalk area near the ego path\",\n  \"spatial_evidence\": \"Pedestrian is in the crosswalk area, which is adjacent to the ego vehicle's path\",\n  \"confidence\": 0.9,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "positive",
+    "ego_relevant": true,
+    "primary_actor_type": "pedestrian",
+    "interaction_type": "crossing",
+    "temporal_evidence": "Pedestrian in orange clothing appears in the rightmost top frame, moving across the crosswalk area near the ego path",
+    "spatial_evidence": "Pedestrian is in the crosswalk area, which is adjacent to the ego vehicle's path",
+    "confidence": 0.9,
+    "failure_reason": "none"
+  },
+  "latency_s": 11.993874073028564,
+  "output_tokens": 285,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

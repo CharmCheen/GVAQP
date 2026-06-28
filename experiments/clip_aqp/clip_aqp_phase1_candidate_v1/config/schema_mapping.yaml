@@ -1,0 +1,46 @@
+inputs:
+  manifest: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/clip_aqp_phase1_nexar_200_v1/manifests/nexar_200_manifest.csv
+  casq_events: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/clip_aqp_phase1_nexar_200_v1/converted/casq_events_nexar_200.csv
+  casq_units: /qiuyeqing/llama_prl/G-ARC/test_vlm/outputs/clip_aqp_phase1_nexar_200_v1/converted/casq_units_nexar_200.csv
+candidate_generation_forbidden_fields:
+  - alert_time
+  - derived_event_end
+  - derived_event_start
+  - event_end
+  - event_moment
+  - event_start
+evaluation_only_fields:
+  - event_start
+  - event_end
+  - event_midpoint
+candidate_columns:
+  - candidate_name
+  - video_id
+  - returned_clip_id
+  - start_time
+  - end_time
+  - score
+  - rank
+  - generation_rule
+  - uses_oracle_annotation
+  - uses_video_content
+  - model_name
+  - runtime_seconds
+  - notes
+evaluation_columns:
+  - candidate_name
+  - theta
+  - budget_type
+  - budget_value
+  - merge_gap
+  - num_returned_clips
+  - total_returned_duration
+  - mean_returned_clip_duration
+  - true_derived_recall
+  - event_hit_count
+  - event_total_count
+  - precision_if_definable
+  - runtime_seconds
+  - frames_processed
+  - videos_processed
+  - throughput_fps

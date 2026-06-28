@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0107",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, check each frame for non-ego dynamic road users entering the ego's path. The ego is the camera vehicle. Looking at the frames, do we see any vehicles or other road users that might interact? Let's check each frame's content. The frames show a highway with vehicles, but do any non-ego vehicles enter the ego's path? Let's check the sequence. The frames show various vehicles, but none seem to be cutting in, crossing, or encroaching. The road appears clear of any immediate interactions. So, since there's no clear interaction, and the road seems clear, the label would be negative. Wait, but need to make sure. Let me check again. The frames show the ego vehicle on a highway with other vehicles, but none are approaching the ego's lane in a way that would encroach. So the event label is negative.</think><answer>{\n  \"event_label\": \"negative\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"none\",\n  \"interaction_type\": \"none\",\n  \"temporal_evidence\": \"No visible changes in road users entering ego path across frames\",\n  \"spatial_evidence\": \"No road users in proximity to ego path\",\n  \"confidence\": 1.0,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "negative",
+    "ego_relevant": true,
+    "primary_actor_type": "none",
+    "interaction_type": "none",
+    "temporal_evidence": "No visible changes in road users entering ego path across frames",
+    "spatial_evidence": "No road users in proximity to ego path",
+    "confidence": 1.0,
+    "failure_reason": "none"
+  },
+  "latency_s": 12.003806591033936,
+  "output_tokens": 280,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

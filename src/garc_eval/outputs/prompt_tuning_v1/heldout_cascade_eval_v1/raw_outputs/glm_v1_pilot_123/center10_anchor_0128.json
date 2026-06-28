@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0128",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. The target event is about a non-ego dynamic road user entering the ego's path. Let's check each frame for road users like pedestrians, motorcycles, etc., moving toward the ego path.\n\nLooking at the frames, especially the lower ones, there are pedestrians and motorcycles. For example, in some frames, pedestrians are crossing or moving near the ego path. Also, motorcycles might be approaching. Since there are road users moving near the path, this suggests a potential interaction. \n\nNow, let's check the definitions. The event is about entering, crossing, cutting into, or encroaching. If there are pedestrians or vehicles moving toward the ego's path, that counts. The frames show pedestrians and motorcycles, so there's a reasonable possibility of interaction. Therefore, the event label should be positive.</think><answer>{\n  \"event_label\": \"positive\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"pedestrian\",\n  \"interaction_type\": \"crossing\",\n  \"temporal_evidence\": \"Pedestrians and motorcycles appear in subsequent frames moving toward the ego path\",\n  \"spatial_evidence\": \"Actors are positioned near or on the ego vehicle's path, with some approaching from crosswalks or intersections\",\n  \"confidence\": 0.8,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "positive",
+    "ego_relevant": true,
+    "primary_actor_type": "pedestrian",
+    "interaction_type": "crossing",
+    "temporal_evidence": "Pedestrians and motorcycles appear in subsequent frames moving toward the ego path",
+    "spatial_evidence": "Actors are positioned near or on the ego vehicle's path, with some approaching from crosswalks or intersections",
+    "confidence": 0.8,
+    "failure_reason": "none"
+  },
+  "latency_s": 11.970927000045776,
+  "output_tokens": 283,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

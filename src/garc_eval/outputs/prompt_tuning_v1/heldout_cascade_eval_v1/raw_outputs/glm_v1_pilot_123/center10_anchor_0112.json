@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0112",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, check each frame for any non-ego dynamic road users entering the ego's path. The frames show a highway with vehicles, but do any of them cross into the ego's path? Let's check each frame's content. The vehicles seem to be maintaining their lanes, and there's no indication of a vehicle cutting in, crossing, or encroaching. The road appears clear of any road users that would interact with the ego's path. So, since there's no interaction visible, the label would be negative.</think><answer>{\n  \"event_label\": \"negative\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"none\",\n  \"interaction_type\": \"none\",\n  \"temporal_evidence\": \"No visible changes in road users entering ego path across frames\",\n  \"spatial_evidence\": \"No road users in or approaching ego's driving corridor\",\n  \"confidence\": 1.0,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "negative",
+    "ego_relevant": true,
+    "primary_actor_type": "none",
+    "interaction_type": "none",
+    "temporal_evidence": "No visible changes in road users entering ego path across frames",
+    "spatial_evidence": "No road users in or approaching ego's driving corridor",
+    "confidence": 1.0,
+    "failure_reason": "none"
+  },
+  "latency_s": 9.192130088806152,
+  "output_tokens": 210,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

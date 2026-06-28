@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0062",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, look for non-ego dynamic road users. The frames show a motorcycle or scooter-like vehicle, maybe a cyclist, moving near the ego path. Let's check each frame. There's a road user (motorcycle/cyclist) that seems to be moving in the direction that could encroach. The temporal evidence shows the actor's position changing relative to the ego path. The spatial evidence is that the actor is near the driving corridor. Since there's a road user that could potentially interact, I think it's positive.</think><answer>{\n  \"event_label\": \"positive\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"cyclist\",\n  \"interaction_type\": \"path_encroachment\",\n  \"temporal_evidence\": \"A cyclist appears in multiple frames moving along the road near the ego vehicle's path, with position changing over time\",\n  \"spatial_evidence\": \"The cyclist is positioned near the driving corridor, with trajectory suggesting potential encroachment\",\n  \"confidence\": 0.8,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "positive",
+    "ego_relevant": true,
+    "primary_actor_type": "cyclist",
+    "interaction_type": "path_encroachment",
+    "temporal_evidence": "A cyclist appears in multiple frames moving along the road near the ego vehicle's path, with position changing over time",
+    "spatial_evidence": "The cyclist is positioned near the driving corridor, with trajectory suggesting potential encroachment",
+    "confidence": 0.8,
+    "failure_reason": "none"
+  },
+  "latency_s": 9.977113962173462,
+  "output_tokens": 232,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

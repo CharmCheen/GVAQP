@@ -1,0 +1,50 @@
+experiment_id,metric_name,metric_value,metric_unit,source_file,interpretation_scope,caveat
+v13_5,num_pilot_vlm_calls,100,calls,vlm_pilot_labels.csv,VLM_ORACLE_RELATIVE single-video,Old prompt caused 66% abstain
+v13_5,pilot_positive_rate,0.18,fraction,vlm_pilot_labels.csv,VLM_ORACLE_RELATIVE single-video,66% abstain inflated denominator
+v13_5,pilot_abstain_rate,0.66,fraction,vlm_pilot_labels.csv,VLM_ORACLE_RELATIVE single-video,Fixed in V13.6 by prompt repair
+v13_6,num_vlm_calls,416,calls,clip_construction_vlm_labels.csv,VLM_ORACLE_RELATIVE single-video,52 base clips × 8 construction policies
+v13_6,center_10s_positive_rate,0.56,fraction,clip_construction_policy_summary.csv,VLM_ORACLE_RELATIVE single-video,vs fixed_5s 0.44
+v13_6,abstain_rate_with_repaired_prompt,0.0,fraction,clip_construction_policy_summary.csv,VLM_ORACLE_RELATIVE single-video,Normal driving now labeled negative
+v13_6,center_10s_full_video_estimated_calls,399,calls,full_video_call_cost_estimates.csv,Estimate for full center10 oracle,vs fixed_5s 798 calls
+v13_6,fixed_5s_full_video_calls,798,calls,full_video_call_cost_estimates.csv,Baseline call count for V13.5 grid,
+v13_7,num_labeled_center10_clips,52,clips,center10_labeled_eval_subset.csv,Pilot-derived biased subset,25% high-YOLO samples
+v13_7,num_positive_labeled_clips,29,clips,center10_labeled_eval_subset.csv,Pilot-derived biased subset,NOT full-video recall
+v13_7,best_static_at_B20_labeled_subset,0.448,recall,method_budget_results.csv,BIASED labeled-subset only,Overstated by ~3× vs unbiased
+v13_7,proxy_beat_random_delta_at_B10_labeled,0.186,delta recall,method_budget_results.csv,BIASED labeled-subset only,
+v13_8,num_full_oracle_anchors,399,anchors,center10_full_oracle_labels.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,All processed successfully
+v13_8,num_successful_vlm_calls,399,calls,center10_full_oracle_labels.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,0 failed calls
+v13_8,num_positive_anchors,94,anchors,center10_full_oracle_labels.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,23.6% positive rate
+v13_8,num_negative_anchors,305,anchors,center10_full_oracle_labels.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,
+v13_8,abstain_count,0,anchors,center10_full_oracle_labels.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,Repaired prompt eliminates abstain
+v13_8,num_stitched_events,51,events,center10_vlm_oracle_events.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,94 positive anchors → 51 events
+v13_8,complete_event_rate,1.0,fraction,center10_vlm_oracle_events.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,All events complete within 10s window
+v13_8,truncation_rate,0.0,fraction,center10_vlm_oracle_events.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,
+v13_8,total_runtime,74,minutes,reports/FINAL_REPORT.md,FULL_CENTER10_ORACLE_RELATIVE single-video,Qwen3-VL-32B on A800 GPU
+v13_8,mean_vlm_call_runtime,11.2,seconds,center10_full_oracle_labels.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,
+v13_9,num_methods_evaluated,19,methods,method_budget_results.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,
+v13_9,num_budgets,5,budgets,method_budget_results.csv,B32=5,10,20,40,80,
+v13_9,best_B20_method,uniform_anchor_10s,,method_budget_results.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,Uniform beat all proxy methods
+v13_9,best_B20_event_recall_overlap,0.137,recall,method_budget_results.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,event_recall_overlap definition
+v13_9,best_B40_event_recall_overlap,0.216,recall,method_budget_results.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,top_fusion_geometry_motion
+v13_9,proxy_delta_vs_random_B20,0.059,delta recall,method_budget_results.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,Below 0.10 threshold
+v13_9,random_mean_event_recall_B20,0.078,recall,random_seed_summary.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,Mean across 5 seeds
+v13_10,anchor_event_uniqueness,1-to-1,,V13_10_REPORT.md,FULL_CENTER10_ORACLE_RELATIVE single-video,Every anchor → exactly 1 event
+v13_10,OracleBest_at_B5,0.098,recall ceiling,oracle_upper_bound_v13_10.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,=min(B,51)/51
+v13_10,OracleBest_at_B10,0.196,recall ceiling,oracle_upper_bound_v13_10.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,
+v13_10,OracleBest_at_B20,0.392,recall ceiling,oracle_upper_bound_v13_10.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,
+v13_10,OracleBest_at_B40,0.784,recall ceiling,oracle_upper_bound_v13_10.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,
+v13_10,OracleBest_at_B80,1.0,recall ceiling,oracle_upper_bound_v13_10.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,Budget ≥ 51 events
+v13_10,best_static_eff_B20,0.350,efficiency ratio,static_methods_efficiency_v13_10.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,uniform_anchor_10s
+v13_10,best_static_eff_B40,0.275,efficiency ratio,static_methods_efficiency_v13_10.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,top_fusion_geometry_motion
+v13_10,best_adaptive_eff_B20,0.250,efficiency ratio,adaptive_simulation_v13_10.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,BASE_B_yolo + priority_boost
+v13_10,bidir_expand_waste_rate_B20,0.38-0.60,fraction,window_sensitivity_v13_10.csv,FULL_CENTER10_ORACLE_RELATIVE single-video,Range across bases
+v13_10,V13_9_mismatches_after_fix,18,rows,V13_10_REPORT.md,All random methods statistically expected,0 deterministic mismatches remain
+v13_minimal_validation,num_videos,192,videos,full_video_candidate_per_video.csv,Nexar-200 derived-boundary,96 positive + 96 normal heldout
+v13_minimal_validation,best_candidate_recall_035frac,0.3229,recall,full_video_candidate_results.csv,Nexar-200 derived-boundary,random_window; no candidate >=0.50
+v13_minimal_validation,representation_candidate_status,NOT_AVAILABLE,,reports/ARTIFACT_AUDIT.md,No local CLIP/SigLIP assets,
+nexar_candidate_v2,num_balanced_readable_videos,384,videos,nexar_candidate_subset_balanced_readable.csv,Nexar-200 derived-boundary,200 positive + 192 normal
+nexar_candidate_v2,vlm_micro_audit_positive_agreement,0.16,fraction,vlm_micro_audit_results.csv,EXTERNAL_LABEL_AUDIT: UNRELIABLE,100 bounded VLM calls
+nexar_candidate_v2,vlm_micro_audit_miss_rate,0.02,fraction,vlm_micro_audit_results.csv,EXTERNAL_LABEL_AUDIT: UNRELIABLE,
+v12_1_completion,num_eligible_positives,38,events,micro_casq_32b_oracle_v1_positive_events.csv,32B-oracle-relative sampled benchmark,NOT full-video
+v12_1_completion,num_expansion_vlm_calls,99,calls,micro_casq_expansion_32b_oracle_results_v1.csv,32B-oracle-relative,A100 GPU
+clip_aqp_phase0,power_pseudo_events_needed,500,events,POWER_REPORT.md,Synthetic pseudo-event simulation,For consistently non-vacuous certificates

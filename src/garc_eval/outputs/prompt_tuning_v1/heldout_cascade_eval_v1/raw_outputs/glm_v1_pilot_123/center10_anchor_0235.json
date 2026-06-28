@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0235",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, I need to check each frame for any non-ego dynamic road user that might interact with the ego's path. Let's look at all the frames:\n\nFirst, check each frame for vehicles, pedestrians, etc. The frames show a city street with barriers, buildings, and some vehicles. Do I see any actor moving toward the ego's path? Let's check each frame:\n\nTop row: frames 2350.5s, 2351.8s, 2353.0s, 2354.2s. Bottom row: 2355.5s, 2356.8s, 2358.0s, 2359.2s.\n\nLooking at all frames, do I see any non-ego dynamic road user (vehicle, pedestrian, etc.) that's entering, crossing, or encroaching? The scenes show mostly static elements like buildings, barriers, and some distant vehicles, but no clear road user moving toward the ego's path. The road appears clear of any interacting road users. So, since there's no visible interaction, I should mark as negative.</think><answer>{\n  \"event_label\": \"negative\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"none\",\n  \"interaction_type\": \"none\",\n  \"temporal_evidence\": \"No visible road users entering or interacting with ego path across frames\",\n  \"spatial_evidence\": \"No road users in proximity to ego path; road appears clear\",\n  \"confidence\": 1.0,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "negative",
+    "ego_relevant": true,
+    "primary_actor_type": "none",
+    "interaction_type": "none",
+    "temporal_evidence": "No visible road users entering or interacting with ego path across frames",
+    "spatial_evidence": "No road users in proximity to ego path; road appears clear",
+    "confidence": 1.0,
+    "failure_reason": "none"
+  },
+  "latency_s": 14.3841872215271,
+  "output_tokens": 334,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

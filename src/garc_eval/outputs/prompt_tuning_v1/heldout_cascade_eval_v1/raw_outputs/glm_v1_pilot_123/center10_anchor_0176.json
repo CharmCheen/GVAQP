@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0176",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, look for any non-ego dynamic road users. In the frames, there's a scooter or motorcycle-like vehicle near the center area. Let's check each frame. The first few frames show a person on a scooter or similar vehicle. The trajectory seems to be moving along the road, possibly encroaching. Wait, need to check if it's entering the ego path. The frames show a person on a scooter, maybe moving into the path. Let's check the temporal evidence: the vehicle is present in multiple frames, moving. The spatial evidence: near the center of the road. So there's a dynamic road user (motorcycle/scooter) that might be encroaching. So the event is positive.</think><answer>{\n  \"event_label\": \"positive\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"motorcycle\",\n  \"interaction_type\": \"path_encroachment\",\n  \"temporal_evidence\": \"A motorcycle/scooter appears in multiple frames moving along the road near the ego path\",\n  \"spatial_evidence\": \"The motorcycle/scooter is positioned near the center of the road, potentially encroaching on the ego vehicle's path\",\n  \"confidence\": 0.8,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "positive",
+    "ego_relevant": true,
+    "primary_actor_type": "motorcycle",
+    "interaction_type": "path_encroachment",
+    "temporal_evidence": "A motorcycle/scooter appears in multiple frames moving along the road near the ego path",
+    "spatial_evidence": "The motorcycle/scooter is positioned near the center of the road, potentially encroaching on the ego vehicle's path",
+    "confidence": 0.8,
+    "failure_reason": "none"
+  },
+  "latency_s": 11.841304063796997,
+  "output_tokens": 275,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

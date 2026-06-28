@@ -1,0 +1,59 @@
+relative_path,file_type,experiment_id_if_detected,role,should_read_for_codex,reason
+CASQ_CODEX_BRIEF_V12_1.md,md,v12_1,protocol_doc,yes,Master protocol — must read first
+docs/clip_aqp/CASQ_CODEX_BRIEF_V11.md,md,v11,protocol_doc,no,Superseded by V12.1
+docs/clip_aqp/REALCARTEST_ORACLE_RELATIVE_VALIDATION_V13_5.md,md,v13_5,protocol_doc,yes,Defines V13.5→V13.10 pipeline
+docs/clip_aqp/CENTER10_MULTI_METHOD_REPLAY_V13_7.md,md,v13_7,protocol_doc,maybe,Historical replay protocol
+test_vlm/outputs/agent_loop_center10_v13_8_to_v13_9_FINAL.md,md,v13_8_to_v13_9,final_report,yes,Loop completion summary
+test_vlm/outputs/v13_6_clip_construction_sensitivity_v1/reports/FINAL_REPORT.md,md,v13_6,final_report,yes,center_10s beats fixed_5s
+test_vlm/outputs/v13_7_center10_multi_method_replay_v1/reports/FINAL_REPORT.md,md,v13_7,final_report,yes,Superseded but shows labeled-subset bias
+test_vlm/outputs/v13_8_center10_full_oracle_reference_v1/reports/FINAL_REPORT.md,md,v13_8,final_report,yes,399-anchor oracle construction
+test_vlm/outputs/v13_9_latency_aware_center10_aqp_v1/reports/FINAL_REPORT.md,md,v13_9,final_report,yes,AQP simulation on full oracle
+test_vlm/outputs/v13_10/reports/V13_10_REPORT.md,md,v13_10,final_report,yes,Oracle upper bound + adaptive search
+test_vlm/outputs/v13_10/reports/V13_10_MISMATCH_ROOT_CAUSE.md,md,v13_10,final_report,yes,Metric reconciliation analysis
+test_vlm/outputs/v13_minimal_validation_v1/reports/V13_MINIMAL_VALIDATION_REPORT.md,md,v13_minimal_validation,final_report,maybe,Historical minimal validation
+test_vlm/outputs/v13_8_center10_full_oracle_reference_v1/tables/center10_full_oracle_labels.csv,csv,v13_8,table,yes,399 oracle labels — single source of truth
+test_vlm/outputs/v13_8_center10_full_oracle_reference_v1/tables/center10_vlm_oracle_events.csv,csv,v13_8,table,yes,51 stitched events
+test_vlm/outputs/v13_7_center10_multi_method_replay_v1/tables/center10_proxy_features.csv,csv,v13_7,table,yes,399 anchors with 19 proxy features
+test_vlm/outputs/v13_9_latency_aware_center10_aqp_v1/tables/method_budget_results.csv,csv,v13_9,table,yes,95 method×budget evaluations
+test_vlm/outputs/v13_10/tables/oracle_upper_bound_v13_10.csv,csv,v13_10,table,yes,OracleBest@B curve B=1..51
+test_vlm/outputs/v13_10/tables/static_methods_efficiency_v13_10.csv,csv,v13_10,table,yes,95 static efficiency rows
+test_vlm/outputs/v13_10/tables/adaptive_simulation_v13_10.csv,csv,v13_10,table,yes,30 adaptive efficiency rows
+test_vlm/outputs/v13_10/tables/combined_comparison_v13_10.csv,csv,v13_10,table,yes,125 rows union static+adaptive
+test_vlm/outputs/v13_10/tables/same_base_comparison_v13_10.csv,csv,v13_10,table,yes,15 same-base rows
+test_vlm/outputs/v13_10/tables/window_sensitivity_v13_10.csv,csv,v13_10,table,maybe,45 window-width rows
+test_vlm/outputs/v13_6_clip_construction_sensitivity_v1/tables/clip_construction_policy_summary.csv,csv,v13_6,table,yes,8 construction policies compared
+test_vlm/outputs/v13_6_clip_construction_sensitivity_v1/tables/clip_construction_vlm_labels.csv,csv,v13_6,table,maybe,416 VLM labels (large)
+test_vlm/outputs/v12_1_completion_v1/reports/V12_1_COMPLETION_FINAL_REPORT.md,md,v12_1,final_report,yes,Micro-CASQ completion
+test_vlm/outputs/clip_aqp_phase0_v1/reports/PHASE0_REPORT.md,md,phase0,final_report,no,Historical Phase 0
+test_vlm/outputs/clip_aqp_phase0_v1/repair_v1/reports/PHASE0_REPORT_v2.md,md,phase0,final_report,maybe,UCB/LCB bound repair
+test_vlm/outputs/clip_aqp_phase0_v1/power_v1/reports/POWER_REPORT.md,md,phase0,final_report,yes,~500 events needed for non-vacuous
+test_vlm/outputs/clip_aqp_phase1_nexar_candidate_v2/reports/NEXAR_CANDIDATE_FEASIBILITY_REPORT_V2.md,md,nexar_candidate_v2,final_report,maybe,VLM micro-audit UNRELIABLE
+test_vlm/outputs/clip_aqp_phase1_nexar_candidate_v2/reports/EXTERNAL_LABEL_MAPPING.md,md,nexar_candidate_v2,final_report,yes,LOOSE_APPROXIMATION / UNRELIABLE
+test_vlm/outputs/clip_aqp_phase1_nexar_candidate_v2/reports/VLM_MICRO_AUDIT_REPORT.md,md,nexar_candidate_v2,final_report,maybe,100 bounded VLM calls
+test_vlm/outputs/v13_5_realcartest_oracle_relative_v1/tables/proxy_features_5s.csv,csv,v13_5,table,yes,798 5s proxy features
+test_vlm/outputs/v13_5_realcartest_oracle_relative_v1/tables/vlm_pilot_labels.csv,csv,v13_5,table,maybe,100 pilot labels (old prompt)
+test_vlm/outputs/v13_5_realcartest_oracle_relative_v1/tables/coarse_5s_clip_grid.csv,csv,v13_5,table,maybe,798 5s clips
+test_vlm/outputs/v13_8_center10_full_oracle_reference_v1/scripts/run_full_center10_oracle.py,py,v13_8,script,maybe,Resumable VLM inference
+test_vlm/outputs/v13_9_latency_aware_center10_aqp_v1/scripts/run_aqp_simulation.py,py,v13_9,script,maybe,AQP simulation logic
+test_vlm/outputs/v13_10/scripts/v13_10_analysis.py,py,v13_10,script,maybe,Oracle bound + adaptive
+test_vlm/outputs/v13_6_clip_construction_sensitivity_v1/scripts/04_vlm_inference.py,py,v13_6,script,maybe,Resumable VLM inference
+garc_eval/outputs/v13_8_center10_full_oracle_reference_v1_summary.md,md,v13_8,summary,yes,Compact oracle summary
+garc_eval/outputs/v13_9_latency_aware_center10_aqp_v1_summary.md,md,v13_9,summary,yes,Compact AQP summary
+garc_eval/outputs/v13_10_summary.md,md,v13_10,summary,yes,Compact upper bound summary
+garc_eval/outputs/v13_6_clip_construction_sensitivity_v1_summary.md,md,v13_6,summary,yes,Compact sensitivity summary
+garc_eval/outputs/v13_7_center10_multi_method_replay_v1_summary.md,md,v13_7,summary,maybe,Compact replay summary
+garc_eval/outputs/v13_minimal_validation_v1_summary.md,md,v13_minimal_validation,summary,maybe,Compact minimal validation
+garc_eval/outputs/v12_1_completion_v1_summary.md,md,v12_1,summary,yes,Micro-CASQ summary
+garc_eval/outputs/clip_aqp_phase0_v1_summary.md,md,phase0,summary,no,Historical
+garc_eval/outputs/nuscenes_event_aqp_feasibility_audit_v1.md,md,nuscenes,intermediate_report,maybe,nuScenes feasibility
+garc_eval/outputs/garc_research_retrospective.md,md,-,final_report,maybe,Project retrospective
+garc_eval/outputs/research_infrastructure_audit.md,md,-,intermediate_report,no,Infrastructure audit
+garc_eval/outputs/collapse_boundary_analysis.md,md,-,final_report,no,Frame-to-clip analysis
+garc_eval/outputs/frame_to_clip_gap_analysis.md,md,-,final_report,no,Gap analysis
+test_vlm/outputs/v13_8_center10_full_oracle_reference_v1/raw_vlm_responses/,json,v13_8,raw_model_output,no,399 JSON files — too large to read
+test_vlm/outputs/v13_6_clip_construction_sensitivity_v1/raw_vlm_responses/,json,v13_6,raw_model_output,no,416 JSON files — too large to read
+test_vlm/outputs/v13_5_realcartest_oracle_relative_v1/raw_vlm_responses/,json,v13_5,raw_model_output,no,100 JSON files — too large to read
+test_vlm/outputs/v13_6_clip_construction_sensitivity_v1/prompts/o_enter_ego_path_v0_v13_6_prompt.txt,txt,v13_6,protocol_doc,yes,Repaired VLM prompt (0% abstain)
+datasets/casq_external/nexar/README_CASQ_MAPPING.md,md,-,protocol_doc,yes,Nexar label mapping document
+garc_eval/README_supg_repro.md,md,-,protocol_doc,no,SUPG reproduction guide
+test_vlm/README.md,md,-,protocol_doc,no,VLM tool documentation

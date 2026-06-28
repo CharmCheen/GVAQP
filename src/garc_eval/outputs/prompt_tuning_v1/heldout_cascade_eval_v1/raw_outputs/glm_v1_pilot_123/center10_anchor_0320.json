@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0320",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, check each frame for any non-ego dynamic road users that might interact with the ego's path. Looking at all the frames, do we see any vehicles, pedestrians, etc., that are entering, crossing, or encroaching? The images show buses, cars, but do any of them have trajectories that would interact with the ego's path? Let's check each frame:\n\nFirst row: buses and cars, but no clear indication of a road user entering the ego path. Second row: buses and cars, same. The scenes seem to have regular traffic without any road users that would cut in or encroach. Since there's no visible interaction, and the road appears clear, I think the label should be negative.</think><answer>{\n  \"event_label\": \"negative\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"none\",\n  \"interaction_type\": \"none\",\n  \"temporal_evidence\": \"No visible road users entering, crossing, or encroaching on ego path across frames\",\n  \"spatial_evidence\": \"No actors in proximity to ego path; road appears clear\",\n  \"confidence\": 1.0,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "negative",
+    "ego_relevant": true,
+    "primary_actor_type": "none",
+    "interaction_type": "none",
+    "temporal_evidence": "No visible road users entering, crossing, or encroaching on ego path across frames",
+    "spatial_evidence": "No actors in proximity to ego path; road appears clear",
+    "confidence": 1.0,
+    "failure_reason": "none"
+  },
+  "latency_s": 10.965624332427979,
+  "output_tokens": 258,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0121",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, check each frame for non-ego dynamic road users entering the ego's path. The frames show a highway with various vehicles, but do any non-ego vehicles enter the ego's path? Let's check each frame's content. The images show multiple vehicles, but none seem to be cutting in, crossing, or encroaching on the ego's path. The vehicles are either in adjacent lanes or moving away. So, no interaction is observed. Therefore, the event label should be \"negative\" since there's no road user interacting with the ego path.</think><answer>{\n  \"event_label\": \"negative\",\n  \"ego_relevant\": false,\n  \"primary_actor_type\": \"none\",\n  \"interaction_type\": \"none\",\n  \"temporal_evidence\": \"No visible changes in road users entering ego path across frames\",\n  \"spatial_evidence\": \"No non-ego dynamic road users in proximity to ego path\",\n  \"confidence\": 1.0,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "negative",
+    "ego_relevant": false,
+    "primary_actor_type": "none",
+    "interaction_type": "none",
+    "temporal_evidence": "No visible changes in road users entering ego path across frames",
+    "spatial_evidence": "No non-ego dynamic road users in proximity to ego path",
+    "confidence": 1.0,
+    "failure_reason": "none"
+  },
+  "latency_s": 9.510274171829224,
+  "output_tokens": 220,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

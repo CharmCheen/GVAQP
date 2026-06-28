@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0230",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, I need to check for any non-ego dynamic road users entering the ego's path. Let's look at each frame:\n\nFirst row frames: There's a motorcycle or scooter near the white SUV in some frames. Wait, let's check the sequence. The frames show a white SUV, and there's a motorcycle or scooter that might be approaching. Wait, let's check the second row maybe? Wait, the frames show various positions. Let's check the presence of any road users. In some frames, there's a motorcycle or scooter near the ego vehicle's path. Wait, the key is whether a non-ego dynamic road user enters the path. Let's check the frames with time stamps. For example, in frame 2301.8s, there's a person on a scooter near the white SUV. That could be a potential interaction. Wait, but need to check if it's entering the path. Alternatively, maybe the presence of a motorcycle or scooter that's moving toward the ego's path. Since there's a road user (motorcycle/scooter) that might be encroaching, so the event would be positive. Wait, let's check each frame for road users. In the frames, there's a motorcycle or scooter near the white vehicle, which could be entering the path. So the event is positive.</think><answer>{\n  \"event_label\": \"positive\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"motorcycle\",\n  \"interaction_type\": \"path_encroachment\",\n  \"temporal_evidence\": \"A motorcycle appears near the ego vehicle's path and moves through the sequence\",\n  \"spatial_evidence\": \"Near the ego vehicle's driving corridor, moving toward the path\",\n  \"confidence\": 0.8,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "positive",
+    "ego_relevant": true,
+    "primary_actor_type": "motorcycle",
+    "interaction_type": "path_encroachment",
+    "temporal_evidence": "A motorcycle appears near the ego vehicle's path and moves through the sequence",
+    "spatial_evidence": "Near the ego vehicle's driving corridor, moving toward the path",
+    "confidence": 0.8,
+    "failure_reason": "none"
+  },
+  "latency_s": 20.886019229888916,
+  "output_tokens": 385,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0231",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. First, check each frame for non-ego dynamic road users entering the ego path. Looking at the images, there are motorcycles and possibly other vehicles near the ego's path. For example, in some frames, motorcycles or scooters might be approaching the ego's lane. The key is to check if any actor is moving toward the ego's path. Since there are dynamic road users (like motorcycles) that could encroach, the event is likely positive. Let's check each frame's content. The frames show various road users, some near the ego's path. So the event_label should be positive. Then determine actor type, interaction type, etc.</think><answer>{\n  \"event_label\": \"positive\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"motorcycle\",\n  \"interaction_type\": \"path_encroachment\",\n  \"temporal_evidence\": \"Motorcycles appear near the ego vehicle's path across multiple frames, showing movement toward the driving corridor\",\n  \"spatial_evidence\": \"Motorcycles are positioned near the ego vehicle's lane, potentially encroaching on the driving corridor\",\n  \"confidence\": 0.8,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "positive",
+    "ego_relevant": true,
+    "primary_actor_type": "motorcycle",
+    "interaction_type": "path_encroachment",
+    "temporal_evidence": "Motorcycles appear near the ego vehicle's path across multiple frames, showing movement toward the driving corridor",
+    "spatial_evidence": "Motorcycles are positioned near the ego vehicle's lane, potentially encroaching on the driving corridor",
+    "confidence": 0.8,
+    "failure_reason": "none"
+  },
+  "latency_s": 11.023836374282837,
+  "output_tokens": 256,
+  "has_think": true,
+  "max_new_tokens": 2048
+}

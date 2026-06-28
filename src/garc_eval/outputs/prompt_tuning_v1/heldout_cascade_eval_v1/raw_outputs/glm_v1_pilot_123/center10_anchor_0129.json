@@ -1,0 +1,19 @@
+{
+  "anchor_id": "center10_anchor_0129",
+  "prompt": "BEST_glm_final",
+  "raw_output": "<think>Got it, let's analyze the frames. The target event is about a non-ego dynamic road user entering, crossing, or encroaching on the ego's path. Let's check each frame for such actors.\n\nLooking at the top row frames, there are motorcycles and pedestrians. For example, in some frames, there are motorcyclists and pedestrians near the ego's path. The bottom row might have vehicles, but the key is the top frames with motorcyclists and pedestrians. Since there are road users (motorcycles, pedestrians) that could be encroaching, the event is positive. \n\nNow, let's check each component. The primary actor type would be motorcycle or pedestrian. Interaction type could be path encroachment or crossing. Temporal evidence shows changes in road users' positions. Spatial evidence shows they're near the ego path. Confidence is high since there are clear road users near the path.</think><answer>{\n  \"event_label\": \"positive\",\n  \"ego_relevant\": true,\n  \"primary_actor_type\": \"motorcycle\",\n  \"interaction_type\": \"path_encroachment\",\n  \"temporal_evidence\": \"Motorcycles and pedestrians appear near the ego vehicle's path, with changing positions suggesting potential encroachment\",\n  \"spatial_evidence\": \"Motorcycles and pedestrians are positioned close to the ego vehicle's driving corridor, with trajectories indicating potential path interaction\",\n  \"confidence\": 0.9,\n  \"failure_reason\": \"none\"\n}</answer>",
+  "parsed": {
+    "event_label": "positive",
+    "ego_relevant": true,
+    "primary_actor_type": "motorcycle",
+    "interaction_type": "path_encroachment",
+    "temporal_evidence": "Motorcycles and pedestrians appear near the ego vehicle's path, with changing positions suggesting potential encroachment",
+    "spatial_evidence": "Motorcycles and pedestrians are positioned close to the ego vehicle's driving corridor, with trajectories indicating potential path interaction",
+    "confidence": 0.9,
+    "failure_reason": "none"
+  },
+  "latency_s": 12.886706352233887,
+  "output_tokens": 304,
+  "has_think": true,
+  "max_new_tokens": 2048
+}
