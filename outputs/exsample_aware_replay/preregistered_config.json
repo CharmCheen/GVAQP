@@ -1,0 +1,29 @@
+{
+  "query_predicate": "Visible Ego-Path Conflict (VEPC)",
+  "atomic_bin_size_s": 10,
+  "base_search_root": "/qiuyeqing/llama_prl/G-ARC",
+  "primary_reference_units": "/qiuyeqing/llama_prl/G-ARC/src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/full_reference_units.csv",
+  "primary_prior_scores": "/qiuyeqing/llama_prl/G-ARC/src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/cheap_signals_per_unit.csv",
+  "primary_reference_events": "/qiuyeqing/llama_prl/G-ARC/src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/reference_events.csv",
+  "dedup_time_distance_threshold_d_s": 10,
+  "chunk_size_candidates_s": [
+    30,
+    60,
+    120
+  ],
+  "expansion_k_candidates_bins": [
+    1,
+    2,
+    3,
+    5
+  ],
+  "E0_threshold_candidates": [
+    "top10",
+    "top20",
+    "top30"
+  ],
+  "prior_aggregation_for_10s_bin": "max",
+  "label_aggregation_for_10s_bin": "any_positive",
+  "random_seed": 42,
+  "n_trials_per_setting": 10
+}
