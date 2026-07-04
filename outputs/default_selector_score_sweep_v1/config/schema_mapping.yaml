@@ -1,0 +1,23 @@
+anchor_id: anchor_id
+time:
+  anchor_time: anchor_time
+  start_time: start_time
+  end_time: end_time
+label:
+  oracle_label: label
+  positive_value: positive
+events:
+  event_id: event_id
+  supporting_anchor_ids: supporting_anchor_ids
+score_columns:
+  primary_candidates:
+    - yolo_vehicle_max
+    - yolo_vehicle_mean
+    - score_yolo_count
+    - score_fusion_yolo_motion
+    - score_fusion_geometry_motion
+    - score_motion
+    - motion_energy_max
+    - bbox_area_sum_max
+    - center_roi_vehicle_count_mean
+    - bottom_roi_vehicle_count_mean

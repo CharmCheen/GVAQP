@@ -1,0 +1,5 @@
+artifact,path,row_count,role,leakage_risk,notes
+frozen_runtime_manifest,outputs/query_runtime_v1/tables/candidate_clip_manifest.csv,40,input_selection,low,Generated before this exporter; selector is not changed.
+frozen_runtime_intervals,outputs/query_runtime_v1/tables/returned_intervals.csv,40,input_selection,low,Generated before this exporter; selector is not changed.
+fallback_video,data/realcam/long_video_data/long_video_dataset3.mp4,1,physical_clip_source,axis_mismatch_if_used_globally,Used only with local_to_media_offset_seconds=2000 for intervals that fit.
+probe_manifest,outputs/probe_set_v1/probe_set_manifest.csv,25,time_mapping_evidence,high_if_used_for_tuning,Read only to justify fallback offset; not used for selector changes.

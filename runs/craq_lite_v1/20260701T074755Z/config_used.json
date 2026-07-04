@@ -1,0 +1,50 @@
+{
+  "experiment": "craq_lite_v1",
+  "timestamp": "20260701T074755Z",
+  "commit": "04196b5c87b5f3d7551a761b6187cbe53ace4bb3",
+  "mode": "smoke_scale",
+  "methods": [
+    "fixed_window_topk",
+    "threshold_merge",
+    "arc_style_prune_refine",
+    "oracle_confirmed_only",
+    "audited_proposal_repair",
+    "cils_craq_lite",
+    "lattice_oracle_upper_bound"
+  ],
+  "oracle_budgets": [
+    20,
+    40,
+    80
+  ],
+  "precision_targets": [
+    0.8,
+    0.9
+  ],
+  "iou_thresholds": [
+    0.3,
+    0.5
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "fixed_cils_policy": {
+    "pilot": "answer_quality_proxy_top",
+    "calibration": "beta_bin_strata_lower",
+    "selector": "clean_v2_no_leak_cils_selector"
+  },
+  "inputs": {
+    "clean_v2": "/qiuyeqing/llama_prl/G-ARC/src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak",
+    "repair_smoke": "/qiuyeqing/llama_prl/G-ARC/src/garc_eval/outputs/cils_calibration_repair_smoke_v1",
+    "repair_replay": "/qiuyeqing/llama_prl/G-ARC/src/garc_eval/outputs/cils_calibration_repair_replay_v1"
+  }
+}

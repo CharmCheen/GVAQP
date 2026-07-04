@@ -1,0 +1,106 @@
+# Repository Inventory
+
+## Relevant Scripts/Data/Configs
+
+- `src/garc_eval/experiments/cils_calibration_repair_replay_v1`
+- `src/garc_eval/experiments/cils_calibration_repair_smoke_v1`
+- `src/garc_eval/experiments/cils_empty_return_root_cause_audit_v1`
+- `src/garc_eval/experiments/clean_interval_aqp_code_audit_v1`
+- `src/garc_eval/experiments/clean_interval_aqp_code_audit_v2_clean_no_leak`
+- `src/garc_eval/experiments/clean_interval_aqp_full_reference_v1`
+- `src/garc_eval/experiments/clean_interval_aqp_full_reference_v2_clean_no_leak`
+- `src/garc_eval/experiments/clean_interval_aqp_full_reference_v2_label_aligned`
+- `src/garc_eval/experiments/craq_lite_v1`
+- `src/garc_eval/metrics/__init__.py`
+- `src/garc_eval/metrics/__pycache__`
+- `src/garc_eval/metrics/aggregation_metrics.py`
+- `src/garc_eval/metrics/clip_metrics.py`
+- `src/garc_eval/metrics/craq_lite_metrics.py`
+- `src/garc_eval/metrics/frame_to_clip.py`
+- `src/garc_eval/metrics/guarantee.py`
+- `src/garc_eval/metrics/selection_metrics.py`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/FINAL_REPORT.md`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/SMOKE_TEST_PROTOCOL.md`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/answer_quality_proxy_report.md`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/answer_quality_proxy_scores.csv`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/artifact_inventory.csv`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/artifact_inventory.md`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/budget_usage_audit.csv`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/config`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/data_manifest`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/evaluation_subset_summary.md`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/evaluation_subsets.csv`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/figures`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/leakage_audit.md`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/logs`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/reports`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/sanity_checks.md`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/scripts`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/smoke_baseline_report.md`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/smoke_calibration_bins.csv`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/smoke_calibration_quality.csv`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/smoke_calibration_report.md`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/smoke_candidate_p_answer.csv`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/smoke_interval_eval_curve.csv`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/smoke_main_curve.csv`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/smoke_pilot_positive_rates.csv`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/smoke_pilot_samples.csv`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/smoke_point_anchor_curve.csv`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/smoke_selected_intervals.csv`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/smoke_vs_baseline_comparison.csv`
+- `src/garc_eval/outputs/cils_calibration_repair_smoke_v1/tables`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/AGENT_LOOP_LOG.md`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/DURATION_STRATIFIED_DIAGNOSIS.md`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/FINAL_REPORT.md`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/FIX_REPORT.md`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/ablation_results_v2_clean.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/base_units.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/baseline_comparison_v2_clean.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/calibration_bins_v2_clean.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/calibration_label_alignment_report.md`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/calibration_metric_fix_report.md`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/calibration_quality_v2_clean.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/calibration_trials_v2_clean.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/cheap_signals_per_unit.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/config`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/data_manifest`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/failure_analysis.md`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/full_reference_units.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/implementation_bugfix_report.md`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/interval_labels_v2_clean.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/interval_lattice_features_only.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/interval_lattice_v2_clean.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/label_leakage_audit.md`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/logs`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/main_budget_curve_v2_clean.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/pipeline.py`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/precision_recall_duration_duplicate_summary_v2_clean.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/proposal_quality_v2_clean.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/proposal_recall_curve_v2_clean.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/proposal_upper_bound_report.md`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/reference_events.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/reports`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/sanity_checks_v2_clean.md`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/selected_intervals_by_trial_v2_clean.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/selected_universe.md`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/stress_test_results_v2_clean.csv`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/tables`
+- `src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/video_segment_manifest.csv`
+- `src/garc_eval/tests/__pycache__`
+- `src/garc_eval/tests/test_abae_adapter.py`
+- `src/garc_eval/tests/test_clip_metrics.py`
+- `src/garc_eval/tests/test_craq_lite_metrics.py`
+- `src/garc_eval/tests/test_fake_real_integration.py`
+- `src/garc_eval/tests/test_frame_to_clip.py`
+
+## Existing Commands Discovered
+
+- `bash src/garc_eval/experiments/cils_calibration_repair_smoke_v1/run_all.sh`
+- `python src/garc_eval/experiments/craq_lite_v1/run_craq_lite.py --smoke`
+- `pytest src/garc_eval/tests/test_craq_lite_metrics.py`
+
+## Missing Pieces
+
+- No human-adjudicated reference set found; using VLM-defined pseudo-oracle clean v2 reference.
+- No >=20 true-interval-event reference in current clean v2 artifact.
+- No standalone production CRAQ-lite guarantee layer found; this run is an evaluation wrapper.

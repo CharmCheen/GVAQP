@@ -1,0 +1,5 @@
+artifact,path,row_count,role,leakage_risk,notes
+runtime_intervals,outputs/query_runtime_v1/tables/returned_intervals.csv,40,frozen_runtime_output,low,Generated before reading probe labels.
+runtime_manifest,outputs/query_runtime_v1/tables/candidate_clip_manifest.csv,40,frozen_runtime_output,low,Generated before reading probe labels.
+probe_manifest,outputs/probe_set_v1/probe_set_manifest.csv,25,frozen_probe_metadata,high_if_used_for_tuning,Read-only evaluation only.
+probe_vlm_oracle_labels,outputs/probe_set_v1/probe_set_vlm_oracle_labels.csv,25,frozen_probe_labels,high_if_used_for_tuning,Read-only evaluation only; not human ground truth.

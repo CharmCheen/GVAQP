@@ -1,0 +1,19 @@
+experiment_name: query_runtime_fallback_clip_export_v1
+date_utc: 2026-07-03
+scope: PARTIAL_PHYSICAL_CLIP_EXPORT_FOR_FROZEN_RUNTIME_OUTPUT
+inputs:
+  frozen_runtime_manifest: outputs/query_runtime_v1/tables/candidate_clip_manifest.csv
+  frozen_runtime_intervals: outputs/query_runtime_v1/tables/returned_intervals.csv
+  fallback_video: data/realcam/long_video_data/long_video_dataset3.mp4
+time_mapping:
+  local_to_media_offset_seconds: 2000.0
+  fallback_video_duration_seconds: 3462.930499
+  eligible_rule: local_t_start + offset >= 0 and local_t_end + offset <= fallback_video_duration
+constraints:
+  selector_frozen: true
+  no_new_vlm_or_yolo: true
+  partial_export_only: true
+notes:
+  - Historical V13 source video try_or_no/videos/realcartest.mp4 is missing in this workspace.
+  - This export uses the probe_set_v1 fallback video time mapping only where selected local intervals fit in that media.
+  - The export is a physical preview subset, not a full V13 source-video export.

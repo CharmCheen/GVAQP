@@ -1,0 +1,7 @@
+artifact,path,row_count,role,leakage_risk,notes
+anchor_grid,experiments/v13/v13_7_multimethod_replay/tables/center10_anchor_grid.csv,399,runtime_time_grid,low,Provides anchor IDs and time boundaries.
+proxy_features,experiments/v13/v13_7_multimethod_replay/tables/center10_proxy_features.csv,399,runtime_scoring,low,Selector reads yolo_vehicle_max only in the default config.
+oracle_labels_optional,experiments/v13/v13_8_full_oracle/tables/center10_full_oracle_labels.csv,399,offline_eval_only,high_if_used_for_selection,Runtime code keeps this outside selection.
+oracle_events_optional,experiments/v13/v13_8_full_oracle/tables/center10_vlm_oracle_events.csv,51,offline_eval_only,high_if_used_for_selection,Used only to report VLM-defined pseudo-event recall.
+source_video,try_or_no/videos/realcartest.mp4,0,optional_clip_export,none,Missing in this workspace.
+fallback_probe_video,data/realcam/long_video_data/long_video_dataset3.mp4,1,not_used_for_v13_export,axis_mismatch,Available but not used for V13 export because local offset differs.

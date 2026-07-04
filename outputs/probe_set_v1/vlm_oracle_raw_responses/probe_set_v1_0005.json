@@ -1,0 +1,20 @@
+{
+  "probe_id": "probe_set_v1_0005",
+  "video_id": "realcartest",
+  "local_t_start": "242.155",
+  "local_t_end": "252.155",
+  "center_frame_path": "/qiuyeqing/llama_prl/G-ARC/outputs/probe_set_v1/probe_media/centers/probe_set_v1_0005_center.jpg",
+  "sheet_path": "/qiuyeqing/llama_prl/G-ARC/outputs/probe_set_v1/probe_media/sheets/probe_set_v1_0005_sheet.jpg",
+  "reference_source": "probe_set_v1_vlm_oracle_reference",
+  "model_name": "Qwen3-VL-32B-Instruct",
+  "label": "true_interval",
+  "event_t_start_local": "248.000",
+  "event_t_end_local": "250.000",
+  "confidence": "high",
+  "rationale": "In the contact sheet, a white car is visible entering the scene from the right side of the frame around the middle of the time window (approximately 248-250 seconds) and proceeds to cross the ego vehicle's path, moving from right to left. The car is clearly on the road and in the vicinity of the traffic light and construction site, indicating a direct interaction with the ego vehicle's path. The center frame does not show the car, but the contact sheet provides clear temporal evidence of its appearance and movement across the path.",
+  "parse_status": "ok",
+  "runtime_seconds": "12.464",
+  "peak_gpu_memory_gb": "63.919",
+  "raw_output": "{\n  \"label\": \"true_interval\",\n  \"event_t_start_local\": 248.0,\n  \"event_t_end_local\": 250.0,\n  \"confidence\": \"high\",\n  \"rationale\": \"In the contact sheet, a white car is visible entering the scene from the right side of the frame around the middle of the time window (approximately 248-250 seconds) and proceeds to cross the ego vehicle's path, moving from right to left. The car is clearly on the road and in the vicinity of the traffic light and construction site, indicating a direct interaction with the ego vehicle's path. The center frame does not show the car, but the contact sheet provides clear temporal evidence of its appearance and movement across the path.\"\n}",
+  "prompt": "You are a visual event reviewer for a driving-video probe set. Your task is to judge whether a short time window contains the target event type using visible semantic evidence from the provided images. Do not try to reproduce object tracking, distance, speed, TTC, or geometric calculations. Use holistic visual judgment from the center frame and contact sheet.\n\nTarget event type: A traffic participant or object enters, crosses, approaches, or creates a near-interaction with the ego vehicle path during the provided local time window.\n\nReview probe `probe_set_v1_0005`.\nLocal time window: 242.155 to 252.155 seconds.\n\nInputs:\n1. Center frame for the probe.\n2. Contact sheet showing multiple frames from the probe window.\n\nQuestion: In this time window, does the visual evidence show the target event type?\n\nImportant rules:\n- Do not base your answer on inferred detector scores, tracking distances, speeds, TTC, or cheap-signal computations.\n- Use semantic visual evidence only.\n- Use `true_interval` when the target event is visible and the contact sheet supports an approximate start and end inside the local window.\n- Use `point_anchor` when the target event is visible but only a point-like moment or rough anchor can be inferred.\n- Use `negative` when no target event is visible.\n- Use `uncertain` when image quality, occlusion, contact-sheet ambiguity, or missing temporal context prevents a reliable judgment.\n- Give a concrete rationale for later human spot-checking.\n\nReturn exactly one JSON object, with no markdown:\n{\n  \"label\": \"true_interval | point_anchor | negative | uncertain\",\n  \"event_t_start_local\": null,\n  \"event_t_end_local\": null,\n  \"confidence\": \"low | medium | high\",\n  \"rationale\": \"short visible-evidence explanation\"\n}"
+}

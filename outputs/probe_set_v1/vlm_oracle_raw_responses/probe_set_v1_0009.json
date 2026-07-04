@@ -1,0 +1,20 @@
+{
+  "probe_id": "probe_set_v1_0009",
+  "video_id": "realcartest",
+  "local_t_start": "484.310",
+  "local_t_end": "494.310",
+  "center_frame_path": "/qiuyeqing/llama_prl/G-ARC/outputs/probe_set_v1/probe_media/centers/probe_set_v1_0009_center.jpg",
+  "sheet_path": "/qiuyeqing/llama_prl/G-ARC/outputs/probe_set_v1/probe_media/sheets/probe_set_v1_0009_sheet.jpg",
+  "reference_source": "probe_set_v1_vlm_oracle_reference",
+  "model_name": "Qwen3-VL-32B-Instruct",
+  "label": "negative",
+  "event_t_start_local": "",
+  "event_t_end_local": "",
+  "confidence": "high",
+  "rationale": "The center frame and contact sheet show a stable urban driving scene with vehicles traveling in the same direction ahead. No traffic participant (pedestrian, cyclist, vehicle) is observed entering, crossing, or approaching the ego vehicle's path. The road is clear, traffic flows normally, and no near-interaction events are visually evident in the provided frames.",
+  "parse_status": "ok",
+  "runtime_seconds": "8.992",
+  "peak_gpu_memory_gb": "63.919",
+  "raw_output": "{\n  \"label\": \"negative\",\n  \"event_t_start_local\": null,\n  \"event_t_end_local\": null,\n  \"confidence\": \"high\",\n  \"rationale\": \"The center frame and contact sheet show a stable urban driving scene with vehicles traveling in the same direction ahead. No traffic participant (pedestrian, cyclist, vehicle) is observed entering, crossing, or approaching the ego vehicle's path. The road is clear, traffic flows normally, and no near-interaction events are visually evident in the provided frames.\"\n}",
+  "prompt": "You are a visual event reviewer for a driving-video probe set. Your task is to judge whether a short time window contains the target event type using visible semantic evidence from the provided images. Do not try to reproduce object tracking, distance, speed, TTC, or geometric calculations. Use holistic visual judgment from the center frame and contact sheet.\n\nTarget event type: A traffic participant or object enters, crosses, approaches, or creates a near-interaction with the ego vehicle path during the provided local time window.\n\nReview probe `probe_set_v1_0009`.\nLocal time window: 484.310 to 494.310 seconds.\n\nInputs:\n1. Center frame for the probe.\n2. Contact sheet showing multiple frames from the probe window.\n\nQuestion: In this time window, does the visual evidence show the target event type?\n\nImportant rules:\n- Do not base your answer on inferred detector scores, tracking distances, speeds, TTC, or cheap-signal computations.\n- Use semantic visual evidence only.\n- Use `true_interval` when the target event is visible and the contact sheet supports an approximate start and end inside the local window.\n- Use `point_anchor` when the target event is visible but only a point-like moment or rough anchor can be inferred.\n- Use `negative` when no target event is visible.\n- Use `uncertain` when image quality, occlusion, contact-sheet ambiguity, or missing temporal context prevents a reliable judgment.\n- Give a concrete rationale for later human spot-checking.\n\nReturn exactly one JSON object, with no markdown:\n{\n  \"label\": \"true_interval | point_anchor | negative | uncertain\",\n  \"event_t_start_local\": null,\n  \"event_t_end_local\": null,\n  \"confidence\": \"low | medium | high\",\n  \"rationale\": \"short visible-evidence explanation\"\n}"
+}

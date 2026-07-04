@@ -1,0 +1,12 @@
+gate,status,value,threshold
+metric_direction_explicit_missing_mass_lower_is_better,PASS,missing_mass_fraction_mean,documented
+full_repeats_at_least_100,PASS,120,>=100
+mhat_min_coverage_at_least_0.90,PASS,0.950000,>=0.900000
+phi_upper_coverage_at_least_0.90,PASS,1.000000,>=0.900000
+phi_upper_p50_width_at_most_2.0,FAIL,13.437477,<=2.000000
+strong_prior_full_not_worse_than_top_prior,FAIL,full=0.366162; top_prior=0.273796,full <= top_prior
+prior_wrong_full_beats_top_prior_aggregate,PASS,full=0.866125; top_prior=0.998189,full <= top_prior
+prior_wrong_full_beats_uniform_aggregate,PASS,full=0.866125; uniform=0.922110,full <= uniform
+repair_q_monotonic_by_width_aggregate,PASS,isolated=0.236806; narrow=0.335530; wide=0.949461,isolated < narrow < wide
+repair_q_monotonic_by_width_each_scenario,FAIL,False,all scenarios True
+dual_ledger_structural_separation,PASS,True,mhat_audit_samples_mean == audit_calls_mean

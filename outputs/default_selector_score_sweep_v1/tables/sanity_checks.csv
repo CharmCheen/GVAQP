@@ -1,0 +1,6 @@
+check,status,details
+100pct_budget_deterministic_clip_and_event_recall_is_1,PASS,All score/NMS configs fill all anchors at B=399.
+random_mean_recall_curves_monotonic,PASS,100 random repeats.
+temporal_nms_gap0_degenerates_to_raw_score_ranking,PASS,Gap 0 compared with raw score order.
+sorting_functions_do_not_read_oracle_labels,PASS,Selector uses score columns and anchor_time only; labels/events are read only in metrics().
+duplicate_selected_clips_not_counted_as_multiple_calls,PASS,All selections are unique anchor IDs.

@@ -1,0 +1,5 @@
+artifact,path,row_count,role,leakage_risk,notes
+generated_center10_anchor_grid,outputs/video_feature_precompute_v1/tables/center10_anchor_grid.csv,347,runtime_anchor_input,low,Cheap-feature anchor grid generated without oracle labels.
+generated_center10_proxy_features,outputs/video_feature_precompute_v1/tables/center10_proxy_features.csv,347,runtime_score_input,low,Cheap proxy features generated without oracle/probe labels.
+source_video,data/realcam/long_video_data/long_video_dataset3.mp4,1,clip_export_source,low,Same video used for feature precompute; local time axis.
+query_runtime_v1_script,outputs/query_runtime_v1/scripts/run_query_runtime.py,1,logic_reference,low,Imports pure selector and manifest helpers; does not write to query_runtime_v1.

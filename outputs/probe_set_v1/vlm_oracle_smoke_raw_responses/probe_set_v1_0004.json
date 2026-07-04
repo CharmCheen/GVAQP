@@ -1,0 +1,20 @@
+{
+  "probe_id": "probe_set_v1_0004",
+  "video_id": "realcartest",
+  "local_t_start": "181.616",
+  "local_t_end": "191.616",
+  "center_frame_path": "/qiuyeqing/llama_prl/G-ARC/outputs/probe_set_v1/probe_media/centers/probe_set_v1_0004_center.jpg",
+  "sheet_path": "/qiuyeqing/llama_prl/G-ARC/outputs/probe_set_v1/probe_media/sheets/probe_set_v1_0004_sheet.jpg",
+  "reference_source": "probe_set_v1_vlm_oracle_reference",
+  "model_name": "Qwen3-VL-32B-Instruct",
+  "label": "point_anchor",
+  "event_t_start_local": "185.000",
+  "event_t_end_local": "187.000",
+  "confidence": "medium",
+  "rationale": "In the center frame and adjacent frames of the contact sheet, a person in a red jacket and white cap is visible on the right sidewalk, bending over near the curb. This individual appears to be engaged in cleaning or maintenance work, positioned very close to the edge of the roadway. While not actively crossing or entering the path, their proximity to the curb and the ego vehicle's trajectory creates a near-interaction scenario. The event is localized to a brief moment within the time window, as the person remains in place and does not move into the road. The contact sheet shows the person present in multiple frames, indicating a sustained but static near-interaction.",
+  "parse_status": "ok",
+  "runtime_seconds": "14.024",
+  "peak_gpu_memory_gb": "63.919",
+  "raw_output": "{\n  \"label\": \"point_anchor\",\n  \"event_t_start_local\": 185.0,\n  \"event_t_end_local\": 187.0,\n  \"confidence\": \"medium\",\n  \"rationale\": \"In the center frame and adjacent frames of the contact sheet, a person in a red jacket and white cap is visible on the right sidewalk, bending over near the curb. This individual appears to be engaged in cleaning or maintenance work, positioned very close to the edge of the roadway. While not actively crossing or entering the path, their proximity to the curb and the ego vehicle's trajectory creates a near-interaction scenario. The event is localized to a brief moment within the time window, as the person remains in place and does not move into the road. The contact sheet shows the person present in multiple frames, indicating a sustained but static near-interaction.\"\n}",
+  "prompt": "You are a visual event reviewer for a driving-video probe set. Your task is to judge whether a short time window contains the target event type using visible semantic evidence from the provided images. Do not try to reproduce object tracking, distance, speed, TTC, or geometric calculations. Use holistic visual judgment from the center frame and contact sheet.\n\nTarget event type: A traffic participant or object enters, crosses, approaches, or creates a near-interaction with the ego vehicle path during the provided local time window.\n\nReview probe `probe_set_v1_0004`.\nLocal time window: 181.616 to 191.616 seconds.\n\nInputs:\n1. Center frame for the probe.\n2. Contact sheet showing multiple frames from the probe window.\n\nQuestion: In this time window, does the visual evidence show the target event type?\n\nImportant rules:\n- Do not base your answer on inferred detector scores, tracking distances, speeds, TTC, or cheap-signal computations.\n- Use semantic visual evidence only.\n- Use `true_interval` when the target event is visible and the contact sheet supports an approximate start and end inside the local window.\n- Use `point_anchor` when the target event is visible but only a point-like moment or rough anchor can be inferred.\n- Use `negative` when no target event is visible.\n- Use `uncertain` when image quality, occlusion, contact-sheet ambiguity, or missing temporal context prevents a reliable judgment.\n- Give a concrete rationale for later human spot-checking.\n\nReturn exactly one JSON object, with no markdown:\n{\n  \"label\": \"true_interval | point_anchor | negative | uncertain\",\n  \"event_t_start_local\": null,\n  \"event_t_end_local\": null,\n  \"confidence\": \"low | medium | high\",\n  \"rationale\": \"short visible-evidence explanation\"\n}"
+}

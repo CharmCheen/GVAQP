@@ -1,0 +1,28 @@
+experiment_name: video_feature_precompute_v1
+date_utc: 2026-07-03
+scope: VIDEO_TO_CHEAP_FEATURES_NO_VLM
+default_input_video: data/realcam/long_video_data/long_video_dataset3.mp4
+outputs:
+  coarse_grid: tables/coarse_5s_clip_grid.csv
+  proxy_5s: tables/proxy_features_5s.csv
+  center10_grid: tables/center10_anchor_grid.csv
+  center10_proxy: tables/center10_proxy_features.csv
+feature_contract:
+  clip_duration_seconds: 5.0
+  anchor_interval_seconds: 10.0
+  center_window_seconds: 10.0
+  motion_sample_fps: 2.0
+  motion_resize: [320, 180]
+  yolo_model: models/yolo/yolov8n.pt
+  yolo_frame_policy: midpoint_frame_per_5s_clip
+selector_compatibility:
+  required_score_column: yolo_vehicle_max
+  compatible_runtime: outputs/query_runtime_v1/scripts/run_query_runtime.py
+constraints:
+  no_vlm: true
+  no_oracle_labels: true
+  no_probe_set_tuning: true
+notes:
+  - This stage computes cheap video features only.
+  - It intentionally preserves V13 center10 proxy feature column names.
+  - It may use YOLO if local model weights are available; this is cheap proxy inference, not oracle labeling.

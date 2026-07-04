@@ -1,0 +1,23 @@
+experiment_name: video_signal_quality_audit_v1
+date_utc: 2026-07-03
+scope: CHEAP_SIGNAL_QUALITY_AND_A0_ARCHIVE_AUDIT_NO_ORACLE
+inputs:
+  coarse_grid: outputs/video_feature_precompute_v1/tables/coarse_5s_clip_grid.csv
+  center10_anchor_grid: outputs/video_feature_precompute_v1/tables/center10_anchor_grid.csv
+  center10_proxy_features: outputs/video_feature_precompute_v1/tables/center10_proxy_features.csv
+  candidate_clip_manifest: outputs/video_feature_precompute_runtime_v1/tables/candidate_clip_manifest.csv
+score_columns:
+  - yolo_vehicle_max
+  - motion_energy_max
+  - score_fusion_yolo_motion
+  - bbox_area_sum_max
+  - center_roi_vehicle_count_mean
+a0_baseline:
+  selector_family: score_topk_temporal_nms_duration_cap
+  budget: 40
+  nms_gap_seconds: 20.0
+  source: "Carried over from default_selector_score_sweep_v1/query_runtime_v1 dev operating point; not a fairness-tuned CILS comparison setting."
+constraints:
+  no_vlm: true
+  no_oracle_labels: true
+  no_probe_set_tuning: true

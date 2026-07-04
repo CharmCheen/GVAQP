@@ -1,0 +1,39 @@
+experiment_name: toy_simulation_gate_v3
+date_utc: 2026-07-03
+scope: SELF_DIAGNOSING_ADAPTIVE_AQP_SYNTHETIC_SEARCH
+algorithm_name: SD-AQP
+algorithm_expansion: Self-Diagnosing Adaptive AQP
+source_reference:
+  v1_script: outputs/toy_simulation_gate_v1/scripts/run_toy_simulation_gate.py
+  v2_strict_audit: outputs/toy_simulation_gate_v2/FINAL_REPORT.md
+core_idea:
+  - Use early DISCOVER calls on high-prior atoms as a prior-trust diagnostic.
+  - If the discovered hit rate is high, preserve the strong prior by continuing top-prior ranking.
+  - If the hit rate is low, switch to dual-ledger AUDIT plus Beta-gated REPAIR.
+  - Keep M_hat structurally separated: only AUDIT samples feed the stratified estimator.
+world:
+  bins: 2000
+  repeats_full: 120
+  scenarios: [strong, weak, wrong, none]
+  width_modes: [isolated, narrow, wide]
+planner:
+  budget: 160
+  checkpoints: [20, 40, 80, 120, 160]
+  trust_probe_calls: 40
+  trust_hit_rate_threshold: 0.05
+  post_switch_audit_fraction: 0.25
+  exploration_floor_eta: 0.08
+  repair_radius_bins: 12
+  repair_beta_prior_alpha: 1.0
+  repair_beta_prior_beta: 1.0
+strict_gates:
+  full_repeats_min: 100
+  strong_prior_adaptive_not_worse_than_top_prior_tolerance: 0.02
+  prior_wrong_adaptive_beats_top_prior: true
+  prior_wrong_adaptive_beats_uniform: true
+  repair_monotonic_aggregate: true
+constraints:
+  no_video: true
+  no_vlm: true
+  no_oracle_labels_from_repo: true
+  no_probe_set_tuning: true

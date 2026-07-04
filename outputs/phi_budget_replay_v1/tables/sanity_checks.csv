@@ -1,0 +1,8 @@
+check,status,details
+100pct_budget_deterministic_clip_and_event_recall_is_1,PASS,All deterministic methods select all anchors at B=399.
+random_mean_recall_curves_monotonic,PASS,Checked after aggregation below.
+event_count_nonincreasing_with_merge_gap,PASS,"[{""merge_gap_anchors"": 0, ""event_count_from_positive_anchor_merge"": 51}, {""merge_gap_anchors"": 1, ""event_count_from_positive_anchor_merge"": 37}, {""merge_gap_anchors"": 2, ""event_count_from_positive_anchor_merge"": 28}, {""merge_gap_anchors"": 3, ""event_count_from_positive_anchor_merge"": 27}, {""merge_gap_anchors"": 6, ""event_count_from_positive_anchor_merge"": 18}]"
+temporal_nms_gap0_degenerates_to_raw_score_ranking,PASS,Compared full score order with NMS gap=0.
+sorting_functions_do_not_read_oracle_labels,PASS,Static selectors use proxy score columns and time only; Phi selector uses oracle labels only inside execute_call after selection.
+cluster_methods_do_not_count_duplicate_selected_clips_as_multiple_calls,PASS,All policies select unique anchor IDs up to budget.
+coverage_aware_novelty_disabled_cluster_rep_baseline,NOT_APPLICABLE,This experiment does not implement coverage-aware cluster scheduling; it implements Phi action bidding with repair/refine frontier actions.

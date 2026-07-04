@@ -1,0 +1,102 @@
+{
+  "features": "outputs/cheap_signal_v2/tables/interval_features_with_signal_v2.csv",
+  "reference_events": "src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_label_aligned/reference_events.csv",
+  "budgets": [
+    5,
+    10,
+    20,
+    40
+  ],
+  "nms_iou_threshold": 0.5,
+  "overlap_group_cap_enabled": false,
+  "uniform_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49
+  ],
+  "selector_specs": {
+    "existing_signal": [
+      {
+        "feature": "motion_energy_mean",
+        "direction": "asc"
+      }
+    ],
+    "track_interaction": [
+      {
+        "feature": "track_mean_track_speed_mean",
+        "direction": "asc"
+      },
+      {
+        "feature": "track_mean_relative_speed_mean",
+        "direction": "asc"
+      }
+    ],
+    "inside_outside": [
+      {
+        "feature": "contrast_optical_flow_burst_z_max",
+        "direction": "asc"
+      },
+      {
+        "feature": "contrast_object_density_change_z_min",
+        "direction": "desc"
+      },
+      {
+        "feature": "contrast_optical_flow_burst_z_mean",
+        "direction": "asc"
+      }
+    ]
+  },
+  "simple_fused": [
+    "existing_signal",
+    "track_interaction",
+    "inside_outside"
+  ],
+  "interpretation": "diagnostic_design_target_smoke"
+}

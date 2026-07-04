@@ -1,0 +1,17 @@
+experiment_name: video_feature_precompute_runtime_v1
+date_utc: 2026-07-03
+scope: GENERATED_FEATURES_TO_QUERY_INTERVALS_NO_ORACLE_EVAL
+query_id: dangerous_segments_enter_ego_path_v0
+selector_family: score_topk_temporal_nms_duration_cap
+score_column: yolo_vehicle_max
+budget: 40
+nms_gap_seconds: 20.0
+inputs:
+  anchor_grid: outputs/video_feature_precompute_v1/tables/center10_anchor_grid.csv
+  proxy_features: outputs/video_feature_precompute_v1/tables/center10_proxy_features.csv
+  source_video: data/realcam/long_video_data/long_video_dataset3.mp4
+constraints:
+  no_vlm: true
+  no_oracle_labels: true
+  no_probe_set_tuning: true
+  default_selector_fixed: true

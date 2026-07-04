@@ -1,0 +1,41 @@
+experiment_name: toy_simulation_gate_v1
+date_utc: 2026-07-03
+scope: SYNTHETIC_AQP_PLANNER_GATE_NO_VIDEO_NO_VLM
+random_seed: 20260703
+world:
+  bins: 2000
+  poisson_lambda_clusters: 18
+  width_modes:
+    isolated: [1, 1]
+    narrow: [3, 7]
+    wide: [18, 45]
+  prior_scenarios: [strong, weak, wrong, none]
+planner:
+  budget: 160
+  checkpoints: [20, 40, 80, 120, 160]
+  strata: 10
+  audit_fraction: 0.35
+  exploration_floor_eta: 0.10
+  repair_radius_bins: 12
+  beta_prior_alpha: 1.0
+  beta_prior_beta: 1.0
+  phi_proxy: "max(0, M_hat - found_positive_bins) / true_positive_bins"
+  phi_upper_proxy: "max(0, M_hat_upper_95 - found_positive_bins) / true_positive_bins"
+  dual_ledger: "M_hat uses AUDIT samples only; DISCOVER and REPAIR discoveries are separate ledgers."
+baselines:
+  - uniform
+  - top_prior_only
+  - audit_discover
+  - full_planner
+gates:
+  calibration_min_coverage_95ci: 0.90
+  isolated_repair_final_q_max: 0.30
+  wide_repair_final_q_min: 0.35
+  prior_wrong_full_planner_missing_mass_lte_top_prior: true
+  phi_upper_missing_mass_coverage_min: 0.90
+  dual_ledger_mhat_uses_only_audit_samples: true
+constraints:
+  no_video: true
+  no_vlm: true
+  no_oracle_labels_from_repo: true
+  no_probe_set_tuning: true

@@ -1,0 +1,28 @@
+world_summary:
+  scenario: prior_scenario
+  width_mode: cluster_width_mode
+  true_positive_bins: true_mass
+  cluster_count: generated_cluster_count
+calibration_summary:
+  scenario: prior_scenario
+  width_mode: cluster_width_mode
+  coverage_95ci: empirical_coverage_of_stratified_total_mass_interval
+planner_budget_curves:
+  planner: uniform_or_top_prior_or_audit_discover_or_full_planner
+  budget: oracle_call_budget
+  missing_mass_fraction_mean: mean_true_missing_mass_fraction
+repair_summary:
+  width_mode: isolated_or_wide
+  repair_hit_rate_mean: posterior_observed_repair_quality
+  final_repair_q_mean: mean_beta_posterior_repair_probability
+phi_summary:
+  phi_upper_covers_true_missing_mass_fraction: fraction_of_checkpoints_where_phi_upper_bounds_true_missing_mass
+  full_planner_phi_estimated_vs_true_missing_mass_corr: correlation_between_phi_estimated_and_true_missing_mass
+dual_ledger_summary:
+  mhat_audit_samples_mean: samples_used_by_stratified_M_hat
+  audit_positive_bins_mean: positives_seen_by_AUDIT_ledger
+  discover_positive_bins_mean: positives_seen_by_DISCOVER_ledger
+  repair_positive_bins_mean: positives_seen_by_REPAIR_ledger
+gate_summary:
+  gate: named_gate
+  status: PASS_or_FAIL

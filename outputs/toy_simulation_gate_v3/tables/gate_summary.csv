@@ -1,0 +1,6 @@
+gate,status,value,threshold
+full_repeats_at_least_100,PASS,120,>=100
+strong_prior_sd_aqp_not_worse_than_top_prior_plus_0.02,PASS,sd_aqp=0.272433; top_prior=0.272433,sd_aqp <= top_prior + 0.02
+prior_wrong_sd_aqp_beats_top_prior,PASS,sd_aqp=0.905801; top_prior=0.997801,sd_aqp <= top_prior
+prior_wrong_sd_aqp_beats_uniform,PASS,sd_aqp=0.905801; uniform=0.922661,sd_aqp <= uniform
+repair_q_monotonic_by_width_aggregate,PASS,isolated=0.394930; narrow=0.438775; wide=0.611177,isolated < narrow < wide

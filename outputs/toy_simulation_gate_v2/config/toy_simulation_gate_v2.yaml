@@ -1,0 +1,29 @@
+experiment_name: toy_simulation_gate_v2
+date_utc: 2026-07-03
+scope: STRICT_POSTHOC_AUDIT_OF_TOY_SIMULATION_GATE_V1
+source_experiment: outputs/toy_simulation_gate_v1
+source_tables:
+  planner_budget_curve_summary: outputs/toy_simulation_gate_v1/tables/planner_budget_curve_summary.csv
+  full_planner_budget_curves: outputs/toy_simulation_gate_v1/tables/full_planner_budget_curves.csv
+  repair_summary: outputs/toy_simulation_gate_v1/tables/repair_summary.csv
+  calibration_summary: outputs/toy_simulation_gate_v1/tables/calibration_summary.csv
+  dual_ledger_summary: outputs/toy_simulation_gate_v1/tables/dual_ledger_summary.csv
+metric_definitions:
+  missing_mass_fraction_mean: "1 - found_positive_bins / true_positive_bins; lower is better."
+  phi_upper_minus_true: "phi_upper_missing_mass - phi_true_missing_mass; lower/tighter is better after coverage is adequate."
+  dual_ledger_scope: "Structural check only: M_hat audit sample count equals AUDIT call count."
+strict_gates:
+  full_repeats_min: 100
+  mhat_coverage_min: 0.90
+  phi_upper_coverage_min: 0.90
+  phi_upper_minus_true_p50_max: 2.0
+  strong_prior_full_not_worse_than_top_prior_required: true
+  prior_wrong_full_beats_top_prior_aggregate_required: true
+  prior_wrong_full_beats_uniform_aggregate_required: true
+  repair_q_monotonic_by_width_aggregate_required: true
+  repair_q_monotonic_by_width_each_scenario_required: true
+constraints:
+  no_video: true
+  no_vlm: true
+  no_oracle_labels_from_repo: true
+  no_probe_set_tuning: true

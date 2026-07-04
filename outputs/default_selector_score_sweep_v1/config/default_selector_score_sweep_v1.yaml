@@ -1,0 +1,27 @@
+experiment_name: default_selector_score_sweep_v1
+date_utc: 2026-07-03
+scope: VLM_ORACLE_RELATIVE_REPLAY_NO_NEW_VLM
+selector_family: score_topk_temporal_nms_duration_cap
+inputs:
+  oracle_labels: experiments/v13/v13_8_full_oracle/tables/center10_full_oracle_labels.csv
+  oracle_events: experiments/v13/v13_8_full_oracle/tables/center10_vlm_oracle_events.csv
+  proxy_features: experiments/v13/v13_7_multimethod_replay/tables/center10_proxy_features.csv
+budgets: [5, 10, 20, 40, 80, 120, 399]
+score_columns:
+  - yolo_vehicle_max
+  - yolo_vehicle_mean
+  - score_yolo_count
+  - score_fusion_yolo_motion
+  - score_fusion_geometry_motion
+  - score_motion
+  - motion_energy_max
+  - bbox_area_sum_max
+  - center_roi_vehicle_count_mean
+  - bottom_roi_vehicle_count_mean
+nms_gaps_seconds: [0, 10, 20, 30, 60, 90]
+random_repeats: 100
+primary_dev_metric: clip_f1_v13_8_center10_oracle
+notes:
+  - Development replay only; do not cite as frozen probe_set_v1 performance.
+  - Conservative VLM labels are used only for final evaluation.
+  - The project default selector family is preserved; only score column and NMS gap are swept.

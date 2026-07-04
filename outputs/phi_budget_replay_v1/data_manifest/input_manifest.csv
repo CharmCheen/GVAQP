@@ -1,0 +1,5 @@
+artifact,path,row_count,role,leakage_risk,notes
+oracle_labels,experiments/v13/v13_8_full_oracle/tables/center10_full_oracle_labels.csv,399,simulated_oracle_response_and_final_eval,high_if_used_for_ranking,Read only after a simulated oracle call; full-scan labels are not used by score sorting.
+oracle_events,experiments/v13/v13_8_full_oracle/tables/center10_vlm_oracle_events.csv,51,final_pseudo_event_eval,high_if_used_for_ranking,Used to map selected anchors to VLM-defined stitched events for evaluation.
+proxy_features,experiments/v13/v13_7_multimethod_replay/tables/center10_proxy_features.csv,399,cheap_feature_ranking_and_strata,low,Cheap YOLO/motion-derived features from prior pipeline.
+previous_static_reference,experiments/v13/v13_9_aqp_sim/tables/method_budget_results.csv,95,context_only,medium,Not used for method selection; only referenced in report context.

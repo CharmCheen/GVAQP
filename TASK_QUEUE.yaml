@@ -1,0 +1,94 @@
+tasks:
+  - id: T001
+    title: Register Phase A/B artifacts and review findings
+    status: complete
+    priority: high
+    type: documentation
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed in outputs/agent_loop_v1/round2_phase_ab_registration.md."
+  - id: T002
+    title: Build probe_set_v1 annotation package index
+    status: complete
+    priority: high
+    type: packaging
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed in outputs/probe_set_v1/annotation_package/ using existing media only. No labels or scores added."
+  - id: T003
+    title: Audit probe versus cheap-signal coverage
+    status: complete
+    priority: high
+    type: audit
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed in outputs/cheap_signal_v2/probe_feature_coverage_audit.md. 20 full coverage, 5 none. Later VLM-oracle-relative probe metrics exist only for the feature-covered 20-probe scope."
+  - id: T004
+    title: Prepare next human-decision handoff
+    status: complete
+    priority: medium
+    type: handoff
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed in outputs/agent_loop_v1/HANDOFF_ROUND5.md."
+  - id: T005
+    title: Review VLM oracle spotcheck for probe_set_v1
+    status: complete
+    priority: high
+    type: audit
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "User accepted local Qwen3-VL oracle labels as the current frozen reference without requiring human spotcheck before evaluation. VLM oracle labels are available at outputs/probe_set_v1/probe_set_vlm_oracle_labels.csv and are not human ground truth."
+    success_criteria: "Completed: probe_set_v1 VLM-oracle-relative signal evaluation written to outputs/agent_loop_v1/probe_eval_after_vlm_oracle. Evaluation uses dataset_source=probe_set_v1_vlm_oracle_reference and wording relative to VLM oracle judgment; do not use true recall or ground truth recall."
+  - id: T006
+    title: Complete pre-annotation design check and label template
+    status: complete
+    priority: high
+    type: documentation
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed without GPU/VLM/API. Created outputs/probe_set_v1/probe_set_human_labels_template.csv, sq_craq_agent_loop_v1/phase1_reference_probe/design_check/design_note.md, and outputs/probe_set_v1/annotation_package/ANNOTATION_GUIDE.md."
+  - id: T007
+    title: probe_v2_expansion
+    status: blocked
+    priority: medium
+    type: design_followup
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    blocker: "等待用户确认是否要在probe_set_v1结果出来后立即扩展，还是先看完probe_set_v1结果再决定"
+    notes: "Design-only plan exists at sq_craq_agent_loop_v1/phase1_reference_probe/probe_v2_expansion_plan.md. Do not execute sampling, media export, or annotation in this round."
+  - id: T008
+    title: Decide whether to launch probe_set_v2 after stable VLM evaluation
+    status: pending
+    priority: medium
+    type: decision
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Once probe_set_v1 VLM oracle evaluation and human spotcheck are stable, evaluate whether to start probe_v2 expansion with the same VLM oracle prompt at 50-80 probes. This is a decision task only; no sampling or labeling is started here."
+  - id: T009
+    title: Phase 3 minimal end-to-end selector smoke
+    status: complete
+    priority: high
+    type: experiment
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed in outputs/agent_loop_v1/phase3_selector_smoke_v1. Ran fixed selectors uniform_random, existing_signal, track_interaction, inside_outside, and simple_fused at B=5,10,20,40 using existing CSV artifacts only. Result is a negative diagnostic smoke: deterministic cheap-signal selectors did not beat the 50-seed uniform random baseline on B=40 event_recall_iou_0_3."
+    success_criteria: "Completed: selector_budget_summary.csv, selector_budget_metrics_by_seed.csv, selected_intervals.csv, event_coverage.csv, run_config.json, and phase3_selector_smoke_report.md exist. No VLM/API/YOLO/GPU training was run."
+  - id: T010
+    title: Redesign AQP selector and return-set objective after Phase 3 smoke
+    status: pending
+    priority: high
+    type: design_followup
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "The first executable AQP loop produced budgeted interval sets but exposed that current fixed cheap-signal selectors do not convert signal diagnostics into useful budgeted coverage. Next step is design-only unless explicitly executed: inspect selected_intervals/event_coverage failure cases, replace simple score ranking with declared objective terms, and evaluate whether weighted interval scheduling or coverage-aware duration penalties should replace greedy NMS."

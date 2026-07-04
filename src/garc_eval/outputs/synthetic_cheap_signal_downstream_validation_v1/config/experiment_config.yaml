@@ -1,0 +1,14 @@
+experiment: synthetic_cheap_signal_downstream_validation_v1
+budgets: [20, 40, 80, 160]
+precision_targets: [0.8, 0.9]
+cils_taus: [0.5, 0.6, 0.7, 0.8, 0.9]
+iou_thresholds: [0.3, 0.5]
+synthetic_targets: [0.6, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95]
+synthetic_seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+random_baseline_repeats_requested: 100
+base_seed: 20260701
+diagnostic_only: true
+label_derived_synthetic_scores: true
+models_rerun: false
+production_cils_modified: false
+production_calibration_modified: false

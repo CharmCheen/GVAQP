@@ -1,0 +1,45 @@
+# Pilot Sampling Audit
+
+CILS uses the `top_score` pilot policy in clean v2 main trials.
+
+Top-score pilot summary:
+
+| budget | policy | trials | mean_sample_positive_rate | zero_positive_pilot_rate | mean_interval_event_positives | mean_answer_positives |
+| --- | --- | --- | --- | --- | --- | --- |
+| 5 | top_score | 100 | 0 | 1 | 0 | 0 |
+| 10 | top_score | 100 | 0 | 1 | 0 | 0 |
+| 20 | top_score | 100 | 0 | 1 | 0 | 0 |
+| 40 | top_score | 100 | 0.05 | 0 | 2 | 2 |
+| 80 | top_score | 100 | 0.1 | 0 | 8 | 8 |
+
+All-policy comparison:
+
+| budget | policy | trials | mean_sample_positive_rate | zero_positive_pilot_rate | mean_interval_event_positives | mean_answer_positives |
+| --- | --- | --- | --- | --- | --- | --- |
+| 5 | decision_aware_simple | 100 | 0 | 1 | 0 | 0 |
+| 5 | quota_stratified | 100 | 0.128 | 0.48 | 0.64 | 0.64 |
+| 5 | top_score | 100 | 0 | 1 | 0 | 0 |
+| 5 | uncertainty_stratified | 100 | 0.232 | 0.22 | 1.16 | 1.16 |
+| 5 | uniform | 100 | 0.108 | 0.54 | 0.53 | 0.54 |
+| 10 | decision_aware_simple | 100 | 0 | 1 | 0 | 0 |
+| 10 | quota_stratified | 100 | 0.107 | 0.32 | 1.07 | 1.07 |
+| 10 | top_score | 100 | 0 | 1 | 0 | 0 |
+| 10 | uncertainty_stratified | 100 | 0.168 | 0.11 | 1.68 | 1.68 |
+| 10 | uniform | 100 | 0.103 | 0.33 | 1.01 | 1.03 |
+| 20 | decision_aware_simple | 100 | 0.05 | 0 | 1 | 1 |
+| 20 | quota_stratified | 100 | 0.089 | 0.14 | 1.73 | 1.78 |
+| 20 | top_score | 100 | 0 | 1 | 0 | 0 |
+| 20 | uncertainty_stratified | 100 | 0.132 | 0.04 | 2.64 | 2.64 |
+| 20 | uniform | 100 | 0.106 | 0.1 | 2.09 | 2.12 |
+| 40 | decision_aware_simple | 100 | 0.125 | 0 | 5 | 5 |
+| 40 | quota_stratified | 100 | 0.09675 | 0.01 | 3.82 | 3.87 |
+| 40 | top_score | 100 | 0.05 | 0 | 2 | 2 |
+| 40 | uncertainty_stratified | 100 | 0.12325 | 0 | 4.93 | 4.93 |
+| 40 | uniform | 100 | 0.0975 | 0 | 3.82 | 3.9 |
+| 80 | decision_aware_simple | 100 | 0.15 | 0 | 12 | 12 |
+| 80 | quota_stratified | 100 | 0.093125 | 0 | 7.34 | 7.45 |
+| 80 | top_score | 100 | 0.1 | 0 | 8 | 8 |
+| 80 | uncertainty_stratified | 100 | 0.09 | 0 | 7.09 | 7.2 |
+| 80 | uniform | 100 | 0.098625 | 0 | 7.74 | 7.89 |
+
+Interpretation: if top-score zero-positive rates remain high at the main budgets, calibration posterior estimates will stay below `tau_p` and the first CILS addition will be rejected.

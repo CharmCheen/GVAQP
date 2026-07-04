@@ -1,0 +1,13 @@
+# Artifact Inventory
+
+| artifact | exists | n_rows | n_cols | columns |
+| --- | --- | --- | --- | --- |
+| cils_calibration_repair_smoke_v1/smoke_candidate_p_answer.csv | True | 5969500 | 6 | interval_id, p_answer, budget, seed, pilot_policy, calibration_model |
+| cils_calibration_repair_replay_v1/candidate_p_answer_by_policy.csv | True | 2507190 | 6 | interval_id, p_answer, pilot_policy, calibration_model, budget, seed |
+| clean_v2/interval_lattice_features_only.csv | True | 11939 | 28 | interval_id, method, source_signal, unit_start_idx, unit_end_idx_exclusive, t_start, t_end, duration, num_units, mean_sc |
+| clean_v2/interval_lattice_v2_clean.csv | True | 11939 | 43 | interval_id, method, source_signal, unit_start_idx, unit_end_idx_exclusive, t_start, t_end, duration, num_units, mean_sc |
+| clean_v2/interval_labels_v2_clean.csv | True | 11939 | 15 | interval_id, discovery_positive, positive_unit_fraction, matched_event_id, best_iou, any_overlap, center_hit, event_hit_ |
+| cils_calibration_repair_smoke_v1/smoke_selected_intervals.csv | True | 200 | 14 | interval_id, t_start, t_end, duration, p_answer, answer_iou_0_3, answer_iou_0_5, matched_event_id, positive_unit_fractio |
+| cils_calibration_repair_smoke_v1/smoke_interval_eval_curve.csv | True | 2500 | 19 | pilot_policy, calibration_model, budget, tau, seed, expected_precision, observed_precision, observed_precision_interval_ |
+| clean_v2/reference_events.csv | True | 20 | 13 | event_id, video_id, t_start, t_end, absolute_t_start, absolute_t_end, duration, event_type, involved_object, num_support |
+| patch_smoke/reference_audit.csv | True | 20 | 11 | event_id, video_id, t_start, t_end, duration, event_type, boundary_confidence, is_interval_event, is_point_anchor, sourc |

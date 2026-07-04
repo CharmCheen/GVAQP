@@ -1,0 +1,41 @@
+experiment_name: phi_budget_replay_v1
+date_utc: 2026-07-03
+scope: VLM_ORACLE_RELATIVE_REPLAY_NO_NEW_VLM
+query: O_enter_ego_path_v0_dangerous_segments
+inputs:
+  oracle_labels: experiments/v13/v13_8_full_oracle/tables/center10_full_oracle_labels.csv
+  oracle_events: experiments/v13/v13_8_full_oracle/tables/center10_vlm_oracle_events.csv
+  proxy_features: experiments/v13/v13_7_multimethod_replay/tables/center10_proxy_features.csv
+  previous_static_reference: experiments/v13/v13_9_aqp_sim/tables/method_budget_results.csv
+unit:
+  name: center10_anchor
+  duration_seconds: 10.0
+budgets: [5, 10, 20, 40, 80, 120, 399]
+random_repeats: 100
+phi_budget:
+  repeats: 100
+  seed: 20260703
+  score_column: score_fusion_yolo_motion
+  strata:
+    score_quantiles: 3
+    time_blocks: 4
+  beta_prior_strength: 2.0
+  audit_floor_eta: 0.12
+  ucb_beta: 1.0
+  repair_prior_alpha: 2.0
+  repair_prior_beta: 2.0
+  refine_prior_alpha: 2.0
+  refine_prior_beta: 2.0
+  initial_candidate_confidence: 0.35
+  refined_confidence_increment: 0.30
+  confirmed_confidence_threshold: 0.80
+baselines:
+  default_selector: score_topk_temporal_nms_duration_cap
+  default_score_column: score_fusion_yolo_motion
+  temporal_nms_gap_seconds: 30.0
+  duration_cap_seconds_by_budget_multiplier: 10.0
+notes:
+  - No new VLM/API/YOLO/GPU inference is run.
+  - Conservative VLM labels are used only as simulated oracle responses after a selected call and for final pseudo-oracle evaluation.
+  - probe_set_v1 is not used.
+  - REFINE is a center10 neighbor-guard proxy only; it is not sub-clip boundary refinement.

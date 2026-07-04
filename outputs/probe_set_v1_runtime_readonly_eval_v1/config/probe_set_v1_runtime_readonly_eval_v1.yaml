@@ -1,0 +1,16 @@
+experiment_name: probe_set_v1_runtime_readonly_eval_v1
+date_utc: 2026-07-03
+scope: FROZEN_PROBE_READONLY_EVAL
+inputs:
+  runtime_intervals: outputs/query_runtime_v1/tables/returned_intervals.csv
+  runtime_manifest: outputs/query_runtime_v1/tables/candidate_clip_manifest.csv
+  probe_manifest: outputs/probe_set_v1/probe_set_manifest.csv
+  probe_vlm_oracle_labels: outputs/probe_set_v1/probe_set_vlm_oracle_labels.csv
+constraints:
+  do_not_use_for_tuning: true
+  selector_config_frozen_before_this_eval: outputs/query_runtime_v1/config/query_runtime_v1.yaml
+metrics_source_label: probe_set_v1_vlm_oracle_reference
+notes:
+  - This is a read-only compatibility audit, not selector tuning.
+  - Probe windows are independent equal-interval time-grid probes, not the V13 center10 candidate lattice.
+  - Runtime intervals were generated before this audit and are not changed here.

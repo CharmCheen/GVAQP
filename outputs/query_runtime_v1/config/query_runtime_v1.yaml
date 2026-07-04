@@ -1,0 +1,27 @@
+experiment_name: query_runtime_v1
+date_utc: 2026-07-03
+scope: QUERY_TO_CLIP_RUNTIME_NO_NEW_VLM
+supported_query:
+  query_id: dangerous_segments_enter_ego_path_v0
+  query_text: dangerous segments where an object enters or crosses the ego vehicle path
+selector:
+  family: score_topk_temporal_nms_duration_cap
+  score_column: yolo_vehicle_max
+  temporal_nms_gap_seconds: 20.0
+  default_budget: 40
+  clip_duration_seconds: 10.0
+  duration_cap_seconds_multiplier: 10.0
+inputs_default:
+  anchor_grid: experiments/v13/v13_7_multimethod_replay/tables/center10_anchor_grid.csv
+  proxy_features: experiments/v13/v13_7_multimethod_replay/tables/center10_proxy_features.csv
+  oracle_labels_optional: experiments/v13/v13_8_full_oracle/tables/center10_full_oracle_labels.csv
+  oracle_events_optional: experiments/v13/v13_8_full_oracle/tables/center10_vlm_oracle_events.csv
+video:
+  source_video_path_in_anchor_grid: /qiuyeqing/llama_prl/G-ARC/try_or_no/videos/realcartest.mp4
+  source_video_available_in_workspace: false
+  fallback_probe_video_path: data/realcam/long_video_data/long_video_dataset3.mp4
+  fallback_video_note: Not used for V13 runtime clip export because its local time axis is offset relative to the historical realcartest reference.
+notes:
+  - No VLM/API/YOLO/GPU inference is run by this runtime.
+  - Oracle CSVs are optional and used only for offline evaluation.
+  - This is a dev operating point from v13_8_center10_oracle, not a frozen probe_set_v1-tuned selector.
