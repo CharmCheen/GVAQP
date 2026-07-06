@@ -34,7 +34,7 @@ tasks:
     requires_gpu: false
     requires_vlm: false
     requires_yolo: false
-    notes: "Completed in outputs/agent_loop_v1/HANDOFF_ROUND5.md."
+    notes: "Completed in outputs/agent_loop_v1/HANDOFF_ROUND5.md. Superseded by outputs/state_sync_late_aqp_v1/ after the LATE-AQP frontier landed."
   - id: T005
     title: Review VLM oracle spotcheck for probe_set_v1
     status: complete
@@ -57,22 +57,22 @@ tasks:
   - id: T007
     title: probe_v2_expansion
     status: blocked
-    priority: medium
+    priority: low
     type: design_followup
     requires_gpu: false
     requires_vlm: false
     requires_yolo: false
-    blocker: "等待用户确认是否要在probe_set_v1结果出来后立即扩展，还是先看完probe_set_v1结果再决定"
-    notes: "Design-only plan exists at sq_craq_agent_loop_v1/phase1_reference_probe/probe_v2_expansion_plan.md. Do not execute sampling, media export, or annotation in this round."
+    blocker: "Waiting on user decision: expand probe_set_v1 to 50-80 probes, or skip in favor of the LATE-AQP mainline. Not on the mainline."
+    notes: "Design-only plan exists at sq_craq_agent_loop_v1/phase1_reference_probe/probe_v2_expansion_plan.md. Do not execute sampling, media export, or annotation in this round. De-prioritized after the LATE-AQP frontier was reached; do not promote this above T010."
   - id: T008
     title: Decide whether to launch probe_set_v2 after stable VLM evaluation
     status: pending
-    priority: medium
+    priority: low
     type: decision
     requires_gpu: false
     requires_vlm: false
     requires_yolo: false
-    notes: "Once probe_set_v1 VLM oracle evaluation and human spotcheck are stable, evaluate whether to start probe_v2 expansion with the same VLM oracle prompt at 50-80 probes. This is a decision task only; no sampling or labeling is started here."
+    notes: "Decision-only. Not the mainline. Should not be used to block T010."
   - id: T009
     title: Phase 3 minimal end-to-end selector smoke
     status: complete
@@ -84,11 +84,121 @@ tasks:
     notes: "Completed in outputs/agent_loop_v1/phase3_selector_smoke_v1. Ran fixed selectors uniform_random, existing_signal, track_interaction, inside_outside, and simple_fused at B=5,10,20,40 using existing CSV artifacts only. Result is a negative diagnostic smoke: deterministic cheap-signal selectors did not beat the 50-seed uniform random baseline on B=40 event_recall_iou_0_3."
     success_criteria: "Completed: selector_budget_summary.csv, selector_budget_metrics_by_seed.csv, selected_intervals.csv, event_coverage.csv, run_config.json, and phase3_selector_smoke_report.md exist. No VLM/API/YOLO/GPU training was run."
   - id: T010
-    title: Redesign AQP selector and return-set objective after Phase 3 smoke
+    title: AQP selector/return-set redesign toward EC-AQP
+    status: active
+    priority: highest
+    type: design_followup
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Highest-priority next step. EC-AQP reframes the objective from per-interval precision/recall to event-coverage mass over the reference event set, and adds a residual missing-mass estimator. Design only. Inputs to read first: outputs/agent_loop_v1/phase3_selector_smoke_v1/selected_intervals.csv and event_coverage.csv, outputs/late_aqp_event_diverse_discovery_v1/unique_event_coverage.csv, outputs/late_aqp_cross_video_frontier_v1/cross_video_failure_taxonomy.csv, outputs/late_aqp_limited_oracle_frontier_v1/FINAL_REPORT.md Q11. Do not run another D1/D2/D3 sweep (already failed to beat B7-core on B_90/90)."
+    success_criteria: "Design-only EC-AQP writeup that (a) declares the new objective, (b) declares the residual missing-mass estimator's inputs and outputs, (c) does not depend on a new VLM/annotation round, (d) states the smallest offline eval that would falsify the proposal."
+  - id: T011
+    title: Frozen-LATE-AQP-v1 cross-segment validation
+    status: complete
+    priority: high
+    type: experiment
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed in outputs/late_aqp_frozen_cross_segment_v1. Frozen-LATE-AQP-v1 reaches 90/90 on 3/3 realcartest segments at B<=120; long-event recall macro-avg wins at 4 of 6 budgets including B=120 vs B6 and B7 (oracle-relative)."
+  - id: T012
+    title: Strict limited-oracle retrieval frontier on realcartest
+    status: complete
+    priority: high
+    type: experiment
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed in outputs/late_aqp_limited_oracle_frontier_v1. 12-question audit. LATE-AQP-core reaches 90/90 on 3/3 segments; B7-core reaches 90/90 on 3/3 segments. No method reaches 90/90 at <=30% budget ratio. Core/Halo is generic."
+  - id: T013
+    title: Upstream event-diverse discovery redesign (D1/D2/D3)
+    status: complete
+    priority: high
+    type: experiment
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed in outputs/late_aqp_event_diverse_discovery_v1. 9-question audit. None of D1, D2, D3, D3-norepair achieves a strictly lower B_90/90 than B7-core on any of 6 segments. Repair marginal value non-positive on chunk-bandit. Recommended next step is upstream discovery redesign (T010)."
+  - id: T014
+    title: D3 chunk-bandit accounting fix and post-fix comparison
+    status: complete
+    priority: high
+    type: experiment
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed in outputs/late_aqp_d3_accounting_fix_v1. Fixed discovery_d3_chunk_bandit to honor the queried argument; duplicate query rate dropped from 11.21 to 0.51 per trial (95.4% reduction). Post-fix, D3-core-fixed is not consistently better than D3-norepair-core; recommended variant is D3-norepair-core."
+  - id: T015
+    title: Cross-video validation of limited-oracle frontier on dataset3
+    status: complete
+    priority: high
+    type: experiment
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed in outputs/late_aqp_cross_video_frontier_v1. Core/Halo generic gain confirmed; LATE-AQP-core reaches 90/90 on 3/3 dataset3 segments. Most low-budget failures are discovery misses."
+  - id: T016
+    title: Low-budget diagnosis and v2 cold-start fix
+    status: complete
+    priority: high
+    type: experiment
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed across outputs/late_aqp_low_budget_discovery_diagnosis_v1, late_aqp_low_budget_fix_v1, late_aqp_v2_original_segment_verification, late_aqp_hybrid_coldstart_v1. v2 cold_start_fallback is split-validated only; both cold-start and hybrid routes FAIL on the original failure segments (0/3 segments with substantive improvement at both B=10 and B=20)."
+  - id: T017
+    title: LATE-AQP algorithm v3 audit-schedule and repair-utility designs
+    status: complete
+    priority: medium
+    type: experiment
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed in outputs/late_aqp_algorithm_v3_oracle_relative. Modest B=20 long-event recall improvement with V3_two_phase (0.517 vs 0.417). No repair utility dominates both recall and precision. The v3 replay's source_action lineage is unknown_not_logged for some intervals."
+  - id: T018
+    title: H7 calibration prep and long-event-only replay
+    status: complete
+    priority: medium
+    type: experiment
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed in outputs/late_aqp_h7_long_event_v1. Ours-full improves event-level recall over B7 at most budgets for the long-event subset. H7 annotation package is ready and pending human annotation; H7 is the next annotation opportunity, not T007/probe_v2."
+  - id: T019
+    title: Agent state sync to LATE-AQP frontier
+    status: complete
+    priority: high
+    type: documentation
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Completed in outputs/state_sync_late_aqp_v1. Updated PROJECT_STATE.md, HANDOFF.md, CLAIMS_LEDGER.md, FAILURES.md, TASK_QUEUE.yaml, EXPERIMENT_REGISTRY.csv, AGENTS.md, and created large_artifact_manifest.md to reflect the LATE-AQP frontier and the Phase 3 selector smoke negative result. Stale Phase A/B / Phase 3 framing was removed from the root state files."
+  - id: T020
+    title: EC-AQP design (objective, residual missing-mass estimator, falsifier)
     status: pending
     priority: high
     type: design_followup
     requires_gpu: false
     requires_vlm: false
     requires_yolo: false
-    notes: "The first executable AQP loop produced budgeted interval sets but exposed that current fixed cheap-signal selectors do not convert signal diagnostics into useful budgeted coverage. Next step is design-only unless explicitly executed: inspect selected_intervals/event_coverage failure cases, replace simple score ranking with declared objective terms, and evaluate whether weighted interval scheduling or coverage-aware duration penalties should replace greedy NMS."
+    notes: "Pure design. No new VLM, no YOLO, no GPU. Successor concept to T010: T010 sets the agenda (EC-AQP redesign), T020 delivers the design doc. Reuses inputs from T010. Does not need to wait for T007/T008 decisions."
+  - id: T021
+    title: Decide on externalization of >100MB CSV artifacts
+    status: pending
+    priority: medium
+    type: housekeeping
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Decision-only. Files listed in outputs/state_sync_late_aqp_v1/large_artifact_manifest.md. User to choose: keep tracked, gitignore, or move to external storage. Do not delete anything; the artifacts are referenced by late_aqp audits and Phase 3 smoke reports."
+  - id: T022
+    title: EC-AQP offline prototype on existing center10 labels
+    status: pending
+    priority: medium
+    type: experiment
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Blocked on T020. Reuses the existing center10_vlm_oracle_events.csv / reference_events.csv and the LATE-AQP oracle adapter. Should be evaluated against the same B_90/90 / event-coverage metrics as late_aqp_limited_oracle_frontier_v1."
+    blocker: "T020 must be complete."
