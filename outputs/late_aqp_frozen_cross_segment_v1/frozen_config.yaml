@@ -1,0 +1,114 @@
+experiment_name: late_aqp_frozen_cross_segment_v1
+query_predicate: Visible Ego-Path Conflict (VEPC)
+oracle_relative: true
+random_seed_base: 20260705
+trials: [0, 1, 2, 3, 4]
+
+audit_schedule:
+  name: V3_two_phase
+  description: >
+    Phase-1 pilot audit = min(ceil(budget * 0.10), num_strata * 2).
+    If any outside-E0 audit is positive, allocate a second tranche up to
+    a 25 % audit cap, with 70 % of the extra tranche spent outside E0.
+
+repair_utility:
+  name: U0_current
+  description: Repair utility = prior score of the outside-positive seed bin.
+
+E0_threshold:
+  name: top20
+  description: E0 = top 20 % of 10 s atomic bins by prior_score_max.
+
+atomic_bin_size_s: 10
+
+budgets: [5, 10, 20, 40, 80, 120]
+
+event_type_split:
+  point_anchor: duration < 1.0 s
+  long_interval: duration >= 1.0 s
+
+baselines:
+  B6_ExSample:
+    name: B6_ExSample-style adaptive chunk sampling
+    chunk_size_s: 120
+    notes: Frozen to the same chunk size as the pre-registered B7 main-result configuration.
+
+  B7_ExSample_plus_expansion:
+    name: B7 ExSample + simple temporal expansion
+    chunk_size_s: 120
+    expansion_k_bins: 3
+    notes: >
+      k = 3 is the pre-registered expansion used in the budget=40 case study
+      and is frozen for all segments and budgets.
+
+  Frozen_LATE_AQP_v1:
+    name: Frozen-LATE-AQP-v1
+    audit_schedule: V3_two_phase
+    repair_utility: U0_current
+    E0_threshold: top20
+
+segments:
+  dev:
+    segment_id: realcartest_2000_3200
+    video_id: realcartest
+    time_start: 2000.0
+    time_end: 3200.0
+    is_dev_segment: true
+    is_selected_for_test: true
+    notes: Previous development segment; included for calibration/reference only.
+
+  unseen_low:
+    segment_id: realcartest_1630_2000
+    video_id: realcartest
+    time_start: 1630.0
+    time_end: 2000.0
+    is_dev_segment: false
+    is_selected_for_test: true
+    density_regime: low
+    notes: >
+      Lowest-density unseen window found (≈ 5.4 % positive bins).
+      Contains only point-anchor events, so long-event metrics are undefined here.
+
+  unseen_medium:
+    segment_id: realcartest_3200_3830
+    video_id: realcartest
+    time_start: 3200.0
+    time_end: 3830.0
+    is_dev_segment: false
+    is_selected_for_test: true
+    density_regime: medium
+    notes: Unseen tail of seg005; moderate positive density (≈ 20.6 %).
+
+  unseen_high:
+    segment_id: realcartest_0_1570
+    video_id: realcartest
+    time_start: 0.0
+    time_end: 1570.0
+    is_dev_segment: false
+    is_selected_for_test: true
+    density_regime: high
+    notes: Full seg001; high positive density (≈ 28.0 %), many long intervals.
+
+prior_scores:
+  dev_source: outputs/exsample_aware_replay/atomic_grid_10s.csv
+  unseen_source: experiments/roadclip_budget_v2/roadclip_budget_v2/proxy_scores.csv
+  score_column: score_count
+  aggregation_for_10s_bin: max
+  notes: >
+    The dev grid uses the existing primary_signal_score derived from cheap_signals_per_unit.csv.
+    Unseen segments reuse the existing roadclip_budget_v2 proxy score_count as the prior.
+    The two priors are on different scales; only relative within-segment rankings are used.
+
+prohibitions:
+  - No ARC / ARC-Proposal / ARC-Clip
+  - No SUPG / ABae
+  - No LATE-AQP-90
+  - No core/halo release
+  - No new cheap signal
+  - No new VLM / YOLO / GPU / API inference
+  - No human annotation
+  - No modification of existing labels / prior scores / reference events
+  - No use of probe_set_v1 for tuning
+  - No config changes based on new segment results
+  - No per-budget winner selection
+  - No hiding unfavorable budgets or segments

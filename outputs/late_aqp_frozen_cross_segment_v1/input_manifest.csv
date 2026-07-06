@@ -1,0 +1,10 @@
+file_path,role,description
+experiments/v13/v13_8_full_oracle/tables/center10_vlm_oracle_events.csv,primary_reference,VLM-oracle reference events for the whole realcartest video (O_ref; qwen3_vl_32b_v13_6_prompt)
+src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/reference_events.csv,dev_reference,Existing dev-segment reference events (2000–3200 s) used as the previous development benchmark
+src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_clean_no_leak/full_reference_units.csv,dev_dense_units,Dense 2 s oracle labels for the dev segment
+outputs/exsample_aware_replay/atomic_grid_10s.csv,dev_grid,Existing 10 s atomic grid with prior scores and labels for the dev segment
+experiments/roadclip_budget_v2/roadclip_budget_v2/proxy_scores.csv,unseen_prior_scores,Existing proxy scores (score_count) covering all realcartest segments including unseen windows
+experiments/roadclip_budget_v2/roadclip_budget_v2/video_inventory.csv,video_metadata,Video durations and paths
+experiments/roadclip_budget_v2/roadclip_budget_v2/road_segments.csv,segment_manifest,Road-segment definitions for realcartest
+outputs/late_aqp_algorithm_v3_oracle_relative/run_algorithm_v3.py,algorithm_reference,Reference implementation of V3_two_phase + U0_current LATE-AQP
+outputs/exsample_aware_replay/run_replay.py,baseline_reference,Reference implementation of B6 and B7 ExSample-style baselines
