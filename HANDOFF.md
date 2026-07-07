@@ -12,6 +12,7 @@ LATE-AQP pipeline (audit + discovery + repair + boundary guard + Core/Halo relea
 - **Default release module**: Core/Halo release (boundary guard up to `MAX_GUARDS_PER_SIDE=3` per side; positive guard bins merged into core; halo reported as diagnostic only). This is treated as a generic post-processing gain, not a LATE-specific advantage.
 - **Strongest current empirical baseline (posthoc_eval)**: **B7-core** (B7 chunk-bandit + temporal expansion + Core/Halo). Use this as the comparison target for any new discovery policy.
 - **Strongest strict-replay alternative**: **D3-norepair-core** (chunk-bandit Thompson sampling, no repair, Core/Halo release). Use this when the comparison must not use `event_id` for selection.
+- **New mainline (2026-07-07): Event-Coverage Policy (ECP)**, `outputs/ecp_event_coverage_policy_v1/ECP_DESIGN.md`. ECP is a **policy layer** above the discovery executor (HTS-EC / EventLift-DC), not a replacement for the default selector or Core/Halo. Its arms are event-level operators (discover / bridge / certify / zero-proxy / stop); its reward is marginal event-recall/precision/IoU. First concrete experiment is T025 (AnchorBridge shadow). Default selector and Core/Halo release remain unchanged.
 - **Reference labels**: `center10_vlm_oracle_events.csv` (non-dev segments) and `reference_events.csv` (dev segment). These are VLM-oracle-relative, not human ground truth.
 - **oracle adapter spec**: `outputs/late_aqp_limited_oracle_frontier_v1/oracle_adapter_spec.md`. Each `query_unit` / `query_interval` call consumes one oracle call; `event_id` is never returned to the method.
 
@@ -29,6 +30,7 @@ LATE-AQP pipeline (audit + discovery + repair + boundary guard + Core/Halo relea
 - Inspect `outputs/agent_loop_v1/phase3_selector_smoke_v1/selected_intervals.csv` and `event_coverage.csv` for the negative Phase 3 smoke failure cases; these motivate the EC-AQP objective.
 - Inspect `outputs/late_aqp_event_diverse_discovery_v1/unique_event_coverage.csv` and `discovery_miss_reduction.csv` to characterize the upstream discovery miss structure.
 - Inspect `outputs/late_aqp_cross_video_frontier_v1/cross_video_failure_taxonomy.csv` for the failure-taxonomy distribution across both videos (most low-budget failures are discovery misses).
+- **Next active work (T025, ECP Step 1):** inspect `outputs/hts_ec_v0_phase2a_rp_opportunity_v1/rp_strategy_miss_analysis.csv` and `outputs/hts_ec_v0_phase2a_rp_strategy_shadow_v1/rp_strategy_shadow_summary.csv` to quantify the AnchorBridge opportunity (proxy-signal segments: `gap_bracket_v2/largest_gap_local_flank_or_proxy_neighbor` = 11/30 shadow hits; proxy-zero `dataset3_0_1200` = 0 hits). This isolates the event-formation gap from the discovery gap.
 
 ## Latest Important Outputs (read these before doing anything else)
 
@@ -47,6 +49,7 @@ LATE-AQP pipeline (audit + discovery + repair + boundary guard + Core/Halo relea
 - `outputs/late_aqp_v2_original_segment_verification/verdict_report.md` and `outputs/late_aqp_hybrid_coldstart_v1/verdict_report.md` — both cold-start tweaks `FAIL` on the original failure segments.
 - `outputs/late_aqp_algorithm_v3_oracle_relative/FINAL_REPORT.md` — v3 audit-schedule and repair-utility designs; modest improvements only.
 - `outputs/late_aqp_h7_long_event_v1/FINAL_REPORT.md` — H7 calibration prep; Ours-full improves event-level recall over B7 at most budgets for the long-event subset.
+- `outputs/ecp_event_coverage_policy_v1/ECP_DESIGN.md` — **NEW MAINLINE (2026-07-07): Event-Coverage Policy.** Reframes the bottleneck from "proxy accuracy" to "event-level budgeted decision policy" under weak proxy / expensive oracle / unknown boundaries. ECP unifies DISCOVER+ROBUST_PROBE+BRIDGE+CERTIFY+ZERO_PROXY as event-level bandit arms above HTS-EC / EventLift-DC. Validation plan T025 (AnchorBridge shadow) -> T026 (action-utility labeling) -> T027 (hand-designed bandit).
 
 ## Do-Not-Repeat Failed Routes
 
@@ -78,6 +81,8 @@ These routes have been tried and **failed** to deliver an oracle-relative perfor
 - T017: LATE-AQP algorithm v3 audit-schedule and repair-utility designs. `outputs/late_aqp_algorithm_v3_oracle_relative/`. **Modest B=20 improvement; no utility dominates both recall and precision; `source_action` lineage not fully logged in the v3 replay.**
 - T018: H7 calibration prep + long-event-only replay. `outputs/late_aqp_h7_long_event_v1/`. **H7 annotation package pending human annotation; Ours-full improves event-level recall over B7 at most budgets for the long-event subset.**
 - T019: Agent state sync. `outputs/state_sync_late_aqp_v1/`. **This file and `PROJECT_STATE.md`, `CLAIMS_LEDGER.md`, `FAILURES.md`, `TASK_QUEUE.yaml`, `EXPERIMENT_REGISTRY.csv`, `AGENTS.md`, `large_artifact_manifest.md` were updated to reflect the LATE-AQP frontier.**
+- T010 (reformulated): EC-AQP -> **Event-Coverage Policy (ECP)** mainline. `outputs/ecp_event_coverage_policy_v1/ECP_DESIGN.md`. **Design doc complete; reframes bottleneck as event-level budgeted decision policy; validation plan T025->T026->T027.**
+- T025: ECP Step 1 — AnchorBridge shadow validation. `outputs/hts_ec_v0_phase2a_rp_*/`. **ACTIVE: quantify whether positive anchor + 1-3 local probes reach IoU>=0.3; isolates formation gap from discovery gap.**
 
 ## Pending / Blocked / Decision-Only
 

@@ -7,6 +7,18 @@ Last updated: 2026-07-07
 **Limited-oracle temporal event retrieval / LATE-AQP frontier.**
 We have completed the first executable LATE-AQP pipeline (audit + discovery + repair + boundary guard + Core/Halo release) and validated it under strict limited-oracle replay across six segments of two videos (`realcartest`, `dataset3`). The pipeline reaches 90/90 event precision/recall on every qualified segment at the practical budget cap (B<=120), and the strongest current empirical baselines are **B7-core** and **D3-norepair-core** (chunk-bandit discovery, no repair, Core/Halo release). Core/Halo has been shown to be a **generic post-processing gain** that lifts B6/B7 to the same 90/90 frontier as LATE-AQP-core; the LATE-specific advantage over these release-augmented baselines is **not established** for performance alone.
 
+**Active direction pivot (2026-07-07): Event-Coverage Policy (ECP).** The
+next mainline is no longer "improve the proxy / discovery heuristic". The
+reframed bottleneck is the absence of an **event-level budgeted decision
+policy** under a weak proxy, an expensive VLM oracle, and unknown event
+boundaries (see `outputs/ecp_event_coverage_policy_v1/ECP_DESIGN.md`). EC-AQP's
+event-coverage-mass objective is absorbed as the reward term inside ECP. ECP
+unifies DISCOVER + ROBUST_PROBE (StagRepMix) + BRIDGE (AnchorBridge) + CERTIFY +
+ZERO_PROXY as event-level arms of a contextual bandit; HTS-EC / EventLift-DC are
+candidate executors. Default selector and Core/Halo release are unchanged.
+Validation sequence: T025 (AnchorBridge shadow) -> T026 (action-utility
+labeling) -> T027 (hand-designed bandit) -> offline learned policy.
+
 **Two-track situation.** Two parallel experimental tracks coexist in this repo:
 
 1. **LATE-AQP track** (`outputs/late_aqp_*`): nine features operationalized end-to-end (core/halo release, boundary guard with budget accounting, temporal merge, duplicate suppression, duration cap, abstain via `p_answer`, 4-way budget accounting, per-interval lineage logging, halo diagnostics). Validated on realcartest (3 segments) and dataset3 (3 segments) at budgets 5-120. All oracle-relative to VLM labels.
@@ -24,7 +36,7 @@ The two tracks share the cheap-signal feature tables but use different reference
 - **Core/Halo is generic.** B6-core and B7-core reach 90/90 on the same segments as LATE-AQP-core. Source: `outputs/late_aqp_core_halo_attribution_v1/final_recommendation.md` and `outputs/late_aqp_limited_oracle_frontier_v1/FINAL_REPORT.md` Q10. Treat Core/Halo release as a **generic release module**, not a LATE-specific advantage.
 - **Repair marginal value is neutral after the D3 accounting fix.** `outputs/late_aqp_d3_accounting_fix_v1/FINAL_REPORT.md` reports the chunk-bandit `queried`-state bug reduced D3-core mean duplicates from 11.21 to 0.51 (95.4% reduction); post-fix, D3-core-fixed is **not** consistently better than D3-norepair-core. Repair is no longer argued to be net-positive on the chunk-bandit discovery backbone. **Recommended next D3 variant: D3-norepair-core.**
 - **LATE-D1/D2/D3 do not beat B7-core.** None of the new event-diverse discovery policies (D1 temporal-NMS prior, D2 component proposals, D3 chunk-bandit) achieves a strictly lower B_90/90 than B7-core on any of 6 segments. Source: `outputs/late_aqp_event_diverse_discovery_v1/FINAL_REPORT.md` Q4. **Strongest current empirical baseline: B7-core (with D3-norepair-core as the strict-replay alternative).**
-- **The dominant low-budget failure is upstream discovery miss.** Limited-oracle frontier failure taxonomy: 6 discovery_miss vs 6 release_over_conservative vs 3 LATE-specific. Source: `outputs/late_aqp_limited_oracle_frontier_v1/failure_taxonomy.csv`. Core/Halo is already effective when discovery finds the events; improving upstream discovery is the open lever.
+- **The dominant low-budget failure is upstream discovery miss — but the deeper gap is event formation, not proxy accuracy.** Limited-oracle frontier failure taxonomy: 6 discovery_miss vs 6 release_over_conservative vs 3 LATE-specific. Source: `outputs/late_aqp_limited_oracle_frontier_v1/failure_taxonomy.csv`. Core/Halo is already effective when discovery finds the events. The 2026-07-07 reframing (`outputs/ecp_event_coverage_policy_v1/ECP_DESIGN.md`) argues the open lever is an **event-level budgeted decision policy** (where to look / verify / expand / stop / abstain) above the discovery executor, not a more accurate proxy. The proxy-zero regime (`dataset3_0_1200`: 7/7 true positives at proxy=0.0 among 76 zero-proxy bins) is an information bottleneck needing explicit proxy-free exploration.
 - **Phase 3 fixed cheap-signal selector is negative.** Source: `outputs/agent_loop_v1/phase3_selector_smoke_v1/phase3_selector_smoke_report.md`. The current deterministic cheap-signal selectors do not convert signal-level diagnostics into better budgeted return-set coverage.
 - **Frozen v2 cold-start fix is split-validated, not re-validated on the original failure segments.** The v2 `cold_start_fallback` was tuned on `realcartest_5k` and validated on `realcartest_3830_3920`; the original realcartest cross-segment low-budget failure could not be re-tested because that footage is no longer available. Source: `outputs/late_aqp_low_budget_fix_v1/README.md` "Caution".
 - **Hybrid cold-start and v2 cold-start are failed routes on the original failure segments.** Both v2 (`outputs/late_aqp_v2_original_segment_verification/verdict_report.md`) and hybrid (`outputs/late_aqp_hybrid_coldstart_v1/verdict_report.md`) reported 0/3 segments with substantive improvement at both B=10 and B=20. The low-budget problem is **not solved by these cold-start tweaks**.
@@ -91,12 +103,25 @@ The current loop state covers the LATE-AQP frontier and the negative Phase 3 sel
 - Round 17 (algorithm v3 audit-schedule and repair-utility designs): `outputs/late_aqp_algorithm_v3_oracle_relative/` — modest improvements at B=20 with `V3_two_phase`; no utility dominates both recall and precision. Repair trace `source_action` lineage is **not** fully logged in the v3 replay.
 - Round 18 (H7 calibration prep + long-event-only replay): `outputs/late_aqp_h7_long_event_v1/` — Ours-full improves event-level recall over B7 at most budgets for the long-event subset. H7 annotation package is **pending human annotation**.
 - Round 19 (state sync): `outputs/state_sync_late_aqp_v1/` — this document and the accompanying root-level state files were resynchronized to reflect the LATE-AQP frontier and the Phase 3 selector smoke negative result.
+- Round 20 (ECP reframing): `outputs/ecp_event_coverage_policy_v1/ECP_DESIGN.md` — mainline redefined from EC-AQP to **Event-Coverage Policy (ECP)**: event-level contextual bandit above the discovery executor, arms = discover/bridge/certify/zero-proxy/stop, reward = marginal event-recall/precision/IoU. Validation plan T025->T026->T027.
 
 ## Current Blocker
 
 There is no current blocker for the next no-new-VLM step.
 
-**Recommended next direction: EC-AQP (Event-Coverage AQP) planning + residual missing-mass estimation.** T010 in `TASK_QUEUE.yaml`. The premise: current methods are strong once the event is in the candidate set; the open gap is **upstream discovery miss** under low budget. EC-AQP reframes the objective from per-interval precision/recall to **event-coverage mass over the reference event set** and adds a residual missing-mass estimator. Design only; no VLM, YOLO, or GPU.
+**Recommended next direction: ECP (Event-Coverage Policy).** T010 in `TASK_QUEUE.yaml`
+is now the ECP mainline (replaces the narrower EC-AQP framing). The premise:
+current methods are strong once an event is in the candidate set, but the open
+gap is **event-level decision-making under weak proxy / expensive oracle /
+unknown boundaries** — specifically the missing `positive anchor -> event
+hypothesis -> interval confirmation` layer and the lack of a unified
+event-utility budget loop. ECP reframes the objective as an event-level
+contextual bandit whose reward is marginal event-recall / precision / IoU. The
+first concrete experiment is **T025 (AnchorBridge shadow)**: verify on existing
+strict-replay logs whether a positive anchor + 1–3 local probes can reach
+IoU>=0.3, isolating the formation gap from the discovery gap. Design only; no
+VLM, YOLO, or GPU for the design doc. T025 reuses existing
+`outputs/hts_ec_v0_phase2a_rp_*` logs.
 
 Other design-only next steps considered but de-prioritized:
 - Another discovery policy sweep along the D1/D2/D3 axes (D1/D2/D3 already failed to beat B7-core on B_90/90; the bottleneck is not the discovery prior but the small-sample cold start and the diversity of long events).

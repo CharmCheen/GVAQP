@@ -24,6 +24,17 @@ LATE-AQP frontier（limited-oracle 严格重放下，对全-VLM 评估参考做�
 - **默认 release module**：Core/Halo release（boundary guard `MAX_GUARDS_PER_SIDE=3`，
   core = positive selected + positive guard bins，halo 仅作诊断）。这是一个
   **generic post-processing gain**，不是 LATE-AQP 特有优势。
+- **下一优先级方向（2026-07-07 起，新 mainline）**：**ECP（Event-Coverage
+  Policy）** — 见 `TASK_QUEUE.yaml` 的 T010 与 `outputs/ecp_event_coverage_policy_v1/ECP_DESIGN.md`。
+  设计目标不是"提升 proxy 精度"（那更像工程增强），而是把问题重定义为
+  **event-level contextual bandit / budgeted decision policy**：在弱 proxy、
+  昂贵 oracle、事件边界未知的条件下，自适应地把预算分配到 discover / bridge /
+  certify / zero-proxy-explore / stop 等事件级动作上；reward 是 event recall /
+  precision / IoU 的边际提升。EC-AQP 的 event-coverage-mass 目标被吸收为 ECP
+  的 reward 项。验证顺序：T025 (AnchorBridge shadow) → T026 (action-utility
+  标注) → T027 (hand-designed bandit) → offline learned policy。ECP 是 discovery
+  executor（HTS-EC / EventLift-DC）之上的 policy layer，不改变默认 selector 与
+  Core/Halo release。
 - **最强经验 baseline**（posthoc_eval）：**B7-core**（B7 chunk-bandit +
   temporal expansion + Core/Halo）。新发现策略应以此为对照目标。
 - **最强 strict-replay 替代**：**D3-norepair-core**（chunk-bandit Thompson sampling、
