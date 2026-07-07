@@ -71,6 +71,60 @@ VARIANTS = {
 }
 
 
+def candidate_targets_module(grid_sorted, proxies, bin_to_t, queried, queried_pos,
+                           unqueried, all_bins, zero_proxy_budget_used, budget_abs, cfg, gap=GAP):
+    """Module-level candidate generator (shared by ECP bandit + T028c audit).
+
+    Returns dict arm -> target bin (or None). Arms: DISCOVER, BRIDGE, CERTIFY,
+    ZERO_PROXY. STOP is implicit (no candidate available / utility<=0).
+    """
+    # DISCOVER: highest proxy unqueried
+    discover = max(unqueried, key=lambda b: proxies[b]) if unqueried else None
+    # BRIDGE: unqueried bin within gap of a discovered positive
+    bridge = None
+    for p in queried_pos:
+        for db in range(p - gap, p + gap + 1):
+            if db in unqueried:
+                bridge = db
+                break
+        if bridge is not None:
+            break
+    # CERTIFY: bin just outside a formed interval boundary
+    certify = None
+    formed = group_positive_bins(sorted(queried_pos), grid_sorted)
+    for (s, e) in formed:
+        for b in unqueried:
+            bt_s, bt_e = bin_to_t[b]
+            if abs(bt_s - e) < 1e-6 or abs(bt_e - s) < 1e-6:
+                certify = b
+                break
+        if certify is not None:
+            break
+    # ZERO_PROXY: space-filling among zero-proxy unqueried (middle of largest run)
+    zerop = None
+    if unqueried and (proxies[unqueried[0]] == 0.0 or any(proxies[b] == 0.0 for b in unqueried)):
+        # compute zp_share quickly
+        zp_bins = [b for b in unqueried if proxies[b] == 0.0]
+        zp_share = len(zp_bins) / len(unqueried)
+        if zp_share > cfg["zero_zp_thresh"] and zero_proxy_budget_used < cfg["zero_cap"] * budget_abs and zp_bins:
+            best = None
+            bestlen = -1
+            run = []
+            for b in all_bins:
+                if b in set(zp_bins):
+                    run.append(b)
+                else:
+                    if len(run) > bestlen:
+                        bestlen = len(run)
+                        best = run
+                    run = []
+            if run and len(run) > bestlen:
+                best = run
+            if best:
+                zerop = best[len(best) // 2]
+    return {"DISCOVER": discover, "BRIDGE": bridge, "CERTIFY": certify, "ZERO_PROXY": zerop}
+
+
 def formed_intervals(queried_pos, grid):
     return group_positive_bins(sorted(queried_pos), grid)
 
@@ -123,58 +177,13 @@ def run_ecp(grid, ref_seg, seg_id, budget_abs, budget_ratio, seed, rng, cfg=None
         }
 
     def candidate_targets(st):
-        # DISCOVER: highest proxy unqueried
-        discover = None
-        if st["unqueried"]:
-            discover = max(st["unqueried"], key=lambda b: proxies[b])
-        # BRIDGE: unqueried bin within GAP of a discovered positive
-        bridge = None
-        for p in queried_pos:
-            for db in range(p - GAP, p + GAP + 1):
-                if db in st["unqueried"]:
-                    bridge = db
-                    break
-            if bridge is not None:
-                break
-        # CERTIFY: bin just outside a formed interval boundary
-        certify = None
-        formed = formed_intervals(queried_pos, grid_sorted)
-        for (s, e) in formed:
-            # find bin whose [t_start,t_end] ends just after e or starts just before s
-            for b in st["unqueried"]:
-                bt_s, bt_e = bin_to_t[b]
-                if abs(bt_s - e) < 1e-6 or abs(bt_e - s) < 1e-6:
-                    certify = b
-                    break
-            if certify is not None:
-                break
-        # ZERO_PROXY: space-filling among zero-proxy unqueried (pick middle of largest gap)
-        zerop = None
-        if st["zp_share"] > cfg["zero_zp_thresh"] and zero_proxy_budget_used < cfg["zero_cap"] * budget_abs:
-            zp_bins = [b for b in st["unqueried"] if proxies[b] == 0.0]
-            if zp_bins:
-                # largest contiguous run of unqueried zero-proxy bins -> midpoint
-                best = None
-                bestlen = -1
-                run = []
-                for b in all_bins:
-                    if b in set(zp_bins):
-                        run.append(b)
-                    else:
-                        if len(run) > bestlen:
-                            bestlen = len(run)
-                            best = run
-                        run = []
-                if run and len(run) > bestlen:
-                    best = run
-                if best:
-                    zerop = best[len(best) // 2]
-        return discover, bridge, certify, zerop
+        return candidate_targets_module(grid_sorted, proxies, bin_to_t, queried,
+                                         queried_pos, st["unqueried"], all_bins,
+                                         zero_proxy_budget_used, budget_abs, cfg)
 
     while oracle.calls < oracle.budget_abs:
         st = state()
         discover, bridge, certify, zerop = candidate_targets(st)
-        # heuristic utilities (online-only)
         u_discover = cfg["w_discover"] * st["top_proxy"] * (1 - st["formed_ratio"]) + cfg["w_discover_floor"]
         u_bridge = cfg["w_bridge"] * (1.0 if bridge is not None else 0.0) * (1 - st["formed_ratio"])
         u_certify = cfg["w_certify"] * (1.0 if certify is not None else 0.0)

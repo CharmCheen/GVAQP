@@ -263,22 +263,32 @@ tasks:
     notes: "COMPLETE (first pass). T028a: reweighted v2 (BRIDGE 0.8->1.2, DISCOVER floor 0.05->0.0, ZERO_PROXY no stagnation + higher cap). BRIDGE now 633 calls @0.441 pos (was 234); ZERO_PROXY 48 calls @0.125 (was 6). But v2 recall NOT clearly better than v1 (lower on 2 realcartest cells). T028b: offline logistic policy on T026/v2 table == v2 on every cell (no regression, no gain) -> offline learning from logged choices only re-learns the logger. Claim 'ECP improves low-budget coverage' STILL NOT supported. Outputs: t028a_ecp_bandit_*, t028b_ecp_learned_*, ECP_STEP4_SYNTHESIS.md."
     success_criteria: "Reweighted + learned variants run strict-replay vs baselines. DONE (first pass)."
   - id: T028c
-    title: ECP Step 4c — policy trained on event-utility reward (not positive label)
-    status: pending
+    title: ECP Step 4c — candidate ceiling + event-utility ranking policy
+    status: complete
     priority: medium
     type: experiment
     requires_gpu: false
     requires_vlm: false
     requires_yolo: false
-    notes: "Per ECP_STEP4_SYNTHESIS.md. Retrain the offline policy using marginal event_recall/IoU gain per logged step (labeled offline from reference) as the reward, instead of the positive-label. This gives the bandit the ECP reward from ECP_DESIGN.md §2.3. Must keep decision/eval batches disjoint (AGENTS.md)."
-    blocker: "T028 complete."
+    notes: "COMPLETE (T028c-0 + T028c-1). T028c-0 oracle ceiling: learnable event-level signal EXISTS on proxy-informative realcartest (ceiling +0.10..+0.14 over v2 on the cells v2 regressed on) but NOT on proxy-zero dataset3_0_1200/1200_2400 (candidate generator cannot propose zero-proxy positives -> ceiling≈0 there). T028c-1 event-utility ranker (GradientBoosting on u(arm|state,arm) from the candidate-level utility table, NOT logger-confined) runs strict-replay and RECOVERS the ceiling on collapsed cells: realcartest_3200_3830 @0.30 c1 0.286=ceiling beats v2 0.143; realcartest_0_1570 @0.30 c1 0.250 vs v2 0.200; dataset3_2400_3462 c1 0.111>v2 0.000. First ECP variant to beat v2 on realcartest, no precision loss. Proxy-zero dataset3 still blocked at candidate-generator level. T028d deferred. Outputs: ecp_candidate_utility_by_step.csv, ecp_oracle_ceiling_frontier.csv, t028c0_ceiling_report.md, t028c1_event_utility_policy_*.csv/.md, ECP_STEP4C_SYNTHESIS.md."
+    success_criteria: "T028c-0 ceiling validates learnable signal; T028c-1 strict-replay policy beats v2 on realcartest. DONE."
   - id: T028d
-    title: ECP Step 4d — IPS / doubly-robust debiasing of logged choices
+    title: ECP Step 4d — IPS / doubly-robust debiasing (DEFERRED)
+    status: pending
+    priority: low
+    type: experiment
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "DEFERRED per user reasoning. Without a randomized logger + recorded propensities, IPS/DR only re-weights the v2 logger and cannot create counterfactual support for zero-proxy arms the candidate generator never proposes. T028c-1 already surpassed T028b by training on candidate-level utilities (not logger-confined), so IPS/DR is lower priority. Prereq: a stochastic logger (epsilon/softmax) recording per-candidate propensities (T029)."
+    blocker: "Needs T029 (stochastic logger + propensity logging) before IPS/DR is meaningful."
+  - id: T028e
+    title: ECP Step 4e — proxy-free candidate generator for proxy-zero regime
     status: pending
     priority: medium
     type: experiment
     requires_gpu: false
     requires_vlm: false
     requires_yolo: false
-    notes: "Per ECP_STEP4_SYNTHESIS.md. Replace the naive supervised-to-bandit reduction with IPS or doubly-robust weighting to correct the v2 logging-policy bias before learning. Design-only risk: needs logged propensities (record them in T028 re-run)."
-    blocker: "T028 complete; needs propensity logging added to run_ecp."
+    notes: "The real open lever for dataset3 proxy-zero (T028c-0 ceiling≈0 there). Replace/extend the highest-proxy DISCOVER + gap-BRIDGE candidate generator with a proxy-free proposal mechanism (space-filling / low-discrepancy / temporal-cluster) that does not depend on proxy=0 filtering. Then re-run T028c-0 to see if the ceiling rises on dataset3_0_1200/1200_2400. Does NOT require new VLM; uses existing grid. Must keep strict-replay + no event_id."
+    blocker: "T028c complete (ceiling diagnosed the candidate-generator bottleneck)."

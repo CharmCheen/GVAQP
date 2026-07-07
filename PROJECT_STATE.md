@@ -106,6 +106,7 @@ The current loop state covers the LATE-AQP frontier and the negative Phase 3 sel
 - Round 20 (ECP reframing): `outputs/ecp_event_coverage_policy_v1/ECP_DESIGN.md` — mainline redefined from EC-AQP to **Event-Coverage Policy (ECP)**: event-level contextual bandit above the discovery executor, arms = discover/bridge/certify/zero-proxy/stop, reward = marginal event-recall/precision/IoU. Validation plan T025->T026->T027.
 - Round 21 (ECP Steps 1-3 experiments): `outputs/ecp_event_coverage_policy_v1/{t025_anchorbridge_shadow*, t026_action_utility.csv, t027_ecp_bandit_*, ECP_STEPS1_3_SYNTHESIS.md}`. T025: positives within an event are already contiguous (gap-bridging near-empty); real formation gap is temporal granularity (sub-1s events in 10s bins) + proxy-zero discovery. T026: BRIDGE most efficient arm (0.474 pos rate) but under-used by hand weights. T027: hand-designed ECP bandit runs strict-replay, matches/beats HTS-EC-safe on realcartest, still weak on dataset3 (proxy-zero). T028 (reweight + learned policy) pending.
 - Round 22 (ECP Step 4 experiments): `outputs/ecp_event_coverage_policy_v1/{t028a_ecp_bandit_*, t028b_ecp_learned_*, ECP_STEP4_SYNTHESIS.md}`. T028a: reweighted v2 fixes BRIDGE under-use (633 calls @0.441 pos; ZERO_PROXY 48 @0.125) but is NOT clearly better than v1 (lower on 2 realcartest cells). T028b: offline logistic policy trained on T026/v2 logs == v2 on every cell — offline learning from logged choices only re-learns the logger (standard offline-bandit limitation). Claim "ECP improves low-budget coverage over B7-core" STILL NOT supported. Next: T028c (event-utility reward) / T028d (IPS/DR debiasing).
+- Round 23 (ECP Step 4c experiments): `outputs/ecp_event_coverage_policy_v1/{ecp_candidate_utility_by_step.csv, ecp_oracle_ceiling_frontier.csv, t028c0_ceiling_report.md, t028c1_event_utility_policy_*, ECP_STEP4C_SYNTHESIS.md}`. T028c-0 oracle ceiling: learnable event-level signal EXISTS on proxy-informative realcartest (+0.10..+0.14 over v2 on cells v2 regressed on) but NOT on proxy-zero dataset3_0_1200/1200_2400 (candidate generator cannot propose zero-proxy positives -> ceiling≈0). T028c-1 event-utility ranker (GradientBoosting on u(arm|state,arm), trained on candidate-level utilities NOT logger-confined) is strict-replay and RECOVERS the ceiling on collapsed cells: realcartest_3200_3830 @0.30 c1 0.286=ceiling beats v2 0.143; realcartest_0_1570 @0.30 c1 0.250 vs v2 0.200; dataset3_2400_3462 c1 0.111>v2 0.000. First ECP variant to beat v2 on realcartest without precision loss. T028d deferred (needs stochastic logger); T028e (proxy-free candidate generator) is the real next lever for dataset3.
 
 ## Current Blocker
 
@@ -120,16 +121,21 @@ hypothesis -> interval confirmation` layer and the lack of a unified
 event-utility budget loop. ECP reframes the objective as an event-level
 contextual bandit whose reward is marginal event-recall / precision / IoU.
 
-**ECP Steps 1-4 are now run (Rounds 21-22):** T025/T026/T027 established the
+**ECP Steps 1-4c are now run (Rounds 21-23):** T025/T026/T027 established the
 structure (event-level bandit above the executor, viable strict-replay, matches/
-beats HTS-EC-safe on proxy-informative realcartest). T028 (reweight + offline
-learned policy) showed that **fixed-weight reweighting and offline learning from
-logged choices alone do NOT beat the hand-designed v2 / fixed executor** — the
-learned policy merely re-learns the logger. The open levers are now precise:
-**T028c** train on event-utility reward (not positive label), **T028d** IPS/DR
-debiasing of logged choices, and a real proxy-free signal for the proxy-zero
-regime. The claim "ECP improves low-budget event coverage over B7-core" remains
-**not supported** after T028.
+beats HTS-EC-safe on proxy-informative realcartest). T028a/T028b showed fixed
+weights and offline learning from logged choices do NOT beat v2. **T028c broke
+through**: T028c-0 ceiling proved learnable event-level signal exists on
+proxy-informative realcartest but not on proxy-zero dataset3 (candidate-generator
+bottleneck); T028c-1 event-utility ranker (trained on candidate-level utilities,
+not logger-confined) is strict-replay and recovers the ceiling on the cells v2
+regressed on — **the first ECP variant to beat v2 on realcartest without precision
+loss**. Proxy-zero dataset3 remains blocked at the candidate-generator level
+(not the policy); T028d (IPS/DR) is deferred until a stochastic logger exists;
+T028e (proxy-free candidate generator) is the real next lever. The claim "ECP
+improves low-budget event coverage over B7-core" is now **partially supported on
+proxy-informative realcartest, still not supported on proxy-zero dataset3** —
+report per-segment, do not over-claim.
 
 Other design-only next steps considered but de-prioritized:
 - Another discovery policy sweep along the D1/D2/D3 axes (D1/D2/D3 already failed to beat B7-core on B_90/90; the bottleneck is not the discovery prior but the small-sample cold start and the diversity of long events).
