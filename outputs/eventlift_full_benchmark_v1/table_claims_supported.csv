@@ -1,0 +1,12 @@
+claim,supported,evidence,allowed_wording
+Unified strict-replay oracle-call ledger with source_action lineage,SUPPORTED,"486/486 budget compliant, 0 event_id leaks, 0 action-sum mismatches",EventLift produces a full oracle-call ledger with source_action lineage; all 486 runs obey budget and use no event_id online.
+EventLift-discover-certify highest macro recall among strict-replay,SUPPORTED,"R=0.156 at budget 0.30, highest among 8 methods with intervals",EventLift-discover-certify achieves the highest macro-average event recall (0.156) among strict-replay methods at budget 0.30.
+CERTIFY improves precision on 4/6 segments,SUPPORTED,"dP>0 on realcartest_2000_3200, realcartest_3200_3830, dataset3_1200_2400, dataset3_2400_3462",CERTIFY improves precision on 4/6 segments without hurting recall on any segment.
+CERTIFY improves recall on 2/6 segments,SUPPORTED,"dR>0 on dataset3_1200_2400 (+0.056), dataset3_2400_3462 (+0.037)",CERTIFY also improves recall on 2/6 segments via boundary expansion finding adjacent positives.
+AUDIT cross-segment usefulness,NOT SUPPORTED,AUDIT fires only on dev segment (17 calls); 0 on 5/6 segments,AUDIT is not yet cross-segment active; its utility formula makes it uncompetitive with DISCOVER on 5/6 segments.
+SUPPRESS effectiveness,NOT SUPPORTED,SUPPRESS never selected in any of 486 runs,SUPPRESS effectiveness is unproven; it was never selected on any segment at any budget.
+Safe stopping,NOT SUPPORTED,All 486 runs abstain (audit_n < 29); stop_certificate_available=0/486,Safe stopping is not claimed; the system abstains when residual bounds are too loose.
+Superiority over B7-core-posthoc,NOT SUPPORTED,B7-core uses event_id online (posthoc_eval); comparison not aligned,No claim against B7-core-posthoc as main baseline; B7-strict-replay is the fair comparison.
+Human-ground-truth performance,NOT SUPPORTED,All labels are VLM-oracle-relative,"All results are VLM-oracle-relative, not human ground truth."
+EventLift dominates all baselines,NOT SUPPORTED,B7-strict wins on 2/6 segments; D3-strict has higher macro precision,EventLift does not dominate all baselines; it wins on 2/6 segments and loses on 2/6.
+ABae-residual better calibrated than EventLift residual,SUPPORTED,abs_error=11.4 vs 16.5; audit_n=31.2 vs 2.9,ABae-residual-strict has better-calibrated residual estimates but produces no intervals.

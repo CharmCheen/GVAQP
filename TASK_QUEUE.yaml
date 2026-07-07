@@ -202,3 +202,23 @@ tasks:
     requires_yolo: false
     notes: "Blocked on T020. Reuses the existing center10_vlm_oracle_events.csv / reference_events.csv and the LATE-AQP oracle adapter. Should be evaluated against the same B_90/90 / event-coverage metrics as late_aqp_limited_oracle_frontier_v1."
     blocker: "T020 must be complete."
+  - id: T023
+    title: EventLift-DR (doubly-robust audit correction) targeted ablation prototype
+    status: pending
+    priority: medium
+    type: design_followup
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Design-only next step from proxy_bias_dr_feasibility_v1 (Gate A=PASS, Gate B=CONDITIONAL, Gate C=PASS). In-scope segments: dataset3_0_1200 + optionally dataset3_1200_2400; out-of-scope: all realcartest segments and dataset3_2400_3462 (proxy already good or DR correction SD > model bias). p_model = per_stratum_loo (NOT raw_minmax strawman). Audit-share in {0.10, 0.20} only. Audit-sample-isolation: audit draws for DR correction must be disjoint from DISCOVER/CERTIFY oracle calls; i.e. not used as decision-driving audit AND as evaluation audit (per AGENTS.md hard constraint). Default selector unchanged; DR is ablation-only. Interval return-set coverage (not residual RMSE) is the primary endpoint. DR / AIPW is a known estimator family, NOT a novel statistical invention; only the design-based application to event-level AQP discovery posterior is candidate-novel. No SOTA claim until implemented."
+    blocker: "Requires explicit human authorization. Default selector (score_topk + temporal NMS + duration cap) must NOT be changed."
+  - id: T024
+    title: HTS-Discover (Phase 1) targeted spec — hierarchical tree search for sparse segments
+    status: pending
+    priority: medium
+    type: design_followup
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Design-only next step from hts_aqp_phase0_feasibility (Verdict B = weakly feasible / segment-dependent). Phase 0 data: at b=4, savings vs flat scan on dataset3 segments = 21-59pct; HTS finds all 6-12 events in 49-95 calls vs existing best 1-2 events in 12-24 calls. Phase 0 is God's-eye upper bound; real algorithm's ratio >= Phase 0 ratio. Required design items: (1) b=4 as default with b in {2,4,8} sensitivity; (2) hybrid fallback for high-density (>20pct positive) segments — realcartest_2000_3200 b=2 shows -21pct regression vs flat scan due to coarse-positive saturation; (3) Phase 0 call counts as efficiency lower bound for the real Beta+UCB algorithm; (4) CERTIFY integration deferred to Phase 2; (5) Coverage convention for evaluation must be IoU>=0.3 (per run_eventlift_full_benchmark_v1.py) — Phase 0's any-overlap convention is diagnostic-only and cannot be used for the Phase 1 evaluation. coarse-to-fine is not a novel search paradigm (standard in spatial/temporal/game-tree search); the candidate-novel element is the application to event-level AQP. Not a SOTA claim, no safe stopping claim. Coarse-oracle-VLM-reliability assumption (validation needs not just strict-replay OR aggregation but real VLM coarse-window judgment) flagged for future work."
+    blocker: "Requires explicit human authorization. Default selector (score_topk + temporal NMS + duration cap) must NOT be replaced by HTS."

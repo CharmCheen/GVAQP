@@ -67,6 +67,26 @@ LATE-AQP frontier（limited-oracle 严格重放下，对全-VLM 评估参考做�
   "repair is net-negative" 这类结论。bug 已修
   （outputs/late_aqp_d3_accounting_fix_v1/），post-fix 结果是 neutral
   （D3-core-fixed 不比 D3-norepair-core 更好），不是 net-negative。
+- 不要把 EventLift-DR / HTS-AQP 当作默认 selector。两者均已通过可
+  行性诊断（分别见 outputs/eventlift_dr_feasibility/ 与
+  outputs/hts_aqp_phase0_feasibility/），但都没实现、都没在严格回放
+  下与现有 baseline 在 interval return-set 覆盖率上比较过。
+  DR/AIPW 是已知估计族、Hierarchical Tree Search 是已知搜索范式，
+  不是 novel statistical estimator / new search paradigm；唯一候选
+  新颖性是 design-based audit correction 对 event-level AQP 的应用
+  （DR）和 coarse-to-fine 对 event-level AQP 的应用（HTS）。任何上
+  线必须显式人工授权，并且维持默认 selector = score_topk + temporal
+  NMS + duration cap 不变。
+- 不要把"raw-minmax DR 在 4/6 segment 上达到 ≥20% RMSE reduction"
+  当成 DR 可行的证据。贴在 outputs/eventlift_dr_feasibility/ 上的
+  Gate B 是 CONDITIONAL；真正 deployable 的 per-stratum-LOO p_model
+  只在 1/6 segment（dataset3_0_1200）达标，aggregate 4/6 来自一个
+  故意 miscalibrate 的 raw_minmax strawman。
+- 不要把"HTS-AQP Phase 0 找全所有 positive bin"等同于"HTS-AQP
+  优于现有 baseline"。Phase 0 是 God's-eye 上界模拟，使用
+  any-overlap coverage convention，baseline 用 IoU ≥ 0.3；二者不等
+  价。Phase 0 verdict 是 B（弱可行 / segment-dependent），不是 A。
+  realcartest_2000_3200 在 b=2 上比 flat scan 倒退 20.8%（coarse-positive saturation）。
 ```
 
 ## 数据 / 来源标注规则

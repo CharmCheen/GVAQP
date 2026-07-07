@@ -72,6 +72,29 @@
 - **Source**: `outputs/late_aqp_algorithm_v3_oracle_relative/FINAL_REPORT.md` Q4/Q5.
 - **Implication**: the v3 ideas are candidates for re-evaluation under strict replay, not established wins.
 
+## Diagnosed-But-Not-Failed (B-verdict candidates; ablation-only paths)
+
+> These routes are **not failed.** Each is a feasibility diagnostic that landed
+> as conditional-positive (B-verdict). They are flagged here so future agents do
+> not re-derive them from scratch, and **do not** quietly elevate them to
+> default selector without explicit authorization.
+
+### DR / AIPW audit-correction feasibility → CONDITIONAL (targeted weak-proxy only)
+
+- **Status**: feasibility-only, not implemented; Gate A=PASS, Gate B=CONDITIONAL, Gate C=PASS (borderline).
+- **Symptom**: with the **deployable** per-stratum-LOO p_model, DR delivers ≥20% RMSE reduction vs model-only on **1/6** segments (dataset3_0_1200); beats ABae-residual-strict on 2/6. The aggregate "≥4/6 PASS" only emerges when crediting a **raw-minmax strawman** p_model, which is a deliberately miscalibrated baseline. The honest call is Gate B = CONDITIONAL, not PASS.
+- **Prior forced-exploration routes are failed/neutral** (v2 `cold_start_fallback`, `hybrid_coldstart`, D3-core repair-vs-norepair-neutral). The **only** meaningful difference between EventLift-DR and those priors is the **dual-use audit correction** term (`Σ (y − p_model) / π`), where the same audit sample yields both positive recovery and bias correction. That is conceptual differentiation, NOT empirically validated outcome.
+- **Source**: `outputs/eventlift_dr_feasibility/dr_gate_summary.csv`; `PROXY_BIAS_DR_FEASIBILITY.md`; `EXPERIMENT_REGISTRY.csv` entries `proxy_bias_dr_feasibility_v1`, `eventlift_full_benchmark_v1`.
+- **Implication**: do NOT implement EventLift-DR globally. Do NOT replace the default `score_topk + temporal NMS + duration cap` selector. A targeted ablation on dataset3_0_1200 (optionally dataset3_1200_2400) with p_model = `per_stratum_loo` only, audit-share ∈ {0.10, 0.20} only, audit-sample-disjoint-from-discovery-discovery, is the smallest non-trivial next step (T023) — but only with explicit human authorization. DR/AIPW is a known estimator family; no "novel statistical invention" claim.
+
+### HTS-AQP Phase 0 feasibility → CONDITIONAL (sparse-segment only)
+
+- **Status**: God's-eye upper-bound simulation only; not implemented; not a real algorithm prototype.
+- **Symptom**: deterministic coarse-to-fine descent (perfect oracle knowledge) at b=4 yields savings-vs-flat-scan: dataset3_0_1200 +59.2%, dataset3_1200_2400 +30.8%, dataset3_2400_3462 +33.6%, realcartest_3200_3830 +22.2%, realcartest_0_1570 +10.8%, **realcartest_2000_3200 −0.8%**. With b=2, realcartest_2000_3200 regresses **−20.8%** vs flat scan (coarse-positive saturation: at 26.7% positive density, almost every coarse node is positive → no pruning → tree overhead dominates). HTS full-coverage call count at b=4 = 49–171 calls/segment; no strict_replay baseline reaches that coverage at any available budget, so an equal-coverage oracle-call ratio is unavailable — Phase 0 reports coverage multiplicative gap (HTS finds all 6 of 6 events on dataset3_0_1200 where the best existing strict-replay baseline finds 1 of 6 at the same call budget).
+- **Q5 verdict**: **B (weakly feasible / segment-dependent)**. Adopted explicit ratio threshold: A requires ratio < 0.5 on ≥4/6 segments AND no b=4 regression > 5%; Phase 0 fails both halves. The honest statement is that HTS is **qualitatively different on sparse segments but not cheaper in equal-coverage call count** (because baselines never reach that coverage).
+- **Source**: `outputs/hts_aqp_phase0_feasibility/` (context_manifest.md, coarse_to_fine_call_count_by_segment.csv, comparison_vs_existing_baselines.csv, HTS_PHASE0_FEASIBILITY_REPORT.md); `HTS_AQP_DESIGN.md`; `EXPERIMENT_REGISTRY.csv` entry `hts_aqp_phase0_feasibility`.
+- **Implication**: do NOT implement HTS-Discover (Phase 1) yet. Required before any Phase 1 implementation: (1) b ∈ {2,4,8} sensitivity analysis; (2) `k0` (prior pseudo-count) sensitivity analysis; (3) **hybrid fallback for high-density (>20% positive) segments** — without this, a real Phase-1 algorithm will reproduce the realcartest_2000_3200 b=2 regression; (4) explicit-intent coverage convention switch from Phase 0's `any-overlap` to IoU ≥ 0.3 (per `run_eventlift_full_benchmark_v1.py:38`) for any actual evaluation. HTS is **not** a novel search paradigm (hierarchical multi-resolution search is standard); the candidate-novel element is the application to event-level AQP. Coarse-oracle-VLM-reliability assumption (real VLM coarse-window judgment vs strict-replay OR aggregation) is **not validated** and must be flagged as future work. Next step is task T024 (design-only) with explicit human authorization.
+
 ## Active Warnings (carry-over from previous state)
 
 - `try_or_no/videos/realcartest.mp4` is absent; current probe media uses fallback `data/realcam/long_video_data/long_video_dataset3.mp4`.
