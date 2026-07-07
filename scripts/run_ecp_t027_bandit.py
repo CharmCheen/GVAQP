@@ -53,12 +53,31 @@ OUT.mkdir(parents=True, exist_ok=True)
 GAP = 3          # bridge gap tolerance (bins)
 ZERO_CAP = 0.25  # max fraction of budget spendable on zero-proxy audit
 
+# Variant configs (T028a reweighting).
+# v1 = original hand-designed weights (T027).
+# v2 = reweighted: BRIDGE boosted above DISCOVER floor; ZERO_PROXY fires on
+#      zero_proxy_share alone (not requiring stagnation), higher cap.
+VARIANTS = {
+    "v1": dict(
+        w_discover=1.0, w_discover_floor=0.05,
+        w_bridge=0.8, w_certify=0.6,
+        w_zero=0.7, zero_need_stagnation=True, zero_cap=0.25, zero_zp_thresh=0.5,
+    ),
+    "v2": dict(
+        w_discover=1.0, w_discover_floor=0.0,
+        w_bridge=1.2, w_certify=0.6,
+        w_zero=1.0, zero_need_stagnation=False, zero_cap=0.40, zero_zp_thresh=0.35,
+    ),
+}
+
 
 def formed_intervals(queried_pos, grid):
     return group_positive_bins(sorted(queried_pos), grid)
 
 
-def run_ecp(grid, ref_seg, seg_id, budget_abs, budget_ratio, seed, rng):
+def run_ecp(grid, ref_seg, seg_id, budget_abs, budget_ratio, seed, rng, cfg=None, variant="v1", policy_fn=None):
+    if cfg is None:
+        cfg = VARIANTS[variant]
     n_bins = len(grid)
     oracle = AlignedOracle(grid, seg_id, "ECP-bandit", seed, budget_abs, budget_ratio)
     grid_sorted = grid.sort_values("bin_idx").reset_index(drop=True)
@@ -131,7 +150,7 @@ def run_ecp(grid, ref_seg, seg_id, budget_abs, budget_ratio, seed, rng):
                 break
         # ZERO_PROXY: space-filling among zero-proxy unqueried (pick middle of largest gap)
         zerop = None
-        if st["zp_share"] > 0.5 and zero_proxy_budget_used < ZERO_CAP * budget_abs:
+        if st["zp_share"] > cfg["zero_zp_thresh"] and zero_proxy_budget_used < cfg["zero_cap"] * budget_abs:
             zp_bins = [b for b in st["unqueried"] if proxies[b] == 0.0]
             if zp_bins:
                 # largest contiguous run of unqueried zero-proxy bins -> midpoint
@@ -156,13 +175,16 @@ def run_ecp(grid, ref_seg, seg_id, budget_abs, budget_ratio, seed, rng):
         st = state()
         discover, bridge, certify, zerop = candidate_targets(st)
         # heuristic utilities (online-only)
-        u_discover = 1.0 * st["top_proxy"] * (1 - st["formed_ratio"]) + 0.05
-        u_bridge = 0.8 * (1.0 if bridge is not None else 0.0) * (1 - st["formed_ratio"])
-        u_certify = 0.6 * (1.0 if certify is not None else 0.0)
-        # zero-proxy audit only when proxy informativeness low & stagnation
-        stagnation_flag = 1.0 if (stagnation >= 2 and st["top_proxy"] < 0.3) else 0.0
-        u_zero = 0.7 * stagnation_flag * st["zp_share"] * (
-            1.0 if (zerop is not None and zero_proxy_budget_used < ZERO_CAP * budget_abs) else 0.0
+        u_discover = cfg["w_discover"] * st["top_proxy"] * (1 - st["formed_ratio"]) + cfg["w_discover_floor"]
+        u_bridge = cfg["w_bridge"] * (1.0 if bridge is not None else 0.0) * (1 - st["formed_ratio"])
+        u_certify = cfg["w_certify"] * (1.0 if certify is not None else 0.0)
+        # zero-proxy audit: optional stagnation gate (v1 requires it, v2 does not)
+        if cfg["zero_need_stagnation"]:
+            stagnation_flag = 1.0 if (stagnation >= 2 and st["top_proxy"] < 0.3) else 0.0
+        else:
+            stagnation_flag = 1.0
+        u_zero = cfg["w_zero"] * stagnation_flag * st["zp_share"] * (
+            1.0 if (zerop is not None and zero_proxy_budget_used < cfg["zero_cap"] * budget_abs) else 0.0
         )
         arms = {
             "DISCOVER": (u_discover, discover),
@@ -170,10 +192,16 @@ def run_ecp(grid, ref_seg, seg_id, budget_abs, budget_ratio, seed, rng):
             "CERTIFY": (u_certify, certify),
             "ZERO_PROXY": (u_zero, zerop),
         }
-        best_arm = max(arms, key=lambda a: arms[a][0])
-        best_u, target = arms[best_arm]
+        if policy_fn is not None:
+            best_arm = policy_fn(st, arms)
+            best_u, target = arms[best_arm]
+        else:
+            best_arm = max(arms, key=lambda a: arms[a][0])
+            best_u, target = arms[best_arm]
         # STOP if best utility below cost threshold and nothing better
-        if best_u < 0.1 or target is None:
+        if target is None or (policy_fn is None and best_u < 0.1):
+            break
+        if policy_fn is not None and best_u <= 0.0 and all(v[0] <= 0.0 for v in arms.values()):
             break
         # execute
         is_zero = (best_arm == "ZERO_PROXY")
@@ -202,7 +230,12 @@ def run_ecp(grid, ref_seg, seg_id, budget_abs, budget_ratio, seed, rng):
                 "chosen_bin": target,
                 "oracle_label": label,
                 "budget_remaining_ratio": round(st["rem_ratio"], 3),
+                "formed_ratio": round(st["formed_ratio"], 3),
+                "top_proxy": round(st["top_proxy"], 3),
+                "zp_share": round(st["zp_share"], 3),
+                "n_pos": st["n_pos"],
                 "formed_events": st["formed_events"],
+                "stagnation": stagnation,
                 "zero_proxy_budget_used": zero_proxy_budget_used,
             }
         )
@@ -221,63 +254,74 @@ def run_ecp(grid, ref_seg, seg_id, budget_abs, budget_ratio, seed, rng):
 
 def main():
     rng = np.random.default_rng(20260707)
-    rows = []
-    util_all = []
-    for seg in SEGMENTS:
-        grid, ref_seg, err = load_segment_data(seg)
-        if grid is None:
-            continue
-        n_bins = len(grid)
-        for br in BUDGET_RATIOS:
-            for seed in SEEDS:
-                budget_abs = max(1, int(round(br * n_bins)))
-                res = run_ecp(grid, ref_seg, seg["segment_id"], budget_abs, br, seed, rng)
-                rows.append(
-                    {
-                        "segment_id": seg["segment_id"],
-                        "method_id": "ECP-bandit",
-                        "seed": seed,
-                        "budget_abs": budget_abs,
-                        "budget_ratio": br,
-                        "oracle_calls_total": res["oracle_calls"],
-                        "returned_intervals": res["returned_intervals"],
-                        "event_precision": round(res["event_precision"], 4),
-                        "event_recall": round(res["event_recall"], 4),
-                        "unique_event_coverage": res["unique_event_coverage"],
-                        "strict_replay_or_posthoc": "strict_replay",
-                        "online_uses_event_id": False,
-                        "can_be_main_comparison": True,
-                        "applicability_note": "ECP hand-designed event-utility bandit (T027)",
-                    }
-                )
-                for ur in res["util_rows"]:
-                    util_all.append(ur)
-        print(f"done {seg['segment_id']}")
+    all_rows = []
+    util_by_variant = {v: [] for v in VARIANTS}
+    for variant in VARIANTS:
+        for seg in SEGMENTS:
+            grid, ref_seg, err = load_segment_data(seg)
+            if grid is None:
+                continue
+            n_bins = len(grid)
+            for br in BUDGET_RATIOS:
+                for seed in SEEDS:
+                    budget_abs = max(1, int(round(br * n_bins)))
+                    res = run_ecp(grid, ref_seg, seg["segment_id"], budget_abs, br, seed, rng,
+                                  cfg=VARIANTS[variant], variant=variant)
+                    all_rows.append(
+                        {
+                            "variant": variant,
+                            "segment_id": seg["segment_id"],
+                            "method_id": f"ECP-{variant}",
+                            "seed": seed,
+                            "budget_abs": budget_abs,
+                            "budget_ratio": br,
+                            "oracle_calls_total": res["oracle_calls"],
+                            "returned_intervals": res["returned_intervals"],
+                            "event_precision": round(res["event_precision"], 4),
+                            "event_recall": round(res["event_recall"], 4),
+                            "unique_event_coverage": res["unique_event_coverage"],
+                            "strict_replay_or_posthoc": "strict_replay",
+                            "online_uses_event_id": False,
+                            "can_be_main_comparison": True,
+                            "applicability_note": f"ECP {variant} hand-designed event-utility bandit (T028a)",
+                        }
+                    )
+                    for ur in res["util_rows"]:
+                        ur2 = dict(ur)
+                        ur2["variant"] = variant
+                        util_by_variant[variant].append(ur2)
+        print(f"done variant {variant}")
 
-    frontier = pd.DataFrame(rows)
-    frontier.to_csv(OUT / "t027_ecp_bandit_frontier.csv", index=False)
-    util_df = pd.DataFrame(util_all)
-    util_df.to_csv(OUT / "t026_action_utility.csv", index=False)
+    frontier = pd.DataFrame(all_rows)
+    frontier.to_csv(OUT / "t028a_ecp_bandit_frontier.csv", index=False)
+    # T026 utility table = the improved v2 variant (primary training signal)
+    pd.DataFrame(util_by_variant["v2"]).to_csv(OUT / "t026_action_utility.csv", index=False)
+    # v1 frontier retained for direct v1->v2 comparison
+    frontier[frontier["variant"] == "v1"].drop(columns=["variant"]).to_csv(
+        OUT / "t027_ecp_bandit_frontier.csv", index=False
+    )
 
     # compare to HTS-EC-safe and B7-core from existing CSVs
     hts = pd.read_csv(OUT.parent / "hts_ec_v0_strict_v1" / "hts_ec_v0_frontier.csv")
     hts = hts[hts["method_id"].isin(["HTS-EC-safe", "B7-strict-replay"])]
-    cmp = frontier.groupby(["segment_id", "budget_ratio"])[["event_recall", "event_precision"]].mean().reset_index()
     hts_cmp = hts.groupby(["segment_id", "budget_ratio", "method_id"])[["event_recall", "event_precision"]].mean().reset_index()
 
     L = []
-    L.append("# T027 — ECP hand-designed bandit (strict replay)\n")
+    L.append("# T028a — ECP reweighted bandit (strict replay)\n")
     L.append(
-        "ECP bandit (DISCOVER/BRIDGE/CERTIFY/ZERO_PROXY/STOP, heuristic U(a)/cost, "
-        "online-only state) run under strict replay. Compared to HTS-EC-safe and "
-        "B7-strict-replay on event_recall / event_precision (VLM-oracle-relative, IoU>=0.3).\n"
+        "Two hand-designed variants under strict replay: v1 (T027 original weights) and "
+        "v2 (T028a reweighted: BRIDGE boosted above DISCOVER floor, ZERO_PROXY fires on "
+        "zero_proxy_share alone with higher cap). Compared to HTS-EC-safe and B7-strict-replay "
+        "on event_recall / event_precision (VLM-oracle-relative, IoU>=0.3).\n"
     )
-    L.append("## Mean event_recall by segment x budget (ECP vs baselines)\n")
-    L.append("| segment | budget | ECP_recall | HTS-EC-safe_recall | B7-strict_recall | ECP_prec | HTS_prec | B7_prec |")
-    L.append("|---|---|---|---|---|---|---|---|")
-    for (seg, br), grp in cmp.groupby(["segment_id", "budget_ratio"]):
-        ecp_r = grp["event_recall"].mean()
-        ecp_p = grp["event_precision"].mean()
+    L.append("## Mean event_recall by segment x budget\n")
+    L.append("| segment | budget | ECP_v1_recall | ECP_v2_recall | HTS-EC-safe | B7-strict | ECP_v1_prec | ECP_v2_prec | HTS_prec | B7_prec |")
+    L.append("|---|---|---|---|---|---|---|---|---|---|")
+    for (seg, br), grp in frontier.groupby(["segment_id", "budget_ratio"]):
+        v1 = grp[grp["variant"] == "v1"]
+        v2 = grp[grp["variant"] == "v2"]
+        v1r = v1["event_recall"].mean(); v1p = v1["event_precision"].mean()
+        v2r = v2["event_recall"].mean(); v2p = v2["event_precision"].mean()
         hs = hts_cmp[(hts_cmp["segment_id"] == seg) & (hts_cmp["budget_ratio"] == br) & (hts_cmp["method_id"] == "HTS-EC-safe")]
         b7 = hts_cmp[(hts_cmp["segment_id"] == seg) & (hts_cmp["budget_ratio"] == br) & (hts_cmp["method_id"] == "B7-strict-replay")]
         hs_r = hs["event_recall"].mean() if len(hs) else float("nan")
@@ -285,27 +329,37 @@ def main():
         b7_r = b7["event_recall"].mean() if len(b7) else float("nan")
         b7_p = b7["event_precision"].mean() if len(b7) else float("nan")
         L.append(
-            f"| {seg} | {br:.2f} | {ecp_r:.3f} | {hs_r:.3f} | {b7_r:.3f} | {ecp_p:.3f} | {hs_p:.3f} | {b7_p:.3f} |"
+            f"| {seg} | {br:.2f} | {v1r:.3f} | {v2r:.3f} | {hs_r:.3f} | {b7_r:.3f} | {v1p:.3f} | {v2p:.3f} | {hs_p:.3f} | {b7_p:.3f} |"
         )
+    # arm usage for v2
+    v2u = pd.DataFrame(util_by_variant["v2"])
+    L.append("\n## v2 arm usage and positive rate\n")
+    L.append("| arm | n_calls | positive_rate |")
+    L.append("|---|---|---|")
+    for arm in ["DISCOVER", "BRIDGE", "CERTIFY", "ZERO_PROXY"]:
+        sub = v2u[v2u["chosen_arm"] == arm]
+        pr = (sub["oracle_label"] == "positive").mean() if len(sub) else 0.0
+        L.append(f"| {arm} | {len(sub)} | {pr:.3f} |")
     L.append("\n## Reading\n")
     L.append(
-        "- This is a FIRST hand-designed bandit; weights are heuristics, not learned. "
-        "It validates that event-level arm selection is a viable strict-replay policy "
-        "layer and isolates which arms earn their budget."
+        "- v2 reweighting: BRIDGE boosted (w_bridge 0.8->1.2, DISCOVER floor 0.05->0.0) so it "
+        "wins when a bridge target exists; ZERO_PROXY no longer requires stagnation and uses a "
+        "higher cap (0.25->0.40, zp_thresh 0.5->0.35)."
     )
     L.append(
-        "- T026 action-utility table (t026_action_utility.csv) logs the per-step U(a) of "
-        "every arm and the chosen arm — the offline-labeled training signal for a future "
-        "learned policy (T027 step 4)."
+        "- If v2 recall >= v1 on realcartest and v2 ZERO_PROXY fires more on dataset3 without "
+        "hurting precision, the reweighting is a legitimate strict-replay improvement (no new "
+        "VLM, no event_id). Compare v1 vs v2 columns above."
     )
     L.append(
-        "- Strict-replay compliant: reference events read only at final evaluation; no "
-        "event_id online; 1 oracle call per arm execution."
+        "- Strict-replay compliant: reference events read only at final eval; 0 event_id leaks; "
+        "1 oracle call per arm."
     )
-    md = OUT / "t027_ecp_bandit_report.md"
+    md = OUT / "t028a_ecp_bandit_report.md"
     md.write_text("\n".join(L))
-    print(f"wrote {OUT/'t027_ecp_bandit_frontier.csv'}")
-    print(f"wrote {OUT/'t026_action_utility.csv'}")
+    print(f"wrote {OUT/'t028a_ecp_bandit_frontier.csv'}")
+    print(f"wrote {OUT/'t027_ecp_bandit_frontier.csv'} (v1 retained)")
+    print(f"wrote {OUT/'t026_action_utility.csv'} (v2 utility table)")
     print(f"wrote {md}")
 
 

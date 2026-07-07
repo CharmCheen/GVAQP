@@ -254,11 +254,31 @@ tasks:
     success_criteria: "Strict-replay ECP frontier + baseline comparison. DONE (first pass)."
   - id: T028
     title: ECP Step 4 — reweighted bandit + learned policy prototype
+    status: complete
+    priority: medium
+    type: experiment
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "COMPLETE (first pass). T028a: reweighted v2 (BRIDGE 0.8->1.2, DISCOVER floor 0.05->0.0, ZERO_PROXY no stagnation + higher cap). BRIDGE now 633 calls @0.441 pos (was 234); ZERO_PROXY 48 calls @0.125 (was 6). But v2 recall NOT clearly better than v1 (lower on 2 realcartest cells). T028b: offline logistic policy on T026/v2 table == v2 on every cell (no regression, no gain) -> offline learning from logged choices only re-learns the logger. Claim 'ECP improves low-budget coverage' STILL NOT supported. Outputs: t028a_ecp_bandit_*, t028b_ecp_learned_*, ECP_STEP4_SYNTHESIS.md."
+    success_criteria: "Reweighted + learned variants run strict-replay vs baselines. DONE (first pass)."
+  - id: T028c
+    title: ECP Step 4c — policy trained on event-utility reward (not positive label)
     status: pending
     priority: medium
     type: experiment
     requires_gpu: false
     requires_vlm: false
     requires_yolo: false
-    notes: "Next ECP step. (a) Reweight BRIDGE up and strengthen ZERO_PROXY trigger using the T026 utility table, re-run strict replay. (b) Train an offline contextual bandit ranker on t026_action_utility.csv (state features -> arm priority), evaluate strict-replay without event_id. Deep RL deferred. This is the Step 4 of ECP_DESIGN.md §6."
-    blocker: "T025/T026/T027 complete."
+    notes: "Per ECP_STEP4_SYNTHESIS.md. Retrain the offline policy using marginal event_recall/IoU gain per logged step (labeled offline from reference) as the reward, instead of the positive-label. This gives the bandit the ECP reward from ECP_DESIGN.md §2.3. Must keep decision/eval batches disjoint (AGENTS.md)."
+    blocker: "T028 complete."
+  - id: T028d
+    title: ECP Step 4d — IPS / doubly-robust debiasing of logged choices
+    status: pending
+    priority: medium
+    type: experiment
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Per ECP_STEP4_SYNTHESIS.md. Replace the naive supervised-to-bandit reduction with IPS or doubly-robust weighting to correct the v2 logging-policy bias before learning. Design-only risk: needs logged propensities (record them in T028 re-run)."
+    blocker: "T028 complete; needs propensity logging added to run_ecp."
