@@ -224,31 +224,41 @@ tasks:
     blocker: "Requires explicit human authorization. Default selector (score_topk + temporal NMS + duration cap) must NOT be replaced by HTS."
   - id: T025
     title: ECP Step 1 — AnchorBridge shadow validation
-    status: active
+    status: complete
     priority: high
     type: experiment
     requires_gpu: false
     requires_vlm: false
     requires_yolo: false
-    notes: "First ECP validation step (per outputs/ecp_event_coverage_policy_v1/ECP_DESIGN.md §6). On existing strict-replay logs (outputs/hts_ec_v0_phase2a_rp_*/), verify whether a positive anchor + 1-3 local probes can form an interval reaching IoU>=0.3, and measure event-recall delta vs the single-bin-hit baseline. Isolates formation gap from discovery gap. Raw material: rp_opportunity_by_step.csv, rp_strategy_shadow_summary.csv (gap_bracket_v2/largest_gap_local_flank_or_proxy_neighbor = 11/30 shadow hits on proxy-signal segments; 0 hits on dataset3_0_1200 proxy-zero)."
-    success_criteria: "A shadow report quantifying how many current positive anchors could become event-level IoU>=0.3 intervals with <=3 local probes, broken down by segment and by proxy-zero vs proxy-signal regime. Strict-replay-only; no event_id online; decision/eval batches disjoint."
+    notes: "COMPLETE. Per-reference-event formation analysis over 6 segments / 74 events. Finding: positives within an event are already contiguous (max_internal_gap=0 for all 74), so gap-bridging is a near-empty formation gap. Real formation bottleneck is temporal granularity (many <1s events inside 10s bins cannot reach IoU>=0.3 even with all positives). proxy_zero_blocked dominates dataset3 (5/6, 8/12, 2/9) -> discovery not formation is the blocker there. Outputs: outputs/ecp_event_coverage_policy_v1/t025_anchorbridge_shadow*.csv/.md."
+    success_criteria: "Shadow report quantifying formation vs discovery gap per event, with proxy-zero breakdown. DONE."
   - id: T026
     title: ECP Step 2 — action-level offline utility labeling
-    status: pending
+    status: complete
     priority: high
     type: experiment
     requires_gpu: false
     requires_vlm: false
     requires_yolo: false
-    notes: "Per ECP §6 Step 2. Label each state in existing replays with counterfactual event-utility of DISCOVER / BRIDGE / CERTIFY / ZERO_PROXY / STOP. This table is the training data for the bandit (T027). Must keep decision-driving and evaluation samples disjoint (AGENTS.md hard constraint)."
-    blocker: "T025 complete (need the bridge/formation labels first)."
+    notes: "COMPLETE (byproduct of T027 run). t026_action_utility.csv logs per-step U(a) of every ECP arm + chosen arm + oracle outcome for 1236 strict-replay steps. Key facts: BRIDGE positive rate 0.474 vs DISCOVER 0.277; BRIDGE under-used by hand weights (chosen 234/876 available); ZERO_PROXY fired 6x, 0 positives. Training signal for learned policy."
+    success_criteria: "Per-state per-arm utility table. DONE."
   - id: T027
     title: ECP Step 3 — hand-designed event-utility bandit
-    status: pending
+    status: complete
     priority: high
     type: experiment
     requires_gpu: false
     requires_vlm: false
     requires_yolo: false
-    notes: "Per ECP §6 Step 3. Rule-based U_discover/U_bridge/U_certify/U_zero_proxy/U_stop under Thompson/UCB, strict-replay eval. Goal: confirm event-level action selection beats the fixed pipeline. Default selector unchanged; ECP is a policy layer above it."
-    blocker: "T026 complete."
+    notes: "COMPLETE (first pass). ECP bandit run as strict-replay method vs HTS-EC-safe and B7-strict-replay. On realcartest (proxy-informative) ECP matches/beats HTS-EC-safe (e.g. realcartest_0_1570 @0.30: ECP 0.300 vs HTS 0.183). On dataset3 (proxy-zero) ECP ~ HTS ~ 0 at low budget, below B7-strict at 0.30. 0 budget violations, 0 event_id leaks. Open levers: reweight BRIDGE up; strengthen ZERO_PROXY trigger; learned policy. Claim 'ECP improves low-budget coverage' still NOT supported. Outputs: t027_ecp_bandit_frontier.csv, t027_ecp_bandit_report.md, ECP_STEPS1_3_SYNTHESIS.md."
+    success_criteria: "Strict-replay ECP frontier + baseline comparison. DONE (first pass)."
+  - id: T028
+    title: ECP Step 4 — reweighted bandit + learned policy prototype
+    status: pending
+    priority: medium
+    type: experiment
+    requires_gpu: false
+    requires_vlm: false
+    requires_yolo: false
+    notes: "Next ECP step. (a) Reweight BRIDGE up and strengthen ZERO_PROXY trigger using the T026 utility table, re-run strict replay. (b) Train an offline contextual bandit ranker on t026_action_utility.csv (state features -> arm priority), evaluate strict-replay without event_id. Deep RL deferred. This is the Step 4 of ECP_DESIGN.md §6."
+    blocker: "T025/T026/T027 complete."

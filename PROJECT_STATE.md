@@ -104,6 +104,7 @@ The current loop state covers the LATE-AQP frontier and the negative Phase 3 sel
 - Round 18 (H7 calibration prep + long-event-only replay): `outputs/late_aqp_h7_long_event_v1/` — Ours-full improves event-level recall over B7 at most budgets for the long-event subset. H7 annotation package is **pending human annotation**.
 - Round 19 (state sync): `outputs/state_sync_late_aqp_v1/` — this document and the accompanying root-level state files were resynchronized to reflect the LATE-AQP frontier and the Phase 3 selector smoke negative result.
 - Round 20 (ECP reframing): `outputs/ecp_event_coverage_policy_v1/ECP_DESIGN.md` — mainline redefined from EC-AQP to **Event-Coverage Policy (ECP)**: event-level contextual bandit above the discovery executor, arms = discover/bridge/certify/zero-proxy/stop, reward = marginal event-recall/precision/IoU. Validation plan T025->T026->T027.
+- Round 21 (ECP Steps 1-3 experiments): `outputs/ecp_event_coverage_policy_v1/{t025_anchorbridge_shadow*, t026_action_utility.csv, t027_ecp_bandit_*, ECP_STEPS1_3_SYNTHESIS.md}`. T025: positives within an event are already contiguous (gap-bridging near-empty); real formation gap is temporal granularity (sub-1s events in 10s bins) + proxy-zero discovery. T026: BRIDGE most efficient arm (0.474 pos rate) but under-used by hand weights. T027: hand-designed ECP bandit runs strict-replay, matches/beats HTS-EC-safe on realcartest, still weak on dataset3 (proxy-zero). T028 (reweight + learned policy) pending.
 
 ## Current Blocker
 
@@ -116,12 +117,16 @@ gap is **event-level decision-making under weak proxy / expensive oracle /
 unknown boundaries** — specifically the missing `positive anchor -> event
 hypothesis -> interval confirmation` layer and the lack of a unified
 event-utility budget loop. ECP reframes the objective as an event-level
-contextual bandit whose reward is marginal event-recall / precision / IoU. The
-first concrete experiment is **T025 (AnchorBridge shadow)**: verify on existing
-strict-replay logs whether a positive anchor + 1–3 local probes can reach
-IoU>=0.3, isolating the formation gap from the discovery gap. Design only; no
-VLM, YOLO, or GPU for the design doc. T025 reuses existing
-`outputs/hts_ec_v0_phase2a_rp_*` logs.
+contextual bandit whose reward is marginal event-recall / precision / IoU.
+
+**ECP Steps 1-3 are now run (Round 21):** T025 (AnchorBridge shadow) shows the
+formation gap is mostly temporal granularity + proxy-zero discovery, NOT
+gap-bridging; T026 logs per-step arm utilities (BRIDGE most efficient, under-used);
+T027 runs a hand-designed ECP bandit under strict replay, matching/beating
+HTS-EC-safe on proxy-informative realcartest but still weak on proxy-zero
+dataset3. Next: **T028** — reweight BRIDGE / strengthen ZERO_PROXY and train an
+offline learned policy on the T026 table. The claim "ECP improves low-budget
+event coverage over B7-core" remains **not supported** until T028 lands.
 
 Other design-only next steps considered but de-prioritized:
 - Another discovery policy sweep along the D1/D2/D3 axes (D1/D2/D3 already failed to beat B7-core on B_90/90; the bottleneck is not the discovery prior but the small-sample cold start and the diversity of long events).

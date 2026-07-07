@@ -50,6 +50,7 @@ LATE-AQP pipeline (audit + discovery + repair + boundary guard + Core/Halo relea
 - `outputs/late_aqp_algorithm_v3_oracle_relative/FINAL_REPORT.md` — v3 audit-schedule and repair-utility designs; modest improvements only.
 - `outputs/late_aqp_h7_long_event_v1/FINAL_REPORT.md` — H7 calibration prep; Ours-full improves event-level recall over B7 at most budgets for the long-event subset.
 - `outputs/ecp_event_coverage_policy_v1/ECP_DESIGN.md` — **NEW MAINLINE (2026-07-07): Event-Coverage Policy.** Reframes the bottleneck from "proxy accuracy" to "event-level budgeted decision policy" under weak proxy / expensive oracle / unknown boundaries. ECP unifies DISCOVER+ROBUST_PROBE+BRIDGE+CERTIFY+ZERO_PROXY as event-level bandit arms above HTS-EC / EventLift-DC. Validation plan T025 (AnchorBridge shadow) -> T026 (action-utility labeling) -> T027 (hand-designed bandit).
+- `outputs/ecp_event_coverage_policy_v1/ECP_STEPS1_3_SYNTHESIS.md` — **ECP Steps 1-3 results (Round 21).** T025: formation gap is temporal granularity + proxy-zero discovery (not gap-bridging; positives already contiguous, max_internal_gap=0 for all 74 events). T026: BRIDGE most efficient arm (0.474 pos rate) but under-used by hand weights. T027: hand-designed ECP bandit strict-replay matches/beats HTS-EC-safe on realcartest, weak on dataset3. T028 (reweight + learned policy) pending.
 
 ## Do-Not-Repeat Failed Routes
 
@@ -82,7 +83,10 @@ These routes have been tried and **failed** to deliver an oracle-relative perfor
 - T018: H7 calibration prep + long-event-only replay. `outputs/late_aqp_h7_long_event_v1/`. **H7 annotation package pending human annotation; Ours-full improves event-level recall over B7 at most budgets for the long-event subset.**
 - T019: Agent state sync. `outputs/state_sync_late_aqp_v1/`. **This file and `PROJECT_STATE.md`, `CLAIMS_LEDGER.md`, `FAILURES.md`, `TASK_QUEUE.yaml`, `EXPERIMENT_REGISTRY.csv`, `AGENTS.md`, `large_artifact_manifest.md` were updated to reflect the LATE-AQP frontier.**
 - T010 (reformulated): EC-AQP -> **Event-Coverage Policy (ECP)** mainline. `outputs/ecp_event_coverage_policy_v1/ECP_DESIGN.md`. **Design doc complete; reframes bottleneck as event-level budgeted decision policy; validation plan T025->T026->T027.**
-- T025: ECP Step 1 — AnchorBridge shadow validation. `outputs/hts_ec_v0_phase2a_rp_*/`. **ACTIVE: quantify whether positive anchor + 1-3 local probes reach IoU>=0.3; isolates formation gap from discovery gap.**
+- T025: ECP Step 1 — AnchorBridge shadow validation. **COMPLETE** (`t025_anchorbridge_shadow*.md/.csv`). Formation gap = temporal granularity + proxy-zero discovery, NOT gap-bridging.
+- T026: ECP Step 2 — action-level offline utility labeling. **COMPLETE** (`t026_action_utility.csv`). BRIDGE most efficient arm; under-used by hand weights.
+- T027: ECP Step 3 — hand-designed event-utility bandit. **COMPLETE (first pass)** (`t027_ecp_bandit_*.md/.csv`). Strict-replay; matches/beats HTS-EC-safe on realcartest, weak on dataset3.
+- T028: ECP Step 4 — reweight BRIDGE + strengthen ZERO_PROXY + offline learned policy on T026 table. **PENDING.**
 
 ## Pending / Blocked / Decision-Only
 
