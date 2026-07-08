@@ -107,6 +107,36 @@ The current loop state covers the LATE-AQP frontier and the negative Phase 3 sel
 - Round 21 (ECP Steps 1-3 experiments): `outputs/ecp_event_coverage_policy_v1/{t025_anchorbridge_shadow*, t026_action_utility.csv, t027_ecp_bandit_*, ECP_STEPS1_3_SYNTHESIS.md}`. T025: positives within an event are already contiguous (gap-bridging near-empty); real formation gap is temporal granularity (sub-1s events in 10s bins) + proxy-zero discovery. T026: BRIDGE most efficient arm (0.474 pos rate) but under-used by hand weights. T027: hand-designed ECP bandit runs strict-replay, matches/beats HTS-EC-safe on realcartest, still weak on dataset3 (proxy-zero). T028 (reweight + learned policy) pending.
 - Round 22 (ECP Step 4 experiments): `outputs/ecp_event_coverage_policy_v1/{t028a_ecp_bandit_*, t028b_ecp_learned_*, ECP_STEP4_SYNTHESIS.md}`. T028a: reweighted v2 fixes BRIDGE under-use (633 calls @0.441 pos; ZERO_PROXY 48 @0.125) but is NOT clearly better than v1 (lower on 2 realcartest cells). T028b: offline logistic policy trained on T026/v2 logs == v2 on every cell — offline learning from logged choices only re-learns the logger (standard offline-bandit limitation). Claim "ECP improves low-budget coverage over B7-core" STILL NOT supported. Next: T028c (event-utility reward) / T028d (IPS/DR debiasing).
 - Round 23 (ECP Step 4c experiments): `outputs/ecp_event_coverage_policy_v1/{ecp_candidate_utility_by_step.csv, ecp_oracle_ceiling_frontier.csv, t028c0_ceiling_report.md, t028c1_event_utility_policy_*, ECP_STEP4C_SYNTHESIS.md}`. T028c-0 oracle ceiling: learnable event-level signal EXISTS on proxy-informative realcartest (+0.10..+0.14 over v2 on cells v2 regressed on) but NOT on proxy-zero dataset3_0_1200/1200_2400 (candidate generator cannot propose zero-proxy positives -> ceiling≈0). T028c-1 event-utility ranker (GradientBoosting on u(arm|state,arm), trained on candidate-level utilities NOT logger-confined) is strict-replay and RECOVERS the ceiling on collapsed cells: realcartest_3200_3830 @0.30 c1 0.286=ceiling beats v2 0.143; realcartest_0_1570 @0.30 c1 0.250 vs v2 0.200; dataset3_2400_3462 c1 0.111>v2 0.000. First ECP variant to beat v2 on realcartest without precision loss. T028d deferred (needs stochastic logger); T028e (proxy-free candidate generator) is the real next lever for dataset3.
+- Round 24 (ECP Step 4c-2 LOSO): `outputs/ecp_event_coverage_policy_v1/{t028c2_loso_*, t028c2_loso_synthesis.md}`. T028c-2 leave-one-segment-out (6-fold) validation. c1 generalizes on realcartest held-out: 0 regressions, 4/9 cells c1>v2 (up to +0.143), 3/9 ties, 2/9 ceiling-reached. Action shift: c1 uses more DISCOVER+CERTIFY, less BRIDGE. dataset3 held-out: c1<=v2 on all 9 cells (candidate-generator bottleneck, ceiling also ~0). Verdict: c1 generalizes on proxy-informative segments; does NOT solve proxy-zero. Next: T028e (proxy-free candidate generator).
+- Round 25 (ECP Step 4e proxy-free candidates): `outputs/ecp_event_coverage_policy_v1/{t028e0_ceiling_*, t028e1_loso_*, t028e_synthesis.md}`. T028e-0 ceiling audit: added 5 proxy-free arms (SPACE_FILLING, LARGEST_GAP, VDC, MIDBAND, LOCAL_GAP_FLANK). dataset3_1200_2400 ceiling lifts +0.083 (from 0.000 to 0.083). dataset3_0_1200 ceiling stays 0 (sparse positives). T028e-1 strict-replay LOSO: c2 matches c1 on realcartest (0 regressions) AND beats v2 on 2/9 dataset3 cells. Most importantly: c2=0.167 on dataset3_0_1200 @0.20/0.30 vs v2=0.000 (ceiling was 0) — proxy-free VDC arm resolves the candidate-generator bottleneck on that segment. Per-seed deterministic. Next: T028e-2 (expand VDC/diversity on remaining dataset3 segments) or T028d (IPS/DR with stochastic logger).
+
+## Current Blocker
+
+There is no current blocker for the next no-new-VLM step.
+
+**Recommended next direction: ECP (Event-Coverage Policy).** T010 in `TASK_QUEUE.yaml`
+is now the ECP mainline (replaces the narrower EC-AQP framing). The premise:
+current methods are strong once an event is in the candidate set, but the open
+gap is **event-level decision-making under weak proxy / expensive oracle /
+unknown boundaries** — specifically the missing `positive anchor -> event
+hypothesis -> interval confirmation` layer and the lack of a unified
+event-utility budget loop. ECP reframes the objective as an event-level
+contextual bandit whose reward is marginal event-recall / precision / IoU.
+
+**ECP Steps 1-4c-2 are now run (Rounds 21-24):** T025/T026/T027 established the
+structure; T028a/T028b showed fixed weights and logged-choice learning do NOT
+beat v2. **T028c broke through**: T028c-0 ceiling proved learnable signal on
+proxy-informative realcartest but not proxy-zero dataset3 (candidate-generator
+bottleneck); T028c-1 ranker beats v2 on realcartest. **T028c-2 LOSO validated
+generalization**: c1 generalizes on realcartest held-out (0 regressions, 4/9
+improvements up to +0.143) but NOT on dataset3 (candidate-generator bottleneck).
+The claim "ECP-utility-c1 improves low-budget event coverage" is now
+**supported on proxy-informative realcartest, still not on proxy-zero dataset3**
+— report per-segment, do not over-claim. T028d (IPS/DR) is deferred until a
+stochastic logger exists; T028e (proxy-free candidate generator) is the real
+next lever for dataset3.
+
+Other design-only next steps considered but de-prioritized: `outputs/ecp_event_coverage_policy_v1/{ecp_candidate_utility_by_step.csv, ecp_oracle_ceiling_frontier.csv, t028c0_ceiling_report.md, t028c1_event_utility_policy_*, ECP_STEP4C_SYNTHESIS.md}`. T028c-0 oracle ceiling: learnable event-level signal EXISTS on proxy-informative realcartest (+0.10..+0.14 over v2 on cells v2 regressed on) but NOT on proxy-zero dataset3_0_1200/1200_2400 (candidate generator cannot propose zero-proxy positives -> ceiling≈0). T028c-1 event-utility ranker (GradientBoosting on u(arm|state,arm), trained on candidate-level utilities NOT logger-confined) is strict-replay and RECOVERS the ceiling on collapsed cells: realcartest_3200_3830 @0.30 c1 0.286=ceiling beats v2 0.143; realcartest_0_1570 @0.30 c1 0.250 vs v2 0.200; dataset3_2400_3462 c1 0.111>v2 0.000. First ECP variant to beat v2 on realcartest without precision loss. T028d deferred (needs stochastic logger); T028e (proxy-free candidate generator) is the real next lever for dataset3.
 
 ## Current Blocker
 

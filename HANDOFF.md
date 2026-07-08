@@ -90,6 +90,8 @@ These routes have been tried and **failed** to deliver an oracle-relative perfor
 - T027: ECP Step 3 — hand-designed event-utility bandit. **COMPLETE (first pass)** (`t027_ecp_bandit_*.md/.csv`). Strict-replay; matches/beats HTS-EC-safe on realcartest, weak on dataset3.
 - T028: ECP Step 4 — reweight BRIDGE + strengthen ZERO_PROXY + offline learned policy on T026 table. **COMPLETE (first pass):** T028a reweight not a clear win; T028b learned policy == v2 (re-learns logger).
 - T028c: ECP Step 4c — candidate ceiling + event-utility ranking policy. **COMPLETE:** T028c-0 ceiling proves learnable signal on realcartest but not proxy-zero dataset3; T028c-1 ranker beats v2 on realcartest (first ECP win). T028d (IPS/DR) **DEFERRED** (needs stochastic logger); T028e (proxy-free candidate generator) **PENDING** (real lever for dataset3).
+- T028c-2: ECP Step 4c-2 — LOSO cross-segment validation. **COMPLETE:** c1 generalizes on realcartest held-out (0 regressions, 4/9 improvements up to +0.143, hits ceiling on 2 cells); does NOT generalize on dataset3 (candidate-generator bottleneck). Action shift: c1 uses more DISCOVER+CERTIFY, less BRIDGE. Outputs: `t028c2_loso_*`.
+- T028e: ECP Step 4e — proxy-free candidate generator. **COMPLETE:** T028e-0 ceiling audit added 5 proxy-free arms; dataset3_1200_2400 ceiling lifts +0.083. T028e-1 strict-replay LOSO: c2 matches c1 on realcartest (0 regressions), beats v2 on 2/9 dataset3 cells, most importantly dataset3_0_1200 @0.20/0.30 c2=0.167 vs v2=0.000 (ceiling was 0). VDC is the key proxy-free arm. Outputs: `t028e0_ceiling_*`, `t028e1_loso_*`, `t028e_synthesis.md`.
 
 ## Pending / Blocked / Decision-Only
 
