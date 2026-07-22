@@ -1,0 +1,13 @@
+{
+  "status":"PASS",
+  "fixture_loader":"garc_eval.psvr_rollout_toy.r2_splits.load_fixture_universe",
+  "development_loader":"garc_eval.psvr_rollout_toy.r2_splits.load_development_universe",
+  "confirmatory_generator":"garc_eval.psvr_rollout_toy.r2_confirmatory.generate_confirmatory_universe_once",
+  "default_includes_confirmatory":false,
+  "forbidden_loader_apis_absent":["load_split(all)","load_all_seeds","recursive seed discovery"],
+  "legacy_blacklist":{"path":true,"sha256":true,"seed_identities":true,"error":"ContaminatedHeldoutUniverseError"},
+  "tests_import_confirmatory_generator":false,
+  "development_smoke_imports_confirmatory_generator":false,
+  "confirmatory_seed_values_exist":false,
+  "confirmatory_attempt_root_exists":false
+}

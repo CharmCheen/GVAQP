@@ -1,0 +1,15 @@
+{
+  "audit_time": "2026-07-21T08:02:27+00:00",
+  "objective": "Recover A4 after power loss without treating pre-loss local PASS as freeze evidence.",
+  "precheck": {"pwd":"/qiuyeqing/llama_prl/G-ARC","hostname":"7utn60j5e1s5-0","git_head":"1a441186a94190254b29848089bb1f6327c6796e","git_safe_directory_repaired":true,"initial_git_read":"blocked by dubious ownership","relevant_processes":"none beyond audit shell","abnormal_files":[]},
+  "integrity_checks": {"a4_json_syntax":"PASS","python_compile":"PASS","initial_source_status":"PARTIALLY_IMPLEMENTED","original_red_team":"FAIL"},
+  "tests": [
+    {"command":"PYTHONPATH=src pytest -q tests/psvr_rollout_h1b/test_h1b_a4.py","collected":9,"passed":9,"failed":0,"skipped":0,"duration_seconds":24.29,"first_failure":null},
+    {"command":"PYTHONPATH=src pytest -q tests/psvr_rollout_h1b/test_h1b_a4.py tests/psvr_rollout_h1b/test_h1b_implementation.py tests/psvr_rollout_toy","collected":77,"passed":77,"failed":0,"skipped":0,"duration_seconds":53.56,"first_failure":null},
+    {"command":"PYTHONPATH=src python scripts/run_psvr_rollout_h1b_ic1_development.py --development-only --limit 0","collected":0,"passed":0,"failed":1,"skipped":0,"duration_seconds":2.50,"first_failure":"development execution disabled: frozen generative-transition semantics require result-blind clarification"}
+  ],
+  "post_recovery_conclusion": "BLOCKED_INDEPENDENT_VERIFIER",
+  "freeze_established": false,
+  "ic1_resumed": false,
+  "confirmatory_artifacts_created": false
+}

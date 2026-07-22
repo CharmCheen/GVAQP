@@ -1,0 +1,48 @@
+{
+  "entries": [
+    {
+      "artifact": "legacy PSVR physical matrices",
+      "historical_claims_preserved": true,
+      "reason": "query clock began after proxy initialization/warm-up; 24 nominally passing runs exceed the strict total-service deadline",
+      "required_rebuild": "rerun every baseline/method entering the new table",
+      "scope": "MF-PSVR publication deadline comparisons"
+    },
+    {
+      "artifact": "legacy unit-only candidate identities",
+      "historical_claims_preserved": true,
+      "reason": "100 run-unit histories changed top_track_id behind one unit candidate identity",
+      "required_rebuild": "re-extract with immutable track-witness identity",
+      "scope": "track-witness candidate-value training or lifecycle claims"
+    },
+    {
+      "artifact": "proxy_frontend_comparison_v0 B2",
+      "historical_claims_preserved": true,
+      "reason": "B2 copies B1 detections and tracking; geometry artifact absent",
+      "required_rebuild": "none; exclude alias or build and bind real geometry",
+      "scope": "independent baseline identity"
+    },
+    {
+      "artifact": "SUPG_RT all-selected vs confirmed-only variants",
+      "historical_claims_preserved": true,
+      "reason": "different selected sets collapse to identical oracle/K3 outputs",
+      "required_rebuild": "adapt one effective SUPG selector and label any ARC unit mapping as inspired rather than faithful",
+      "scope": "two independent publication baselines"
+    },
+    {
+      "artifact": "proxy_oracle_distillation_v0 model results",
+      "historical_claims_preserved": true,
+      "reason": "DrivingDojo training labels are tag-based generic weak labels",
+      "required_rebuild": "label Q1/Q2 with the frozen oracle and grouped splits",
+      "scope": "query-aligned frozen-oracle refiner evidence"
+    },
+    {
+      "artifact": "copied/invalidated complete.json records with missing snapshots",
+      "historical_claims_preserved": true,
+      "reason": "20 unique run records lack snapshots",
+      "required_rebuild": "exclude copied rows; new runner must hash snapshot payload",
+      "scope": "durability-valid publication rows"
+    }
+  ],
+  "invalidated_result_count": 6,
+  "policy": "PRESERVE_FILES_EXCLUDE_FROM_NEW_CLAIMS"
+}

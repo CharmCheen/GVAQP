@@ -1,0 +1,140 @@
+{
+  "schema_version": "candidate_outcome_calibration_gate_v1_independent_review_v1",
+  "reviewed_at_utc": "2026-07-11T04:52:00Z",
+  "reviewer": "independent_adversarial_codex_agent",
+  "status": "PASS",
+  "blocking_findings": 0,
+  "high_findings": 0,
+  "medium_findings": 0,
+  "low_findings": 0,
+  "decision_reviewed": "CHEAP_CANDIDATE_CONSTRUCTION_REQUIRED",
+  "findings": [
+    {
+      "id": "PROVENANCE_AND_IMMUTABILITY",
+      "severity": "INFO",
+      "status": "PASS",
+      "conclusion": "All current PRESENT rows in INPUT_MANIFEST.csv match their recorded SHA-256 hashes. The manifest explicitly records the H1 configuration and implementation, strict baseline selected units, saved segment registries/segments, and all H0/H1 traces used by reproduction. Strict and HCR inputs retain their frozen package hashes; H1 configuration, implementation, initial state tables, action trace, and all-candidate scores match the sealed HCR FILE_MANIFEST. No stale or silent substitution remains."
+    },
+    {
+      "id": "FROZEN_FACT_REPRODUCTION",
+      "severity": "INFO",
+      "status": "PASS",
+      "conclusion": "All 22 frozen facts were independently recomputed with maximum absolute error 1.1102230246251565e-16. The recomputation reevaluates 30 best-native saved-segment runs, 6 MAP/M1 saved-segment runs, and 12 H0/H1 saved traces through frozen K3 bridge-safe materialization and matching, and reconstructs H0/H1 hypothesis quality from public construction plus evaluator reference rather than trusting summary metrics."
+    },
+    {
+      "id": "NO_NEW_INFERENCE_OR_RERUN",
+      "severity": "INFO",
+      "status": "PASS",
+      "conclusion": "The diagnostic code reads frozen oracle CSV outcomes directly and contains no OracleAccessor construction, VLM client, subprocess baseline execution, or physical inference path. Frozen baseline and HCR output hashes remain unchanged. Physical VLM calls are 0, baseline reruns are 0, and H0-H4 were not rerun."
+    },
+    {
+      "id": "CANDIDATE_UNIVERSE_SEMANTICS",
+      "severity": "INFO",
+      "status": "PASS",
+      "conclusion": "The evaluator-only core table has 107 rows, 107 unique core units, and all 87 H1 hypotheses. The full H1 legal core-plus-exploration universe has 185 unique units. The core universe covers 12/26 events and the full legal universe covers 20/26; six events are absent. The static report now distinguishes top-20, ranks 21-100, beyond-B100 legal candidates, and absent events."
+    },
+    {
+      "id": "STATIC_CEILINGS",
+      "severity": "INFO",
+      "status": "PASS",
+      "conclusion": "Actual public order, perfect positive-label order, and perfect unique-event order use the same 185-unit legal universe. Perfect unique-event coverage is 5/26, 10/26, and 20/26 at B=5,10,20, with deterministic evaluator-only ordering and no promotion as an online method."
+    },
+    {
+      "id": "ORACLE_REORDER_REPLAY",
+      "severity": "INFO",
+      "status": "PASS",
+      "conclusion": "All 100 saved oracle-reorder choices were legal under independently replayed H1 state transitions. Replaying the saved trace through frozen K3 and the evaluator reproduced event F1 values 0.32258064516129037, 0.5555555555555556, 0.6666666666666666, 0.6666666666666666, 0.7000000000000001, and 0.7317073170731707 at B=5,10,20,50,80,100. Independent trapezoidal AUC is exactly 0.6644581556172099. The artifact is correctly labeled ESTIMATED_ORACLE_INFORMED_REORDER_CEILING rather than an exact upper bound."
+    },
+    {
+      "id": "ACTION_OUTCOME_DIAGNOSTICS",
+      "severity": "INFO",
+      "status": "PASS",
+      "conclusion": "Saved all-candidate rows exactly equal fresh enumerate_actions output at all 100 H1 states, yielding 7,107 legal state-action rows and exactly one selected action per state. Oracle labels match for every row. An independent counterfactual replay sample of 574 rows spanning calls 0,1,9,19,49,79,99 reproduced actual_new_event, realized event-F1 delta, and materializer-output-changed without mismatch. actual_new_event is based on newly matched reference IDs under the current frozen history, as required."
+    },
+    {
+      "id": "CALIBRATION_METRICS",
+      "severity": "INFO",
+      "status": "PASS",
+      "conclusion": "Independent pooled recomputation reproduced positive Brier 0.15805968912273521, ECE 0.21979390502705343, AUROC 0.5461426480793851 and new-event Brier 0.14991556716727478, ECE 0.2345028100947967, AUROC 0.502504381685151. Log loss uses documented 1e-6 clipping; reliability, MCE, AP, Spearman, precision/hits at k, and regret fields are present. No one-class group reports a defined AUROC."
+    },
+    {
+      "id": "BLOCKED_CROSSFIT",
+      "severity": "INFO",
+      "status": "PASS",
+      "conclusion": "The 107 temporally ordered core candidates are split into five non-overlapping contiguous folds with no shuffle. Unit ID and support time are monotone across fold boundaries. Fixed C=1 liblinear logistic regression, fixed feature sets, train-four/test-one rotation, and no hyperparameter search are implemented. Independent model refits reproduced all 642 saved cross-fitted probabilities within 1e-12. One no-positive test fold has undefined AUROC. All defined F2 fold AUROCs are below 0.5, so the stable-public-signal gate correctly fails."
+    },
+    {
+      "id": "RANKING_SCOPE",
+      "severity": "INFO",
+      "status": "PASS",
+      "conclusion": "Ranking comparison uses frozen H1 B100, MAP/M1 seed-0 B100, best-native ARC seed-0 B100, and evaluator-only H1 reorder. Best-native AUC remains the authoritative cross-seed aggregation. Unit/Jaccard/positive/event overlaps and first divergence are reported at K=5,10,20,50,100. Method-specific public-proxy percentile strings for selected positive units were independently recomputed with zero mismatches, including MAP/ARC-only differing events."
+    },
+    {
+      "id": "SOURCE_FALSE_BURDEN",
+      "severity": "INFO",
+      "status": "PASS",
+      "conclusion": "Source accounting reconciles exactly to 69/87 false hypotheses: 45/55 high-proxy islands and 24/32 orphan-local-peak hypotheses. Aggregate false burden is 0.7931034482758621. The package separately reports support-overlap burden and positive-core/certifiable-event quality."
+    },
+    {
+      "id": "HEADROOM_DECOMPOSITION",
+      "severity": "INFO",
+      "status": "PASS",
+      "conclusion": "Candidate and ranking headroom columns exactly satisfy their declared differences. Materialization gap uses optimistic unique-event coverage converted to F1 minus greedy-reorder-plus-K3 F1 and is explicitly labeled a combined reorder/materialization gap, not an additive causal identity. At B5/B10 it is zero; the B20 reported value is 0.2028985507246378."
+    },
+    {
+      "id": "PRIMARY_DECISION",
+      "severity": "INFO",
+      "status": "PASS",
+      "conclusion": "CHEAP_CANDIDATE_CONSTRUCTION_REQUIRED follows the preregistered interpretation rule: evaluator ordering shows large ranking headroom, but six events are absent from the full legal universe and fixed blocked cross-validation provides no stable planner-public predictive signal. Therefore oracle ordering alone does not justify outcome-calibration data collection. K3 is not the primary low-budget bottleneck because oracle reorder has precision 1.0 and F1 0.322581/0.555556/0.666667 at B5/B10/B20."
+    },
+    {
+      "id": "DELIVERABLE_COMPLETENESS",
+      "severity": "INFO",
+      "status": "PASS",
+      "conclusion": "All substantive requested reports, CSVs, evaluator-only traces, diagnostics, configs, reproduction artifacts, and research-state files exist and agree with FINAL_REPORT.md and FINAL_DECISION.csv. FILE_MANIFEST.csv and EXPERIMENT_MANIFEST.json are intentionally generated by the package finalizer only after this PASS review is present; the reviewed finalizer fail-closes unless this review has PASS with zero blocking/high findings."
+    }
+  ],
+  "independent_checks": {
+    "input_manifest_present_rows_hash_mismatches": 0,
+    "frozen_facts_passed": 22,
+    "frozen_facts_total": 22,
+    "frozen_fact_max_abs_error": 1.1102230246251565e-16,
+    "recomputed_run_metric_rows": 48,
+    "core_candidate_rows": 107,
+    "core_unique_units": 107,
+    "hypothesis_count": 87,
+    "full_legal_unique_units": 185,
+    "full_legal_events_covered": 20,
+    "reference_events": 26,
+    "oracle_trace_legal_choice_failures": 0,
+    "oracle_trace_replayed_steps": 100,
+    "oracle_reorder_auc_recomputed": 0.6644581556172099,
+    "saved_all_candidate_enumeration_mismatched_states": 0,
+    "action_counterfactual_rows_sampled": 574,
+    "action_counterfactual_mismatches": 0,
+    "crossfit_predictions_recomputed": 642,
+    "crossfit_prediction_max_abs_error": 0.0,
+    "one_class_groups_with_defined_auroc": 0,
+    "ranking_proxy_percentile_mismatches": 0,
+    "false_hypotheses": 69,
+    "physical_vlm_calls": 0,
+    "baseline_runs_rerun": 0,
+    "online_method_modified": false
+  },
+  "evidence_hashes": {
+    "FINAL_REPORT.md": "40a6ec79c23e8cf919bd30b2358285d0fb23fd9582bb62e9d3e3447a7d5caa26",
+    "FINAL_DECISION.csv": "e52a105765f85162c1c829b9a48ee577e7bfb3c1998d7f48e5f0a3bd637a3d13",
+    "audit/INPUT_MANIFEST.csv": "c62af51555550e9efa9151c222f8dd545b04b7844b5d7b2669dfd8e5a1beab56",
+    "reproduction/FROZEN_RESULT_RECOMPUTATION.csv": "78815fae309b411e0e5208f7c738acdd14d51c40141564d35b77c872d2733772",
+    "reproduction/RECOMPUTED_RUN_METRICS.csv": "965a5814a536c36c1832cab11c0fdbc14032e38d071cd751d0b7ddbb318880c3",
+    "ceilings/oracle_informed_reorder_trace_EVALUATOR_ONLY.csv": "357be6c73958f1725817fdb8bc46f43da36a0303306a6dc8c972acf165c5c7bf",
+    "ceilings/oracle_informed_reorder_metrics.csv": "44e84925debc3bd20e202a06667cf433b51e81411f9f0dc0d77209e5d54a0c21",
+    "calibration/ACTION_OUTCOME_DIAGNOSTIC_EVALUATOR_ONLY.csv": "3a8b6c622bcf50419ec78dd5fcd8a89cb50cf1d1d94682c3a2e3df6d54549c16",
+    "calibration_feasibility/crossfit_predictions_EVALUATOR_ONLY.csv": "c36fb918d3f24c02c4ec033df204a7cb48eb82fe5a5dcae5882ece3db32798ce",
+    "ranking/event_discovery_comparison.csv": "3509e75d83b6cbeedacdbded1e1d2e67da684feb686df8cdaf3d2e95a2cd08fa",
+    "hcr_EXPERIMENT_MANIFEST.json": "20c2b1857525896d3fea28f724e06400e7a9e37b4fcac08f0fada157cc42cada",
+    "strict_BENCHMARK_MANIFEST.json": "8dfc11624fc8d9f774c73f30b6fc60c7be1c3f7a5ff502f6a1998c0fb8259fbf"
+  },
+  "residual_uncertainty": "The blocked cross-validation evidence is diagnostic on one development video and cannot establish cross-video generalization. This limitation strengthens, rather than weakens, the decision not to train or promote a calibrated planner on this video.",
+  "conclusion": "PASS. The current artifacts support CHEAP_CANDIDATE_CONSTRUCTION_REQUIRED as the primary diagnostic decision. The exact next experiment is a cheap public-only primitive/candidate-construction gate on separate development videos, with the candidate rule frozen before untouched held-out evaluation and before any further planner work."
+}

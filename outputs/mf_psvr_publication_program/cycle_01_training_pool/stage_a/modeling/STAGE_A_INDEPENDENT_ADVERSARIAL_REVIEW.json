@@ -1,0 +1,348 @@
+{
+  "audit_id": "MF_PSVR_STAGE_A_INDEPENDENT_ADVERSARIAL_REVIEW_V1",
+  "created_at_utc": "2026-07-19T07:03:10Z",
+  "verdict": "PASS",
+  "pass_scope": "Artifact integrity, exact recomputability, implementation consistency, and the conservative exploratory handoff conclusion.",
+  "pass_does_not_mean": "The value model, temporal refiner, Platt calibrators, fixed pool-audit result, or Stage-A support is ready for a physical pilot or deployment.",
+  "scientific_state": {
+    "oracle_execution": "COMPLETE_COMMIT",
+    "oracle_support_decision": "STOP_ACQUIRE_LICENSED_QUERY_ENRICHED_SOURCE",
+    "stage_state": "STAGE_A_FAIL_ACQUIRE_LICENSED_QUERY_ENRICHED_SOURCE",
+    "modeling_analysis": "EXPLORATORY_NOT_PREREGISTERED_OR_CRYPTOGRAPHICALLY_BLINDED",
+    "model_readiness": "NOT_READY_FOR_PHYSICAL_PILOT",
+    "heldout_opened": false
+  },
+  "blocking_residual_defects": [],
+  "verifier_results": {
+    "candidate_snapshot_aware_verify": {
+      "command": "python scripts/audit_mf_psvr_candidate_completion.py verify",
+      "status": "PASS",
+      "completed_provider_videos": 603,
+      "observed_unit_score_rows": 5308,
+      "failed_provider_videos": 0,
+      "receipt_hashes_unchanged_after_verify": true
+    },
+    "dataset_verify": {
+      "command": "python scripts/build_mf_psvr_stage_a_dataset.py verify",
+      "status": "PASS",
+      "semantic_rows": 192,
+      "binary_rows": 172,
+      "positive_rows": 24
+    },
+    "roundtrip_frozen_oracle_verify": {
+      "command": "python scripts/audit_mf_psvr_stage_a_oracle_roundtrip.py verify",
+      "status": "PASS",
+      "frozen_verify_status": "VERIFIED_COMPLETE_COMMIT",
+      "physical_attempts_started": 96,
+      "accepted_durable_calls": 96,
+      "uncertain_started_calls": 0,
+      "call_rows": 96,
+      "label_rows": 192
+    },
+    "modeling_verify": {
+      "command": "python scripts/run_mf_psvr_stage_a_modeling.py verify",
+      "status": "PASS",
+      "best_aggregate_model": "M0_LOGISTIC",
+      "best_temporal_model": "TCN_TEMPORAL",
+      "selected_representation": "M0_LOGISTIC"
+    }
+  },
+  "checked_sha256": {
+    "scripts/audit_mf_psvr_candidate_completion.py": "4c6b945f501ea6b1eaf115218a1339c9aae082cdf5f64dd1069054abe9b618cf",
+    "scripts/audit_mf_psvr_stage_a_oracle_roundtrip.py": "db6ebfe06177909e5058f9264bbfc90809336e66d703e3f0b9cf5a9f060cf462",
+    "scripts/run_mf_psvr_stage_a_oracle.py": "f2461781504c13cc6b675e870f88332c7b19a6d6fa1a330a3ff320d0c20e5326",
+    "scripts/build_mf_psvr_stage_a_dataset.py": "870e92340c8024cfe77e7af72ae5fb0b222fcaee245f03883753f5550fa49d2b",
+    "scripts/run_mf_psvr_stage_a_modeling.py": "3b1b5451cdd3b5b1e32ccabf7029d1994bc4f8895deba9697a9a9930d260ff31",
+    "candidates/CANDIDATE_EXTRACTION_COMPLETION_AUDIT.json": "c63e563087b12818798e6a90ce5bb5e878db3f8b15f3bbe7f3de8f44cc1fa9fe",
+    "candidates/CANDIDATE_EXTRACTION_COST.json": "8e4b56ab898e769b53895d6b82247c673b80d50f606b619ba3d96663d534a8e4",
+    "candidates/CANDIDATE_EXTRACTION_FAILURES.csv": "202854e262df3d84b8a7d42387486a16f705f2cf52285d894280ac8cf1d358d0",
+    "candidates/CANDIDATE_AUDITOR_LIFECYCLE_INCIDENT_AUDIT.json": "a5cafc5240137a9cddec1920bd16598e4ef42a4291651bf5eb09d733baf67fa3",
+    "stage_a/STAGE_A_COMPLETION_AUDIT.json": "30be4aec7d31ecf06ee43cc0e598bdf1f042824009ff29a6b227c094fcac7bbe",
+    "stage_a/STAGE_A_EXECUTION_DIFFERENCE_AUDIT.json": "38969406e856e08002ab4013509b47016ae5fc176baf92fb3eb42d1ee513675f",
+    "stage_a/STAGE_A_ORACLE_ROUNDTRIP_VERIFICATION_AUDIT.json": "9f7ebaf209125ff9c6bc9b38cb1b2f6129d762cd88e3c47ea1aec7b8094351e6",
+    "stage_a/STAGE_A_TO_MODEL_FINAL_REPORT.md": "b132285eb3d166ff0c4670280f8247884b7d8610aac66b283ab6271f11eea417",
+    "modeling/STAGE_A_MODELING_PROTOCOL.json": "f02aed0f140650b69101bd983a94025b92562b7bb148c8c6bd24bec2086feedc",
+    "modeling/STAGE_A_MODELING_PROTOCOL_PROVENANCE.json": "91a0e8d9b45a66f42ec61f19f1e7c59bffe68d1dc6f02909bb20701fa5be5918",
+    "modeling/STAGE_A_CANDIDATE_VALUE_DATASET.parquet": "85038f02c1accae835d74dabf02b5074265d17b96f10d3fd45511ba55d3a1005",
+    "modeling/STAGE_A_FEATURE_SCHEMA.json": "942ec0b74b803b227c077246631196ff8efc1caaa8c82368f64747a47ab5c44d",
+    "modeling/STAGE_A_DATASET_COMPLETION_AUDIT.json": "d54f2bb318161c8656065609a37d9d8f495e31bb02c56ec54641b991db1ba62f",
+    "modeling/STAGE_A_GROUPED_PREDICTIONS.parquet": "573d9bee4f52f2b6c6b171d0f5e88fd88486cad4461ab98249f061dbbe15f078",
+    "modeling/STAGE_A_MODEL_METRICS.csv": "6230cee4ad0d6491e0506068c193133f34719f2ecf357876a4a21828c7a08938",
+    "modeling/STAGE_A_PER_QUERY_RESULTS.csv": "7a4969a613486ebdf752fb00ab68dd702f5d1ad946d7a6b0d8972a910fce797c",
+    "modeling/STAGE_A_CONTROL_SUMMARY.csv": "d12793735717ea1d570021acd6ded9144af5d9a36d7d85b39a66ea4ffd28eb9f",
+    "modeling/STAGE_A_GROUP_BOOTSTRAP_INTERVALS.csv": "2cfbaf83c4f8a2b2aae3ca86de24838cdffd84aef75bb58679831c3eb573f563",
+    "modeling/FEATURE_IMPORTANCE.csv": "e986b9bc0475f8adf18c57b005b7c1772694008e77a1324ae5f764b858223b47",
+    "modeling/STAGE_A_MODEL_READINESS_DECISION.json": "ce25b7243a6210b10019910b5f7f305be20179a0c2954193ee2b7e9c746e3b3a",
+    "modeling/MODEL_HASHES.json": "864c75b3fe9637f19482828b4f9e10c8621a0027a45e4f6fc7a90315d4890dde",
+    "modeling/STAGE_A_MODELING_COMPLETION_AUDIT.json": "d5761de8574764b9cdbff9d0152198086727a0d66a8f063f64c4edb1dbde9974",
+    "modeling/models/M0_LOGISTIC.joblib": "42907ae140160cf91dcf30d6aba967fcc8ed241ad171c1dd98b1df62f8f853de",
+    "modeling/models/M1_CALIBRATED_LOGISTIC.joblib": "046f81993724dbe060680dff53977ce00c1385df742ca36e10d07b354005b8f9",
+    "modeling/models/M2_LIGHTGBM.joblib": "f662551a7bcc5b09a0e7febe18cfb6721767b80db404d61709e21fe3f1ebbd19",
+    "modeling/models/TCN_TEMPORAL.pt": "64205835900410761d6f5e0da2b8641c043dbece6136d22b8924b3701a7476af",
+    "modeling/models/GRU_TEMPORAL.pt": "f71064476550de1f0b0dbe914fd5a48bd0027ec03bc598aff6870c5e206c42cd"
+  },
+  "internal_self_hash_checks": {
+    "candidate_completion_audit": {
+      "stored_and_recomputed": "dbc8bfbbf53103ca021b81d0cb4b7443399a491e94cb29fdcd006ed32666ef39",
+      "match": true
+    },
+    "candidate_lifecycle_incident_audit": {
+      "stored_and_recomputed": "d477662b66ac2283e7a39b1e023dfca85cad7418df56da90b85411f8064f2e27",
+      "match": true
+    },
+    "oracle_roundtrip_audit": {
+      "stored_and_recomputed": "c45cbfd557fc854b0c971efe10941adbc5ad14b4834512cef12db6c7edc519b7",
+      "match": true
+    },
+    "dataset_completion_audit": {
+      "stored_and_recomputed": "b8b6cd73b857c4fdf37222d64abd8baee23ff91379e4f33da8474eca681eae07",
+      "match": true
+    },
+    "model_hash_manifest": {
+      "stored_and_recomputed": "fdd913283512f5ced24c4ce289daae1f6ff90daf40a7912e24af401adf1e2205",
+      "match": true
+    },
+    "readiness_decision": {
+      "stored_and_recomputed": "15188b2da346974deedce1aa1d0f2353b21b2c36761f655d63513f9d5d160dc5",
+      "match": true
+    },
+    "modeling_completion_audit": {
+      "stored_and_recomputed": "4dbfb789e089162725a289b282c921812fa14863303d47522f1780c647956d39",
+      "match": true
+    }
+  },
+  "decisive_recomputations": {
+    "dataset_and_schema": {
+      "semantic_rows": 192,
+      "binary_rows": 172,
+      "positive_rows": 24,
+      "physical_calls": 96,
+      "source_sessions": 91,
+      "candidate_aggregate_features": 72,
+      "retained_aggregate_features": 61,
+      "design_rank_with_intercept_all_192": 62,
+      "design_rank_with_intercept_development_binary_144": 62,
+      "development_only_pruning_returns_identical_feature_list": true,
+      "raw_numeric_witness_class_in_effective_aggregate_schema": false,
+      "all_three_serialized_aggregate_bundles_match_the_61_feature_schema": true,
+      "smallest_all_row_design_singular_value": 2.900046040341758e-08,
+      "all_row_design_condition_number": 477799533.79354286
+    },
+    "grouping_and_pool_audit": {
+      "source_session_groups_crossing_split_roles": 0,
+      "development_pool_audit_group_overlap": 0,
+      "development_binary_rows": 144,
+      "development_physical_calls": 72,
+      "development_source_session_groups": 69,
+      "fixed_pool_audit_binary_rows": 28,
+      "fixed_pool_audit_physical_calls": 14,
+      "fixed_pool_audit_source_session_groups": 14,
+      "all_physical_calls_have_two_query_rows_and_one_split_role": true,
+      "independent_M0_development_LOSO_probability_max_abs_error": 0.0,
+      "independent_M0_fixed_audit_probability_max_abs_error": 0.0,
+      "pool_audit_rows_in_supervised_fit_or_model_winner_selection": 0
+    },
+    "metric_table": {
+      "maximum_absolute_error_across_independently_recomputed_pooled_metrics_and_physical_call_budgets": 8.326672684688674e-17,
+      "development": {
+        "M0_LOGISTIC_auprc": 0.5554693466017564,
+        "M0_LOGISTIC_macro_query_auprc": 0.496672852759589,
+        "B0_RAW_YOLO_auprc": 0.17639956144989347,
+        "B0_RAW_YOLO_macro_query_auprc": 0.4637837276647551,
+        "selected_minus_raw_pooled_auprc": 0.3790697851518629,
+        "selected_minus_raw_macro_query_auprc": 0.0328891250948339,
+        "M0_physical_call_budget_16_actual": 16,
+        "M0_physical_call_top_16_positive_recovery": 7,
+        "M0_physical_positive_calls": 15,
+        "M0_physical_call_precision_at_16": 0.4375,
+        "M0_physical_call_recall_at_16": 0.4666666666666667
+      },
+      "fixed_pool_audit": {
+        "M0_LOGISTIC_auprc": 0.8197781385281386,
+        "M0_LOGISTIC_macro_query_auprc": 0.7055555555555556,
+        "B0_RAW_YOLO_auprc": 0.43945707070707074,
+        "M0_physical_call_budget_16_actual": 14,
+        "M0_physical_call_top_16_positive_recovery": 8,
+        "M0_physical_positive_calls": 8,
+        "M0_physical_call_precision_at_16": 0.5714285714285714,
+        "M0_physical_call_recall_at_16": 1.0
+      }
+    },
+    "query_results": {
+      "Q1_development": {
+        "positives": 7,
+        "M0_auprc": 0.1676804957959973,
+        "raw_yolo_auprc": 0.11805466873339042,
+        "selection_stratum_only_auprc": 0.1700986700986701,
+        "anchor_only_auprc": 0.09966289030118816
+      },
+      "Q2_development": {
+        "positives": 9,
+        "M0_auprc": 0.8256652097231807,
+        "raw_yolo_auprc": 0.8095127865961198,
+        "selection_stratum_only_auprc": 0.3590232389251997,
+        "anchor_only_auprc": 0.26914739025167556
+      },
+      "Q1_fixed_pool_audit": {
+        "positives": 3,
+        "M0_auprc": 0.41111111111111115,
+        "raw_yolo_auprc": 0.3277777777777778,
+        "M0_ece": 0.16082319851212235
+      },
+      "Q2_fixed_pool_audit": {
+        "positives": 5,
+        "M0_auprc": 1.0,
+        "raw_yolo_auprc": 0.9266666666666665,
+        "M0_ece": 0.11274098732050691
+      },
+      "M0_minus_no_explicit_query_development_auprc": -0.0012862053332654,
+      "explicit_query_gain_interpretation": "NO_CLEAR_EXPLICIT_QUERY_GAIN"
+    },
+    "controls": {
+      "shuffled_label_M0_mean_auprc": 0.1422445118841198,
+      "shuffled_label_M0_p95_auprc": 0.2376785324885514,
+      "source_id_only_auprc": 0.1111111111111111,
+      "session_id_only_auprc": 0.0693128143265734,
+      "query_id_only_auprc": 0.1019797985830594,
+      "selection_stratum_only_auprc": 0.1973881050167815,
+      "anchor_id_only_auprc": 0.1331986536941399,
+      "formal_significance_claim_allowed": false
+    },
+    "group_bootstrap": {
+      "resampling_unit": "source_dataset_plus_session_id",
+      "requested_replicates": 2000,
+      "development_selected_minus_raw_pooled_auprc_interval": [
+        0.15038909740247486,
+        0.5953447825081558
+      ],
+      "development_selected_minus_raw_macro_query_auprc_interval": [
+        -0.09424846302064205,
+        0.15303539889818155
+      ],
+      "development_best_temporal_minus_best_aggregate_pooled_auprc_interval": [
+        -0.4200469791402433,
+        0.0487284990683749
+      ],
+      "independent_reproduction_matches_persisted_intervals": true,
+      "development_replicates_missing_a_class_in_either_query": 0,
+      "interpretation": "Descriptive paired percentile intervals conditional on fixed OOF predictions; they do not include winner-selection or cross-dataset uncertainty."
+    },
+    "temporal": {
+      "best_temporal_model": "TCN_TEMPORAL",
+      "TCN_development_auprc": 0.33563437262907425,
+      "TCN_development_macro_query_auprc": 0.3823381002237073,
+      "TCN_minus_M0_development_auprc": -0.21983497397268215,
+      "Q1_TCN_minus_M0_auprc": 0.04216794538603944,
+      "Q2_TCN_minus_M0_auprc": -0.2708374504578028,
+      "signal": "NO_CLEAR_GAIN",
+      "causal_64_step_sequence": true,
+      "RGB_or_YOLO_training": false
+    },
+    "readiness_and_calibration": {
+      "ready": false,
+      "failed_checks": [
+        "oracle_support_pass",
+        "minimum_development_class_count_each",
+        "all_per_query_support_and_audit_gates",
+        "final_calibrator_deployable"
+      ],
+      "Q1_development_positive_count": 7,
+      "Q2_development_positive_count": 9,
+      "final_calibration_rows": 28,
+      "final_calibration_positives": 1,
+      "final_calibration_negatives": 27,
+      "Q1_final_calibration_positives": 1,
+      "Q2_final_calibration_positives": 0,
+      "calibration_status": "UNSUPPORTED_ONE_POSITIVE_NOT_DEPLOYABLE",
+      "serialized_Platt_maps_deployable": false
+    },
+    "final_report": {
+      "mandatory_fields_checked": 34,
+      "mandatory_fields_missing": 0,
+      "distinguishes_semantic_support_state_from_oracle_execution_commit": true,
+      "discloses_default_frozen_verify_failure_and_roundtrip_exception": true,
+      "labels_modeling_as_exploratory_not_preregistered_or_blinded": true,
+      "reports_physical_call_budgets_separately_from_semantic_opportunity_budgets": true,
+      "reports_macro_and_per_query_results": true,
+      "reports_calibration_non_deployability": true,
+      "stops_before_V0_V1_physical_execution": true
+    }
+  },
+  "oracle_roundtrip_binding": {
+    "frozen_runner_sha256_matches_execution_spec": true,
+    "wrapper_source_sha256_matches_receipt": true,
+    "execution_difference_audit_sha256_matches_receipt": true,
+    "call_manifest_sha256_matches_receipt": true,
+    "parser_exception": "pandas default C-parser changed the textual runtime 19.338814230635762 to 19.33881423063576; round-trip parsing preserves the raw JSON float and the otherwise unchanged frozen verify returns VERIFIED_COMPLETE_COMMIT.",
+    "default_unshimmed_frozen_verify_remains": "FAIL_FALSE_NEGATIVE",
+    "scientific_effect": "No evidence or projected label changed."
+  },
+  "candidate_lifecycle_incident_binding": {
+    "incident_status": "PASS_RECOVERED_EXACT_RECEIPTS_AND_NONMUTATING_VERIFY",
+    "incident_audit_file_sha256": "a5cafc5240137a9cddec1920bd16598e4ef42a4291651bf5eb09d733baf67fa3",
+    "incident_audit_self_hash": "d477662b66ac2283e7a39b1e023dfca85cad7418df56da90b85411f8064f2e27",
+    "restored_candidate_completion_file_sha256": "c63e563087b12818798e6a90ce5bb5e878db3f8b15f3bbe7f3de8f44cc1fa9fe",
+    "restored_candidate_completion_self_hash": "dbc8bfbbf53103ca021b81d0cb4b7443399a491e94cb29fdcd006ed32666ef39",
+    "candidate_payload_files_modified_by_incident": 0,
+    "post_repair_verify_result": "PASS",
+    "post_repair_verify_modified_finalized_receipts": false
+  },
+  "provenance_assessment": {
+    "initial_protocol_mtime_utc": "2026-07-19T05:39:35.738753Z",
+    "human_readable_raw_oracle_envelopes_already_present": 70,
+    "oracle_parse_finalize_had_not_run": true,
+    "current_corrected_trainer_mtime_utc": "2026-07-19T06:37:22.285794Z",
+    "classification": "FULLY_EXPLORATORY_POST_HOC_CORRECTED_ANALYSIS",
+    "allowed_claim": "The original modeling protocol existed before bulk parse/finalize, supervised current-run fitting and winner selection arithmetically exclude pool_audit rows, and the physical oracle protocol was independently frozen before calls.",
+    "disallowed_claim": "The corrected analysis suite, readiness gates, controls, bootstrap, pool-audit result, or model choice is preregistered, label-blind, cryptographically blinded, or independent prospective validation.",
+    "final_report_language_is_adequately_exploratory": true
+  },
+  "non_blocking_residual_uncertainties": [
+    {
+      "id": "R1_SINGLE_DATASET_AND_FEW_POSITIVE_GROUPS",
+      "evidence": "There is one source dataset; development has only 7 Q1 and 9 Q2 positive rows; leave-one-dataset-out is unidentifiable.",
+      "effect": "No cross-dataset transport or natural-prevalence claim is supported.",
+      "disposition": "Acquire a second query-aligned source dataset before any physical-pilot decision."
+    },
+    {
+      "id": "R2_QUERY_HETEROGENEITY_AND_SELECTION_STRATUM_EXPLANATION",
+      "evidence": "M0 Q1 development AUPRC 0.167680 is slightly below the stratum-only 0.170099; M0 Q2 improves only 0.016152 over raw YOLO. The pooled selected-minus-raw gain is 0.379070, but the macro-query gain is only 0.032889 with interval [-0.094248, 0.153035].",
+      "effect": "The pooled AUPRC lift is not evidence of a uniform learned query refinement.",
+      "disposition": "Retain the report's no-pilot conclusion and inspect query-specific controls on the next dataset."
+    },
+    {
+      "id": "R3_NEAR_COLLINEAR_FULL_RANK_BASIS",
+      "evidence": "The 61-feature basis is mathematically full rank with an intercept, but its all-row design condition number is approximately 4.78e8.",
+      "effect": "Individual coefficient magnitudes remain unstable association screens, not identified feature effects.",
+      "disposition": "The final report already caveats feature importance; use grouped permutation/ablation evidence prospectively."
+    },
+    {
+      "id": "R4_ARITHMETIC_AUDIT_AND_POST_HOC_CORRECTION",
+      "evidence": "The full dataset was locally available, the pool audit had been evaluated in an earlier exploratory run, and the corrected trainer postdates the initial protocol. Label-free rank pruning also inspected all feature rows, including pool-audit covariates, although development-only pruning independently returns the identical 61 features.",
+      "effect": "The fixed pool-audit result is a reused exploratory diagnostic, not independent holdout validation. No observed feature-basis result changes when audit covariates are removed.",
+      "disposition": "Interpret `pool_audit_rows_used_for_fit_or_selection = 0` as supervised current-run arithmetic exclusion only; require a new prospective dataset for confirmation."
+    },
+    {
+      "id": "R5_BOOTSTRAP_SCOPE",
+      "evidence": "The reported intervals resample provider sessions conditional on fixed OOF predictions and do not repeat winner selection. In the small fixed-audit scope, 76/2000 resamples lack both classes for at least one query and the implementation averages the remaining identifiable query slice; the final report's development macro interval has 0 such resamples.",
+      "effect": "Development intervals used in the final report reproduce exactly, but fixed-audit macro intervals are not strict two-query macro intervals in every replicate.",
+      "disposition": "Do not use fixed-audit bootstrap intervals as confirmatory uncertainty; require both query slices identifiable in future prospective interval code."
+    },
+    {
+      "id": "R6_CALIBRATION_NON_DEPLOYABILITY",
+      "evidence": "The final calibration role has one positive total and zero Q2 positives.",
+      "effect": "Serialized M1, TCN, and GRU Platt maps are reproducibility artifacts only.",
+      "disposition": "Do not deploy calibrated probabilities; acquire calibration support first."
+    },
+    {
+      "id": "R7_RECOVERED_CANDIDATE_AUDITOR_INCIDENT",
+      "evidence": "A legacy argument-ignoring auditor transiently overwrote three summary receipts after oracle acquisition; exact original bytes were restored, all candidate payloads were unchanged, and the repaired snapshot-aware verify independently passed without changing receipt hashes.",
+      "effect": "No candidate evidence or downstream model input changed, but the lifecycle incident must remain bound to the handoff.",
+      "disposition": "Use only the explicit non-mutating candidate `verify` stage after oracle acquisition."
+    }
+  ],
+  "strongest_supported_conclusion": "The corrected Stage-A artifact chain is internally consistent and independently recomputable, and it supports only the conservative conclusion that Stage A is not ready for physical-method execution. M0 is the best exploratory aggregate representation and TCN the best temporal network by development LOSO AUPRC, but neither the pooled lift, the reused fixed audit, nor the unsupported calibration establishes prospective cross-dataset value.",
+  "next_highest_value_action": "Acquire a second licensed/query-enriched source dataset under the same label semantics, preregister the prospective analysis and per-query gates before labels, preserve a genuinely unopened audit, and repeat grouped evaluation without running V0/V1 meanwhile.",
+  "revision_trigger": "Revise this PASS if any checked hash changes without a new bound audit, if exact group exclusion or probability reproduction fails, or if the recovered candidate receipt/round-trip oracle verification no longer recomputes.",
+  "review_hash": "bd3e1db2c3546c249c001d04b635c11a6419a234f7bfc5950187787c68249498"
+}

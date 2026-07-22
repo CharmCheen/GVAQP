@@ -1,0 +1,461 @@
+{
+  "checks": [
+    {
+      "check": "artifact_exists:INPUT_ROOTS.json",
+      "evidence": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/benchmark_unblock/INPUT_ROOTS.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_exists:VIDEO_CANDIDATES.csv",
+      "evidence": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/benchmark_unblock/VIDEO_CANDIDATES.csv",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_exists:SOURCE_INDEPENDENCE_AUDIT.json",
+      "evidence": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/benchmark_unblock/SOURCE_INDEPENDENCE_AUDIT.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_exists:DERIVATION_GROUPS.json",
+      "evidence": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/benchmark_unblock/DERIVATION_GROUPS.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_exists:INPUT_POOL_DECISION.json",
+      "evidence": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/benchmark_unblock/INPUT_POOL_DECISION.json",
+      "status": "PASS"
+    },
+    {
+      "check": "artifact_exists:INPUT_REQUEST.md",
+      "evidence": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/benchmark_unblock/INPUT_REQUEST.md",
+      "status": "PASS"
+    },
+    {
+      "check": "candidate_schema",
+      "evidence": [
+        "absolute_path",
+        "capture_session_id",
+        "codec",
+        "configured_dataset_identity",
+        "container",
+        "creation_time",
+        "decision_reason",
+        "decode_evidence",
+        "duplicate_group",
+        "duration_seconds",
+        "exists",
+        "file_sha256",
+        "file_size_bytes",
+        "frame_count",
+        "frame_rate",
+        "height",
+        "input_pool_eligible",
+        "known_derivation_operation",
+        "known_parent_video",
+        "length_sufficient",
+        "lineage_independence",
+        "mtime_utc",
+        "oracle_feasibility",
+        "provenance_declaration",
+        "proxy_feasibility",
+        "resolution",
+        "source_name",
+        "width",
+        "workload_units_10s"
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "candidate_path_uniqueness",
+      "evidence": 609,
+      "status": "PASS"
+    },
+    {
+      "check": "frozen_candidate_row_count",
+      "evidence": 609,
+      "status": "PASS"
+    },
+    {
+      "check": "frozen_existing_path_count",
+      "evidence": 607,
+      "status": "PASS"
+    },
+    {
+      "check": "exactly_one_eligible_source",
+      "evidence": [
+        "long_video_dataset3"
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "dataset3_canonical_path",
+      "evidence": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4",
+      "status": "PASS"
+    },
+    {
+      "check": "dataset3_duration_and_units",
+      "evidence": {
+        "duration": "3462.930499",
+        "units": "347"
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "dataset3_recorded_hash",
+      "evidence": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+      "status": "PASS"
+    },
+    {
+      "check": "dataset3_physical_hash",
+      "evidence": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+      "status": "PASS"
+    },
+    {
+      "check": "dataset3_feasibility_evidence",
+      "evidence": {
+        "decode_evidence": "PASS:historical_full_sequential_read_100_percent_and_current_physical_runtime",
+        "oracle_feasibility": "PASS:347_of_347_frozen_physical_oracle",
+        "proxy_feasibility": "PASS:existing_full_physical_proxy"
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "nexar_paths_and_unique_content",
+      "evidence": {
+        "paths": 604,
+        "unique_hashes": 603
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "nexar_length_fatal",
+      "evidence": {
+        "at_least_1200s": 0,
+        "max": 49.464883,
+        "min": 15.0
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "nexar_known_duplicate_group",
+      "evidence": {
+        "groups": [
+          "DUPLICATE_001"
+        ],
+        "paths": [
+          "datasets/casq_external/nexar/videos_hf/train/positive/00822.mp4",
+          "datasets/casq_external/nexar/videos_smoke/positive/00822.mp4"
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "nexar_duplicate_physical_hash",
+      "evidence": [
+        "c79d4f8a8045e012905952c9b1cb79615db1300fa1799339f88bbb5f69636243"
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "realcartest_5k_derivative_excluded",
+      "evidence": {
+        "decision_reason": "REJECT:documented_prefix_of_missing_realcartest_parent",
+        "known_derivation_operation": "first 5000 frames / 208.33-second prefix",
+        "known_parent_video": "/qiuyeqing/llama_prl/G-ARC/try_or_no/videos/realcartest.mp4"
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "historical_long_sources_missing",
+      "evidence": {
+        "long_video_dataset2": "REJECT:MISSING_BYTES:historical scout manifest; bytes now absent; later role audit found in-cabin driver-facing view unsuitable for ego-path queries",
+        "realcartest": "REJECT:MISSING_BYTES:historical V13 development/reference source; bytes absent"
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "heldout_row_metadata_only",
+      "evidence": {
+        "absolute_path": "/qiuyeqing/llama_prl/G-ARC/try_or_no/test.mov",
+        "decision_reason": "EXCLUDE:canonical_heldout_and_too_short; metadata copied from existing identity manifest",
+        "decode_evidence": "NOT_PROBED:heldout_excluded"
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "heldout_roots_not_searched",
+      "evidence": [
+        {
+          "absolute_path": "/qiuyeqing/llama_prl/G-ARC/AQP_Algorithm_Invention_Sprint_v1/operator_validation/heldout_reference_v1/media",
+          "exists": true,
+          "reason": "explicitly excluded from byte and semantic access",
+          "role": "existing_heldout_split",
+          "searched_for_video_files": false,
+          "video_file_count": null
+        },
+        {
+          "absolute_path": "/qiuyeqing/llama_prl/G-ARC/try_or_no/test.mov",
+          "exists": true,
+          "reason": "explicitly excluded by existing INPUT_MANIFEST; no labels/reference/method evaluation opened",
+          "role": "canonical_heldout_video",
+          "searched_for_video_files": false,
+          "video_file_count": null
+        },
+        {
+          "absolute_path": "/qiuyeqing/llama_prl/G-ARC/try_or_no/videos/test.mov",
+          "exists": false,
+          "role": "legacy manifest alias of canonical heldout",
+          "searched_for_video_files": false,
+          "video_file_count": null
+        },
+        {
+          "absolute_path": "/qiuyeqing/llama_prl/G-ARC/data/realcam/heldout_v1/raw",
+          "exists": false,
+          "reason": "explicitly excluded",
+          "role": "configured heldout root",
+          "searched_for_video_files": false,
+          "video_file_count": null
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "heldout_flags_false",
+      "evidence": {
+        "decision": false,
+        "derivations": false,
+        "independence": false,
+        "roots": false
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "hash_accounting_separates_heldout_manifest",
+      "evidence": {
+        "dataset2_role_artifact": "src/garc_eval/outputs/event_native_aqp_autonomous_research_sprint_v1/reports/DATASET2_ROLE_ANALYSIS.md",
+        "duplicate_groups": [
+          {
+            "group_id": "DUPLICATE_001",
+            "paths": [
+              "/qiuyeqing/llama_prl/G-ARC/datasets/casq_external/nexar/videos_hf/train/positive/00822.mp4",
+              "/qiuyeqing/llama_prl/G-ARC/datasets/casq_external/nexar/videos_smoke/positive/00822.mp4"
+            ],
+            "sha256": "c79d4f8a8045e012905952c9b1cb79615db1300fa1799339f88bbb5f69636243"
+          }
+        ],
+        "full_file_sha256_computed_by_this_audit": 606,
+        "heldout_identity_hashes_copied_from_existing_manifest": 1,
+        "realcartest_lineage_artifact": "AQP_Algorithm_Invention_Sprint_v1/operator_validation/realcartest_event_enumerate_v2/video/DERIVED_SLICE_LINEAGE.csv"
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "duplicate_record_cross_artifact_consistency",
+      "evidence": {
+        "derivations": [
+          {
+            "group_id": "DUPLICATE_001",
+            "paths": [
+              "/qiuyeqing/llama_prl/G-ARC/datasets/casq_external/nexar/videos_hf/train/positive/00822.mp4",
+              "/qiuyeqing/llama_prl/G-ARC/datasets/casq_external/nexar/videos_smoke/positive/00822.mp4"
+            ],
+            "sha256": "c79d4f8a8045e012905952c9b1cb79615db1300fa1799339f88bbb5f69636243"
+          }
+        ],
+        "expected": {
+          "group_id": "DUPLICATE_001",
+          "paths": [
+            "/qiuyeqing/llama_prl/G-ARC/datasets/casq_external/nexar/videos_hf/train/positive/00822.mp4",
+            "/qiuyeqing/llama_prl/G-ARC/datasets/casq_external/nexar/videos_smoke/positive/00822.mp4"
+          ],
+          "sha256": "c79d4f8a8045e012905952c9b1cb79615db1300fa1799339f88bbb5f69636243"
+        },
+        "independence": [
+          {
+            "group_id": "DUPLICATE_001",
+            "paths": [
+              "/qiuyeqing/llama_prl/G-ARC/datasets/casq_external/nexar/videos_hf/train/positive/00822.mp4",
+              "/qiuyeqing/llama_prl/G-ARC/datasets/casq_external/nexar/videos_smoke/positive/00822.mp4"
+            ],
+            "sha256": "c79d4f8a8045e012905952c9b1cb79615db1300fa1799339f88bbb5f69636243"
+          }
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "workload_threshold_precedes_candidates",
+      "evidence": {
+        "A0_scan_batches_before_verify": 29,
+        "batch_size": 4,
+        "frozen_unit_seconds": 10,
+        "minimum_seconds_used": 1200.0,
+        "recommended_seconds": 1800.0,
+        "units_needed_before_full_coverage": 117
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "drivingdojo_archive_has_no_video_container",
+      "evidence": {
+        "archive_exists": true,
+        "video_entries": []
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "input_pool_decision_exact",
+      "evidence": {
+        "AUTONOMOUS_RESEARCH": "PAUSED_INPUT_REQUIRED",
+        "AUTONOMOUS_RESEARCH_STATUS": "PAUSED_INPUT_REQUIRED",
+        "BENCHMARK_INPUT_POOL": "INSUFFICIENT",
+        "DEV_BENCHMARK_UNBLOCK": "NOT_RUN_INPUT_INSUFFICIENT",
+        "PSVR_CORE_INNOVATION": "BLOCKED",
+        "PSVR_METHOD_USABILITY": "NOT_YET",
+        "additional_sources_needed": 2,
+        "eligible_independent_source_videos": 1,
+        "eligible_source_ids": [
+          "long_video_dataset3"
+        ],
+        "heldout_opened": false,
+        "next_exact_command": "python scripts/audit_psvr_dev_inputs.py",
+        "required_independent_source_videos": 3
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "advertised_user_input_root_is_searched",
+      "evidence": [
+        {
+          "absolute_path": "/qiuyeqing/llama_prl/G-ARC/data/realcam/psvr_dev_inputs",
+          "exists": false,
+          "role": "user_provided_psvr_development_input_root",
+          "searched_for_video_files": true,
+          "video_file_count": 0
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "all_supplied_user_inputs_are_in_candidate_table",
+      "evidence": {
+        "actual": [],
+        "recorded": []
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "user_input_qualification_is_explicit",
+      "evidence": {
+        "independence_limit": "provider capture-session declaration plus exact-content duplicate audit; any uncertain lineage remains ineligible",
+        "placement_root": "/qiuyeqing/llama_prl/G-ARC/data/realcam/psvr_dev_inputs",
+        "query_semantic_eligibility": "not assessed until frozen Phase B/C",
+        "required_declaration": {
+          "capture_session_id": "nonempty and unique",
+          "known_derivation_operation": null,
+          "known_parent_video": null,
+          "source_kind": "original_continuous_capture"
+        },
+        "required_sidecar_suffix": ".source.json",
+        "technical_probe": "ffprobe plus start/middle/tail one-second physical decode"
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "new_input_eligibility_rule_reachable_and_fail_closed",
+      "evidence": {
+        "negative_cases": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "positive_case": true
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "no_output_or_clip_derivative_eligible",
+      "evidence": [
+        "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4"
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "derivation_groups_complete",
+      "evidence": [
+        "dataset3_family",
+        "drivingdojo_mini",
+        "nexar_collection",
+        "realcartest_family",
+        "test_heldout_family"
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "input_request_complete",
+      "evidence": [
+        "2 additional independent source videos",
+        "MP4, MOV, MKV, AVI, WebM, or M4V",
+        "30 minutes",
+        "data/realcam/psvr_dev_inputs",
+        "Do not provide crops, reencodes",
+        "name.mp4.source.json",
+        "capture_session_id",
+        "python scripts/audit_psvr_dev_inputs.py"
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "audit_script_hash_frozen",
+      "evidence": {
+        "actual": "fb34102a1518c59f8852c8232a5a31da1cb90aec0ad2189390168635865a8255",
+        "recorded": "fb34102a1518c59f8852c8232a5a31da1cb90aec0ad2189390168635865a8255"
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "phase_a_artifact_hashes_frozen",
+      "evidence": {
+        "actual": {
+          "DERIVATION_GROUPS.json": "ae78d05f07fc9d9519507091f3814e67bacd6aabd11912b4521ddea471ad77f6",
+          "INPUT_POOL_DECISION.json": "f8f461f5a009a5f798a0bb599e5387500b4649a6e53145ea61fdb19d6e1d922a",
+          "INPUT_REQUEST.md": "b91308f2554bfd54ca047d53226c66a58a5efbcaf690a85c3971e33a40efec90",
+          "INPUT_ROOTS.json": "a1c44868f9642cc369c9c5abe7feb7d159c917dc77538c01b0b742ddb5dc4319",
+          "SOURCE_INDEPENDENCE_AUDIT.json": "80d20d7cdc486641b5f6f71d935f6ef77cee9338d1c24050992d85c0572cf04d",
+          "VIDEO_CANDIDATES.csv": "f1063fb19f5589f03fc22ca5b2f067b47723d306caa5b377097e20c5098a55a4"
+        },
+        "recorded": {
+          "DERIVATION_GROUPS.json": "ae78d05f07fc9d9519507091f3814e67bacd6aabd11912b4521ddea471ad77f6",
+          "INPUT_POOL_DECISION.json": "f8f461f5a009a5f798a0bb599e5387500b4649a6e53145ea61fdb19d6e1d922a",
+          "INPUT_REQUEST.md": "b91308f2554bfd54ca047d53226c66a58a5efbcaf690a85c3971e33a40efec90",
+          "INPUT_ROOTS.json": "a1c44868f9642cc369c9c5abe7feb7d159c917dc77538c01b0b742ddb5dc4319",
+          "SOURCE_INDEPENDENCE_AUDIT.json": "80d20d7cdc486641b5f6f71d935f6ef77cee9338d1c24050992d85c0572cf04d",
+          "VIDEO_CANDIDATES.csv": "f1063fb19f5589f03fc22ca5b2f067b47723d306caa5b377097e20c5098a55a4"
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "decision_state_synthesis_consistency",
+      "evidence": {
+        "cycle": {
+          "AUTONOMOUS_RESEARCH_STATUS": "PAUSED_INPUT_REQUIRED",
+          "PSVR_CORE_INNOVATION": "BLOCKED"
+        },
+        "state": {
+          "autonomous_research_status": "PAUSED_INPUT_REQUIRED",
+          "core_innovation_status": "BLOCKED"
+        }
+      },
+      "status": "PASS"
+    }
+  ],
+  "checks_passed": 40,
+  "checks_total": 40,
+  "errors": [],
+  "heldout_opened": false,
+  "scope": "Cycle-07 frozen Phase-A input availability; this verifier does not open held-out media/reference",
+  "status": "PASS",
+  "verifier": "scripts/verify_psvr_dev_input_audit.py"
+}

@@ -1,0 +1,53 @@
+{
+  "ORACLE_REFERENCE_INTEGRITY": "PASS",
+  "RUNTIME_CAPABILITY_ISOLATION": "PASS",
+  "STAGE_0A": "PASS",
+  "capability_boundary": {
+    "selector_receives": [
+      "public unit metadata",
+      "scanned proxy observations",
+      "queried oracle observations"
+    ],
+    "runtime_launcher_owns": [
+      "restricted OracleAccessor facade",
+      "queried EvidenceLedger"
+    ],
+    "selector_scheduler_worker": [
+      "clean spawn address space",
+      "empty chroot",
+      "dropped uid/gid",
+      "serialized SelectorView only"
+    ],
+    "materializer_worker": [
+      "clean spawn address space",
+      "unchanged K3 code",
+      "public units plus queried trace only",
+      "empty chroot",
+      "dropped uid/gid"
+    ],
+    "oracle_service_process_owns": [
+      "complete frozen oracle cache"
+    ],
+    "evaluator_process_owns": [
+      "complete reference events"
+    ],
+    "oracle_accessor_methods": [
+      "queried_ids",
+      "query",
+      "query_count"
+    ]
+  },
+  "legacy_runner": {
+    "status": "QUARANTINED_FOR_RUNTIME_USE",
+    "runner": "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/scripts/run_clean_benchmark_v2_strict.py",
+    "reason": "load_frozen exposes oracle/reference and legacy OracleAccessor.table; retained only as immutable historical benchmark artifact."
+  },
+  "adversarial_test_count": 15,
+  "failed_tests": [],
+  "reference_evidence": {
+    "raw_responses": 347,
+    "raw_normalized_observations_match_saved": true,
+    "reference_events": 26,
+    "deterministic_reconstruction": true
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "review_id": "heldout_reference_v1_phase0_terminal_review_1",
+  "reviewed_at_utc": "2026-07-12",
+  "reviewer_role": "independent_adversarial_agent",
+  "result": "PASS_WITH_CAVEATS",
+  "decision_reviewed": "HELDOUT_VIDEO_INPUT_REQUIRED",
+  "checks": {
+    "raw_input_path_absent": "PASS",
+    "zero_candidate_videos": "PASS",
+    "terminal_decision_follows_governing_rule": "PASS",
+    "downstream_phases_not_claimed": "PASS",
+    "video_independence": "NOT_TESTABLE_NO_HELDOUT_HASH",
+    "full_prior_hash_comparison": "NOT_APPLICABLE_NO_HELDOUT_HASH",
+    "physical_vlm_calls_zero": "PASS_BUNDLE_LOCAL_ONLY",
+    "event_enumerate_not_run": "PASS_BUNDLE_LOCAL_ONLY",
+    "vera_not_run": "PASS_BUNDLE_LOCAL_ONLY",
+    "qwen_not_loaded": "PASS_BUNDLE_LOCAL_ONLY",
+    "no_fabricated_human_annotation": "PASS_NO_ANNOTATION_ARTIFACTS_FOUND",
+    "no_self_labeling": "PASS_NO_REFERENCE_ARTIFACTS_FOUND",
+    "no_premature_physical_sample": "PASS"
+  },
+  "caveats": [
+    "No held-out video hash exists, so independence is untestable rather than passed.",
+    "No external scheduler or runtime call ledger was available to independently prove the workflow's no-execution claims.",
+    "Phase-specific full deliverables are absent by design because the governing stop condition occurs in Phase 0."
+  ],
+  "required_next_action": "Provide provenance-documented new raw videos at data/realcam/heldout_v1/raw and rerun from Phase 0."
+}

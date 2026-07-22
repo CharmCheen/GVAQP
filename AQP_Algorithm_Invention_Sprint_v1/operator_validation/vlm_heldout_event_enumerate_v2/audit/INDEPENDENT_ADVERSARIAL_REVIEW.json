@@ -1,0 +1,32 @@
+{
+  "review_id": "vlm_heldout_event_enumerate_v2_terminal_review_1",
+  "result": "PASS_WITH_CAVEATS",
+  "scientific_decision": "PASS",
+  "decision": "VLM_REFERENCE_INCOMPLETE",
+  "stop_before_physical_execution": "PASS",
+  "checks": {
+    "user_oracle_assumption_scoped": "PASS",
+    "no_human_gt_claim": "PASS",
+    "no_real_world_semantic_claim": "PASS",
+    "test_mov_independence": "PASS_WITH_USER_PROVENANCE_ASSUMPTION",
+    "vera_non_exposure": "PASS_WITH_USER_PROVENANCE_ASSUMPTION",
+    "slice_mapping": "FAIL_CONTENT_MISMATCH",
+    "canonical_test_mov_vlm_coverage": "FAIL_UNKNOWN_ZERO_TARGET_OBSERVATIONS",
+    "pseudo_reference_freeze": "CORRECTLY_NOT_RUN",
+    "processor_and_physical_phases": "CORRECTLY_NOT_RUN",
+    "physical_call_count": "PASS_ZERO_BUNDLE_LOCAL",
+    "prohibited_claim_compliance": "PASS"
+  },
+  "decisive_evidence": [
+    "test.mov is 43.043333 seconds with SHA256 282804b7eaeb83eb9c7fc1cff456dddec7eef80750d207e5907e8e1ca053fdcb.",
+    "All 399 recovered Qwen3-VL observations identify video_id=realcartest and span a roughly 3987-second source.",
+    "The exhaustive 1775-row test.mov table is YOLO vehicle counting, not prompt-conditioned VEPC.",
+    "realcartest_5k.mp4 is 208.333333 seconds and sampled frames show content unrelated to the current test.mov bytes."
+  ],
+  "caveats": [
+    "Independence relies on authoritative user provenance plus sampled fingerprints; exhaustive decoded-frame offset and audio fingerprint audits were not completed.",
+    "The supplied assertion that videos/* are temporal slices contradicts the current media artifacts and cannot justify label transfer.",
+    "Zero physical calls is bundle-local; no external scheduler ledger was available."
+  ],
+  "required_next_action": "Provide or identify exhaustive prompt-conditioned VEPC observations with frame lineage to the current test.mov, or authorize a new independent oracle-generation pass before operator sampling."
+}

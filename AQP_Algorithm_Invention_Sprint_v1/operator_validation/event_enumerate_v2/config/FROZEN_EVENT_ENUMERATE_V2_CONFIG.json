@@ -1,0 +1,99 @@
+{
+  "algorithm_changes": false,
+  "canonical_processor_contract": "event_enumerate_v2_metadata_exact_v1",
+  "cost_gate": {
+    "cold_warm_separate": true,
+    "gpu_synchronization_required": true,
+    "old_compressed_runtime_reusable": false,
+    "rule": "corrected enumerator GPU seconds < matched dense 10-second GPU seconds"
+  },
+  "freeze_date_utc": "2026-07-12",
+  "freeze_version": "metadata_correct_event_enumerate_operator_gate_v2_freeze_1",
+  "frozen_artifact_hashes": {
+    "AQP_Algorithm_Invention_Sprint_v1/operator_validation/event_enumerate_v2/config/MODEL_FILE_MANIFEST.csv": "91c036351f4032bdfc25dfff5b43d507fd4aea13c3420115441474aaa98ca6fc",
+    "AQP_Algorithm_Invention_Sprint_v1/operator_validation/event_enumerate_v2/config/PROCESSOR_CONTRACT.json": "4542c62c2dc3ed557515a6db76eddbb0886c4dbcc29e71ac2e70c50e7f2fb6d3",
+    "AQP_Algorithm_Invention_Sprint_v1/operator_validation/event_enumerate_v2/config/PROMPT_AND_PARSER_MANIFEST.json": "c4256c1bde9c2ba2b774799b741f701bb5fa024b415ddb5e659a2110331a419b"
+  },
+  "frozen_source_hashes": {
+    "src/garc_eval/event_enumerate_v2/__init__.py": "9fe95b404944746a2e4f49b2040e8be2a3227a577f82c2e4fb6ef7b73e562f1b",
+    "src/garc_eval/event_enumerate_v2/audit_heldout.py": "e35009dbe2db2410c91ed4556f70a5f05332e595c5dfa1b90531cc2bff12e300",
+    "src/garc_eval/event_enumerate_v2/forensics.py": "77b153fd533f8b34fdf72f8581ce10796df14ea1b613c2b2eacf1a395a70e3b9",
+    "src/garc_eval/event_enumerate_v2/freeze.py": "ec69938b416e533e0764db8658761cbc06cc3e56f0bf1a8f86a0faa366d03551",
+    "src/garc_eval/event_enumerate_v2/generate_metadata_corpus.py": "88f496105b1493b376796d394c81bb1912f0dcf777a449f5bcb45ed0fdd4dcd4",
+    "src/garc_eval/event_enumerate_v2/preexecution_audit.py": "7be9d5d34a4bb9c1298473a91af8868bf482684f82aa88bafd5e1777edee15e9",
+    "src/garc_eval/event_enumerate_v2/processor_adapter.py": "c9b0ab44f445273df626a93bd59b1a5df7fff650af6546e1c7807c61af217549",
+    "src/garc_eval/event_enumerate_v2/prompts/event_enumerate_v2.txt": "ffb65213017a79b5312bce98d5cf9a3d270cf69347ed560176119be347167bc8",
+    "src/garc_eval/event_enumerate_v2/seal.py": "fbb3eca48bb73dafa0ed764ce7e7c72c9f3ed48a44378793da741983605b16fb",
+    "src/garc_eval/event_enumerate_v2/temporal_contract.py": "aa971ff807e590733cefa2252dc7370ae1dc16e2a74daeda8473908807d68f0d"
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 768,
+    "retry_count": 0,
+    "temperature": null
+  },
+  "input": {
+    "batch_size_for_physical_calls": 1,
+    "contract_version": "event_enumerate_v2_metadata_exact_v1",
+    "decode": "OpenCV sequential BGR decode then cv2.COLOR_BGR2RGB",
+    "forbidden": [
+      "processor resampling",
+      "missing video metadata",
+      "timestamp clamping",
+      "alternate sampling paths",
+      "reference access in inference"
+    ],
+    "metadata": {
+      "anchor": "first selected source index divided by source FPS",
+      "do_sample_frames": false,
+      "fps": "exact probed source FPS",
+      "frames_indices": "selected source index minus first selected source index",
+      "required": true,
+      "return_metadata": true,
+      "total_num_frames": "last relative source index plus one"
+    },
+    "processor_timestamp_formula": "pair-average(relative source frame index/source FPS), repeat final index for an odd frame count",
+    "reconciler": "event_enumerate_v2_midpoint_owner_exact_dedup_v1",
+    "relative_to_absolute_mapping": "absolute = actual_first_decoded_timestamp + generated_relative_seconds",
+    "selection": {
+      "end_frame": "min(total_frames-1, int(input_end_seconds * source_fps))",
+      "maximum_decoded_frames": 121,
+      "maximum_interval_seconds": 60.0,
+      "rule": "inclusive fixed source-frame stride",
+      "start_frame": "int(input_start_seconds * source_fps)",
+      "strategy_count": 1,
+      "stride": "max(1, int(source_fps / 2.0))",
+      "target_sample_fps": 2.0
+    },
+    "temporal_patch_size": 2,
+    "timestamp_display_tolerance_seconds": 0.050001,
+    "timestamp_text_precision_decimals": 1
+  },
+  "model": {
+    "device_map": "auto",
+    "dtype": "bfloat16",
+    "fine_tuning_allowed": false,
+    "full_content_hash_from_prior_audited_manifest": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+    "identity": "Qwen3-VL-32B-Instruct",
+    "path": "/qiuyeqing/llama_prl/G-ARC/models/vlm/qwen3_vl/Qwen3-VL-32B-Instruct",
+    "substitution_allowed": false
+  },
+  "operator": "EVENT_ENUMERATE",
+  "physical_authorization": {
+    "calls_permitted_now": false,
+    "maximum_new_calls": 100,
+    "new_calls_so_far": 0,
+    "reason": "held-out data gate has not passed"
+  },
+  "prompt_parser_manifest_sha256": "c4256c1bde9c2ba2b774799b741f701bb5fa024b415ddb5e659a2110331a419b",
+  "quality_gate": {
+    "event_f1_minimum": 0.8,
+    "event_recall_minimum": 0.8
+  },
+  "semantic_call_matrix": {
+    "reason": "no valid disjoint held-out reference; terminal data gate precedes preregistration",
+    "status": "NOT_CREATED"
+  },
+  "terminal_decision_if_no_heldout": "HELDOUT_DATA_REQUIRED",
+  "vera_execution": false
+}

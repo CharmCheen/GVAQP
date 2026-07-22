@@ -1,0 +1,30 @@
+{
+  "benchmark_id": "cbbv2_514c0d360fd5b2a4b5fe",
+  "blocking_findings": 0,
+  "conclusion": "PASS: the corrected pre-review seal is internally consistent, the 24-run BCM-AQP v2 experiment is leakage-safe under the audited planner surfaces with 1060 logical cache calls and zero physical VLM calls, and the independently recomputed event-F1 AUC evidence supports the scoped NO-GO decision.",
+  "decision": "NO-GO",
+  "evidence_hashes": {
+    "FINAL_DECISION.csv": "a7ca65eb28ba8cd5b7139057846226bdabf0b5196b31d243eded44f5da3fd7a2",
+    "audit/completion_audit.csv": "6f22f211a34d1d8d42bc6828aa8a638927f2346913b4b0cf1dbdc5aa1d57a7f2",
+    "reports/FINAL_REPORT.md": "d0dacade08e7fabb30dbf8b05f452d11e123bb1fb8cf318138f133e59b8238a7",
+    "scripts/run_bcm_aqp_v2.py": "1f64599f5ccb95e57de1d235d2dbebd654ed9490e6836c226c72fbea30e96b1a",
+    "tables/materializer_matrix.csv": "fa06c8f06b3404bfc09d80710e6fcb5a9e7977f355562bc884e380eaecccbbd2",
+    "tables/run_registry.csv": "d0f9f0c40b0e56b000231e630770f746fe8f49dd82bf95988698f607ac1639ab"
+  },
+  "high_findings": 0,
+  "reviewed_at_utc": "2026-07-11T02:30:23Z",
+  "reviewer": "Codex independent adversarial reviewer /root/strict_benchmark_reviewer",
+  "scope": [
+    "implementation_and_frozen_config",
+    "preflight_synthetic_and_completion_audits",
+    "run_manifests_registry_and_traces",
+    "materializer_matrix_ceilings_and_metrics",
+    "method_summary_and_auc_recomputation",
+    "realized_utility_and_mechanism_activation",
+    "oracle_accounting_and_planner_leakage",
+    "ablation_claims_and_scope_language",
+    "final_decision_report_and_research_state",
+    "file_manifest_and_seal_protocol"
+  ],
+  "status": "PASS"
+}

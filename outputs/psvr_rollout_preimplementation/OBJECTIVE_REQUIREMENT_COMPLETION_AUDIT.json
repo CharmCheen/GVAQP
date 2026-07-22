@@ -1,0 +1,188 @@
+{
+  "audit_id": "PSVR_D2_SPLIT_FULL_OBJECTIVE_AUDIT_V1",
+  "overall_status": "BLOCKED_INTERNAL_INCONSISTENCY",
+  "completion_claim": false,
+  "evidence_standard": "Every explicit phase, artifact, invariant, test family, prohibition, freeze gate, and terminal status is checked against current files or executed commands.",
+  "requirements": [
+    {
+      "id": "0_PRIOR_STATE",
+      "status": "PROVEN",
+      "requirement": "Validate the previous BLOCKED_D2_NUMERIC_BINDING state before amendment.",
+      "evidence": "python scripts/validate_psvr_rollout_preimplementation.py => PASS_BLOCKED_D2_NUMERIC_BINDING, 33 checks, zero failures"
+    },
+    {
+      "id": "1_RESULT_BLIND_AMENDMENT",
+      "status": "PROVEN",
+      "requirement": "Amendment occurs before any toy/heldout/physical policy result is visible.",
+      "evidence": "PROTOCOL_AMENDMENT_D2_SPLIT.json and absence of heldout output; baseline manifest contained no policy results"
+    },
+    {
+      "id": "1_D2_SPLIT",
+      "status": "PROVEN",
+      "requirement": "Split D2 into complete D2-L, exact toy D2-T, and blocked physical D2-P.",
+      "evidence": "PROTOCOL_AMENDMENT_D2_SPLIT.json; D2_DEPENDENCY_GRAPH.json"
+    },
+    {
+      "id": "2_D2T_MATHEMATICAL_SUPPORT",
+      "status": "PROVEN",
+      "requirement": "Use exact finite toy support, not empirical p95/maximum, with productive SCAN reserve.",
+      "evidence": "D2_TOY_NUMERIC_BINDING.json derives SCAN 56.5 seconds, CONFIRM/reserve 13.75 seconds; physical_safety_claim=false"
+    },
+    {
+      "id": "2_D2T_END_TO_END_VALIDATION",
+      "status": "INSUFFICIENT_EVIDENCE",
+      "requirement": "Validate every legal toy duration and every pi0 start over the complete frozen configuration universe.",
+      "evidence": "Prototype probes cover 16 development seeds and ten named fixtures, not the uniquely frozen complete generator; ratio draw order is undefined"
+    },
+    {
+      "id": "3_DEPENDENCY_GRAPH",
+      "status": "PROVEN",
+      "requirement": "H-ROLLOUT1A/B do not require D2-P; H-ROLLOUT1C does.",
+      "evidence": "D2_DEPENDENCY_GRAPH.json"
+    },
+    {
+      "id": "4_D4A_REBIND",
+      "status": "PARTIAL_BLOCKED",
+      "requirement": "Rebind D4A to D1+D2-L+D2-T+D3 without changing protected scientific semantics, then freeze it.",
+      "evidence": "UPDATED_H_ROLLOUT1A_PREREGISTRATION.json contains the new dependencies but status is REBOUND_BUT_BLOCKED_INTERNAL_INCONSISTENCY and execution_authorized=false"
+    },
+    {
+      "id": "5_REQUIRED_MODULES",
+      "status": "PARTIAL_UNFROZEN",
+      "requirement": "Implement the independent src/garc_eval/psvr_rollout_toy module set.",
+      "evidence": "All recommended module filenames exist, plus conditional.py; TOY_SIMULATOR_CODE_MANIFEST.json marks them PROTOTYPE_NOT_FROZEN"
+    },
+    {
+      "id": "5_REQUIRED_SCRIPTS",
+      "status": "PARTIAL_UNFROZEN",
+      "requirement": "Implement build, verify, development-smoke, and heldout runners.",
+      "evidence": "All four entry-point paths exist; development and heldout runners intentionally fail closed and do not implement an authorized comparison"
+    },
+    {
+      "id": "9_1_LATENT_VISIBLE_SEPARATION",
+      "status": "CONTRADICTED",
+      "requirement": "Policy cannot access latent identity or future information.",
+      "evidence": "Strict xfail proves VisibleState.episode_id contains the literal seed (development_11000); other forbidden latent/future field checks pass"
+    },
+    {
+      "id": "9_2_SEED_DETERMINISM",
+      "status": "PARTIAL_BLOCKED",
+      "requirement": "Same seed/config gives a bit-identical manifest and different seeds have distinct latent identities under the frozen construction.",
+      "evidence": "Prototype stability tests pass, but ratio_draw is absent from the authoritative ordered draw schedule, so the intended manifest is not unique"
+    },
+    {
+      "id": "9_3_ATOMIC_CONFIRM",
+      "status": "PROVEN_FOR_PROTOTYPE",
+      "requirement": "CONFIRM consumes full duration and commits atomically only at completion.",
+      "evidence": "Atomicity tests and ten named trace audits pass"
+    },
+    {
+      "id": "9_4_GROUPING_ERROR",
+      "status": "PARTIAL_UNFROZEN",
+      "requirement": "Independent under/over merge controls with hidden correctness, duplicate cost, and irrecoverable over-merge loss.",
+      "evidence": "grouping.py and environment suppression implement the mechanisms; no authorized generator-conformance fixture proves the frozen joint law"
+    },
+    {
+      "id": "9_5_UTILITY",
+      "status": "PROVEN_FOR_PROTOTYPE",
+      "requirement": "D1 primary plus AUC-F1, TTFC, endpoint metrics, duplicates, all recomputable from raw trace.",
+      "evidence": "utility/invariant tests pass integral/jump identity, duplicate, late reward, state-dependent F1, and separate surrogate reporting"
+    },
+    {
+      "id": "10_BASELINES_B0_TO_B4_M0",
+      "status": "IMPLEMENTED_UNFROZEN",
+      "requirement": "Implement all simple baselines and M0 without heldout execution.",
+      "evidence": "policies.py contains B0, B1, B2 k=1/2/4/8, B3, B4, and M0; no heldout result exists"
+    },
+    {
+      "id": "10_M1",
+      "status": "BLOCKED",
+      "requirement": "Implement exact non-clairvoyant symmetric full-horizon M1 with zero estimator error/certified MC fallback.",
+      "evidence": "rollout.py fails closed; conditional.py provides only an unfrozen firewall because no visible-history posterior kernel is authorized"
+    },
+    {
+      "id": "10_C0",
+      "status": "IMPLEMENTED_PROVEN_FOR_SMALL_PROTOTYPE_STATES",
+      "requirement": "Implement clairvoyant optimal DP ceiling only for exactly enumerable small states.",
+      "evidence": "ClairvoyantSmallDP now recursively enumerates every reachable safe action with state/action caps; a heterogeneous-cost fixture proves it selects the fast witness rather than FIFO/pi0"
+    },
+    {
+      "id": "11_SCHEMA_RNG_TESTS",
+      "status": "PROVEN_FOR_PROTOTYPE_EXCEPT_AUTHORITATIVE_RNG_AMBIGUITY",
+      "requirement": "Schema roundtrip, seed determinism/disjointness, SplitMix fixture, manifest stability.",
+      "evidence": "Strict Episode roundtrip, SplitMix fixture, split disjointness, and prototype stability pass; authoritative seed-to-manifest identity remains blocked only by the missing ratio draw position"
+    },
+    {
+      "id": "11_VISIBILITY_TESTS",
+      "status": "FAILED_BLOCKING",
+      "requirement": "No latent event, future region, or future duration access; evaluator truth separated.",
+      "evidence": "Ordinary field-denial and conditional-firewall tests pass, but seed-bearing episode_id strict xfail remains"
+    },
+    {
+      "id": "11_SAFETY_PROPERNESS_ATOMICITY_UTILITY",
+      "status": "PROVEN_FOR_TESTED_PROTOTYPE",
+      "requirement": "All specified safety, properness, atomicity, and utility tests.",
+      "evidence": "tests/psvr_rollout_toy reports those cases passing across 16 development-prefix probes and all ten named fixtures"
+    },
+    {
+      "id": "11_POLICY_BEHAVIOR",
+      "status": "PARTIAL",
+      "requirement": "Ten named qualitative checks including symmetric rollout and no f_min override.",
+      "evidence": "Named pi0/properness, late closure, FIFO, scan, capacity failure, and high-value/no-floor tests pass; scientific M1 behavior remains blocked"
+    },
+    {
+      "id": "12_DEVELOPMENT_SMOKE",
+      "status": "NOT_RUN_PROTOCOL_BLOCKED",
+      "requirement": "Run correctness-only smoke over all frozen development seeds without rankings or scientific metrics.",
+      "evidence": "TOY_SIMULATOR_DEVELOPMENT_SMOKE_AUDIT.json records zero episodes and no seed-file access because the generator/M1 contract is not frozen"
+    },
+    {
+      "id": "13_CODE_FREEZE",
+      "status": "NOT_ACHIEVED",
+      "requirement": "Freeze source, configuration, seeds, schema, tests, and heldout runner after a passing smoke.",
+      "evidence": "TOY_SIMULATOR_FREEZE_MANIFEST.json status is NOT_FROZEN_BLOCKED_INTERNAL_INCONSISTENCY"
+    },
+    {
+      "id": "14_ADVERSARIAL_REVIEW",
+      "status": "COMPLETED_WITH_BLOCKER",
+      "requirement": "Independent post-amendment review and at most one evidence-backed direct repair.",
+      "evidence": "POST_AMENDMENT_ADVERSARIAL_REVIEW.md; one direct repair made the realized-episode M1 evaluator fail closed"
+    },
+    {
+      "id": "15_COMPLETION_AUDIT",
+      "status": "FAILED_AS_EXPECTED",
+      "requirement": "Prove complete amendment, simulator, smoke, freeze, no forbidden access, all hashes/tests/review clear.",
+      "evidence": "UPDATED_PREIMPLEMENTATION_COMPLETION_AUDIT.json reports BLOCKED_INTERNAL_INCONSISTENCY"
+    },
+    {
+      "id": "16_SUCCESS_TERMINAL_STATE",
+      "status": "NOT_ACHIEVED",
+      "requirement": "PREIMPLEMENTATION_FREEZE_FOR_TOY=COMPLETE while physical remains blocked.",
+      "evidence": "POST_AMENDMENT_FINAL_REPORT.md reports toy freeze BLOCKED_INTERNAL_INCONSISTENCY"
+    },
+    {
+      "id": "18_NEXT_COMMAND",
+      "status": "PREPARED_BUT_UNAUTHORIZED",
+      "requirement": "Prepare exactly one unexecuted heldout command matching the runner CLI.",
+      "evidence": "NEXT_HELDOUT_COMMAND.md contains one command; runner source accepts both flags and fails before seed access because preregistration is unauthorized"
+    }
+  ],
+  "prohibitions": {
+    "heldout_h1a_comparison_run": false,
+    "heldout_policy_metrics_read": false,
+    "policy_ranking_generated": false,
+    "development_metrics_used_for_selection": false,
+    "physical_oracle_calls_started": 0,
+    "gpu_extraction_jobs_started": 0,
+    "real_policy_matrix_run": false,
+    "heldout_real_data_opened": false,
+    "physical_bounds_recalibrated": false,
+    "learned_scheduler_or_rl_added": false
+  },
+  "decisive_blockers": [
+    "ratio_draw has no authoritative position in the ordered RNG schedule",
+    "no authorized visible-history posterior/conditional transition kernel for M1",
+    "policy-visible episode_id reveals deterministic construction seed"
+  ],
+  "next_highest_value_action": "Explicitly authorize or reject the result-blind Branch-A D3/D4 consistency amendment; activation is required before repairing visibility, implementing the posterior kernel, running smoke, or freezing code."
+}

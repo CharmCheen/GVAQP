@@ -1,0 +1,17 @@
+requirement,status,evidence
+C0 contract recovery,PASS,audit/C0_CONTRACT_RECOVERY.md
+Frozen fact reproduction,PASS,audit/FROZEN_FACT_REPRODUCTION.csv
+Source and input hashes,PASS,config manifests
+GPU availability,PASS,A100 80GB available
+Strict model identity,PASS,existing strict model hash recovered read-only
+Numerical ANY accuracy thresholds,BLOCKER,missing in every governing C0 source
+Numerical COUNT accuracy thresholds,BLOCKER,missing in every governing C0 source
+Prompt/parser freeze,NOT_STARTED,hard stop occurred in Phase 0
+Interval sample freeze,NOT_STARTED,hard stop occurred in Phase 0
+Physical calls,PASS_ZERO_CALLS,oracle/VLM_CALL_LEDGER.csv has header only
+Accuracy evaluation,NOT_APPLICABLE,contract blocked before inference
+Physical cost model,NOT_APPLICABLE,contract blocked before inference
+C0 replay,NOT_APPLICABLE,contract blocked before inference
+Decision compliance,PASS,required INTERVAL_OPERATOR_CONTRACT_BLOCKED label used
+No unauthorized work,PASS,no model download training prompt tuning or hierarchy implementation
+File-manifest first attempt,RECOVERED,symlink-resolved implementation path initially selected repository src directory; no inference impact

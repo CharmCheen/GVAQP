@@ -1,0 +1,72 @@
+{
+  "Q2_fail_closed_policy": "YOLOP Q2 emits no eligible track candidates and unit score 0. No hidden YOLOv8 detector, semantic oracle, textual evidence, or hybrid frontend is permitted.",
+  "audit_version": "PSVR_PROXY_CAPABILITY_V1",
+  "audited_at_utc": "2026-07-16T18:28:10.620974+00:00",
+  "decisive_finding": "Frozen YOLOP ONNX heads have nc=1 vehicle detection. They cannot directly instantiate the preregistered person/bicycle/motorcycle Q2 tracks.",
+  "heldout_opened": false,
+  "models": {
+    "Y8": {
+      "class_support": {
+        "Q1": [
+          "bicycle",
+          "car",
+          "motorcycle",
+          "bus",
+          "truck"
+        ],
+        "Q2": [
+          "person",
+          "bicycle",
+          "motorcycle"
+        ]
+      },
+      "detector": "YOLOv8n",
+      "family": "YOLOV8",
+      "resolution": 640,
+      "road_geometry": false,
+      "weight_path": "/qiuyeqing/llama_prl/G-ARC/models/yolo/yolov8n.pt",
+      "weight_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36"
+    },
+    "YP320": {
+      "class_support": {
+        "Q1": [
+          "vehicle"
+        ],
+        "Q2": []
+      },
+      "detector": "YOLOP-320",
+      "detector_classes": 1,
+      "family": "YOLOP",
+      "onnx_output_shape": [
+        1,
+        6300,
+        6
+      ],
+      "resolution": 320,
+      "road_geometry": true,
+      "weight_path": "/qiuyeqing/llama_prl/G-ARC/YOLOP/weights/yolop-320-320.onnx",
+      "weight_sha256": "86d6e8b6dfdef195c061e9bcad82d9487bb5ee1ac4a1cf9a3dc4736657a07369"
+    },
+    "YP640": {
+      "class_support": {
+        "Q1": [
+          "vehicle"
+        ],
+        "Q2": []
+      },
+      "detector": "YOLOP-640",
+      "detector_classes": 1,
+      "family": "YOLOP",
+      "onnx_output_shape": [
+        1,
+        25200,
+        6
+      ],
+      "resolution": 640,
+      "road_geometry": true,
+      "weight_path": "/qiuyeqing/llama_prl/G-ARC/YOLOP/weights/yolop-640-640.onnx",
+      "weight_sha256": "cd66a3e0087a7258ae07768cc02cb742eed93865727ae4c9baf969b8fa190696"
+    }
+  },
+  "scientific_interpretation": "This is a measured candidate-family capability limitation, not a reason to change Q2 or add an unregistered hybrid."
+}

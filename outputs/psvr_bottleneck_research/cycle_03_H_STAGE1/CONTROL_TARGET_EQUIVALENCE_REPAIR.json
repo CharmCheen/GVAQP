@@ -1,0 +1,17 @@
+{
+  "repair_id": "H_STAGE1_FROZEN_CONTROL_TARGET_RESTORE_V1",
+  "decision": "PASS",
+  "trigger": "Refreshing stale latency observations changed planned_scan_actions() even though H-STAGE1 preregistered F0 as the exact historical C10 fixed control.",
+  "invalidated_result": "The first refreshed-profile F0 V0_Q1 trace used 6 SCAN and 2 VERIFY opportunities instead of historical 3/1; all remaining attempts were stopped and retained.",
+  "repair": "Read target_scan_actions and target_verify_opportunities from the frozen H-BOTTLE2 C10 replicate-0 artifact for each task/deadline.",
+  "frozen_targets": {
+    "V0_Q1": "3 SCAN / 1 VERIFY at both deadlines",
+    "V0_Q2": "3 SCAN / 1 VERIFY at both deadlines",
+    "V1_Q1": "12 SCAN / 4 VERIFY at both deadlines",
+    "V1_Q2": "12 SCAN / 4 VERIFY at both deadlines"
+  },
+  "method_rule_changed": false,
+  "deadline_changed": false,
+  "invalidated_artifacts_retained_at": "outputs/psvr_bottleneck_research/cycle_03_H_STAGE1/invalidated_recomputed_action_ceiling_v0",
+  "heldout_opened": false
+}

@@ -1,0 +1,33 @@
+{
+  "hypothesis": "H-SCAN-COMP1",
+  "status": "FROZEN_BEFORE_NEW_PHYSICAL_RUN",
+  "priority_components": {
+    "duration": "unobserved_span_units / N",
+    "debt": "0.5 * log2(unobserved_span_units + 1) / log2(N + 1)",
+    "proxy": "0.25 * max_seen(max(0,score)/max_abs_seen_score/(1+temporal_distance_to_cell_midpoint))"
+  },
+  "methods": {
+    "S0": "Fixed Coverage ascending range(1,N,3), reused from C0",
+    "S1": "duration + debt + proxy, reused from C1",
+    "S2": "duration + proxy; debt component computed for trace but weight set to zero",
+    "S3": "duration + debt; proxy component computed for trace but weight set to zero",
+    "S4": "debt + proxy; duration component computed for trace but weight set to zero"
+  },
+  "allocation": "A0 fixed 29 physical SCAN batches then at most five guarded physical VERIFY actions",
+  "deadlines": ["T_transition", "T_high"],
+  "runtime_repeats_per_cell": 3,
+  "semantic_sample_count": 1,
+  "required_runtime_trace_per_selected_cell": ["cell_id", "parent_cell_id", "scan_level", "unobserved_duration_component", "debt_component", "proxy_component", "total_priority", "selected_rank", "next_best_cell"],
+  "required_evaluator_only_trace": ["cell_event_overlap_after_execution", "time_to_first_event_cell_scan", "time_to_first_positive_proxy_exposure", "time_to_candidate_creation", "time_to_physical_VERIFY", "time_to_confirmation", "positive_cells_touched", "positive_candidate_exposure_per_scan", "distinct_cells_refined", "repeat_refinements", "global_gap_integral", "AnytimeAUC_F1"],
+  "decision_rules": {
+    "DEBT": "S2 fails while S3 and S4 retain S1 benefit",
+    "PROXY_SIGNAL": "S3 fails while S2 and S4 retain S1 benefit; H-COV1 REJECT",
+    "DURATION_COVERAGE": "S4 fails while S2 and S3 retain S1 benefit",
+    "COMPOSITE_INTERACTION": "only full S1 is effective",
+    "TIE_BREAK_OR_COMMON_PATH": "S2, S3, and S4 are all effective; H-COV1 NOT_IDENTIFIABLE_ON_CURRENT_TASK",
+    "FRAGILE": "all ablations fail and reused S1 cannot reproduce",
+    "INCONCLUSIVE": "any other pattern"
+  },
+  "effectiveness_definition": "At both frozen deadlines, all three runtime repeats recover at least one reference event with F1 and AnytimeAUC_F1 above S0; repeats are stability evidence, not semantic replication.",
+  "post_cycle_stop": "No additional tuning or single-video physical experiment. The next research phase must use at least 3 independent videos x at least 2 queries with the selected method, Fixed Coverage, and Uniform Temporal."
+}

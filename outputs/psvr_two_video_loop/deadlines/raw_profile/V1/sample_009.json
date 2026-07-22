@@ -1,0 +1,103 @@
+{
+  "cache_replay": false,
+  "commit": {
+    "materializer_mode": "persistent_clean_spawn_predeadline",
+    "raw_observation_commit": {
+      "atomic_replace_seconds": 0.001191364,
+      "fsync_seconds": 0.00086766,
+      "payload_sha256": "714b6e01a34cb6ac0f0a7518988065bc81a68b08ec7f0f6a8b7b6fb17be6537b",
+      "serialize_seconds": 0.000253403,
+      "total_seconds": 0.003755422
+    },
+    "snapshot_commit": {
+      "atomic_replace_seconds": 0.001106977,
+      "fsync_seconds": 0.000608526,
+      "payload_sha256": "69874fbb4e19955857ec5e273175b5b83e4499e6be6ef4a1c441881f5ff8aad1",
+      "serialize_seconds": 6.1204e-05,
+      "total_seconds": 0.002393719
+    },
+    "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_two_video_loop/deadlines/raw_profile/V1/sample_009_snapshot.json",
+    "stage_seconds": {
+      "atomic_replace": 0.001106977,
+      "fsync": 0.000608526,
+      "materialize": 0.021190807,
+      "observation_persist": 0.003755422,
+      "serialize": 6.1204e-05
+    },
+    "total_seconds": 0.0285827
+  },
+  "commit_wall_seconds": 0.028613017,
+  "confirmed_events": 0,
+  "oracle_result": {
+    "cache_replay": false,
+    "confidence": "high",
+    "cuda_synchronized_before_and_after": true,
+    "end_time": 5390.0,
+    "frame_identity_verified": true,
+    "generic_parsed_label": "negative",
+    "logical_oracle_call": true,
+    "oracle_build_id": "two_video_v1_oracle_7e37193ced4063695206",
+    "parse_status": "ok",
+    "parsed": {
+      "abstain_reason": null,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "ego_relevant": false,
+      "event_end": null,
+      "event_start": null,
+      "event_type": "none",
+      "evidence": "The video shows a straight urban street at night with vehicles and pedestrians moving normally. No object is observed entering the ego vehicle's path from outside the driving corridor. Traffic flows smoothly without any merging, cutting, or crossing into the ego path. Pedestrians are on sidewalks or crosswalks without encroaching into the driving lane. No spatial conflict or attention-requiring event is visible.",
+      "involved_object": "none",
+      "label": "negative",
+      "negative_reason": "no_ego_path_interaction"
+    },
+    "parsed_label": "negative",
+    "physical_oracle_invocation": true,
+    "projection_allowed_involved_objects": [
+      "cyclist",
+      "vehicle"
+    ],
+    "query_id": "Q1",
+    "raw": "{\n  \"label\": \"negative\",\n  \"event_start\": null,\n  \"event_end\": null,\n  \"event_type\": \"none\",\n  \"involved_object\": \"none\",\n  \"ego_relevant\": false,\n  \"boundary_status\": \"ok\",\n  \"complete_event_visible\": true,\n  \"confidence\": \"high\",\n  \"evidence\": \"The video shows a straight urban street at night with vehicles and pedestrians moving normally. No object is observed entering the ego vehicle's path from outside the driving corridor. Traffic flows smoothly without any merging, cutting, or crossing into the ego path. Pedestrians are on sidewalks or crosswalks without encroaching into the driving lane. No spatial conflict or attention-requiring event is visible.\",\n  \"negative_reason\": \"no_ego_path_interaction\",\n  \"abstain_reason\": null\n}",
+    "raw_sha256": "f1db3cf7c35f6efc36612142edae8b62c0925358267ac945847cf5e7f040775a",
+    "recorded_at_utc": "2026-07-18T02:38:37.193105+00:00",
+    "rng_seed": 20261248,
+    "service_total_seconds": 23.517543964,
+    "session_id": "deadline_profile_V1_009",
+    "stage_seconds": {
+      "cleanup": 1.308571327,
+      "clip_extraction": 0.580682335,
+      "oracle_inference": 16.956850634,
+      "oracle_parse": 0.000142085,
+      "oracle_postprocess": 0.000668368,
+      "oracle_preprocess": 4.670540268
+    },
+    "start_time": 5380.0,
+    "unit_id": 538,
+    "video_id": "V1"
+  },
+  "physical_oracle_only": true,
+  "query_wall_seconds": 23.518235285,
+  "recorded_at_utc": "2026-07-18T02:38:37.193105+00:00",
+  "sample_index": 9,
+  "service_total_seconds": 23.517543964,
+  "session_initialization": {
+    "prior_query_count": 0,
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V1_009",
+    "video_id": "V1"
+  },
+  "session_summary": {
+    "physical_calls": 1,
+    "queried_ids": [
+      538
+    ],
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V1_009",
+    "video_id": "V1"
+  },
+  "status": "ok",
+  "unit_id": 538,
+  "video_id": "V1"
+}

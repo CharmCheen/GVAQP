@@ -1,0 +1,90 @@
+{
+  "content_identity_evidence": {
+    "dataset2_role_artifact": "src/garc_eval/outputs/event_native_aqp_autonomous_research_sprint_v1/reports/DATASET2_ROLE_ANALYSIS.md",
+    "duplicate_groups": [
+      {
+        "group_id": "DUPLICATE_001",
+        "paths": [
+          "/qiuyeqing/llama_prl/G-ARC/datasets/casq_external/nexar/videos_hf/train/positive/00822.mp4",
+          "/qiuyeqing/llama_prl/G-ARC/datasets/casq_external/nexar/videos_smoke/positive/00822.mp4"
+        ],
+        "sha256": "c79d4f8a8045e012905952c9b1cb79615db1300fa1799339f88bbb5f69636243"
+      }
+    ],
+    "full_file_sha256_computed_by_this_audit": 606,
+    "heldout_identity_hashes_copied_from_existing_manifest": 1,
+    "realcartest_lineage_artifact": "AQP_Algorithm_Invention_Sprint_v1/operator_validation/realcartest_event_enumerate_v2/video/DERIVED_SLICE_LINEAGE.csv"
+  },
+  "definition": [
+    "not crop/reencode/resolution/fps copy",
+    "not overlapping same source session",
+    "sufficient duration for progressive partial-proxy",
+    "stable decode",
+    "physical proxy and oracle executable"
+  ],
+  "eligible_sources": [
+    {
+      "absolute_path": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4",
+      "duration_seconds": 3462.930499,
+      "file_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+      "source_name": "long_video_dataset3"
+    }
+  ],
+  "heldout_opened": false,
+  "heldout_opened_definition": "no heldout semantic reference, label, method evaluation, or tuning access",
+  "nexar_duration_audit": {
+    "maximum_seconds": 49.464883,
+    "minimum_seconds": 15.0,
+    "over_60_seconds": 0,
+    "over_minimum_workload_seconds": 0,
+    "path_count": 604,
+    "unique_file_count": 603
+  },
+  "rejected_key_candidates": [
+    {
+      "reason": "bytes absent; later role audit identifies in-cabin driver-facing view as semantically unsuitable",
+      "source": "long_video_dataset2"
+    },
+    {
+      "reason": "historical development/reference long-source bytes are absent",
+      "source": "realcartest"
+    },
+    {
+      "reason": "documented first-5000-frame derivative of realcartest",
+      "source": "realcartest_5k"
+    },
+    {
+      "reason": "canonical heldout explicitly excluded; existing manifest also records only 43.043333 seconds",
+      "source": "test_heldout"
+    },
+    {
+      "reason": "604 paths / 603 unique files, duration 15.000000-49.464883s; each <=5 frozen units",
+      "source": "Nexar collection"
+    },
+    {
+      "reason": "archive has no video-container entries; image-sequence sessions are approximately 10-26 seconds",
+      "source": "DrivingDojo-mini archive"
+    }
+  ],
+  "user_input_qualification": {
+    "independence_limit": "provider capture-session declaration plus exact-content duplicate audit; any uncertain lineage remains ineligible",
+    "placement_root": "/qiuyeqing/llama_prl/G-ARC/data/realcam/psvr_dev_inputs",
+    "query_semantic_eligibility": "not assessed until frozen Phase B/C",
+    "required_declaration": {
+      "capture_session_id": "nonempty and unique",
+      "known_derivation_operation": null,
+      "known_parent_video": null,
+      "source_kind": "original_continuous_capture"
+    },
+    "required_sidecar_suffix": ".source.json",
+    "technical_probe": "ffprobe plus start/middle/tail one-second physical decode"
+  },
+  "workload_length_derivation": {
+    "A0_scan_batches_before_verify": 29,
+    "batch_size": 4,
+    "frozen_unit_seconds": 10,
+    "minimum_seconds_used": 1200.0,
+    "recommended_seconds": 1800.0,
+    "units_needed_before_full_coverage": 117
+  }
+}

@@ -1,0 +1,26 @@
+check,status,evidence
+expected_run_ids_all_present,PASS,missing=0
+no_unexpected_run_ids,PASS,unexpected=0
+no_duplicate_run_ids,PASS,rows=1476 unique=1476
+configs_match_frozen_manifest,PASS,mismatches=0
+seeds_match_frozen_manifest,PASS,mismatches=0
+budgets_match_frozen_manifest,PASS,mismatches=0
+all_traces_parse,PASS,failed=0
+no_duplicate_query_within_run,PASS,failed_runs=0
+no_budget_violations,PASS,failed_runs=0
+logical_oracle_cost_complete,PASS,failed_runs=0; total_logical_calls=64614
+event_metrics_recompute,PASS,failed_runs=0
+compatible_outputs_rematerialize,PASS,failed_controlled_or_current_runs=0
+physical_vlm_calls_separated,PASS,oracle_build=1 method_runs=0
+all_raw_oracle_inputs_match_v2_identities,PASS,units=347
+unit346_old_cache_never_used,PASS,unit346=V2_NEW_VLM_RESPONSE
+all_reused_cache_content_equivalent,PASS,reused=346
+no_planner_label_leakage,PASS,public units/proxy and adapter input contain no label/oracle columns
+reference_lineage_complete,PASS,rebuilt_from_347_v2_observations
+matcher_materializer_source_hashes_match,PASS,"{""abae_adapter"": ""1b548aa71f91b3c98e041bafa534d638c1778493a6de19d34bf9707351e43a2e"", ""arc_adapter"": ""220be4e6f813329fc2a144cbb376ff5aa6f778f2881bf0146c14a3c9292ed9c9"", ""benchmark_lib"": ""0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610"", ""benchmark_pipeline"": ""9acc5de2df46bd7cd1e5b360cde0c13a65d0e6002acf0d229f7e94ae95f8ace5"", ""map_anchor"": ""005e659c0918c9fab768efe928344b04b5e087d75b154ea2c4be5076ca2d18e2"", ""supg_adapter"": ""c994c136c09753cbed0f358b89590dcff2ce8784f6facadc3bd2c30953477f2b""}"
+benchmark_semantic_hashes_remained_frozen,PASS,Protected immutable files unchanged; mutable BENCHMARK_MANIFEST envelope excluded by corrected scope; benchmark ID still recomputes.
+auc_recomputes,PASS,rows=16
+native_controlled_tracks_distinct,PASS,"{'controlled_track': 732, 'native_track': 732, 'current_method': 12}"
+raw_oracle_manifest_complete,PASS,347/347
+file_manifest_self_validation,PASS,self-excluding manifest regenerated as final package write after detecting finalize stdout ordering issue
+legacy_generation_configuration_identity_proven,FAIL,Generation-time model/processor/video-processor/package/full-generation hashes are unresolved for 346 reused legacy responses; strict cache-identity equivalence is unproven.

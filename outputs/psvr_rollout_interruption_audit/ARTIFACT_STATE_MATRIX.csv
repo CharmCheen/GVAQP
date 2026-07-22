@@ -1,0 +1,14 @@
+path,exists,state,evidence
+docs/psvr_rollout_preimplementation/09_PROTOCOL_AMENDMENT_D2_SPLIT.md,true,COMPLETE,corresponding JSON exists and updated freeze manifest hash matches
+docs/psvr_rollout_preimplementation/10_D2_TOY_NUMERIC_BINDING.md,true,COMPLETE,corresponding JSON has exact-support semantics
+docs/psvr_rollout_preimplementation/11_TOY_SIMULATOR_IMPLEMENTATION_SPEC.md,true,PRESENT,implementation remains blocked by frozen manifest defects
+docs/psvr_rollout_preimplementation/12_TOY_SIMULATOR_INVARIANTS.md,true,PRESENT,36 focused tests passed with one expected failure
+docs/psvr_rollout_preimplementation/13_H_ROLLOUT1A_EXECUTION_PROTOCOL.md,true,PRESENT,held-out runner exists but was not executed
+outputs/psvr_rollout_preimplementation/PROTOCOL_AMENDMENT_D2_SPLIT.json,true,COMPLETE,hash matches updated freeze manifest
+outputs/psvr_rollout_preimplementation/D2_TOY_NUMERIC_BINDING.json,true,COMPLETE_VERIFIED,hash matches updated freeze manifest
+outputs/psvr_rollout_preimplementation/UPDATED_H_ROLLOUT1A_PREREGISTRATION.json,true,REBOUND_BUT_BLOCKED,explicit internal-consistency block
+src/garc_eval/psvr_rollout_toy,true,PARTIAL_IMPORTABLE,all listed modules compile and focused tests pass
+tests/psvr_rollout_toy,true,PASS_WITH_SEED_EXPOSURE,36 passed 1 xfailed; one test reads heldout seed file
+outputs/psvr_rollout_preimplementation/TOY_SIMULATOR_DEVELOPMENT_SMOKE_AUDIT.json,true,NOT_RUN_PROTOCOL_BLOCKED,zero completed episodes
+outputs/psvr_rollout_preimplementation/TOY_SIMULATOR_FREEZE_MANIFEST.json,true,NOT_FROZEN_BLOCKED_INTERNAL_INCONSISTENCY,lists four blocking defects
+outputs/psvr_rollout_preimplementation/h_rollout1a_heldout,false,NOT_CREATED,verifier confirms absent-or-empty but heldout seed visibility occurred via test

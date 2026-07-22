@@ -1,0 +1,83 @@
+schema_version: PSVR_TOY_PARAMETER_DISTRIBUTION_V1
+status: FROZEN_RESULT_BLIND
+sampling_unit: independent_latent_video_episode
+construction_spec: outputs/psvr_rollout_preimplementation/TOY_CONSTRUCTION_SPEC.json
+construction_spec_sha256: 7a103ce7d3cc80721d60d0a4a7ccb6d5eb63c1d2c10ea699511eec03f5d06402
+named_scenario_spec: outputs/psvr_rollout_preimplementation/TOY_NAMED_SCENARIOS.json
+named_scenario_spec_sha256: 3cf05ee6fe1033fb5636aaa6c3c116ca90f0d8c4575ed9432ed3e17415b16471
+rng: SplitMix64_with_frozen_uint64_fixture
+joint_sampler: ordered_draw_schedule_in_construction_spec
+axes:
+  event_density:
+    family: LOG_UNIFORM
+    units: expected_events_per_region
+    development_by_process: {UNIFORM_SPARSE: [0.005, 0.03], UNIFORM_DENSE: [0.08, 0.20], BURSTY_CLUSTERED: [0.02, 0.12]}
+    heldout_by_process: {UNIFORM_SPARSE: [0.003, 0.04], UNIFORM_DENSE: [0.06, 0.25], BURSTY_CLUSTERED: [0.015, 0.15]}
+  burstiness:
+    processes: [UNIFORM_SPARSE, UNIFORM_DENSE, BURSTY_CLUSTERED]
+    assignment: split_index_mod_3
+  candidate_quality:
+    family: UNIFORM
+    development_range: [0.10, 0.75]
+    heldout_range: [0.05, 0.80]
+  duplicate_factor:
+    family: LOG_UNIFORM_THEN_1_PLUS_POISSON
+    development_range: [1.0, 6.0]
+    heldout_range: [1.0, 8.0]
+  scan_confirm_cost_ratio:
+    assignment: floor_split_index_over_3_mod_3
+    regimes:
+      SCAN_CHEAP: [0.05, 0.30]
+      BALANCED: [0.30, 1.50]
+      SCAN_EXPENSIVE: [1.50, 5.00]
+  cost_variance:
+    family: BOUNDED_TWO_POINT
+    development_range: [0.0, 0.6]
+    heldout_range: [0.0, 0.8]
+  estimator_noise:
+    H_ROLLOUT1A: 0.0
+    reserved_schema_range: [0.0, 1.0]
+  grouping_error:
+    under_merge_rate_range: [0.0, 0.35]
+    over_merge_rate_range: [0.0, 0.25]
+    over_merge_causes_irrecoverable_suppression: true
+event_process:
+  M_categorical: {values: [16, 32, 64], weights: [0.25, 0.50, 0.25]}
+  event_count: Poisson_M_times_event_density
+  event_length_seconds: LOG_UNIFORM_[0.5,40]_clipped_to_media
+  actor_count_categorical: {1: 0.75, 2: 0.20, 3: 0.05}
+  hard_negative_rate_range: [0.0, 0.50]
+  region_activity_multiplier_range: [0.5, 2.0]
+oracle_materialization:
+  H_ROLLOUT1A: {true_positive_rate: 1.0, false_positive_rate: 0.0, materialization_success_rate: 1.0}
+  H_ROLLOUT1B_reserved: {true_positive_rate_range: [0.8, 1.0], false_positive_rate_range: [0.0, 0.2], materialization_success_rate_range: [0.8, 1.0]}
+planning:
+  primary: {mode: IDEAL_ZERO, seconds: 0.0}
+  auxiliary_parametric: {family: CONSTANT, seconds_over_confirm_cost: [0.01, 0.05, 0.10, 0.25]}
+horizon_rule:
+  T_floor: smallest preregistered grid horizon at which any non-clairvoyant baseline can complete one SCAN plus one CONFIRM under that episode's nominal costs
+  T_saturation: smallest preregistered grid horizon at which Scan-Then-Confirm reaches at least 0.99 of the DP ceiling in expected primary utility
+  no_saturation_rule: if no grid point reaches 0.99, set status NO_SATURATION_WITHIN_GRID and report outside Gate C; never extrapolate or alter grid
+  T_transition: geometric mean of finite T_floor and T_saturation; status NO_TRANSITION and report outside Gate C if either is unavailable or floor >= saturation
+  horizon_grid_confirm_cost_units: [1.25, 1.5, 2, 3, 4, 6, 8, 12, 16, 24, 32]
+splits:
+  development:
+    seeds: [11000, 11001, 11002, 11003, 11004, 11005, 11006, 11007, 11008, 11009, 11010, 11011, 11012, 11013, 11014, 11015, 11016, 11017, 11018, 11019, 11020, 11021, 11022, 11023, 11024, 11025, 11026, 11027, 11028, 11029, 11030, 11031, 11032, 11033, 11034, 11035, 11036, 11037, 11038, 11039, 11040, 11041, 11042, 11043, 11044, 11045, 11046, 11047, 11048, 11049, 11050, 11051, 11052, 11053, 11054, 11055, 11056, 11057, 11058, 11059, 11060, 11061, 11062, 11063, 11064, 11065, 11066, 11067, 11068, 11069, 11070, 11071, 11072, 11073, 11074, 11075, 11076, 11077, 11078, 11079, 11080, 11081, 11082, 11083, 11084, 11085, 11086, 11087, 11088, 11089, 11090, 11091, 11092, 11093, 11094, 11095, 11096, 11097, 11098, 11099, 11100, 11101, 11102, 11103, 11104, 11105, 11106, 11107, 11108, 11109, 11110, 11111, 11112, 11113, 11114, 11115, 11116, 11117, 11118, 11119, 11120, 11121, 11122, 11123, 11124, 11125, 11126, 11127]
+    use: implementation correctness and informal debugging only
+  heldout:
+    seeds: [91000, 91001, 91002, 91003, 91004, 91005, 91006, 91007, 91008, 91009, 91010, 91011, 91012, 91013, 91014, 91015, 91016, 91017, 91018, 91019, 91020, 91021, 91022, 91023, 91024, 91025, 91026, 91027, 91028, 91029, 91030, 91031, 91032, 91033, 91034, 91035, 91036, 91037, 91038, 91039, 91040, 91041, 91042, 91043, 91044, 91045, 91046, 91047, 91048, 91049, 91050, 91051, 91052, 91053, 91054, 91055, 91056, 91057, 91058, 91059, 91060, 91061, 91062, 91063, 91064, 91065, 91066, 91067, 91068, 91069, 91070, 91071, 91072, 91073, 91074, 91075, 91076, 91077, 91078, 91079, 91080, 91081, 91082, 91083, 91084, 91085, 91086, 91087, 91088, 91089, 91090, 91091, 91092, 91093, 91094, 91095, 91096, 91097, 91098, 91099, 91100, 91101, 91102, 91103, 91104, 91105, 91106, 91107, 91108, 91109, 91110, 91111, 91112, 91113, 91114, 91115, 91116, 91117, 91118, 91119, 91120, 91121, 91122, 91123, 91124, 91125, 91126, 91127, 91128, 91129, 91130, 91131, 91132, 91133, 91134, 91135, 91136, 91137, 91138, 91139, 91140, 91141, 91142, 91143, 91144, 91145, 91146, 91147, 91148, 91149, 91150, 91151, 91152, 91153, 91154, 91155, 91156, 91157, 91158, 91159, 91160, 91161, 91162, 91163, 91164, 91165, 91166, 91167, 91168, 91169, 91170, 91171, 91172, 91173, 91174, 91175, 91176, 91177, 91178, 91179, 91180, 91181, 91182, 91183, 91184, 91185, 91186, 91187, 91188, 91189, 91190, 91191, 91192, 91193, 91194, 91195, 91196, 91197, 91198, 91199, 91200, 91201, 91202, 91203, 91204, 91205, 91206, 91207, 91208, 91209, 91210, 91211, 91212, 91213, 91214, 91215, 91216, 91217, 91218, 91219, 91220, 91221, 91222, 91223, 91224, 91225, 91226, 91227, 91228, 91229, 91230, 91231, 91232, 91233, 91234, 91235, 91236, 91237, 91238, 91239, 91240, 91241, 91242, 91243, 91244, 91245, 91246, 91247, 91248, 91249, 91250, 91251, 91252, 91253, 91254, 91255, 91256, 91257, 91258, 91259, 91260, 91261, 91262, 91263, 91264, 91265, 91266, 91267, 91268, 91269, 91270, 91271, 91272, 91273, 91274, 91275, 91276, 91277, 91278, 91279, 91280, 91281, 91282, 91283, 91284, 91285, 91286, 91287, 91288, 91289, 91290, 91291, 91292, 91293, 91294, 91295, 91296, 91297, 91298, 91299, 91300, 91301, 91302, 91303, 91304, 91305, 91306, 91307, 91308, 91309, 91310, 91311, 91312, 91313, 91314, 91315, 91316, 91317, 91318, 91319, 91320, 91321, 91322, 91323, 91324, 91325, 91326, 91327, 91328, 91329, 91330, 91331, 91332, 91333, 91334, 91335, 91336, 91337, 91338, 91339, 91340, 91341, 91342, 91343, 91344, 91345, 91346, 91347, 91348, 91349, 91350, 91351, 91352, 91353, 91354, 91355, 91356, 91357, 91358, 91359, 91360, 91361, 91362, 91363, 91364, 91365, 91366, 91367, 91368, 91369, 91370, 91371, 91372, 91373, 91374, 91375, 91376, 91377, 91378, 91379, 91380, 91381, 91382, 91383, 91384, 91385, 91386, 91387, 91388, 91389, 91390, 91391, 91392, 91393, 91394, 91395, 91396, 91397, 91398, 91399, 91400, 91401, 91402, 91403, 91404, 91405, 91406, 91407, 91408, 91409, 91410, 91411, 91412, 91413, 91414, 91415, 91416, 91417, 91418, 91419, 91420, 91421, 91422, 91423, 91424, 91425, 91426, 91427, 91428, 91429, 91430, 91431, 91432, 91433, 91434, 91435, 91436, 91437, 91438, 91439, 91440, 91441, 91442, 91443, 91444, 91445, 91446, 91447, 91448, 91449, 91450, 91451, 91452, 91453, 91454, 91455, 91456, 91457, 91458, 91459, 91460, 91461, 91462, 91463, 91464, 91465, 91466, 91467, 91468, 91469, 91470, 91471, 91472, 91473, 91474, 91475, 91476, 91477, 91478, 91479, 91480, 91481, 91482, 91483, 91484, 91485, 91486, 91487, 91488, 91489, 91490, 91491, 91492, 91493, 91494, 91495, 91496, 91497, 91498, 91499, 91500, 91501, 91502, 91503, 91504, 91505, 91506, 91507, 91508, 91509, 91510, 91511]
+    use: H-ROLLOUT1A primary decision; do not run without later explicit authorization
+  seed_universes_disjoint: true
+  parameter_distributions_distinct_and_frozen: true
+named_scenarios:
+  - VERIFY_FIRST_FAILURE
+  - SCAN_FIRST_FAILURE
+  - FIXED_PERIODIC_FAILURE
+  - CAPACITY_MATCHING_LOW_QUALITY_FAILURE
+  - SINGLE_HIGH_VALUE_FRONTIER
+  - DUPLICATE_HEAVY_FRONTIER
+  - LATE_HORIZON_CLOSURE
+  - HETEROGENEOUS_CONFIRM_COST
+  - DENSE_HOMOGENEOUS_BASELINE_FAVORABLE
+  - BURSTY_SCAN_FAVORABLE
+named_scenarios_in_primary_inference: false

@@ -1,0 +1,60 @@
+{
+  "schema_version": "dare_gate_a_frozen_v1",
+  "frozen_utc": "2026-07-11",
+  "video": "data/realcam/long_video_data/long_video_dataset3.mp4",
+  "unit_seconds": 10.0,
+  "query_text": "a vehicle, pedestrian, or cyclist entering the ego vehicle's path from outside the driving corridor",
+  "prompt_id": "enter_ego_path_zero_shot_v1",
+  "methods": {
+    "current_proxy": {
+      "source": "strict_benchmark_public_proxy",
+      "model_id": "strict_public_proxy",
+      "revision": "65d3233818f27aa55a08cdbefd832e6dac37b04cd744dd686576cddfcf7f6b7f",
+      "prompt_id": "not_applicable",
+      "seed_namespace": 0
+    },
+    "image_text": {
+      "model_id": "openai/clip-vit-base-patch32",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "sampling": "one center frame per 10-second unit",
+      "prompt_id": "enter_ego_path_zero_shot_v1",
+      "seed_namespace": 1
+    },
+    "video_text": {
+      "model_id": "microsoft/xclip-base-patch32",
+      "revision": "a2e27a78a2b5d802e894b8a1ef14f3a8ce490963",
+      "sampling": "eight uniformly spaced frames per 10-second unit",
+      "prompt_id": "enter_ego_path_zero_shot_v1",
+      "seed_namespace": 2
+    },
+    "rank_fusion": {
+      "inputs": ["image_text", "video_text"],
+      "weights": [0.5, 0.5],
+      "rule": "weighted mean of descending percentile ranks; stable unit-id tie break",
+      "model_id": "rank_fusion",
+      "revision": "gate_a_frozen_v1",
+      "prompt_id": "enter_ego_path_zero_shot_v1",
+      "seed_namespace": 3
+    }
+  },
+  "top_k": [5, 10, 20, 24, 50],
+  "temporal_block_count": 5,
+  "gate_b": {
+    "seed_count": 500,
+    "base_seed": 20260711,
+    "delta": 0.05,
+    "recall_target": 0.8,
+    "audit_step": 10,
+    "certify_rate_required": 0.9,
+    "coverage_diagnostic_required": 0.94,
+    "go_cost_ratio": 0.7,
+    "presence_unit_cost": 1.0,
+    "certify_event_cost": 1.0,
+    "audit_unit_cost": 1.0
+  },
+  "inputs": {
+    "units": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/units.csv",
+    "events": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/event_reference.csv",
+    "public_proxy": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/benchmark/adapter_units.csv"
+  }
+}

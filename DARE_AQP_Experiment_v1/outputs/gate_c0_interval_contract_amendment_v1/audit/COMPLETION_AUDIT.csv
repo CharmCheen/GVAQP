@@ -1,0 +1,16 @@
+requirement,status,evidence
+Authoritative target recovery,PASS,audit/AUTHORITATIVE_INPUT_RECOVERY.md
+Source/input hashes,PASS,config manifests
+Safe three-valued ANY semantics,PASS,contract semantics and fallback table
+COUNT priority-only safety,PASS,COUNT contract and consistency rules
+Synthetic ANY error grid,PASS,derivation CSV and source
+Conservative feasible region,PASS,only sensitivity 1 specificity >=.99 UNKNOWN 0 passes
+COUNT error grid,PASS,descriptive non-gating grid
+Abstain/failure accounting,PASS,exhaustive policy table
+Exact finite-sample power,PASS,Clopper-Pearson tables
+160-call accounting,PASS,96+24+12+16+12=160
+Physical VLM calls,PASS_ZERO,0
+Contract machine readability,PASS,v2 JSON and hash
+Decision compliance,PASS,CONTRACT_INFEASIBLE_UNDER_160_CALLS
+Independent review,PASS,audit JSON
+File hashes,PASS,FILE_MANIFEST.csv

@@ -1,0 +1,43 @@
+{
+  "audit_timestamp": "2026-07-16T07:38:57Z",
+  "Y8-R_model": {
+    "exists": true,
+    "sha256_prefix": "f59b3d833e2ff32e"
+  },
+  "Y8-L_model": {
+    "exists": true,
+    "sha256_prefix": "f59b3d833e2ff32e"
+  },
+  "YP640-R_model": {
+    "exists": true,
+    "sha256_prefix": "cd66a3e0087a7258"
+  },
+  "YP640-L_model": {
+    "exists": true,
+    "sha256_prefix": "cd66a3e0087a7258"
+  },
+  "YP320-R_model": {
+    "exists": true,
+    "sha256_prefix": "86d6e8b6dfdef195"
+  },
+  "YP320-L_model": {
+    "exists": true,
+    "sha256_prefix": "86d6e8b6dfdef195"
+  },
+  "Y8-L_lgbm": {
+    "exists": true
+  },
+  "YP640-L_lgbm": {
+    "exists": true
+  },
+  "YP320-L_lgbm": {
+    "exists": true
+  },
+  "oracle_units": 347,
+  "oracle_positives": 39,
+  "oracle_events": 26,
+  "units": 347,
+  "b1_b2_same_dets": false,
+  "current_target_score_formula": "0.5 * clip(det_count,0,20)/20 + 0.5 * max_conf",
+  "note": "Previous target eval used simple count-based proxy, not LightGBM"
+}

@@ -1,0 +1,86 @@
+{
+  "T_short_use": "safety/floor diagnostic only",
+  "derivation": {
+    "T_high_rule": "runtime-scaled existing simple-baseline full-proxy p50",
+    "T_min_rule": "coarse p95 + physical VERIFY p95 + K3/commit p95 + safety",
+    "candidate_family_or_method_outcome_used": false,
+    "low_dimensionless_fraction": 0.5000000000000001,
+    "physical_profile": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_two_video_loop/deadlines/PROFILE_DECISION.json",
+    "simple_baseline_trace": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/stage_3_factorization/TRANSITION_DEADLINES.json",
+    "simple_baseline_trace_sha256": "c555c38358bb3b24bf1e126ecd5cbf650b9d02be2ddd2811d598689885793a98",
+    "transition_dimensionless_fraction": 0.9765756132103428
+  },
+  "formal_deadlines": [
+    "T_transition",
+    "T_high"
+  ],
+  "frozen_at_utc": "2026-07-16T22:42:40.343394+00:00",
+  "frozen_before_proxy_candidate_runs": true,
+  "heldout_opened": false,
+  "manifest_hash": "b102b2fcb393bb18d250f934ebcdce144aaefb0a352debf33ec443cd10813a10",
+  "manifest_version": "PSVR_TWO_VIDEO_TASK_DEADLINES_V1",
+  "tasks": [
+    {
+      "T_high": 123.9524739725,
+      "T_short": 87.672773436325,
+      "T_transition": 122.2528144965554,
+      "query_id": "Q1",
+      "task_id": "V0_Q1",
+      "video_id": "V0"
+    },
+    {
+      "T_high": 123.9524739725,
+      "T_short": 87.672773436325,
+      "T_transition": 122.2528144965554,
+      "query_id": "Q2",
+      "task_id": "V0_Q2",
+      "video_id": "V0"
+    },
+    {
+      "T_high": 202.7927274621175,
+      "T_short": 125.97845669609495,
+      "T_transition": 199.19407308333996,
+      "query_id": "Q1",
+      "task_id": "V1_Q1",
+      "video_id": "V1"
+    },
+    {
+      "T_high": 202.7927274621175,
+      "T_short": 125.97845669609495,
+      "T_transition": 199.19407308333996,
+      "query_id": "Q2",
+      "task_id": "V1_Q2",
+      "video_id": "V1"
+    }
+  ],
+  "video_regimes": {
+    "V0": {
+      "T_high_seconds": 123.9524739725,
+      "T_max_seconds": 123.9524739725,
+      "T_min_seconds": 51.393072900149974,
+      "T_short_seconds": 87.672773436325,
+      "T_transition_seconds": 122.2528144965554,
+      "coarse_proxy_p95_seconds": 13.15064991665,
+      "duration_scale_from_V0": 1.0,
+      "interval_width_seconds": 72.55940107235003,
+      "k3_snapshot_commit_p95_seconds": 0.07536728279999995,
+      "normalized_interval_width": 0.5853808217530858,
+      "physical_verify_p95_seconds": 37.16705570069997,
+      "safety_margin_seconds": 1.0
+    },
+    "V1": {
+      "T_high_seconds": 202.7927274621175,
+      "T_max_seconds": 202.7927274621175,
+      "T_min_seconds": 49.16418593007234,
+      "T_short_seconds": 125.97845669609495,
+      "T_transition_seconds": 199.19407308333996,
+      "coarse_proxy_p95_seconds": 21.515150759222347,
+      "duration_scale_from_V0": 1.6360522784491494,
+      "interval_width_seconds": 153.62854153204518,
+      "k3_snapshot_commit_p95_seconds": 0.19993404569999995,
+      "normalized_interval_width": 0.7575643537845488,
+      "physical_verify_p95_seconds": 26.449101125149994,
+      "safety_margin_seconds": 1.0
+    }
+  }
+}

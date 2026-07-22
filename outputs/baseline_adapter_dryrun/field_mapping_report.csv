@@ -1,0 +1,12 @@
+adapter_field,source_file,source_field,transform
+video_id,src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_label_aligned/base_units.csv,video_id,as string
+frame_idx,src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_label_aligned/base_units.csv,"row order after video_id,t_start,t_end sort",0-based integer unit index
+timestamp,src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_label_aligned/base_units.csv,t_start,float
+proxy_score,src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_label_aligned/cheap_signals_per_unit.csv,cheap_fused_score,"clip to [0,1]; no new proxy generated"
+oracle_label,src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_label_aligned/full_reference_units.csv,label_event,int(label_event > 0)
+start_frame,src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_label_aligned/base_units.csv,t_start,round(t_start * 10)
+end_frame,src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_label_aligned/base_units.csv,t_end,round(t_end * 10) - 1
+start_time,src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_label_aligned/base_units.csv,t_start,float
+end_time,src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_label_aligned/base_units.csv,t_end,float
+reference.start_frame,src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_label_aligned/reference_events.csv,t_start,round(t_start * 10)
+reference.end_frame,src/garc_eval/outputs/clean_interval_aqp_full_reference_v2_label_aligned/reference_events.csv,t_end,round(t_end * 10) - 1

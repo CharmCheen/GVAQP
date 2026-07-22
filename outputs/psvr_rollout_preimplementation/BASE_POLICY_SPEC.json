@@ -1,0 +1,100 @@
+{
+  "actions": [
+    "SCAN(region)",
+    "CONFIRM(hypothesis,witness)",
+    "STOP"
+  ],
+  "blocking_fields": {
+    "ALPHA_CONFIRM": "Separate marginal alpha=0.1 profiles do not establish alpha=0.1 for their summed complete CONFIRM obligation; direct paired calibration is required.",
+    "ALPHA_SCAN": "Cannot bind until the full SCAN duration distribution is calibrated.",
+    "MIN_ACTION_DURATION": "No certified strictly positive lower bound across complete SCAN and CONFIRM actions exists.",
+    "TOTAL_SCAN_BOUND": "No direct calibrated pre-action full-obligation SCAN bound exists."
+  },
+  "confirm_atomic_sequence": [
+    "VERIFY",
+    "PARSE",
+    "MATERIALIZE",
+    "ATOMIC_COMMIT",
+    "FRONTIER_UPDATE"
+  ],
+  "confirm_binding_evidence": {
+    "action_profile_sha256": "5a293b521f1f974e035f85dd0789b76b8cdb291687269cca721779aeebc95640",
+    "commit_profile_sha256": "b324853fce26014eccb2b84328ed552d863e5e6b28298c9e4299bef7b14e8fc6",
+    "durable_commit_upper_seconds": 0.2854655565,
+    "guard_required_sum_seconds": 27.390509267,
+    "scope": "empirical one-video/one-query/one-A800 workload; not WCET",
+    "verify_upper_seconds": 27.1050437105
+  },
+  "executable_physical_binding": false,
+  "f_min_forbidden_roles": [
+    "force_SCAN",
+    "veto_safe_CONFIRM",
+    "override_rollout"
+  ],
+  "f_min_role": [
+    "logging",
+    "stratified_analysis",
+    "plan_admission_candidate_feature",
+    "world_model_feature",
+    "alerting"
+  ],
+  "fail_closed_when_scan_binding_missing": true,
+  "forbidden_inputs": [
+    "future_proxy",
+    "unscanned_content",
+    "reference_labels",
+    "future_oracle_outcome",
+    "evaluator_bottleneck_label",
+    "rollout_result",
+    "m0_prediction",
+    "latent_event_id"
+  ],
+  "logical_spec_status": "COMPLETE",
+  "numeric_binding": {
+    "ALPHA_CONFIRM": null,
+    "ALPHA_SCAN": null,
+    "CONFIRM_WITNESS_DURATION": "unit-manifest interval: 10 seconds nominal; 5 seconds final row",
+    "MIN_ACTION_DURATION": null,
+    "REGION_DURATION": "10 seconds nominal; final row 5 seconds",
+    "REGION_OVERLAP": "manifest-defined; maximum observed 2.07 seconds at final boundary",
+    "SCAN_ITERATOR_MANIFEST": "bfbe4270936d267e36734b30174e83c47b0cb021cda3a9a9b6a7e7a7f709d182",
+    "STANDARD_CONFIRM_RESERVE": 27.390509267,
+    "TIE_BREAK_VERSION": "GROUP_FIFO_V1",
+    "TOTAL_CONFIRM_BOUND": 27.390509267,
+    "TOTAL_SCAN_BOUND": null
+  },
+  "properness_rank": "finite lexicographic rank: unscanned regions plus nonterminal witnesses; SCAN consumes one of 347 regions, CONFIRM terminalizes its witness, and every region emits finitely many witnesses",
+  "rejected_numeric_substitute": {
+    "legacy_scan_formula_seconds": 2.6691289902249995,
+    "reason": "Derived from per-frame p95 and an additive allowance, then updated after action completion; not a direct full-obligation pre-action bound and cannot be relabeled as B_S."
+  },
+  "safe_harbor": "STOP_STARTING_NEW_WORK_AND_RETURN_LAST_COMPLETE_DURABLE_SNAPSHOT",
+  "scan_iterator": {
+    "config_sha256": "39a619c5cf2e95a4152862e280907ccb839e09e0133c2e35ff5b88c1a4f96a19",
+    "manifest_path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/unit_table.csv",
+    "manifest_sha256": "bfbe4270936d267e36734b30174e83c47b0cb021cda3a9a9b6a7e7a7f709d182",
+    "order": "ascending (start_time, end_time, unit_id)",
+    "region_duration_seconds": "10 nominal; final manifest row may be 5",
+    "region_ids": "unit_id 0..346",
+    "region_overlap_seconds": "manifest-defined; rows 345/346 overlap 2.07 seconds, so no false zero-overlap claim",
+    "seek_decode_convention": "manifest start_frame/end_frame inclusive; media timestamps authoritative; 5 proxy FPS",
+    "source_revision_sha256": "db7a42a2d8e442d7270e5a84c20526e2ea5c8681a71f963a3ff2843c7c20e566"
+  },
+  "spec_id": "PSVR_SHIELDED_BASE_POLICY_V1",
+  "state": [
+    "scan_state",
+    "event_hypothesis_frontier",
+    "committed_events",
+    "execution_mode",
+    "frozen_query",
+    "remaining_wall_clock"
+  ],
+  "status": "BLOCKED_NUMERIC_BINDING",
+  "tie_break": [
+    "hypothesis_created_at",
+    "hypothesis_id",
+    "witness_created_at",
+    "witness_id"
+  ],
+  "tie_break_version": "GROUP_FIFO_V1"
+}

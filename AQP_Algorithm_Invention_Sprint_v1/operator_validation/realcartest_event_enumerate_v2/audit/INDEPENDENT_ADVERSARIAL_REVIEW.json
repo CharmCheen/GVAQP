@@ -1,0 +1,24 @@
+{
+  "result": "PASS_WITH_MATERIAL_CAVEATS",
+  "decision": "REALCARTEST_VIDEO_IDENTITY_BLOCKED",
+  "decision_compliance": "PASS_AFTER_REASONING_CORRECTION",
+  "checks": {
+    "previous_35_file_bundle": "PASS",
+    "previous_399_raw_hashes": "PASS_REVALIDATED",
+    "available_prefix_identity": "PASS_REPORTED_FIRST_5000_FRAMES",
+    "complete_399_response_source_identity": "FAIL_PARENT_BYTES_MISSING",
+    "all_399_response_binding": "NOT_RUN_IDENTITY_BLOCKED",
+    "physical_calls": "PASS_ZERO_BUNDLE_LOCAL",
+    "prohibited_actions": "PASS_NO_EVIDENCE_FOUND"
+  },
+  "decisive_evidence": [
+    "Historical runner names missing try_or_no/videos/realcartest.mp4 and a 3987.104-second timeline.",
+    "Session log reports realcartest_5k.mp4 was cut from the first 5000 parent frames.",
+    "Available prefix ends at 208.333333 seconds and cannot bind responses spanning the full parent timeline."
+  ],
+  "material_caveats": [
+    "Exact prefix frame equality cannot be recomputed without parent bytes.",
+    "Zero-call evidence is bundle-local; no external scheduler audit was available."
+  ],
+  "next_action": "Recover the original long parent bytes or authoritative complete frame/hash lineage sufficient to bind all 399 calls."
+}

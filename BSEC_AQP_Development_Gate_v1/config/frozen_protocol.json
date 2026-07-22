@@ -1,0 +1,71 @@
+{
+  "schema_version": "bsec_aqp_development_gate_v1",
+  "frozen_utc": "2026-07-12T15:15:04Z",
+  "research_status": "FROZEN_BEFORE_HELDOUT_CLIP_SCORING",
+  "objective": "Maximize event-level F1 across fixed exact-oracle-call budgets while returning distinct, oracle-supported events under one shared materializer.",
+  "budgets": [5, 10, 20, 50, 80, 100],
+  "unit_seconds": 10.0,
+  "query_text": "a vehicle, pedestrian, or cyclist entering the ego vehicle's path from outside the driving corridor",
+  "clip": {
+    "model_id": "openai/clip-vit-base-patch32",
+    "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "sampling": "one center frame per 10-second unit",
+    "prompt_id": "enter_ego_path_zero_shot_v1"
+  },
+  "primary_materializer": {
+    "name": "k3_bridge_safe",
+    "g_max": 1,
+    "d_core_max": 40.0,
+    "d_seg_max": 60.0
+  },
+  "primary_metric": "normalized_trapezoidal_event_f1_auc",
+  "development": {
+    "name": "dataset3_full_347",
+    "role": "exploratory_development_only",
+    "units": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/units.csv",
+    "oracle_observations": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/oracle_observations.csv",
+    "reference": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/event_reference.csv",
+    "clip_scores": "DARE_AQP_Experiment_v1/outputs/gate_a_final/raw_scores.csv",
+    "clip_checkpoints": "DARE_AQP_Experiment_v1/outputs/gate_a_final/checkpoints/image_text",
+    "arc_native_metrics": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/analysis/per_budget_metrics.csv"
+  },
+  "heldout": {
+    "name": "realcartest_2000_3200",
+    "role": "directional_cross_video_confirmation",
+    "source_video_status": "original video missing; exact-time frames reconstructed from retained overlapping 5-second clips",
+    "absolute_offset_seconds": 2000.0,
+    "units": "outputs/real_video_protocol_pilot_v1/frame_scores_adapter_ready.csv",
+    "reference": "outputs/real_video_protocol_pilot_v1/reference_segments_adapter_ready.csv",
+    "retained_clip_index": "experiments/roadclip_budget_v2/roadclip_budget_v2/vlm_oracle_expanded/proxy_scores.csv",
+    "arc_runs": "outputs/ours_vs_baselines_realcartest_v1/baseline_outputs"
+  },
+  "candidate": {
+    "method_id": "qtpc_h8",
+    "name": "Query-Temporal Peak Contrast",
+    "contrast_radius_units": 8,
+    "contrast_radius_seconds": 80.0,
+    "score": "c_i = s_i - max_{j: 0 < abs(j-i) <= 8} s_j",
+    "ranking": "descending c_i, then ascending unit_id",
+    "budget_policy": "take the first B units of the single nested ranking",
+    "selection_disclosure": "Radius 8 was selected on dataset3 after an exploratory dyadic sweep over 1,2,4,8,16,32. It is not claimed to be label-free tuning.",
+    "heldout_rule": "Apply radius 8 unchanged; do not tune or switch methods using heldout labels."
+  },
+  "baselines": {
+    "clip_topk": "descending raw CLIP score",
+    "temporal_nms_h8": "greedy CLIP ranking with +/-8-unit hard suppression, then CLIP-order fill",
+    "temporal_nms_h10_dev_selected": "greedy CLIP ranking with +/-10-unit hard suppression, then CLIP-order fill",
+    "mmr": "CLIP relevance percentile and cosine embedding similarity; lambda=0.5",
+    "facility_location": "query-weighted semantic facility location; development specification recorded by the runner",
+    "bsec": "semantic-temporal monotone-submodular cover; development specification recorded by the runner",
+    "arc_shared_k3": "ARC queried units rematerialized with the same k3_bridge_safe operator",
+    "arc_native_descriptive": "historical native ARC output; descriptive only because its materializer and returned duration differ",
+    "random": "uniform random nested rankings over fixed seeds",
+    "oracle_ceiling": "positive units first; diagnostic upper bound"
+  },
+  "decision_rule": {
+    "development_go": "QTPC F1-AUC exceeds CLIP top-k, ARC-shared-K3, MMR, facility location, BSEC, and both frozen temporal-NMS baselines.",
+    "heldout_replication": "QTPC F1-AUC exceeds CLIP top-k and ARC-shared-K3, improves at least four of six budget points over CLIP, and uses exactly B oracle observations at every budget.",
+    "native_arc_interpretation": "Native ARC is reported but cannot be a fair primary gate unless materialization and returned-duration contracts are equalized.",
+    "failure_action": "If heldout replication fails, reject QTPC as a general method and continue mechanism search without changing this frozen file."
+  }
+}

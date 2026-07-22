@@ -1,0 +1,100 @@
+{
+  "base_seed": 20260710,
+  "frame_config": {
+    "color": "cv2.COLOR_BGR2RGB",
+    "decoded_end_inclusive": true,
+    "fallback_decode_fps": 4.0,
+    "message_fps": 2.0,
+    "minimum_frames_before_fallback": 5,
+    "primary_decode_fps": 2.0
+  },
+  "generation_config": {
+    "do_sample": false,
+    "max_new_tokens": 256,
+    "randomness_policy": "greedy_with_per_unit_rng_identity_recorded",
+    "temperature": null
+  },
+  "hardware_runtime_identity": {
+    "cuda_available": true,
+    "cudnn_version": 91002,
+    "devices": [
+      {
+        "compute_capability": "8.0",
+        "index": 0,
+        "name": "NVIDIA A800-SXM4-80GB",
+        "total_memory_bytes": 85094825984,
+        "uuid": "391277ca-0990-1fb4-f6da-c7a79894f439"
+      }
+    ],
+    "nvidia_driver_versions": [
+      "580.65.06"
+    ],
+    "platform": "Linux-5.15.0-60-generic-x86_64-with-glibc2.35",
+    "python": "3.10.20 (main, Mar 11 2026, 17:46:40) [GCC 14.3.0]",
+    "torch_cuda_version": "12.6",
+    "torch_version": "2.12.0+cu126"
+  },
+  "model_file_manifest_sha256": "a27032176f0193562426fed825fc8822f6a8f562c83383f5ba9aab2e7aae1d00",
+  "model_full_content_hash": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+  "model_load_config": {
+    "device_map": "auto",
+    "torch_dtype": "bfloat16",
+    "trust_remote_code": true
+  },
+  "oracle_build_id": "strict_oracle_3b9ba1187c0449426978",
+  "parser_config": {
+    "confidence_domain": [
+      "high",
+      "low",
+      "medium"
+    ],
+    "label_domain": [
+      "abstain",
+      "negative",
+      "positive"
+    ],
+    "parser_version": "presence_json_parser_v1_stage2_compatible",
+    "required_keys": [
+      "label",
+      "confidence"
+    ]
+  },
+  "parser_source_hash": "c02b545c0c5d2969508eea9a5470f0cb67d71282b25059948106504f9f4edd31",
+  "processor_files": {
+    "chat_template.json": "5c72a170d2a4a1a3bc5adad2e689ae28138a9700e5b8c96c0266331e86c0acce",
+    "config.json": "d2dd0c60d01b9e195d9447c52da61c7302d28828524914c044d9c6e1b81d0427",
+    "generation_config.json": "1e241830b48b397cb0900101421df5450baddc7adf01e5fc86b5615865f3bae4",
+    "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+    "preprocessor_config.json": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+    "tokenizer.json": "a5d85b6dcc535e6b93115a9ef287e6132fdbf30270da6218194ba742261173c7",
+    "tokenizer_config.json": "c2da771801886ad9ae98181793ffd3dfb7f1af30f6f7c6a4e15d7dbba52e2399",
+    "video_preprocessor_config.json": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "prompt_sha256": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+  "rng_policy": {
+    "cublas_workspace_config": ":4096:8",
+    "deterministic_algorithms": true,
+    "numpy_seed": "BASE_SEED + unit_id",
+    "python_seed": "BASE_SEED + unit_id",
+    "torch_cuda_seed_all": "BASE_SEED + unit_id",
+    "torch_seed": "BASE_SEED + unit_id",
+    "warn_only": false
+  },
+  "runtime_package_content_hash": "1720fd948dbb1b03d3186f6a49cd8ac4788755be5ec59665ac843ff94c8ebd5f",
+  "runtime_package_manifest_sha256": "8a35e6b78671b959a27bdc4ba12194a664adb782c444a8e7929762ec16954d24",
+  "runtime_versions": {
+    "numpy": "2.2.6",
+    "opencv": "4.13.0",
+    "opencv_python": "4.13.0.92",
+    "pillow": "10.4.0",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.12.0+cu126",
+    "transformers": "5.10.0.dev0"
+  },
+  "sampling_code_hash": "5b038acb5450d76928b43d873d73decd1792969e0aa072f121b8f23b751e0240",
+  "script_sha256": "4e52a5d9dc4de906350dc4e69b2c26cfb414d41f4a4281822acefa42120d1458",
+  "video_fps": 30.000005775562784,
+  "video_frame_count": 103886,
+  "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+}

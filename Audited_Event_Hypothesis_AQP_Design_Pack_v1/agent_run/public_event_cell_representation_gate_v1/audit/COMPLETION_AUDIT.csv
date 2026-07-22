@@ -1,0 +1,35 @@
+requirement,status,evidence
+governing_v3_manifest_valid,PASS,41/41 governed entries hash-match
+frozen_facts_reproduced,PASS,13/13 required facts match primitive artifacts
+immutable_parent_hashes_valid,PASS,SOURCE_MANIFEST current hashes
+r1_config_and_ownership_frozen,PASS,INPUT_MANIFEST hashes
+single_r1_no_threshold_grid,PASS,FROZEN_R1_CONFIG
+evaluator_fields_absent_from_builder,PASS,structural builder input list
+no_new_cheap_primitives,PASS,only units/H1/audit public inputs
+all_structural_tests_pass,PASS,10/10 preregistered cases
+r0_exact_reproduction,PASS,900/900 P0/P1 rows
+formal_matrix_complete,PASS,15 cells x 30 seeds x 4 methods
+exact_method_set,PASS,R0/R1 x P0/P1 only
+p2_p3_absent,PASS,run registry
+exact_cell_seed_set,PASS,frozen S2 axes
+exact_budget_set,PASS,1800 x 6 metric rows
+no_duplicate_queries,PASS,primitive action traces
+no_budget_violations,PASS,100 queries per formal run
+required_trace_schema,PASS,selection/state/oracle/cost columns
+materializer_outputs_present,PASS,primitive materialized events
+match_outputs_present,PASS,primitive match rows
+action_universe_identity,PASS,450/450 instance hashes
+score_probability_identity,PASS,450/450 instance hashes
+oracle_mapping_identity,PASS,450/450 instance hashes
+budgets_seeds_identical_across_methods,PASS,paired registry
+audit_action_isolation,PASS,audit trace falsification
+saturation_changes_actual_selections,PASS,primitive selection_changed flag
+paired_distribution_reported,PASS,15 exact S2 cell effects
+ci_not_pseudoreplicated,PASS,one-video cells not treated independent
+physical_vlm_calls_zero,PASS,run registry and traces
+baseline_reruns_zero,PASS,run registry
+required_deliverables_present,PASS,required output tree
+decision_complies_with_frozen_gate,PASS,primary estimand decision predicate
+next_operator_not_executed,PASS,output tree inspection
+independent_review_pass,PASS,INDEPENDENT_ADVERSARIAL_REVIEW.json
+final_manifest_postwrite_validation,PASS,seal rebuilds manifest after all artifacts and validates every listed hash

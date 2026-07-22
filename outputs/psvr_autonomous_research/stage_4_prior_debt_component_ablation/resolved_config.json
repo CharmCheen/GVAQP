@@ -1,0 +1,63 @@
+{
+  "batch_size": 4,
+  "benchmark_id": "cbbv2_514c0d360fd5b2a4b5fe",
+  "component_methods": {
+    "S0": "Fixed Coverage ascending range(1,N,3), reused from C0",
+    "S1": "duration + debt + proxy, reused from C1",
+    "S2": "duration + proxy; debt component computed for trace but weight set to zero",
+    "S3": "duration + debt; proxy component computed for trace but weight set to zero",
+    "S4": "debt + proxy; duration component computed for trace but weight set to zero"
+  },
+  "coverage_debt_parameters": {
+    "beta": 0.25,
+    "lambda": 0.5,
+    "revision": 0
+  },
+  "deadlines_seconds": {
+    "T_high": 123.9524739725,
+    "T_transition": 121.747711537
+  },
+  "evidence_scope": "DEVELOPMENT_ONLY_ONE_VIDEO_ONE_QUERY_ONE_A800_FINAL_SINGLE_TASK_CYCLE",
+  "expected_physical_VERIFY": 5,
+  "experiment_id": "psvr_stage_4_H_SCAN_COMP1_v1",
+  "frozen_input_hashes": {
+    "manifest": "99c737e879d6d449aeb37df88dbfa97f5da57b8c71339b9678757c665968b337",
+    "preregistration": "d79caf85471b8f2b45fe45650a13a6e303b457280581c8ef7a12f04482d10b43"
+  },
+  "heldout_opened": false,
+  "implementation_hashes": {
+    "deadline_runtime": "166749f01ba53d3ff6531958ba878aa04a9ce40499edcbf2dcdde82a7c68ecd7",
+    "materializer_evaluator": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+    "policy": "bf6b90b6cdcbb6b598631588696cbe8908f62215d0616be7a1c124e01625b918",
+    "proxy_profiler": "4ea965643eb86ef482936949f1b15cd93b28cdf20929a36ab3649b961b5c7588",
+    "runner": "b0ee58c8adbb24c717283c5c012881cedc00c9e6b3a542d0b2d60a22beb05787",
+    "stage2_physical_runtime": "7e30dbcc637b7a67fec4bd9b429997ac8eb4d36ac2ad95167b11f0aaf696a889"
+  },
+  "materializer": "unchanged_k3_bridge_safe_persistent_service",
+  "methods": {
+    "S2": "S2 Duration+Proxy",
+    "S3": "S3 Duration+Debt",
+    "S4": "S4 Debt+Proxy"
+  },
+  "oracle": "fresh cache-free physical Qwen3-VL-32B-Instruct",
+  "proxy_observation": "physical YOLOv8n midpoint frame original decoded BGR",
+  "runtime_identity": {
+    "batch_size": 4,
+    "hardware_id": "NVIDIA A800-SXM4-80GB, GPU-78772d8e-1166-c9c7-1f73-86ea2537431e, 565.57.01",
+    "oracle_contract_hash": "ba9ae8755c651acdaccb48f8415e4880ad7da92fcb8f36254e8334480567a201",
+    "oracle_model_id": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+    "proxy_config_hash": "4427a99f0aaf3ba3ad79eb01dd8265eb10ff5032b176d63b6e6bb615c88cb87f",
+    "proxy_model_id": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "query_id": "enter_ego_path",
+    "resident_model_set": [
+      "Qwen3-VL-32B-Instruct",
+      "yolov8n"
+    ],
+    "serving_config_hash": "30460607e4abcd298bb9e213eeeca56e4386020190ce02cc447d44f0c1a54ec1",
+    "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+    "workload_id": "warm_oracle_cold_proxy:after_coarse:physical_service:persistent_k3:v2"
+  },
+  "runtime_identity_hash": "08b384175d8b9debc38598faf09e3966a0cb19d4ccc5fdca3a5e0664c05679fb",
+  "scan_quota_batches": 29,
+  "snapshot_checkpoint": "after every completed SCAN or VERIFY"
+}

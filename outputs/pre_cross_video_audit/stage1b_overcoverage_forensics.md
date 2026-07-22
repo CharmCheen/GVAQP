@@ -1,0 +1,6 @@
+# Stage 1B Overcoverage Forensics
+
+- B=100 dominant segment contributions: [{'segment_id': 15, 'duration': 40.0, 'extra_coverage_seconds': 0.0, 'overcoverage_contribution': 0.29962546816479285, 'root_cause_label': 'C_new_positive_anchor_from_barrier_query'}, {'segment_id': 0, 'duration': 30.0, 'extra_coverage_seconds': 9.299999999999997, 'overcoverage_contribution': 0.22471910112359464, 'root_cause_label': 'C_new_positive_anchor_from_barrier_query'}, {'segment_id': 7, 'duration': 20.0, 'extra_coverage_seconds': 9.300000000000011, 'overcoverage_contribution': 0.14981273408239643, 'root_cause_label': 'F_metric_denominator_artifact'}, {'segment_id': 6, 'duration': 20.0, 'extra_coverage_seconds': 0.0, 'overcoverage_contribution': 0.14981273408239643, 'root_cause_label': 'F_metric_denominator_artifact'}, {'segment_id': 11, 'duration': 20.0, 'extra_coverage_seconds': 9.299999999999955, 'overcoverage_contribution': 0.14981273408239643, 'root_cause_label': 'F_metric_denominator_artifact'}]
+- segments containing positive PLACE_BARRIER anchors: 11
+- No K3 duration cap violation or negative-barrier crossing was found in Stage 1B sanity checks.
+- B=100 overcoverage rises because Stage 1B discovers/adds more positive evidence and segments, raising recall/F1, while K3 keeps each segment bounded. This is a bounded event-set expansion rather than destructive overmerge.

@@ -1,0 +1,55 @@
+{
+  "annotation_status": "PENDING",
+  "version": "1.0",
+  "created": "2026-07-16T04:00:00Z",
+  "updated": "2026-07-16T04:00:00Z",
+  "tasks": {
+    "detection": {
+      "status": "READY_FOR_ANNOTATION",
+      "total_frames": 400,
+      "pre_annotations_generated": true,
+      "export_format": "COCO",
+      "export_path": "annotations/tasks/detection/detection_pre_annotations.json",
+      "annotated_frames": 0,
+      "double_annotated_frames": 0,
+      "adjudicated_frames": 0,
+      "annotator_ids": [],
+      "qa_metrics": {}
+    },
+    "tracking": {
+      "status": "READY_FOR_ANNOTATION",
+      "total_clips": 6,
+      "total_frames": 600,
+      "pre_annotations_generated": true,
+      "export_format": "MOT-CSV",
+      "export_path": "annotations/tasks/tracking/",
+      "annotated_clips": 0,
+      "annotated_tracks": 0,
+      "annotator_ids": [],
+      "qa_metrics": {}
+    },
+    "lane": {
+      "status": "AWAITING_FRAME_SELECTION",
+      "total_frames": 100,
+      "pre_annotations_generated": false,
+      "export_format": "GeoJSON",
+      "export_path": "annotations/tasks/lane/",
+      "annotated_frames": 0,
+      "annotator_ids": [],
+      "qa_metrics": {}
+    }
+  },
+  "blockers": [
+    "Human annotators needed for detection (400 frames)",
+    "Human annotators needed for tracking (6 clips x 100 frames)",
+    "Lane frame selection requires visual inspection of YOLOP overlays"
+  ],
+  "next_actions": [
+    "1. Run annotation task exporter to generate pre-annotated tasks",
+    "2. Have annotators review ANNOTATION_GUIDELINE.md",
+    "3. Begin detection annotation",
+    "4. Begin tracking annotation",
+    "5. Select 100 lane frames from overlay images",
+    "6. Begin lane annotation"
+  ]
+}

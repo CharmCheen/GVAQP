@@ -1,0 +1,104 @@
+{
+  "schema_version": "bsec_aqp_continuation_v3",
+  "frozen_utc": "2026-07-13T01:44:24Z",
+  "research_status": "FROZEN_BEFORE_FINAL_INTERVAL_CLIP_SCORING",
+  "predecessor_protocol_sha256": "f62800ece1edee2751afa646efe8d8d344dd8a04de3b1392c9845d0aa15e1daa",
+  "predecessor_decision_sha256": "be18e1aefa2f03d77a0e725a9e710e8eea06377e0b90dcbf2426b0e9df8ccf92",
+  "predecessor_decision": "PNIR rejected after failing the disjoint-interval gate",
+  "unit_seconds": 10.0,
+  "query_text": "a vehicle, pedestrian, or cyclist entering the ego vehicle's path from outside the driving corridor",
+  "clip": {
+    "model_id": "openai/clip-vit-base-patch32",
+    "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "sampling": "one center frame per 10-second unit",
+    "prompt_id": "enter_ego_path_zero_shot_v1"
+  },
+  "primary_materializer": {
+    "name": "k3_bridge_safe",
+    "g_max": 1,
+    "d_core_max": 40.0,
+    "d_seg_max": 60.0
+  },
+  "candidate": {
+    "method_id": "dasr_m1.5_c8_h10",
+    "name": "Density-Adaptive Stratified Retrieval",
+    "temporal_nms_radius_units": 10,
+    "stratum_multiplier": 1.5,
+    "exploitation_constant": 8.0,
+    "selection_rule": [
+      "For population n and budget B, generate the full greedy CLIP temporal-NMS ranking with radius 10.",
+      "Partition the timeline into M=min(n,max(B,round(1.5*B))) equal contiguous cells.",
+      "Take the highest-CLIP unit in every nonempty cell and sort cell winners by descending CLIP score.",
+      "Set alpha=n/(n+8*B) and k=round(alpha*B).",
+      "Select the first k distinct NMS units, then fill to B from cell winners, then from the NMS ranking if overlap leaves a deficit."
+    ],
+    "oracle_use": "none during selection",
+    "nested_across_budgets": false,
+    "selection_disclosure": "The radius, 1.5 cell multiplier, and constant 8 were selected after opening dataset3, realcartest_2000_3200, and realcartest_0_1570."
+  },
+  "fitting_evidence": {
+    "dataset3": {
+      "dasr_event_f1_auc": 0.568778,
+      "arc_shared_k3_event_f1_auc": 0.250568,
+      "clip_event_f1_auc": 0.538949,
+      "temporal_nms_event_f1_auc": 0.562378
+    },
+    "realcartest_2000_3200": {
+      "dasr_event_f1_auc": 0.654310,
+      "arc_shared_k3_event_f1_auc": 0.602761,
+      "clip_event_f1_auc": 0.619170,
+      "temporal_nms_event_f1_auc": 0.641261
+    },
+    "realcartest_0_1570": {
+      "dasr_event_f1_auc": 0.576507,
+      "arc_shared_k3_event_f1_auc": 0.548629,
+      "clip_event_f1_auc": 0.518892,
+      "temporal_nms_event_f1_auc": 0.542895
+    },
+    "status": "fitting_only"
+  },
+  "confirmatory_intervals": [
+    {
+      "name": "realcartest_1630_2000",
+      "absolute_start_seconds": 1630.0,
+      "absolute_end_seconds": 2000.0,
+      "unit_count": 37,
+      "event_count": 2,
+      "budgets": [5, 10, 20],
+      "units_and_oracle": "outputs/late_aqp_frozen_cross_segment_v1/grid_realcartest_1630_2000.csv",
+      "units_and_oracle_sha256": "2fd09a701ad7db199536a9e202411fb4f00c095b7c5d4eee4397820c58fc61cb",
+      "reference": "outputs/late_aqp_frozen_cross_segment_v1/ref_events_realcartest_1630_2000.csv",
+      "reference_sha256": "5a80bdadc3ff5b7f66913b15661c882bcf33a7a1e55eb0872169914c900ed42d"
+    },
+    {
+      "name": "realcartest_3200_3830",
+      "absolute_start_seconds": 3200.0,
+      "absolute_end_seconds": 3830.0,
+      "unit_count": 63,
+      "event_count": 7,
+      "budgets": [5, 10, 20, 50],
+      "units_and_oracle": "outputs/late_aqp_frozen_cross_segment_v1/grid_realcartest_3200_3830.csv",
+      "units_and_oracle_sha256": "1dfacb84a43f06235e7c501c7b6eef8afa8379871ca0abe534a66084890add1f",
+      "reference": "outputs/late_aqp_frozen_cross_segment_v1/ref_events_realcartest_3200_3830.csv",
+      "reference_sha256": "97b5f17c59133e60faa76e308ceae02b97bb8142d78cfd27d63a1d1a2f91a830"
+    }
+  ],
+  "media_pattern": "experiments/roadclip_budget_v2/roadclip_budget_v2/scene_windows/realcartest_win{absolute_unit_id:05d}_s{start_ms:09d}ms_e{end_ms:09d}ms.mp4",
+  "comparators": {
+    "clip_topk": "raw CLIP ranking",
+    "temporal_nms_h10": "candidate exploitation component alone",
+    "stratified_m1.5": "candidate coverage component alone",
+    "arc_shared_k3": "ARC refinement threshold 0.4, five seeds, exact B calls, shared K3",
+    "random": "100 fixed nested random rankings",
+    "arc_native_descriptive": "ARC native broad intervals, excluded from the primary fairness gate"
+  },
+  "decision_rule": {
+    "event_rich_primary": "On realcartest_3200_3830, DASR F1-AUC must strictly exceed ARC-shared-K3, CLIP, and NMS-h10.",
+    "sparse_directional": "On realcartest_1630_2000, DASR F1-AUC must be no lower than ARC-shared-K3; ties are not treated as evidence of superiority.",
+    "macro_primary": "Across the two intervals, unweighted mean DASR F1-AUC must strictly exceed unweighted mean ARC-shared-K3 F1-AUC.",
+    "fairness": "Every primary method must use exactly B unique oracle observations and the identical shared materializer/evaluator.",
+    "pass": "event-rich primary, sparse directional, macro primary, and fairness all hold",
+    "failure_action": "Reject the confirmatory DASR claim. Do not alter constants using either interval and call it confirmed."
+  },
+  "claim_limit": "A pass establishes a reproducible advantage over exact-call shared-K3 ARC on this VLM-defined pseudo-oracle benchmark family. The final intervals are disjoint but share the realcartest source; human-ground-truth and broad cross-dataset generalization remain unresolved."
+}

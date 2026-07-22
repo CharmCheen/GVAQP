@@ -1,0 +1,53 @@
+{
+  "r1_state": "BLOCKED_SCIENTIFIC_SPEC_CONFLICT",
+  "baseline_validation": {
+    "command": "python scripts/validate_psvr_rollout_preimplementation.py",
+    "status": "PASS_BLOCKED_D2_NUMERIC_BINDING",
+    "checks": 33,
+    "failures": 0
+  },
+  "unchanged_assets": {
+    "D1": "not modified",
+    "D2_L": "not modified",
+    "D2_T": "not modified",
+    "D2_P": "BLOCKED_CALIBRATION_REQUIRED",
+    "old_heldout_file": "retained unchanged"
+  },
+  "defects": [
+    {
+      "id": "VISIBLE_STATE_SEED_BEARING_EPISODE_ID",
+      "classification": "IMPLEMENTATION_BUG",
+      "evidence": "VisibleState.episode_id is populated from Episode(f'{split}_{seed}'); existing strict test marks this exposure xfail.",
+      "repair_authorized": true,
+      "repair_applied": false,
+      "reason_not_applied": "The decisive M1 scientific conflict requires a stop before implementation changes; an isolated repair would not make R1 executable."
+    },
+    {
+      "id": "M1_VISIBLE_HISTORY_CONDITIONAL_KERNEL_UNSPECIFIED",
+      "classification": "SCIENTIFIC_SPEC_CONFLICT",
+      "evidence": [
+        "docs/psvr_rollout_preimplementation/11_TOY_SIMULATOR_IMPLEMENTATION_SPEC.md item 4",
+        "docs/psvr_rollout_preimplementation/14_PROPOSED_D3_D4_CONSISTENCY_AMENDMENT.md",
+        "outputs/psvr_rollout_preimplementation/PROPOSED_D3_D4_CONSISTENCY_AMENDMENT.json",
+        "src/garc_eval/psvr_rollout_toy/rollout.py fail-closed ProtocolBlocked evaluator"
+      ],
+      "missing_frozen_choices": [
+        "ratio draw position in ordered RNG schedule",
+        "visible-history observation likelihood and posterior state",
+        "conditional sampler independent of realized future tape",
+        "visibility classification of seed, split index, episode parameters, and RNG state"
+      ],
+      "repair_authorized": false,
+      "repair_applied": false,
+      "consequence": "Do not implement a posterior, re-preregister, run development smoke, or freeze R1."
+    }
+  ],
+  "repository_revision": "UNAVAILABLE_GIT_DUBIOUS_OWNERSHIP",
+  "uncommitted_changes": "UNAVAILABLE_GIT_DUBIOUS_OWNERSHIP",
+  "independent_adversarial_review": "CONFIRMS_SCIENTIFIC_SPEC_CONFLICT",
+  "physical_calls_started": 0,
+  "gpu_jobs_started": 0,
+  "real_heldout_access": false,
+  "new_confirmatory_seeds_generated": false,
+  "new_confirmatory_results_exist": false
+}

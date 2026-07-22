@@ -1,0 +1,103 @@
+{
+  "cache_replay": false,
+  "commit": {
+    "materializer_mode": "persistent_clean_spawn_predeadline",
+    "raw_observation_commit": {
+      "atomic_replace_seconds": 0.000765389,
+      "fsync_seconds": 0.000772943,
+      "payload_sha256": "c925aebf9a94c0ed71fdaa84e704e24be1153c813828f444d0976c46b3166654",
+      "serialize_seconds": 0.000242072,
+      "total_seconds": 0.002865901
+    },
+    "snapshot_commit": {
+      "atomic_replace_seconds": 0.000690159,
+      "fsync_seconds": 0.000510583,
+      "payload_sha256": "1748cd4d1aecd7343d2e5890fe198382629c51d85198e3fbf9752bca1ecf4707",
+      "serialize_seconds": 5.878e-05,
+      "total_seconds": 0.001738747
+    },
+    "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_two_video_loop/deadlines/raw_profile/V0/sample_000_snapshot.json",
+    "stage_seconds": {
+      "atomic_replace": 0.000690159,
+      "fsync": 0.000510583,
+      "materialize": 0.017577661,
+      "observation_persist": 0.002865901,
+      "serialize": 5.878e-05
+    },
+    "total_seconds": 0.02427106
+  },
+  "commit_wall_seconds": 0.024302678,
+  "confirmed_events": 0,
+  "oracle_result": {
+    "cache_replay": false,
+    "confidence": "high",
+    "cuda_synchronized_before_and_after": true,
+    "end_time": 180.0,
+    "frame_identity_verified": true,
+    "generic_parsed_label": "negative",
+    "logical_oracle_call": true,
+    "oracle_build_id": "strict_oracle_3b9ba1187c0449426978",
+    "parse_status": "ok",
+    "parsed": {
+      "abstain_reason": null,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "ego_relevant": false,
+      "event_end": null,
+      "event_start": null,
+      "event_type": "none",
+      "evidence": "\u89c6\u9891\u663e\u793a\u57ce\u5e02\u9053\u8def\u6b63\u5e38\u884c\u9a76\u573a\u666f\uff0c\u8f66\u8f86\u5728\u5404\u81ea\u8f66\u9053\u5185\u884c\u9a76\uff0c\u65e0\u4efb\u4f55\u7269\u4f53\u4ece\u9053\u8def\u8fb9\u7f18\u6216\u5916\u90e8\u8fdb\u5165 ego \u8f66\u8f86\u7684\u884c\u9a76\u8def\u5f84\u3002\u53f3\u4fa7\u9ec4\u8272\u51fa\u79df\u8f66\u4fdd\u6301\u5728\u81ea\u8eab\u8f66\u9053\u5185\uff0c\u65e0\u5207\u5165\u6216\u5408\u5e76\u884c\u4e3a\u3002\u9053\u8def\u4e24\u4fa7\u6709\u62a4\u680f\u548c\u7eff\u5316\u5e26\uff0c\u65e0\u884c\u4eba\u6216\u975e\u673a\u52a8\u8f66\u8fdb\u5165\u884c\u8f66\u9053\u3002",
+      "involved_object": "none",
+      "label": "negative",
+      "negative_reason": "no_ego_path_interaction"
+    },
+    "parsed_label": "negative",
+    "physical_oracle_invocation": true,
+    "projection_allowed_involved_objects": [
+      "cyclist",
+      "vehicle"
+    ],
+    "query_id": "Q1",
+    "raw": "{\n  \"label\": \"negative\",\n  \"event_start\": null,\n  \"event_end\": null,\n  \"event_type\": \"none\",\n  \"involved_object\": \"none\",\n  \"ego_relevant\": false,\n  \"boundary_status\": \"ok\",\n  \"complete_event_visible\": true,\n  \"confidence\": \"high\",\n  \"evidence\": \"\u89c6\u9891\u663e\u793a\u57ce\u5e02\u9053\u8def\u6b63\u5e38\u884c\u9a76\u573a\u666f\uff0c\u8f66\u8f86\u5728\u5404\u81ea\u8f66\u9053\u5185\u884c\u9a76\uff0c\u65e0\u4efb\u4f55\u7269\u4f53\u4ece\u9053\u8def\u8fb9\u7f18\u6216\u5916\u90e8\u8fdb\u5165 ego \u8f66\u8f86\u7684\u884c\u9a76\u8def\u5f84\u3002\u53f3\u4fa7\u9ec4\u8272\u51fa\u79df\u8f66\u4fdd\u6301\u5728\u81ea\u8eab\u8f66\u9053\u5185\uff0c\u65e0\u5207\u5165\u6216\u5408\u5e76\u884c\u4e3a\u3002\u9053\u8def\u4e24\u4fa7\u6709\u62a4\u680f\u548c\u7eff\u5316\u5e26\uff0c\u65e0\u884c\u4eba\u6216\u975e\u673a\u52a8\u8f66\u8fdb\u5165\u884c\u8f66\u9053\u3002\",\n  \"negative_reason\": \"no_ego_path_interaction\",\n  \"abstain_reason\": null\n}",
+    "raw_sha256": "81957ab1ce63a674413a8432dad4d74913b49be947787364e8f76558cc548c6a",
+    "recorded_at_utc": "2026-07-18T02:31:36.620946+00:00",
+    "rng_seed": 20260727,
+    "service_total_seconds": 27.578102038,
+    "session_id": "deadline_profile_V0_000",
+    "stage_seconds": {
+      "cleanup": 0.626676526,
+      "clip_extraction": 0.690856774,
+      "oracle_inference": 21.863098871,
+      "oracle_parse": 0.000329456,
+      "oracle_postprocess": 0.000727729,
+      "oracle_preprocess": 4.396311434
+    },
+    "start_time": 170.0,
+    "unit_id": 17,
+    "video_id": "V0"
+  },
+  "physical_oracle_only": true,
+  "query_wall_seconds": 27.579096846,
+  "recorded_at_utc": "2026-07-18T02:31:36.620946+00:00",
+  "sample_index": 0,
+  "service_total_seconds": 27.578102038,
+  "session_initialization": {
+    "prior_query_count": 0,
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V0_000",
+    "video_id": "V0"
+  },
+  "session_summary": {
+    "physical_calls": 1,
+    "queried_ids": [
+      17
+    ],
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V0_000",
+    "video_id": "V0"
+  },
+  "status": "ok",
+  "unit_id": 17,
+  "video_id": "V0"
+}

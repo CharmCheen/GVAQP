@@ -1,0 +1,77 @@
+{
+  "batch_size": 4,
+  "benchmark_id": "cbbv2_514c0d360fd5b2a4b5fe",
+  "deadlines": {
+    "T_mid": 76.891211381125,
+    "T_short": 30.82994878975
+  },
+  "evidence_scope": "DEVELOPMENT_ONLY_ONE_VIDEO_ONE_QUERY",
+  "experiment_id": "h_ds1_tail_guard_v2_persistent_k3",
+  "heldout_opened": false,
+  "hypothesis": "H-DS1",
+  "implementation_hashes": {
+    "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/scripts/benchmark_lib.py": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+    "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/scripts/build_strict_oracle.py": "4e52a5d9dc4de906350dc4e69b2c26cfb414d41f4a4281822acefa42120d1458",
+    "scripts/psvr_stage0b_physical_profile.py": "4ea965643eb86ef482936949f1b15cd93b28cdf20929a36ab3649b961b5c7588",
+    "scripts/run_deadline_safety_validation.py": "166749f01ba53d3ff6531958ba878aa04a9ce40499edcbf2dcdde82a7c68ecd7",
+    "src/garc_eval/psvr_runtime/__init__.py": "30c9ebeeffd42ca082ebedf501e90b36d4dd324afb0a543c883543921f8dee45",
+    "src/garc_eval/psvr_runtime/capabilities.py": "2f799ebe9d0f2b01cb7cb2cd9c3a17e8aec6da6c8e5e70df3596ad1d0f92a00f",
+    "src/garc_eval/psvr_runtime/deadline_guard.py": "b735a3d36818d86ffd631978f29c1e4d0e72b7e3ad9f499b048fc34223adaefe",
+    "src/garc_eval/psvr_runtime/latency.py": "28515aeb5544fef2de3228f853254e253a493b0b151ddd961d147b644834e7c9",
+    "src/garc_eval/psvr_runtime/physical_oracle.py": "330912e872e3a053f3c68ae2f01eb199c58c920c1e52dcaa7da1e6e742401f65",
+    "src/garc_eval/psvr_runtime/runner.py": "874adc04e129676338ef290a6deb8c061f9b1ec6826952bbdc4e362fb55e2ce7",
+    "src/garc_eval/psvr_runtime/sandbox.py": "5854db5b9a67283bf62310379a9c1946f1d9303e89dc61dafb5a142d74b60e0a",
+    "src/garc_eval/psvr_runtime/views.py": "bdc8be98364859ebea50e1514d06d4f8507bf494b178f329dc4bd61cd9ae50c8"
+  },
+  "input_integrity_sha256": "c0e313a8f6c3e114159ce90727aff9c907c13638c2ad52932b466d028ea28b4e",
+  "materializer": "unchanged_k3_bridge_safe_persistent_service",
+  "oracle_aware_latency_stress_units_not_for_method_claims": [
+    50,
+    57,
+    60
+  ],
+  "oracle_model": "/qiuyeqing/llama_prl/G-ARC/models/vlm/qwen3_vl/Qwen3-VL-32B-Instruct",
+  "profile": {
+    "action_epsilon_seconds": 0.5,
+    "action_required_stages": [
+      "clip_extraction",
+      "oracle_preprocess",
+      "oracle_inference",
+      "oracle_postprocess",
+      "oracle_parse",
+      "cleanup"
+    ],
+    "commit_epsilon_seconds": 0.25,
+    "commit_required_stages": [
+      "observation_persist",
+      "materialize",
+      "serialize",
+      "fsync",
+      "atomic_replace"
+    ],
+    "maximum_age_seconds": 86400.0,
+    "minimum_samples": 10,
+    "quantile_alpha": 0.9,
+    "version": "tail_upper_v1"
+  },
+  "proxy_model": "/qiuyeqing/llama_prl/G-ARC/models/yolo/yolov8n.pt",
+  "runtime_identity": {
+    "batch_size": 4,
+    "hardware_id": "NVIDIA A800-SXM4-80GB, GPU-78772d8e-1166-c9c7-1f73-86ea2537431e, 565.57.01",
+    "oracle_contract_hash": "ba9ae8755c651acdaccb48f8415e4880ad7da92fcb8f36254e8334480567a201",
+    "oracle_model_id": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+    "proxy_config_hash": "4427a99f0aaf3ba3ad79eb01dd8265eb10ff5032b176d63b6e6bb615c88cb87f",
+    "proxy_model_id": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "query_id": "enter_ego_path",
+    "resident_model_set": [
+      "Qwen3-VL-32B-Instruct",
+      "yolov8n"
+    ],
+    "serving_config_hash": "30460607e4abcd298bb9e213eeeca56e4386020190ce02cc447d44f0c1a54ec1",
+    "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+    "workload_id": "warm_oracle_cold_proxy:after_coarse:physical_service:persistent_k3:v2"
+  },
+  "runtime_identity_hash": "08b384175d8b9debc38598faf09e3966a0cb19d4ccc5fdca3a5e0664c05679fb",
+  "selector": "empty_chroot_fixed_or_ranked_public_proxy_only",
+  "video": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4"
+}

@@ -1,0 +1,74 @@
+{
+  "method": "H-PROXY1",
+  "timestamp": "2026-07-16T05:14:45Z",
+  "decision": "H-PROXY1 = BLOCKED_WAITING_FOR_ANNOTATIONS",
+  "reason": "Human-perception annotations (400 detection + 600 tracking + 100 lane frames) and DrivingDojo structured event labels are prerequisites for accuracy, tracking, and event metrics. Executable inference, distributional comparison, and cost profiling completed.",
+  "executable_results_summary": {
+    "detection_distribution": {
+      "B0_YOLOv8n_dets_per_frame_mean": 6.96661101836394,
+      "B1_YOLOP640_dets_per_frame_mean": 9.848333333333333,
+      "B3_YOLOP320_dets_per_frame_mean": 6.929166666666666
+    },
+    "cost_profile": {
+      "B0": {
+        "warmup": 20,
+        "measured": 300,
+        "fps_model": 122.00919927391843,
+        "p50_ms": 8.074377663433552,
+        "p95_ms": 8.678344357758762
+      },
+      "B1_B2": {
+        "warmup": 20,
+        "measured": 300,
+        "fps_model": 41.18492336433042,
+        "p50_ms": 24.144325405359268,
+        "p95_ms": 25.510985869914293
+      },
+      "B3": {
+        "warmup": 20,
+        "measured": 300,
+        "fps_model": 79.49492571307786,
+        "p50_ms": 12.61532586067915,
+        "p95_ms": 13.115966506302357
+      }
+    },
+    "track_stats": {
+      "B1": {
+        "total_tracks": 1420,
+        "mean_track_len": 1.3223676849054493,
+        "median_track_len": 1.0,
+        "tracks_ge_5": 149,
+        "tracks_ge_10": 103
+      },
+      "B2": {
+        "total_tracks": 1420,
+        "mean_track_len": 1.3223676849054493,
+        "median_track_len": 1.0,
+        "tracks_ge_5": 149,
+        "tracks_ge_10": 103
+      },
+      "B0": {
+        "total_tracks": 1051,
+        "mean_track_len": 1.2769277845777234,
+        "median_track_len": 1.0,
+        "tracks_ge_5": 104,
+        "tracks_ge_10": 63
+      },
+      "B3": {
+        "total_tracks": 808,
+        "mean_track_len": 1.3867578385590393,
+        "median_track_len": 1.0,
+        "tracks_ge_5": 110,
+        "tracks_ge_10": 71
+      }
+    },
+    "road_geometry": {}
+  },
+  "selected_config": "PENDING_ANNOTATIONS",
+  "next_highest_value_work": "Obtain human annotations for the 1200-frame sample plan (400 detection + 600 tracking + 100 lane frames) OR reduce scope to distributional-only comparison with UNSUPERVISED event proxy (e.g., rule-baseline on target-domain video using YOLOP road geometry)",
+  "unblock_conditions": [
+    "Human annotation of detection/tracking/lane frames from long_video_dataset3.mp4",
+    "Structured event labels for DrivingDojo (or alternative labeled event dataset)",
+    "Implementation of LightGBM event proxy pipeline"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "active_hypotheses": [],
+  "established_findings": [
+    "TWO_VIDEO_DEV_BENCHMARK=PASS for two independent source videos, two frozen queries, and four video-query tasks.",
+    "SELECTED_PROXY_FAMILY=YOLOV8 and SELECTED_PROXY_CONFIG=Y8; PROXY_REGIME_REVALIDATION=PASS.",
+    "The R3 fixed 10-second temporal-NMS revision matrix has 72/72 valid cells, complete schedules and snapshots, with zero replay, future access, visibility violation, failure, or deadline miss.",
+    "Reference scoring finds FIFO is the best method in this matrix, with macro AnytimeAUC_F1 0.0450066276, macro F1 0.0541666667, and two mean-summed T_high unique events.",
+    "FIFO's advantage is confined to one V0_Q1 event selected by creation-order VERIFY; all methods are null on both V1 tasks.",
+    "HELD_OUT_OPENED=false."
+  ],
+  "evidence_boundary": "E4_TWO_VIDEO_DEVELOPMENT_NEGATIVE_OR_NONMECHANISTIC",
+  "heldout_opened": false,
+  "important_failures_and_lessons": [
+    "R3 changes some V1 VERIFY rankings but is endpoint-equivalent to score-only and creates no cross-video quality gain.",
+    "FIFO recovers V0_Q1 because the oldest candidate unit 173 is a reference-matched true positive; score-only and R3 choose higher-scored negative unit 86.",
+    "Candidate capacity does not bind in V0_Q1, so retention is not the cause of the FIFO/R3 difference.",
+    "V1 nulls are compatible with the conservative fixed schedule exposing no reference-positive units; this limits mechanism interpretation but does not rescue R3."
+  ],
+  "next_highest_value_action": "Obtain a third independent source video, retain Q1/Q2, and run six-task generalization validation without opening held-out.",
+  "objective": "Determine whether one frozen low-cost proxy and an exposure-aware candidate frontier produce directionally consistent physical PSVR gains across two independent source videos and two frozen queries.",
+  "rejected_hypotheses": [
+    {
+      "hypothesis_id": "H-EXPOSE2",
+      "reason": "The original design and only allowed R3 revision fail the preregistered task-direction, substantive-threshold, and cross-video requirements.",
+      "status": "REJECT"
+    }
+  ],
+  "status": "PAUSED_INPUT_REQUIRED",
+  "terminal_two_video_decision": {
+    "AUTONOMOUS_RESEARCH_STATUS": "PAUSED_INPUT_REQUIRED",
+    "CURRENT_BEST_PSVR_METHOD": "fifo",
+    "DEV_QUERIES": 2,
+    "DEV_SOURCE_VIDEOS": 2,
+    "DEV_VIDEO_QUERIES": 4,
+    "EVIDENCE_LEVEL": "E4_TWO_VIDEO_DEVELOPMENT_NEGATIVE_OR_NONMECHANISTIC",
+    "GPU_BREAKDOWN": {
+      "TOTAL_GPU_SECONDS": 20125.517495150303,
+      "V1_exhaustive_reference_GPU_seconds": 8897.438972091302,
+      "deadline_profile_GPU_seconds": 347.957763566,
+      "h_expose2_GPU_seconds": 3810.991767904,
+      "h_expose2_ablation_GPU_seconds": 0.0,
+      "proxy_full_extraction_GPU_seconds": 988.418960739,
+      "proxy_pilot_GPU_seconds": 2220.861358446,
+      "proxy_standalone_profile_GPU_seconds": 60.708255058000006,
+      "revision_exposure_temporal_nms_GPU_seconds": 3799.1404173459996
+    },
+    "HELD_OUT_OPENED": false,
+    "H_EXPOSE2_ABLATION": "NOT_RUN_HYPOTHESIS_REJECTED",
+    "H_EXPOSE2_DECISION": "REJECT",
+    "H_EXPOSE2_DECISION_SOURCE": "R3",
+    "H_EXPOSE2_REVISION": "R3_FIXED_10_SECOND_TEMPORAL_NMS_COMPLETE",
+    "MACRO_ANYTIME_AUC": 0.04500662762784838,
+    "MACRO_F1": 0.05416666666666665,
+    "MACRO_TTFC": 110.82089521065603,
+    "NEXT_EXACT_COMMAND": "NONE_INPUT_REQUIRED__PROVIDE_THIRD_INDEPENDENT_SOURCE_VIDEO",
+    "PAPER_READY": false,
+    "PROXY_REGIME_REVALIDATION": "PASS",
+    "PSVR_METHOD_USABILITY": "NOT_YET",
+    "SELECTED_PROXY_CONFIG": "Y8",
+    "SELECTED_PROXY_FAMILY": "YOLOV8",
+    "TOTAL_GPU_SECONDS": 20125.517495150303,
+    "TOTAL_UNIQUE_CONFIRMED_EVENTS": 2.0,
+    "TWO_VIDEO_CORE_SIGNAL": "ABSENT",
+    "TWO_VIDEO_DEV_BENCHMARK": "PASS",
+    "decision_hash": "e5a943fe53898ff0dd6355267ad37e474739906ff55f19fd630506cf336eaa29"
+  },
+  "terminal_two_video_decision_path": "outputs/psvr_two_video_loop/AUDITED_DECISION.json",
+  "unresolved_uncertainties": [
+    "Whether a materially different core route generalizes on an independent third source video.",
+    "Whether FIFO's single-event V0 advantage survives any new source rather than reflecting a creation-order coincidence.",
+    "How much conservative tail-bound schedule planning, rather than frontier policy, contributes to V1 nulls."
+  ]
+}

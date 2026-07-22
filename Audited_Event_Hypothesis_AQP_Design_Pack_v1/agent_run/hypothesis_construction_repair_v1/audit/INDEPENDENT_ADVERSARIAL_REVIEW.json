@@ -1,0 +1,74 @@
+{
+  "schema_version": "hypothesis_construction_repair_v1_independent_review_v1",
+  "reviewer_role": "independent_adversarial_reviewer",
+  "status": "PASS",
+  "blocking_findings": 0,
+  "high_findings": 0,
+  "findings": [
+    {
+      "id": "H0_REPRODUCTION",
+      "severity": "INFO",
+      "status": "PASS",
+      "finding": "The sealed H0 reproduction reports event-F1 AUC 0.2942701472213108, 141 initial hypotheses, 100/100 DISCOVER_CORE selections, fieldwise saved-trace equality, and matching initial/terminal state hashes."
+    },
+    {
+      "id": "CONFIG_FREEZE",
+      "severity": "INFO",
+      "status": "PASS",
+      "finding": "All five H0-H4 configuration files match the SHA-256 values in CONFIG_MANIFEST.csv; the files predate the corrected formal runs and HS was correctly omitted because score-scale failure was not demonstrated."
+    },
+    {
+      "id": "PLANNER_LEAKAGE_AND_ORACLE_ORDERING",
+      "severity": "INFO",
+      "status": "PASS",
+      "finding": "Static inspection confirms hypothesis construction and scoring use public units/proxy/config/state only. score_actions completes before OracleAccessor.query, simulated branches make no oracle calls, and reference tables enter only evaluator-only diagnostics after acquisition traces are fixed."
+    },
+    {
+      "id": "FORMAL_RUN_MATRIX_AND_VLM_CALLS",
+      "severity": "INFO",
+      "status": "PASS",
+      "finding": "Exactly 24 H1-H4 run manifests cover variants H1-H4 crossed with budgets 5, 10, 20, 50, 80, and 100. They contain 1,060 logical immutable-cache queries, unique queried units, deterministic budget prefixes, and zero physical VLM calls."
+    },
+    {
+      "id": "METRICS_AND_AUC_RECOMPUTATION",
+      "severity": "INFO",
+      "status": "PASS",
+      "finding": "Independent replay of all 48 acquisition/materializer rows from saved action traces agrees with the reported metrics to maximum absolute error 1.1102230246251565e-16. Independent trapezoidal AUC recomputation agrees to 5.551115123125783e-17."
+    },
+    {
+      "id": "MECHANISM_ATTRIBUTION",
+      "severity": "INFO",
+      "status": "PASS",
+      "finding": "H1 source separation is the only independently supported repair contribution: bridge-safe AUC rises by 0.020720322268309888 over H0. H2 saturation, H3 dynamic creation, and H4 triggered structure each add zero AUC on this trace and the report no longer claims them as performance causes. H4 generates structure candidates on 55 budget-100 steps; every candidate is eligible but is outscored by the selected core action by 0.0001969843908729 to 0.0035752735069051996. No exploration, dynamic creation, absorption, or structure selection activates in the formal budget-100 runs."
+    },
+    {
+      "id": "DECISION_AND_SCOPE",
+      "severity": "INFO",
+      "status": "PASS",
+      "finding": "HYPOTHESIS_REPAIR_WEAK_GO follows the stated rule: H1 materially exceeds H0 (0.31499046948962056 versus 0.2942701472213107) but remains below MAP/M1 (0.3880556629484837) and the best native baseline (0.3896592193755119). The report consistently limits the conclusion to single-video, VLM-defined pseudo-oracle development evidence and recommends unchanged held-out validation rather than added planner complexity."
+    },
+    {
+      "id": "DELIVERABLE_SCOPE",
+      "severity": "INFO",
+      "status": "PASS",
+      "finding": "All substantive required reports, configs, tests, run traces, forensics, and analysis tables are present. FILE_MANIFEST.csv and EXPERIMENT_MANIFEST.json are correctly deferred to the post-review finalizer so that this review itself is included in the sealed file inventory."
+    }
+  ],
+  "evidence_hashes": {
+    "implementation/run_hypothesis_construction_repair_v1.py": "85c3d9f5eaf6d86934dc6f4d7bf055e8ed1d53318df2721f595a25488e3abe74",
+    "forensics/H0_REPRODUCTION.csv": "a0c2479760e8a6f4413884f7685766d6720d7531480e6ce3ab397b95d879122c",
+    "forensics/FAILURE_CAUSAL_DECOMPOSITION.md": "7d7cd1b63dfdc6195962f1cd74f899868b6ab9204b929e323c7414b78e718655",
+    "forensics/hypothesis_quality_summary.csv": "02df4a0b209776725b3d7aee6a5725424d9dfc6094b75b9619dad54241389a5a",
+    "configs/CONFIG_MANIFEST.csv": "2922ab5464a1f96ad570adc264ea599fcac5f992b8bc44786dbc86d170a16cc7",
+    "tests/synthetic_test_results.csv": "2935c566fc415323ad8ae95ad02dc0e9a8910f383c5ed3cfb042f30c66fcba67",
+    "audit/FORMAL_INTEGRITY_CHECKS.csv": "deab386cd74f6529f6abcdb0e021bf3a4cf547cd7aee341f20da7c6a7a2fb6b2",
+    "analysis/acquisition_materializer_matrix.csv": "a5b75074920bb995e732d663390bd80f9ac31e9692592bf9d0e7af448480b800",
+    "analysis/per_budget_metrics.csv": "f91dc0c2e2167a41c65fed7700a26024faad1a15cd439fb8c9256710e440fe9a",
+    "analysis/event_f1_auc.csv": "ea5a7e126c2087f10ab198bb5a9317a2936ad9c8a2eead6d2aaa31c2201ede92",
+    "analysis/mechanism_activation.csv": "a570605d2bca1bd724a75f4ae89b693851970f173a03e55065acf02caf2b3422",
+    "analysis/repair_attribution.csv": "7dedf6f7e2f66da962a29ce2718c60fe9aea9cb92a9d78fce46348eedeea121e",
+    "FINAL_REPORT.md": "ddacb3f22af007991334ec0d6ef1b46d377d1fc3815532b3d59dc730d661d433",
+    "FINAL_DECISION.csv": "c3cd430fa8c5debc44d12f16fd740ba4227e2fcc5fbb00ce1690db33145b6e05"
+  },
+  "conclusion": "PASS. The corrected package supports a scoped HYPOTHESIS_REPAIR_WEAK_GO: source-separated hypothesis construction has a modest independent gain over H0, while saturation, dynamic exploration, and triggered structure receive no independent support on this formal trace. The evidence does not support STRONG_GO, cross-video generalization, or further complexity without held-out testing. No blocking or high-severity integrity, leakage, metric, configuration, run-matrix, decision-rule, or reporting defect remains."
+}

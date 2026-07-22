@@ -1,0 +1,18 @@
+{
+  "initial_required_suite": {"command": "PYTHONPATH=src pytest -q tests/psvr_runtime", "result_after_direct_test_fix": "47 passed"},
+  "final_required_suite": {"command": "PYTHONPATH=src pytest -q tests/psvr_runtime", "result": "47 passed", "elapsed_seconds": 9.53},
+  "specialized_gates": {
+    "D1_full_equivalence": "PASS",
+    "component_zeroing": "PASS",
+    "D1_D2_D3_frozen_eligibility": "PASS",
+    "D0_four_way_eligibility": "NOT_APPLICABLE_CONFLICTS_WITH_FROZEN_D0_DEFINITION",
+    "frozen_tie_break": "PASS",
+    "no_future_proxy": "PASS",
+    "evaluator_visibility": "PASS"
+  },
+  "visited_scheduler_states_checked": 174,
+  "eligible_cell_decompositions_checked": 9630,
+  "maximum_decomposition_absolute_error": 2.7755575615628914e-17,
+  "allowed_direct_fixes_used": 1,
+  "direct_fix_scope": "trace-only parent metadata for non-canonical artificial states and correction of D3 tie-break test expectation; no priority, eligibility, or physical behavior changed"
+}

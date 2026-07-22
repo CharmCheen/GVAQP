@@ -1,0 +1,431 @@
+{
+  "$defs": {
+    "cost": {
+      "additionalProperties": false,
+      "properties": {
+        "confirm": {
+          "$ref": "#/$defs/distribution"
+        },
+        "mode_switch": {
+          "$ref": "#/$defs/distribution"
+        },
+        "planning": {
+          "$ref": "#/$defs/distribution"
+        },
+        "scan": {
+          "$ref": "#/$defs/distribution"
+        },
+        "scan_confirm_ratio_regime": {
+          "enum": [
+            "SCAN_CHEAP",
+            "BALANCED",
+            "SCAN_EXPENSIVE"
+          ]
+        },
+        "variance_scale": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "scan",
+        "confirm",
+        "mode_switch",
+        "planning",
+        "variance_scale",
+        "scan_confirm_ratio_regime"
+      ],
+      "type": "object"
+    },
+    "distribution": {
+      "additionalProperties": false,
+      "properties": {
+        "family": {
+          "enum": [
+            "CONSTANT",
+            "TWO_POINT",
+            "POISSON",
+            "CATEGORICAL"
+          ]
+        },
+        "parameters": {
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "high": {
+              "type": "number"
+            },
+            "lambda": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "low": {
+              "type": "number"
+            },
+            "probabilities": {
+              "type": "array"
+            },
+            "value": {
+              "type": "number"
+            },
+            "values": {
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "family",
+        "parameters"
+      ],
+      "type": "object"
+    },
+    "event": {
+      "additionalProperties": false,
+      "properties": {
+        "actor_id": {
+          "type": "string"
+        },
+        "candidate_multiplicity": {
+          "$ref": "#/$defs/distribution"
+        },
+        "confirm_characteristics": {
+          "additionalProperties": false,
+          "properties": {
+            "nominal_duration_seconds": {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "nominal_duration_seconds"
+          ],
+          "type": "object"
+        },
+        "detectability": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "event_id": {
+          "type": "string"
+        },
+        "interval": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "type": "array"
+        },
+        "query_id": {
+          "type": "string"
+        },
+        "region_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "event_id",
+        "query_id",
+        "region_ids",
+        "interval",
+        "actor_id",
+        "detectability",
+        "candidate_multiplicity",
+        "confirm_characteristics"
+      ],
+      "type": "object"
+    },
+    "region": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_emission": {
+          "additionalProperties": false,
+          "properties": {
+            "candidate_quality": {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            "duplicate_factor": {
+              "minimum": 1,
+              "type": "number"
+            },
+            "region_activity": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "candidate_quality",
+            "duplicate_factor",
+            "region_activity"
+          ],
+          "type": "object"
+        },
+        "hard_negative_process": {
+          "additionalProperties": false,
+          "properties": {
+            "rate": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "rate"
+          ],
+          "type": "object"
+        },
+        "latent_event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "media_end": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "media_start": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "region_id": {
+          "type": "string"
+        },
+        "scan_duration_distribution": {
+          "$ref": "#/$defs/distribution"
+        }
+      },
+      "required": [
+        "region_id",
+        "media_start",
+        "media_end",
+        "latent_event_ids",
+        "scan_duration_distribution",
+        "candidate_emission",
+        "hard_negative_process"
+      ],
+      "type": "object"
+    },
+    "witness": {
+      "additionalProperties": false,
+      "properties": {
+        "actor_tracklet": {
+          "type": "object"
+        },
+        "confirm_duration_parameters": {
+          "type": "object"
+        },
+        "creation_time": {
+          "type": "number"
+        },
+        "interval": {
+          "type": "array"
+        },
+        "latent_event_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "proxy_features": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "query_id": {
+          "type": "string"
+        },
+        "raw_score": {
+          "type": "number"
+        },
+        "witness_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "witness_id",
+        "latent_event_id",
+        "query_id",
+        "actor_tracklet",
+        "interval",
+        "proxy_features",
+        "raw_score",
+        "creation_time",
+        "confirm_duration_parameters"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "urn:garc:psvr:toy-environment:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cost_process": {
+      "$ref": "#/$defs/cost"
+    },
+    "episode_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "grouping": {
+      "additionalProperties": false,
+      "properties": {
+        "over_merge_rate": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "over_merge_suppression_loss": {
+          "type": "boolean"
+        },
+        "under_merge_rate": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "under_merge_rate",
+        "over_merge_rate",
+        "over_merge_suppression_loss"
+      ],
+      "type": "object"
+    },
+    "horizon_seconds": {
+      "exclusiveMinimum": 0,
+      "type": "number"
+    },
+    "latent_events": {
+      "items": {
+        "$ref": "#/$defs/event"
+      },
+      "type": "array"
+    },
+    "oracle": {
+      "additionalProperties": false,
+      "properties": {
+        "false_positive_rate": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "materialization_success_rate": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "true_positive_rate": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "true_positive_rate",
+        "false_positive_rate",
+        "materialization_success_rate"
+      ],
+      "type": "object"
+    },
+    "planning": {
+      "additionalProperties": false,
+      "properties": {
+        "duration_distribution": {
+          "$ref": "#/$defs/distribution"
+        },
+        "mode": {
+          "enum": [
+            "IDEAL_ZERO",
+            "PARAMETRIC"
+          ]
+        }
+      },
+      "required": [
+        "mode",
+        "duration_distribution"
+      ],
+      "type": "object"
+    },
+    "regions": {
+      "items": {
+        "$ref": "#/$defs/region"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "seed": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "episode_id",
+    "seed",
+    "horizon_seconds",
+    "regions",
+    "latent_events",
+    "cost_process",
+    "grouping",
+    "oracle",
+    "planning"
+  ],
+  "title": "PSVR finite-horizon SMDP episode",
+  "transition_contract": {
+    "CONFIRM": [
+      "consume full duration",
+      "oracle result",
+      "materialization result",
+      "new/duplicate/false-positive classification",
+      "atomic commit if new",
+      "frontier suppression/update"
+    ],
+    "SCAN": [
+      "consume full duration",
+      "mark region scanned",
+      "reveal proxy evidence",
+      "emit zero or more witnesses",
+      "group/update frontier",
+      "never modify committed set"
+    ],
+    "STOP": [
+      "return last durable snapshot"
+    ]
+  },
+  "type": "object",
+  "visibility_contract": {
+    "evaluator_only": [
+      "reference_event_matching",
+      "regime_family",
+      "leakage_labels",
+      "clairvoyant_value"
+    ],
+    "latent_only": [
+      "latent_events",
+      "latent_event_id",
+      "unscanned_emissions",
+      "future_cost_draws",
+      "future_oracle_draws"
+    ],
+    "policy_visible": [
+      "scanned_region_ids",
+      "emitted_witness_fields_except_latent_event_id",
+      "hypothesis_assignments",
+      "committed_events",
+      "remaining_time",
+      "action_history"
+    ]
+  }
+}

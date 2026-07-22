@@ -1,0 +1,39 @@
+check,status,evidence
+expected_run_matrix_exact,PASS,expected=1476 actual=1476 missing=0 unexpected=0
+no_duplicate_run_ids,PASS,rows=1476 unique=1476
+frozen_configs_match,PASS,mismatch=0
+frozen_seeds_match,PASS,mismatch=0
+frozen_budgets_match,PASS,mismatch=0
+expected_plan_fields_match,PASS,"{""configuration->method_variant"": 0, ""materializer_expected->materializer_actual"": 0, ""method_expected->method_actual"": 0, ""run_category_expected->run_category_actual"": 0, ""track_expected->track_actual"": 0}"
+clean_initial_state_matches,PASS,mismatch=0
+expected_logical_calls_match_registry,PASS,mismatch=0
+run_paths_unique,PASS,rows=1476 unique=1476
+all_run_artifacts_parse,PASS,failed=0
+terminal_run_manifests_and_hashes,PASS,failed_runs=0
+trace_identity_and_exact_call_sequence,PASS,failed_runs=0
+no_duplicate_queries,PASS,failed_runs=0
+no_budget_violations,PASS,failed_runs=0
+logical_cost_complete_and_no_method_vlm,PASS,failed_runs=0 total_logical=64614
+metric_recomputation,PASS,failed_runs=0
+controlled_rematerialization,PASS,failed_runs=0
+baseline_metric_aggregate_rebuilt,PASS,rows=1464
+current_metric_aggregate_rebuilt,PASS,rows=12
+baseline_budget_curves_rebuilt,PASS,rows=84
+materializer_replay_comparison_rebuilt,PASS,rows=732
+baseline_summary_rebuilt,PASS,rows=84
+baseline_rankings_rebuilt,PASS,rows=14
+method_comparisons_rebuilt,PASS,rows=90
+event_f1_auc_rebuilt,PASS,rows=16
+strict_oracle_builder_full_verify,PASS,returncode=1 mode=post_completion_runtime_migration log=evaluator/strict_oracle_verify.log
+strict_call_ledger_exact,PASS,rows=347 attempts=347
+strict_oracle_provenance,PASS,oracle_build_id=strict_oracle_3b9ba1187c0449426978 units=347 reused=0
+public_planner_inputs_leakage_safe,PASS,unit_extra=[] proxy_extra=[] exact_copies=True
+public_proxy_exact_retention_fail_closed,PASS,authorized=7 actual=7 mismatches=[]
+compatibility_recomputed_from_current_files,PASS,mismatches=[]
+manifest_physical_frozen_hashes,PASS,mismatches=[]
+benchmark_id_recomputes,PASS,benchmark_id=cbbv2_514c0d360fd5b2a4b5fe
+pre_execution_semantic_snapshot_unchanged,PASS,changed=[]
+matcher_materializer_code_hashes,PASS,"{""abae_adapter"": ""1b548aa71f91b3c98e041bafa534d638c1778493a6de19d34bf9707351e43a2e"", ""arc_adapter"": ""220be4e6f813329fc2a144cbb376ff5aa6f778f2881bf0146c14a3c9292ed9c9"", ""benchmark_lib"": ""0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610"", ""benchmark_pipeline"": ""0f5a3b144dc13922ffd066e1beb4f69d89b8787aaa931b3606205b61b5903437"", ""map_anchor"": ""005e659c0918c9fab768efe928344b04b5e087d75b154ea2c4be5076ca2d18e2"", ""supg_adapter"": ""c994c136c09753cbed0f358b89590dcff2ce8784f6facadc3bd2c30953477f2b""}"
+reference_rebuilt_from_committed_strict_oracle,PASS,saved=dae29fff60c176ed346d843fb53d9af27aed3cca308de589ab71804402c48da4 rebuilt=dae29fff60c176ed346d843fb53d9af27aed3cca308de589ab71804402c48da4
+reference_lineage_complete,PASS,reference_events=26 source_units=39
+independent_adversarial_review,PASS,path=audit/INDEPENDENT_ADVERSARIAL_REVIEW.json sha256=47b77c3e2aa382e66a7235fda68e792d622c0b9eba09be77e3323cb6b48cbc58

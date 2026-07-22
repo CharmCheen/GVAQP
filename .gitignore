@@ -25,6 +25,7 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.ipynb_checkpoints/
 .coverage
 htmlcov/
 build/
@@ -94,6 +95,15 @@ logs/
 *.ckpt
 *.safetensors
 *.bin
+*.joblib
+
+# Output-local model / cache directories
+outputs/**/models/
+outputs/**/checkpoints/
+outputs/**/raw_cache/
+outputs/**/cache/
+**/raw_cache/
+**/checkpoints/
 
 # Archives
 *.tar
@@ -212,3 +222,12 @@ garc_eval/**/*.png
 # Miscellaneous large files
 archive/
 test_vlm_outputs_v13_experiments.tar.gz
+
+# =========================
+# Node / JS deps (project root only)
+# =========================
+node_modules/
+package.json
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

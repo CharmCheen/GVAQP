@@ -1,0 +1,88 @@
+{
+  "benchmark_id": "psvr2v_6250e3124206dccec5a3",
+  "benchmark_version": "PSVR_TWO_VIDEO_DEV_V1",
+  "created_at_utc": "2026-07-16T21:52:20Z",
+  "heldout_opened": false,
+  "oracle": {
+    "V0_policy": "reuse existing complete strict physical oracle",
+    "V1_build_id": "two_video_v1_oracle_7e37193ced4063695206",
+    "V1_cache_replays": 0,
+    "V1_physical_calls": 567,
+    "V1_policy": "fresh physical oracle, resumable only by exact content-bound identity",
+    "model_hash": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+    "parser_hash": "9a7413407d52df0484c0a338f0a12ae6b57553bdfa16753d7542f60977b558cb",
+    "prompt_hash": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+    "sampling_code_hash": "5b038acb5450d76928b43d873d73decd1792969e0aa072f121b8f23b751e0240"
+  },
+  "query_manifest_sha256": "73b0a7c9a3b8e3b03fb48763e248725894aaf4588094b24c5d49d55966ad5c7f",
+  "query_protocol_hash": "5705a1365e6033445932c06f4aa2432ff6bdcdfcb813ee822dfad39da3ae25c0",
+  "reference": {
+    "V0_unprojected_equivalence_pass": true,
+    "materializer": "consecutive_positive_units_v1",
+    "type": "VLM_DEFINED_PSEUDO_ORACLE"
+  },
+  "status": "FROZEN_COMPLETE",
+  "tasks": [
+    {
+      "abstain_units": 0,
+      "parse_failures": 0,
+      "positive_units": 14,
+      "projected_labels_path": "parsed_labels/V0_Q1.csv",
+      "query_id": "Q1",
+      "query_name": "OTHER_VEHICLE_ENTERS_EGO_PATH",
+      "reference_events": 14,
+      "reference_path": "reference_events/V0_Q1.csv",
+      "reference_sha256": "4fa8f07c0499ae3293869b690c8cc8bced21d651d155c217dd65085596cb3024",
+      "task_id": "V0_Q1",
+      "units": 347,
+      "video_id": "V0",
+      "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+    },
+    {
+      "abstain_units": 0,
+      "parse_failures": 0,
+      "positive_units": 36,
+      "projected_labels_path": "parsed_labels/V0_Q2.csv",
+      "query_id": "Q2",
+      "query_name": "VRU_ENTERS_EGO_PATH",
+      "reference_events": 23,
+      "reference_path": "reference_events/V0_Q2.csv",
+      "reference_sha256": "177802f018722d1f4bc6f14aacf6478d9d4298f79d27ee77fe6a15634ce2c949",
+      "task_id": "V0_Q2",
+      "units": 347,
+      "video_id": "V0",
+      "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+    },
+    {
+      "abstain_units": 0,
+      "parse_failures": 0,
+      "positive_units": 41,
+      "projected_labels_path": "parsed_labels/V1_Q1.csv",
+      "query_id": "Q1",
+      "query_name": "OTHER_VEHICLE_ENTERS_EGO_PATH",
+      "reference_events": 34,
+      "reference_path": "reference_events/V1_Q1.csv",
+      "reference_sha256": "c3ba16267c2a270eb7bdbd69226a53f67896c98ae66b91b59f07a45b52d7d11a",
+      "task_id": "V1_Q1",
+      "units": 567,
+      "video_id": "V1",
+      "video_sha256": "64cb0cfac6c37e52045552b4ed24e8aa20fd2c1fddc22509cf33dd957d14fd09"
+    },
+    {
+      "abstain_units": 0,
+      "parse_failures": 0,
+      "positive_units": 63,
+      "projected_labels_path": "parsed_labels/V1_Q2.csv",
+      "query_id": "Q2",
+      "query_name": "VRU_ENTERS_EGO_PATH",
+      "reference_events": 42,
+      "reference_path": "reference_events/V1_Q2.csv",
+      "reference_sha256": "9ed0cb0e09e141927f1462affa4fb86260a18b024cd5853a7b79a3e99738d3df",
+      "task_id": "V1_Q2",
+      "units": 567,
+      "video_id": "V1",
+      "video_sha256": "64cb0cfac6c37e52045552b4ed24e8aa20fd2c1fddc22509cf33dd957d14fd09"
+    }
+  ],
+  "video_manifest_sha256": "3c6d254cbb7ada2ad475fbda5a8fe49ef4fa8b9cf53f64bb5a1a6eac458338c7"
+}

@@ -1,0 +1,52 @@
+{
+  "checks": [
+    {
+      "check": "original rows unique",
+      "expected": 13,
+      "observed": 13,
+      "status": "PASS"
+    },
+    {
+      "check": "exact seed count",
+      "expected": 6,
+      "observed": 6,
+      "status": "PASS"
+    },
+    {
+      "check": "exact method count",
+      "expected": 5,
+      "observed": 5,
+      "status": "PASS"
+    },
+    {
+      "check": "original Cartesian product",
+      "expected": 390,
+      "observed": 390,
+      "status": "PASS"
+    },
+    {
+      "check": "runtime rows individually classified",
+      "expected": 6,
+      "observed": 6,
+      "status": "PASS"
+    },
+    {
+      "check": "all runtime rows pre-result authorized",
+      "expected": 6,
+      "observed": 0,
+      "status": "FAIL"
+    },
+    {
+      "check": "frozen full-form/magnitude coverage",
+      "expected": "four forms / 0,.05,.10,.20",
+      "observed": "two forms / 0,.05,.10",
+      "status": "FAIL"
+    }
+  ],
+  "commands": [
+    "python scripts/build_psvr_rollout_h1b_a5.py",
+    "python -m json.tool outputs/psvr_rollout_r2b_a5/A5_DEVELOPMENT_UNIVERSE_MANIFEST.json",
+    "python -m py_compile scripts/build_psvr_rollout_h1b_a5.py"
+  ],
+  "result": "BLOCKED_POSTHOC_CONFIGURATION"
+}

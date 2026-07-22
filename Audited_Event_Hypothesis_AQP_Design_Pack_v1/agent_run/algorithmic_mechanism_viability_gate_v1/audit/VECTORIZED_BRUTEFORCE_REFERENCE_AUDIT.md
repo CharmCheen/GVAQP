@@ -1,0 +1,11 @@
+# Vectorized vs Brute-force Reference Audit
+
+| probe             | identifier                         |       seed | vector_bruteforce_order_exact   | action_types_exact   | oracle_outcomes_exact   |   max_metric_abs_difference | status   |
+|:------------------|:-----------------------------------|-----------:|:--------------------------------|:---------------------|:------------------------|----------------------------:|:---------|
+| Suite A           | A_SATURATION_efd876b3395c          | 2026071100 | True                            | True                 | True                    |                           0 | PASS     |
+| Suite B           | B_COUNTERFACTUAL_fe662512ad78      | 2026071100 | True                            | True                 | True                    |                           0 | PASS     |
+| Suite C           | C_ROBUSTNESS_0140689abf85          | 2026071100 | True                            | True                 | True                    |                           0 | PASS     |
+| Suite D           | D_EXPLORATION_7dcbbdb6f23b         | 2026071100 | True                            | True                 | True                    |                           0 | PASS     |
+| N=1000            | C_SCALE_734d761ac74f               | 2026071100 | True                            | True                 | True                    |                           0 | PASS     |
+| S1 semi-synthetic | S1_EVENT_ALIGNED_EVALUATOR_DERIVED | 2026072100 | True                            | True                 | True                    |                           0 | PASS     |
+| S2 semi-synthetic | S2_H1_PUBLIC_HYPOTHESES            | 2026072100 | True                            | True                 | True                    |                           0 | PASS     |

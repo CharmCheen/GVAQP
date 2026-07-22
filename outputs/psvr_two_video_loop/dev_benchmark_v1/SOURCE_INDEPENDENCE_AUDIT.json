@@ -1,0 +1,77 @@
+{
+  "SOURCE_INDEPENDENCE": "PASS",
+  "audit_version": "PSVR_TWO_VIDEO_SOURCE_INDEPENDENCE_V1",
+  "created_utc": "2026-07-16T17:36:38.342093+00:00",
+  "criteria": [
+    "not exact duplicate",
+    "not crop or re-encode",
+    "not an overlapping sequence",
+    "no content evidence of adjacent same-source segmentation",
+    "not looped or padded",
+    "not a compilation of unrelated short clips"
+  ],
+  "evidence_boundary": "Direct byte, frame, sequence, audio, timestamp, decode, and edit-boundary evidence. No external capture-session sidecar was available.",
+  "heldout_opened": false,
+  "pair_audits": [
+    {
+      "candidate": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/\u9a7e\u9a76-\u5927\u7406.mp4",
+      "candidate_loop_padding_audit": {
+        "comparison_count": 16836,
+        "compilation_screen": "Fail only when at least 20 high-confidence cuts and more than 60 cuts/hour indicate a sequence of short edited clips.",
+        "hard_cut_count": 2,
+        "hard_cuts_per_hour": 1.2708419552274637,
+        "longest_repeated_sequence_run": 0,
+        "loop_or_padding_detected": false,
+        "loop_reject_run_length": 5,
+        "maximum_nonlocal_similarity": 0.803209022743619,
+        "minimum_nonlocal_gap_seconds": 180.0,
+        "multi_clip_compilation_suspected": false,
+        "near_duplicate_pairs": 0,
+        "sampling_stride_seconds": 30.0,
+        "status": "PASS"
+      },
+      "content_independence": {
+        "aligned_audio_similarity": {
+          "max": 0.8885147621037215,
+          "mean": 0.7437268559972693,
+          "p95": 0.8751008783547969,
+          "reject_threshold_mean": 0.94
+        },
+        "duration_ratio_right_over_left": 1.6360522784491494,
+        "exact_file_duplicate": false,
+        "fixed_ratio_visual_similarity": {
+          "max": 0.6933171189932623,
+          "mean": 0.5582417374367667,
+          "p95": 0.6432419595347835,
+          "reject_threshold_mean": 0.9
+        },
+        "independence_conclusion": "Content fingerprints reject crop/re-encode/overlap/loop explanations and provide no evidence that the files are adjacent pieces of one source.",
+        "same_source_adjacent_segment_assessment": {
+          "decision": "NO_SUPPORT_FOR_SAME_SOURCE_ADJACENCY",
+          "limitation": "A cryptographic capture-session declaration is unavailable. The decision is a content-based independence conclusion, not proof of camera ownership provenance.",
+          "observed_evidence": [
+            "No exact-byte duplicate",
+            "No sustained visual sequence alignment at 30-second sampling",
+            "Fixed-ratio visual summaries are below the preregistered overlap threshold",
+            "Audio summaries do not show aligned-content identity"
+          ]
+        },
+        "sequence_overlap": {
+          "best_constant_offset_match_count": 0,
+          "left_samples": 116,
+          "longest_consecutive_offset_run": 0,
+          "maximum_pair_similarity": 0.7802802324295044,
+          "reject_run_length": 5,
+          "right_samples": 189,
+          "sampling_stride_seconds": 30.0,
+          "threshold": 0.92,
+          "threshold_match_pairs": 0
+        },
+        "status": "PASS"
+      },
+      "eligible": true,
+      "v0": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4"
+    }
+  ],
+  "selected_candidate": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/\u9a7e\u9a76-\u5927\u7406.mp4"
+}

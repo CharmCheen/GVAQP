@@ -1,0 +1,103 @@
+{
+  "status": "PASS_TERMINAL_PAUSE",
+  "cycle_id": "cycle_07_BENCHMARK_UNBLOCK",
+  "completed_utc": "2026-07-15T17:31:53Z",
+  "terminal_condition": "AUTONOMOUS_RESEARCH_STATUS=PAUSED_INPUT_REQUIRED",
+  "scientific_interpretation": "The permitted current input pool is insufficient. This is neither PSVR_CORE_INNOVATION=NO_GO nor evidence that a method failed.",
+  "terminal_fields": {
+    "AUTONOMOUS_RESEARCH_STATUS": "PAUSED_INPUT_REQUIRED",
+    "DEV_BENCHMARK_UNBLOCK": "NOT_RUN_INPUT_INSUFFICIENT",
+    "PSVR_METHOD_USABILITY": "NOT_YET",
+    "PSVR_CORE_INNOVATION": "BLOCKED",
+    "CURRENT_BEST_OBSERVED_CONFIGURATION": "D2_TB0_FIXED_A0__SINGLE_TASK_TIE_SENSITIVE",
+    "CURRENT_BEST_VALIDATED_METHOD": null,
+    "EVIDENCE_LEVEL": "E3_SINGLE_TASK_TIE_SENSITIVE",
+    "DEV_SOURCE_VIDEOS": 1,
+    "DEV_VIDEO_QUERIES_COMPLETED": 1,
+    "HELD_OUT_OPENED": false,
+    "PAPER_READY_EVALUATION": "NOT_YET_RUN",
+    "FINAL_DECISION": "PAUSED_INPUT_REQUIRED__BENCHMARK_INPUT_POOL_INSUFFICIENT",
+    "NEXT_EXACT_COMMAND": "python scripts/audit_psvr_dev_inputs.py"
+  },
+  "input_gate": {
+    "BENCHMARK_INPUT_POOL": "INSUFFICIENT",
+    "required_independent_sources": 3,
+    "eligible_independent_sources": 1,
+    "eligible_source_ids": [
+      "long_video_dataset3"
+    ],
+    "additional_sources_needed": 2,
+    "candidate_rows": 609,
+    "existing_candidate_paths": 607,
+    "nexar_paths": 604,
+    "nexar_unique_files": 603,
+    "nexar_maximum_seconds": 49.464883,
+    "minimum_workload_seconds": 1200.0
+  },
+  "correctness": {
+    "phase_a_verifier": "PASS_40_OF_40",
+    "phase_a_verifier_report": "outputs/psvr_autonomous_research/cycle_07_BENCHMARK_UNBLOCK/CORRECTNESS_REPORT.json",
+    "phase_a_verifier_sha256": "90681518567928ff04c9e99651719ec58ce159d5e83a7e1ddb16a6c245f2fced",
+    "psvr_runtime_tests": "PASS_47_OF_47",
+    "json_and_csv_parse_checks": "PASS",
+    "final_field_count": 13,
+    "state_queue_registry_synthesis_consistency": "PASS"
+  },
+  "execution": {
+    "authoritative_audit_command": "python scripts/audit_psvr_dev_inputs.py",
+    "audit_exit_code": 0,
+    "audit_wall_seconds": 12.433,
+    "physical_method_runs": 0,
+    "physical_proxy_calls": 0,
+    "physical_oracle_calls": 0,
+    "gpu_seconds": 0,
+    "algorithm_work_after_input_failure": false
+  },
+  "heldout_boundary": {
+    "heldout_opened": false,
+    "definition": "no heldout semantic reference, label, method evaluation, query result, or tuning access",
+    "metadata_only_superseded_draft_probe": true,
+    "metadata_probe_disclosed": true,
+    "authoritative_audit_reads_heldout_bytes": false,
+    "verifier_reads_heldout_bytes": false
+  },
+  "required_phase_a_artifacts": {
+    "INPUT_ROOTS.json": true,
+    "VIDEO_CANDIDATES.csv": true,
+    "SOURCE_INDEPENDENCE_AUDIT.json": true,
+    "DERIVATION_GROUPS.json": true,
+    "INPUT_POOL_DECISION.json": true,
+    "INPUT_REQUEST.md": true
+  },
+  "required_cycle_artifacts": {
+    "TASK_MANIFEST.json": true,
+    "DEADLINE_MANIFEST.json": true,
+    "PREREGISTRATION.json": true,
+    "resolved_config.json": true,
+    "environment.json": true,
+    "git_commit.txt": true,
+    "commands.sh": true,
+    "raw/": true,
+    "tables/": true,
+    "plots/": true,
+    "MECHANISM_ANALYSIS.md": true,
+    "ADVERSARIAL_REVIEW.md": true,
+    "FINAL_REPORT.md": true,
+    "AUDITED_DECISION.json": true,
+    "CHANGED_FILES.md": true,
+    "EXACT_COMMANDS.md": true,
+    "COMPLETION_AUDIT.json": true
+  },
+  "persistent_state_files_updated": [
+    "outputs/psvr_autonomous_research/RESEARCH_STATE.json",
+    "outputs/psvr_autonomous_research/RESEARCH_QUEUE.json",
+    "outputs/psvr_autonomous_research/METHOD_REGISTRY.json",
+    "outputs/psvr_autonomous_research/EXPERIMENT_INDEX.csv",
+    "outputs/psvr_autonomous_research/CURRENT_BEST_METHOD.md",
+    "outputs/psvr_autonomous_research/CLAIMS_LEDGER.md",
+    "outputs/psvr_autonomous_research/FINAL_SYNTHESIS.md"
+  ],
+  "authority_note": "docs/PSVR_AUTONOMOUS_RESEARCH_CONTRACT.md was requested but is absent; it was not fabricated. The supplied controller and four available PSVR authority documents were used.",
+  "historical_artifacts_overwritten": false,
+  "next_exact_command": "python scripts/audit_psvr_dev_inputs.py"
+}

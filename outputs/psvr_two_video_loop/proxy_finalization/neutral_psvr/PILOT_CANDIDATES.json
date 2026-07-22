@@ -1,0 +1,41 @@
+{
+  "candidate_capacity": 10,
+  "candidate_capacity_rationale": "10 is the smallest preregistered offline ranking cutoff and is small enough for retention pressure to become observable under fixed-periodic high-deadline schedules; it was frozen before task deadlines or any proxy/reference outcome.",
+  "candidate_count": 3,
+  "candidates": [
+    "Y8",
+    "YP640",
+    "YP320"
+  ],
+  "freeze_hash": "6d07b3fd06f6435cc929a8bec4389d1da60d99ddd8f20f155d46e08fdc16fab0",
+  "freeze_id": "H_PROXY_2VIDEO_NEUTRAL_PILOT_CANDIDATES_V1",
+  "frontier": "score_only",
+  "frozen_at_utc": "2026-07-17T00:24:46.461496+00:00",
+  "heldout_opened": false,
+  "maximum_allowed": 3,
+  "offline_metrics_sha256": "94fa9412c09369dbb9eff1bed936d31673dfa3b71420b6fe80b4514706ee1c1b",
+  "pareto_cost_column": "gpu_seconds_per_video_hour",
+  "pareto_quality_columns": [
+    "unit_auprc",
+    "unique_event_recall@20",
+    "positive_event_exposure_auc"
+  ],
+  "physical_cost_sha256": {
+    "Y8": "39a619c5cf2e95a4152862e280907ccb839e09e0133c2e35ff5b88c1a4f96a19",
+    "YP320": "de96e2ff4bd0492533b2a6c998aa817b604c76991885ce303744d697c190ad6a",
+    "YP640": "17fb050901dd29dfa38fc7c186d84fc7a00e4b46c23af2b6f8757afb0c0efd75"
+  },
+  "reference_outcome_used": false,
+  "scanner": "Uniform-Temporal-Interleave",
+  "scanner_resolution": {
+    "rule": "iterative largest-unobserved-gap midpoint; lower midpoint tie",
+    "source": "/qiuyeqing/llama_prl/G-ARC/src/garc_eval/psvr_pilot/policy_service.py",
+    "source_sha256": "1357bf8116ba19cc625b5e65f03aeb9955b708f909567808a57d7aaad4dc29c3"
+  },
+  "verify_allocator": {
+    "name": "A0 Fixed-Periodic",
+    "resolution_source": "/qiuyeqing/llama_prl/G-ARC/scripts/run_psvr_proxy_pilot.py",
+    "resolution_source_sha256": "bb0ac6aebbaa232047094d9549e3c5350f816bdd00befc7247f2c7a09b9d57c7",
+    "verify_every_n_scanned_units": 3
+  }
+}

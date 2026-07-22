@@ -1,0 +1,46 @@
+{
+  "analysis_status": "EXPLORATORY_NOT_DEPLOYABLE",
+  "artifact_hash": "a7f03754994fc8c1d78974ff9b8c23e0e84f81e8b7775c5fd3c6b34732eeb302",
+  "artifact_id": "MF_PSVR_BEST_STAGE_A_TEMPORAL_REFINER_V1",
+  "created_at_utc": "2026-07-19T06:41:35Z",
+  "development_metrics": {
+    "auprc": 0.33563437262907425,
+    "brier": 0.08890709501703452,
+    "ece": 0.06649700750651474
+  },
+  "final_calibration_support": {
+    "deployable": false,
+    "interpretation": "A fitted Platt map is retained only to reproduce the exploratory audit; it is not a deployable calibrator.",
+    "negatives": 27,
+    "per_query": {
+      "Q1": {
+        "negatives": 13,
+        "positives": 1,
+        "rows": 14
+      },
+      "Q2": {
+        "negatives": 14,
+        "positives": 0,
+        "rows": 14
+      }
+    },
+    "positives": 1,
+    "rows": 28,
+    "status": "UNSUPPORTED_ONE_POSITIVE_NOT_DEPLOYABLE"
+  },
+  "fixed_pool_audit_metrics": {
+    "auprc": 0.7961465617715617,
+    "brier": 0.26011907454610733,
+    "ece": 0.24758577076229654
+  },
+  "heldout_opened": false,
+  "model_id": "TCN_TEMPORAL",
+  "modeling_protocol_sha256": "f02aed0f140650b69101bd983a94025b92562b7bb148c8c6bd24bec2086feedc",
+  "path": "outputs/mf_psvr_publication_program/cycle_01_training_pool/stage_a/modeling/models/TCN_TEMPORAL.pt",
+  "pool_audit_cryptographically_blinded": false,
+  "pool_audit_evaluated_after_selection": true,
+  "pool_audit_rows_used_for_fit_or_selection": 0,
+  "selection_metric": "AUPRC",
+  "selection_scope": "development_loso",
+  "sha256": "64205835900410761d6f5e0da2b8641c043dbece6136d22b8924b3701a7476af"
+}

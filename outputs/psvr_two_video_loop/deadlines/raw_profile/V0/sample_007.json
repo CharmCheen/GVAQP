@@ -1,0 +1,103 @@
+{
+  "cache_replay": false,
+  "commit": {
+    "materializer_mode": "persistent_clean_spawn_predeadline",
+    "raw_observation_commit": {
+      "atomic_replace_seconds": 0.001209269,
+      "fsync_seconds": 0.00074997,
+      "payload_sha256": "8b474ecbf07194dccedc79c5bb889e3677d1b7d82d73a336d643f56c44ba765c",
+      "serialize_seconds": 0.000251068,
+      "total_seconds": 0.003782573
+    },
+    "snapshot_commit": {
+      "atomic_replace_seconds": 0.001365269,
+      "fsync_seconds": 0.000553914,
+      "payload_sha256": "d2e65afecfce78bb9aa7d7be065592c5ce426bc611c55206ca090bc0acaa3091",
+      "serialize_seconds": 7.9188e-05,
+      "total_seconds": 0.00268829
+    },
+    "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_two_video_loop/deadlines/raw_profile/V0/sample_007_snapshot.json",
+    "stage_seconds": {
+      "atomic_replace": 0.001365269,
+      "fsync": 0.000553914,
+      "materialize": 0.017220575,
+      "observation_persist": 0.003782573,
+      "serialize": 7.9188e-05
+    },
+    "total_seconds": 0.024978932
+  },
+  "commit_wall_seconds": 0.025013185,
+  "confirmed_events": 0,
+  "oracle_result": {
+    "cache_replay": false,
+    "confidence": "high",
+    "cuda_synchronized_before_and_after": true,
+    "end_time": 2610.0,
+    "frame_identity_verified": true,
+    "generic_parsed_label": "negative",
+    "logical_oracle_call": true,
+    "oracle_build_id": "strict_oracle_3b9ba1187c0449426978",
+    "parse_status": "ok",
+    "parsed": {
+      "abstain_reason": null,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "ego_relevant": false,
+      "event_end": null,
+      "event_start": null,
+      "event_type": "none",
+      "evidence": "The ego vehicle is driving straight on a multi-lane road with clear lane markings. Other vehicles are present in adjacent lanes and ahead, but none are observed entering the ego vehicle's path. Traffic is flowing normally without any merging, cutting, or crossing into the ego path. No pedestrians, cyclists, or other road users are seen entering the driving corridor.",
+      "involved_object": "none",
+      "label": "negative",
+      "negative_reason": "normal_following"
+    },
+    "parsed_label": "negative",
+    "physical_oracle_invocation": true,
+    "projection_allowed_involved_objects": [
+      "cyclist",
+      "vehicle"
+    ],
+    "query_id": "Q1",
+    "raw": "{\n  \"label\": \"negative\",\n  \"event_start\": null,\n  \"event_end\": null,\n  \"event_type\": \"none\",\n  \"involved_object\": \"none\",\n  \"ego_relevant\": false,\n  \"boundary_status\": \"ok\",\n  \"complete_event_visible\": true,\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving straight on a multi-lane road with clear lane markings. Other vehicles are present in adjacent lanes and ahead, but none are observed entering the ego vehicle's path. Traffic is flowing normally without any merging, cutting, or crossing into the ego path. No pedestrians, cyclists, or other road users are seen entering the driving corridor.\",\n  \"negative_reason\": \"normal_following\",\n  \"abstain_reason\": null\n}",
+    "raw_sha256": "1624f61b49eae203b033badabc7c2b75af77875c29b7b9d2047c177c4d5474a7",
+    "recorded_at_utc": "2026-07-18T02:34:11.729794+00:00",
+    "rng_seed": 20260970,
+    "service_total_seconds": 22.283959133,
+    "session_id": "deadline_profile_V0_007",
+    "stage_seconds": {
+      "cleanup": 0.605389483,
+      "clip_extraction": 0.618338523,
+      "oracle_inference": 16.186085677,
+      "oracle_parse": 0.000125785,
+      "oracle_postprocess": 0.000506235,
+      "oracle_preprocess": 4.873403754
+    },
+    "start_time": 2600.0,
+    "unit_id": 260,
+    "video_id": "V0"
+  },
+  "physical_oracle_only": true,
+  "query_wall_seconds": 22.284633392,
+  "recorded_at_utc": "2026-07-18T02:34:11.729794+00:00",
+  "sample_index": 7,
+  "service_total_seconds": 22.283959133,
+  "session_initialization": {
+    "prior_query_count": 0,
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V0_007",
+    "video_id": "V0"
+  },
+  "session_summary": {
+    "physical_calls": 1,
+    "queried_ids": [
+      260
+    ],
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V0_007",
+    "video_id": "V0"
+  },
+  "status": "ok",
+  "unit_id": 260,
+  "video_id": "V0"
+}

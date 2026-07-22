@@ -1,0 +1,14 @@
+fact,expected,observed,tolerance,match,primitive_source
+strict_benchmark_id,cbbv2_514c0d360fd5b2a4b5fe,cbbv2_514c0d360fd5b2a4b5fe,0.0,True,BENCHMARK_ID.txt
+reference_events,26,26,0.0,True,frozen_inputs/event_reference.csv
+best_native_baseline_event_f1_auc,0.3896592193755119,0.3896592193755119,1e-12,True,baselines/baseline_budget_curves.csv
+map_m1_event_f1_auc,0.3880556629484837,0.3880556629484837,1e-12,True,current_method/current_budget_curves.csv
+h1_event_f1_auc,0.31499046948962056,0.31499046948962056,1e-12,True,hypothesis repair analysis/per_budget_metrics.csv
+mechanism_settings,149,149,0.0,True,configs/EXPERIMENT_MATRIX.csv
+mechanism_settings_complete_valid,149,149,0.0,True,runs/settings/*/COMPLETE.json and artifact hashes
+mechanism_policy_runs,141750,141750,0.0,True,primitive synthetic and semi-synthetic seed metrics
+s1_event_aligned_p1_minus_p0,0.025434,0.025434363037068235,5e-07,True,semi-synthetic primitive seed metrics
+s2_h1_p1_minus_p0,-0.003978,-0.003977534735534348,5e-07,True,semi-synthetic primitive seed metrics
+s2_cells_all_negative,15/15,15/15,0.0,True,paired primitive S2 cells
+mechanism_decision,IDEAL_SIGNAL_ONLY,IDEAL_SIGNAL_ONLY,0.0,True,decision predicate over primitive S1/S2 effects
+real_cheap_primitive_engineering_justified,False,False,0.0,True,primitive transfer predicate

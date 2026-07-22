@@ -1,0 +1,26 @@
+{
+  "hypothesis_id": "H-ROLLOUT1B",
+  "status": "FROZEN_RESULT_BLIND_PREREGISTRATION",
+  "execution_authorized": false,
+  "question": "Can a fixed finite-compute, planning-time-aware approximate rollout retain positive net utility over immediate shielded pi0 under a predeclared robustness region?",
+  "upstream_1a_binding": {
+    "completion_marker_sha256": "39d17f756f569b4a82be2f384d18bd35ff610537c3a202fbfa60d7e5db22a99c",
+    "independent_verifier_sha256": "6621a2733e29b5f54fade9e8ae910d4e68c589b8d4ece2a92c0a38e9c44b7b7c",
+    "gate_sha256": "54bca1c6c094f08d593a788175033997a9536b7142be13e9cca8ed243e3694af",
+    "decision_sha256": "0d582148feff6071fbcb7633a94630dd4df7924f52c1032c2ae7596df1c57876",
+    "interpretation": "ideal mechanism accepted; approximate and planning-aware effectiveness untested"
+  },
+  "universe": {"new_h1b_seed_count": 1024, "creation": "ONE_SHOT_AFTER_FUTURE_CODE_FREEZE", "disjoint_from": ["1A sealed universe", "development seeds", "legacy contaminated held-out universe"]},
+  "baselines": ["B1_SHIELDED_PI0", "APPROX_NO_FALLBACK", "APPROX_POINT_ESTIMATE_FALLBACK", "APPROX_LCB_FALLBACK", "APPROX_PLANNING_ADMISSION_LCB"],
+  "compute_configurations": [{"posterior_worlds":4,"trajectories":4},{"posterior_worlds":16,"trajectories":16},{"posterior_worlds":64,"trajectories":64},{"posterior_worlds":256,"trajectories":256}],
+  "planning_cost_ticks": [0,2,5,10,20],
+  "common_random_numbers": "paired by h1b_seed|decision_index|action_pair|configuration|trajectory",
+  "exact_m1": "EVALUATOR_ONLY_CEILING_NEVER_POLICY_ACCESSIBLE",
+  "error_mechanisms": ["scan_candidate_yield","confirm_positive_probability","novelty_duplicate_probability","grouping_transition","action_duration","materialization_success"],
+  "error_forms": ["independent_variance","systematic_optimism","systematic_pessimism","state_dependent_calibration"],
+  "error_magnitudes": [0.0,0.05,0.1,0.2],
+  "primary_metric": "net D1 time-weighted unique-event utility after SMDP planning time",
+  "diagnostics": ["action_agreement_exact_m1","incorrect_override_rate","paired_value_regret","paired_CI_width","planning_invocation_count","break_even_planning_cost","unused_deadline","late_confirm_opportunity_loss","plan_admission_frequency"],
+  "acceptance_branches": ["ACCEPT_APPROXIMATE_ROLLOUT","PARTIAL_NARROW_ROBUSTNESS_REGION","REJECT_PLANNING_COST_ERASES_GAIN","REJECT_MODEL_ERROR_ERASES_GAIN","REJECT_APPROXIMATION_UNSTABLE","BLOCKED_EXECUTION_INTEGRITY"],
+  "forbidden_this_stage": ["new result generation before code freeze","real video replay","physical prototype","GPU extraction","learned M0","physical safety claim"]
+}

@@ -1,0 +1,42 @@
+{
+  "freeze_timestamp": "2026-07-16T04:58:05Z",
+  "method": "H-PROXY1",
+  "proxy_model": {
+    "name": "YOLOv8n",
+    "architecture": "YOLOv8 Nano",
+    "path": "/qiuyeqing/llama_prl/G-ARC/models/yolo/yolov8n.pt",
+    "size_bytes": 6549796,
+    "sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "library": "ultralytics",
+    "library_version": "8.4.51",
+    "input_resolution": "640x640 (auto-scale)",
+    "conf_threshold": 0.25,
+    "precision_mode": "FP32",
+    "backend": "PyTorch/CUDA",
+    "coco_classes": {
+      "0": "person",
+      "1": "bicycle",
+      "2": "car",
+      "3": "motorcycle",
+      "5": "bus",
+      "7": "truck"
+    },
+    "inference_code": "src/garc_eval/models/yolo_scorer.py",
+    "config_files": [
+      "configs/garc_eval/real_frame_yolo.kitti_0005_count5.yaml",
+      "src/garc_eval/outputs/new_video_scout_gate_v1/config/scout_config.yaml"
+    ]
+  },
+  "oracle_model": {
+    "name": "YOLOv8x",
+    "architecture": "YOLOv8 Extra-Large",
+    "path": "/qiuyeqing/llama_prl/G-ARC/models/yolo/yolov8x.pt",
+    "size_bytes": 136890692,
+    "sha256": "3df4ada6b4dad6d657868f2fdf7faecfb34dcfccf3a25c4b82079064718524c8",
+    "role": "frame-level pseudo-oracle for PSVR verification"
+  },
+  "sampling": {
+    "scout": "1 midpoint frame per 5-second window",
+    "full": "2 fps full extraction"
+  }
+}

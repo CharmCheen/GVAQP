@@ -1,0 +1,28 @@
+{
+  "B1_B2": {
+    "detection_rows_equal": true,
+    "identity_verdict": "ALIAS_NOT_INDEPENDENT_BASELINES",
+    "publication_action": "EXCLUDE_B2_AS_DISTINCT_BASELINE",
+    "road_geometry_artifact_count": 0,
+    "tracking_rows_equal": true
+  },
+  "SUPG_RT": {
+    "different_selected_set_pairs": 30,
+    "identical_K3_segment_pairs": 30,
+    "identical_metric_pairs": 30,
+    "identity_verdict": "DISTINCT_SELECTIONS_EFFECTIVELY_ALIAS_AFTER_K3",
+    "pair_count": 30,
+    "publication_action": "COUNT_AS_ONE_EFFECTIVE_BASELINE_VARIANT"
+  },
+  "current_best_simple_baseline": "FIFO",
+  "required_publication_baselines": [
+    "FIFO",
+    "raw_YOLO_score",
+    "deterministic_random",
+    "one_effective_SUPG_selector",
+    "explicit_ARC_unit_inspired_mapping",
+    "Zeus_style_adaptive_configuration",
+    "FiGO_style_chunk_fidelity_plan"
+  ],
+  "status": "PASS_WITH_EXCLUSIONS"
+}

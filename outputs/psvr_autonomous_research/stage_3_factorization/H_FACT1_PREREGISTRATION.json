@@ -1,0 +1,40 @@
+{
+  "preregistration_version": "H-FACT1_v1",
+  "status": "FROZEN_BEFORE_FIRST_PHYSICAL_RUN",
+  "scientific_question": "Does the current quality signal arise from composite scan-cell scheduling, scan/VERIFY allocation, or their interaction?",
+  "factors": {
+    "S0": "Use the frozen Coverage-Interleave coarse grid in ascending order: unit ids 1,4,7,...,346, four previously unobserved units per SCAN.",
+    "S1": "Use the current Coverage-Debt midpoint scheduler with priority span/N + 0.5*log2(span+1)/log2(N+1) + 0.25*observed_local_proxy_signal, sequentially updating the temporary observed set within each four-unit batch.",
+    "A0": "Fixed state-independent phase schedule inherited from Stage-2 Coverage-Interleave: decision epochs 0..28 are SCAN (29 batches cover the 116-unit coarse grid), and every later epoch is VERIFY while a scanned unqueried candidate exists; no observed proxy value changes the allocation schedule.",
+    "A1": "Current state-dependent allocation inherited from Stage-2 Coverage-Debt: SCAN when no candidate is available or scan_actions <= completed_VERIFY_actions; otherwise VERIFY. If a requested scan order is exhausted, VERIFY if possible, else STOP."
+  },
+  "cells": {
+    "C0": {"scan_order": "S0", "allocation": "A0", "equivalence": "Stage-2 coverage_interleave"},
+    "C1": {"scan_order": "S1", "allocation": "A0"},
+    "C2": {"scan_order": "S0", "allocation": "A1"},
+    "C3": {"scan_order": "S1", "allocation": "A1", "equivalence": "Stage-2 coverage_debt_psvr"}
+  },
+  "shared_rules": {
+    "VERIFY_candidate": "highest observed physical proxy score among scanned unqueried units",
+    "candidate_tie_break": "ascending unit_id",
+    "proxy": "physical YOLOv8n midpoint frame, original decoded BGR",
+    "oracle": "fresh cache-free physical Qwen3-VL-32B-Instruct service per run",
+    "materializer": "unchanged K3 bridge-safe persistent service",
+    "deadline_guard": "unchanged H-DS1 tail-aware admission guard",
+    "snapshots": "commit after every completed SCAN or VERIFY action",
+    "batch_size": 4,
+    "hardware_runtime_identity": "08b384175d8b9debc38598faf09e3966a0cb19d4ccc5fdca3a5e0664c05679fb"
+  },
+  "deadlines_manifest": "TRANSITION_DEADLINES.json",
+  "execution": {"smoke": "one physical run per cell at T_transition", "matrix": "4 cells x 3 deadlines x 3 runtime repeats", "physical_cap": 40},
+  "primary_endpoints": ["AnytimeAUC_F1", "F1_at_deadline", "TP", "FP", "FN", "unique_confirmed_events", "time_to_first_confirmed_event"],
+  "decision_rule": {
+    "Branch_A": "C1 clearly improves over C0 and C2 remains close to C0",
+    "Branch_B": "C2 clearly improves over C0 and C1 remains close to C0",
+    "Branch_C": "only C3 is stably effective",
+    "Branch_D": "C1, C2, and C3 show no repeatable quality improvement"
+  },
+  "interpretation_constraint": "Three repeats measure runtime stability on one semantic sample; they are not independent semantic samples.",
+  "evaluator_only_metrics_forbidden_to_policy": ["time_to_first_positive_candidate", "positive_event_cells_touched", "candidate_frontier_precision_against_reference", "candidate_frontier_reference_event_diversity", "reference_event_redundant_VERIFY"],
+  "prohibited": ["hidden proxy replay", "heldout access", "benchmark/reference/K3 changes", "boundary refinement", "learned scheduler", "deadline changes", "C3 parameter changes"]
+}

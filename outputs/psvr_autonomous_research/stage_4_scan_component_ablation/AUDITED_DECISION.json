@@ -1,0 +1,63 @@
+{
+  "COVERAGE_STRUCTURAL_SIGNAL": "PRESENT",
+  "H_COV1": "REVISE_MORE_SPECIFIC",
+  "H_SCAN1A": "ACCEPT_STRUCTURAL_SIGNAL",
+  "OBSERVED_PROXY_EXPLOITATION_DRIVER": "NOT_SUPPORTED",
+  "PSVR_CORE_INNOVATION_PILOT": "WEAK",
+  "best_method_by_AnytimeAUC": "D2",
+  "best_method_by_TTFC": "D2",
+  "best_methods_by_unique_events": [
+    "D1",
+    "D2"
+  ],
+  "branch": "S-A",
+  "current_best_H_SCAN1A_method": "D2",
+  "current_best_update_reason": "D2 is simpler and mechanism-informative, but D1 remains operational best if D2 mean AnytimeAUC is lower.",
+  "effectiveness": {
+    "D0": false,
+    "D1": true,
+    "D2": true,
+    "D3": false
+  },
+  "method_summary": [
+    {
+      "AnytimeAUC_F1": 0.0,
+      "GPU_seconds": 76.40170077,
+      "TTFC": null,
+      "deadline_misses": 0,
+      "method": "D0",
+      "unique_events": 0
+    },
+    {
+      "AnytimeAUC_F1": 0.0187490705,
+      "GPU_seconds": 74.8923387282,
+      "TTFC": 89.2250039055,
+      "deadline_misses": 0,
+      "method": "D1",
+      "unique_events": 1
+    },
+    {
+      "AnytimeAUC_F1": 0.0215915337,
+      "GPU_seconds": 79.981748594,
+      "TTFC": 86.8593339815,
+      "deadline_misses": 0,
+      "method": "D2",
+      "unique_events": 1
+    },
+    {
+      "AnytimeAUC_F1": 0.0,
+      "GPU_seconds": 76.8024367337,
+      "TTFC": null,
+      "deadline_misses": 0,
+      "method": "D3",
+      "unique_events": 0
+    }
+  ],
+  "next_exact_command": "python scripts/preregister_psvr_hscan1b.py",
+  "next_experiment": "Register H-SCAN1B to split unobserved-duration/coverage from scan-level/hierarchical debt; do not execute it in this cycle.",
+  "pre_existing_related_evidence_disclosed": true,
+  "recommended_scientific_candidate": "D2",
+  "runtime_repeats_are_stability_only": true,
+  "semantic_samples": 1,
+  "stop_after_decision": true
+}

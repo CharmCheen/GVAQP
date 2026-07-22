@@ -1,0 +1,40 @@
+{
+  "feature_order": [
+    "frame_valid",
+    "witness_observed",
+    "raw_yolo_confidence",
+    "bbox_center_x",
+    "bbox_center_y",
+    "bbox_width",
+    "bbox_height",
+    "bbox_area",
+    "bbox_bottom",
+    "delta_center_x_per_second",
+    "delta_center_y_per_second",
+    "box_growth_per_second",
+    "height_growth_per_second",
+    "front_region_occupancy",
+    "approximate_ttc_urgency",
+    "elapsed_fraction",
+    "active_query_track_count",
+    "max_query_raw_yolo_confidence"
+  ],
+  "identity_fields_excluded_from_model_inputs": [
+    "source_dataset",
+    "session_id",
+    "physical_call_id",
+    "semantic_sample_id"
+  ],
+  "padding": "right zero padding to 64 steps; frame_valid and valid_mask distinguish padding",
+  "query_conditioning": "query_code plus query-specific class eligibility and witness sequence",
+  "raw_yolo_score": "maximum post-NMS YOLOv8 detection confidence among query-eligible classes in the frozen unit",
+  "runtime_visible_only": true,
+  "sample_rate_fps": 5,
+  "schema_id": "MF_PSVR_STAGE_A_TEMPORAL_FEATURE_SCHEMA_V1",
+  "sequence_shape": [
+    192,
+    64,
+    18
+  ],
+  "witness_policy": "pre-label frozen query witness track; no label-aware track selection"
+}

@@ -1,0 +1,20 @@
+{
+  "amendment_id": "IC1_REPAIR4_SMDP_ACCOUNTING_AND_EXECUTION_HOLD",
+  "scope": "result-blind implementation-integrity repair only",
+  "scientific_spec_changed": false,
+  "status": "INCOMPLETE_BLOCKED_CANONICAL_SPEC_AMBIGUITY",
+  "invalidated_development_attempts": [
+    "development_attempt_v7",
+    "development_attempt_v8",
+    "development_attempt_v9"
+  ],
+  "files": {
+    "src/garc_eval/psvr_rollout_h1b/ic1.py": "31bb2709fb3eb649ba741dc0f08f1abfea537b4a2fc41312259ed7956373bc84",
+    "src/garc_eval/psvr_rollout_h1b/exact_reference.py": "f55f4b144c266ae3e389c1a2d30b5f1ba6790ecf5029c79e3178cc4408250956",
+    "scripts/run_psvr_rollout_h1b_ic1_development.py": "29e4e671847b9e96ebcbc9eea88b4cf5dccd3596f5cc623b45995f4eb2bfd9b6",
+    "tests/psvr_rollout_h1b/test_h1b_implementation.py": "517be1ee7e8bc54927dc944a7bf3109d4641cc1528fcdc776992049125540a8b",
+    "outputs/psvr_rollout_r2b_ic1/IC1_CANONICAL_SPEC_AMBIGUITY_PROOF.md": "5fa2487c4838ad40f9e1ad3e33f066f0e3583d1b2ff4b95b0005f3cda8f0c4a6"
+  },
+  "repair_reason": "The blind red-team found that v9 omitted planning time from executor D1, approximate continuation values, and exact evaluator values, represented no post-planning SCAN/CONFIRM minimums, and calculated sidecars before the selected action record. This repair fixes those implementation defects and prevents new development execution while A1/A2 generative-transition semantics remain underspecified.",
+  "not_a_complete_implementation_freeze": "The six model-error transitions, independent verifier, universe declaration, source-closure manifest, and resource reconciliation remain incomplete. This file must not authorize development or confirmatory execution."
+}

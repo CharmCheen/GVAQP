@@ -1,0 +1,28 @@
+{
+  "frozen_before_semantic_calls": true,
+  "manifest_version": "event_enumerate_v2_prompt_parser_freeze_v1",
+  "parser": {
+    "clamp": false,
+    "module": "src/garc_eval/event_enumerate_v2/temporal_contract.py",
+    "module_sha256": "aa971ff807e590733cefa2252dc7370ae1dc16e2a74daeda8473908807d68f0d",
+    "reference_access": false,
+    "repair": false,
+    "version": "event_enumerate_v2_strict_parser_v1"
+  },
+  "prompt": {
+    "byte_identical_to_v1": true,
+    "dynamic_substitution": {
+      "__CLIP_DURATION_SECONDS__": "actual sampled span formatted to one decimal"
+    },
+    "path": "src/garc_eval/event_enumerate_v2/prompts/event_enumerate_v2.txt",
+    "selected_without_event_accuracy": true,
+    "sha256": "ffb65213017a79b5312bce98d5cf9a3d270cf69347ed560176119be347167bc8",
+    "v1_path": "src/garc_eval/aqp_invention_v1/prompts/event_enumerate_v1.txt"
+  },
+  "semantic_calls_at_freeze": 0,
+  "thresholds": {
+    "cost": "corrected enumerator synchronized GPU seconds strictly less than matched dense synchronized GPU seconds",
+    "event_f1_minimum": 0.8,
+    "event_recall_minimum": 0.8
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "audit_timestamp":"2026-07-20T02:35:24+00:00",
+  "active_r2_confirmatory_process":false,
+  "confirmatory_master_seed_exists":false,
+  "confirmatory_attempt_ledger_exists":false,
+  "confirmatory_episode_outputs_exist":false,
+  "confirmatory_aggregate_exists":false,
+  "freeze_manifest_files":55,
+  "freeze_hash_mismatches":0,
+  "toy_tests":"48/48 PASS",
+  "development_smoke_status":"PASS_UNCHANGED",
+  "old_contaminated_path_hash_guard":"PASS_STATIC_AND_TESTED",
+  "command_cli_match":"CONDITIONAL: NEXT command requires PYTHONPATH=src; bare python runner --help cannot import garc_eval",
+  "state":"BLOCKED_COMMAND_SPEC_MISMATCH",
+  "integrity_blockers":[
+    "mandatory C0 Clairvoyant/DP ceiling is absent from frozen preregistration and runner",
+    "runner does not generate required CONFIRMATORY_* result artifacts or the four required reports",
+    "runner verifier does not recompute raw-trace metrics, paired/regime aggregation, Gate, seed/split integrity",
+    "runner does not emit a preregistered final decision branch",
+    "runner has no compliant resume/uncertain_nonretriable semantics after attempt STARTED",
+    "bare-python help contract differs from the frozen PYTHONPATH command"
+  ],
+  "master_seed_created":false,
+  "one_shot_command_executed":false,
+  "safe_action":"DO_NOT_LAUNCH_FROZEN_NONCONFORMING_RUNNER"
+}

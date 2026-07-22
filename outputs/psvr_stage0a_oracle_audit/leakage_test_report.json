@@ -1,0 +1,46 @@
+{
+  "public_surface_columns": {
+    "units": [
+      "benchmark_id",
+      "video_id",
+      "video_sha256",
+      "unit_id",
+      "start_frame",
+      "end_frame",
+      "start_time",
+      "end_time",
+      "duration_seconds",
+      "split_role",
+      "eligible_for_query",
+      "anchor_id"
+    ],
+    "public_proxy": [
+      "benchmark_id",
+      "video_id",
+      "unit_id",
+      "proxy_name",
+      "proxy_version",
+      "proxy_score_raw",
+      "proxy_score_normalized",
+      "feature_source",
+      "model_path",
+      "config_hash",
+      "generated_this_run",
+      "provenance_valid"
+    ]
+  },
+  "forbidden_columns_exposed": [],
+  "selector_public_surface_pass": true,
+  "execution_cache_path": "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/oracle/oracle_presence_observations.csv",
+  "evaluation_reference_path": "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/event_reference.csv",
+  "paths_are_distinct": true,
+  "interface_separation_documented_in_frozen_code": true,
+  "malicious_zero_query_test": {
+    "queried_count": 0,
+    "frozen_oracle_rows_readable": 347,
+    "frozen_reference_rows_readable": 26,
+    "oracle_accessor_public_table_rows_readable": 347
+  },
+  "critical_failure": "Selector/runtime object graph directly exposes complete oracle labels and evaluation reference before any query.",
+  "status": "FAIL"
+}

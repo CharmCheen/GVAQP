@@ -1,0 +1,103 @@
+{
+  "cache_replay": false,
+  "commit": {
+    "materializer_mode": "persistent_clean_spawn_predeadline",
+    "raw_observation_commit": {
+      "atomic_replace_seconds": 0.001664097,
+      "fsync_seconds": 0.000740933,
+      "payload_sha256": "79da818b4a600e1865799dfbebb45198b653d4925546f6118055025251409b62",
+      "serialize_seconds": 0.000170629,
+      "total_seconds": 0.003539749
+    },
+    "snapshot_commit": {
+      "atomic_replace_seconds": 0.000873021,
+      "fsync_seconds": 0.000537534,
+      "payload_sha256": "05f3ce58d9eb4c9918ec3bceef41e5294524e1f274df5f0adf6b48d47906ed55",
+      "serialize_seconds": 5.8349e-05,
+      "total_seconds": 0.001937828
+    },
+    "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_two_video_loop/deadlines/raw_profile/V0/sample_005_snapshot.json",
+    "stage_seconds": {
+      "atomic_replace": 0.000873021,
+      "fsync": 0.000537534,
+      "materialize": 0.009347715,
+      "observation_persist": 0.003539749,
+      "serialize": 5.8349e-05
+    },
+    "total_seconds": 0.015567188
+  },
+  "commit_wall_seconds": 0.01559008,
+  "confirmed_events": 0,
+  "oracle_result": {
+    "cache_replay": false,
+    "confidence": "high",
+    "cuda_synchronized_before_and_after": true,
+    "end_time": 1910.0,
+    "frame_identity_verified": true,
+    "generic_parsed_label": "negative",
+    "logical_oracle_call": true,
+    "oracle_build_id": "strict_oracle_3b9ba1187c0449426978",
+    "parse_status": "ok",
+    "parsed": {
+      "abstain_reason": null,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "ego_relevant": false,
+      "event_end": null,
+      "event_start": null,
+      "event_type": "none",
+      "evidence": "The video shows normal driving on a clear road with vehicles ahead in the same direction. No object is observed entering the ego vehicle's path from outside or near the boundary. All visible road users are in their lanes and not merging or crossing into the ego path.",
+      "involved_object": "none",
+      "label": "negative",
+      "negative_reason": "no_ego_path_interaction"
+    },
+    "parsed_label": "negative",
+    "physical_oracle_invocation": true,
+    "projection_allowed_involved_objects": [
+      "cyclist",
+      "vehicle"
+    ],
+    "query_id": "Q1",
+    "raw": "{\n  \"label\": \"negative\",\n  \"event_start\": null,\n  \"event_end\": null,\n  \"event_type\": \"none\",\n  \"involved_object\": \"none\",\n  \"ego_relevant\": false,\n  \"boundary_status\": \"ok\",\n  \"complete_event_visible\": true,\n  \"confidence\": \"high\",\n  \"evidence\": \"The video shows normal driving on a clear road with vehicles ahead in the same direction. No object is observed entering the ego vehicle's path from outside or near the boundary. All visible road users are in their lanes and not merging or crossing into the ego path.\",\n  \"negative_reason\": \"no_ego_path_interaction\",\n  \"abstain_reason\": null\n}",
+    "raw_sha256": "a04e14d000908c1db3cce2fe46ea90e79cec0163d245b14b2b3070fc7c5ba790",
+    "recorded_at_utc": "2026-07-18T02:33:26.962370+00:00",
+    "rng_seed": 20260900,
+    "service_total_seconds": 22.152586764,
+    "session_id": "deadline_profile_V0_005",
+    "stage_seconds": {
+      "cleanup": 1.745926824,
+      "clip_extraction": 0.890257139,
+      "oracle_inference": 14.50337582,
+      "oracle_parse": 0.000159367,
+      "oracle_postprocess": 0.000559715,
+      "oracle_preprocess": 5.012200539
+    },
+    "start_time": 1900.0,
+    "unit_id": 190,
+    "video_id": "V0"
+  },
+  "physical_oracle_only": true,
+  "query_wall_seconds": 22.15346302,
+  "recorded_at_utc": "2026-07-18T02:33:26.962370+00:00",
+  "sample_index": 5,
+  "service_total_seconds": 22.152586764,
+  "session_initialization": {
+    "prior_query_count": 0,
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V0_005",
+    "video_id": "V0"
+  },
+  "session_summary": {
+    "physical_calls": 1,
+    "queried_ids": [
+      190
+    ],
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V0_005",
+    "video_id": "V0"
+  },
+  "status": "ok",
+  "unit_id": 190,
+  "video_id": "V0"
+}

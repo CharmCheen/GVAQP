@@ -1,0 +1,27 @@
+{
+  "current_state": "GOAL_COMPLETED",
+  "goal_status": "complete",
+  "last_transition": {
+    "input_hashes": {
+      "bcm_experiment_manifest": "6a351738238d691dde9d8eac4a6ba2146e492bdd3a6d234e493ca732eaf10458",
+      "strict_frozen_commit": "6f41abcfab7a9bdcf9140306acf74081a20d647f482e4fa03a236468e4dcc1da"
+    },
+    "new_state": "GOAL_COMPLETED",
+    "output_hashes": {
+      "final_decision": "a7ca65eb28ba8cd5b7139057846226bdabf0b5196b31d243eded44f5da3fd7a2",
+      "research_state": "c0e113762fe4d6ed8be3e56b8a58d9a74d5803515661cb959e8d6b8bfd3bb32d"
+    },
+    "pass": true,
+    "previous_state": "BCM_FINAL_AUDIT",
+    "reason": "AEH-AQP autorun completed end-to-end. Strict benchmark frozen ready for BCM; formal BCM v2 package complete and independently audited. Scientific terminal decision is NO-GO for the current BCM candidate due AUC deficit and zero mechanism activation, with a development-only revision path recorded.",
+    "recovery_command": "python3 Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/aeh_aqp_autorun_v1/scripts/goal_state.py verify",
+    "timestamp": "2026-07-11T02:31:57Z"
+  },
+  "schema_version": "aeh_aqp_goal_state_v1",
+  "strict_benchmark_directory": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict",
+  "terminal_outcomes": [
+    "GOAL_COMPLETED",
+    "BLOCKED_AT_BENCHMARK",
+    "BLOCKED_AT_BCM_CORRECTNESS"
+  ]
+}

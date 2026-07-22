@@ -1,0 +1,103 @@
+{
+  "cache_replay": false,
+  "commit": {
+    "materializer_mode": "persistent_clean_spawn_predeadline",
+    "raw_observation_commit": {
+      "atomic_replace_seconds": 0.001134266,
+      "fsync_seconds": 0.000885021,
+      "payload_sha256": "eb2af4bb31fdf523abb8d4088bc1da9e34737ca90ba8898a1e11625e30261db3",
+      "serialize_seconds": 0.000184424,
+      "total_seconds": 0.003579307
+    },
+    "snapshot_commit": {
+      "atomic_replace_seconds": 0.001019151,
+      "fsync_seconds": 0.000520792,
+      "payload_sha256": "cd253b1383c5bb9116bdf7cf2895c3a3cfaaf246575f1c2d632ca31b30e98e7f",
+      "serialize_seconds": 7.3006e-05,
+      "total_seconds": 0.002231183
+    },
+    "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_two_video_loop/deadlines/raw_profile/V1/sample_007_snapshot.json",
+    "stage_seconds": {
+      "atomic_replace": 0.001019151,
+      "fsync": 0.000520792,
+      "materialize": 0.020971065,
+      "observation_persist": 0.003579307,
+      "serialize": 7.3006e-05
+    },
+    "total_seconds": 0.027861951
+  },
+  "commit_wall_seconds": 0.027891396,
+  "confirmed_events": 0,
+  "oracle_result": {
+    "cache_replay": false,
+    "confidence": "high",
+    "cuda_synchronized_before_and_after": true,
+    "end_time": 4260.0,
+    "frame_identity_verified": true,
+    "generic_parsed_label": "negative",
+    "logical_oracle_call": true,
+    "oracle_build_id": "two_video_v1_oracle_7e37193ced4063695206",
+    "parse_status": "ok",
+    "parsed": {
+      "abstain_reason": null,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "ego_relevant": false,
+      "event_end": null,
+      "event_start": null,
+      "event_type": "none",
+      "evidence": "The video shows normal driving on a multi-lane urban road with vehicles ahead and to the sides. No object is observed entering the ego vehicle's path from outside the driving corridor. Traffic flows smoothly without any merging, cutting, or crossing into the ego path. All vehicles remain in their lanes or follow predictable trajectories.",
+      "involved_object": "none",
+      "label": "negative",
+      "negative_reason": "normal_following"
+    },
+    "parsed_label": "negative",
+    "physical_oracle_invocation": true,
+    "projection_allowed_involved_objects": [
+      "cyclist",
+      "vehicle"
+    ],
+    "query_id": "Q1",
+    "raw": "{\n  \"label\": \"negative\",\n  \"event_start\": null,\n  \"event_end\": null,\n  \"event_type\": \"none\",\n  \"involved_object\": \"none\",\n  \"ego_relevant\": false,\n  \"boundary_status\": \"ok\",\n  \"complete_event_visible\": true,\n  \"confidence\": \"high\",\n  \"evidence\": \"The video shows normal driving on a multi-lane urban road with vehicles ahead and to the sides. No object is observed entering the ego vehicle's path from outside the driving corridor. Traffic flows smoothly without any merging, cutting, or crossing into the ego path. All vehicles remain in their lanes or follow predictable trajectories.\",\n  \"negative_reason\": \"normal_following\",\n  \"abstain_reason\": null\n}",
+    "raw_sha256": "8911d79066ab0453b4b5e90a8917e0ba522a9759c42b744030c861cbdf1fed94",
+    "recorded_at_utc": "2026-07-16T22:40:43.242383+00:00",
+    "rng_seed": 20261135,
+    "service_total_seconds": 20.976390817,
+    "session_id": "deadline_profile_V1_007",
+    "stage_seconds": {
+      "cleanup": 0.233972274,
+      "clip_extraction": 0.820653648,
+      "oracle_inference": 15.190367111,
+      "oracle_parse": 0.000157494,
+      "oracle_postprocess": 0.000789293,
+      "oracle_preprocess": 4.730344098
+    },
+    "start_time": 4250.0,
+    "unit_id": 425,
+    "video_id": "V1"
+  },
+  "physical_oracle_only": true,
+  "query_wall_seconds": 20.977015092,
+  "recorded_at_utc": "2026-07-16T22:40:43.242383+00:00",
+  "sample_index": 7,
+  "service_total_seconds": 20.976390817,
+  "session_initialization": {
+    "prior_query_count": 0,
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V1_007",
+    "video_id": "V1"
+  },
+  "session_summary": {
+    "physical_calls": 1,
+    "queried_ids": [
+      425
+    ],
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V1_007",
+    "video_id": "V1"
+  },
+  "status": "ok",
+  "unit_id": 425,
+  "video_id": "V1"
+}

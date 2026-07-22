@@ -1,0 +1,182 @@
+{
+  "video": {
+    "absolute_path": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4",
+    "exists": true,
+    "size_bytes": 1181062596,
+    "sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+  },
+  "weights": {
+    "End-to-end.pth": {
+      "absolute_path": "/qiuyeqing/llama_prl/G-ARC/YOLOP/weights/End-to-end.pth",
+      "size_bytes": 95756827,
+      "sha256": "620e7495328cfc8e04807c14cbb8f8df9916953359d190cbf494b2d049f03b0c"
+    },
+    "yolop-320-320.onnx": {
+      "absolute_path": "/qiuyeqing/llama_prl/G-ARC/YOLOP/weights/yolop-320-320.onnx",
+      "size_bytes": 31817335,
+      "sha256": "86d6e8b6dfdef195c061e9bcad82d9487bb5ee1ac4a1cf9a3dc4736657a07369"
+    },
+    "yolop-640-640.onnx": {
+      "absolute_path": "/qiuyeqing/llama_prl/G-ARC/YOLOP/weights/yolop-640-640.onnx",
+      "size_bytes": 35902568,
+      "sha256": "cd66a3e0087a7258ae07768cc02cb742eed93865727ae4c9baf969b8fa190696"
+    },
+    "yolop-1280-1280.onnx": {
+      "absolute_path": "/qiuyeqing/llama_prl/G-ARC/YOLOP/weights/yolop-1280-1280.onnx",
+      "size_bytes": 32069740,
+      "sha256": "1234df7c57e3561b730a320aad34d060e27c7febd9f5385f5a69a3bc92422edd"
+    }
+  },
+  "onnx_schema": {
+    "yolop-320-320.onnx": {
+      "ir_version": 6,
+      "opset_import": [
+        {
+          "domain": "",
+          "version": 12
+        }
+      ],
+      "producer_name": "pytorch",
+      "producer_version": "1.8",
+      "inputs": [
+        {
+          "name": "images",
+          "shape": [
+            1,
+            3,
+            320,
+            320
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "name": "det_out",
+          "shape": [
+            1,
+            6300,
+            6
+          ]
+        },
+        {
+          "name": "drive_area_seg",
+          "shape": [
+            1,
+            2,
+            320,
+            320
+          ]
+        },
+        {
+          "name": "lane_line_seg",
+          "shape": [
+            1,
+            2,
+            320,
+            320
+          ]
+        }
+      ]
+    },
+    "yolop-640-640.onnx": {
+      "ir_version": 6,
+      "opset_import": [
+        {
+          "domain": "",
+          "version": 12
+        }
+      ],
+      "producer_name": "pytorch",
+      "producer_version": "1.6",
+      "inputs": [
+        {
+          "name": "images",
+          "shape": [
+            1,
+            3,
+            640,
+            640
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "name": "det_out",
+          "shape": [
+            1,
+            25200,
+            6
+          ]
+        },
+        {
+          "name": "drive_area_seg",
+          "shape": [
+            1,
+            2,
+            640,
+            640
+          ]
+        },
+        {
+          "name": "lane_line_seg",
+          "shape": [
+            1,
+            2,
+            640,
+            640
+          ]
+        }
+      ]
+    },
+    "yolop-1280-1280.onnx": {
+      "ir_version": 6,
+      "opset_import": [
+        {
+          "domain": "",
+          "version": 12
+        }
+      ],
+      "producer_name": "pytorch",
+      "producer_version": "1.8",
+      "inputs": [
+        {
+          "name": "images",
+          "shape": [
+            1,
+            3,
+            1280,
+            1280
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "name": "det_out",
+          "shape": [
+            1,
+            100800,
+            6
+          ]
+        },
+        {
+          "name": "drive_area_seg",
+          "shape": [
+            1,
+            2,
+            1280,
+            1280
+          ]
+        },
+        {
+          "name": "lane_line_seg",
+          "shape": [
+            1,
+            2,
+            1280,
+            1280
+          ]
+        }
+      ]
+    }
+  }
+}

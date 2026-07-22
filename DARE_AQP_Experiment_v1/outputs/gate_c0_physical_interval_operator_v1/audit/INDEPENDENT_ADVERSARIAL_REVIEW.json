@@ -1,0 +1,62 @@
+{
+  "verdict": "PASS",
+  "review_scope": "contract-blocked terminal package",
+  "checks": [
+    {
+      "check": "C0_SOURCE_MANIFEST.csv hashes",
+      "status": "PASS",
+      "evidence": "11"
+    },
+    {
+      "check": "C0_INPUT_MANIFEST.csv hashes",
+      "status": "PASS",
+      "evidence": "7"
+    },
+    {
+      "check": "accuracy thresholds absent from frozen config",
+      "status": "PASS",
+      "evidence": "['minimum_any_sensitivity', 'maximum_any_false_negatives', 'minimum_count_exact_accuracy', 'maximum_count_undercount_rate', 'abstention_gate_semantics']"
+    },
+    {
+      "check": "existing contract is exact ceiling only",
+      "status": "PASS",
+      "evidence": "explicit validity boundary"
+    },
+    {
+      "check": "new physical call count",
+      "status": "PASS",
+      "evidence": "0"
+    },
+    {
+      "check": "single blocked decision",
+      "status": "PASS",
+      "evidence": "INTERVAL_OPERATOR_CONTRACT_BLOCKED"
+    },
+    {
+      "check": "decision call accounting",
+      "status": "PASS",
+      "evidence": "0/160"
+    },
+    {
+      "check": "GPU availability not used as blocker",
+      "status": "PASS",
+      "evidence": "NVIDIA A100-SXM4-80GB, 81153 MiB"
+    },
+    {
+      "check": "strict model availability not used as blocker",
+      "status": "PASS",
+      "evidence": "/qiuyeqing/llama_prl/G-ARC/models/vlm/qwen3_vl/Qwen3-VL-32B-Instruct"
+    },
+    {
+      "check": "no interval inference session",
+      "status": "PASS",
+      "evidence": "no session"
+    },
+    {
+      "check": "all sealed file hashes",
+      "status": "PASS",
+      "evidence": "14"
+    }
+  ],
+  "conclusion": "Stopping before call 1 is the only decision-compliant action; no physical-operator claim is validated."
+}

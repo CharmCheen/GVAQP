@@ -1,0 +1,63 @@
+{
+  "groups": [
+    {
+      "candidate_source_eligible": true,
+      "canonical_source": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4",
+      "excluded_derivatives": [
+        "outputs/probe_set_v1/probe_media/clips",
+        "outputs/video_feature_precompute_runtime_v1/clips",
+        "src/garc_eval/outputs/true_interval_reference_expansion_execution_v1/review_media/clips"
+      ],
+      "group_id": "dataset3_family"
+    },
+    {
+      "canonical_exists": false,
+      "canonical_source": "/qiuyeqing/llama_prl/G-ARC/try_or_no/videos/realcartest.mp4",
+      "group_id": "realcartest_family",
+      "members": [
+        {
+          "path": "/qiuyeqing/llama_prl/G-ARC/try_or_no/videos/realcartest_5k.mp4",
+          "relation": "reported_first_5000_frames"
+        },
+        {
+          "path": "datasets/clips/clips/round1_stride10 and round2_5k_*",
+          "relation": "short clips from realcartest_5k"
+        }
+      ]
+    },
+    {
+      "candidate_source_eligible": false,
+      "canonical_source": "/qiuyeqing/llama_prl/G-ARC/try_or_no/test.mov",
+      "excluded_derivatives": [
+        "datasets/clips/clips/round1_extra"
+      ],
+      "group_id": "test_heldout_family",
+      "reason": "existing canonical heldout; explicitly excluded (also too short)"
+    },
+    {
+      "candidate_source_eligible": false,
+      "exact_duplicate_groups": [
+        {
+          "group_id": "DUPLICATE_001",
+          "paths": [
+            "/qiuyeqing/llama_prl/G-ARC/datasets/casq_external/nexar/videos_hf/train/positive/00822.mp4",
+            "/qiuyeqing/llama_prl/G-ARC/datasets/casq_external/nexar/videos_smoke/positive/00822.mp4"
+          ],
+          "sha256": "c79d4f8a8045e012905952c9b1cb79615db1300fa1799339f88bbb5f69636243"
+        }
+      ],
+      "group_id": "nexar_collection",
+      "path_count": 604,
+      "reason": "individual independent clips are too short",
+      "unique_file_count": 603
+    },
+    {
+      "archive": "/qiuyeqing/llama_prl/G-ARC/datasets/DrivingDojo-mini/drivingdojo_mini.zip",
+      "candidate_source_eligible": false,
+      "group_id": "drivingdojo_mini",
+      "reason": "no video containers; short image-sequence sessions"
+    }
+  ],
+  "heldout_opened": false,
+  "heldout_opened_definition": "no heldout semantic reference, label, method evaluation, or tuning access"
+}

@@ -1,0 +1,385 @@
+{
+  "GPU_seconds": 15.817875616999999,
+  "actions": [
+    {
+      "action": "scan",
+      "end_seconds": 0.526349016,
+      "future_proxy_accesses": 0,
+      "policy_decision_sha256": "d66137571567d80f1aaccc80533fdeaee02a2f8a59b92a6a2bdd913763843190",
+      "scan_priorities": [
+        {
+          "rule": "largest_gap_midpoint",
+          "unit_id": 173,
+          "unobserved_span_units": 347
+        },
+        {
+          "rule": "largest_gap_midpoint",
+          "unit_id": 86,
+          "unobserved_span_units": 173
+        },
+        {
+          "rule": "largest_gap_midpoint",
+          "unit_id": 260,
+          "unobserved_span_units": 173
+        },
+        {
+          "rule": "largest_gap_midpoint",
+          "unit_id": 42,
+          "unobserved_span_units": 86
+        }
+      ],
+      "scores": [
+        2.0,
+        5.0,
+        11.0,
+        3.0
+      ],
+      "start_seconds": 0.003129547,
+      "timestamps": [
+        1735.0,
+        865.0,
+        2605.0,
+        425.0
+      ],
+      "unit_ids": [
+        173,
+        86,
+        260,
+        42
+      ]
+    },
+    {
+      "action": "query",
+      "admission": {
+        "action_profile_id": "a04d87e9f53d6887af8d80aeabc75abf22dd6662f07f78bfa71e7b0034e54573",
+        "action_upper_seconds": 27.1050437105,
+        "admitted": true,
+        "commit_profile_id": "ddfbaa9c641591e20c8581cec3bacb500c8b534370ca22c1e5b6b971bca612c0",
+        "commit_upper_seconds": 0.2854655565,
+        "reason": "admitted",
+        "remaining_seconds": 30.27748265575,
+        "required_seconds": 27.390509267,
+        "validation_errors": []
+      },
+      "candidate_proxy_observed_before_query": true,
+      "end_seconds": 18.543691746,
+      "future_proxy_accesses": 0,
+      "policy_decision_sha256": "253d8a96a8782b1bf20ac466fb1bd9a731cdb90dee94bf6bf0b236de30d1c229",
+      "snapshot_elapsed_seconds": 18.563434793,
+      "start_seconds": 0.556545093,
+      "unit_id": 260
+    },
+    {
+      "action": "scan",
+      "end_seconds": 19.067343401,
+      "future_proxy_accesses": 0,
+      "policy_decision_sha256": "2c3522136bb3595aeabf5a43213dcc1eb0cc1d62d2e3d52769264bdd8ecde01d",
+      "scan_priorities": [
+        {
+          "rule": "largest_gap_midpoint",
+          "unit_id": 129,
+          "unobserved_span_units": 86
+        },
+        {
+          "rule": "largest_gap_midpoint",
+          "unit_id": 216,
+          "unobserved_span_units": 86
+        },
+        {
+          "rule": "largest_gap_midpoint",
+          "unit_id": 303,
+          "unobserved_span_units": 86
+        },
+        {
+          "rule": "largest_gap_midpoint",
+          "unit_id": 64,
+          "unobserved_span_units": 43
+        }
+      ],
+      "scores": [
+        1.0,
+        5.0,
+        10.0,
+        4.0
+      ],
+      "start_seconds": 18.57033805,
+      "timestamps": [
+        1295.0,
+        2165.0,
+        3035.0,
+        645.0
+      ],
+      "unit_ids": [
+        129,
+        216,
+        303,
+        64
+      ]
+    }
+  ],
+  "cache_replay_calls": 0,
+  "candidate_observation_violations": 0,
+  "checkpoints": [
+    {
+      "action": "scan",
+      "checkpoint_index": 0,
+      "confirmed_events": 0,
+      "coverage_debt": 0.21427800247489806,
+      "elapsed_seconds": 0.548329428,
+      "max_unobserved_gap_seconds": 860.0,
+      "max_unobserved_units": 86,
+      "observed_units": 4,
+      "physical_oracle_calls": 0,
+      "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/stage_2_baselines/raw/uniform_temporal_interleave__T_short__replicate_02/attempt_001/checkpoint_000_snapshot.json",
+      "temporal_coverage": 0.011544011544011544
+    },
+    {
+      "action": "query",
+      "checkpoint_index": 1,
+      "confirmed_events": 0,
+      "coverage_debt": 0.21427800247489806,
+      "elapsed_seconds": 18.563434793,
+      "max_unobserved_gap_seconds": 860.0,
+      "max_unobserved_units": 86,
+      "observed_units": 4,
+      "physical_oracle_calls": 1,
+      "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/stage_2_baselines/raw/uniform_temporal_interleave__T_short__replicate_02/attempt_001/checkpoint_001_snapshot.json",
+      "temporal_coverage": 0.011544011544011544
+    },
+    {
+      "action": "scan",
+      "checkpoint_index": 2,
+      "confirmed_events": 0,
+      "coverage_debt": 0.11199328953815745,
+      "elapsed_seconds": 19.088320961,
+      "max_unobserved_gap_seconds": 430.0,
+      "max_unobserved_units": 43,
+      "observed_units": 8,
+      "physical_oracle_calls": 1,
+      "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/stage_2_baselines/raw/uniform_temporal_interleave__T_short__replicate_02/attempt_001/checkpoint_002_snapshot.json",
+      "temporal_coverage": 0.023088023088023088
+    }
+  ],
+  "completed_at_utc": "2026-07-15T03:10:22.904147+00:00",
+  "deadline_met": true,
+  "deadline_name": "T_short",
+  "deadline_seconds": 30.82994878975,
+  "final_snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/stage_2_baselines/raw/uniform_temporal_interleave__T_short__replicate_02/attempt_001/checkpoint_002_snapshot.json",
+  "future_proxy_accesses": 0,
+  "method": "uniform_temporal_interleave",
+  "method_label": "B2 Uniform-Temporal-Interleave",
+  "oracle_gpu_seconds": 15.770340388,
+  "physical_oracle_calls": 1,
+  "proxy_decode_failures": 0,
+  "proxy_gpu_seconds": 0.047535229,
+  "proxy_operator_rows": [
+    {
+      "duration_seconds": 0.061233271,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "video_open",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_000",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.150448009,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "decode_seek",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_000",
+      "status": "ok",
+      "timestamp_seconds": 1735.0
+    },
+    {
+      "duration_seconds": 0.096724976,
+      "invocation_type": "none",
+      "iteration": 1,
+      "operator": "decode_seek",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_000",
+      "status": "ok",
+      "timestamp_seconds": 865.0
+    },
+    {
+      "duration_seconds": 0.101646947,
+      "invocation_type": "none",
+      "iteration": 2,
+      "operator": "decode_seek",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_000",
+      "status": "ok",
+      "timestamp_seconds": 2605.0
+    },
+    {
+      "duration_seconds": 0.085788035,
+      "invocation_type": "none",
+      "iteration": 3,
+      "operator": "decode_seek",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_000",
+      "status": "ok",
+      "timestamp_seconds": 425.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 6.12e-07,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "proxy_preprocessing",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_000",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.02326127,
+      "invocation_type": "physical_proxy",
+      "iteration": 0,
+      "operator": "proxy_inference",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_000",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000958107,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "proxy_postprocessing",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_000",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.047073478,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "video_open",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_001",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.127124021,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "decode_seek",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_001",
+      "status": "ok",
+      "timestamp_seconds": 1295.0
+    },
+    {
+      "duration_seconds": 0.103903447,
+      "invocation_type": "none",
+      "iteration": 1,
+      "operator": "decode_seek",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_001",
+      "status": "ok",
+      "timestamp_seconds": 2165.0
+    },
+    {
+      "duration_seconds": 0.094024379,
+      "invocation_type": "none",
+      "iteration": 2,
+      "operator": "decode_seek",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_001",
+      "status": "ok",
+      "timestamp_seconds": 3035.0
+    },
+    {
+      "duration_seconds": 0.096836785,
+      "invocation_type": "none",
+      "iteration": 3,
+      "operator": "decode_seek",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_001",
+      "status": "ok",
+      "timestamp_seconds": 645.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 6.31e-07,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "proxy_preprocessing",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_001",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.024273959,
+      "invocation_type": "physical_proxy",
+      "iteration": 0,
+      "operator": "proxy_inference",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_001",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000803439,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "proxy_postprocessing",
+      "phase": "uniform_temporal_interleave__T_short__r02__attempt_001_scan_001",
+      "status": "ok"
+    }
+  ],
+  "queried_results": [
+    {
+      "cache_replay": false,
+      "confidence": "high",
+      "oracle_inference_seconds": 15.770340388,
+      "parse_status": "ok",
+      "parsed_label": "negative",
+      "physical_oracle_invocation": true,
+      "query_end_seconds": 18.543691746,
+      "query_start_seconds": 0.556545093,
+      "raw_observation_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/stage_2_baselines/raw/uniform_temporal_interleave__T_short__replicate_02/attempt_001/query_000_oracle.json",
+      "service_total_seconds": 17.986484819,
+      "snapshot_elapsed_seconds": 18.563434793,
+      "unit_id": 260
+    }
+  ],
+  "queried_rows": [
+    {
+      "parsed_label": "negative",
+      "unit_id": 260
+    }
+  ],
+  "replicate": 2,
+  "resolved_config_sha256": "f5ce03c6a7325f1a5440a1aedbfc39a1f1f07a8a8cd19d9aad0e6dae0da4e3a1",
+  "run_id": "uniform_temporal_interleave__T_short__r02__attempt_001",
+  "runtime_identity_hash": "08b384175d8b9debc38598faf09e3966a0cb19d4ccc5fdca3a5e0664c05679fb",
+  "runtime_initialization": {
+    "materializer": {
+      "worker_root": "/",
+      "worker_uid": 65534
+    },
+    "oracle": {
+      "cache_loaded": false,
+      "initialization_seconds": 72.271703807,
+      "physical_oracle": true,
+      "pid": 66694,
+      "torch_cuda_version": "12.6",
+      "torch_version": "2.12.0+cu126",
+      "verified_configuration": {
+        "model_file_count": 28,
+        "observed_hashes": {
+          "frozen_oracle_source": "4e52a5d9dc4de906350dc4e69b2c26cfb414d41f4a4281822acefa42120d1458",
+          "input_identities": "48c513e121f1df2d43d64586d9936de937080585258a062facd5ba735420351e",
+          "model_manifest": "a27032176f0193562426fed825fc8822f6a8f562c83383f5ba9aab2e7aae1d00",
+          "prompt": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+          "strict_manifest": "be3ab70c136260f550c781739678534fedacf63b308ecb04326e3bc220bbe8f3",
+          "video": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+        },
+        "oracle_build_id": "strict_oracle_3b9ba1187c0449426978"
+      }
+    },
+    "pilot_policy": {
+      "worker_root": "/",
+      "worker_uid": 65534
+    },
+    "runtime_identity_hash": "08b384175d8b9debc38598faf09e3966a0cb19d4ccc5fdca3a5e0664c05679fb",
+    "selector": {
+      "worker_root": "/",
+      "worker_uid": 65534
+    }
+  },
+  "snapshot_elapsed_seconds": 19.088320961,
+  "status": "ok",
+  "stop_reason": "verify_not_admitted:insufficient_tail_reservation",
+  "time_to_first_candidate_seconds": 0.552466134,
+  "unused_deadline_seconds": 11.741627828749998
+}

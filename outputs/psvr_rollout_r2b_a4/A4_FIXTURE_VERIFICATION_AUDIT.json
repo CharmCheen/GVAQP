@@ -1,0 +1,9 @@
+{
+  "status": "PARTIAL_PASS_BLOCKED_INDEPENDENT_VERIFIER",
+  "test_command": "PYTHONPATH=src pytest -q tests/psvr_rollout_h1b/test_h1b_a4.py tests/psvr_rollout_h1b/test_h1b_implementation.py tests/psvr_rollout_toy",
+  "tests_passed": 77,
+  "fixtures": ["key serialization", "shared-uniform draw records", "A2 generated-pair retention", "CORRECT attach", "UNDER_MERGE", "OVER_MERGE attach/fallback", "hypothesis flags", "history hydration", "JOINT deterministic replay", "latent serialization", "lossless records", "scalar/action/identity/commitment forgery rejection"],
+  "missing_required_fixture": "forged post-state and forged continuation-return/Q evidence must be rejected after all commitments are recomputed",
+  "result_blind": true,
+  "confirmatory_artifacts_created": false
+}

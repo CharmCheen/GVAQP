@@ -1,0 +1,27 @@
+{
+  "repair_id": "H_STAGE1_PROFILE_STALENESS_REFRESH_V1",
+  "registered_at_utc": "2026-07-18T02:26:00Z",
+  "trigger": "All attempted F0 VERIFY admissions returned profile_invalid after the frozen 86400-second maximum profile age elapsed.",
+  "scientific_status": "execution-validity repair, not a method revision",
+  "invalidated_attempts": [
+    "F0__Y8__V0_Q1__T_transition__replicate_00/attempt_001",
+    "F0__Y8__V0_Q2__T_transition__replicate_00/attempt_001",
+    "F0__Y8__V1_Q1__T_transition__replicate_00/attempt_001",
+    "F0__Y8__V1_Q2__T_transition__replicate_00/attempt_001 (interrupted before a complete result)"
+  ],
+  "frozen": [
+    "task deadlines and deadline manifest",
+    "TailAwareDeadlineGuard code and profile policy",
+    "profile sample count, deterministic profile units, estimator, quantile, and epsilons",
+    "oracle, proxy, materializer, serving topology, hardware, and runtime identity"
+  ],
+  "changed": "Only observation timestamps and newly measured physical latency durations under the same topology.",
+  "procedure": [
+    "Archive rather than delete the expired raw observations and derived profiles.",
+    "Run python scripts/freeze_psvr_two_video_deadlines.py profile for 10 fresh physical samples per video.",
+    "Do not run the freeze subcommand and do not modify TASK_DEADLINE_MANIFEST.json.",
+    "Require all four refreshed profiles to validate against the unchanged guard before restarting smoke."
+  ],
+  "reference_visible_to_runtime": false,
+  "heldout_opened": false
+}

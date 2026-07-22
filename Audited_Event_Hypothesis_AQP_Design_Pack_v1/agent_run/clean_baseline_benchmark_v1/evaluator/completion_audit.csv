@@ -1,0 +1,27 @@
+check,status,detail
+all_run_required_files_present,PASS,runs=1476 missing_runs=0
+all_run_benchmark_ids_match,PASS,bad=0 benchmark_id=cbbv1_c2e246d1504d9d8a80b2
+all_recorded_run_hashes_match,PASS,files_checked=4428 bad=0
+baseline_action_trace.csv_mechanical_row_count,PASS,raw_sum=64084 aggregate=64084
+baseline_selected_units.csv_mechanical_row_count,PASS,raw_sum=64084 aggregate=64084
+baseline_event_segments.csv_mechanical_row_count,PASS,raw_sum=8345 aggregate=8345
+baseline_event_matches.csv_mechanical_row_count,PASS,raw_sum=41115 aggregate=41115
+baseline_metrics.csv_mechanical_row_count,PASS,raw_sum=20496 aggregate=20496
+baseline_cost_ledger.csv_mechanical_row_count,PASS,raw_sum=1464 aggregate=1464
+current_action_trace.csv_mechanical_row_count,PASS,raw_sum=530 aggregate=530
+current_selected_units.csv_mechanical_row_count,PASS,raw_sum=530 aggregate=530
+current_event_segments.csv_mechanical_row_count,PASS,raw_sum=72 aggregate=72
+current_event_matches.csv_mechanical_row_count,PASS,raw_sum=330 aggregate=330
+current_metrics.csv_mechanical_row_count,PASS,raw_sum=168 aggregate=168
+current_cost_ledger.csv_mechanical_row_count,PASS,raw_sum=12 aggregate=12
+random_100_seeds_random_native_confirmed,PASS,"[{'budget': 5, 'num_seeds': 100}, {'budget': 10, 'num_seeds': 100}, {'budget': 20, 'num_seeds': 100}, {'budget': 50, 'num_seeds': 100}, {'budget': 80, 'num_seeds': 100}, {'budget': 100, 'num_seeds': 100}]"
+random_100_seeds_random_controlled_bridge_safe,PASS,"[{'budget': 5, 'num_seeds': 100}, {'budget': 10, 'num_seeds': 100}, {'budget': 20, 'num_seeds': 100}, {'budget': 50, 'num_seeds': 100}, {'budget': 80, 'num_seeds': 100}, {'budget': 100, 'num_seeds': 100}]"
+B3_ARC_adapted_five_seed_coverage,PASS,rows=6 seed_counts=[np.int64(5)]
+B4_SUPG_adapted_five_seed_coverage,PASS,rows=24 seed_counts=[np.int64(5)]
+B5_ARC_native_five_seed_coverage,PASS,rows=6 seed_counts=[np.int64(5)]
+B6_ABae_adapted_diagnostic_five_seed_coverage,PASS,rows=12 seed_counts=[np.int64(5)]
+M0_M1_same_acquisition,PASS,"budgets=5,10,20,50,80,100"
+all_controlled_traces_dual_replayed,PASS,rows=732 valid=732
+physical_vlm_calls_zero_cache_reuse,PASS,physical=0 logical=64614 cache_hits=64614
+required_sanity_no_fail,PASS,failures=0
+baseline_algorithm_failures_zero,PASS,"failure_rows=3 gated_current_only=['M2_coverage_variant', 'M3_relation_heuristic', 'M4_relation_adaptive']"

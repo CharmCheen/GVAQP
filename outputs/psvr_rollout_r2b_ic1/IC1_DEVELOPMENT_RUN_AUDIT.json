@@ -1,0 +1,51 @@
+{
+  "status": "INVALIDATED_GENERATIVE_ERROR_MODEL_NOT_IMPLEMENTED",
+  "prior_status": "PASS",
+  "invalidated_attempt": "development_attempt_v9",
+  "gate_usable": false,
+  "invalidation_reason": "v9 used post-hoc payoff offsets instead of the six required generative model-error transitions; its coverage cannot prove H1B development execution.",
+  "committed": 570,
+  "coverage": {
+    "complete": true,
+    "error_directions": [
+      "OPTIMISTIC",
+      "PESSIMISTIC",
+      "STATE_DEPENDENT",
+      "STOCHASTIC"
+    ],
+    "error_forms": [
+      "independent_variance",
+      "state_dependent_calibration",
+      "systematic_optimism",
+      "systematic_pessimism"
+    ],
+    "error_magnitudes": [
+      0.0,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "fallback_variants": [
+      "BASELINE",
+      "LCB",
+      "LCB_ADMISSION",
+      "NONE",
+      "POINT"
+    ],
+    "planning_costs": [
+      "p-0",
+      "p-10",
+      "p-2",
+      "p-20",
+      "p-5"
+    ]
+  },
+  "expected_identities": 570,
+  "failed_deterministic": 0,
+  "failed_infrastructure": 0,
+  "never_started": 0,
+  "non_confirmatory": true,
+  "recovered": 0,
+  "started": 570,
+  "historical_runner_output_status": "PASS"
+}

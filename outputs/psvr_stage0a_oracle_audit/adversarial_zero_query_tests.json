@@ -1,0 +1,166 @@
+{
+  "tests": [
+    {
+      "test": "zero_query_selector_visible_labels",
+      "status": "PASS",
+      "evidence": 0
+    },
+    {
+      "test": "zero_query_confirmed_events",
+      "status": "PASS",
+      "evidence": 0
+    },
+    {
+      "test": "accessor_surface_exact",
+      "status": "PASS",
+      "evidence": [
+        "queried_ids",
+        "query",
+        "query_count"
+      ]
+    },
+    {
+      "test": "forbidden_attributes_fail",
+      "status": "PASS",
+      "evidence": {
+        "table": "BLOCKED",
+        "all_labels": "BLOCKED",
+        "items": "BLOCKED",
+        "dump": "BLOCKED",
+        "reference": "BLOCKED",
+        "reference_events": "BLOCKED",
+        "cache_path": "BLOCKED",
+        "oracle_path": "BLOCKED",
+        "__dict__": "BLOCKED"
+      }
+    },
+    {
+      "test": "full_table_enumeration_fails",
+      "status": "PASS",
+      "evidence": "BLOCKED"
+    },
+    {
+      "test": "after_k_queries_exact_visibility",
+      "status": "PASS",
+      "evidence": {
+        "k": 5,
+        "visible_labels": 5,
+        "visible_ids": [
+          0,
+          50,
+          57,
+          60,
+          68
+        ]
+      }
+    },
+    {
+      "test": "accessor_query_accounting",
+      "status": "PASS",
+      "evidence": {
+        "count": 5,
+        "ids": [
+          0,
+          50,
+          57,
+          60,
+          68
+        ]
+      }
+    },
+    {
+      "test": "materializer_input_is_queried_evidence_only",
+      "status": "PASS",
+      "evidence": [
+        {
+          "unit_id": 0,
+          "oracle_label_after_query": "negative"
+        },
+        {
+          "unit_id": 50,
+          "oracle_label_after_query": "positive"
+        },
+        {
+          "unit_id": 57,
+          "oracle_label_after_query": "positive"
+        },
+        {
+          "unit_id": 60,
+          "oracle_label_after_query": "positive"
+        },
+        {
+          "unit_id": 68,
+          "oracle_label_after_query": "positive"
+        }
+      ]
+    },
+    {
+      "test": "runtime_config_has_no_sensitive_paths",
+      "status": "PASS",
+      "evidence": {
+        "fields": [
+          "benchmark_id",
+          "video_id",
+          "query_id",
+          "proxy_name"
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "test": "runtime_cannot_import_evaluator_reference_provider",
+      "status": "PASS",
+      "evidence": {
+        "actual_import_attack": "BLOCKED:ModuleNotFoundError",
+        "worker_uid": 65534
+      }
+    },
+    {
+      "test": "direct_cache_and_reference_path_open_fails",
+      "status": "PASS",
+      "evidence": {
+        "actual_open_attacks": {
+          "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/oracle/oracle_presence_observations.csv": "BLOCKED:PermissionError",
+          "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/event_reference.csv": "BLOCKED:PermissionError"
+        },
+        "worker_root": "/"
+      }
+    },
+    {
+      "test": "selector_worker_has_no_oracle_accessor",
+      "status": "PASS",
+      "evidence": {
+        "oracle_accessor_present": false
+      }
+    },
+    {
+      "test": "spawn_worker_stack_gc_enumeration_finds_no_sensitive_state",
+      "status": "PASS",
+      "evidence": {
+        "sensitive_stack_names": [],
+        "sensitive_gc_objects": []
+      }
+    },
+    {
+      "test": "evaluation_independent_process_boundary",
+      "status": "PASS",
+      "evidence": {
+        "pid": 52063,
+        "reference_events": 26,
+        "runtime_pid": 51739,
+        "exitcode": 0
+      }
+    },
+    {
+      "test": "same_legal_action_trace_deterministic",
+      "status": "PASS",
+      "evidence": {
+        "trace_1_sha256": "132857963314fa93905cf4860a151af7638e22e49583c5a8e17fbabc1583e363",
+        "trace_2_sha256": "132857963314fa93905cf4860a151af7638e22e49583c5a8e17fbabc1583e363",
+        "actions": 17
+      }
+    }
+  ],
+  "failed_tests": [],
+  "all_pass": true
+}

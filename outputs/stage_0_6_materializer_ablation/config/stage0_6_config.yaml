@@ -1,0 +1,12 @@
+stage: 0.6
+budgets: [5, 10, 20, 50, 80, 100]
+target_methods: ['ABae-stratified-confirmed', 'ARC-refinement', 'Ours-Frozen-LATE-AQP-v1', 'SUPG-RT-all-selected', 'SUPG-RT-confirmed-only']
+materializer_params:
+  G_max: 1
+  D_core_max: 40.0
+  D_seg_max: 60.0
+  E: 1
+  low_proxy_quantile: 0.3
+  nms_iou: 0.7
+fixed_across_methods_and_budgets: true
+model_inference: false

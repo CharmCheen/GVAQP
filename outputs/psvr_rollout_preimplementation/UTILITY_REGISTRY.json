@@ -1,0 +1,51 @@
+{
+  "committed_set_mutability": "append_only; event identity and interval fixed atomically at commit",
+  "duplicate_reward": 0,
+  "final_metric_equivalence": false,
+  "initial_utility": {
+    "committed_set": [],
+    "u0": 0
+  },
+  "lambda_primary": 1,
+  "lambda_sensitivity": [
+    0,
+    2
+  ],
+  "late_reward": 0,
+  "mechanism_metrics": [
+    "duplicate_CONFIRM_rate",
+    "under_merge_rate",
+    "over_merge_event_loss",
+    "SCAN_starvation_duration",
+    "frontier_congestion_duration",
+    "unused_safe_deadline",
+    "STOP_time"
+  ],
+  "perfect_oracle_simplification": "If H-ROLLOUT1A has no FP, the FP term is zero and lambda does not affect results; registry remains unchanged.",
+  "planning_cost_semantics": "planning consumes wall-clock while durable utility is constant; compare plan-then-act using net planning-aware value",
+  "primary_metrics": [
+    "AnytimeAUC_F1",
+    "time_weighted_unique_event_utility",
+    "TTFC",
+    "unique_committed_events_at_T",
+    "event_precision_at_T",
+    "event_recall_at_T"
+  ],
+  "primary_surrogate": "sum_TP(max(T-tau_e,0))-lambda*sum_FP(max(T-tau_f,0))",
+  "registry_id": "PSVR_UTILITY_REGISTRY_V1",
+  "rollout_metrics": [
+    "planning_invocation_count",
+    "planning_time",
+    "planning_time_over_deadline",
+    "fallback_trigger_rate",
+    "incorrect_rollout_override_rate",
+    "advantage_interval_width"
+  ],
+  "safety_metrics": [
+    "deadline_miss",
+    "unfinished_action_at_T",
+    "uncommitted_positive_counted_as_output",
+    "future_proxy_access"
+  ],
+  "status": "FROZEN"
+}

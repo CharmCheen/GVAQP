@@ -1,0 +1,34 @@
+{
+  "cycle_id": "cycle_07_BENCHMARK_UNBLOCK",
+  "hypothesis_id": "BENCHMARK_UNBLOCK",
+  "status": "FROZEN_BEFORE_FINAL_AUTHORITATIVE_BOUNDED_INPUT_AUDIT_RERUN",
+  "protocol_provenance": "Gate, search scope, and stop rule were frozen by the user controller before any audit; this cycle artifact was materialized during iterative implementation and precedes the final authoritative rerun.",
+  "highest_value_uncertainty": "Whether the existing approved local/mounted pool contains at least two additional independent long source videos.",
+  "search_scope": [
+    "repository data directories",
+    "historical manifest/config video paths",
+    "explicit mounted data roots"
+  ],
+  "forbidden": [
+    "whole-system scan",
+    "external download",
+    "synthetic video",
+    "counting crops/reencodes/splits as independent",
+    "opening heldout reference or evaluating methods on heldout"
+  ],
+  "input_gate": {
+    "required_independent_sources_total": 3,
+    "A0_scan_batches": 29,
+    "batch_size": 4,
+    "unit_seconds": 10,
+    "minimum_progressive_workload_seconds": 1200,
+    "recommended_source_seconds": 1800
+  },
+  "decision_rule": {
+    "PASS": "at least three eligible independent long source videos total",
+    "INSUFFICIENT": "fewer than three; pause input and do no algorithm work"
+  },
+  "physical_method_runs": 0,
+  "heldout_opened": false,
+  "heldout_opened_definition": "no heldout semantic reference, label, method evaluation, or tuning access"
+}

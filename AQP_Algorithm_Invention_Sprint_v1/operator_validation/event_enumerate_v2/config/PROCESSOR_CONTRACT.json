@@ -1,0 +1,37 @@
+{
+  "batch_size_for_physical_calls": 1,
+  "contract_version": "event_enumerate_v2_metadata_exact_v1",
+  "decode": "OpenCV sequential BGR decode then cv2.COLOR_BGR2RGB",
+  "forbidden": [
+    "processor resampling",
+    "missing video metadata",
+    "timestamp clamping",
+    "alternate sampling paths",
+    "reference access in inference"
+  ],
+  "metadata": {
+    "anchor": "first selected source index divided by source FPS",
+    "do_sample_frames": false,
+    "fps": "exact probed source FPS",
+    "frames_indices": "selected source index minus first selected source index",
+    "required": true,
+    "return_metadata": true,
+    "total_num_frames": "last relative source index plus one"
+  },
+  "processor_timestamp_formula": "pair-average(relative source frame index/source FPS), repeat final index for an odd frame count",
+  "reconciler": "event_enumerate_v2_midpoint_owner_exact_dedup_v1",
+  "relative_to_absolute_mapping": "absolute = actual_first_decoded_timestamp + generated_relative_seconds",
+  "selection": {
+    "end_frame": "min(total_frames-1, int(input_end_seconds * source_fps))",
+    "maximum_decoded_frames": 121,
+    "maximum_interval_seconds": 60.0,
+    "rule": "inclusive fixed source-frame stride",
+    "start_frame": "int(input_start_seconds * source_fps)",
+    "strategy_count": 1,
+    "stride": "max(1, int(source_fps / 2.0))",
+    "target_sample_fps": 2.0
+  },
+  "temporal_patch_size": 2,
+  "timestamp_display_tolerance_seconds": 0.050001,
+  "timestamp_text_precision_decimals": 1
+}

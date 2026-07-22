@@ -1,0 +1,30 @@
+{
+  "clip_status": "ok",
+  "events": [
+    {
+      "event_start": 0.0,
+      "event_end": 2.0,
+      "event_type": "enter_ego_path",
+      "involved_object": "vehicle",
+      "object_identity": "blue and white bus on the right lane merging into the center lane",
+      "ego_relevant": true,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "evidence": "At t=0.0, a blue and white bus is visible on the right lane, positioned to the right of the ego vehicle. By t=1.0, it begins to move into the center lane, overlapping the ego vehicle's path. By t=2.0, it has fully entered the center lane, creating a spatial conflict."
+    },
+    {
+      "event_start": 2.0,
+      "event_end": 4.0,
+      "event_type": "enter_ego_path",
+      "involved_object": "cyclist",
+      "object_identity": "cyclist in red shirt riding from the right side into the center lane",
+      "ego_relevant": true,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "evidence": "At t=2.0, a cyclist in a red shirt is visible on the far right, outside the ego path. By t=3.0, the cyclist begins to move left into the center lane, entering the ego vehicle's driving corridor. By t=4.0, the cyclist is fully within the lane, requiring ego attention."
+    }
+  ],
+  "abstain_reason": null
+}

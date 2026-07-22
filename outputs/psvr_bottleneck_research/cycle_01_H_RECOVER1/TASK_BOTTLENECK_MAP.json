@@ -1,0 +1,84 @@
+{
+  "classification_scope": "frozen two-video planned action ceilings",
+  "heldout_opened": false,
+  "hypothesis_id": "H-RECOVER1",
+  "reference_visibility": "evaluator_only",
+  "tasks": {
+    "V0_Q1": {
+      "alternative_explanations": [
+        "Runtime repeats are timing replicates, not independent semantic samples.",
+        "Reference-defined ceilings are evaluator-only and cannot be used by runtime policy."
+      ],
+      "confidence": "high",
+      "primary_bottleneck": "FRONTIER_OR_VERIFY_ORDER_LIMITED",
+      "secondary_bottleneck": "VERIFY_BUDGET_LIMITED",
+      "supporting_metrics": {
+        "best_alternative_event_exposure_ceiling": 1,
+        "current_event_exposure_ceiling": 1,
+        "materialization_losses": 0,
+        "median_additional_scans_conservatively_feasible": 47.0,
+        "positive_candidate_to_frontier_rate": 1.0,
+        "positive_scanned_observations": 18,
+        "positive_unit_to_candidate_rate": 1.0,
+        "runs_with_verify_order_regret_rate": 0.6666666666666666
+      }
+    },
+    "V0_Q2": {
+      "alternative_explanations": [
+        "Runtime repeats are timing replicates, not independent semantic samples.",
+        "Reference-defined ceilings are evaluator-only and cannot be used by runtime policy."
+      ],
+      "confidence": "moderate",
+      "primary_bottleneck": "SCAN_EXPOSURE_LIMITED",
+      "secondary_bottleneck": "VERIFY_BUDGET_LIMITED",
+      "supporting_metrics": {
+        "best_alternative_event_exposure_ceiling": 2,
+        "current_event_exposure_ceiling": 1,
+        "materialization_losses": 0,
+        "median_additional_scans_conservatively_feasible": 47.0,
+        "positive_candidate_to_frontier_rate": 1.0,
+        "positive_scanned_observations": 18,
+        "positive_unit_to_candidate_rate": 1.0,
+        "runs_with_verify_order_regret_rate": 0.0
+      }
+    },
+    "V1_Q1": {
+      "alternative_explanations": [
+        "Runtime repeats are timing replicates, not independent semantic samples.",
+        "Reference-defined ceilings are evaluator-only and cannot be used by runtime policy."
+      ],
+      "confidence": "high",
+      "primary_bottleneck": "SCAN_EXPOSURE_LIMITED",
+      "secondary_bottleneck": "VERIFY_BUDGET_LIMITED",
+      "supporting_metrics": {
+        "best_alternative_event_exposure_ceiling": 1,
+        "current_event_exposure_ceiling": 0,
+        "materialization_losses": 0,
+        "median_additional_scans_conservatively_feasible": 44.5,
+        "positive_candidate_to_frontier_rate": 0.0,
+        "positive_scanned_observations": 0,
+        "positive_unit_to_candidate_rate": 0.0,
+        "runs_with_verify_order_regret_rate": 0.0
+      }
+    },
+    "V1_Q2": {
+      "alternative_explanations": [
+        "DEADLINE_FLOOR is conditional on the frozen planned scan-action ceiling; realized slack indicates conservative planning may be the actual limiting mechanism.",
+        "Reference-defined ceilings are evaluator-only and cannot be used by runtime policy."
+      ],
+      "confidence": "high",
+      "primary_bottleneck": "DEADLINE_FLOOR",
+      "secondary_bottleneck": "SCAN_EXPOSURE_LIMITED",
+      "supporting_metrics": {
+        "best_alternative_event_exposure_ceiling": 0,
+        "current_event_exposure_ceiling": 0,
+        "materialization_losses": 0,
+        "median_additional_scans_conservatively_feasible": 46.0,
+        "positive_candidate_to_frontier_rate": 0.0,
+        "positive_scanned_observations": 0,
+        "positive_unit_to_candidate_rate": 0.0,
+        "runs_with_verify_order_regret_rate": 0.0
+      }
+    }
+  }
+}

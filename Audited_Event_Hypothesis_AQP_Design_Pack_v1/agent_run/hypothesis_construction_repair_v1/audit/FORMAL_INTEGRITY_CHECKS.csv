@@ -1,0 +1,14 @@
+check,status,evidence
+H1_unique_queries,PASS,True
+H1_deterministic_budget_prefixes,PASS,True
+H2_unique_queries,PASS,True
+H2_deterministic_budget_prefixes,PASS,True
+H3_unique_queries,PASS,True
+H3_deterministic_budget_prefixes,PASS,True
+H4_unique_queries,PASS,True
+H4_deterministic_budget_prefixes,PASS,True
+planner_public_columns,PASS,construct/score functions receive units and public_proxy only; reference loaded in evaluator-only functions
+oracle_after_selection,PASS,execute_variant calls score_actions before OracleAccessor.query
+counterfactual_no_oracle_calls,PASS,apply_observation simulated branches are pure state transitions
+all_candidate_scores_saved,PASS,24/24 run directories contain all_candidate_scores.csv
+physical_vlm_calls,PASS,0; immutable OracleAccessor cache replay

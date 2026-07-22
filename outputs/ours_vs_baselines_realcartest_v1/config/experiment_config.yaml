@@ -1,0 +1,9 @@
+dataset: realcartest_2000_3200
+frame_csv: outputs/real_video_protocol_pilot_v1/frame_scores_adapter_ready.csv
+reference_csv: outputs/real_video_protocol_pilot_v1/reference_segments_adapter_ready.csv
+budgets: [5, 10, 20, 30, 40, 50, 80, 100]
+seeds: [0, 1, 2, 3, 4]
+arc_thresholds: [0.1, 0.2, 0.3, 0.4, 0.5]
+primary_metric: event_detection@overlap_any
+no_gpu: true
+no_model_calls: true

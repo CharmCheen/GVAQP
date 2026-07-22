@@ -1,0 +1,26 @@
+{
+  "audit_population": {
+    "stage2_runs": 45,
+    "winning_runs": 3,
+    "semantic_samples": 1,
+    "runtime_repeats_not_semantic_samples": true
+  },
+  "primary_driver": "INCONCLUSIVE_INTERACTION_OR_ALLOCATION",
+  "secondary_driver": "coverage_debt_scan_order_exposed_unit_75_before_the_sixth_VERIFY",
+  "attribution_confidence": "LOW_TO_MODERATE",
+  "evidence_scope": "visited_scheduler_states_of_three_runtime_repeats_on_one_development_video_query",
+  "physically_validated": false,
+  "observed_evidence": {
+    "winning_unit": 75,
+    "winning_unit_recovered_in_all_C3_T_high_repeats": true,
+    "other_stage2_runs_with_confirmed_event": 0,
+    "visited_priority_candidate_rows": 273,
+    "rank_entries_changed_when_proxy_signal_removed": 240,
+    "rank_entries_changed_when_coverage_debt_removed": 261,
+    "fixed_trigger_action_disagreements_at_visited_scan_states": 0
+  },
+  "derived_conclusion": "The local trace proves that both exposure by S1 and admission of a sixth VERIFY were necessary on the realized path, but it cannot identify their separate causal effects.",
+  "competing_explanation": "Runtime timing or the scan/allocation interaction, rather than either marginal factor, may explain the win.",
+  "counterfactual_limit": "No hidden proxy observation, unexecuted trajectory, counterfactual F1, counterfactual AnytimeAUC, or counterfactual recovery was computed.",
+  "CF4_CF5_resolution": "Deferred to physical C1 and C2 in H-FACT1."
+}

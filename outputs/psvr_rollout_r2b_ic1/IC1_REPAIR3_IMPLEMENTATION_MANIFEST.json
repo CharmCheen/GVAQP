@@ -1,0 +1,18 @@
+{
+  "amendment_id": "IC1_REPAIR3_COMPLETE_IDENTITY_AND_CONTINUATION_CACHE",
+  "scope": "result-blind implementation repair only",
+  "scientific_spec_changed": false,
+  "invalidated_development_attempts": [
+    "development_attempt_v7",
+    "development_attempt_v8"
+  ],
+  "files": {
+    "src/garc_eval/psvr_rollout_h1b/ic1.py": "f70653fe9b1f9dcd57ff2d3baffb2725e033ca7b892a68ead218018cd2f70e72",
+    "src/garc_eval/psvr_rollout_h1b/approximate_rollout.py": "d54f7166c7dfaddfc8388508221091026f39eac320a4a26c99d5464333661d4f",
+    "src/garc_eval/psvr_rollout_h1b/exact_reference.py": "266da6221dbc1addf9b365b269815e20e98ed8b94e4d824b51129886879b9866",
+    "scripts/run_psvr_rollout_h1b_ic1_development.py": "d07cefe9a4a76fe206265f31dc5ed0e5aeeba2fae0b9c83135e9c080c81b0512",
+    "scripts/verify_psvr_rollout_h1b_ic1_development.py": "c7f08e10e3ab5ccc5afafc793cf8c58ce85eb840ad01de56b87a313965588806",
+    "tests/psvr_rollout_h1b/test_h1b_implementation.py": "52398333ad767b366202aac2dbdf3a7a5bcd286b1a6e1a28881c378820e6e36d"
+  },
+  "repair_reason": "IC1/v7 omitted the canonical-spec, implementation, and development-universe hashes from canonical scientific identities; v7 is preserved as debug-only invalid evidence. The repair introduces a bounded, content-addressed continuation-return cache and exact-reference cache instrumentation, both with semantics-preserving test coverage. v8 is preserved as debug-only partial evidence because it predated the required exact-cache resource measurement."
+}

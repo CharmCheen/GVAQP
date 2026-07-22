@@ -1,0 +1,13 @@
+stage: 1A
+method: MAP-anchor-only
+materializer: K3_gap_duration_negative_barrier
+budgets: [5, 10, 20, 50, 80, 100]
+component_threshold: top_30_percent_proxy
+audit_window_seconds: 60
+low_budget_anchor_audit_split: 80_20
+high_budget_anchor_audit_split: 70_30
+barrier_probing: false
+params:
+  G_max: 1
+  D_core_max: 40.0
+  D_seg_max: 60.0

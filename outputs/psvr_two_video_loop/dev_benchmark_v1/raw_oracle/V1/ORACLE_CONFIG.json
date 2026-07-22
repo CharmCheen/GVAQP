@@ -1,0 +1,98 @@
+{
+  "base_seed": 20260710,
+  "bindings": {
+    "extract_frames_source_sha256": "ffc97cf7debdc4aa088cf0d5c19c26641566ecb2e24a207a4c2eec5761ae91a8",
+    "frame_config": {
+      "color": "cv2.COLOR_BGR2RGB",
+      "decoded_end_inclusive": true,
+      "fallback_decode_fps": 4.0,
+      "message_fps": 2.0,
+      "minimum_frames_before_fallback": 5,
+      "primary_decode_fps": 2.0
+    },
+    "frame_sampler_source_sha256": "833af1ee5b89b80afc34893c0167c84d45952b3e05ff6545c870fe2f654ab07b",
+    "generation_config": {
+      "do_sample": false,
+      "max_new_tokens": 256,
+      "randomness_policy": "greedy_with_per_unit_rng_identity_recorded",
+      "temperature": null
+    },
+    "model_full_content_hash": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+    "model_input_manifest_source_sha256": "e422cd61bd2b161bff0478183506031aca1aadd11e08655e77bc2d866ac1a386",
+    "model_load_config": {
+      "device_map": "auto",
+      "torch_dtype": "bfloat16",
+      "trust_remote_code": true
+    },
+    "parser_config": {
+      "confidence_domain": [
+        "high",
+        "low",
+        "medium"
+      ],
+      "label_domain": [
+        "abstain",
+        "negative",
+        "positive"
+      ],
+      "parser_version": "presence_json_parser_v1_stage2_compatible",
+      "required_keys": [
+        "label",
+        "confidence"
+      ]
+    },
+    "parser_source_hash_original_config": "c02b545c0c5d2969508eea9a5470f0cb67d71282b25059948106504f9f4edd31",
+    "parser_source_sha256": "c02b545c0c5d2969508eea9a5470f0cb67d71282b25059948106504f9f4edd31",
+    "processor_files": {
+      "chat_template.json": "5c72a170d2a4a1a3bc5adad2e689ae28138a9700e5b8c96c0266331e86c0acce",
+      "config.json": "d2dd0c60d01b9e195d9447c52da61c7302d28828524914c044d9c6e1b81d0427",
+      "generation_config.json": "1e241830b48b397cb0900101421df5450baddc7adf01e5fc86b5615865f3bae4",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "preprocessor_config.json": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+      "tokenizer.json": "a5d85b6dcc535e6b93115a9ef287e6132fdbf30270da6218194ba742261173c7",
+      "tokenizer_config.json": "c2da771801886ad9ae98181793ffd3dfb7f1af30f6f7c6a4e15d7dbba52e2399",
+      "video_preprocessor_config.json": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "prompt_sha256": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+    "rng_source_sha256": "c28f536f9102143f31ebb9b5bcb7d492413d1951ca0c6e96a4c73887dff6efeb",
+    "sampling_code_hash": "5b038acb5450d76928b43d873d73decd1792969e0aa072f121b8f23b751e0240",
+    "strict_builder_path": "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/scripts/build_strict_oracle.py",
+    "strict_builder_sha256": "4e52a5d9dc4de906350dc4e69b2c26cfb414d41f4a4281822acefa42120d1458"
+  },
+  "build_id": "two_video_v1_oracle_7e37193ced4063695206",
+  "heldout_opened": false,
+  "physical_oracle_only": true,
+  "preparation_hardware_runtime_identity": {
+    "cuda_available": true,
+    "cudnn_version": 91002,
+    "devices": [
+      {
+        "compute_capability": "8.0",
+        "index": 0,
+        "name": "NVIDIA A800-SXM4-80GB",
+        "total_memory_bytes": 85097971712,
+        "uuid": "772f15c4-d805-dbbc-48f8-d4d0a815edbb"
+      }
+    ],
+    "nvidia_driver_versions": [
+      "565.57.01"
+    ],
+    "platform": "Linux-5.15.0-60-generic-x86_64-with-glibc2.35",
+    "python": "3.10.20 (main, Mar 11 2026, 17:46:40) [GCC 14.3.0]",
+    "torch_cuda_version": "12.6",
+    "torch_version": "2.12.0+cu126"
+  },
+  "prepared_at_utc": "2026-07-16T17:42:16Z",
+  "query_protocol_hash": "5705a1365e6033445932c06f4aa2432ff6bdcdfcb813ee822dfad39da3ae25c0",
+  "raw_reuse_policy": "resume only exact valid raw from this build identity",
+  "unit_semantics_hash": "1a11707da33eedee7d6a653f4d3d844eb99946935333fafc3e3e45ecb233f6a4",
+  "units": 567,
+  "video": {
+    "absolute_path": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/驾驶-大理.mp4",
+    "duration_seconds": 5665.535333,
+    "fps": 30.0,
+    "frame_count": 169962,
+    "sha256": "64cb0cfac6c37e52045552b4ed24e8aa20fd2c1fddc22509cf33dd957d14fd09"
+  }
+}

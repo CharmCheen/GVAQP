@@ -1,0 +1,22 @@
+{
+  "H-PROXY1U": "SELECT_YOLOV8N",
+  "H-PROXY1U_reason": "YOLOv8n UR@20 (0.0769) >= YOLOP-640 (0.0513)",
+  "H-DISTILL1": "ACCEPT",
+  "H-DISTILL1_reason": "LightGBM AUPRC (B2=0.3598) > Rule baseline (none=0.0000)",
+  "FINAL_PROXY_FRONTEND": "YOLOv8n + ByteTrack + motion proxy",
+  "FINAL_EVENT_HEAD": "LightGBM",
+  "DRIVINGDOJO_TEST_AUPRC": 0.35978972619836924,
+  "TARGET_UNIT_AUPRC": 0.11891869016381645,
+  "TARGET_CANDIDATE_RECALL_20": 0.07692307692307693,
+  "TARGET_UNIQUE_EVENT_RECALL_20": 0.07692307692307693,
+  "HUMAN_ANNOTATION_USED": false,
+  "evidence_quality": "WEAK_PROXY_LABELS_ONLY",
+  "limitations": [
+    "DrivingDojo training labels are tag-based weak proxies, NOT oracle-verified",
+    "Target oracle labels are from PSVR benchmark (frozen reference, not re-run)",
+    "No human detection/tracking/lane ground truth",
+    "Single target video (long_video_dataset3)",
+    "Feature extraction on DrivingDojo uses ~5fps sampling"
+  ],
+  "frozen_at": "2026-07-16T06:38:41Z"
+}

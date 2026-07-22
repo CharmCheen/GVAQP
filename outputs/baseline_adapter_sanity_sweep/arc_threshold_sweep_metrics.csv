@@ -1,0 +1,68 @@
+method,threshold,budget,num_segments,recall,precision,f1,mean_iou,oracle_calls,status,error
+ARC-proxy-only,0.1,5,16,0.05,0.0625,0.0555555555555555,0.6521739130434783,0,ok,
+ARC-refinement,0.1,5,15,0.0,0.0,0.0,0.0,1,ok,
+ARC-proxy-only,0.1,10,16,0.05,0.0625,0.0555555555555555,0.6521739130434783,0,ok,
+ARC-refinement,0.1,10,15,0.0,0.0,0.0,0.0,1,ok,
+ARC-proxy-only,0.1,20,16,0.05,0.0625,0.0555555555555555,0.6521739130434783,0,ok,
+ARC-refinement,0.1,20,15,0.0,0.0,0.0,0.0,1,ok,
+ARC-proxy-only,0.1,50,16,0.05,0.0625,0.0555555555555555,0.6521739130434783,0,ok,
+ARC-refinement,0.1,50,15,0.0,0.0,0.0,0.0,1,ok,
+ARC-proxy-only,0.2,5,52,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.2,5,52,0.1,0.0384615384615384,0.0555555555555555,0.6271153846153846,5,ok,
+ARC-proxy-only,0.2,10,52,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.2,10,48,0.1,0.0416666666666666,0.0588235294117647,0.6271153846153846,10,ok,
+ARC-proxy-only,0.2,20,52,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.2,20,46,0.1,0.0434782608695652,0.0606060606060606,0.6271153846153846,20,ok,
+ARC-proxy-only,0.2,50,52,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.2,50,45,0.1,0.0444444444444444,0.0615384615384615,0.6271153846153846,50,ok,
+ARC-proxy-only,0.3,5,50,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.3,5,49,0.1,0.0408163265306122,0.0579710144927536,0.8297897196261682,5,ok,
+ARC-proxy-only,0.3,10,50,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.3,10,48,0.1,0.0416666666666666,0.0588235294117647,0.8297897196261682,10,ok,
+ARC-proxy-only,0.3,20,50,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.3,20,48,0.1,0.0416666666666666,0.0588235294117647,0.8297897196261682,20,ok,
+ARC-proxy-only,0.3,50,50,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.3,50,46,0.1,0.0434782608695652,0.0606060606060606,0.8297897196261682,50,ok,
+ARC-proxy-only,0.4,5,23,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.4,5,21,0.0,0.0,0.0,0.0,5,ok,
+ARC-proxy-only,0.4,10,23,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.4,10,18,0.0,0.0,0.0,0.0,10,ok,
+ARC-proxy-only,0.4,20,23,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.4,20,17,0.0,0.0,0.0,0.0,20,ok,
+ARC-proxy-only,0.4,50,23,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.4,50,17,0.0,0.0,0.0,0.0,50,ok,
+ARC-proxy-only,0.5,5,2,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.5,5,0,0.0,0.0,0.0,0.0,5,ok,
+ARC-proxy-only,0.5,10,2,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.5,10,,,,,,,failed,"6, in <module>
+    main()
+  File ""/qiuyeqing/llama_prl/G-ARC/refe_repos/adapter/arc_baseline/run.py"", line 211, in main
+    outputs = run_refinement(df, args, reference_segments)
+  File ""/qiuyeqing/llama_prl/G-ARC/refe_repos/adapter/arc_baseline/run.py"", line 158, in run_refinement
+    result = original_arc(
+  File ""/qiuyeqing/llama_prl/G-ARC/refe_repos/ARC-main/arc/arc.py"", line 73, in arc
+    int((confidence-tau_confidence)*len(tau_cand_clips)))
+ValueError: cannot convert float NaN to integer
+"
+ARC-proxy-only,0.5,20,2,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.5,20,,,,,,,failed,"6, in <module>
+    main()
+  File ""/qiuyeqing/llama_prl/G-ARC/refe_repos/adapter/arc_baseline/run.py"", line 211, in main
+    outputs = run_refinement(df, args, reference_segments)
+  File ""/qiuyeqing/llama_prl/G-ARC/refe_repos/adapter/arc_baseline/run.py"", line 158, in run_refinement
+    result = original_arc(
+  File ""/qiuyeqing/llama_prl/G-ARC/refe_repos/ARC-main/arc/arc.py"", line 73, in arc
+    int((confidence-tau_confidence)*len(tau_cand_clips)))
+ValueError: cannot convert float NaN to integer
+"
+ARC-proxy-only,0.5,50,2,0.0,0.0,0.0,0.0,0,ok,
+ARC-refinement,0.5,50,,,,,,,failed,"6, in <module>
+    main()
+  File ""/qiuyeqing/llama_prl/G-ARC/refe_repos/adapter/arc_baseline/run.py"", line 211, in main
+    outputs = run_refinement(df, args, reference_segments)
+  File ""/qiuyeqing/llama_prl/G-ARC/refe_repos/adapter/arc_baseline/run.py"", line 158, in run_refinement
+    result = original_arc(
+  File ""/qiuyeqing/llama_prl/G-ARC/refe_repos/ARC-main/arc/arc.py"", line 73, in arc
+    int((confidence-tau_confidence)*len(tau_cand_clips)))
+ValueError: cannot convert float NaN to integer
+"

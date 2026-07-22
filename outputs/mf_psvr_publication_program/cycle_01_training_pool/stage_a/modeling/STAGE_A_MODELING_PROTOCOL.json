@@ -1,0 +1,77 @@
+{
+  "audit_policy": "The preassigned pool_audit role is excluded from model selection and fitting; it is evaluated only after the development-LOSO winner is fixed.",
+  "auxiliary_evaluations": [
+    "leave-one-query-out",
+    "leave-one-dataset-out_if_identifiable",
+    "fixed_pool_audit"
+  ],
+  "best_model_selection": "maximum pooled development LOSO AUPRC; ties within 1e-12 break by lower Brier, then lower ECE, then lexical model id",
+  "calibration": "Nested group-held-out Platt calibration for M1/TCN/GRU LOSO; final calibrators use only model_calibration after base fitting on model_train.",
+  "controls": {
+    "categorical_identity_only": [
+      "source_dataset",
+      "session_id",
+      "query_id"
+    ],
+    "shuffled_label_permutations": 32,
+    "shuffled_label_seed": 20260719
+  },
+  "created_at_utc": "2026-07-19T05:38:29Z",
+  "development_roles": [
+    "model_train",
+    "model_calibration"
+  ],
+  "fixed_verify_budgets": [
+    8,
+    16,
+    32
+  ],
+  "frozen_before_oracle_parse": true,
+  "heldout_opened": false,
+  "main_evaluation": "exact leave-one-(source_dataset,session_id)-out over binary-labeled development rows, pooled out-of-fold metrics",
+  "models": {
+    "B0_RAW_YOLO": "raw_yolo_score",
+    "B1_FIFO": "fifo_creation_score",
+    "GRU_TEMPORAL": {
+      "epochs": 32,
+      "hidden_size": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0001
+    },
+    "M0_LOGISTIC": {
+      "C": 1.0,
+      "class_weight": "balanced",
+      "max_iter": 3000
+    },
+    "M1_CALIBRATED_LOGISTIC": "M0 base plus group-held-out Platt calibration",
+    "M2_LIGHTGBM": {
+      "deterministic": true,
+      "learning_rate": 0.03,
+      "max_depth": 3,
+      "min_child_samples": 10,
+      "n_estimators": 160,
+      "num_leaves": 7
+    },
+    "TCN_TEMPORAL": {
+      "channels": 32,
+      "epochs": 32,
+      "kernel_size": 3,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0001
+    }
+  },
+  "primary_verify_budget": 16,
+  "protocol_id": "MF_PSVR_STAGE_A_MODELING_PROTOCOL_V1",
+  "readiness_rule": {
+    "audit_ece_max": 0.2,
+    "audit_must_not_underperform_raw_yolo_auprc": true,
+    "development_auprc_margin_over_controls": 0.03,
+    "minimum_development_class_count_each": 20,
+    "oracle_support_must_pass": true
+  },
+  "runtime_feature_policy": "Only numeric runtime-visible features from STAGE_A_FEATURE_SCHEMA plus query code and witness class in temporal inputs; source/session/call/unit/anchor/event/oracle fields are forbidden.",
+  "selection_scope": "development_loso",
+  "status": "FROZEN",
+  "temporal_input": "fixed 64-step pre-label YOLO/ByteTrack sequence with query one-hot and witness-class one-hot; no RGB backbone",
+  "uncertainty_policy": "AUPRC is undefined for one-class slices; such slices remain reported with null AUPRC. Leave-one-dataset-out is NOT_IDENTIFIABLE when only one source dataset exists."
+}

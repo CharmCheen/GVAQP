@@ -1,0 +1,73 @@
+{
+  "schema_version": "barrier_constrained_event_materialization_gate_v1",
+  "benchmark_id": "cbbv2_514c0d360fd5b2a4b5fe",
+  "frozen_before_ceiling_execution": true,
+  "freeze_scope": "semantic config and gate rules; source provenance distinguishes original execution from the post-review correctness repair",
+  "unit_seconds": 10.0,
+  "core_cap_seconds": 40.0,
+  "output_cap_seconds": 60.0,
+  "legal_group": {
+    "positive_anchor_slice": "nonempty contiguous slice in sorted positive-anchor order",
+    "output_interval": "minimal convex hull from first anchor start to last anchor end",
+    "queried_negative_crossing_forbidden": true,
+    "unqueried_units_are_unknown": true,
+    "abstain_policy": "raise_explicit_error",
+    "positive_anchor_coverage": "exactly_once"
+  },
+  "ceiling_objective": {
+    "scope": "evaluator_only",
+    "primary": "strict_overlap_any_event_f1",
+    "matcher": "cardinality_then_total_temporal_iou",
+    "partition_tie_break": [
+      "higher_event_f1",
+      "higher_total_temporal_iou",
+      "lower_returned_duration",
+      "lexicographically_smaller_ordered_anchor_tuples"
+    ],
+    "anchor_certified_sensitivity": true,
+    "pathological_reference_threshold_seconds": 40.0
+  },
+  "budgets": [5, 10, 20, 50, 80, 100],
+  "selector_variants": [
+    ["M1_MAP_anchor_only", "K3_BRIDGE_SAFE", "MAP_M1"],
+    ["B1_top_proxy", "top_proxy_controlled_bridge_safe", "TOP_PROXY"],
+    ["B2_component_first", "component_first_controlled_bridge_safe", "COMPONENT_FIRST"],
+    ["B3_ARC_adapted", "arc_refinement_th0.4_controlled", "ARC_CONTROLLED"],
+    ["B4_SUPG_adapted", "supg_all_selected_controlled", "SUPG_ALL"],
+    ["B4_SUPG_adapted", "supg_confirmed_only_controlled", "SUPG_CONFIRMED"],
+    ["B6_ABae_adapted_diagnostic", "abae_stratified_controlled", "ABAE_CONTROLLED"],
+    ["B0_uniform_random", "random_controlled_bridge_safe", "RANDOM_CONTROLLED"]
+  ],
+  "headroom_gate": {
+    "numerical_epsilon": 1e-12,
+    "minimum_nonrandom_selector_variants_with_positive_auc_gap": 2,
+    "minimum_aggregate_budgets_with_positive_gap": 2,
+    "minimum_nonrandom_selector_variants_with_positive_nonpathological_auc_gap": 2,
+    "minimum_nonrandom_selector_variants_with_positive_anchor_certified_auc_gap": 2,
+    "require_zero_legality_violations": true,
+    "random_selector_cannot_satisfy_cross_selector_requirement": true
+  },
+  "phase5_status_before_headroom_gate": "NOT_AUTHORIZED",
+  "public_objective": null,
+  "physical_vlm_calls": 0,
+  "baseline_acquisition_reruns": 0,
+  "source_hashes": {
+    "bcem_core_py": "0b7f05f11e3df6fd7f959a2f99a7ccd71d68853d76866846e3673ae114f8dfb4",
+    "bcem_ceiling_py": "95671dd652c607895d9d944556188187b6086f426c45aefeb1609c9e073fbbd5",
+    "benchmark_lib_py": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610"
+  },
+  "original_execution_source_hashes": {
+    "bcem_core_py": "98f1576154c2a7cae828663b915781f508fb1abf4a12379a6cddc1c316f1e923",
+    "bcem_ceiling_py": "5ab1b78faa961cf46ec56544e2e1bcbf394d637d518a5823080d2691002db957",
+    "benchmark_lib_py": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610"
+  },
+  "post_execution_formal_repair": {
+    "id": "INTERVAL_NONCROSSING_CUT_FEASIBILITY_V1",
+    "reason": "independent review found overlapping terminal UnitTable intervals falsifying ID-order-only non-crossing",
+    "semantics_changed": "legal cuts now require previous anchor end <= next anchor start",
+    "objective_or_weight_changed": false,
+    "infeasible_partition_policy": "raise explicit RuntimeError without emitting output",
+    "dependent_equivalence_artifact": "audit/FORMAL_REPAIR_EQUIVALENCE.csv",
+    "equivalent_frozen_runs": 738
+  }
+}

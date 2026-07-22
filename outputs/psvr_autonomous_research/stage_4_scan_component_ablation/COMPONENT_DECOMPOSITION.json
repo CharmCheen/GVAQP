@@ -1,0 +1,46 @@
+{
+  "source_implementation": "src/garc_eval/psvr_pilot/policy_service.py::_coverage_debt_batch",
+  "source_implementation_sha256": "1357bf8116ba19cc625b5e65f03aeb9955b708f909567808a57d7aaad4dc29c3",
+  "eligible_cells": "one midpoint representative for every contiguous unobserved block; temporary observed set is updated after each selected cell within a batch",
+  "priority": "P_full(c)=P_duration(c)+0.5*P_level_debt(c)+0.25*P_local_proxy(c)",
+  "summands": [
+    {
+      "component_name": "normalized_unobserved_duration",
+      "mathematical_definition": "span(c)/N",
+      "normalization": "N=number of public units (347)",
+      "weight": 1.0,
+      "input_visibility": "public observed/unobserved membership only; no proxy score",
+      "eligibility_effect": "none; scores already-eligible block midpoints",
+      "tie_breaking_effect": "may create or resolve priority ties; residual tie uses ascending unit_id",
+      "frozen_group": "STRUCTURAL_GROUP"
+    },
+    {
+      "component_name": "scan_level_debt",
+      "mathematical_definition": "log2(span(c)+1)/log2(N+1)",
+      "normalization": "log2(N+1), with N=347",
+      "weight": 0.5,
+      "input_visibility": "public observed/unobserved membership and hierarchical span only; no proxy score",
+      "eligibility_effect": "none; scores already-eligible block midpoints",
+      "tie_breaking_effect": "may create or resolve priority ties; residual tie uses ascending unit_id",
+      "frozen_group": "STRUCTURAL_GROUP"
+    },
+    {
+      "component_name": "observed_local_proxy_signal",
+      "mathematical_definition": "max_seen[(max(0,score_seen)/max(1,max_abs_seen_score))/(1+abs(unit(c)-seen_unit))]",
+      "normalization": "maximum absolute physically observed proxy score, lower bounded by 1",
+      "weight": 0.25,
+      "input_visibility": "only proxy scores from cells physically scanned before the decision",
+      "eligibility_effect": "none; scores already-eligible block midpoints",
+      "tie_breaking_effect": "may create or resolve priority ties; residual tie uses ascending unit_id",
+      "frozen_group": "PROXY_GROUP"
+    }
+  ],
+  "grouping_ambiguity": false,
+  "STRUCTURAL_GROUP": ["normalized_unobserved_duration", "scan_level_debt"],
+  "PROXY_GROUP": ["observed_local_proxy_signal"],
+  "D2_identity": "P_D2=P_full-0.25*P_local_proxy=P_duration+0.5*P_level_debt",
+  "D3_identity": "P_D3=0.25*P_local_proxy",
+  "normalization_reused_without_change": true,
+  "weights_reused_without_retuning": true,
+  "tie_break": "max(total_priority,-unit_id), equivalent to descending priority then ascending unit_id"
+}

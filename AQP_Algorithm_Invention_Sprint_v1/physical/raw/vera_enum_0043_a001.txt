@@ -1,0 +1,42 @@
+{
+  "clip_status": "ok",
+  "events": [
+    {
+      "event_start": 0.0,
+      "event_end": 2.0,
+      "event_type": "enter_ego_path",
+      "involved_object": "cyclist",
+      "object_identity": "cyclist in orange shirt riding from right sidewalk into the road",
+      "ego_relevant": true,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "evidence": "At t=0.0, a cyclist in orange shirt is seen on the right sidewalk; by t=1.0, they cross into the road lane, entering the ego vehicle's path. The cyclist continues into the path until t=2.0, then moves ahead."
+    },
+    {
+      "event_start": 1.0,
+      "event_end": 3.0,
+      "event_type": "enter_ego_path",
+      "involved_object": "cyclist",
+      "object_identity": "cyclist in red shirt riding from right sidewalk into the road",
+      "ego_relevant": true,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "evidence": "At t=1.0, a cyclist in red shirt appears on the right sidewalk; by t=2.0, they enter the road lane, overlapping the ego path. They continue into the path until t=3.0, then move ahead."
+    },
+    {
+      "event_start": 3.0,
+      "event_end": 5.0,
+      "event_type": "enter_ego_path",
+      "involved_object": "vehicle",
+      "object_identity": "black SUV turning left from right side into the ego path",
+      "ego_relevant": true,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "evidence": "At t=3.0, a black SUV is seen on the right side of the road; by t=4.0, it begins turning left into the ego vehicle's path, creating a spatial conflict. The vehicle completes the turn and moves ahead by t=5.0."
+    }
+  ],
+  "abstain_reason": null
+}

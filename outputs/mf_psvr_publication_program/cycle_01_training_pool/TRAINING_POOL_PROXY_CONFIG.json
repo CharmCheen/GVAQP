@@ -1,0 +1,102 @@
+{
+  "confidence_threshold": 0.25,
+  "config_id": "MF_PSVR_TRAINING_POOL_Y8_LABEL_INDEPENDENT_V1",
+  "detector": "YOLOv8n",
+  "fallback": "no eligible track => unit score 0 and explicit empty evidence",
+  "feature_schema": {
+    "approximate_ttc_urgency": "maximum positive relative box-height growth per second; larger means shorter TTC",
+    "boundary_crossing": "binary change across a frozen left/right ego-corridor boundary, multiplied by reliability",
+    "box_growth": "maximum positive per-second log box-area growth",
+    "ego_corridor_overlap": "maximum bottom-center inclusion in the estimated ego corridor/drivable region, multiplied by reliability",
+    "front_region_occupancy": "maximum triangular center-corridor membership multiplied by normalized box-bottom y",
+    "lane_relative_motion": "maximum positive per-second reduction in distance to the estimated YOLOP lane center, multiplied by road-geometry reliability",
+    "path_directed_lateral_motion": "maximum positive per-second reduction in |bbox_center_x - 0.5|",
+    "road_geometry_reliability": "bounded score from nondegenerate lane/drivable masks and plausible corridor width",
+    "track_persistence": "number of eligible active observations for one track in the unit"
+  },
+  "final_proxy_selection_artifact_read": false,
+  "heldout_opened": false,
+  "implementation_freeze_hash": "4f965358909606a2198fa33a655fbd6a78f64d43e5368212ca6ba08aa39f0d60",
+  "implementation_outcome_information_used": false,
+  "implementation_path": "/qiuyeqing/llama_prl/G-ARC/scripts/run_psvr_two_video_proxy.py",
+  "implementation_sha256": "880f0ba3be6fb8b3164f279f5c6574dacd5342dab339a55cd2381f0459b36a68",
+  "nms_iou": 0.45,
+  "normalization": "Zero-anchored empirical percentile: raw values <=0 map to 0; positive values use deterministic average-rank percentile among positive values. Offline population is the complete video-task candidate set; online population contains only candidates already physically observed. No reference labels.",
+  "outcome_metrics_or_v0_v1_oracle_labels_used_for_selection": false,
+  "query_heads": {
+    "Q1": {
+      "Y8": {
+        "eligible_coco_class_ids": [
+          1,
+          2,
+          3,
+          5,
+          7
+        ],
+        "features": [
+          "track_persistence",
+          "path_directed_lateral_motion",
+          "box_growth",
+          "front_region_occupancy",
+          "approximate_ttc_urgency"
+        ],
+        "weights": {
+          "approximate_ttc_urgency": 0.2,
+          "box_growth": 0.2,
+          "front_region_occupancy": 0.2,
+          "path_directed_lateral_motion": 0.2,
+          "track_persistence": 0.2
+        }
+      }
+    },
+    "Q2": {
+      "Y8": {
+        "eligible_coco_class_ids": [
+          0,
+          1,
+          3
+        ],
+        "features": [
+          "track_persistence",
+          "path_directed_lateral_motion",
+          "box_growth",
+          "front_region_occupancy",
+          "approximate_ttc_urgency"
+        ],
+        "weights": {
+          "approximate_ttc_urgency": 0.2,
+          "box_growth": 0.2,
+          "front_region_occupancy": 0.2,
+          "path_directed_lateral_motion": 0.2,
+          "track_persistence": 0.2
+        }
+      }
+    }
+  },
+  "resolution": 640,
+  "sample_fps": 5,
+  "selected_proxy_config": "Y8",
+  "selected_proxy_family": "YOLOV8",
+  "selection_basis": "Label-independent structural query coverage: among the three preregistered local detectors, Y8 alone has nonempty registered class support for both Q1 and Q2.",
+  "status": "FROZEN_BEFORE_POOL_CANDIDATE_EXTRACTION",
+  "tracker": {
+    "implementation": "Ultralytics BYTETracker",
+    "implementation_path": "/qiuyeqing/tools/miniconda3/envs/garc/lib/python3.10/site-packages/ultralytics/trackers/byte_tracker.py",
+    "implementation_sha256": "05545b07876311937097fdd61a47cfba7dc09fd3695fd35603eb61be09c0b40d",
+    "parameters": {
+      "fuse_score": true,
+      "match_thresh": 0.8,
+      "new_track_thresh": 0.25,
+      "track_buffer": 30,
+      "track_high_thresh": 0.25,
+      "track_low_thresh": 0.1
+    },
+    "ultralytics_version": "8.4.51"
+  },
+  "training_pool_proxy_config_hash": "d42eae5848ec239c549c8e35e22355b532ba01ce44900dd6d31614b935210e74",
+  "upstream_preregistration_file_sha256": "e87c0bdc3ab4a35703be50c244185c63a8af85bec6c212fc3da4d529a147cd39",
+  "upstream_preregistration_hash": "17d8a2be6bd502df9ef7a4bde5c4e07e1d4a9976f81e7a49101bbab95dfdd47f",
+  "upstream_preregistration_path": "outputs/psvr_two_video_loop/proxy_finalization/H_PROXY_2VIDEO_PREREGISTRATION.json",
+  "weight_path": "/qiuyeqing/llama_prl/G-ARC/models/yolo/yolov8n.pt",
+  "weight_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36"
+}

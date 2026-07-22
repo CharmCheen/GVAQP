@@ -1,0 +1,86 @@
+{
+  "analysis_status": "EXPLORATORY_NOT_PREREGISTERED_OR_CRYPTOGRAPHICALLY_BLINDED",
+  "best_aggregate_model": "M0_LOGISTIC",
+  "best_temporal_model": "TCN_TEMPORAL",
+  "checks": {
+    "all_per_query_support_and_audit_gates": false,
+    "development_margin_over_raw_shuffled_p95_and_expanded_nuisance_controls": true,
+    "final_calibrator_deployable": false,
+    "fixed_audit_auprc_identifiable": true,
+    "fixed_audit_ece_at_most_0_20": true,
+    "fixed_audit_not_worse_than_raw_yolo": true,
+    "minimum_development_class_count_each": false,
+    "oracle_support_pass": false
+  },
+  "control_threshold_auprc": 0.23767853248855142,
+  "created_at_utc": "2026-07-19T06:40:36Z",
+  "decision": "NOT_READY_FOR_PHYSICAL_PILOT",
+  "decision_hash": "15188b2da346974deedce1aa1d0f2353b21b2c36761f655d63513f9d5d160dc5",
+  "decision_id": "MF_PSVR_STAGE_A_EXPLORATORY_MODEL_READINESS_V2",
+  "development_auprc": 0.5554693466017564,
+  "final_calibration_support": {
+    "deployable": false,
+    "interpretation": "A fitted Platt map is retained only to reproduce the exploratory audit; it is not a deployable calibrator.",
+    "negatives": 27,
+    "per_query": {
+      "Q1": {
+        "negatives": 13,
+        "positives": 1,
+        "rows": 14
+      },
+      "Q2": {
+        "negatives": 14,
+        "positives": 0,
+        "rows": 14
+      }
+    },
+    "positives": 1,
+    "rows": 28,
+    "status": "UNSUPPORTED_ONE_POSITIVE_NOT_DEPLOYABLE"
+  },
+  "fixed_audit_auprc": 0.8197781385281386,
+  "heldout_opened": false,
+  "key_uncertainty": "Leave-one-dataset-out is unidentifiable until another source dataset is labeled.",
+  "main_competing_explanation": "Enriched stratum sampling and a single dataset family can inflate apparent discrimination without cross-dataset transport.",
+  "next_action": "Acquire a second source dataset under the same frozen label semantics before physical-pilot execution.",
+  "oracle_support_decision": "STOP_ACQUIRE_LICENSED_QUERY_ENRICHED_SOURCE",
+  "per_query_checks": {
+    "Q1": {
+      "development_negatives": 65,
+      "development_positives": 7,
+      "fixed_audit_auprc": 0.41111111111111115,
+      "fixed_audit_auprc_identifiable": true,
+      "fixed_audit_ece": 0.16082319851212235,
+      "fixed_audit_ece_at_most_0_20": true,
+      "fixed_audit_not_worse_than_raw_yolo": true,
+      "minimum_development_class_count_each": false,
+      "raw_yolo_fixed_audit_auprc": 0.3277777777777778
+    },
+    "Q2": {
+      "development_negatives": 63,
+      "development_positives": 9,
+      "fixed_audit_auprc": 1.0,
+      "fixed_audit_auprc_identifiable": true,
+      "fixed_audit_ece": 0.11274098732050691,
+      "fixed_audit_ece_at_most_0_20": true,
+      "fixed_audit_not_worse_than_raw_yolo": true,
+      "minimum_development_class_count_each": false,
+      "raw_yolo_fixed_audit_auprc": 0.9266666666666665
+    }
+  },
+  "query_conditioning_ablation_model": "M0_NO_EXPLICIT_QUERY",
+  "query_conditioning_auprc_delta": -0.0012862053332654,
+  "query_conditioning_reference_model": "M0_LOGISTIC",
+  "query_conditioning_signal": "NO_CLEAR_EXPLICIT_QUERY_GAIN",
+  "query_signal_caveat": "The ablation removes explicit query-code/interaction columns, but raw scores and witness construction remain query-specific.",
+  "query_signal_rule_status": "POST_HOC_DESCRIPTIVE_0_02_RULE_NOT_IN_MODELING_PROTOCOL",
+  "ready": false,
+  "rejection_trigger": "Reverse or revise this exploratory assessment if independent audit finds group leakage, audit-role fitting, unstable group-bootstrap deltas, or a below-control per-query audit result.",
+  "selected_representation": "M0_LOGISTIC",
+  "strongest_expanded_nuisance_control_auprc": 0.1973881050167815,
+  "strongest_identity_control_auprc": 0.1111111111111111,
+  "strongest_supported_conclusion": "At least one exploratory evidence screen failed; Stage A does not justify physical-method execution.",
+  "temporal_minus_aggregate_auprc": -0.21983497397268215,
+  "temporal_refinement_signal": "NO_CLEAR_GAIN",
+  "temporal_signal_rule_status": "POST_HOC_DESCRIPTIVE_0_02_RULE_NOT_IN_MODELING_PROTOCOL"
+}

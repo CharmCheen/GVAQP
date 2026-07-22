@@ -1,0 +1,157 @@
+{
+  "acceptance": [
+    "macro primary > shielded pi0",
+    "macro primary > Ratio-PSVR",
+    "macro primary > maximum frozen simple comparator",
+    "continuous positive area in >=2 non-extreme families",
+    "gain includes earlier durable commits: positive paired AnytimeAUC contribution remains after conditioning on equal endpoint event count",
+    "no future access",
+    "no evaluator leakage",
+    "all named adverse scenarios reported",
+    "trace-recomputable from immutable action/transition/commit ledger",
+    "independent review has no blocking defect"
+  ],
+  "aggregation": {
+    "heatmap": "8 equal-probability bins per displayed continuous axis using frozen theoretical quantile cutpoints; show count and paired mean in every bin; no smoothing for gates",
+    "macro": "unweighted arithmetic mean across all 512 heldout episodes",
+    "median": "standard midpoint median of episode paired differences",
+    "pairing": "same episode seed across methods",
+    "regime_cells": "3 event processes x 3 cost regimes fixed by split-index assignment; per-cell unweighted mean",
+    "worst_regime": "minimum of the nine per-cell M1-minus-comparator means"
+  },
+  "base_policy_hash": "70386f1958c4629e729f416ab81eecd9049c91ea90b22a2f5d3d7fa15a78ffa4",
+  "branches": {
+    "ACCEPT": "ACCEPT_IDEAL_MECHANISM -> H-ROLLOUT1B_APPROXIMATION_ROBUSTNESS",
+    "BLOCKED": [
+      "environment contradiction",
+      "D2 incomplete",
+      "frozen environment unimplementable",
+      "results not recomputable"
+    ],
+    "PARTIAL": "PARTIAL_EXTREME_REGIME_ONLY; no runtime",
+    "REJECT": "retain Ratio-PSVR or pi0; do not add world-model complexity"
+  },
+  "continuous_positive_neighborhood": {
+    "axis": "assigned family's event-density quantile",
+    "bins": 8,
+    "family_filters": {
+      "BURSTY": "BURSTY_CLUSTERED",
+      "HETEROGENEOUS_COST": "cost_variance in heldout upper half [0.4,0.8]",
+      "SPARSE": "UNIFORM_SPARSE"
+    },
+    "neighborhood": ">=3 consecutive positive bins against both B1 and the best simple comparator selected globally by heldout macro",
+    "no_pooling_or_smoothing": true,
+    "positive_bin": "n>=12, paired mean M1-comparator > 1e-8*max(1,mean(M*T)), and median paired difference >=0"
+  },
+  "development_seed_hash": "7718e0cc982b562f2bb37b6eee3133b8b6e43097bc97d73bc81d7309ba132eae",
+  "excluded_claims": [
+    "M0 cross-source generalization",
+    "real world-model accuracy",
+    "Monte Carlo finite-sample error",
+    "physical planning overhead",
+    "real runtime throughput",
+    "production deployment",
+    "query-conditioned refiner",
+    "multi-fidelity"
+  ],
+  "execution_authorized": false,
+  "forbidden_posthoc_changes": [
+    "utility",
+    "lambda primary",
+    "pi0",
+    "gates",
+    "environment distribution",
+    "seed split",
+    "regime weights",
+    "deadline classes",
+    "named-scenario promotion",
+    "baseline identities",
+    "selecting favorable scenarios"
+  ],
+  "gates": {
+    "A_MECHANISM_EXISTENCE": [
+      "M1 heldout macro primary > B1",
+      "M1 heldout macro primary > B4 Ratio-PSVR",
+      "M1 heldout macro primary > maximum heldout macro among frozen simple_comparator_set",
+      "gain not confined to named extreme",
+      "continuous positive neighborhoods in at least two of SPARSE/BURSTY/HETEROGENEOUS_COST"
+    ],
+    "B_DENSE_HONESTY": [
+      "include DENSE_HOMOGENEOUS",
+      "report pi0 wins without deletion or downweighting"
+    ],
+    "C_TRANSITION_VALUE": [
+      "use frozen floor/transition/saturation rule",
+      "test concentration of gain for floor<T<saturation"
+    ],
+    "D_COMPLEXITY": [
+      "M1 versus Ratio-PSVR",
+      "report rollout decisions, trajectories, asymptotic complexity",
+      "record COMPLEXITY_NOT_YET_JUSTIFIED if gain is tiny"
+    ]
+  },
+  "heldout_seed_hash": "a5a1dc6e218bb880525177433f25a18c227a715f55e5905e27eca559dd83aec9",
+  "hypothesis_id": "H-ROLLOUT1A",
+  "methods": {
+    "B0_SCAN_THEN_CONFIRM": "SCAN timestamp order while productive-safe; when no further productive-safe SCAN, group-FIFO CONFIRM to STOP",
+    "B1_SHIELDED_PI0": "exact D2 policy",
+    "B2_FIXED_PERIODIC": "separate frozen arms k in [1,2,4,8]: after every k safe SCANs do one group-FIFO CONFIRM if safe; otherwise continue safe SCAN; STOP fail-closed",
+    "B3_CAPACITY_MATCHING": "capacity=floor(rho/R_C); SCAN while safe and frontier hypothesis count<capacity, else group-FIFO CONFIRM",
+    "B4_RATIO_PSVR": "choose safe action maximizing exact-model conditional expected one-step surrogate increment divided by complete expected duration; uses visible history/posterior, never latent realization; ties pi0 then action identifier",
+    "C0_CLAIRVOYANT_DP_CEILING": "latent-state finite-horizon DP, evaluator-only and limited to exactly enumerable episode sizes",
+    "M1_IDEAL_ROLLOUT_PSVR": "full-horizon symmetric rollout defined below"
+  },
+  "metrics": {
+    "AnytimeAUC_F1": "(1/T)*integral_0^T F1(t)dt; F1=0 when committed set empty; otherwise exact-id precision/recall harmonic mean with precision=1 for no predictions and recall=1 for no latent events",
+    "TTFC": "first durable unique-TP commit time; censored to T for aggregates and accompanied by no-commit indicator",
+    "event_matching": "one-to-one exact latent_event_id; null-id commit is FP; no interval-IoU matching",
+    "primary": "sum over exact unique TP event ids of max(T-first_durable_commit_time,0) minus sum over unique FP ids of max(T-first_durable_commit_time,0); lambda=1; duplicate=0",
+    "secondary": [
+      "AnytimeAUC_F1",
+      "TTFC",
+      "TTFC_no_commit_indicator",
+      "unique_committed_events_at_T",
+      "event_recall_at_T",
+      "duplicate_CONFIRM_count"
+    ]
+  },
+  "minimum_scientific_significance": [
+    "not floating-point error",
+    "not one discrete event jump alone",
+    "same direction in a continuous parameter neighborhood"
+  ],
+  "name": "Ideal Symmetric Rollout Mechanism",
+  "named_scenario_hash": "3cf05ee6fe1033fb5636aaa6c3c116ca90f0d8c4575ed9432ed3e17415b16471",
+  "not_independent": [
+    "actions within episode",
+    "multiple deadlines within episode",
+    "rollout MC samples"
+  ],
+  "parameter_distribution_hash": "48cf39b381c09ba1d7bfa64c74c8e9bdd659a3e03df476436ef4f5936a6b3916",
+  "rollout": {
+    "candidate_actions": "all safe actions including pi0 action",
+    "continuation": "same frozen shielded pi0 to horizon",
+    "first_action": "execute candidate once",
+    "horizon": "full",
+    "mc_rule": "if MC is necessary, independent SplitMix64 streams keyed by (episode,decision,action,sample); 99% normal-CI half-width <= 1e-8*max(1,M*T) utility-seconds, cap 100000000 samples; cap failure is NUMERICAL_BLOCK and cannot be imputed",
+    "model": "exact",
+    "planning_cost_seconds": 0,
+    "value": "exact expectation/enumeration preferred"
+  },
+  "scientific_question": "Under an exact generative model, full-horizon rollout, zero estimator error, and ideal zero planning cost, does symmetric continuation evaluation of safe SCAN and CONFIRM actions outperform frozen shielded pi0, Ratio-PSVR, and the best fixed strategy over continuous non-extreme workload regimes?",
+  "simple_comparator_set": [
+    "B0_SCAN_THEN_CONFIRM",
+    "B2_FIXED_PERIODIC_k1",
+    "B2_FIXED_PERIODIC_k2",
+    "B2_FIXED_PERIODIC_k4",
+    "B2_FIXED_PERIODIC_k8",
+    "B3_CAPACITY_MATCHING",
+    "B4_RATIO_PSVR"
+  ],
+  "statistical_unit": "independent latent video episode",
+  "status": "BLOCKED_DEPENDENCY_D2_NUMERIC_BINDING",
+  "toy_construction_hash": "7a103ce7d3cc80721d60d0a4a7ccb6d5eb63c1d2c10ea699511eec03f5d06402",
+  "toy_environment_hash": "b5ce7ddc5c2da0a968c4484b8dae5074b528dceff0482999609c50a03791e964",
+  "toy_environment_schema_hash": "e81a6a3951ee81c5df8547c9f8be518dc40da1bd8a5e3f0e7e4b2b5460d100c9",
+  "utility_registry_hash": "2f58110d80fa2ef12390a9b1721ce2f30b8bcc3270193e52759d141decf74c74"
+}

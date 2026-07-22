@@ -1,0 +1,56 @@
+{
+  "cycle": 5,
+  "forbidden": [
+    "heldout",
+    "multi-video-query",
+    "lambda_beta_tuning",
+    "hierarchy_change",
+    "unitization_change",
+    "K3_change",
+    "reference_change",
+    "oracle_change",
+    "proxy_change",
+    "A0_change",
+    "adaptive_VERIFY",
+    "boundary_refinement",
+    "learned_scheduler",
+    "bandit_RL",
+    "Stage0_HDS_HFACT_rerun"
+  ],
+  "frozen_shared_system": {
+    "A0": "fixed 29 SCAN batches then guarded VERIFY at every decision epoch",
+    "K3": "unchanged_k3_bridge_safe_persistent_service",
+    "batch_size": 4,
+    "candidate_selector": "maximum physically observed proxy score among scanned unqueried units",
+    "candidate_tie_break": "ascending unit_id",
+    "deadline_guard": "h_ds1_tail_guard_v2_persistent_k3",
+    "physical_oracle": "fresh cache-free Qwen3-VL-32B-Instruct",
+    "proxy": "physical YOLOv8n midpoint frame original decoded BGR",
+    "scan_hierarchy": "midpoint of each eligible contiguous unobserved block; batch size four",
+    "snapshot_checkpoints": "after every completed SCAN or VERIFY"
+  },
+  "hardware": "NVIDIA A800-SXM4-80GB, GPU-78772d8e-1166-c9c7-1f73-86ea2537431e, 565.57.01",
+  "heldout_opened": false,
+  "hypothesis_id": "H-SCAN1B",
+  "manifest_version": "H-SCAN1B_task_v1",
+  "physical_budget": {
+    "conditional_factorial": 24,
+    "tie_gate": 9,
+    "total_cap": 33
+  },
+  "revision": 0,
+  "runtime_identity_hash": "08b384175d8b9debc38598faf09e3966a0cb19d4ccc5fdca3a5e0664c05679fb",
+  "scope": "ONE_DEVELOPMENT_VIDEO_QUERY__TIE_ROBUSTNESS_THEN_STRUCTURAL_FACTORIAL",
+  "status": "FROZEN_BEFORE_PHYSICAL_EXECUTION",
+  "task": {
+    "benchmark_id": "cbbv2_514c0d360fd5b2a4b5fe",
+    "benchmark_version": "clean_baseline_benchmark_v2_strict",
+    "query_id": "enter_ego_path",
+    "reference_events": 26,
+    "reference_sha256": "56f617e759e108c96c7a865da26dc229689c87dcf2b633904255aa4c715633a3",
+    "reference_type": "VLM_DEFINED_PSEUDO_ORACLE",
+    "reference_version": "consecutive_positive_units_v1",
+    "video_id": "long_video_dataset3",
+    "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+  }
+}

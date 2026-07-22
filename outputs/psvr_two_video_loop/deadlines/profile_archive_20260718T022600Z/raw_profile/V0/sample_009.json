@@ -1,0 +1,103 @@
+{
+  "cache_replay": false,
+  "commit": {
+    "materializer_mode": "persistent_clean_spawn_predeadline",
+    "raw_observation_commit": {
+      "atomic_replace_seconds": 0.001402336,
+      "fsync_seconds": 0.000831611,
+      "payload_sha256": "a3020d4a4bf0e7db67e73720b00dfcaf33bef371ab2f388369db4ed83fbe2430",
+      "serialize_seconds": 0.000190555,
+      "total_seconds": 0.003819195
+    },
+    "snapshot_commit": {
+      "atomic_replace_seconds": 0.001199398,
+      "fsync_seconds": 0.000514019,
+      "payload_sha256": "660ec0ac22a484c102ca6f47ccd7af45e462c565a288dcd57d619cfb36207a74",
+      "serialize_seconds": 7.4779e-05,
+      "total_seconds": 0.002513189
+    },
+    "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_two_video_loop/deadlines/raw_profile/V0/sample_009_snapshot.json",
+    "stage_seconds": {
+      "atomic_replace": 0.001199398,
+      "fsync": 0.000514019,
+      "materialize": 0.016961897,
+      "observation_persist": 0.003819195,
+      "serialize": 7.4779e-05
+    },
+    "total_seconds": 0.02451073
+  },
+  "commit_wall_seconds": 0.02454871,
+  "confirmed_events": 0,
+  "oracle_result": {
+    "cache_replay": false,
+    "confidence": "high",
+    "cuda_synchronized_before_and_after": true,
+    "end_time": 3300.0,
+    "frame_identity_verified": true,
+    "generic_parsed_label": "negative",
+    "logical_oracle_call": true,
+    "oracle_build_id": "strict_oracle_3b9ba1187c0449426978",
+    "parse_status": "ok",
+    "parsed": {
+      "abstain_reason": null,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "ego_relevant": false,
+      "event_end": null,
+      "event_start": null,
+      "event_type": "none",
+      "evidence": "The ego vehicle is driving under an overpass with multiple vehicles ahead in the same lane. No object is observed entering the ego vehicle's path from outside the driving corridor. Traffic is flowing normally without any merging, cutting, or crossing into the ego path. All visible road users remain within their respective lanes or paths without spatial conflict.",
+      "involved_object": "none",
+      "label": "negative",
+      "negative_reason": "normal_following"
+    },
+    "parsed_label": "negative",
+    "physical_oracle_invocation": true,
+    "projection_allowed_involved_objects": [
+      "cyclist",
+      "vehicle"
+    ],
+    "query_id": "Q1",
+    "raw": "{\n  \"label\": \"negative\",\n  \"event_start\": null,\n  \"event_end\": null,\n  \"event_type\": \"none\",\n  \"involved_object\": \"none\",\n  \"ego_relevant\": false,\n  \"boundary_status\": \"ok\",\n  \"complete_event_visible\": true,\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving under an overpass with multiple vehicles ahead in the same lane. No object is observed entering the ego vehicle's path from outside the driving corridor. Traffic is flowing normally without any merging, cutting, or crossing into the ego path. All visible road users remain within their respective lanes or paths without spatial conflict.\",\n  \"negative_reason\": \"normal_following\",\n  \"abstain_reason\": null\n}",
+    "raw_sha256": "1cec14fd1271bbd301d9189cfe60ffc042fe8fd873ecddaf3a44941bf6bd5be9",
+    "recorded_at_utc": "2026-07-16T22:22:23.470412+00:00",
+    "rng_seed": 20261039,
+    "service_total_seconds": 21.829822014,
+    "session_id": "deadline_profile_V0_009",
+    "stage_seconds": {
+      "cleanup": 0.197656117,
+      "clip_extraction": 1.198352754,
+      "oracle_inference": 15.68696735,
+      "oracle_parse": 0.000125855,
+      "oracle_postprocess": 0.000814269,
+      "oracle_preprocess": 4.745792939
+    },
+    "start_time": 3290.0,
+    "unit_id": 329,
+    "video_id": "V0"
+  },
+  "physical_oracle_only": true,
+  "query_wall_seconds": 21.830588304,
+  "recorded_at_utc": "2026-07-16T22:22:23.470412+00:00",
+  "sample_index": 9,
+  "service_total_seconds": 21.829822014,
+  "session_initialization": {
+    "prior_query_count": 0,
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V0_009",
+    "video_id": "V0"
+  },
+  "session_summary": {
+    "physical_calls": 1,
+    "queried_ids": [
+      329
+    ],
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V0_009",
+    "video_id": "V0"
+  },
+  "status": "ok",
+  "unit_id": 329,
+  "video_id": "V0"
+}

@@ -1,0 +1,103 @@
+{
+  "baseline_execution": "CLEAN_RERUN_FROM_FROZEN_INPUTS",
+  "benchmark_frozen": false,
+  "benchmark_id": "cbbv2_79b484f79b5c4d5edc45",
+  "benchmark_source": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4",
+  "blocking_reason": "Generation-time model/processor/video-processor/package/full-generation hashes are unresolved for 346 reused legacy responses; strict cache-identity equivalence is unproven.",
+  "compatibility": {
+    "authoritative_duration_seconds": 3462.930499,
+    "authoritative_duration_source": "MP4_format_duration",
+    "baseline_code_hashes": {
+      "abae_adapter": "1b548aa71f91b3c98e041bafa534d638c1778493a6de19d34bf9707351e43a2e",
+      "arc_adapter": "220be4e6f813329fc2a144cbb376ff5aa6f778f2881bf0146c14a3c9292ed9c9",
+      "benchmark_lib": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+      "benchmark_pipeline": "9acc5de2df46bd7cd1e5b360cde0c13a65d0e6002acf0d229f7e94ae95f8ace5",
+      "map_anchor": "005e659c0918c9fab768efe928344b04b5e087d75b154ea2c4be5076ca2d18e2",
+      "supg_adapter": "c994c136c09753cbed0f358b89590dcff2ce8784f6facadc3bd2c30953477f2b"
+    },
+    "budget_schedule_hash": "08e52d99ed4ec43f53bea9fe3b1d1468d329bf16932d7f467f26e608cebd6101",
+    "cheap_feature_manifest_sha256": "04e760ae1d1dc1210d368cd7402ec7f8bb64d5f7cb4ea832286697a67ff7436c",
+    "content_bound_oracle_manifest_sha256": "57ca45c8381f4666796d5522d343dc69d1331f80d95e058c362f3fb8195f54d8",
+    "cost_model": {
+      "duplicate_queries": "REJECT",
+      "physical_oracle_build_calls_excluded": true,
+      "presence_query_logical_cost": 1
+    },
+    "evaluator_hash": "ca34f7fe2ab23accd22d42dba299091890157fb7c913068199f318f4dc5db407",
+    "generation_config_hash": "1e736848fe36a1749e2be336faa46cbf6403d55861c9945b9e677df2b24031db",
+    "matching_hash": "d080a377b5d1bd1ca1d6fb01a37137b32b9660ae07ced0cc05b14a1844414f54",
+    "oracle_input_manifest_sha256": "cd9e174fc738b4a1263acf1a1a64c773b4ed1599add84014ff5795f3ba4ebf2d",
+    "oracle_model_hash": "921540a4c33c8f8608f77c34af99741ff0828e79e66cd79af13bdc702b02f0ea",
+    "oracle_parser_hash": "2b0c34cb3d759aaab5d0ca3801c2c2b78bfb208f13d9449e6c9ab07b0c2bb30e",
+    "oracle_prompt_hash": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+    "parent_benchmark_id": "cbbv1_c2e246d1504d9d8a80b2",
+    "processor_hash": "d511a3af5ed95c352b5a05397ddf9f9f4a4c89c1045555d5e8e09fe9b869749d",
+    "proxy_table_sha256": "d72ad29eae193d6eca54b40d024eafbbba29c6556d30576558fa50452723ce9c",
+    "raw_response_manifest_sha256": "d00fd1d21362d8b7d0ec16289114beac45909fd89182b20761238219a769e505",
+    "reference_hash": "d1d8bf6f4b8d844411ade0ed7cb7b695f9b2b304622a9c40b9d86ac80e7c91f1",
+    "run_plan_hashes": {
+      "BASELINE_CONFIG_MANIFEST.csv": "65bf840cdaf2bb326ed1c7357199afdee8be3be0550cd1acd97f0b3230f12ebe",
+      "EXPECTED_RUN_MATRIX.csv": "8d7936bd71d93be1ff310b76a5f1fc18f6841b859903764b35e4efba8a504527",
+      "FROZEN_BUDGETS.json": "e832f59eb6cd1ef1b85399e9d7db92515aa704b773c7da28f17b2963e96704eb",
+      "SEED_MANIFEST.csv": "0625ef3e29efa742dbb3997d1c6422a7dd4f26343b83a3705e4e53499591598c"
+    },
+    "sampling_code_hash": "a64dd0acdbf1913662073d303ea5818999932defbc3e04061a3c2fb0353024b8",
+    "unit_table_sha256": "fdf828c4cddaf8608302ce3de0950236800c5058bf94025ed2f57b3d6755ed8f",
+    "video_processor_hash": "b26c36218bdc3022636f68556ed9b5c7a2553851d8f26c90472205f1ad87358c",
+    "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+  },
+  "completed_at_utc": "2026-07-10T12:40:46Z",
+  "counts": {
+    "positive_units": 40,
+    "reference_events": 27,
+    "units": 347
+  },
+  "created_at_utc": "2026-07-10T12:23:12Z",
+  "decision": "BENCHMARK_V2_INCOMPLETE_NOT_READY_FOR_BCM",
+  "execution": {
+    "compatibility": false,
+    "completion_audit_pass": false,
+    "logical_oracle_calls": 64614,
+    "physical_vlm_calls": 1,
+    "semantic_snapshot_sha256": "ce3eafc2defc91e02c5c2a9d8791f5c8c21e7bb8c2cc86dd7e40425b100993e6"
+  },
+  "final_decision": "WEAK GO",
+  "freeze_timestamp_utc": "2026-07-10T12:55:06Z",
+  "freeze_withdrawn_at_utc": "2026-07-10T13:05:01Z",
+  "oracle_cache": {
+    "entries": 347,
+    "new_raw_cache": 1,
+    "physical_calls_this_run": 1,
+    "raw_cache_reused": 346
+  },
+  "parent_benchmark_id": "cbbv1_c2e246d1504d9d8a80b2",
+  "physical_hashes": {
+    "frozen_inputs/budget_schedule.csv": "08e52d99ed4ec43f53bea9fe3b1d1468d329bf16932d7f467f26e608cebd6101",
+    "frozen_inputs/cheap_feature_manifest.csv": "04e760ae1d1dc1210d368cd7402ec7f8bb64d5f7cb4ea832286697a67ff7436c",
+    "frozen_inputs/evaluator_config.json": "2466f38a74c65e56a2c52a99b033f81a5dee80cad33a31433a1a1b7219f01aa5",
+    "frozen_inputs/event_reference.csv": "ecc9f40c7516babf7f9311ba177a171608691550823f0e513bd14da103d8b5dc",
+    "frozen_inputs/proxy_table.csv": "0f112fbfcd7843470b54f7b8920cf3d29b691625ad0170c7167ccb622362daeb",
+    "frozen_inputs/random_seeds.csv": "0625ef3e29efa742dbb3997d1c6422a7dd4f26343b83a3705e4e53499591598c",
+    "frozen_inputs/unit_table.csv": "c688d11c8a8c3df2efaafd63923966163ba631606b3055c08ce11c860c3fa0db",
+    "frozen_inputs/video_manifest.csv": "f0533890cb1f099ab645f58fffd1b864785dd9708c4f81bd011b17993f2f0073"
+  },
+  "post_freeze_repair": {
+    "reason": "Initial FILE_MANIFEST preceded final stdout append",
+    "refrozen_at_utc": "2026-07-10T12:55:06Z",
+    "scope": "FILE_MANIFEST and recorded freeze metadata only",
+    "semantic_or_execution_results_changed": false
+  },
+  "result_hashes": {
+    "baseline_rankings": "201505bbfab7db8ab8c275b8cc1f515affb091dfc1813c855f687e419c47f097",
+    "completion_audit": "2cfb207d3f2583af1aa4a272ff179b52f046133e8004f372bd6ba2a94e99e227",
+    "event_f1_auc": "f94b7535871b704378fd52fe7ae3faf1251e709b676215923a449586336693a7",
+    "final_decision": "3be0f024ede198dc46ee54103cce899b95b44859abf27c55964d06c58fb59fa5"
+  },
+  "result_scope": "SINGLE_VIDEO_TEMPORAL_HOLDOUT_DIAGNOSTIC",
+  "run_counts": {
+    "baseline_valid": 1464,
+    "current_method_valid": 12,
+    "failed_expected_runs": 0
+  },
+  "status": "INCOMPLETE_PROVENANCE_BLOCKED"
+}

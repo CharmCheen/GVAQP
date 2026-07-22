@@ -1,0 +1,40 @@
+{
+  "audit_hash": "d477662b66ac2283e7a39b1e023dfca85cad7418df56da90b85411f8064f2e27",
+  "audit_id": "MF_PSVR_CANDIDATE_AUDITOR_LIFECYCLE_INCIDENT_V1",
+  "created_at_utc": "2026-07-19T06:54:29Z",
+  "status": "PASS_RECOVERED_EXACT_RECEIPTS_AND_NONMUTATING_VERIFY",
+  "trigger": "The command `python scripts/audit_mf_psvr_candidate_completion.py --help` was issued after Stage-A completion. The script had no argument parser, ignored `--help`, and executed its write path.",
+  "root_cause": "A pre-oracle completion auditor mixed immutable extraction checks with lifecycle checks requiring empty oracle manifests, and its only execution path atomically rewrote finalized summary artifacts.",
+  "transient_false_findings": [
+    "PREINFERENCE_ARTIFACT_BINDING: ORACLE_CALL_MANIFEST.csv",
+    "PREINFERENCE_ARTIFACT_BINDING: ORACLE_LABEL_MANIFEST.csv",
+    "PREINFERENCE_ARTIFACT_BINDING: STAGE_STATE.json",
+    "ORACLE_OUTPUT_BEFORE_CANDIDATE_FREEZE: call rows=96, label rows=192"
+  ],
+  "scientific_interpretation": "These were expected downstream lifecycle changes, not changes to the frozen 603-provider extraction evidence. The rerun independently reconfirmed 603 providers, 2654 units, 5308 scores, 28551 tracks, all source hashes, all per-provider hashes, and zero numeric/content errors.",
+  "overwritten_summary_artifacts": {
+    "completion_audit_transient_self_hash": "d9795b176f62cda7b78a4eabadaf6158fddcc3c65528cfbeb00392bf311eafab",
+    "cost_transient_sha256": "ab0363b9c93daab4b0ad0ae37d66e93d244fd559335907a913cbdc2d634d7359",
+    "failures_transient_sha256": "d524b8761406a459c70a57dacbc9576c0d76c474b04d6e4d863a558015e6d60a"
+  },
+  "recovery_evidence": {
+    "source": "Immutable Codex session tool output recorded the complete original 2026-07-19T05:09:18Z PASS JSON and extraction-cost JSON before the accidental rerun.",
+    "restored_completion_audit_sha256": "c63e563087b12818798e6a90ce5bb5e878db3f8b15f3bbe7f3de8f44cc1fa9fe",
+    "restored_completion_audit_self_hash": "dbc8bfbbf53103ca021b81d0cb4b7443399a491e94cb29fdcd006ed32666ef39",
+    "restored_cost_sha256": "8e4b56ab898e769b53895d6b82247c673b80d50f606b619ba3d96663d534a8e4",
+    "restored_failures_sha256": "202854e262df3d84b8a7d42387486a16f705f2cf52285d894280ac8cf1d358d0",
+    "unchanged_score_distribution_sha256": "fce9eacdb8c1b9e6f8c208deea7ecda19e3e2c3490b7ef25ee97d30fa84ad467"
+  },
+  "repair": {
+    "auditor_source_sha256": "4c6b945f501ea6b1eaf115218a1339c9aae082cdf5f64dd1069054abe9b618cf",
+    "cli": "Explicit `write` and `verify` stages; standard `--help`; write refuses to overwrite an existing PASS receipt.",
+    "verify_semantics": "Recompute stable extraction identities, hashes, numeric/content invariants, score distribution, and cost while treating zero oracle rows as a historical receipt field rather than a current-state requirement.",
+    "post_repair_verify_result": "PASS",
+    "receipt_hash_list_before_sha256": "bca1bf590425bd7250f15c2a0a06cca79ee15f15668e57c1a0d84737d7dd7e52",
+    "receipt_hash_list_after_sha256": "bca1bf590425bd7250f15c2a0a06cca79ee15f15668e57c1a0d84737d7dd7e52",
+    "verify_modified_finalized_candidate_receipts": false
+  },
+  "candidate_payload_files_modified_by_incident": 0,
+  "heldout_opened": false,
+  "next_action": "Bind this incident receipt and the restored candidate PASS receipt in the final research-state audit; use only the non-mutating `verify` stage after oracle acquisition."
+}

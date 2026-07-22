@@ -1,0 +1,120 @@
+{
+  "algorithm": "VERA",
+  "baseline_comparison": {
+    "dense": "new 20-call current-hardware cost calibration plus existing frozen 347-output strict relation",
+    "oracle_ceiling": "evaluator-only and excluded from deployable claims",
+    "quality_baselines": [
+      "uniform/random",
+      "public proxy",
+      "CLIP retrieve-then-ground",
+      "MAP/M1",
+      "native ARC",
+      "SUPG adapted",
+      "ABae adapted"
+    ],
+    "same_cost_grid_dense_equivalent_units": [
+      5,
+      10,
+      20,
+      50,
+      80,
+      100
+    ]
+  },
+  "benchmark_id": "cbbv2_514c0d360fd5b2a4b5fe",
+  "failure_behavior": {
+    "cap_exhaustion": "stop, mark pilot incomplete",
+    "cross_role_cache_reuse": false,
+    "dense_parse_error_or_abstain": "UNKNOWN; no positive row; pilot fails completeness",
+    "enumeration_parse_error_or_abstain": "dense presence for every strict 10-second unit overlapping that ownership core",
+    "retry_count": 0,
+    "started_attempt_counts_against_cap": true,
+    "uncertain_interrupted_attempt": "never rerun; schedule its dense fallback if enumeration"
+  },
+  "freeze_version": "vera_physical_freeze_v1",
+  "frozen_artifact_hashes": {
+    "AQP_Algorithm_Invention_Sprint_v1/physical/MODEL_MANIFEST.csv": "0994947e20232d6bcb99cc7a64bba5c5aff0ec865d0ccf180e3dd8b567c78946",
+    "AQP_Algorithm_Invention_Sprint_v1/physical/PROMPT_MANIFEST.json": "cb5ded9a90a22398a788ccde9fc1ff75d623c68edf5489ad80019fd8f6467ba3",
+    "AQP_Algorithm_Invention_Sprint_v1/physical/SAMPLE_MANIFEST.json": "98fc698f9149466aebe8f5550bba7b8befcc69ad7a000fa97f6ebcef7a9a533e",
+    "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/event_reference.csv": "56f617e759e108c96c7a865da26dc229689c87dcf2b633904255aa4c715633a3",
+    "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/unit_table.csv": "bfbe4270936d267e36734b30174e83c47b0cb021cda3a9a9b6a7e7a7f709d182",
+    "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/oracle/oracle_prompt.txt": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+    "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/scripts/benchmark_lib.py": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+    "src/garc_eval/aqp_invention_v1/prompts/event_enumerate_v1.txt": "ffb65213017a79b5312bce98d5cf9a3d270cf69347ed560176119be347167bc8"
+  },
+  "frozen_before_any_new_call": true,
+  "frozen_source_hashes": {
+    "src/garc_eval/aqp_invention_v1/contract.py": "02d5b2ec6a6459a69275a04e80c401e68be31f2647b44c058d511aaa18f032fc",
+    "src/garc_eval/aqp_invention_v1/evaluate_physical.py": "e284c2278d197d6aa8dffdb98cd144f15d622001ec06565f1b3e365280c22dea",
+    "src/garc_eval/aqp_invention_v1/physical_common.py": "e4daba8cf97ef1bf2a40c5551226096c79447fc3a691499d056519f93e502639",
+    "src/garc_eval/aqp_invention_v1/prepare_physical.py": "1948c753bffaf679d2e6cbf7cca617f2634a586d0e0f07adce70e29a1d5df8e6",
+    "src/garc_eval/aqp_invention_v1/run_physical.py": "69575d911c165b1aa0a99d5a694a0cf901188fc69f64a197802003db3908bfb0"
+  },
+  "generation": {
+    "base_seed": 20260711,
+    "cublas_workspace_config": ":4096:8",
+    "deterministic_algorithms": true,
+    "do_sample": false,
+    "max_new_tokens_dense": 256,
+    "max_new_tokens_event_enumerate": 768,
+    "temperature": null
+  },
+  "model": {
+    "frozen_gpu": {
+      "driver_version": "580.65.06",
+      "index": "0",
+      "memory_total_mib": "81920",
+      "name": "NVIDIA A100-SXM4-80GB",
+      "uuid": "GPU-2ca52ddc-874d-913c-c345-5fa08fa92817"
+    },
+    "full_content_hash": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+    "load": {
+      "device_map": "auto",
+      "torch_dtype": "bfloat16",
+      "trust_remote_code": true
+    },
+    "path": "/qiuyeqing/llama_prl/G-ARC/models/vlm/qwen3_vl/Qwen3-VL-32B-Instruct"
+  },
+  "operator_contract": "vera_event_enumerate_contract_v1",
+  "physical_success_gate": "complete AND event_recall>=0.80 AND event_f1>=0.80 AND gpu_cost_ratio<0.70",
+  "plan": {
+    "base_calls": 90,
+    "calibration_calls": 20,
+    "core_seconds": 50.0,
+    "execution_order": "20 uniform dense calibration calls, 70 chronological enumeration calls, then ascending dense fallback units",
+    "margin_seconds": 5.0,
+    "maximum_physical_calls": 200,
+    "reserved_dense_fallback_calls": 110,
+    "windows": 70
+  },
+  "pre_execution_decision": "PHYSICAL_PILOT_JUSTIFIED",
+  "primary_accuracy": {
+    "evaluator": "strict overlap-any one-to-one EventRelation evaluator",
+    "event_f1_threshold": 0.8,
+    "event_recall_threshold": 0.8,
+    "reference_access": "post-inference evaluator only"
+  },
+  "primary_cost": {
+    "dense_gpu_seconds": "347 * median dense calibration synchronized generation wall",
+    "selected_gpu_seconds": "sum synchronized generation wall for EVENT_ENUMERATE plus executed dense fallbacks",
+    "strict_ratio_threshold": 0.7
+  },
+  "reconciler": "midpoint_single_owner_no_cross_window_merge_v1",
+  "runtime_measurement": {
+    "cold_cost": "model load wall + selected algorithm total call wall",
+    "decision_gpu_seconds": "wall clock around generate after torch.cuda.synchronize before and after",
+    "dense_current_hardware_estimate": "347 times median of 20 uniform physical dense calibration calls",
+    "generation_wall_seconds": "perf_counter around synchronized generate",
+    "peak_memory": "torch.cuda.max_memory_allocated after reset immediately before generate",
+    "secondary_cuda_event_seconds": "CUDA event elapsed time around generate",
+    "total_call_wall_seconds": "frame decode/hash + processor + synchronized generation + decode/parse",
+    "warm_cost": "selected algorithm total call wall only"
+  },
+  "video": {
+    "duration_seconds": 3462.93,
+    "fps": 30.000005775562784,
+    "path": "data/realcam/long_video_data/long_video_dataset3.mp4",
+    "sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+    "total_frames": 103886
+  }
+}

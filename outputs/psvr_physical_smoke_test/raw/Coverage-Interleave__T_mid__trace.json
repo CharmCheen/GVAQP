@@ -1,0 +1,53 @@
+{
+  "method": "Coverage-Interleave",
+  "deadline_name": "T_mid",
+  "deadline_seconds": 76.37340106492499,
+  "wall_seconds": 61.444712799,
+  "deadline_met": true,
+  "proxy_units_scanned": 117,
+  "full_proxy_complete": false,
+  "logical_oracle_calls": 3,
+  "physical_oracle_calls": 3,
+  "cache_replay_calls": 0,
+  "visible_oracle_labels": 3,
+  "visible_label_ids": [
+    50,
+    250,
+    316
+  ],
+  "confirmed_events": 1,
+  "strict_only_confirmed": true,
+  "future_proxy_accesses": 0,
+  "instrumentation": "derived_from_action_and_physical_oracle_records",
+  "boundary_state": "unit_interval_censored_no_refinement",
+  "k3_seconds": 0.002163005,
+  "snapshot_seconds": 0.001429627,
+  "actions": [
+    {
+      "action": "coarse_scan",
+      "units_visible": 116,
+      "duration_seconds": 12.805740726
+    },
+    {
+      "action": "validation_anchor_scan",
+      "unit_id": 50,
+      "duration_seconds": 0.23453521,
+      "selection_basis": "fixed_public_smoke_fixture"
+    },
+    {
+      "action": "physical_verify",
+      "unit_id": 50,
+      "duration_seconds": 17.563415472
+    },
+    {
+      "action": "physical_verify",
+      "unit_id": 316,
+      "duration_seconds": 15.19901931
+    },
+    {
+      "action": "physical_verify",
+      "unit_id": 250,
+      "duration_seconds": 15.001012886
+    }
+  ]
+}

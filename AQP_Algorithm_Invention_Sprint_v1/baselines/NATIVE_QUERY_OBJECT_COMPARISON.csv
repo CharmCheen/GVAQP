@@ -1,0 +1,10 @@
+comparison,query_object,event_f1_auc,auc_budget_grid,physical_cost_basis,deployable
+native_ARC,10-second UNIT_PRESENCE then event materialization,0.3896592193755119,5|10|20|50|80|100 dense-unit calls,existing physical labels; current-A100 cost rescaled,True
+random_uniform,10-second UNIT_PRESENCE then event materialization,0.3190361160355643,5|10|20|50|80|100 dense-unit calls,existing physical labels; current-A100 cost rescaled,True
+public_proxy,10-second UNIT_PRESENCE then event materialization,0.3542124760437505,5|10|20|50|80|100 dense-unit calls,existing physical labels; current-A100 cost rescaled,True
+SUPG_adapted,10-second UNIT_PRESENCE then event materialization,0.2781282320949461,5|10|20|50|80|100 dense-unit calls,existing physical labels; current-A100 cost rescaled,True
+ABae_adapted,10-second UNIT_PRESENCE then event materialization,0.3031977816411156,5|10|20|50|80|100 dense-unit calls,existing physical labels; current-A100 cost rescaled,True
+MAP_M1,10-second UNIT_PRESENCE then K3-safe,0.3880556629484837,5|10|20|50|80|100 dense-unit calls,existing physical labels; current-A100 cost rescaled,True
+CLIP_retrieve_then_ground,CLIP unit retrieval then K3-safe,0.5389489935061179,5|10|20|50|80|100 dense-unit calls,378.93s cold CLIP index plus exact-unit calls,True
+dense_10s_Qwen3VL,all 347 UNIT_PRESENCE calls,,full endpoint only,347 * 18.730841s current-A100 median,True
+evaluator_only_oracle,hindsight reference ordering,0.919626,5|10|20|50|80|100,ceiling; not deployable,False

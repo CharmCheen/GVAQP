@@ -1,0 +1,55 @@
+{
+  "K3": "unchanged k3_bridge_safe persistent clean spawn",
+  "candidate_capacity": 10,
+  "config_hash": "391396602addf32d69579277c31dea2d0031ba54e76a89df7f9a66fc6b3f6e83",
+  "deadline_manifest_hash": "b102b2fcb393bb18d250f934ebcdce144aaefb0a352debf33ec443cd10813a10",
+  "experiment_id": "H_EXPOSE2_REVISION_exposure_temporal_nms",
+  "final_proxy_config_hash": "2c3026fcffcab75fa7a1024e8a929b6eec339b7cbeec4ece9827bcb7e811035d",
+  "heldout_opened": false,
+  "implementation_hashes": {
+    "deadline": "adecea2817c74247d89124c7db3683add987b1a9e72533b5dbd47786cfb386a6",
+    "materializer": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+    "oracle_service": "0b40ccda9e44a7ca6eb16e65ec532480b8333b13d2fb3e37678f5066db808e9f",
+    "policy": "7710f648c577db8da47ca1e958204b3662f574d560b8a8658479004f5e9c6f1b",
+    "proxy": "880f0ba3be6fb8b3164f279f5c6574dacd5342dab339a55cd2381f0459b36a68",
+    "runner": "b289e24ddfdf9a655e5f0d15e3f80edefb948ef59cb1a9e0a36de1b3eab363dd",
+    "runtime_runner": "874adc04e129676338ef290a6deb8c061f9b1ec6826952bbdc4e362fb55e2ce7"
+  },
+  "job_scope": {
+    "deadlines": [
+      "T_high",
+      "T_transition"
+    ],
+    "families": [
+      "Y8"
+    ],
+    "methods": [
+      "exposure_temporal_nms",
+      "fifo",
+      "score_only"
+    ],
+    "replicates": [
+      0,
+      1,
+      2
+    ],
+    "tasks": [
+      "V0_Q1",
+      "V0_Q2",
+      "V1_Q1",
+      "V1_Q2"
+    ]
+  },
+  "oracle": "physical cache-free Qwen3-VL-32B frozen generic prompt plus frozen projection",
+  "oracle_logical_session": "fresh query ledger per run",
+  "oracle_model_persistence": "resident across runs",
+  "proxy": "cold physical detector per run",
+  "proxy_implementation_freeze_hash": "4f965358909606a2198fa33a655fbd6a78f64d43e5368212ca6ba08aa39f0d60",
+  "proxy_preregistration_hash": "17d8a2be6bd502df9ef7a4bde5c4e07e1d4a9976f81e7a49101bbab95dfdd47f",
+  "reference_visible_to_runtime": false,
+  "scanner": "Uniform-Temporal-Interleave",
+  "snapshot_checkpoint": "after every SCAN or VERIFY plus initial empty snapshot",
+  "uniform_temporal_order": "iterative largest-unobserved-gap midpoint; lower midpoint tie",
+  "verify_allocator": "A0 Fixed-Periodic",
+  "verify_every_n_scanned_units": 3
+}

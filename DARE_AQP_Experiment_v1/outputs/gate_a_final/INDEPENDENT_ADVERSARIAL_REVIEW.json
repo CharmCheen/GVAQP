@@ -1,0 +1,76 @@
+{
+  "review_type": "independent_fail_closed_recomputation",
+  "verdict": "PASS",
+  "checks": [
+    {
+      "check": "exact_model_repositories",
+      "passed": true,
+      "evidence": "['microsoft/xclip-base-patch32', 'openai/clip-vit-base-patch32']"
+    },
+    {
+      "check": "exact_model_revisions",
+      "passed": true,
+      "evidence": "requested=resolved=configured"
+    },
+    {
+      "check": "all_model_file_sizes_and_hashes",
+      "passed": true,
+      "evidence": "files=16"
+    },
+    {
+      "check": "four_signals_347_exact_units",
+      "passed": true,
+      "evidence": "{'current_proxy': 347, 'image_text': 347, 'rank_fusion': 347, 'video_text': 347}"
+    },
+    {
+      "check": "frozen_score_metadata",
+      "passed": true,
+      "evidence": "all signal metadata equals frozen config"
+    },
+    {
+      "check": "raw_score_seal",
+      "passed": true,
+      "evidence": "5bd2201de270327ae6e6a8810a04c99009c278a2b764bf3ea561ad591c5157c4"
+    },
+    {
+      "check": "ranking_hash_and_recomputation",
+      "passed": true,
+      "evidence": "rankings=4"
+    },
+    {
+      "check": "static_inference_leakage_boundary",
+      "passed": true,
+      "evidence": "no evaluator/oracle path token in runner"
+    },
+    {
+      "check": "input_and_sampling_identity",
+      "passed": true,
+      "evidence": "{'image_text': 'one center frame per 10-second unit', 'video_text': 'eight uniformly spaced frames per 10-second unit'}"
+    },
+    {
+      "check": "complete_runtime_accounting",
+      "passed": true,
+      "evidence": "columns=36, rows=2"
+    },
+    {
+      "check": "frozen_gate_b_integration",
+      "passed": true,
+      "evidence": "rows=20"
+    },
+    {
+      "check": "decision_matches_registered_threshold",
+      "passed": true,
+      "evidence": "any_public_GO=False"
+    },
+    {
+      "check": "physical_exact_oracle_calls_zero",
+      "passed": true,
+      "evidence": "0"
+    },
+    {
+      "check": "required_evaluation_artifacts",
+      "passed": true,
+      "evidence": "['ranking_metrics.csv', 'gate_b_link.csv', 'per_budget_event_metrics.csv', 'event_f1_auc.csv', 'unique_event_first_discovery.csv', 'arc_map_overlap_divergence.csv', 'ranking_diagnostics.csv', 'public_to_oracle_gap.csv', 'query_cost_normalized_results.csv', 'per_unit_runtime.csv']"
+    }
+  ]
+}

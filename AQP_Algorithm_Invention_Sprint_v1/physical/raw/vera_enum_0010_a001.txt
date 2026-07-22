@@ -1,0 +1,42 @@
+{
+  "clip_status": "ok",
+  "events": [
+    {
+      "event_start": 1.0,
+      "event_end": 3.0,
+      "event_type": "enter_ego_path",
+      "involved_object": "vehicle",
+      "object_identity": "white sedan turning left from right lane into ego path at intersection",
+      "ego_relevant": true,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "evidence": "At t=1.0, a white sedan is seen entering the ego path from the right lane during a left turn maneuver at the intersection, crossing directly into the ego vehicle’s forward path. The vehicle is clearly visible and overlaps the driving corridor until t=3.0."
+    },
+    {
+      "event_start": 2.0,
+      "event_end": 4.0,
+      "event_type": "enter_ego_path",
+      "involved_object": "vehicle",
+      "object_identity": "blue and white bus turning left from right lane into ego path at intersection",
+      "ego_relevant": true,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "evidence": "At t=2.0, a blue and white bus begins turning left from the right lane, entering the ego vehicle’s path at the intersection. The bus occupies the left portion of the ego path from t=2.0 to t=4.0, creating a clear spatial conflict."
+    },
+    {
+      "event_start": 3.0,
+      "event_end": 5.0,
+      "event_type": "enter_ego_path",
+      "involved_object": "pedestrian",
+      "object_identity": "pedestrian crossing the road at marked crosswalk from right to left",
+      "ego_relevant": true,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "evidence": "At t=3.0, a pedestrian is seen stepping onto the crosswalk from the right sidewalk, moving directly across the ego vehicle’s path. The pedestrian is fully within the driving corridor by t=4.0 and exits by t=5.0."
+    }
+  ],
+  "abstain_reason": null
+}

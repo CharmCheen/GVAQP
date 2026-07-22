@@ -1,0 +1,59 @@
+{
+  "pack_version": "3.0",
+  "freeze_date": "2026-07-11",
+  "project_root": "/qiuyeqing/llama_prl/G-ARC",
+  "strict_benchmark": {
+    "id": "cbbv2_514c0d360fd5b2a4b5fe",
+    "status": "FROZEN_READY",
+    "reference_events": 26,
+    "scope": "SINGLE_VIDEO_VLM_DEFINED_ORACLE",
+    "best_native_auc": 0.389659,
+    "map_m1_auc": 0.388056
+  },
+  "completed_experiments": [
+    {"name": "bcm_aqp_experiment_v2", "decision": "NO_GO", "auc": 0.294270},
+    {"name": "hypothesis_construction_repair_v1", "decision": "HYPOTHESIS_REPAIR_WEAK_GO", "auc": 0.314990},
+    {
+      "name": "candidate_outcome_calibration_gate_v1",
+      "decision": "CHEAP_CANDIDATE_CONSTRUCTION_REQUIRED",
+      "oracle_ceiling_auc": 0.664458,
+      "legal_event_coverage": "20/26",
+      "blocked_cv_auroc": 0.548282
+    },
+    {
+      "name": "algorithmic_mechanism_viability_gate_v1",
+      "decision": "IDEAL_SIGNAL_ONLY",
+      "settings": "149/149",
+      "policy_runs": 141750,
+      "physical_vlm_calls": 0,
+      "s1_saturation_delta": 0.025434,
+      "s2_h1_saturation_delta": -0.003978,
+      "real_cheap_primitive_engineering_justified": false
+    }
+  ],
+  "stopped_routes": [
+    "P2 exploration",
+    "P3 counterfactual materialization planner",
+    "real cheap-primitive engineering from current evidence",
+    "full actor graph before new evidence"
+  ],
+  "next_experiment": {
+    "name": "public_event_cell_representation_gate_v1",
+    "status": "PLANNED_ONE_SHOT_GATE",
+    "physical_vlm_calls_allowed": 0,
+    "baseline_reruns_allowed": 0,
+    "methods": ["R0-P0", "R0-P1", "R1-P0", "R1-P1"],
+    "terminal_decisions": [
+      "PUBLIC_EVENT_CELL_SATURATION_GO",
+      "PLANNER_ROUTE_REJECTED",
+      "EXPERIMENT_BLOCKED"
+    ]
+  },
+  "retained_mainline": [
+    "EventRelation query semantics",
+    "BB-EM/K3-safe",
+    "Barrier-Constrained Event Partition/Materialization operator",
+    "selector-agnostic fixed-trace evaluation",
+    "independent audit as a later gated target"
+  ]
+}

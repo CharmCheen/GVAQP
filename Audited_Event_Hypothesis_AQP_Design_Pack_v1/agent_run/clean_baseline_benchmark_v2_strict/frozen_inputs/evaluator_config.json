@@ -1,0 +1,28 @@
+{
+  "assignment_tie_break": "maximum_temporal_iou",
+  "evaluator_version": "clean_baseline_evaluator_v1",
+  "matching_version": "overlap_any_one_to_one_cardinality_then_tiou_v1",
+  "materializers": {
+    "k3_bridge_safe": {
+      "d_core_max": 40.0,
+      "d_seg_max": 60.0,
+      "g_max": 1,
+      "negative_barrier": true
+    },
+    "original_k3": {
+      "d_core_max": 40.0,
+      "d_seg_max": 60.0,
+      "g_max": 1,
+      "negative_barrier": true
+    }
+  },
+  "primary_matching": "overlap_any_one_to_one",
+  "reference_type": "VLM_DEFINED_PSEUDO_ORACLE",
+  "reference_version": "consecutive_positive_units_v1",
+  "tiou_thresholds": [
+    0.3,
+    0.5
+  ],
+  "unit_seconds": 10.0,
+  "video_duration_seconds": 3462.93
+}

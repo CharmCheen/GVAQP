@@ -1,0 +1,117 @@
+{
+  "verdict": "PASS",
+  "checks": [
+    {
+      "check": "SOURCE_MANIFEST.csv hashes",
+      "status": "PASS",
+      "evidence": "16"
+    },
+    {
+      "check": "INPUT_MANIFEST.csv hashes",
+      "status": "PASS",
+      "evidence": "4"
+    },
+    {
+      "check": "no physical response accessed",
+      "status": "PASS",
+      "evidence": "0 calls; reference-only source"
+    },
+    {
+      "check": "known inclusion-probability implementation",
+      "status": "PASS",
+      "evidence": "SRS n/H and per-stratum n_h/H_h"
+    },
+    {
+      "check": "HT conditional unbiasedness",
+      "status": "PASS",
+      "evidence": "3.0=3"
+    },
+    {
+      "check": "stratified HT unbiasedness",
+      "status": "PASS",
+      "evidence": "3.0=3"
+    },
+    {
+      "check": "complete grid and seeds",
+      "status": "PASS",
+      "evidence": "56448"
+    },
+    {
+      "check": "placement generators represented",
+      "status": "PASS",
+      "evidence": "['adversarial', 'boundary', 'correlated_level', 'correlated_sibling', 'independent', 'long_event', 'low_proxy', 'multi_event']"
+    },
+    {
+      "check": "confidence coverage",
+      "status": "PASS",
+      "evidence": "1.0"
+    },
+    {
+      "check": "HT error variance reported",
+      "status": "PASS",
+      "evidence": "range=0.0..5715.375150300599"
+    },
+    {
+      "check": "failure probability identity",
+      "status": "PASS",
+      "evidence": "max=0.0"
+    },
+    {
+      "check": "cost accounting exact ceiling",
+      "status": "PASS",
+      "evidence": "217 interval + 26 certify = 243"
+    },
+    {
+      "check": "recall calculation",
+      "status": "PASS",
+      "evidence": "21/26"
+    },
+    {
+      "check": "random feasible extraction",
+      "status": "PASS",
+      "evidence": "0"
+    },
+    {
+      "check": "robust feasible extraction",
+      "status": "PASS",
+      "evidence": "0"
+    },
+    {
+      "check": "no threshold relaxation",
+      "status": "PASS",
+      "evidence": "frozen grids"
+    },
+    {
+      "check": "minimum quality-valid cost",
+      "status": "PASS",
+      "evidence": "350 > dense"
+    },
+    {
+      "check": "minimum all-placement quality-valid cost",
+      "status": "PASS",
+      "evidence": "550/347"
+    },
+    {
+      "check": "estimator numerical diagnostics",
+      "status": "PASS",
+      "evidence": "variance and empirical failure probability present"
+    },
+    {
+      "check": "best estimator selection",
+      "status": "PASS",
+      "evidence": "B3 narrower conservative bound"
+    },
+    {
+      "check": "decision compliance",
+      "status": "PASS",
+      "evidence": "RISK_LIMITING_INTERVAL_NO_GO"
+    },
+    {
+      "check": "all sealed hashes",
+      "status": "PASS",
+      "evidence": "30"
+    }
+  ],
+  "physical_vlm_calls": 0,
+  "conclusion": "No random-only or robust feasible region; risk-limiting interval pruning is NO-GO."
+}

@@ -1,0 +1,14 @@
+fact,expected,observed,tolerance,status,primitive_source
+strict_benchmark_id,cbbv2_514c0d360fd5b2a4b5fe,cbbv2_514c0d360fd5b2a4b5fe,0,PASS,strict/BENCHMARK_ID.txt
+reference_events,26,26,0,PASS,strict/frozen_inputs/event_reference.csv row count
+best_native_baseline_event_f1_auc,0.389659,0.3896592193755119,0.0000005,PASS,reintegrated strict/baselines/baseline_budget_curves.csv
+map_m1_event_f1_auc,0.388056,0.3880556629484837,0.0000005,PASS,reintegrated strict/current_method/current_budget_curves.csv
+h1_event_f1_auc,0.314990,0.31499046948962056,0.0000005,PASS,reintegrated hypothesis repair analysis/per_budget_metrics.csv
+mechanism_decision,IDEAL_SIGNAL_ONLY,IDEAL_SIGNAL_ONLY,0,PASS,mechanism EXPERIMENT_MANIFEST plus primitive gate audit
+public_event_cell_decision,PLANNER_ROUTE_REJECTED,PLANNER_ROUTE_REJECTED,0,PASS,public event-cell FINAL_DECISION.csv
+r1_p1_minus_p0_auc,-0.003501139,-0.0035011393723635,0.0000000005,PASS,public event-cell FINAL_DECISION.csv backed by primitive trace review
+r1_negative_s2_cells,15/15,15/15,0,PASS,public event-cell aggregates/paired_auc_by_s2_cell.csv
+representation_only_delta,0,0,0,PASS,public event-cell FINAL_DECISION.csv
+representation_gate_physical_vlm_calls,0,0,0,PASS,public event-cell FINAL_DECISION.csv
+frozen_oracle_abstains,0,0,0,PASS,strict/frozen_inputs/oracle_observations.csv
+

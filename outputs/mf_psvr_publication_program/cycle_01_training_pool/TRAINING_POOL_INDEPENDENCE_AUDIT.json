@@ -1,0 +1,98 @@
+{
+  "audit_id": "MF_PSVR_CYCLE1_POOL_INDEPENDENCE_V1",
+  "audited_at_utc": "2026-07-18T19:15:41Z",
+  "benchmark_source_hashes": [
+    "64cb0cfac6c37e52045552b4ed24e8aa20fd2c1fddc22509cf33dd957d14fd09",
+    "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+  ],
+  "decision": "ELIGIBLE_NO_EXACT_OVERLAP_LINEAGE_UNRESOLVED_DRIVINGDOJO_QUARANTINED",
+  "drivingdojo_mini": {
+    "archive_bytes": 2506380084,
+    "archive_sha256": "5f7cb0796f74ed52f427bd342c9f170b1c165c8e1c394fa2853eaf3d9158d8ff",
+    "license_status": "UNRESOLVED_QUARANTINED",
+    "repository": "jiaweihe/DrivingDojo-mini",
+    "revision": "97092ae989332696f88567f8dfaae704b1529b59",
+    "sessions": 32,
+    "tag_counts": {
+      "crossing_turn_left": 2,
+      "crossing_turn_right": 2,
+      "crossing_turn_straight": 3,
+      "detection": 4,
+      "foreign obstacle": 2,
+      "heading": 1,
+      "intention": 1,
+      "lane_change": 2,
+      "moving_foreign_obstacle": 1,
+      "other issues": 2,
+      "pedestrian_cutin": 2,
+      "pnc_risk": 3,
+      "prediction": 2,
+      "traffic_light_green_to_red": 1,
+      "traffic_light_red_to_green": 1,
+      "vehicle": 1,
+      "vulnerable road users": 2
+    },
+    "type_counts": {
+      "drivingdojo-action": 9,
+      "drivingdojo-interplay": 13,
+      "drivingdojo-open": 10
+    }
+  },
+  "heldout_opened": false,
+  "interpretation": "Nexar has zero exact-content overlap with V0/V1 and provider-level separation, so it is eligible for training-pool use under a residual-lineage caveat. Perceptual equivalence and shared capture sessions remain unresolved. DrivingDojo-mini has provider separation but remains legally quarantined.",
+  "legacy_audit_binding": {
+    "nexar_prior_role": "604 paths / 603 unique files, duration 15.000000-49.464883s; each <=5 frozen units",
+    "path": "outputs/psvr_autonomous_research/benchmark_unblock/SOURCE_INDEPENDENCE_AUDIT.json",
+    "sha256": "80d20d7cdc486641b5f6f71d935f6ef77cee9338d1c24050992d85c0572cf04d"
+  },
+  "nexar": {
+    "capture_session_grouping": "UNAVAILABLE_IN_RELEASED_METADATA",
+    "derivative_exclusion_evidence": [
+      "zero exact-content overlap with V0/V1",
+      "different public provider and provider video IDs",
+      "existing pre-benchmark audit rejected Nexar only for short workload duration"
+    ],
+    "duplicate_groups": [],
+    "duration_seconds": {
+      "maximum": 49.464883,
+      "minimum": 15.0,
+      "p50": 40.1,
+      "p95": 40.882353,
+      "total": 22655.902875000007
+    },
+    "eligible_provider_videos": 603,
+    "exact_benchmark_hash_overlaps": [],
+    "expected_revision": "aa97deda5a59f00bb7187739053b7c72e14374df",
+    "local_provider_videos": 603,
+    "metadata_file_provenance": {
+      "negative": {
+        "cache_metadata_path": "datasets/casq_external/nexar/hf_metadata_probe/.cache/huggingface/download/train/negative/metadata.csv.metadata",
+        "download_recorded_at_utc": "2026-06-21T12:22:52.112055+00:00",
+        "path": "datasets/casq_external/nexar/hf_metadata_probe/train/negative/metadata.csv",
+        "provider_etag": "3e7d0e21fd79afebe82f45ecc9339bd5a8709703",
+        "provider_identity_kind": "git_blob_sha1",
+        "provider_revision": "aa97deda5a59f00bb7187739053b7c72e14374df",
+        "sha256": "677204454437ec4699b22c96bf389578d41822e0023fe015eb4ea04b11d020d3"
+      },
+      "positive": {
+        "cache_metadata_path": "datasets/casq_external/nexar/hf_metadata_probe/.cache/huggingface/download/train/positive/metadata.csv.metadata",
+        "download_recorded_at_utc": "2026-06-21T12:22:51.130241+00:00",
+        "path": "datasets/casq_external/nexar/hf_metadata_probe/train/positive/metadata.csv",
+        "provider_etag": "581be3756f2da6cbb539d3b5def2c97d03e48539",
+        "provider_identity_kind": "git_blob_sha1",
+        "provider_revision": "aa97deda5a59f00bb7187739053b7c72e14374df",
+        "sha256": "1a7e4f23d137316475f024f1fa7cf86ca5a99384e1b61318d6b3a4eedfea2d41"
+      }
+    },
+    "metadata_or_probe_failures": [],
+    "provider_video_identity": "Each train/<provider-class>/<file> is a provider video identity; local SHA-256 matches its Hugging Face LFS object identity. The release exposes no trip or capture-session grouping field.",
+    "repository": "nexar-ai/nexar_collision_prediction",
+    "residual_uncertainty": "Exact hashes cannot alone rule out every perceptually equivalent crop or re-encode, or multiple clips from one capture trip. No such lineage is indicated, but the released metadata is insufficient to test it.",
+    "revision_counts": {
+      "aa97deda5a59f00bb7187739053b7c72e14374df": 603
+    },
+    "unique_exact_content_hashes": 603
+  },
+  "paper_heldout_accessed": false,
+  "semantic_labels_accessed_by_this_script": false
+}

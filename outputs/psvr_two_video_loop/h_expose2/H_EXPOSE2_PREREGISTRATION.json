@@ -1,0 +1,52 @@
+{
+  "acceptance_rule": {
+    "mechanism_alignment": "Exposure-aware must improve macro frontier temporal entropy or unique temporal cells versus the best baseline, and the gain cannot be confined to V0.",
+    "safety": [
+      "zero deadline miss",
+      "zero replay",
+      "zero future access",
+      "zero visibility violation"
+    ],
+    "task_direction": "At least 3/4 tasks lexicographically improve over that task's best baseline: higher mean AnytimeAUC_F1; if tied within 1e-12, higher F1; if tied, lower deadline-censored TTFC.",
+    "thresholds": [
+      "Macro AnytimeAUC_F1 relative gain >= 10%",
+      "Macro TTFC reduction >= 20%",
+      "Macro absolute F1 gain >= 0.05",
+      "sum over four tasks of mean T_high unique confirmed events gain >= 2"
+    ],
+    "ttfc_censoring": "no confirmed event maps to that run's frozen deadline"
+  },
+  "allowed_single_revisions": {
+    "R1": "exposure_minus_age",
+    "R2": "exposure_minus_novelty",
+    "R3": "exposure_temporal_nms with fixed 10-second window"
+  },
+  "formal_matrix": "3 methods x 4 tasks x 2 deadlines x 3 repeats",
+  "frozen_system": {
+    "K3": "frozen k3_bridge_safe",
+    "candidate_capacity": 10,
+    "candidate_capacity_rationale": "smallest preregistered ranking cutoff; frozen before physical method outcomes",
+    "deadline_guard": "tail_upper_v1 task-matched profiles",
+    "proxy_config_hash": "2c3026fcffcab75fa7a1024e8a929b6eec339b7cbeec4ece9827bcb7e811035d",
+    "proxy_family": "YOLOV8",
+    "scan_order": "iterative largest-unobserved-gap midpoint",
+    "scanner": "Uniform-Temporal-Interleave",
+    "verify_allocator": "A0 Fixed-Periodic",
+    "verify_every_n_scanned_units": 3
+  },
+  "heldout_opened": false,
+  "hypothesis_id": "H-EXPOSE2",
+  "methods": {
+    "exposure_aware": "rank-normalized proxy + age + temporal novelty - pending overlap - confirmed overlap; fixed equal weights",
+    "fifo": "candidate creation time ascending",
+    "score_only": "current frozen proxy score descending"
+  },
+  "parameters": {},
+  "preregistration_hash": "aed592e49491a54766c82c72d2d9fc6a8b7fef6ab99680f5b9e39c84867fe769",
+  "registered_at_utc": "2026-07-17T01:35:36.145877+00:00",
+  "revision": 0,
+  "scientific_question": "Under identical scan and VERIFY opportunities, does explicit candidate age, temporal diversity, and frontier survival improve cross-video event confirmation?",
+  "smoke_matrix": "3 methods x 4 tasks x T_transition x 1",
+  "status": "REGISTERED_BEFORE_H_EXPOSE2_PHYSICAL_RUNS",
+  "tie_break": "priority, proxy rank, age rank, novelty, older creation, lower unit, lower track"
+}

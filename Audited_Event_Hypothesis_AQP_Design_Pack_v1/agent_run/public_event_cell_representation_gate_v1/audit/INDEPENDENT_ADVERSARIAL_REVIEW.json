@@ -1,0 +1,143 @@
+{
+  "reviewer_scope": "Independent adversarial reconstruction from immutable H1/unit/audit inputs and primitive run artifacts. Aggregate estimand files and FINAL_REPORT were not used as computational inputs. The review covered frozen R1 ownership, actual-input row-order invariance, evaluator isolation, action/score/oracle identity, trace activation flags, exact R0 reproduction, formal-matrix completeness, current hashes, and decision compliance. No implementation, primitive run, aggregate, report, or decision artifact was modified.",
+  "primitive_sources": [
+    {
+      "path": "runs/action_traces.csv.gz",
+      "sha256": "9200103bb5278ada9d0f589db568c02966e589c543c6bef9a4e74bd960732895",
+      "role": "selection lineage, activation flags, scores, and oracle observations"
+    },
+    {
+      "path": "runs/budget_metrics.csv.gz",
+      "sha256": "fd2ba38a59289fedf51f8ecde58e4d13fee4958af68d8bfc5f6103888666a368",
+      "role": "per-run per-budget event-F1 used for independent AUC integration and low-budget estimand"
+    },
+    {
+      "path": "runs/run_registry.csv",
+      "sha256": "9428e7bb6b5728b6a1aba4f33fe0a9bcd8f9d284feb919b1959a648c8c0a5ba6",
+      "role": "formal matrix and independently checked AUC registry"
+    },
+    {
+      "path": "../algorithmic_mechanism_viability_gate_v1/runs/semi_synthetic_seed_metrics.csv.gz",
+      "sha256": "a7bad5117819a273b96d7565e28c4033f1ef3c721e372e99763de77c36bec667",
+      "role": "authoritative frozen S2 rows for exact R0 reproduction"
+    },
+    {
+      "path": "../clean_baseline_benchmark_v2_strict/frozen_inputs/units.csv",
+      "sha256": "bfbe4270936d267e36734b30174e83c47b0cb021cda3a9a9b6a7e7a7f709d182",
+      "role": "planner-public unit IDs and temporal intervals"
+    },
+    {
+      "path": "../hypothesis_construction_repair_v1/runs/H1/b100/initial_hypotheses.csv",
+      "sha256": "0c1058c9808e6814bffb72b38b6023384adc274a2eb6f32d196cfd637d7cefea",
+      "role": "authoritative public H1 source rows"
+    },
+    {
+      "path": "../hypothesis_construction_repair_v1/runs/H1/b100/initial_exploration_cells.csv",
+      "sha256": "d58e116e07f54976148f708e66b3b149f2fb296080bc3dd5812f7bf906cb9337",
+      "role": "authoritative public audit/uncovered-window rows"
+    }
+  ],
+  "recomputed_estimands": {
+    "delta_sat_r1": -0.0035011393723635154,
+    "delta_repr_p0": 0.0,
+    "delta_repr_p1": 0.0004763953631709006,
+    "low_budget_delta": 0.00017025192779134848
+  },
+  "recomputed_activation_counts": {
+    "saturation_triggers": 4735,
+    "saturation_applied": 3792,
+    "saturation_output_changes": 2696,
+    "selection_changes": 32614
+  },
+  "falsification_checks": [
+    {
+      "name": "primary_and_secondary_estimand_recomputation",
+      "status": "PASS",
+      "evidence": "Integrated event_f1 directly within each of 1,800 runs at B=[5,10,20,50,80,100] using trapezoidal area/(100-5), then macro-averaged run AUC. Method AUCs were R0-P0=0.5223527295475591, R0-P1=0.5183751948120247, R1-P0=0.5223527295475591, and R1-P1=0.5188515901751956. Independently integrated AUC differs from run_registry by at most 2.220446049250313e-16."
+    },
+    {
+      "name": "action_universe_identity",
+      "status": "PASS",
+      "evidence": "Independent reconstruction found exactly 347 unique actions in both R0 and R1, exactly one owner per action, and zero independent R1 owner mismatches. All 180,000 trace selections were legal under independently regenerated per-instance candidate masks. R0-P0 and R1-P0 selected-action sequences were identical in all 45,000 paired calls."
+    },
+    {
+      "name": "score_identity",
+      "status": "PASS",
+      "evidence": "R0-P0 and R1-P0 raw-score and positive-probability columns were exactly identical call-for-call. Against independently regenerated strict_base instances, maximum CSV round-trip absolute differences were 8.881784197001252e-16 for raw scores and 1.1102230246251565e-16 for probabilities; no substantive score change was found."
+    },
+    {
+      "name": "oracle_mapping_identity",
+      "status": "PASS",
+      "evidence": "R0-P0 and R1-P0 oracle labels and observation strings were exactly identical call-for-call. All 180,000 selected-action oracle labels exactly matched independently regenerated strict_base hidden labels for the corresponding target-AUROC, candidate-recall, seed, and action ID."
+    },
+    {
+      "name": "audit_action_isolation",
+      "status": "PASS",
+      "evidence": "The frozen universe contains 78 audit actions under 25 stable negative owner IDs. Across 11,556 R1-P1 audit selections, active owner was always negative, owner_saturated_before=0, triggers=0, applications=0, and effective score equaled unsaturated probability exactly."
+    },
+    {
+      "name": "frozen_r1_construction",
+      "status": "PASS",
+      "evidence": "An independent implementation using only public unit_id/start_time/end_time, H1 hypothesis_id/source_type/support_unit_ids/core_candidate_ids, and audit cell_id/unit_ids reproduced all 347 R1 action-owner assignments with zero mismatches: 55 high-proxy seeds, 32 orphan sources, 7 seed attachments, 25 standalone orphan cells, 80 event cells, and 25 audit cells. The 40-second cap is independently present as d_core_max in the strict evaluator config."
+    },
+    {
+      "name": "non_transitive_seed_behavior",
+      "status": "PASS",
+      "evidence": "All 55 high-proxy seeds retained 55 distinct owner IDs, every event cell contained at most one high-proxy seed, and no seed-to-seed merge occurred. No frozen orphan with attachment_reason other than standalone was assigned to a standalone-orphan owner."
+    },
+    {
+      "name": "standalone_cell_not_promoted_to_seed_general_case",
+      "status": "PASS",
+      "evidence": "Follow-up adversarial execution constructed a distant orphan with discontinuous support spanning a second later orphan. The corrected builder produced event:standalone:o1 and event:standalone:o2, both with attachment_reason=standalone, proving that a prior standalone cell is no longer promoted to an attachment seed. The strengthened standalone structural test also passes."
+    },
+    {
+      "name": "selection_change_and_trigger_counts",
+      "status": "PASS",
+      "evidence": "Recomputed every R1-P1 flag from selected IDs, oracle labels, R1 owner IDs, legal-action sets, and the independent unsaturated P0 ordering. Counts were triggers=4,735, applications=3,792, next-output changes=2,696, and selection changes=32,614, with zero disagreements against all stored trace flags."
+    },
+    {
+      "name": "exact_r0_reproduction",
+      "status": "PASS",
+      "evidence": "Matched all 900 R0 P0/P1 target-recall-seed-policy rows to the frozen mechanism-gate primitive S2 seed table. Across AUC and all six budget F1 values, maximum absolute difference was 2.220446049250313e-16."
+    },
+    {
+      "name": "full_formal_matrix",
+      "status": "PASS",
+      "evidence": "Observed 1,800/1,800 unique completed runs: 15 target-AUROC x candidate-recall cells, four exact methods, 30 seeds per cell-method, 10,800 budget rows at the six frozen budgets, and 180,000 trace rows with exactly 100 selections per run. Physical VLM calls and baseline reruns are zero throughout the registry/metrics."
+    },
+    {
+      "name": "negative_effect_stability",
+      "status": "PASS",
+      "evidence": "R1 P1-P0 cell-macro AUC differences were negative in 15/15 cells (range -0.010752041070862695 to -0.0003539117938496372). Thus the negative primary result is not a one-cell artifact. The 15 cells share one video/reference, so they are not treated as independent units for a confidence interval."
+    },
+    {
+      "name": "decision_compliance",
+      "status": "PASS",
+      "evidence": "The frozen rule mandates PLANNER_ROUTE_REJECTED whenever delta_sat_R1 <= 0. Independently recomputed delta_sat_R1=-0.0035011393723635154, so rejection is mandatory even though the low-budget delta is +0.00017025192779134848 and selection changes occurred."
+    },
+    {
+      "name": "artifact_and_source_hash_validation",
+      "status": "PASS",
+      "evidence": "Follow-up validation found that the corrected build_public_ownership source hash 5c8301bfd015ddfe65c3130db35bac247d57e27f6c5bfdca1e1f83d27da54416 exactly matches FROZEN_R1_CONFIG. All four INPUT_MANIFEST entries match current bytes: config a7a8048ea201f4bd447a93886407b69fe93ab3d2e57a153a7990917eb4e06c1b, R0 ownership e49aaf2677f2d8eb4d9d46f2eefa790df873931eefc1126f4c2082b19b7c4bc5, R1 ownership 2fa9a4dad7373fbdb04291be71bb2339ee694c74a0a7e3d9549ff04f8f19ca0d, and lineage 78a71644befa7d91f2cfe1be1adf37f0b1e6ebd5630e60b15bf3e0021c9a66d2. Primitive action-trace, budget-metric, and run-registry hashes remain exactly 9200103bb5278ada9d0f589db568c02966e589c543c6bef9a4e74bd960732895, fd2ba38a59289fedf51f8ecde58e4d13fee4958af68d8bfc5f6103888666a368, and 9428e7bb6b5728b6a1aba4f33fe0a9bcd8f9d284feb919b1959a648c8c0a5ba6. The final seal must rebuild FILE_MANIFEST after this review-only update."
+    }
+  ],
+  "row_order_invariance": {
+    "status": "PASS",
+    "trials": 5,
+    "failures": 0,
+    "evidence": "Independently shuffled the complete authoritative units, H1 hypotheses, and audit-cell tables with five distinct triplets of shuffle seeds. Sorted R1 action_id/owner_id/owner_numeric mappings and source_owner_id/new_owner_id/attachment_reason lineage were identical in every trial."
+  },
+  "evaluator_leakage_assessment": {
+    "status": "PASS",
+    "evidence": "Static AST/source inspection of the frozen builder found accesses only to hypothesis_id, source_type, support_unit_ids, core_candidate_ids, cell_id, unit_ids, unit_id, start_time, and end_time plus derived ownership fields. The builder signature accepts only the three public tables and two public temporal constants; it has no evaluator/reference/oracle parameter or global read. Its local variable event_ids is only a deterministic numeric owner map, not evaluator event identity. Evaluation and hidden labels are loaded only in run_formal after ownership/config/lineage files are written and hashed. Independent ownership reconstruction deliberately projected only the public columns and matched 347/347 assignments."
+  },
+  "decision_recomputed": "PLANNER_ROUTE_REJECTED",
+  "reported_decision": "PLANNER_ROUTE_REJECTED",
+  "decision_compliant": true,
+  "unresolved_blocking_findings": [],
+  "overall_status": "PASS",
+  "limitations": [
+    "All 15 S2 cells are perturbations of one video/reference, so no defensible independent-unit confidence interval is available and no cross-video or human-ground-truth generalization is implied.",
+    "CSV serialization introduces only sub-1e-15 numeric round-trip differences when trace scores are compared with regenerated strict instances; call-for-call R0/R1 P0 score columns are exactly identical."
+  ]
+}

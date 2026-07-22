@@ -1,0 +1,12 @@
+{
+  "planner_only": true,
+  "evaluator_kernel": "R2_TRUE_UNPERTURBED",
+  "families": [
+    {"variable_family":"candidate_yield","action_type":"SCAN","support":[false,true],"baseline_probability_source":"sampled_root_world_candidate_exists","visible_inputs":["action","branch_frontier"],"latent_planner_inputs":["sampled_root_world"],"forbidden_inputs":["actual_execution_future"]},
+    {"variable_family":"grouping","action_type":"SCAN","support":["CORRECT","UNDER_MERGE","OVER_MERGE"],"category_order":["CORRECT","UNDER_MERGE","OVER_MERGE"],"baseline_probability_source":"sampled_root_world_same_event_relation","visible_inputs":["frontier"],"latent_planner_inputs":["sampled_root_world_event_identity"],"forbidden_inputs":["actual_execution_future"]},
+    {"variable_family":"confirm_outcome","action_type":"CONFIRM","support":[false,true],"baseline_probability_source":"sampled_root_world_positive_indicator","visible_inputs":["selected_witness"],"latent_planner_inputs":["sampled_root_world"],"forbidden_inputs":["actual_execution_future"]},
+    {"variable_family":"novelty","action_type":"CONFIRM","support":[false,true],"baseline_probability_source":"sampled_root_world_event_token_not_committed","visible_inputs":["committed_model_tokens"],"latent_planner_inputs":["sampled_root_world_event_token"],"forbidden_inputs":["actual_execution_future"]},
+    {"variable_family":"materialization","action_type":"CONFIRM","support":[false,true],"baseline_probability_source":"sampled_root_world_positive_token_indicator","visible_inputs":[],"latent_planner_inputs":["sampled_root_world_event_token"],"forbidden_inputs":["actual_execution_future"]},
+    {"variable_family":"duration","action_type":"SCAN_OR_CONFIRM","support":"R2_D2_T_ACTION_SUPPORT","baseline_probability_source":"sampled_root_world_action_duration","visible_inputs":["action"],"latent_planner_inputs":["sampled_root_world"],"forbidden_inputs":["actual_execution_future"]}
+  ]
+}

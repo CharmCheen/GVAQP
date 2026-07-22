@@ -1,0 +1,62 @@
+{
+  "COLD_PROCESS_COLD_PROXY_REGIME": "NO_GO",
+  "WARM_ORACLE_COLD_PROXY_REGIME": "GO",
+  "replication_requirements_met": {
+    "coarse": true,
+    "full": true,
+    "oracle_init": true,
+    "verify": true,
+    "commit": true
+  },
+  "regime_B": {
+    "coarse_p95": 13.15064991665,
+    "physical_verify_p95": 15.67111717325,
+    "k3_snapshot_p95": 0.00818169985,
+    "safety_margin": 1.0,
+    "T_min_B": 29.82994878975,
+    "full_proxy_p50": 123.9524739725,
+    "T_max_B": 123.9524739725,
+    "interval_width_B": 94.12252518275,
+    "normalized_interval_width_B": 0.7593436594386325
+  },
+  "regime_A_serial": {
+    "oracle_initialization_p95": 178.2110079042,
+    "proxy_initialization_p95": 0.21465710814999966,
+    "T_min_A": 208.2556138021,
+    "T_max_A": 123.00096956149999,
+    "interval_width_A": -85.2546442406,
+    "normalized_interval_width_A": -0.6931217253370757
+  },
+  "regime_A_parallel_physical_trace": {
+    "status": "ok",
+    "same_gpu_true_parallel": true,
+    "end_to_end_seconds": 255.787950262,
+    "event_elapsed_seconds": {
+      "coarse_complete": 70.059412098,
+      "oracle_ready": 237.56789376,
+      "verify_complete": 253.52538649,
+      "commit_complete": 255.787946405
+    },
+    "oracle_exitcode": 0,
+    "proxy_exitcode": 0,
+    "raw_trace": "outputs/psvr_stage0b_physical_profile/raw/cold_parallel_end_to_end_trace.json"
+  },
+  "regime_C_proxy_cache_load": {
+    "n": 30,
+    "p50_seconds": 0.0054727155,
+    "p90_seconds": 0.009410240600000001,
+    "p95_seconds": 0.011190228499999995,
+    "mean_seconds": 0.007783526433333332,
+    "std_seconds": 0.008750601273959598,
+    "min_seconds": 0.005028272,
+    "max_seconds": 0.054046418
+  },
+  "physical_verify_calls": 20,
+  "cache_replay_calls_in_latency": 0,
+  "video": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4",
+  "proxy_checkpoint": "/qiuyeqing/llama_prl/G-ARC/models/yolo/yolov8n.pt",
+  "oracle_checkpoint": "/qiuyeqing/llama_prl/G-ARC/models/vlm/qwen3_vl/Qwen3-VL-32B-Instruct",
+  "batch_size": 4,
+  "hardware": "NVIDIA A800-SXM4-80GB",
+  "regime_B_proxy_measurement_context": "physical Qwen3-VL-32B resident on same GPU"
+}

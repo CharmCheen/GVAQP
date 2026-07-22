@@ -1,0 +1,17 @@
+{
+  "query": "OTHER_AGENT_ENTERS_EGO_PATH",
+  "output_schema": {
+    "label": "POSITIVE|HARD_NEGATIVE|ORDINARY_NEGATIVE|AMBIGUOUS|UNUSABLE",
+    "other_agent_enters_ego_path": "boolean",
+    "event_start_seconds": "float|null",
+    "event_end_seconds": "float|null",
+    "actor_description": "string",
+    "entry_side": "left|right|front|unknown",
+    "ego_motion_confounded": "boolean",
+    "curve_confounded": "boolean",
+    "occlusion_confounded": "boolean",
+    "confidence": "high|medium|low",
+    "reason": "string"
+  },
+  "prompt_template": "You are a driving safety analyst. Examine the entire chronological driving video clip. The sampled clip runs from t=0.0 seconds through t=__CLIP_DURATION_SECONDS__ seconds, with frames presented at 2 frames per second.\n\nEnumerate EVERY distinct \"object enters ego path\" event visible in the clip.\n\nDefinition: An object (vehicle, pedestrian, cyclist, or other road user) starts outside or near the boundary of the ego vehicle's future driving path, then enters or clearly overlaps the ego path, creating potential spatial conflict or requiring ego attention.\n\nInclude an event ONLY if ALL are true:\n1. A road user is visible.\n2. The object starts outside or near the boundary of the ego vehicle's future path.\n3. The object enters or clearly overlaps the ego path or future driving corridor.\n4. The event can be temporally localized in this clip, including a truncated boundary.\n5. The object is sufficiently close or trajectory-relevant to require ego attention.\n\nDo NOT include normal following traffic, dense traffic without an identifiable entering event, static roadside objects, far-away crossings without ego-path conflict, parked vehicles that do not move into the path, low-speed irrelevant maneuvers, or visible objects with no ego-path interaction. A normal no-event clip is not an abstention: return an empty events list.\n\nAbstain for the whole clip only if poor view, occlusion, an ambiguous ego path, or insufficient evidence makes it impossible to judge the clip. Do not abstain merely because there is no event.\n\nFor event_start, use the first visible moment the road user begins entering or overlapping the path. For event_end, use the first moment after the spatial conflict has ended. Times are numeric seconds relative to the sampled clip start. List events in chronological order. object_identity is a short visual/trajectory description that distinguishes the road user, such as \"red sedan merging from right\".\n\nReturn one JSON object only, with no markdown or prose outside it:\n{\n  \"clip_status\": \"ok | abstain\",\n  \"events\": [\n    {\n      \"event_start\": 12.5,\n      \"event_end\": 15.0,\n      \"event_type\": \"enter_ego_path\",\n      \"involved_object\": \"vehicle | pedestrian | cyclist | other | unknown\",\n      \"object_identity\": \"short distinguishing description\",\n      \"ego_relevant\": true,\n      \"boundary_status\": \"ok | truncated_start | truncated_end | truncated_both | uncertain\",\n      \"complete_event_visible\": true,\n      \"confidence\": \"high | medium | low\",\n      \"evidence\": \"brief visual evidence\"\n    }\n  ],\n  \"abstain_reason\": null\n}\n\nThe example event above illustrates schema only. Do not copy it unless it is actually observed. For no event, return \"events\": []. For abstention, return \"clip_status\": \"abstain\", an empty events list, and a short abstain_reason.\n"
+}

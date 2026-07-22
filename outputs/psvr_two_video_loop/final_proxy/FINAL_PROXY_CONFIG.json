@@ -1,0 +1,125 @@
+{
+  "confidence_threshold": 0.25,
+  "detector": "YOLOv8n",
+  "fallback": "no eligible track => unit score 0 and explicit empty evidence",
+  "feature_schema": {
+    "approximate_ttc_urgency": "maximum positive relative box-height growth per second; larger means shorter TTC",
+    "boundary_crossing": "binary change across a frozen left/right ego-corridor boundary, multiplied by reliability",
+    "box_growth": "maximum positive per-second log box-area growth",
+    "ego_corridor_overlap": "maximum bottom-center inclusion in the estimated ego corridor/drivable region, multiplied by reliability",
+    "front_region_occupancy": "maximum triangular center-corridor membership multiplied by normalized box-bottom y",
+    "lane_relative_motion": "maximum positive per-second reduction in distance to the estimated YOLOP lane center, multiplied by road-geometry reliability",
+    "path_directed_lateral_motion": "maximum positive per-second reduction in |bbox_center_x - 0.5|",
+    "road_geometry_reliability": "bounded score from nondegenerate lane/drivable masks and plausible corridor width",
+    "track_persistence": "number of eligible active observations for one track in the unit"
+  },
+  "final_proxy_config_hash": "2c3026fcffcab75fa7a1024e8a929b6eec339b7cbeec4ece9827bcb7e811035d",
+  "heldout_opened": false,
+  "implementation_freeze_hash": "4f965358909606a2198fa33a655fbd6a78f64d43e5368212ca6ba08aa39f0d60",
+  "nms_iou": 0.45,
+  "normalization": "Zero-anchored empirical percentile: raw values <=0 map to 0; positive values use deterministic average-rank percentile among positive values. Offline population is the complete video-task candidate set; online population contains only candidates already physically observed. No reference labels.",
+  "query_heads": {
+    "Q1": {
+      "Y8": {
+        "eligible_coco_class_ids": [
+          1,
+          2,
+          3,
+          5,
+          7
+        ],
+        "features": [
+          "track_persistence",
+          "path_directed_lateral_motion",
+          "box_growth",
+          "front_region_occupancy",
+          "approximate_ttc_urgency"
+        ],
+        "weights": {
+          "approximate_ttc_urgency": 0.2,
+          "box_growth": 0.2,
+          "front_region_occupancy": 0.2,
+          "path_directed_lateral_motion": 0.2,
+          "track_persistence": 0.2
+        }
+      },
+      "YOLOP": {
+        "eligible_detector_class_ids": [
+          0
+        ],
+        "features": [
+          "track_persistence",
+          "path_directed_lateral_motion",
+          "box_growth",
+          "front_region_occupancy",
+          "approximate_ttc_urgency",
+          "lane_relative_motion",
+          "boundary_crossing",
+          "ego_corridor_overlap",
+          "road_geometry_reliability"
+        ],
+        "weights": {
+          "approximate_ttc_urgency": 0.1111111111111111,
+          "boundary_crossing": 0.1111111111111111,
+          "box_growth": 0.1111111111111111,
+          "ego_corridor_overlap": 0.1111111111111111,
+          "front_region_occupancy": 0.1111111111111111,
+          "lane_relative_motion": 0.1111111111111111,
+          "path_directed_lateral_motion": 0.1111111111111111,
+          "road_geometry_reliability": 0.1111111111111111,
+          "track_persistence": 0.1111111111111111
+        }
+      }
+    },
+    "Q2": {
+      "Y8": {
+        "eligible_coco_class_ids": [
+          0,
+          1,
+          3
+        ],
+        "features": [
+          "track_persistence",
+          "path_directed_lateral_motion",
+          "box_growth",
+          "front_region_occupancy",
+          "approximate_ttc_urgency"
+        ],
+        "weights": {
+          "approximate_ttc_urgency": 0.2,
+          "box_growth": 0.2,
+          "front_region_occupancy": 0.2,
+          "path_directed_lateral_motion": 0.2,
+          "track_persistence": 0.2
+        }
+      },
+      "YOLOP": {
+        "eligible_detector_class_ids": [],
+        "features": [],
+        "score_policy": "FAIL_CLOSED_ZERO_UNSUPPORTED_TARGET_CLASSES",
+        "weights": {}
+      }
+    }
+  },
+  "resolution": 640,
+  "sample_fps": 5,
+  "selected_proxy_config": "Y8",
+  "selected_proxy_family": "YOLOV8",
+  "selection_fallback_used": false,
+  "tracker": {
+    "implementation": "Ultralytics BYTETracker",
+    "implementation_path": "/qiuyeqing/tools/miniconda3/envs/garc/lib/python3.10/site-packages/ultralytics/trackers/byte_tracker.py",
+    "implementation_sha256": "05545b07876311937097fdd61a47cfba7dc09fd3695fd35603eb61be09c0b40d",
+    "parameters": {
+      "fuse_score": true,
+      "match_thresh": 0.8,
+      "new_track_thresh": 0.25,
+      "track_buffer": 30,
+      "track_high_thresh": 0.25,
+      "track_low_thresh": 0.1
+    },
+    "ultralytics_version": "8.4.51"
+  },
+  "weight_path": "/qiuyeqing/llama_prl/G-ARC/models/yolo/yolov8n.pt",
+  "weight_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36"
+}

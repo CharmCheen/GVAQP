@@ -1,0 +1,60 @@
+{
+  "audit": "PSVR_STAGE0A_ORACLE_BENCHMARK_INTEGRITY",
+  "result": "BLOCKED",
+  "source_benchmark": "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict",
+  "benchmark_id": "cbbv2_514c0d360fd5b2a4b5fe",
+  "source_git_commit": "1a441186a94190254b29848089bb1f6327c6796e",
+  "counts": {
+    "units": 347,
+    "raw_envelopes": 347,
+    "raw_response_texts": 347,
+    "parsed": 347,
+    "positive_units": 39,
+    "reference_events": 26
+  },
+  "frozen_configuration": {
+    "oracle_build_id": "strict_oracle_3b9ba1187c0449426978",
+    "model_path": "/qiuyeqing/llama_prl/G-ARC/models/vlm/qwen3_vl/Qwen3-VL-32B-Instruct",
+    "model_hash": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+    "prompt_hash": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+    "parser_hash": "9a7413407d52df0484c0a338f0a12ae6b57553bdfa16753d7542f60977b558cb",
+    "sampling_code_hash": "5b038acb5450d76928b43d873d73decd1792969e0aa072f121b8f23b751e0240",
+    "generation_config": {
+      "do_sample": false,
+      "max_new_tokens": 256,
+      "randomness_policy": "greedy_with_per_unit_rng_identity_recorded",
+      "temperature": null
+    },
+    "frame_config": {
+      "color": "cv2.COLOR_BGR2RGB",
+      "decoded_end_inclusive": true,
+      "fallback_decode_fps": 4.0,
+      "message_fps": 2.0,
+      "minimum_frames_before_fallback": 5,
+      "primary_decode_fps": 2.0
+    },
+    "materializer": {
+      "reference_version": "consecutive_positive_units_v1",
+      "implementation": "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/scripts/run_clean_benchmark_v2_strict.py::build_reference",
+      "implementation_hash": "0f5a3b144dc13922ffd066e1beb4f69d89b8787aaa931b3606205b61b5903437"
+    }
+  },
+  "output_hashes": {
+    "oracle_coverage.csv": "957b2b69affffb48936f09bbd1d0398155bba5549ec821ee86cb5891b4ecfa81",
+    "provenance_audit.json": "e7b3df35b2f0dd11fad5ec77b8a0985ebc4a21353d170a028eec03b24394dbf8",
+    "reconstructed_unit_labels.csv": "2d08ad46e5bdfebf2460709b61c7126359e08b3a5d8ba28e2213a06d2d39f4c0",
+    "reconstructed_reference_events.csv": "56f617e759e108c96c7a865da26dc229689c87dcf2b633904255aa4c715633a3",
+    "replay_consistency.json": "64e72457d4ff29de2912ee7b41f322ee792eea7e5e86899ef6f4fd3437852849",
+    "leakage_test_report.json": "4ce7708f391fa8bcac8f8cc02e3f03aa2f80c093cf6a2b3393561633f18caf31"
+  },
+  "split_stage0a_status": {
+    "ORACLE_REFERENCE_INTEGRITY": "PASS",
+    "RUNTIME_CAPABILITY_ISOLATION": "PASS",
+    "STAGE_0A": "PASS"
+  },
+  "runtime_capability_implementation": {
+    "package": "src/garc_eval/psvr_runtime",
+    "mandatory_policy_boundary": "clean spawn address space, empty chroot, and permanent uid/gid drop",
+    "legacy_runner_runtime_use": "FORBIDDEN"
+  }
+}

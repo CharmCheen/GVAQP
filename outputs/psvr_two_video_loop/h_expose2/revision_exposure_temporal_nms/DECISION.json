@@ -1,0 +1,88 @@
+{
+  "F1_gain": -0.03333333333333334,
+  "H_EXPOSE2_DECISION": "REJECT",
+  "TTFC_reduction": -0.22963593683422914,
+  "TWO_VIDEO_CORE_SIGNAL": "ABSENT",
+  "T_high_unique_event_gain": -1.0,
+  "V1_contribution": false,
+  "anytime_relative_gain": -0.612268384157331,
+  "best_baseline": "fifo",
+  "correctness": {
+    "complete_schedules": true,
+    "complete_snapshots": true,
+    "deadline_safety": true,
+    "deterministic_replay": true,
+    "gate": "PASS",
+    "no_future_proxy": true,
+    "no_reference_visibility": true,
+    "same_VERIFY_opportunity_count": true,
+    "same_candidate_capacity": true,
+    "same_proxy_observations": true,
+    "same_scan_actions": true,
+    "same_scan_video_timestamps": true,
+    "valid_action_ledgers": true
+  },
+  "heldout_opened": false,
+  "macro_metrics": [
+    {
+      "AnytimeAUC_F1": 0.01745049245377497,
+      "F1_at_deadline": 0.020833333333333332,
+      "TTFC_censored": 136.26935530316297,
+      "candidate_conversion": 0.40277777777777773,
+      "frontier_entropy": 0.6117647058823529,
+      "frontier_unique_cells": 2.6205882352941177,
+      "method": "exposure_temporal_nms",
+      "precision": 0.25,
+      "recall": 0.010869565217391304,
+      "redundant_VERIFY": 0.0,
+      "total_GPU_seconds": 1263.072992629,
+      "unique_confirmed_events": 0.25
+    },
+    {
+      "AnytimeAUC_F1": 0.0450066276278484,
+      "F1_at_deadline": 0.05416666666666667,
+      "TTFC_censored": 110.82089521065603,
+      "candidate_conversion": 0.40277777777777773,
+      "frontier_entropy": 0.6117647058823529,
+      "frontier_unique_cells": 2.6205882352941177,
+      "method": "fifo",
+      "precision": 0.5,
+      "recall": 0.02872670807453416,
+      "redundant_VERIFY": 0.0,
+      "total_GPU_seconds": 1271.895560706,
+      "unique_confirmed_events": 0.5
+    },
+    {
+      "AnytimeAUC_F1": 0.01741096418670605,
+      "F1_at_deadline": 0.020833333333333332,
+      "TTFC_censored": 136.3276301947463,
+      "candidate_conversion": 0.40277777777777773,
+      "frontier_entropy": 0.6117647058823529,
+      "frontier_unique_cells": 2.6205882352941177,
+      "method": "score_only",
+      "precision": 0.25,
+      "recall": 0.010869565217391304,
+      "redundant_VERIFY": 0.0,
+      "total_GPU_seconds": 1264.171864011,
+      "unique_confirmed_events": 0.25
+    }
+  ],
+  "mechanism_alignment": false,
+  "mechanism_improved": true,
+  "physical_runs": 72,
+  "positive_direction_task_count": 0,
+  "positive_direction_tasks": [],
+  "safety": {
+    "cache_replay_zero": true,
+    "deadline_misses_zero": true,
+    "future_access_zero": true,
+    "visibility_violation_zero": true
+  },
+  "target_method": "exposure_temporal_nms",
+  "threshold_checks": {
+    "macro_TTFC_reduction_20pct": false,
+    "macro_absolute_F1_gain_005": false,
+    "macro_anytime_relative_gain_10pct": false,
+    "total_T_high_unique_gain_2": false
+  }
+}

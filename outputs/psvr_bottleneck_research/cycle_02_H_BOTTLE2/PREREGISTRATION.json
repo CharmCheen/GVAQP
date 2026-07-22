@@ -1,0 +1,85 @@
+{
+  "S0": "exact frozen uniform-temporal scan",
+  "S1": "frozen midpoint coarse cell; thereafter maximize minimum temporal-center distance to observed cells; earlier center then lower unit id tie",
+  "V0": "exact FIFO candidate creation order",
+  "V1": {
+    "between_cells": "first-candidate creation time FIFO",
+    "confirmed_exclusion_window": "median frozen unit duration = unchanged K3 return window (10 seconds)",
+    "fallback": "global FIFO when no nonpending cell-diverse eligible candidate",
+    "name": "Cell-Diverse Conservative VERIFY",
+    "one_candidate_per_cell": true,
+    "pending_suppression": true,
+    "tuned_parameters": 0,
+    "within_cell": "highest current proxy score"
+  },
+  "branch_rules": {
+    "D": "all reference-blind scan policies fail to expose V1 at physical action ceiling",
+    "N": "no stable quality gain and no exploitable recoverability ceiling",
+    "P": "S1 exposes positives but positive-unit-to-candidate conversion remains near zero",
+    "S": "C10>C00 and C11>C01 with V1 improvement and exposure alignment",
+    "SV": "only C11 stably improves over C00",
+    "V": "C01>C00 and C11>C10 on V0_Q1 plus another task with VERIFY alignment"
+  },
+  "correctness_gate": [
+    "S0 historical scan equivalence",
+    "V0 historical FIFO equivalence",
+    "C00 historical endpoint/query/proxy-evidence equivalence",
+    "C00/C01 identical scan observations",
+    "C10/C11 identical scan observations",
+    "same candidate capacity and deadline guard",
+    "zero future proxy/reference access and complete snapshots"
+  ],
+  "formal_matrix": "4 methods x 4 tasks x 2 deadlines x 3 repeats = 96",
+  "frozen": {
+    "candidate_capacity": 10,
+    "deadline_guard": "unchanged task-matched tail_upper_v1",
+    "materializer": "unchanged k3_bridge_safe",
+    "oracle": "frozen physical Qwen3-VL-32B generic prompt/projection",
+    "proxy": "YOLOV8/Y8",
+    "snapshots": "after every scan/verify plus initial",
+    "unitization": "frozen 10-second units",
+    "verify_period": "every 3 completed scans"
+  },
+  "heldout_opened": false,
+  "hypothesis_id": "H-BOTTLE2",
+  "implementation_hashes": {
+    "factorial_runner": "4ad64f35a88c121804252f2f69121cbcfaa4fbcd58c4fea1a701c2fe06c97b67",
+    "physical_runner": "7a82633cdd0a83079e89d0575c21d05165ad87e9f213053494663744869284db",
+    "policy": "9666b260c4a2afe93212e06afcaa182ca4e06e9539e13a08165e485a29f542e6"
+  },
+  "methods": {
+    "C00": {
+      "scan_policy": "S0",
+      "verify_policy": "fifo"
+    },
+    "C01": {
+      "scan_policy": "S0",
+      "verify_policy": "cell_diverse_conservative"
+    },
+    "C10": {
+      "scan_policy": "S1",
+      "verify_policy": "fifo"
+    },
+    "C11": {
+      "scan_policy": "S1",
+      "verify_policy": "cell_diverse_conservative"
+    }
+  },
+  "preregistration_hash": "c412955bb2c4a8ae0612a7adb22a7b55f7b1b4346c3fd12d0c8ece7d961516e7",
+  "quality_signal": {
+    "cross_video": "at least one improving task in each video",
+    "safety": "no increase in misses; zero replay/future/visibility violations",
+    "thresholds": [
+      "macro AnytimeAUC relative gain >= 10%",
+      "macro TTFC reduction >= 20%",
+      "macro absolute F1 gain >= 0.05",
+      "four-task unique-event gain >= 2"
+    ]
+  },
+  "recoverability_decision_hash": "458b57e256989ef83dac9bc8c04144e007750b597ecef89ca9bf2de09ab0326f",
+  "reference_visible_to_runtime": false,
+  "registered_at_utc": "2026-07-17T15:53:45.515286+00:00",
+  "scientific_question": "Do reference-blind scan recovery and cell-diverse conservative VERIFY have independent or interacting two-video quality effects?",
+  "smoke_counts_as_formal_repeat_0": true,
+  "smoke_matrix": "4 methods x 4 tasks x T_transition x replicate 0 = 16"
+}

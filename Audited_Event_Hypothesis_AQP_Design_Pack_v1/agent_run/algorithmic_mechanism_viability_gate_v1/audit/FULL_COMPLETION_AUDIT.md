@@ -1,0 +1,15 @@
+# Full Completion Audit
+
+| check                           | status   |
+|:--------------------------------|:---------|
+| canonical_setting_ids_149       | PASS     |
+| complete_valid_149              | PASS     |
+| missing_settings_zero           | PASS     |
+| unexpected_settings_zero        | PASS     |
+| synthetic_seed_policy_cartesian | PASS     |
+| synthetic_budget_cartesian      | PASS     |
+| semi_synthetic_cells_complete   | PASS     |
+| all_leakage_tests_pass          | PASS     |
+| physical_vlm_calls_zero         | PASS     |
+| strict_replay_inputs_unchanged  | PASS     |
+| frozen_configs_match            | PASS     |

@@ -1,0 +1,41 @@
+{
+  "manifest_version": "psvr_stage_3_transition_deadlines_v1",
+  "frozen_at_utc": "2026-07-15T05:33:10Z",
+  "immutable_after_first_H_FACT1_run": true,
+  "deadlines_seconds": {
+    "T_low": 76.891211381125,
+    "T_transition": 121.747711537,
+    "T_high": 123.9524739725
+  },
+  "derivation_exclusively_from_stage2": {
+    "T_low": {
+      "rule": "largest_existing_Stage2_deadline_with_zero_confirmed_events_for_all_methods",
+      "source_name": "T_mid",
+      "source_value_seconds": 76.891211381125
+    },
+    "T_transition": {
+      "rule": "maximum_C3_winning_sixth_VERIFY_admission_elapsed_plus_frozen_required_path_plus_existing_action_epsilon",
+      "winning_unit_id": 75,
+      "replicate_admission_thresholds_seconds": [121.247711537, 120.376447725, 119.217297527],
+      "maximum_threshold_seconds": 121.247711537,
+      "existing_action_epsilon_seconds": 0.5,
+      "value_seconds": 121.747711537,
+      "purpose": "place the deadline immediately above the observed winning-action admission transition without using H-FACT1 outcomes"
+    },
+    "T_high": {
+      "rule": "existing_Stage2_Regime-B_T_max_and_T_long",
+      "source_name": "T_long",
+      "source_value_seconds": 123.9524739725
+    }
+  },
+  "stage2_winning_confirmation_seconds": [110.711157717, 109.964398649, 108.681638143],
+  "stage2_winning_confirmation_median_seconds": 109.964398649,
+  "guard_required_path_seconds": 27.390509267,
+  "guard_strict_admission": "remaining_seconds > required_seconds",
+  "source_artifacts": [
+    "outputs/psvr_autonomous_research/stage_2_baselines/raw/coverage_debt_psvr__T_long__replicate_00/attempt_001/complete.json",
+    "outputs/psvr_autonomous_research/stage_2_baselines/raw/coverage_debt_psvr__T_long__replicate_01/attempt_001/complete.json",
+    "outputs/psvr_autonomous_research/stage_2_baselines/raw/coverage_debt_psvr__T_long__replicate_02/attempt_001/complete.json"
+  ],
+  "future_result_dependence": false
+}

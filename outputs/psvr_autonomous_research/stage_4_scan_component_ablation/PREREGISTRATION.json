@@ -1,0 +1,26 @@
+{
+  "hypothesis_id": "H-SCAN1A",
+  "revision": 0,
+  "status": "FROZEN_BEFORE_NEW_PHYSICAL_RUNS",
+  "methods": {
+    "D0": "H-FACT1 C0 fixed Coverage ordering + A0",
+    "D1": "H-FACT1 C1 full structural+proxy composite ordering + A0",
+    "D2": "D1 with PROXY_GROUP contribution set exactly to zero + A0",
+    "D3": "D1 with STRUCTURAL_GROUP contributions set exactly to zero + A0"
+  },
+  "invariants": ["same eligible cells", "same hierarchy", "same batch size", "same normalization constants", "same weights for retained terms", "same fallback", "same ascending-unit tie-break", "same candidate selector", "same A0", "same guard", "same K3", "same physical operators", "same snapshots"],
+  "execution": {"smoke": "D0-D3 once at T_transition", "matrix": "D0-D3 x T_transition/T_high x 3 physical repeats", "physical_cap": 28},
+  "equivalence_gate": "D1 scheduler replay must match H-FACT1 C1; physical smoke must match scan/proxy/candidate/query/snapshot prefixes modulo measured guard admission timing. One direct implementation repair maximum.",
+  "valid_smoke": ["physical oracle only", "deadline_met", "cache_replay=false", "future_proxy_access=false", "visibility_violation=false", "complete durable snapshot"],
+  "decision_rules": {
+    "S_A": "D2 stably retains event/major quality while D3 does not or is clearly weaker, with aligned structural mechanism metrics",
+    "S_B": "D3 stably retains major quality while D2 does not or is clearly weaker",
+    "S_C": "only D1 is stably effective",
+    "S_D": "D2 and D3 both stably provide benefit; select simpler component using AUC, TTFC, events, overhead",
+    "S_E": "D1 fails to reproduce stable C1",
+    "S_F": "D1,D2,D3 all lack stable benefit without implementation/environment anomaly"
+  },
+  "stable_effect": "positive F1 and AnytimeAUC in all three formal repeats at both deadlines; repeats are execution stability, semantic sample count remains one",
+  "pre_existing_evidence_disclosure": "Related prior component results were already present. This preregistration freezes the requested group ablation before its 28 new physical runs but is not claimed to be blind to that prior evidence.",
+  "stop_after_decision": true
+}

@@ -1,0 +1,18 @@
+# V2 final report
+
+```text
+INPUT_STATE = V1 BLOCKED_LOSSLESS_EVIDENCE
+V2_AMENDMENT = H1B_A4_V2_PRIMITIVE_EVIDENCE_CONTRACT
+SCIENTIFIC_FILES_CHANGED = false
+IMMUTABLE_UNIVERSE = FAIL
+DEVELOPMENT_UNIVERSE_CHANGED = false
+A4_FREEZE_GATE = FAIL
+H1B_DEVELOPMENT_GATE = BLOCKED
+CONFIRMATORY_RUNNER_CREATED = false
+CONFIRMATORY_SEEDS_CREATED = false
+CONFIRMATORY_RESULTS_EXIST = false
+FINAL_STATE = BLOCKED_REQUIRES_SCIENTIFIC_AMENDMENT
+UNRESOLVED_BLOCKERS = frozen 13-row coverage registry conflicts with runner's 19-row effective universe
+NEXT_RESEARCH_STAGE = obtain an authorized result-blind decision binding one development universe; do not run it meanwhile
+NEXT_EXACT_COMMAND = none; execution is not authorized
+```

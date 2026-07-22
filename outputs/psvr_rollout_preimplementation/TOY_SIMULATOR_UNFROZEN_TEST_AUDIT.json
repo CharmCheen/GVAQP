@@ -1,0 +1,48 @@
+{
+  "audit_scope": "UNFROZEN_ENGINEERING_READINESS_ONLY",
+  "command": "PYTHONPATH=src pytest -q tests/psvr_rollout_toy",
+  "development_smoke": false,
+  "heldout_seed_file_opened_by_test_runner": true,
+  "heldout_seed_access_scope": "Static seed-list disjointness test required by section 11.1 only; no episode construction, policy execution, or metric access.",
+  "heldout_policy_results_generated": false,
+  "observed_result": {
+    "passed": 36,
+    "failed": 0,
+    "xfailed": 1,
+    "xpassed": 0
+  },
+  "proven_engineering_properties": [
+    "SplitMix64 frozen fixture",
+    "development and heldout seed-list disjointness from separate static seed assets",
+    "same-seed prototype manifest stability",
+    "strict Episode schema roundtrip preserves latent structure and canonical hash while rejecting missing/unknown fields",
+    "latent and future field names absent from ordinary policy projection",
+    "prototype generated duration realizations lie below D2-T supports",
+    "pi0 deadline admission and productive scan reserve on 16 development-prefix construction probes",
+    "all ten named pi0 traces terminate and pass atomic/trace invariants",
+    "SCAN never commits",
+    "failed CONFIRM does not commit",
+    "successful CONFIRM commits exactly at completion",
+    "AUC integral equals jump identity",
+    "duplicate and horizon-time reward semantics",
+    "F1 increments are state-dependent and separate from the primary surrogate",
+    "required qualitative named-policy behaviors",
+    "conditional evaluator rejects declared realized-truth access and enforces symmetric continuation"
+    ,"C0 recursively optimizes every reachable safe action in small realized worlds and is separated from pi0 continuation"
+  ],
+  "blocking_expected_failure": {
+    "test": "test_policy_projection_does_not_expose_seed_identity",
+    "observed_defect": "VisibleState.episode_id contains the literal construction seed, e.g. development_11000",
+    "impact": "policy can recover deterministic episode identity, conflicting with the proposed latent seed classification and potentially revealing future pseudorandom outcomes",
+    "repair_applied": false
+  },
+  "not_proven": [
+    "unique frozen ratio draw placement",
+    "authorized Bayesian visible-history posterior kernel",
+    "M1 scientific-value correctness",
+    "full development smoke",
+    "toy code freeze",
+    "heldout execution"
+  ],
+  "status": "BLOCKED_UNFROZEN_VISIBILITY_AND_CONDITIONAL_KERNEL"
+}

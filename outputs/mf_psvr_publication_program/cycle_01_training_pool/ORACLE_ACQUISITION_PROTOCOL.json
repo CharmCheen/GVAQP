@@ -1,0 +1,392 @@
+{
+  "candidate_pipeline": {
+    "candidate_rows": "track x unit opportunities plus a deduplicated verification-key table",
+    "confidence_threshold": 0.25,
+    "config_artifact": "TRAINING_POOL_PROXY_CONFIG.json",
+    "config_identity": "d42eae5848ec239c549c8e35e22355b532ba01ce44900dd6d31614b935210e74",
+    "detector": "YOLOv8n",
+    "label_independent_selection_basis": "Label-independent structural query coverage: among the three preregistered local detectors, Y8 alone has nonempty registered class support for both Q1 and Q2.",
+    "nms_iou": 0.45,
+    "query_heads": {
+      "Q1": {
+        "Y8": {
+          "eligible_coco_class_ids": [
+            1,
+            2,
+            3,
+            5,
+            7
+          ],
+          "features": [
+            "track_persistence",
+            "path_directed_lateral_motion",
+            "box_growth",
+            "front_region_occupancy",
+            "approximate_ttc_urgency"
+          ],
+          "weights": {
+            "approximate_ttc_urgency": 0.2,
+            "box_growth": 0.2,
+            "front_region_occupancy": 0.2,
+            "path_directed_lateral_motion": 0.2,
+            "track_persistence": 0.2
+          }
+        }
+      },
+      "Q2": {
+        "Y8": {
+          "eligible_coco_class_ids": [
+            0,
+            1,
+            3
+          ],
+          "features": [
+            "track_persistence",
+            "path_directed_lateral_motion",
+            "box_growth",
+            "front_region_occupancy",
+            "approximate_ttc_urgency"
+          ],
+          "weights": {
+            "approximate_ttc_urgency": 0.2,
+            "box_growth": 0.2,
+            "front_region_occupancy": 0.2,
+            "path_directed_lateral_motion": 0.2,
+            "track_persistence": 0.2
+          }
+        }
+      }
+    },
+    "resolution": 640,
+    "sample_fps": 5,
+    "status": "NOT_RUN_PENDING_AUTHORITY",
+    "tracker": {
+      "implementation": "Ultralytics BYTETracker",
+      "implementation_path": "/qiuyeqing/tools/miniconda3/envs/garc/lib/python3.10/site-packages/ultralytics/trackers/byte_tracker.py",
+      "implementation_sha256": "05545b07876311937097fdd61a47cfba7dc09fd3695fd35603eb61be09c0b40d",
+      "parameters": {
+        "fuse_score": true,
+        "match_thresh": 0.8,
+        "new_track_thresh": 0.25,
+        "track_buffer": 30,
+        "track_high_thresh": 0.25,
+        "track_low_thresh": 0.1
+      },
+      "ultralytics_version": "8.4.51"
+    },
+    "tracker_scope": "fresh tracker state per 10-second unit, matching frozen proxy semantics",
+    "v0_v1_outcome_dependency": false,
+    "weight_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36"
+  },
+  "decision_interpretation": {
+    "cycle1_complete_only_after": [
+      "candidate extraction audited",
+      "frozen identities physically labeled",
+      "both query support targets evaluated",
+      "positive/negative, hard-positive/hard-negative, and duplicate-event coverage audited"
+    ],
+    "enriched_sample_positive_fraction_is_prevalence": false,
+    "stage_a_is_a_support_test": true
+  },
+  "frozen_oracle": {
+    "abstention_policy": "retain as abstain; never coerce or drop",
+    "frame_config": {
+      "color": "cv2.COLOR_BGR2RGB",
+      "decoded_end_inclusive": true,
+      "fallback_decode_fps": 4.0,
+      "message_fps": 2.0,
+      "minimum_frames_before_fallback": 5,
+      "primary_decode_fps": 2.0
+    },
+    "generation_config": {
+      "do_sample": false,
+      "max_new_tokens": 256,
+      "randomness_policy": "greedy_with_per_unit_rng_identity_recorded",
+      "temperature": null
+    },
+    "model_hash": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+    "old_nexar_vlm_audit_reuse": "PROHIBITED_AS_LABEL_OR_SELECTION_SIGNAL",
+    "parser_schema_hash": "9a7413407d52df0484c0a338f0a12ae6b57553bdfa16753d7542f60977b558cb",
+    "parser_source_hash": "c02b545c0c5d2969508eea9a5470f0cb67d71282b25059948106504f9f4edd31",
+    "policy": "one generic OBJECT_ENTERS_EGO_PATH call per selected 10-second unit",
+    "projection": {
+      "Q1": [
+        "vehicle",
+        "cyclist"
+      ],
+      "Q2": [
+        "pedestrian",
+        "cyclist"
+      ]
+    },
+    "projection_uses_free_text": false,
+    "prompt_hash": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+    "sampling_code_hash": "5b038acb5450d76928b43d873d73decd1792969e0aa072f121b8f23b751e0240"
+  },
+  "heldout_opened": false,
+  "protocol_hash": "84631247f37f309385e78350e4599f070014d9d9cad8a9eb5f2ef1afea454843",
+  "protocol_id": "MF_PSVR_CYCLE1_ACQUISITION_V1",
+  "sampling_metadata_policy": {
+    "allowed": [
+      "Nexar collision/normal provider tag",
+      "Nexar alert/event time as a weak sampling anchor",
+      "weather/light/scene covariates",
+      "causally extracted frozen Y8 features and scores"
+    ],
+    "prohibited": [
+      "V0/V1 oracle/reference outcomes or configurations selected from those outcomes",
+      "V0/V1 media, slices, re-encodings, or other media derivatives as pool examples",
+      "paper held-out split",
+      "old 5-second Nexar VLM outputs as labels or selection signals",
+      "oracle evidence free text for Q1/Q2 projection"
+    ],
+    "weak_tags_are_targets": false
+  },
+  "scientific_question": "Does a licensed, provider-separated pool with no exact V0/V1 overlap contain enough Q1/Q2-positive unit-level verify opportunities, including score failures, to train and discriminate an L1 refiner?",
+  "stage_a_support_pilot": {
+    "abstain_and_retry": {
+      "abstain_counts_as_negative": false,
+      "abstain_counts_as_positive": false,
+      "parse_or_runtime_failure": "retain the call identity and failure status; no replacement identity and no additional call without a separately authorized protocol amendment",
+      "retry_within_stage_a": false
+    },
+    "fallback": "FAIL_CLOSED before any oracle call if any stratum x split cell cannot be filled; there is no quota borrowing, threshold relaxation, stratum substitution, or label-aware replacement.",
+    "freeze_rule": "All 96 identities and both query witnesses are durable before call 1.",
+    "freeze_runner_path": "scripts/freeze_mf_psvr_stage_a_sample.py",
+    "freeze_runner_sha256": "c0590e965ac1b26a3dc322025f41ed6021f123d4c00136eccbd58e098b54fe22",
+    "freeze_timing": "all 96 identities frozen before first Stage-A oracle call",
+    "hash_rank": "sha256(selection_seed|stratum_name|source_dataset|session_id|unit_id), lexicographically ascending",
+    "identity_tie_break": "source_dataset, session_id, unit_id ascending",
+    "input_fields": [
+      "source_dataset",
+      "session_id",
+      "unit_id",
+      "model_split_role",
+      "sampling_tag_only",
+      "sampling_anchor_seconds",
+      "anchor_time",
+      "q1_score",
+      "q2_score",
+      "q1_witness_track_id",
+      "q2_witness_track_id"
+    ],
+    "input_labels_permitted": false,
+    "maximum_unique_generic_oracle_calls": 96,
+    "maximum_units_per_provider_video": 2,
+    "minimum_distinct_provider_videos": 48,
+    "mutual_exclusion": "Once a source-video x unit is selected, it is unavailable to every later stratum.",
+    "quota_algorithm": "For each stratum in priority order and each split in fixed split_order, greedily take the first eligible unselected unit in the stated total order while enforcing the global two-unit provider-video cap.",
+    "selection_id": "MF_PSVR_CYCLE1_STAGE_A_SELECTION_V1",
+    "selection_implementation_path": "src/garc_eval/mf_psvr/stage_a.py",
+    "selection_implementation_sha256": "689b836f6c01d27d5868215218bfe63a1b0212ab6cb9ccb6aea2018ec7b0251a",
+    "selection_seed": "MF_PSVR_CYCLE1_STAGE_A_V1_2026-07-18",
+    "selection_spec_hash": "48458e6abbb519d46722e6ffe4df5e115249ae7e9c5d3699e71152d1c33388da",
+    "selection_unit": "one generic physical oracle call per unique source video x unit",
+    "split_order": [
+      "model_calibration",
+      "pool_audit",
+      "model_train"
+    ],
+    "split_quotas": {
+      "model_calibration": 16,
+      "model_train": 64,
+      "pool_audit": 16
+    },
+    "split_specific_usability_gates_per_query": {
+      "model_calibration": {
+        "failure_action": "Reject frozen-pool trainability; do not adaptively replace rows.",
+        "minimum_negative_source_videos": 3,
+        "minimum_negative_units": 4,
+        "minimum_positive_source_videos": 2,
+        "minimum_positive_units": 2
+      },
+      "model_train": {
+        "failure_action": "Stage B may enrich model_train only if evaluation splits pass.",
+        "minimum_negative_source_videos": 5,
+        "minimum_negative_units": 8,
+        "minimum_positive_source_videos": 3,
+        "minimum_positive_units": 4
+      },
+      "pool_audit": {
+        "failure_action": "Reject frozen-pool trainability; do not adaptively replace rows.",
+        "minimum_negative_source_videos": 3,
+        "minimum_negative_units": 4,
+        "minimum_positive_source_videos": 2,
+        "minimum_positive_units": 2
+      }
+    },
+    "strata_in_priority_order": [
+      {
+        "eligibility": "all remaining units",
+        "name": "Q2_Y8_HIGH",
+        "ranking": "q2_score descending, then selection_hash and identity ascending",
+        "score_threshold": null,
+        "split_quotas": {
+          "model_calibration": 4,
+          "model_train": 16,
+          "pool_audit": 4
+        }
+      },
+      {
+        "eligibility": "sampling_tag_only == collision_or_near_collision and absolute distance between unit anchor and provider event anchor <= 5.0 seconds",
+        "name": "Q1_WEAK_COLLISION_NEAR_ANCHOR",
+        "near_anchor_window_seconds_inclusive": 5.0,
+        "ranking": "q1_score descending, anchor_distance_seconds ascending, then selection_hash and identity ascending",
+        "score_threshold": null,
+        "split_quotas": {
+          "model_calibration": 4,
+          "model_train": 16,
+          "pool_audit": 4
+        }
+      },
+      {
+        "eligibility": "sampling_tag_only == collision_or_near_collision and absolute distance between unit anchor and provider event anchor <= 5.0 seconds",
+        "name": "LOW_SCORE_WEAK_COLLISION_NEAR_ANCHOR",
+        "near_anchor_window_seconds_inclusive": 5.0,
+        "ranking": "max(q1_score,q2_score) ascending, anchor_distance_seconds ascending, then selection_hash and identity ascending",
+        "score_threshold": null,
+        "split_quotas": {
+          "model_calibration": 3,
+          "model_train": 10,
+          "pool_audit": 3
+        }
+      },
+      {
+        "eligibility": "sampling_tag_only == normal_driving",
+        "name": "HIGH_SCORE_WEAK_NORMAL",
+        "ranking": "max(q1_score,q2_score) descending, then selection_hash and identity ascending",
+        "score_threshold": null,
+        "split_quotas": {
+          "model_calibration": 3,
+          "model_train": 10,
+          "pool_audit": 3
+        }
+      },
+      {
+        "eligibility": "all remaining units",
+        "name": "Q1_Q2_SCORE_DISAGREEMENT",
+        "ranking": "abs(q1_score-q2_score) descending, then selection_hash and identity ascending",
+        "score_threshold": null,
+        "split_quotas": {
+          "model_calibration": 1,
+          "model_train": 6,
+          "pool_audit": 1
+        }
+      },
+      {
+        "eligibility": "sampling_tag_only == normal_driving",
+        "name": "DETERMINISTIC_RANDOM_BACKGROUND",
+        "ranking": "selection_hash and identity ascending",
+        "score_threshold": null,
+        "split_quotas": {
+          "model_calibration": 1,
+          "model_train": 6,
+          "pool_audit": 1
+        }
+      }
+    ],
+    "support_existence_gate": {
+      "Q1": {
+        "minimum_positive_source_videos": 5,
+        "minimum_positive_units": 8
+      },
+      "Q2": {
+        "minimum_positive_source_videos": 5,
+        "minimum_positive_units": 8
+      },
+      "each_query_positive_in_model_calibration_or_pool_audit": true,
+      "failure_action": "Do not scale oracle calls on Nexar alone; acquire a directly licensed, query-enriched independent source."
+    }
+  },
+  "stage_b_bounded_top_up": {
+    "adaptive_label_aware_top_up_allowed_only_in": "model_train",
+    "adjacent_unit_follow_up": "at most two neighbors per positive unit, within total cap",
+    "authority": "requires a separate post-pilot decision",
+    "completion_targets_per_query": {
+      "high_score_hard_negatives": 16,
+      "low_score_hard_positives": 8,
+      "multi_unit_positive_event_groups": 6,
+      "negative_source_videos": 20,
+      "negative_units": 60,
+      "positive_source_videos": 12,
+      "positive_units": 30
+    },
+    "failure_action": "reject Nexar-only sufficiency and add a new independent source",
+    "hard_negative_definition": "oracle negative in top frozen Y8 score quartile for query",
+    "hard_positive_definition": "oracle positive in bottom frozen Y8 score quartile for query",
+    "maximum_additional_calls": 224,
+    "maximum_total_calls": 320,
+    "model_calibration_selection_frozen_before_stage_a_labels": true,
+    "multi_unit_positive_event_definition": "one k3_bridge_safe event group containing at least two directly adjacent oracle-positive unit IDs within a source video and query",
+    "pool_audit_selection_frozen_before_stage_a_labels": true
+  },
+  "status": "FROZEN_BEFORE_CANDIDATE_EXTRACTION_OR_ORACLE_LABELING",
+  "unit_and_label_scope": {
+    "duplicate_event_materializer": {
+      "d_core_max_seconds": 40.0,
+      "d_seg_max_seconds": 60.0,
+      "g_max": 1,
+      "name": "k3_bridge_safe",
+      "negative_barrier": true,
+      "source": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/scripts/benchmark_lib.py"
+    },
+    "duplicate_event_rule": "Frozen K3 bridge-safe grouping within source video and query: join only directly adjacent queried-positive unit IDs, never bridge a queried negative, and require the proposed core duration <= min(d_core_max=40s,d_seg_max=60s). Candidate opportunities remain separate verification keys.",
+    "opportunity_witness": "track_id is scheduling provenance only",
+    "row_rule": "One supervised opportunity row per verification key. Do not copy a unit label onto all tracks. A pre-label deterministic witness or explicit multiple-instance model is required.",
+    "track_label_available": false,
+    "unit_seconds": 10.0,
+    "unitization": "anchors at 5,15,25,... seconds; if the final nominal anchor exceeds duration, anchor at duration and use the preceding 5 seconds; the final unit may overlap the prior unit",
+    "verification_key": "(source_dataset, session_id, query_id, unit_id)"
+  },
+  "unitization_equivalence_audit": {
+    "projection_parity": {
+      "deployed_source": "src/garc_eval/psvr_runtime/two_video_physical_oracle.py",
+      "deployed_source_sha256": "0b40ccda9e44a7ca6eb16e65ec532480b8333b13d2fb3e37678f5066db808e9f",
+      "exhaustive_cases": 64,
+      "status": "PASS"
+    },
+    "status": "PASS",
+    "videos": {
+      "V0": {
+        "failures": [],
+        "frame_count": 103886,
+        "frozen_rows": 347,
+        "frozen_units_path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/units.csv",
+        "frozen_units_sha256": "bfbe4270936d267e36734b30174e83c47b0cb021cda3a9a9b6a7e7a7f709d182",
+        "generated_rows": 347,
+        "status": "PASS",
+        "tail_window": {
+          "anchor_seconds": 3462.930499,
+          "effective_end_frame": 103885,
+          "end_seconds": 3462.930499,
+          "frozen_requested_end_frame": 103886,
+          "overlaps_previous": true,
+          "start_seconds": 3457.930499,
+          "unit_id": 346
+        },
+        "video_id": "V0",
+        "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+      },
+      "V1": {
+        "failures": [],
+        "frame_count": 169962,
+        "frozen_rows": 567,
+        "frozen_units_path": "outputs/psvr_two_video_loop/dev_benchmark_v1/units/V1_units.csv",
+        "frozen_units_sha256": "fe37fadc74f5475a106aa0ee3ab852909ec77ea660abaa8316aed41a6cf49a35",
+        "generated_rows": 567,
+        "status": "PASS",
+        "tail_window": {
+          "anchor_seconds": 5665.0,
+          "effective_end_frame": 169961,
+          "end_seconds": 5665.535333,
+          "frozen_requested_end_frame": 169961,
+          "overlaps_previous": false,
+          "start_seconds": 5660.0,
+          "unit_id": 566
+        },
+        "video_id": "V1",
+        "video_sha256": "64cb0cfac6c37e52045552b4ed24e8aa20fd2c1fddc22509cf33dd957d14fd09"
+      }
+    }
+  }
+}

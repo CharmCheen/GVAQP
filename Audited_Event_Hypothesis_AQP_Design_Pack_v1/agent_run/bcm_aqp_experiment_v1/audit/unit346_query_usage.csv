@@ -1,0 +1,15 @@
+category,total_run_instances,querying_run_instances,unique_querying_seeds,earliest_budget,earliest_call_idx_0based,earliest_call_number_1based,notes
+current_M0,6,0,0,,,,M0_MAP_anchor_only/CURRENT_ORIGINAL
+current_M1,6,0,0,,,,M1_MAP_anchor_only/K3_BRIDGE_SAFE
+native_ARC,30,13,5,50,21,22,B5_ARC_native/arc_refinement_th0.4_native
+controlled_ARC,30,13,5,50,21,22,B3_ARC_adapted/arc_refinement_th0.4_controlled
+SUPG_all,120,0,0,,,,all native and controlled all-selected/confirmed-only variants
+SUPG_native,60,0,0,,,,native all-selected and confirmed-only variants
+SUPG_controlled,60,0,0,,,,controlled all-selected and confirmed-only variants
+ABae_all,60,6,2,80,23,24,native plus controlled duplicates of acquisition results
+ABae_native,30,3,2,80,23,24,abae_stratified_native
+ABae_controlled,30,3,2,80,23,24,abae_stratified_controlled
+random_all,1200,134,32,5,0,1,native plus controlled materializations of each random acquisition order
+random_native,600,67,32,5,0,1,random_native_confirmed
+random_controlled,600,67,32,5,0,1,random_controlled_bridge_safe
+all_controlled_trace_runs,732,83,36,5,0,1,67 random + 13 ARC + 3 ABae; every one has a materializer replay row

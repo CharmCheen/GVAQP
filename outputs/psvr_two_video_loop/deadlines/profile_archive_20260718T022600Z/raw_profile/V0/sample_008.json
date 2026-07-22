@@ -1,0 +1,103 @@
+{
+  "cache_replay": false,
+  "commit": {
+    "materializer_mode": "persistent_clean_spawn_predeadline",
+    "raw_observation_commit": {
+      "atomic_replace_seconds": 0.010290289,
+      "fsync_seconds": 0.000722177,
+      "payload_sha256": "abd8dd778d46fef46080192e94533fff81d89f88b5dc06993e93059d6296f70d",
+      "serialize_seconds": 0.000290492,
+      "total_seconds": 0.012665931
+    },
+    "snapshot_commit": {
+      "atomic_replace_seconds": 0.001412526,
+      "fsync_seconds": 0.009896955,
+      "payload_sha256": "3af106d9c8baadc147d7b55b8d0e9cc696f3586b3db01d52a7e4d0db5d010a42",
+      "serialize_seconds": 5.5553e-05,
+      "total_seconds": 0.012052597
+    },
+    "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_two_video_loop/deadlines/raw_profile/V0/sample_008_snapshot.json",
+    "stage_seconds": {
+      "atomic_replace": 0.001412526,
+      "fsync": 0.009896955,
+      "materialize": 0.016139561,
+      "observation_persist": 0.012665931,
+      "serialize": 5.5553e-05
+    },
+    "total_seconds": 0.041829161
+  },
+  "commit_wall_seconds": 0.04186638,
+  "confirmed_events": 0,
+  "oracle_result": {
+    "cache_replay": false,
+    "confidence": "high",
+    "cuda_synchronized_before_and_after": true,
+    "end_time": 2950.0,
+    "frame_identity_verified": true,
+    "generic_parsed_label": "negative",
+    "logical_oracle_call": true,
+    "oracle_build_id": "strict_oracle_3b9ba1187c0449426978",
+    "parse_status": "ok",
+    "parsed": {
+      "abstain_reason": null,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "ego_relevant": false,
+      "event_end": null,
+      "event_start": null,
+      "event_type": "none",
+      "evidence": "The video shows a clear, straight road with no visible road users entering the ego vehicle's path. Traffic is minimal, and no vehicles, pedestrians, or cyclists are seen moving into the driving corridor. The scene is static with no spatial conflict or trajectory interaction.",
+      "involved_object": "none",
+      "label": "negative",
+      "negative_reason": "no_ego_path_interaction"
+    },
+    "parsed_label": "negative",
+    "physical_oracle_invocation": true,
+    "projection_allowed_involved_objects": [
+      "cyclist",
+      "vehicle"
+    ],
+    "query_id": "Q1",
+    "raw": "{\n  \"label\": \"negative\",\n  \"event_start\": null,\n  \"event_end\": null,\n  \"event_type\": \"none\",\n  \"involved_object\": \"none\",\n  \"ego_relevant\": false,\n  \"boundary_status\": \"ok\",\n  \"complete_event_visible\": true,\n  \"confidence\": \"high\",\n  \"evidence\": \"The video shows a clear, straight road with no visible road users entering the ego vehicle's path. Traffic is minimal, and no vehicles, pedestrians, or cyclists are seen moving into the driving corridor. The scene is static with no spatial conflict or trajectory interaction.\",\n  \"negative_reason\": \"no_ego_path_interaction\",\n  \"abstain_reason\": null\n}",
+    "raw_sha256": "83f334b6107dc95c4ed50b30bc0803a4d6638492e09846037f5c2d8970c78aac",
+    "recorded_at_utc": "2026-07-16T22:22:01.526645+00:00",
+    "rng_seed": 20261004,
+    "service_total_seconds": 20.447431302,
+    "session_id": "deadline_profile_V0_008",
+    "stage_seconds": {
+      "cleanup": 0.200174746,
+      "clip_extraction": 1.046427964,
+      "oracle_inference": 14.49809362,
+      "oracle_parse": 0.00013407,
+      "oracle_postprocess": 0.00081507,
+      "oracle_preprocess": 4.701707936
+    },
+    "start_time": 2940.0,
+    "unit_id": 294,
+    "video_id": "V0"
+  },
+  "physical_oracle_only": true,
+  "query_wall_seconds": 20.448017726,
+  "recorded_at_utc": "2026-07-16T22:22:01.526645+00:00",
+  "sample_index": 8,
+  "service_total_seconds": 20.447431302,
+  "session_initialization": {
+    "prior_query_count": 0,
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V0_008",
+    "video_id": "V0"
+  },
+  "session_summary": {
+    "physical_calls": 1,
+    "queried_ids": [
+      294
+    ],
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V0_008",
+    "video_id": "V0"
+  },
+  "status": "ok",
+  "unit_id": 294,
+  "video_id": "V0"
+}

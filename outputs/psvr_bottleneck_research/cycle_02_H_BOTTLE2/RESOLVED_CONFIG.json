@@ -1,0 +1,83 @@
+{
+  "K3": "unchanged k3_bridge_safe persistent clean spawn",
+  "candidate_capacity": 10,
+  "config_hash": "f43ba0b5984430bfa9c3b691c4fa2153eba8c34c9edad3da62021f7bbeb570a9",
+  "deadline_manifest_hash": "b102b2fcb393bb18d250f934ebcdce144aaefb0a352debf33ec443cd10813a10",
+  "experiment_id": "H_BOTTLE2_FACTORIAL_V1",
+  "experiment_preregistration_hash": "c412955bb2c4a8ae0612a7adb22a7b55f7b1b4346c3fd12d0c8ece7d961516e7",
+  "final_proxy_config_hash": "2c3026fcffcab75fa7a1024e8a929b6eec339b7cbeec4ece9827bcb7e811035d",
+  "frontier_policy_definitions": {
+    "cell_diverse_conservative": "one candidate per frozen unit-cell; within-cell proxy max; cell FIFO; unit/K3-derived confirmed exclusion",
+    "fifo": "oldest candidate creation first"
+  },
+  "heldout_opened": false,
+  "implementation_hashes": {
+    "deadline": "adecea2817c74247d89124c7db3683add987b1a9e72533b5dbd47786cfb386a6",
+    "materializer": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+    "oracle_service": "0b40ccda9e44a7ca6eb16e65ec532480b8333b13d2fb3e37678f5066db808e9f",
+    "policy": "9666b260c4a2afe93212e06afcaa182ca4e06e9539e13a08165e485a29f542e6",
+    "proxy": "880f0ba3be6fb8b3164f279f5c6574dacd5342dab339a55cd2381f0459b36a68",
+    "runner": "7a82633cdd0a83079e89d0575c21d05165ad87e9f213053494663744869284db",
+    "runtime_runner": "874adc04e129676338ef290a6deb8c061f9b1ec6826952bbdc4e362fb55e2ce7"
+  },
+  "job_scope": {
+    "deadlines": [
+      "T_high",
+      "T_transition"
+    ],
+    "families": [
+      "Y8"
+    ],
+    "method_definitions": {
+      "C00": {
+        "scan_policy": "S0",
+        "verify_policy": "fifo"
+      },
+      "C01": {
+        "scan_policy": "S0",
+        "verify_policy": "cell_diverse_conservative"
+      },
+      "C10": {
+        "scan_policy": "S1",
+        "verify_policy": "fifo"
+      },
+      "C11": {
+        "scan_policy": "S1",
+        "verify_policy": "cell_diverse_conservative"
+      }
+    },
+    "methods": [
+      "C00",
+      "C01",
+      "C10",
+      "C11"
+    ],
+    "replicates": [
+      0,
+      1,
+      2
+    ],
+    "tasks": [
+      "V0_Q1",
+      "V0_Q2",
+      "V1_Q1",
+      "V1_Q2"
+    ]
+  },
+  "oracle": "physical cache-free Qwen3-VL-32B frozen generic prompt plus frozen projection",
+  "oracle_logical_session": "fresh query ledger per run",
+  "oracle_model_persistence": "resident across runs",
+  "proxy": "cold physical detector per run",
+  "proxy_implementation_freeze_hash": "4f965358909606a2198fa33a655fbd6a78f64d43e5368212ca6ba08aa39f0d60",
+  "proxy_preregistration_hash": "17d8a2be6bd502df9ef7a4bde5c4e07e1d4a9976f81e7a49101bbab95dfdd47f",
+  "reference_visible_to_runtime": false,
+  "scan_policy_definitions": {
+    "S0": "exact frozen uniform-temporal contiguous-block midpoint",
+    "S1": "midpoint start then farthest observed-center distance"
+  },
+  "scanner": "H-BOTTLE2 factorial S0/S1",
+  "snapshot_checkpoint": "after every SCAN or VERIFY plus initial empty snapshot",
+  "uniform_temporal_order": "iterative largest-unobserved-gap midpoint; lower midpoint tie",
+  "verify_allocator": "A0 Fixed-Periodic",
+  "verify_every_n_scanned_units": 3
+}

@@ -1,0 +1,115 @@
+{
+  "barcode": {
+    "bits": 16,
+    "decode_threshold": 128,
+    "encoding": "little-endian binary frame index",
+    "square_size": 11,
+    "step": 14,
+    "x": 8,
+    "y": 8
+  },
+  "corpus_version": "event_enumerate_v2_metadata_corpus_v1",
+  "purpose": "temporal transport, frame identity, marker, and boundary tests only",
+  "semantic_event_labels_present": false,
+  "videos": [
+    {
+      "container_duration_seconds": 60.1,
+      "file": "timeline_60s_10fps.mp4",
+      "fps": 10.0,
+      "height": 144,
+      "intervals": [
+        {
+          "end": 10.0,
+          "id": "len_10",
+          "start": 0.0
+        },
+        {
+          "end": 55.0,
+          "id": "len_50",
+          "start": 5.0
+        },
+        {
+          "end": 55.0,
+          "id": "len_55",
+          "start": 0.0
+        },
+        {
+          "end": 60.0,
+          "id": "len_60",
+          "start": 0.0
+        },
+        {
+          "end": 22.3,
+          "id": "nonzero_10",
+          "start": 12.3
+        }
+      ],
+      "last_frame_timestamp_seconds": 60.0,
+      "marker_frame_indices": {
+        "begin": 0,
+        "end": 600,
+        "middle": 300
+      },
+      "sha256": "252f1a12adc9d711827f741e794610d30f31d5c35b7f5d67f3e77b2e3dcaed2c",
+      "size_bytes": 1610026,
+      "total_frames": 601,
+      "width": 256
+    },
+    {
+      "container_duration_seconds": 73.4,
+      "file": "timeline_73p4s_10fps.mp4",
+      "fps": 10.0,
+      "height": 144,
+      "intervals": [
+        {
+          "end": 70.0,
+          "id": "nonzero_60",
+          "start": 10.0
+        },
+        {
+          "end": 73.4,
+          "id": "final_partial",
+          "start": 70.0
+        },
+        {
+          "end": 4.0,
+          "id": "odd_count",
+          "start": 1.0
+        }
+      ],
+      "last_frame_timestamp_seconds": 73.3,
+      "marker_frame_indices": {
+        "begin": 0,
+        "end": 733,
+        "middle": 366
+      },
+      "sha256": "1fee5bb1e6277b50872db3716d0973636de1915ee6eff237e72a16a6a9377d83",
+      "size_bytes": 1964246,
+      "total_frames": 734,
+      "width": 256
+    },
+    {
+      "container_duration_seconds": 10.083333333333334,
+      "file": "timeline_10s_12fps.mp4",
+      "fps": 12.0,
+      "height": 144,
+      "intervals": [
+        {
+          "end": 10.0,
+          "id": "alternate_fps",
+          "start": 0.0
+        }
+      ],
+      "last_frame_timestamp_seconds": 10.0,
+      "marker_frame_indices": {
+        "begin": 0,
+        "end": 120,
+        "middle": 60
+      },
+      "sha256": "bfe15113c7dd3735a387783e01f3e625d0849d2984f53ff9c34ac03801fde517",
+      "size_bytes": 337470,
+      "total_frames": 121,
+      "width": 256
+    }
+  ]
+}

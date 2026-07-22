@@ -1,0 +1,97 @@
+{
+  "NON_INFERIORITY_THEOREM_APPLIES": true,
+  "conditions": [
+    {
+      "EVIDENCE": "chooses FIFO CONFIRM, else next SCAN, else STOP",
+      "FORMAL_SOURCE": "r2.py: ShieldedPi0R2.choose",
+      "LIMITATION": "Within the finite synthetic action model only.",
+      "R2_IMPLEMENTATION_SOURCE": "B1 traces and frozen r2.py",
+      "SATISFIED": true,
+      "THEOREM_CONDITION": "pi0 defined on every safe action set"
+    },
+    {
+      "EVIDENCE": "HORIZON=1600, STOP always safe; all 4608 raw traces terminate",
+      "FORMAL_SOURCE": "finite-horizon rollout theorem requirement",
+      "LIMITATION": "Properness is demonstrated for this finite synthetic construction, not video.",
+      "R2_IMPLEMENTATION_SOURCE": "r2.py safe actions + raw traces",
+      "SATISFIED": true,
+      "THEOREM_CONDITION": "pi0 proper"
+    },
+    {
+      "EVIDENCE": "candidate tuple is every safe action; B1 action is among safe actions",
+      "FORMAL_SOURCE": "rollout policy-improvement premise",
+      "LIMITATION": "Tie-break is not explicitly B1-preferential, but inclusion is sufficient for weak non-inferiority.",
+      "R2_IMPLEMENTATION_SOURCE": "r2.py ExactConditionalRollout.choose",
+      "SATISFIED": true,
+      "THEOREM_CONDITION": "base action included"
+    },
+    {
+      "EVIDENCE": "deterministic finite world library and replay",
+      "FORMAL_SOURCE": "r2 mathematical audit",
+      "LIMITATION": "Exact only relative to the frozen toy generator.",
+      "R2_IMPLEMENTATION_SOURCE": "r2.py finite World/replay",
+      "SATISFIED": true,
+      "THEOREM_CONDITION": "transition model exact"
+    },
+    {
+      "EVIDENCE": "durations are world-deterministic; support admission is frozen",
+      "FORMAL_SOURCE": "D2-T / r2 mathematical audit",
+      "LIMITATION": "Not a wall-clock model.",
+      "R2_IMPLEMENTATION_SOURCE": "r2.py RegionLatent ticks and R2Environment.execute",
+      "SATISFIED": true,
+      "THEOREM_CONDITION": "duration model exact"
+    },
+    {
+      "EVIDENCE": "uniform mass over replay-consistent finite worlds",
+      "FORMAL_SOURCE": "r2 mathematical audit",
+      "LIMITATION": "Exactness is a code/design claim; source hashes bind the implementation.",
+      "R2_IMPLEMENTATION_SOURCE": "r2.py ExactPosterior.weights",
+      "SATISFIED": true,
+      "THEOREM_CONDITION": "visible-history posterior exact"
+    },
+    {
+      "EVIDENCE": "each candidate is continued until STOP in each supported world",
+      "FORMAL_SOURCE": "preregistration rollout.horizon=full",
+      "LIMITATION": "No finite-MC approximation, within the finite library.",
+      "R2_IMPLEMENTATION_SOURCE": "r2.py ExactConditionalRollout.value",
+      "SATISFIED": true,
+      "THEOREM_CONDITION": "Q full-horizon exact"
+    },
+    {
+      "EVIDENCE": "continuation defaults to B1_SHIELDED_PI0",
+      "FORMAL_SOURCE": "preregistration rollout.continuation",
+      "LIMITATION": "Applies to candidate evaluation, not a practical learned policy.",
+      "R2_IMPLEMENTATION_SOURCE": "r2.py ExactConditionalRollout",
+      "SATISFIED": true,
+      "THEOREM_CONDITION": "same continuation policy"
+    },
+    {
+      "EVIDENCE": "sum HORIZON-completion time over NEW_COMMIT",
+      "FORMAL_SOURCE": "D1 primary utility",
+      "LIMITATION": "Synthetic D1 utility only.",
+      "R2_IMPLEMENTATION_SOURCE": "r2.py R2Environment.utility; raw reference recomputation",
+      "SATISFIED": true,
+      "THEOREM_CONDITION": "terminal value exact"
+    },
+    {
+      "EVIDENCE": "declared 0; utility has no compute-time term",
+      "FORMAL_SOURCE": "preregistration rollout.planning_cost_seconds=0",
+      "LIMITATION": "No physical latency evidence.",
+      "R2_IMPLEMENTATION_SOURCE": "raw/implementation model",
+      "SATISFIED": true,
+      "THEOREM_CONDITION": "planning cost zero"
+    },
+    {
+      "EVIDENCE": "one safe-action function used for M1 and B1",
+      "FORMAL_SOURCE": "policy-improvement premise",
+      "LIMITATION": "Does not establish real-world safety.",
+      "R2_IMPLEMENTATION_SOURCE": "r2.py R2Environment.safe_actions",
+      "SATISFIED": true,
+      "THEOREM_CONDITION": "safe action set consistent"
+    }
+  ],
+  "critical_boundary": "The theorem is an expectation/policy-value statement. It does not by itself guarantee M1 >= pi0 on each realized episode, nor strict improvement, gap frequency, gap magnitude, robustness, or transfer.",
+  "formal_theorem_record_limitation": "The R2/E1 authority assets state the construction and mathematical audit but do not contain a separately formalized policy-improvement proof. This audit treats the previously established ideal one-step theorem in the task specification as the theorem under audit; it does not independently prove that theorem.",
+  "scope": "Expected D1 utility under the exact finite synthetic generative model and frozen zero-cost full-horizon construction.",
+  "strict_improvement_theorem_found": false
+}

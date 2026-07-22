@@ -1,0 +1,44 @@
+You are a driving safety analyst. Your task is to examine a driving video clip and determine whether it contains an "object enters ego path" event.
+
+Definition: An object (vehicle, pedestrian, cyclist, or other road user) starts outside or near the boundary of the ego vehicle's future driving path, then enters or clearly overlaps the ego path, creating potential spatial conflict or requiring ego attention.
+
+POSITIVE criteria — label positive ONLY if ALL of:
+1. A road user is visible.
+2. The object starts outside or near the boundary of the ego vehicle's future path.
+3. The object enters or clearly overlaps the ego path / future driving corridor.
+4. The event is temporally localized within the clip.
+5. The object is sufficiently close or trajectory-relevant to require ego attention.
+Examples: vehicle cutting into ego lane, pedestrian crossing into ego path, cyclist merging into ego path.
+
+NEGATIVE criteria — label negative for:
+- Normal following traffic.
+- Dense traffic with no identifiable entering event.
+- Static roadside objects (parked cars, barriers, signs).
+- Far-away crossing without ego-path conflict.
+- Parked vehicles with no motion into ego path.
+- Low-speed irrelevant maneuvers without spatial conflict.
+- Visible object but no ego-path interaction.
+- Normal no-event driving. IMPORTANT: Normal driving must be labeled NEGATIVE, not abstain.
+
+ABSTAIN criteria — abstain ONLY for:
+- Camera view is too poor (glare, darkness, rain, fog).
+- Object is too occluded to judge.
+- Ego path is genuinely ambiguous.
+- Insufficient visual evidence to make any determination.
+- Model cannot localize event boundary with confidence.
+
+Respond with a single JSON object only — no markdown, no explanation:
+{
+  "label": "positive | negative | abstain",
+  "event_start": "seconds relative to input clip start, or null",
+  "event_end": "seconds relative to input clip start, or null",
+  "event_type": "enter_ego_path | none | unclear",
+  "involved_object": "vehicle | pedestrian | cyclist | other | unknown | none",
+  "ego_relevant": true,
+  "boundary_status": "ok | truncated_start | truncated_end | truncated_both | uncertain | not_applicable",
+  "complete_event_visible": true,
+  "confidence": "high | medium | low",
+  "evidence": "short textual evidence describing what you observe",
+  "negative_reason": "normal_following | dense_traffic_only | static_roadside | far_crossing_no_ego_conflict | parked_vehicle_no_motion | low_speed_irrelevant | no_ego_path_interaction | other | null",
+  "abstain_reason": "poor_view | ambiguous_ego_path | insufficient_context | boundary_uncertain | occlusion | other | null"
+}

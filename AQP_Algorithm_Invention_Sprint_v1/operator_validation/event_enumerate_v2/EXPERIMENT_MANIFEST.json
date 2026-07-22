@@ -1,0 +1,94 @@
+{
+  "accepted_heldout_reference": null,
+  "accepted_heldout_videos": [],
+  "authoritative_artifacts": {
+    "config": "config/FROZEN_EVENT_ENUMERATE_V2_CONFIG.json",
+    "heldout_gate": "data/HELDOUT_GATE.json",
+    "independent_review": "audit/INDEPENDENT_ADVERSARIAL_REVIEW.json",
+    "metric_status": "metrics/METRICS_STATUS.json",
+    "old_coordinate_warp": "audit/OLD_COORDINATE_WARP_DIAGNOSTICS.csv",
+    "old_timeline": "audit/OLD_CALL_TIMELINE_RECONSTRUCTION.csv",
+    "physical_status": "physical/NO_CALLS.json",
+    "processor_audit": "audit/PRE_EXECUTION_PROCESSOR_AUDIT.csv"
+  },
+  "corrected_cost": null,
+  "decision": "HELDOUT_DATA_REQUIRED",
+  "experiment_id": "metadata_correct_event_enumerate_operator_gate_v2",
+  "heldout_gate": "FAIL_NO_VALID_POPULATION",
+  "independent_review": "PASS_WITH_CAVEATS",
+  "matched_dense_cost": null,
+  "maximum_authorized_physical_calls": 100,
+  "model_generation_performed": false,
+  "old_sprint_artifacts_modified": false,
+  "operator": "EVENT_ENUMERATE",
+  "phases": [
+    {
+      "name": "failed path recovery",
+      "phase": 0,
+      "status": "PASS"
+    },
+    {
+      "name": "metadata corpus",
+      "phase": 1,
+      "status": "PASS"
+    },
+    {
+      "name": "local/official semantics",
+      "phase": 2,
+      "status": "PASS"
+    },
+    {
+      "name": "one corrected path",
+      "phase": 3,
+      "status": "PASS_FROZEN"
+    },
+    {
+      "name": "postprocessor verification",
+      "phase": 4,
+      "status": "PASS"
+    },
+    {
+      "name": "held-out data gate",
+      "phase": 5,
+      "status": "TERMINAL_HELDOUT_DATA_REQUIRED"
+    },
+    {
+      "name": "held-out sample freeze",
+      "phase": 6,
+      "status": "NOT_REACHED"
+    },
+    {
+      "name": "physical preregistration",
+      "phase": 7,
+      "status": "NOT_REACHED"
+    },
+    {
+      "name": "physical execution",
+      "phase": 8,
+      "status": "NOT_RUN"
+    },
+    {
+      "name": "operator evaluation",
+      "phase": 9,
+      "status": "NOT_RUN"
+    },
+    {
+      "name": "quality/cost decision",
+      "phase": 10,
+      "status": "NOT_REACHED"
+    }
+  ],
+  "physical_calls": 0,
+  "preexecution_checks": 15,
+  "processor_gate": "PASS",
+  "selected_algorithm": "VERA (unchanged and not executed)",
+  "semantic_metrics": null,
+  "tests": {
+    "errors": 0,
+    "failures": 0,
+    "seconds": 116.796,
+    "sha256": "9d6f895cb270a035fdde0c1ca809b9aa8e6bf9c1de6832e55b5d49d1c4eb1f59",
+    "skipped": 0,
+    "tests": 25
+  }
+}

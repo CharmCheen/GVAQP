@@ -1,0 +1,91 @@
+{
+  "audit_owner_policy": "stable_negative_numeric_owner; excluded by exact frozen P1 owner>=0 predicate",
+  "baseline_reruns": 0,
+  "benchmark_id": "cbbv2_514c0d360fd5b2a4b5fe",
+  "budgets": [
+    5,
+    10,
+    20,
+    50,
+    80,
+    100
+  ],
+  "builder_source_sha256": "5c8301bfd015ddfe65c3130db35bac247d57e27f6c5bfdca1e1f83d27da54416",
+  "candidate_recalls": [
+    0.6,
+    0.8,
+    1.0
+  ],
+  "evaluator_only_builder_inputs": [],
+  "frozen_at": "2026-07-11T08:29:17.298645+00:00",
+  "interval_distance_cap_seconds": 10.0,
+  "interval_distance_cap_units": 1,
+  "k3_core_cap_seconds": 40.0,
+  "methods": [
+    "R0-P0",
+    "R0-P1",
+    "R1-P0",
+    "R1-P1"
+  ],
+  "orphan_order": [
+    "start_time",
+    "end_time",
+    "stable_hypothesis_id"
+  ],
+  "orphan_transitive_seed_merge": false,
+  "overlap_rule": "strict_positive_duration_overlap",
+  "physical_vlm_calls": 0,
+  "planner_public_builder_inputs": [
+    "units.unit_id/start_time/end_time",
+    "H1 hypothesis_id/source_type/support_unit_ids/core_candidate_ids",
+    "audit cell_id/unit_ids"
+  ],
+  "rule_variant": "R1_ONLY_NO_GRID",
+  "schema_version": "frozen_public_event_cell_representation_gate_v1",
+  "seed_merge": false,
+  "seeds": [
+    2026072100,
+    2026072101,
+    2026072102,
+    2026072103,
+    2026072104,
+    2026072105,
+    2026072106,
+    2026072107,
+    2026072108,
+    2026072109,
+    2026072110,
+    2026072111,
+    2026072112,
+    2026072113,
+    2026072114,
+    2026072115,
+    2026072116,
+    2026072117,
+    2026072118,
+    2026072119,
+    2026072120,
+    2026072121,
+    2026072122,
+    2026072123,
+    2026072124,
+    2026072125,
+    2026072126,
+    2026072127,
+    2026072128,
+    2026072129
+  ],
+  "target_aurocs": [
+    0.55,
+    0.65,
+    0.75,
+    0.85,
+    0.95
+  ],
+  "tie_break": [
+    "smaller_temporal_distance",
+    "earlier_seed_start_time",
+    "stable_seed_id"
+  ],
+  "unit_seconds": 10.0
+}

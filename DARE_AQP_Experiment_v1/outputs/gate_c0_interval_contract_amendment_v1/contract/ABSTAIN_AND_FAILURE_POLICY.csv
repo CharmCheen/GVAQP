@@ -1,0 +1,17 @@
+outcome,effective_any,effective_count,prune,action,logical_cost,physical_cost,accuracy_scoring,retry_allowed,max_retries
+valid_positive,POSITIVE,ADVISORY_COUNT,false,split_or_localize,charge,charge,in_denominator,false,0
+valid_negative_high_complete,NEGATIVE,ADVISORY_COUNT_ZERO,true,prune,charge,charge,in_denominator,false,0
+valid_zero_count,from_ANY,ADVISORY_COUNT_ZERO,false,obey_ANY,charge,charge,in_denominator,false,0
+valid_positive_count,from_ANY,ADVISORY_COUNT,false,priority_only,charge,charge,in_denominator,false,0
+medium_or_low_negative,UNKNOWN,from_COUNT,false,safe_fallback,charge,charge,wrong_for_effective_specificity,false,0
+abstain,UNKNOWN,UNKNOWN_COUNT,false,safe_fallback,charge,charge,in_denominator,false,0
+parser_invalid,UNKNOWN,UNKNOWN_COUNT,false,safe_fallback,charge,charge,in_denominator,true,1
+missing_fields,UNKNOWN,UNKNOWN_COUNT,false,safe_fallback,charge,charge,in_denominator,true,1
+timeout,UNKNOWN,UNKNOWN_COUNT,false,safe_fallback,charge,charge,in_denominator,true,1
+OOM,UNKNOWN,UNKNOWN_COUNT,false,safe_fallback,charge,charge,in_denominator,true,1
+incomplete_target,UNKNOWN,UNKNOWN_COUNT,false,safe_fallback,charge,charge,in_denominator,false,0
+truncated_context,UNKNOWN,UNKNOWN_COUNT,false,safe_fallback,charge,charge,in_denominator,false,0
+contradictory_ANY_COUNT,UNKNOWN,UNKNOWN_COUNT,false,safe_fallback,charge,charge,in_denominator,false,0
+duplicate_event_list,from_ANY,UNKNOWN_COUNT,false,safe_fallback,charge,charge,in_denominator,false,0
+negative_count,from_ANY,UNKNOWN_COUNT,false,safe_fallback,charge,charge,in_denominator,false,0
+non_integer_count,from_ANY,UNKNOWN_COUNT,false,safe_fallback,charge,charge,in_denominator,false,0

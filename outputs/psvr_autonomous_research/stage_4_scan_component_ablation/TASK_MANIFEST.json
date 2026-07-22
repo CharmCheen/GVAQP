@@ -1,0 +1,45 @@
+{
+  "manifest_version": "H-SCAN1A_task_v1",
+  "hypothesis_id": "H-SCAN1A",
+  "revision": 0,
+  "frozen_before_H_SCAN1A_physical_runs": true,
+  "scope": "ONE_DEVELOPMENT_VIDEO_QUERY_COMPONENT_GROUP_ABLATION",
+  "scientific_question": "Does C1 benefit primarily from coverage-structural priority, observed local proxy signal, or their interaction under fixed A0?",
+  "task": {
+    "video_id": "long_video_dataset3",
+    "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+    "query_id": "enter_ego_path",
+    "benchmark_id": "cbbv2_514c0d360fd5b2a4b5fe",
+    "benchmark_version": "clean_baseline_benchmark_v2_strict",
+    "reference_type": "VLM_DEFINED_PSEUDO_ORACLE",
+    "reference_version": "consecutive_positive_units_v1",
+    "reference_sha256": "56f617e759e108c96c7a865da26dc229689c87dcf2b633904255aa4c715633a3",
+    "reference_events": 26
+  },
+  "runtime_identity_hash": "08b384175d8b9debc38598faf09e3966a0cb19d4ccc5fdca3a5e0664c05679fb",
+  "hardware": "NVIDIA A800-SXM4-80GB, GPU-78772d8e-1166-c9c7-1f73-86ea2537431e, 565.57.01",
+  "frozen_shared_system": {
+    "proxy": "physical YOLOv8n midpoint frame original decoded BGR",
+    "physical_oracle": "fresh cache-free Qwen3-VL-32B-Instruct",
+    "K3": "unchanged_k3_bridge_safe_persistent_service",
+    "deadline_guard": "h_ds1_tail_guard_v2_persistent_k3",
+    "snapshot_checkpoints": "after every completed SCAN or VERIFY",
+    "A0": "fixed 29 SCAN batches then guarded VERIFY at every decision epoch",
+    "candidate_selector": "maximum physically observed proxy score among scanned unqueried units",
+    "candidate_tie_break": "ascending unit_id",
+    "scan_hierarchy": "midpoint of each eligible contiguous unobserved block; batch size four",
+    "batch_size": 4
+  },
+  "physical_budget": {"smoke": 4, "matrix": 24, "total_cap": 28},
+  "heldout_opened": false,
+  "pre_existing_related_evidence": {
+    "disclosure": "A prior, differently grouped Stage-4 component experiment existed in the authoritative worktree before H-SCAN1A preregistration. It is preserved and is not counted in this experiment.",
+    "archive": "outputs/psvr_autonomous_research/stage_4_prior_debt_component_ablation",
+    "archive_combined_sha256_at_move": "6e7fb639795a84b8d3a532c6166c7be329b99e124195f401864dc6e3fa48fa29",
+    "interpretation_constraint": "H-SCAN1A is prospective for its new 28 physical runs and D3 proxy-only arm, but not blind to related prior component evidence."
+  },
+  "missing_required_asset": {
+    "docs/PSVR_AUTONOMOUS_RESEARCH_CONTRACT.md": "MISSING_AT_FREEZE"
+  },
+  "forbidden": ["heldout", "multi-video-query", "lambda_beta_tuning", "hierarchy_change", "unitization_change", "K3_change", "reference_change", "oracle_change", "proxy_change", "A0_change", "adaptive_VERIFY", "boundary_refinement", "learned_scheduler", "bandit_RL", "Stage0_HDS_HFACT_rerun"]
+}

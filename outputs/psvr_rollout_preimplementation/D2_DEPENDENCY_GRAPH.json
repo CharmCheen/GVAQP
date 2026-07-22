@@ -1,0 +1,57 @@
+{
+  "claim_boundary": "toy mechanism evidence is not physical deadline-safety evidence",
+  "edges": [
+    {
+      "from": [
+        "D1"
+      ],
+      "to": "D2-L"
+    },
+    {
+      "from": [
+        "D1"
+      ],
+      "to": "D3"
+    },
+    {
+      "from": [
+        "D1"
+      ],
+      "to": "UTILITY_METRIC_SEMANTICS"
+    },
+    {
+      "from": [
+        "D2-L",
+        "D3"
+      ],
+      "to": "D2-T"
+    },
+    {
+      "from": [
+        "D1",
+        "D2-L",
+        "D2-T",
+        "D3"
+      ],
+      "to": "D4A_H-ROLLOUT1A"
+    },
+    {
+      "from": [
+        "H-ROLLOUT1A_RESULT"
+      ],
+      "to": "H-ROLLOUT1B"
+    },
+    {
+      "from": [
+        "D2-P_PHYSICAL_CALIBRATION"
+      ],
+      "to": "H-ROLLOUT1C_PHYSICAL_PROTOTYPE"
+    }
+  ],
+  "graph_version": "D2_SPLIT_V1",
+  "requires_d2_p": {
+    "H-ROLLOUT1A": false,
+    "H-ROLLOUT1B": false,
+    "H-ROLLOUT1C": true
+  }
+}

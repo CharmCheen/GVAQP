@@ -1,0 +1,82 @@
+{
+  "hypothesis_id": "H-STAGE1",
+  "revision": 0,
+  "registered_at_utc": "2026-07-18T02:19:10Z",
+  "parent_decision_hash": "28aba267a59faa5560603a1db38b5dda2aeeab31cc5a543820cfce3d9fdc058d",
+  "scientific_question": "Can a reference-blind observable-state controller convert the large unused physical deadline into scan exposure and useful VERIFY allocation across both videos?",
+  "competing_hypotheses": {
+    "H1": "The fixed planned action ceiling is the dominant residual bottleneck; observable stage switching increases positive exposure and cross-video quality.",
+    "H0": "The recoverability ceiling is not realizable under the frozen frontier, oracle latency, and deadline guard; extra scans do not produce timely unique-event gains."
+  },
+  "methods": {
+    "F0": {
+      "role": "best fixed policy control selected before this cycle by H-BOTTLE2 macro AnytimeAUC_F1",
+      "scan_policy": "S1 max-gap coverage recovery",
+      "verify_policy": "FIFO",
+      "action_policy": "fixed VERIFY after every 3 scans",
+      "historical_identity": "C10"
+    },
+    "ST1": {
+      "role": "observable stage-conditioned controller",
+      "scan_policy": "S1 max-gap coverage recovery",
+      "verify_policy": "cell_diverse_conservative",
+      "action_policy": "stage_conditioned_v1",
+      "coarse_cell_count": "ceil(sqrt(number of frozen units))",
+      "coarse_coverage_threshold": "coarse_cell_count / number of frozen units",
+      "persistent_candidate": "retained candidate created before the current completed scan",
+      "candidate_threshold": "unchanged candidate capacity (10)",
+      "rules_in_order": [
+        "SCAN while below coarse coverage and persistent candidate count is below capacity",
+        "SCAN a max-gap cell when eligible retained candidates occupy at most one temporal unit-cell",
+        "VERIFY a persistent candidate when the unchanged guard admits VERIFY plus durable commit",
+        "otherwise SCAN a max-gap cell when the unchanged scan-plus-commit reservation admits it",
+        "after a confirmed event, suppress its unit/K3-derived neighboring cell through the frozen cell-diverse rule",
+        "when VERIFY is not admitted, continue safe SCAN rather than terminating if scan-plus-commit remains admissible"
+      ],
+      "task_specific_switches": 0,
+      "tuned_parameters": 0
+    }
+  },
+  "frozen_variables": [
+    "two videos, two queries, and four task identities",
+    "YOLOV8/Y8 weights, feature schema, sampling FPS, candidate threshold, and capacity",
+    "physical Qwen3-VL-32B oracle, prompt, parser, frame sampling, clips, and normalization",
+    "unitization, K3 materializer, ontology, snapshot semantics, and deadline guard",
+    "T_transition and T_high deadlines, hardware, and complete physical accounting"
+  ],
+  "changed_variables": [
+    "online SCAN-versus-VERIFY admission rule",
+    "continuation with safe SCAN after VERIFY becomes inadmissible",
+    "VERIFY frontier rule from FIFO to frozen cell-diverse conservative only in ST1"
+  ],
+  "correctness_gate": [
+    "F0 exactly reproduces C10 scan/query/label/proxy/snapshot signatures",
+    "ST1 consumes only public units, observed candidates, returned oracle rows, remaining deadline, and frozen latency bounds",
+    "deterministic action and query signatures across repeats",
+    "zero replay, future-proxy access, reference visibility violation, deadline miss, missing snapshot, or invalid action ledger",
+    "candidate capacity, guard, oracle, proxy, K3, and commit path are identical"
+  ],
+  "physical_matrix": {
+    "smoke": "2 methods x 4 tasks x T_transition x replicate 0 = 8; valid smoke counts as formal repeat 0",
+    "formal": "2 methods x 4 tasks x 2 deadlines x 3 repeats = 48"
+  },
+  "quality_acceptance": {
+    "cross_video": "at least one improving task in each video",
+    "noninferiority": "at least 3/4 tasks not worse in primary direction",
+    "threshold_any_of": [
+      "macro AnytimeAUC_F1 relative gain >= 10%",
+      "macro TTFC reduction >= 20%",
+      "macro absolute F1 gain >= 0.05",
+      "four-task total unique-event gain >= 2"
+    ],
+    "not_single_event_only": true,
+    "mechanism_alignment": "increased positive/event exposure and candidate-to-VERIFY conversion must align with quality"
+  },
+  "branch_after_cycle": {
+    "accept": "run one critical mechanism ablation and freeze only if the core candidate criteria survive",
+    "near_miss": "permit one single-component causal revision only when mechanism and quality improve but narrowly miss the threshold",
+    "reject": "kill the sole branch-specific rule route and set PSVR_TWO_VIDEO_SEARCH=NO_GO"
+  },
+  "reference_visible_to_runtime": false,
+  "heldout_opened": false
+}

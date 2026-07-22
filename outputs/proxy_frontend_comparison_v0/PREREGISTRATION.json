@@ -1,0 +1,140 @@
+{
+  "experiment_id": "H-PROXY1",
+  "title": "Controlled Proxy Comparison: Current YOLO (YOLOv8n) vs YOLOP for PSVR Front-End",
+  "registration_timestamp": "2026-07-16T04:00:00Z",
+  "status": "PARTIALLY_BLOCKED",
+
+  "hypotheses": {
+    "H-PROXY1-A": {
+      "statement": "Current YOLOv8n and YOLOP detection head have measurable differences in target-domain key traffic target recall, track continuity, and cost.",
+      "testable": "PARTIALLY — detection inference and distributional comparison possible; accuracy metrics (recall, precision, mAP) REQUIRE human annotations",
+      "blocker": "HUMAN_ANNOTATION_NEEDED"
+    },
+    "H-PROXY1-B": {
+      "statement": "Adding YOLOP lane/drivable-derived road-relative features to YOLOP detection + ByteTrack improves cut-in candidate identification beyond motion-only features.",
+      "testable": "PARTIALLY — road-relative features can be computed; event-level evaluation REQUIRES event labels on DrivingDojo (missing)",
+      "blocker": "DRIVINGDOJO_EVENT_LABELS_MISSING"
+    },
+    "H-PROXY1-C": {
+      "statement": "YOLOP-320's cost advantage can be retained without significant loss of key vehicle trajectory and event candidate recall.",
+      "testable": "PARTIALLY — cost profiling and detection distributional comparison executable; recall metrics REQUIRE human annotations",
+      "blocker": "HUMAN_ANNOTATION_NEEDED"
+    }
+  },
+
+  "configurations": {
+    "B0": {
+      "detector": "YOLOv8n (ultralytics 8.4.51)",
+      "weight_path": "/qiuyeqing/llama_prl/G-ARC/models/yolo/yolov8n.pt",
+      "weight_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+      "tracker": "ByteTrack",
+      "features": "motion-only",
+      "role": "current baseline"
+    },
+    "B1": {
+      "detector": "YOLOP-640 detection head (ONNX)",
+      "weight_path": "/qiuyeqing/llama_prl/G-ARC/YOLOP/weights/yolop-640-640.onnx",
+      "weight_sha256": "cd66a3e0087a7258ae07768cc02cb742eed93865727ae4c9baf969b8fa190696",
+      "tracker": "ByteTrack",
+      "features": "motion-only",
+      "role": "isolate detection head difference"
+    },
+    "B2": {
+      "detector": "YOLOP-640 full (ONNX)",
+      "weight_path": "/qiuyeqing/llama_prl/G-ARC/YOLOP/weights/yolop-640-640.onnx",
+      "tracker": "ByteTrack",
+      "features": "motion + road-relative",
+      "role": "YOLOP full candidate"
+    },
+    "B3": {
+      "detector": "YOLOP-320 full (ONNX)",
+      "weight_path": "/qiuyeqing/llama_prl/G-ARC/YOLOP/weights/yolop-320-320.onnx",
+      "tracker": "ByteTrack",
+      "features": "motion + road-relative",
+      "role": "YOLOP low-cost candidate"
+    }
+  },
+
+  "data_sources": {
+    "target_domain_video": {
+      "path": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4",
+      "resolution": "1920x1080",
+      "fps": 30,
+      "duration_sec": 3462.9,
+      "frames": 103886,
+      "sampling_plan": "12 windows × 20s × 5fps = 1200 frames (frozen from YOLOP sanity audit)",
+      "sampling_plan_path": "/qiuyeqing/llama_prl/G-ARC/outputs/yolop_target_sanity_v0/SAMPLE_PLAN.json",
+      "annotations_status": "MISSING — requires 400 detection frames + 600 tracking frames + 100 lane sanity frames human annotation"
+    },
+    "drivingdojo_event_set": {
+      "path": "/qiuyeqing/llama_prl/G-ARC/datasets/DrivingDojo-mini/drivingdojo_mini.zip",
+      "sessions": 32,
+      "frames": 2816,
+      "metadata_fields": ["action_info", "camera_info", "videos", "meta_info", "description"],
+      "meta_info": {"weather": "string", "location": "string", "time": "string", "frame_num": "int"},
+      "description": {"type": ["string"], "tag": "string", "remark": "string (free-text)"},
+      "unique_types": ["drivingdojo-action", "drivingdojo-interplay", "drivingdojo-open"],
+      "unique_tags": ["traffic_light_green_to_red","lane_change","pnc_risk","detection","crossing_turn_right","intention","crossing_turn_straight","vehicle","prediction","moving_foreign_obstacle","vulnerable road users","heading","pedestrian_cutin","foreign obstacle","other issues","crossing_turn_left"],
+      "event_labels_status": "MISSING — no binary cut-in/event labels; no time-aligned event spans; STRIVE-D annotations (583 videos, 41 queries) were never publicly released",
+      "event_label_blocker": "STRIVE_D_ANNOTATIONS_NOT_PUBLIC",
+      "alternative": "Session-level tags provide weak proxy signal but cannot substitute for structured event labels"
+    }
+  },
+
+  "blockers": {
+    "BLOCKER_1_HUMAN_ANNOTATIONS": {
+      "severity": "HIGH",
+      "description": "Stage A (detection comparison) requires human-annotated bounding boxes on 400 frames for car/truck/bus/motorcycle/bicycle/person + attributes (near_ego_path, adjacent_lane, small_or_distant, partially_occluded). Without these, detection recall/precision/F1 cannot be computed.",
+      "impact": "All accuracy-based detection metrics blocked; can only do distributional comparison and runtime correctness",
+      "mitigation": "Can compute detection count distributions, confidence distributions, and box statistics without labels"
+    },
+    "BLOCKER_2_TRACKING_ANNOTATIONS": {
+      "severity": "HIGH",
+      "description": "Stage B (tracking comparison) requires human-annotated track IDs on 6 full 20-second windows (~600 frames) with ego-path vehicles, adjacent-lane vehicles, and potential lateral movers.",
+      "impact": "Track recall, track continuity, and event-relevant track recall cannot be computed",
+      "mitigation": "Can compute track-level statistics (count, length, ID switches from track fragments) without labels"
+    },
+    "BLOCKER_3_DRIVINGDOJO_EVENT_LABELS": {
+      "severity": "HIGH",
+      "description": "Stage D (event proxy) requires 200 cut-in positives + 200 hard negatives + 200 normal negatives with time-aligned binary labels. DrivingDojo-mini has only free-text description tags. STRIVE-D annotations (which contain the query-conditioned relevance labels for 583 DrivingDojo videos) were never publicly released per the asset audit.",
+      "impact": "LightGBM event proxy training blocked; event AUPRC/recall metrics blocked; Unique Event Recall@20 blocked",
+      "mitigation": "Can use DrivingDojo session tags as weak labels for distributional feature analysis; can run rule-baseline on target-domain video using road-relative geometry without event labels"
+    },
+    "BLOCKER_4_NO_LIGHTGBM_IMPLEMENTATION": {
+      "severity": "MEDIUM",
+      "description": "No LightGBM code exists in the repository. Would need implementation from scratch.",
+      "impact": "Even if labels existed, event proxy model would need to be built",
+      "mitigation": "Implementation is straightforward once labels exist"
+    }
+  },
+
+  "what_is_executable": {
+    "1_detection_inference": "Run B0 (YOLOv8n), B1/B3 (YOLOP detection) on all 1200 frozen sample frames. Compare detection count distributions, confidence distributions, box geometry, and class distributions.",
+    "2_tracking_inference": "Implement ByteTrack wrapper; run on B0, B1, B3 detections. Compute track stats (count, length, fragmentation, ID switches) without label-dependent metrics.",
+    "3_road_geometry": "Extract lane-relative position, lane-relative velocity, distance-to-boundary, boundary-crossing, drivable-area overlap, lane confidence for B2/B3.",
+    "4_cost_profiling": "Full physical cost profile for all 4 configurations with warmup + measured frames on NVIDIA A800.",
+    "5_drivingdojo_audit": "Extract DrivingDojo-mini, audit contents, build manifest, run detection on all 2816 frames.",
+    "6_distributional_comparison": "Compare detection distributions (count per frame, area, confidence, position) between B0 and YOLOP variants.",
+    "7_visual_audit": "Generate overlay visualizations for visual quality assessment."
+  },
+
+  "final_status_options": {
+    "H-PROXY1_SELECT_CURRENT_YOLO": "REQUIRES human annotations showing B0 detection recall >= B1+5pp AND B2 road-geometry doesn't improve event recall",
+    "H-PROXY1_SELECT_YOLOP_640": "REQUIRES human annotations showing B2 achieves event-relevant track recall + B2 unique event recall improvement + throughput >= 5fps",
+    "H-PROXY1_SELECT_YOLOP_320": "REQUIRES human annotations showing B3 retains >=95% of B2's metrics with >=25% lower cost",
+    "H-PROXY1_REVISE_HYBRID": "REQUIRES human annotations showing B0 detection beats B1 BUT B2 road-geometry beats B1",
+    "H-PROXY1_INCONCLUSIVE": "If confidence intervals overlap or DrivingDojo labels cannot support event definition",
+    "H-PROXY1_BLOCKED_WAITING_FOR_ANNOTATIONS": "CURRENT STATUS — human annotations and event labels are prerequisites for the primary metrics"
+  },
+
+  "decision": {
+    "H-PROXY1": "BLOCKED_WAITING_FOR_ANNOTATIONS",
+    "reason": "Human-perception annotations (400 detection + 600 tracking + 100 lane frames) and DrivingDojo structured event labels are prerequisites for Stages A-D accuracy/tracking/event metrics. Executable work is limited to inference, distributional comparison, cost profiling, and visual audit.",
+    "executable_next_step": "Run full inference pipeline (B0 detection + B1/B2/B3 YOLOP + ByteTrack tracking) on the frozen 1200-frame sample plan. Produce cost profiles, distributional comparisons, road-geometry features, and visual audit assets. These results enable rapid completion when annotations become available.",
+    "unblock_conditions": [
+      "Human annotation of 400 detection frames + 600 tracking frames from long_video_dataset3.mp4",
+      "Structured event labels for DrivingDojo sessions (or alternative labeled event dataset)",
+      "Implementation of LightGBM event proxy pipeline"
+    ]
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "CURRENT_DEADLINE_FLOOR": "NOT_GLOBAL",
+  "H_BOTTLE2_DECISION": "REJECT_FIXED_FACTORIAL_HETEROGENEOUS_BOTTLENECK",
+  "PROXY_CANDIDATE_GENERATION_BOTTLENECK": "ABSENT",
+  "SCAN_RECOVERY_SIGNAL": "ABSENT",
+  "SCAN_VERIFY_INTERACTION": "ABSENT",
+  "VERIFY_SELECTION_SIGNAL": "ABSENT",
+  "comparisons": {
+    "S_with_FIFO": {
+      "candidate": "C10",
+      "control": "C00",
+      "winning_tasks": [
+        "V0_Q1",
+        "V0_Q2"
+      ]
+    },
+    "S_with_V1": {
+      "candidate": "C11",
+      "control": "C01",
+      "winning_tasks": [
+        "V0_Q1",
+        "V0_Q2"
+      ]
+    },
+    "V_with_S0": {
+      "candidate": "C01",
+      "control": "C00",
+      "winning_tasks": [
+        "V0_Q1",
+        "V0_Q2"
+      ]
+    },
+    "V_with_S1": {
+      "candidate": "C11",
+      "control": "C10",
+      "winning_tasks": []
+    },
+    "interaction_vs_baseline": {
+      "candidate": "C11",
+      "control": "C00",
+      "winning_tasks": [
+        "V0_Q1",
+        "V0_Q2"
+      ]
+    }
+  },
+  "correctness": {
+    "C00_historical_equivalence_cells": 24,
+    "C00_historical_equivalence_expected": 24,
+    "cache_replays": 0,
+    "deadline_misses": 0,
+    "deterministic_query_repeats": true,
+    "expected_runs": 96,
+    "failed_attempts": 0,
+    "future_accesses": 0,
+    "gate": "PASS",
+    "heldout_opened": false,
+    "incomplete_schedules": 0,
+    "invalid_action_ledgers": 0,
+    "matched_VERIFY_opportunities": true,
+    "matched_proxy_observations": true,
+    "matched_scan_orders": true,
+    "missing_snapshots": 0,
+    "physical_runs": 96,
+    "same_candidate_capacity": true,
+    "same_deadline_guard": true,
+    "visibility_violations": 0
+  },
+  "cross_video_checks": {
+    "C01": false,
+    "C10": false,
+    "C11": false
+  },
+  "decision_hash": "28aba267a59faa5560603a1db38b5dda2aeeab31cc5a543820cfce3d9fdc058d",
+  "heldout_opened": false,
+  "macro_metrics": [
+    {
+      "AnytimeAUC_F1": 0.04486961088445182,
+      "F1_at_deadline": 0.05416666666666667,
+      "TTFC_censored": 110.91299255453104,
+      "method": "C00",
+      "negative_VERIFY_before_first_TP": 2.0,
+      "positive_candidate_to_VERIFY_conversion": 0.5,
+      "positive_units_scanned": 0.5,
+      "total_GPU_seconds": 1236.296334918,
+      "unique_confirmed_events": 0.5,
+      "unique_reference_events_touched": 0.5
+    },
+    {
+      "AnytimeAUC_F1": 0.04554198737992007,
+      "F1_at_deadline": 0.05416666666666667,
+      "TTFC_censored": 110.2862986070727,
+      "method": "C01",
+      "negative_VERIFY_before_first_TP": 2.0,
+      "positive_candidate_to_VERIFY_conversion": 0.5,
+      "positive_units_scanned": 0.5,
+      "total_GPU_seconds": 1231.145814193,
+      "unique_confirmed_events": 0.5,
+      "unique_reference_events_touched": 0.5
+    },
+    {
+      "AnytimeAUC_F1": 0.04556607851646069,
+      "F1_at_deadline": 0.05416666666666667,
+      "TTFC_censored": 110.2729180861977,
+      "method": "C10",
+      "negative_VERIFY_before_first_TP": 2.0,
+      "positive_candidate_to_VERIFY_conversion": 0.5,
+      "positive_units_scanned": 0.5,
+      "total_GPU_seconds": 1214.335552146,
+      "unique_confirmed_events": 0.5,
+      "unique_reference_events_touched": 0.5
+    },
+    {
+      "AnytimeAUC_F1": 0.04549484830405084,
+      "F1_at_deadline": 0.05416666666666667,
+      "TTFC_censored": 110.35449342953103,
+      "method": "C11",
+      "negative_VERIFY_before_first_TP": 2.0,
+      "positive_candidate_to_VERIFY_conversion": 0.5,
+      "positive_units_scanned": 0.5,
+      "total_GPU_seconds": 1210.655668504,
+      "unique_confirmed_events": 0.5,
+      "unique_reference_events_touched": 0.5
+    }
+  ],
+  "physical_runs": 96,
+  "quality_thresholds": {
+    "C01": {
+      "four_task_unique_gain_2": false,
+      "macro_TTFC_reduction_20pct": false,
+      "macro_absolute_F1_gain_005": false,
+      "macro_anytime_relative_gain_10pct": false
+    },
+    "C10": {
+      "four_task_unique_gain_2": false,
+      "macro_TTFC_reduction_20pct": false,
+      "macro_absolute_F1_gain_005": false,
+      "macro_anytime_relative_gain_10pct": false
+    },
+    "C11": {
+      "four_task_unique_gain_2": false,
+      "macro_TTFC_reduction_20pct": false,
+      "macro_absolute_F1_gain_005": false,
+      "macro_anytime_relative_gain_10pct": false
+    }
+  },
+  "recoverability_ceiling_exploitable": true,
+  "scan_mechanism_alignment": false,
+  "selected_branch_hypothesis": "H-STAGE1",
+  "verify_mechanism_alignment": false
+}

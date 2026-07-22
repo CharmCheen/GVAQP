@@ -1,0 +1,58 @@
+{
+  "$schema": "Proxy Front-End Detection Annotation Schema v1",
+  "format": "COCO-style JSON",
+  "info": {
+    "description": "H-PROXY1 detection ground truth for target-domain video",
+    "version": "1.0",
+    "year": 2026,
+    "date_created": "2026-07-16"
+  },
+  "images": {
+    "description": "List of annotated frames",
+    "fields": {
+      "id": "integer, unique frame identifier across all annotation tasks",
+      "file_name": "string, relative path to frame image (extracted JPEG)",
+      "width": "integer, 1920",
+      "height": "integer, 1080",
+      "clip_id": "string, e.g. clip_000",
+      "frame_index": "integer, original video frame index",
+      "timestamp_sec": "float, seconds from video start"
+    }
+  },
+  "annotations": {
+    "description": "List of bounding box annotations",
+    "fields": {
+      "id": "integer, unique annotation ID",
+      "image_id": "integer, references images.id",
+      "category_id": "integer, 0=car 1=truck 2=bus 3=motorcycle 4=bicycle 5=person",
+      "bbox": "[x, y, width, height] in absolute pixels, top-left origin",
+      "area": "float, bbox area in pixels^2",
+      "iscrowd": "integer, 0 or 1 (1 if object cluster too dense for individual boxes)",
+      "attributes": {
+        "small_or_distant": "boolean",
+        "partially_occluded": "boolean",
+        "adjacent_lane": "boolean",
+        "near_ego_path": "boolean",
+        "interaction_relevant": "boolean"
+      },
+      "annotator_id": "string, anonymized annotator identifier",
+      "review_status": "string: 'single' | 'double' | 'adjudicated'",
+      "time_spent_sec": "float, annotation time for this box"
+    }
+  },
+  "categories": [
+    {"id": 0, "name": "car", "supercategory": "vehicle"},
+    {"id": 1, "name": "truck", "supercategory": "vehicle"},
+    {"id": 2, "name": "bus", "supercategory": "vehicle"},
+    {"id": 3, "name": "motorcycle", "supercategory": "vehicle"},
+    {"id": 4, "name": "bicycle", "supercategory": "vehicle"},
+    {"id": 5, "name": "person", "supercategory": "person"}
+  ],
+  "pre_annotations": {
+    "description": "Merged model predictions (anonymized, model source hidden)",
+    "source_models": ["YOLOv8n", "YOLOP-640", "YOLOP-320"],
+    "merge_strategy": "Union of all boxes → IoU deduplication (threshold=0.7) → random shuffle",
+    "pre_annotation_fields": ["bbox", "category_id (model's best guess)"],
+    "note": "Pre-annotations are provided as starting points. Annotators MUST correct, delete, or add boxes as needed."
+  }
+}

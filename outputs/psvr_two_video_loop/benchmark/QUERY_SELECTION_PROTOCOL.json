@@ -1,0 +1,105 @@
+{
+  "feasibility_rule": {
+    "both_video_zero_event": "consider preregistered fallback order Q3 then Q4",
+    "fallback_constraint": "A fallback may be used only if it can be evaluated without changing the frozen oracle/prompt/parser. Otherwise reference integrity fails closed.",
+    "fallback_order": [
+      "Q3_DYNAMIC_AGENT_BLOCKS_EGO_PATH",
+      "Q4_FRONT_VEHICLE_ABRUPTLY_STOPS_OR_SLOWS"
+    ],
+    "same_queries_across_both_videos": true,
+    "single_video_zero_event": "retain as sparse stress task"
+  },
+  "frozen_at_utc": "2026-07-16T17:36:52.779051+00:00",
+  "heldout_opened": false,
+  "immutable_oracle_binding": {
+    "frame_config": {
+      "color": "cv2.COLOR_BGR2RGB",
+      "decoded_end_inclusive": true,
+      "fallback_decode_fps": 4.0,
+      "message_fps": 2.0,
+      "minimum_frames_before_fallback": 5,
+      "primary_decode_fps": 2.0
+    },
+    "generation_config": {
+      "do_sample": false,
+      "max_new_tokens": 256,
+      "randomness_policy": "greedy_with_per_unit_rng_identity_recorded",
+      "temperature": null
+    },
+    "model_full_content_hash": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+    "parser_config": {
+      "confidence_domain": [
+        "high",
+        "low",
+        "medium"
+      ],
+      "label_domain": [
+        "abstain",
+        "negative",
+        "positive"
+      ],
+      "parser_version": "presence_json_parser_v1_stage2_compatible",
+      "required_keys": [
+        "label",
+        "confidence"
+      ]
+    },
+    "parser_source_hash": "c02b545c0c5d2969508eea9a5470f0cb67d71282b25059948106504f9f4edd31",
+    "prompt_path": "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/oracle/oracle_prompt.txt",
+    "prompt_sha256": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+    "sampling_code_hash": "5b038acb5450d76928b43d873d73decd1792969e0aa072f121b8f23b751e0240"
+  },
+  "protocol_hash": "5705a1365e6033445932c06f4aa2432ff6bdcdfcb813ee822dfad39da3ae25c0",
+  "protocol_version": "PSVR_TWO_QUERY_SELECTION_V1",
+  "queries": [
+    {
+      "definition": "A non-ego vehicle, motorcycle, or bicycle enters, crosses, or persistently occupies the ego vehicle's potential driving path from outside that path.",
+      "exclusions": [
+        "ego vehicle lane change causing relative motion",
+        "ordinary adjacent parallel travel",
+        "distant irrelevant lane change",
+        "object visible without entering the ego path",
+        "road curvature causing apparent lateral motion",
+        "static parked actor"
+      ],
+      "frozen_oracle_type_projection": [
+        "vehicle",
+        "cyclist"
+      ],
+      "name": "OTHER_VEHICLE_ENTERS_EGO_PATH",
+      "projection_reason": "The immutable oracle schema represents bicycle/cyclist with involved_object=cyclist and does not expose a separate motorcycle category.",
+      "query_id": "Q1"
+    },
+    {
+      "definition": "A pedestrian, cyclist, or other vulnerable road user enters, crosses, or persistently occupies the ego vehicle's potential driving path.",
+      "exclusions": [
+        "ego vehicle lane change causing relative motion",
+        "ordinary adjacent parallel travel",
+        "distant irrelevant lane change",
+        "object visible without entering the ego path",
+        "road curvature causing apparent lateral motion",
+        "static parked actor"
+      ],
+      "frozen_oracle_type_projection": [
+        "pedestrian",
+        "cyclist"
+      ],
+      "name": "VRU_ENTERS_EGO_PATH",
+      "projection_reason": "The immutable schema reliably identifies pedestrian and cyclist. The generic 'other' value is excluded because vulnerability is not encoded deterministically.",
+      "query_id": "Q2"
+    }
+  ],
+  "reference_construction": {
+    "multiple_query_membership": "cyclist is intentionally eligible for both Q1 and Q2 because the user-frozen definitions overlap; tasks need not be mutually exclusive.",
+    "negative_policy": "A unit is positive for a query iff the frozen oracle label is positive and involved_object belongs to that query's preregistered projection; every other successfully parsed unit is negative for that query, except oracle abstentions which remain abstentions.",
+    "oracle_policy": "Run/reuse the immutable exhaustive OBJECT_ENTERS_EGO_PATH oracle exactly once per video-unit, then deterministically project positive observations using only the parsed involved_object field.",
+    "reference_or_proxy_outcome_used_for_query_choice": false,
+    "text_evidence_used_for_projection": false
+  },
+  "selection_timing": "before any new two-video proxy or scheduler evaluation",
+  "task_count": 4,
+  "video_ids": [
+    "V0",
+    "V1"
+  ]
+}

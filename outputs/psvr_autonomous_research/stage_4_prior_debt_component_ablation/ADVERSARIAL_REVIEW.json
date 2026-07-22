@@ -1,0 +1,41 @@
+{
+  "review_type": "Primary-agent adversarial artifact review; subagent delegation was prohibited by the active orchestration instruction.",
+  "verdict": "H-SCAN-COMP1 is valid and supports DEBT_COMPONENT_SIGNAL=PRESENT_ON_CURRENT_DEV_TASK, but H-SCAN1 is not accepted and generalization is untested.",
+  "claim_under_review": "Removing the debt component eliminates the fixed-A0 event benefit, while retaining debt preserves it without either proxy or duration.",
+  "decisive_evidence": {
+    "S1_full": "6/6 positive across T_transition/T_high; recovered unit 317 / vlm_event_0022.",
+    "S2_duration_plus_proxy_without_debt": "0/6 positive; 4-5 VERIFY calls; no event even in every five-call T_high run.",
+    "S3_duration_plus_debt_without_proxy": "6/6 positive; recovered unit 246; confirmation occurred within the first four VERIFY calls.",
+    "S4_debt_plus_proxy_without_duration": "6/6 positive; recovered unit 317 / vlm_event_0022; confirmation occurred by the third VERIFY.",
+    "S0_fixed_coverage": "0/6 positive under the same A0 allocation.",
+    "safety_and_causality": "18/18 new physical runs, zero failures, misses, replay, future access, or candidate-observation violations; one runtime identity."
+  },
+  "falsification_checks": [
+    {
+      "alternative": "Unequal admitted VERIFY count caused S2 failure.",
+      "result": "Contradicted: all three S2 T_high runs had five VERIFY calls and recovered no event; S3/S4 recovered their events within four and three calls respectively."
+    },
+    {
+      "alternative": "Proxy signal is necessary.",
+      "result": "Contradicted on this task: S3 removes proxy and is positive in 6/6 runs."
+    },
+    {
+      "alternative": "Duration/global coverage is necessary.",
+      "result": "Contradicted on this task: S4 removes duration and is positive in 6/6 runs."
+    },
+    {
+      "alternative": "Any hierarchical midpoint/common implementation path is sufficient.",
+      "result": "Contradicted by S2, which shares that path but is negative in 6/6 runs."
+    },
+    {
+      "alternative": "Runtime repeats are independent semantic replications.",
+      "result": "Rejected interpretation: all runs use one video-query and repeats measure execution stability only."
+    }
+  ],
+  "main_remaining_competing_explanation": "Debt-induced ordering may align fortuitously with event locations on this development video; cross-task direction and effect size are unknown.",
+  "mechanism_detail": "Debt is necessary in the tested 2-of-3 component family, but it is not sufficient as a standalone term because no debt-only arm was preregistered. S3 and S4 recover different event regions, so debt can support multiple useful orderings rather than one fixed event path.",
+  "key_uncertainty": "Whether the debt-dependent advantage recurs across independent video-query tasks.",
+  "revision_trigger": "Reject or weaken the debt hypothesis if the preregistered multi-task comparison lacks directionally consistent gains on at least two independent video-query tasks or if removing debt does not reduce utility there.",
+  "reporting_correction": "Candidate creation is measured when a reference-positive scanned unit first reaches the top of the visible unqueried frontier, including promotion after negative VERIFY completion. Positive exposure per scan is positive scanned units divided by scan actions.",
+  "single_video_stop_required": true
+}

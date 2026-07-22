@@ -1,0 +1,72 @@
+{
+  "git_commit": "1a441186a94190254b29848089bb1f6327c6796e",
+  "branch": "main",
+  "working_tree_status": {
+    "at_start": [
+      "M AGENTS.md",
+      "?? docs/FROZEN_CONFIG_FOR_CROSS_VIDEO.md",
+      "?? outputs/baseline_adapter_dryrun/",
+      "?? outputs/baseline_adapter_sanity_sweep/",
+      "?? outputs/ours_failure_audit_v1/",
+      "?? outputs/ours_vs_baselines_realcartest_v1/",
+      "?? outputs/pre_cross_video_audit/",
+      "?? outputs/real_video_protocol_pilot_v1/",
+      "?? outputs/real_video_protocol_pilot_v1_metric_repair/",
+      "?? outputs/stage0_5_common_materializer_baseline_audit_v1/",
+      "?? outputs/stage0_merge_only_repair_v1/",
+      "?? outputs/stage_0_6_materializer_ablation/",
+      "?? outputs/stage_0_7_minimal_operator_compression/",
+      "?? outputs/stage_1a_diagnostic_native_arc_vs_map_bbem/",
+      "?? outputs/stage_1a_map_anchor_only/",
+      "?? outputs/stage_1b_map_anchor_barrier/",
+      "?? outputs/stage_2_cross_video_validation/",
+      "?? scripts/pre_cross_video_audit.py",
+      "?? scripts/stage0_5_common_materializer_baseline_audit.py",
+      "?? scripts/stage0_6_materializer_ablation.py",
+      "?? scripts/stage0_7_minimal_operator_compression.py",
+      "?? scripts/stage0_merge_only_repair.py",
+      "?? scripts/stage1a_map_anchor_only.py",
+      "?? scripts/stage1a_native_arc_vs_map_bbem_diagnostic.py",
+      "?? scripts/stage1b_map_anchor_barrier.py",
+      "?? scripts/stage2_cross_video_validation.py"
+    ],
+    "at_end_additions": [
+      "?? outputs/latent_event_diag_v1/",
+      "?? src/garc_eval/latent_event_diag/",
+      "?? tests/latent_event_diag/"
+    ],
+    "pre_existing_changes_preserved": true
+  },
+  "python_version": "3.10.20",
+  "dependencies": {
+    "numpy": "2.2.6",
+    "pandas": "2.2.2",
+    "scipy": "1.13.1",
+    "scikit-learn": "1.7.2",
+    "pytest": "9.0.3",
+    "pyyaml": "6.0.3"
+  },
+  "random_seeds": {
+    "synthetic_generator": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+    "synthetic_oracle": "generator_seed + 100003",
+    "existing_fixed_log_replay": [0, 1, 2, 3, 4],
+    "map_note": "seed field is not consumed by the audited MAP selector"
+  },
+  "commands_run": [
+    "pwd",
+    "git status --short",
+    "git branch --show-current",
+    "git rev-parse HEAD",
+    "python --version",
+    "git config --global --add safe.directory /qiuyeqing/llama_prl/G-ARC",
+    "python -m compileall -q src/garc_eval/latent_event_diag",
+    "PYTHONPATH=src python -m garc_eval.latent_event_diag.audit --output-dir outputs/latent_event_diag_v1",
+    "PYTHONPATH=src pytest -q tests/latent_event_diag",
+    "PYTHONPATH=src python -m garc_eval.latent_event_diag.experiment --output-dir outputs/latent_event_diag_v1 --seed-count 20 --budgets 5,10,20,40",
+    "PYTHONPATH=src pytest -q tests/latent_event_diag > outputs/latent_event_diag_v1/test_report.txt 2>&1"
+  ],
+  "start_time": "2026-07-10T04:02:09Z",
+  "end_time": "2026-07-10T04:31:32Z",
+  "expensive_model_calls": 0,
+  "manifest_self_excluded": true
+}

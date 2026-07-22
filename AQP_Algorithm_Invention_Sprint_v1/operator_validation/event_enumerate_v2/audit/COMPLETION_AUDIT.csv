@@ -1,0 +1,13 @@
+requirement,status,evidence
+prior artifacts unmodified,PASS,all v2 writes confined to new output/implementation directories
+old 60-second calls reconstructed,PASS,"audit/OLD_CALL_TIMELINE_RECONSTRUCTION.csv: 68 nominal rows, 70 total"
+exact compression cause identified,PASS,audit/FAILED_PIPELINE_FORENSICS.md and old runner lines 153-157
+metadata videos and five named tests,PASS,tests/metadata_videos and runtime/pytest_results.xml
+processor semantics independently verified,PASS,theory/QWEN3_VL_TEMPORAL_SEMANTICS.md plus installed-source tests
+one corrected path frozen,PASS,config/FROZEN_EVENT_ENUMERATE_V2_CONFIG.json
+all pre-execution processor checks pass,PASS,audit/PRE_EXECUTION_PROCESSOR_AUDIT.csv: 15/15
+disjoint held-out reference,ABSENT_TERMINAL_STOP,data/HELDOUT_GATE.json
+physical calls only after all gates,PASS_ZERO_CALLS,physical/NO_CALLS.json
+quality/cost metrics not fabricated,PASS_NOT_MEASURED,metrics/METRICS_STATUS.json
+independent adversarial review,PASS_WITH_CAVEATS,audit/INDEPENDENT_ADVERSARIAL_REVIEW.json
+allowed exact decision,PASS,FINAL_DECISION.csv: HELDOUT_DATA_REQUIRED

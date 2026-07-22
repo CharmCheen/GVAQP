@@ -1,0 +1,42 @@
+{
+  "clip_status": "ok",
+  "events": [
+    {
+      "event_start": 0.0,
+      "event_end": 1.0,
+      "event_type": "enter_ego_path",
+      "involved_object": "vehicle",
+      "object_identity": "white sedan crossing intersection from left side, entering ego path at crosswalk",
+      "ego_relevant": true,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "evidence": "At t=0.0, a white sedan is visible crossing the intersection from the left lane, moving directly into the ego vehicle's path as the ego proceeds straight. The vehicle is clearly in the crosswalk and occupies the ego's future driving corridor by t=1.0."
+    },
+    {
+      "event_start": 2.0,
+      "event_end": 4.0,
+      "event_type": "enter_ego_path",
+      "involved_object": "cyclist",
+      "object_identity": "cyclist riding from right sidewalk into the rightmost traffic lane, entering ego path",
+      "ego_relevant": true,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "evidence": "At t=2.0, a cyclist is seen on the right sidewalk. By t=3.0, the cyclist has entered the rightmost traffic lane, crossing into the ego vehicle's path. The cyclist remains in the lane until t=4.0, after which they are no longer in the immediate path."
+    },
+    {
+      "event_start": 3.0,
+      "event_end": 5.0,
+      "event_type": "enter_ego_path",
+      "involved_object": "vehicle",
+      "object_identity": "white sedan merging from right side into the right lane, entering ego path",
+      "ego_relevant": true,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "evidence": "At t=3.0, a white sedan is visible on the right side of the road, beginning to merge into the right lane. By t=4.0, it is fully in the lane and overlapping the ego path. The vehicle continues ahead, remaining in the path until t=5.0."
+    }
+  ],
+  "abstain_reason": null
+}

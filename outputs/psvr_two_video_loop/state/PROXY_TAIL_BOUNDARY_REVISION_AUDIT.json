@@ -1,0 +1,58 @@
+{
+  "audit_id": "PSVR_PROXY_TAIL_BOUNDARY_REVISION_V1",
+  "audited_at_utc": "2026-07-16T23:07:00Z",
+  "observed_evidence": {
+    "failed_command": "python scripts/run_psvr_two_video_proxy.py extract --family Y8 --video V0",
+    "failure": "decode failed for unit 346 at frame 103886",
+    "successful_full_video_artifact_committed": false,
+    "V0_ffprobe_nb_frames": 103886,
+    "V0_valid_frame_index_range": [
+      0,
+      103885
+    ],
+    "V0_out_of_range_units": [
+      {
+        "unit_id": 346,
+        "start_frame": 103737,
+        "end_frame": 103886,
+        "overrun_frames": 1
+      }
+    ],
+    "V0_direct_decode": {
+      "frame_103885": "PASS",
+      "frame_103886": "FAIL"
+    },
+    "V1_ffprobe_nb_frames": 169962,
+    "V1_valid_frame_index_range": [
+      0,
+      169961
+    ],
+    "V1_out_of_range_units": [],
+    "V1_direct_decode": {
+      "frame_169961": "PASS",
+      "frame_169962": "FAIL"
+    }
+  },
+  "derived_conclusion": "The V0 final frozen endpoint is a one-past-last boundary error; it is not a transient decoder failure.",
+  "correction": "Clamp only an inclusive end_frame exactly equal to the positive container frame count to frame_count - 1; reject all larger overruns and invalid starts.",
+  "sampling_effect": {
+    "sample_interval_frames": 6,
+    "last_scheduled_sample_in_V0_unit_346": 103881,
+    "missing_frame_was_scheduled_for_detection": false,
+    "expected_candidate_semantics_change": false,
+    "expected_cost_change": "one fewer decoded, unsampled tail frame in V0 unit 346"
+  },
+  "information_timing": {
+    "reference_outcomes_used_for_revision": false,
+    "proxy_quality_metrics_used_for_revision": false,
+    "successful_full_video_proxy_outputs_before_revision": 0,
+    "physical_oracle_proxy_pilot_runs_before_revision": 0
+  },
+  "retained_artifacts": {
+    "rationale": "The revised branch is unreachable for all profile samples, which use early in-range V0 units.",
+    "Y8_profile_samples_sha256": "25a54d95ddb89b2bb0ec0dd56b20508013770a3f76a8f25f1b6f43db65242c33",
+    "Y8_physical_cost_sha256": "39a619c5cf2e95a4152862e280907ccb839e09e0133c2e35ff5b88c1a4f96a19"
+  },
+  "superseded_implementation_freeze_hash": "573463e1fb1eaea70e14586709685fe24fd73405a203b0e051358f4195c1fe66",
+  "heldout_opened": false
+}

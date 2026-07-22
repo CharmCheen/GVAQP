@@ -1,0 +1,10 @@
+{
+  "status": "PARTIAL_PASS_NOT_FREEZE_EVIDENCE",
+  "planner_module": "src/garc_eval/psvr_rollout_h1b/a4.py",
+  "forbidden_imports_absent": ["ExactReferenceEvaluator", "R2Environment", "actual execution random tape"],
+  "allowed_inputs": ["sampled posterior root world", "visible history", "visible decision state", "A4 keyed planner RNG", "canonical identity error configuration"],
+  "evaluator_boundary": "src/garc_eval/psvr_rollout_h1b/exact_reference.py remains evaluator-only and is not imported by a4.py",
+  "dynamic_policy_serialization_check": "PASS: canonical A4 transition serialization excludes latent_event_id and grouping correctness label",
+  "remaining_limitation": "independent verifier does not reconstruct full post-state/continuation, so end-to-end information-boundary PASS is not established",
+  "result_blind": true
+}

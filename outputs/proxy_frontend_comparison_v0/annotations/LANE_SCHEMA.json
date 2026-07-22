@@ -1,0 +1,72 @@
+{
+  "$schema": "Proxy Front-End Lane Annotation Schema v1",
+  "format": "GeoJSON LineString per boundary",
+  "info": {
+    "description": "H-PROXY1 ego-lane corridor ground truth for 100 target-domain frames",
+    "version": "1.0",
+    "year": 2026,
+    "date_created": "2026-07-16"
+  },
+  "per_frame_json": {
+    "naming": "lane_gt_{frame_index:06d}.json",
+    "structure": {
+      "frame_index": "integer",
+      "clip_id": "string",
+      "timestamp_sec": "float",
+      "image_width": 1920,
+      "image_height": 1080,
+      "left_boundary": {
+        "type": "LineString",
+        "coordinates": "[[x1, y1], [x2, y2], ...] — ordered from bottom-of-frame (y=max) to top",
+        "num_points": "minimum 3, recommended 8-15"
+      },
+      "right_boundary": {
+        "type": "LineString",
+        "coordinates": "[[x1, y1], [x2, y2], ...] — same ordering",
+        "num_points": "minimum 3, recommended 8-15"
+      },
+      "ego_corridor": {
+        "description": "Polygon bounded by left_boundary + right_boundary + bottom edge + top of drivable area",
+        "type": "Polygon (optional, can be derived from boundaries)"
+      },
+      "lane_visibility": {
+        "type": "string",
+        "enum": ["clear", "partial", "unavailable"],
+        "description": "Overall lane visibility assessment for this frame"
+      },
+      "scene_type": {
+        "type": "string",
+        "enum": ["straight", "curve_left", "curve_right", "intersection", "merge", "tunnel", "other"],
+        "description": "Road geometry type"
+      },
+      "annotator_notes": {
+        "type": "string",
+        "description": "Free-text notes about challenging conditions, unclear boundaries, etc."
+      },
+      "annotator_id": "string",
+      "review_status": "string: 'single' | 'double' | 'adjudicated'",
+      "time_spent_sec": "float"
+    }
+  },
+  "frame_selection": {
+    "description": "100 frames deterministically selected from the 12 windows",
+    "criteria": "Stratified by scene type: at least 15% curves, 10% intersections, 10% occluded, 10% unclear lane markings",
+    "selection_method": "Visual inspection of overlay images from YOLOP sanity audit → manual frame selection"
+  },
+  "coordinate_system": {
+    "origin": "top-left, (0,0)",
+    "x_axis": "right-positive",
+    "y_axis": "down-positive",
+    "units": "pixels"
+  },
+  "quality_checks": {
+    "required": [
+      "Left boundary x < Right boundary x for all y with both defined",
+      "Polylines extend from bottom of frame (y ~= 1080) upward",
+      "No self-intersections in either polyline",
+      "For 'clear' visibility: >= 80% of frame height covered by both boundaries",
+      "For 'partial' visibility: >= 40% of frame height covered",
+      "For 'unavailable': explicit note explaining why"
+    ]
+  }
+}

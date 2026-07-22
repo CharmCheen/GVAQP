@@ -1,0 +1,53 @@
+{
+  "schema_version": "pstr_next_candidate_v4",
+  "frozen_utc": "2026-07-13T02:15:13Z",
+  "research_status": "FROZEN_AFTER_ALL_AVAILABLE_DOMAINS_OPENED_AWAITING_NEW_EXTERNAL_DOMAIN",
+  "objective": "Maximize event-F1 AUC at fixed exact-oracle budgets under the shared K3 materializer.",
+  "candidate": {
+    "method_id": "pstr_5_to_4",
+    "name": "Proxy-Stratified Temporal Retrieval",
+    "inputs": "the same public per-unit proxy score available to ARC and unit time order",
+    "selection_rule": [
+      "For population n and budget B, set M=min(n,B+floor(B/4)).",
+      "Partition unit IDs into M equal contiguous cells using boundaries floor(n*c/M).",
+      "Choose the maximum-proxy unit in each nonempty cell, breaking ties by smaller unit ID.",
+      "Rank cell winners by decreasing proxy score, then smaller unit ID, and return the first B distinct units."
+    ],
+    "oracle_use_during_selection": "none",
+    "nested_across_budgets": false,
+    "fitted_parameter_disclosure": "The one-quarter cell overhead was chosen after labels from all four available realcartest domains had been opened."
+  },
+  "development_evidence": {
+    "status": "POSTHOC_AND_LEAVE_ONE_DOMAIN_OUT_ONLY",
+    "decision_sha256": "3b464fb0608de1a1daa18a72c397fed4a50f3c6235a8a3282673481c4e6d7673",
+    "leave_one_domain_out_sha256": "c07c76378913961d7c08dfa04f442f69837a9a167fd021339f82edcbbc36d424",
+    "selected_candidate_auc_sha256": "eb5b51950cc3e3993cf4382516667b27ddfbd65874637eb382f563cc106372ec",
+    "runner_sha256": "700a882dc5ad689d3bd82540ba7fbb57877a8b96cf44b5c3ed283113ae7ef11e",
+    "leave_one_domain_out_result": "three strict wins and one tie versus the five-seed shared-K3 ARC comparator; zero losses",
+    "warning": "The four domains share one source video and were not prospectively unopened when PSTR was proposed."
+  },
+  "future_confirmation_contract": {
+    "required_data": "at least one independently sourced video whose unit oracle labels and event reference are not opened until after PSTR selections are sealed",
+    "preferred_data": "multiple videos with human-adjudicated event references",
+    "budgets": [5, 10, 20, 50, 80, 100],
+    "primary_comparators": [
+      "pure public-proxy top-k",
+      "threshold-0.4 ARC-refinement plus proxy-order exact-fill",
+      "CLIP top-k",
+      "temporal NMS",
+      "random/uniform"
+    ],
+    "mandatory_additional_comparators": [
+      "SUPG adapted to exact-B plus shared K3",
+      "MMR",
+      "facility location",
+      "a DPP or equivalent diversified-retrieval baseline"
+    ],
+    "fairness": "Each primary method selects exactly B unique units and uses identical cached-or-physical oracle observations, K3 materialization, and event evaluator.",
+    "primary_decision": "PSTR normalized event-F1 AUC must strictly exceed both pure proxy top-k and shared-K3 ARC on the pooled external data.",
+    "budget_shape_decision": "PSTR must be no worse than both comparators at a majority of evaluated budget points; report every point regardless of outcome.",
+    "efficiency_decision": "Any advantage must remain visible in distinct event discoveries and may not be explained only by broader per-event intervals or a different materializer.",
+    "failure_action": "Reject PSTR-5:4 without tuning the cell overhead on the confirmation data."
+  },
+  "claim_limit": "This freeze defines a candidate and a future falsification test. It is not evidence of prospective, human-ground-truth, native-ARC, or broad cross-video superiority."
+}

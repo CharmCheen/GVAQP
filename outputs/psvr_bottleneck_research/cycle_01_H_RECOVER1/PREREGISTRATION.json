@@ -1,0 +1,440 @@
+{
+  "classification_rules": {
+    "CANDIDATE_GENERATION_LIMITED": "a scanned positive lacks a runtime candidate/frontier entry",
+    "DEADLINE_FLOOR": "no frozen reference-blind sequence touches a positive unit at the frozen physical scan-action ceiling",
+    "FRONTIER_OR_VERIFY_ORDER_LIMITED": "a positive candidate is visible at a VERIFY opportunity and trace-conditional oracle ceiling exceeds actual unique events",
+    "HETEROGENEOUS_BOTTLENECK": "multiple non-dominant loss locations remain",
+    "MATERIALIZATION_LIMITED": "an oracle-positive completed query yields no matching durable K3 event",
+    "SCAN_EXPOSURE_LIMITED": "current event exposure is below a reference-blind alternative sequence at the same scan count",
+    "VERIFY_BUDGET_LIMITED": "visible positive candidates exceed calls without ordering regret"
+  },
+  "evidence_type": "evaluator_only_diagnostic",
+  "heldout_opened": false,
+  "hypothesis_id": "H-RECOVER1",
+  "input_hashes": {
+    "deadline_manifest": "75a4ccbd2d84d91b5de0dde053d3e26b3752165febd366d0f221a442b723e91a",
+    "revision_config": "17c807d9aaeafaae169a5f525dd17c4cf8a587978f83f766025bd1f849e2869e",
+    "run_metrics": "c579e71328dbb04f5d7d2b5c63ff36ced35b0102fd21e66d94d8a113ea50a1f0",
+    "task_manifest": "c1b301c9bb0d724e48b171540c7d2cc09d42e7691e3b32b9f310cc29e5026633"
+  },
+  "input_matrix": "H-EXPOSE2 R3 72-cell durable revision matrix",
+  "physical_calls_authorized": 0,
+  "preregistration_hash": "84b956a88756cfddf9e4e0e2ff30350ae2b777b325182d0ac85517ac91a24d29",
+  "prior_outcome_disclosure": "Registered after H-EXPOSE2/R3 rejection; diagnostic is not outcome-blind. Sequence generators are frozen before this evaluator opens references.",
+  "reference_visibility": "evaluator_only",
+  "registered_at_utc": "2026-07-17T15:30:50.437704+00:00",
+  "runtime_behavior_changed": false,
+  "sequence_rules": {
+    "S_CURRENT": "exact frozen iterative largest-unobserved contiguous-block midpoint",
+    "S_HIER": "breadth-first dyadic equal-strata centers",
+    "S_MAXGAP": "frozen midpoint then maximum nearest observed-center distance",
+    "S_SEQ": "ascending contiguous unit id",
+    "S_UNIFORM": "centers of action-count equal temporal strata"
+  },
+  "sequences": {
+    "V0_Q1::T_high": {
+      "S_CURRENT": [
+        173,
+        86,
+        260
+      ],
+      "S_HIER": [
+        173,
+        86,
+        260
+      ],
+      "S_MAXGAP": [
+        173,
+        0,
+        346
+      ],
+      "S_SEQ": [
+        0,
+        1,
+        2
+      ],
+      "S_UNIFORM": [
+        57,
+        173,
+        289
+      ],
+      "action_count": 3
+    },
+    "V0_Q1::T_transition": {
+      "S_CURRENT": [
+        173,
+        86,
+        260
+      ],
+      "S_HIER": [
+        173,
+        86,
+        260
+      ],
+      "S_MAXGAP": [
+        173,
+        0,
+        346
+      ],
+      "S_SEQ": [
+        0,
+        1,
+        2
+      ],
+      "S_UNIFORM": [
+        57,
+        173,
+        289
+      ],
+      "action_count": 3
+    },
+    "V0_Q2::T_high": {
+      "S_CURRENT": [
+        173,
+        86,
+        260
+      ],
+      "S_HIER": [
+        173,
+        86,
+        260
+      ],
+      "S_MAXGAP": [
+        173,
+        0,
+        346
+      ],
+      "S_SEQ": [
+        0,
+        1,
+        2
+      ],
+      "S_UNIFORM": [
+        57,
+        173,
+        289
+      ],
+      "action_count": 3
+    },
+    "V0_Q2::T_transition": {
+      "S_CURRENT": [
+        173,
+        86,
+        260
+      ],
+      "S_HIER": [
+        173,
+        86,
+        260
+      ],
+      "S_MAXGAP": [
+        173,
+        0,
+        346
+      ],
+      "S_SEQ": [
+        0,
+        1,
+        2
+      ],
+      "S_UNIFORM": [
+        57,
+        173,
+        289
+      ],
+      "action_count": 3
+    },
+    "V1_Q1::T_high": {
+      "S_CURRENT": [
+        283,
+        141,
+        425,
+        70,
+        212,
+        354,
+        496,
+        34,
+        105,
+        176,
+        247,
+        318
+      ],
+      "S_HIER": [
+        283,
+        141,
+        425,
+        70,
+        212,
+        354,
+        496,
+        35,
+        106,
+        177,
+        248,
+        318
+      ],
+      "S_MAXGAP": [
+        283,
+        0,
+        566,
+        141,
+        424,
+        212,
+        495,
+        70,
+        353,
+        35,
+        105,
+        176
+      ],
+      "S_SEQ": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "S_UNIFORM": [
+        23,
+        70,
+        118,
+        165,
+        212,
+        259,
+        307,
+        354,
+        401,
+        448,
+        496,
+        543
+      ],
+      "action_count": 12
+    },
+    "V1_Q1::T_transition": {
+      "S_CURRENT": [
+        283,
+        141,
+        425,
+        70,
+        212,
+        354,
+        496,
+        34,
+        105,
+        176,
+        247,
+        318
+      ],
+      "S_HIER": [
+        283,
+        141,
+        425,
+        70,
+        212,
+        354,
+        496,
+        35,
+        106,
+        177,
+        248,
+        318
+      ],
+      "S_MAXGAP": [
+        283,
+        0,
+        566,
+        141,
+        424,
+        212,
+        495,
+        70,
+        353,
+        35,
+        105,
+        176
+      ],
+      "S_SEQ": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "S_UNIFORM": [
+        23,
+        70,
+        118,
+        165,
+        212,
+        259,
+        307,
+        354,
+        401,
+        448,
+        496,
+        543
+      ],
+      "action_count": 12
+    },
+    "V1_Q2::T_high": {
+      "S_CURRENT": [
+        283,
+        141,
+        425,
+        70,
+        212,
+        354,
+        496,
+        34,
+        105,
+        176,
+        247,
+        318
+      ],
+      "S_HIER": [
+        283,
+        141,
+        425,
+        70,
+        212,
+        354,
+        496,
+        35,
+        106,
+        177,
+        248,
+        318
+      ],
+      "S_MAXGAP": [
+        283,
+        0,
+        566,
+        141,
+        424,
+        212,
+        495,
+        70,
+        353,
+        35,
+        105,
+        176
+      ],
+      "S_SEQ": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "S_UNIFORM": [
+        23,
+        70,
+        118,
+        165,
+        212,
+        259,
+        307,
+        354,
+        401,
+        448,
+        496,
+        543
+      ],
+      "action_count": 12
+    },
+    "V1_Q2::T_transition": {
+      "S_CURRENT": [
+        283,
+        141,
+        425,
+        70,
+        212,
+        354,
+        496,
+        34,
+        105,
+        176,
+        247,
+        318
+      ],
+      "S_HIER": [
+        283,
+        141,
+        425,
+        70,
+        212,
+        354,
+        496,
+        35,
+        106,
+        177,
+        248,
+        318
+      ],
+      "S_MAXGAP": [
+        283,
+        0,
+        566,
+        141,
+        424,
+        212,
+        495,
+        70,
+        353,
+        35,
+        105,
+        176
+      ],
+      "S_SEQ": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "S_UNIFORM": [
+        23,
+        70,
+        118,
+        165,
+        212,
+        259,
+        307,
+        354,
+        401,
+        448,
+        496,
+        543
+      ],
+      "action_count": 12
+    }
+  }
+}

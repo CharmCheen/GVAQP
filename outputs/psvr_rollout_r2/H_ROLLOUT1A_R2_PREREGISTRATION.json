@@ -1,0 +1,16 @@
+{
+  "hypothesis_id":"H-ROLLOUT1A-R2",
+  "name":"Exact Visible-History Symmetric Rollout Mechanism",
+  "status":"FROZEN_PRE_CONFIRMATORY",
+  "execution_authorized":true,
+  "scientific_question":"Under the frozen finite-support toy environment, exact visible-history posterior, exact conditional full-horizon rollout and zero planning cost, does symmetric rollout outperform shielded pi0, Ratio-PSVR and the best fixed strategy?",
+  "inheritance":{"D1":"UNCHANGED","D2_L_PI0":"UNCHANGED","D2_T":"UNCHANGED","D2_P":"BLOCKED_PHYSICAL_CALIBRATION","workload_axes":"UNCHANGED_REGIME_SEMANTICS","gates":"UNCHANGED"},
+  "methods":{"B0":"B0_SCAN_THEN_CONFIRM","B1":"B1_SHIELDED_PI0","B2":["B2_FIXED_PERIODIC_K1","B2_FIXED_PERIODIC_K2","B2_FIXED_PERIODIC_K4","B2_FIXED_PERIODIC_K8"],"B3":"B3_CAPACITY_MATCHING","B4":"B4_RATIO_PSVR","M1":"M1_EXACT_VISIBLE_HISTORY_ROLLOUT"},
+  "rollout":{"posterior":"EXACT_ENUMERATION","candidate_actions":"all safe actions including STOP and pi0 action","continuation":"same B1 shielded pi0 closed-loop","horizon":"full","planning_cost_seconds":0,"actual_future_access":false},
+  "metrics":{"primary":"D1 time-weighted unique-event utility lambda=1","secondary":["AnytimeAUC_F1","TTFC","event recall","duplicate confirm count"]},
+  "aggregation":"inherit original unweighted paired macro/median/regime/Gate semantics; no R2 result has been generated",
+  "acceptance_gate":"inherited unchanged; never use development smoke for selection",
+  "excluded_claims":["real planning cost","finite Monte Carlo error","world-model misspecification","M0 transferability","physical deadline safety","real video effectiveness"],
+  "contamination_disclosure":"old concrete held-out universe permanently invalid; R2 confirmatory seeds are generated one-shot only after frozen code verification",
+  "result_branches":{"ACCEPT":"only after future confirmatory Gate","REJECT":"only after future confirmatory Gate","BLOCKED":"integrity or numerical failure"}
+}

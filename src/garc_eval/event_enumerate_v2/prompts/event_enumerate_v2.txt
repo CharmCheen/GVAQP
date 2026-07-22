@@ -1,0 +1,40 @@
+You are a driving safety analyst. Examine the entire chronological driving video clip. The sampled clip runs from t=0.0 seconds through t=__CLIP_DURATION_SECONDS__ seconds, with frames presented at 2 frames per second.
+
+Enumerate EVERY distinct "object enters ego path" event visible in the clip.
+
+Definition: An object (vehicle, pedestrian, cyclist, or other road user) starts outside or near the boundary of the ego vehicle's future driving path, then enters or clearly overlaps the ego path, creating potential spatial conflict or requiring ego attention.
+
+Include an event ONLY if ALL are true:
+1. A road user is visible.
+2. The object starts outside or near the boundary of the ego vehicle's future path.
+3. The object enters or clearly overlaps the ego path or future driving corridor.
+4. The event can be temporally localized in this clip, including a truncated boundary.
+5. The object is sufficiently close or trajectory-relevant to require ego attention.
+
+Do NOT include normal following traffic, dense traffic without an identifiable entering event, static roadside objects, far-away crossings without ego-path conflict, parked vehicles that do not move into the path, low-speed irrelevant maneuvers, or visible objects with no ego-path interaction. A normal no-event clip is not an abstention: return an empty events list.
+
+Abstain for the whole clip only if poor view, occlusion, an ambiguous ego path, or insufficient evidence makes it impossible to judge the clip. Do not abstain merely because there is no event.
+
+For event_start, use the first visible moment the road user begins entering or overlapping the path. For event_end, use the first moment after the spatial conflict has ended. Times are numeric seconds relative to the sampled clip start. List events in chronological order. object_identity is a short visual/trajectory description that distinguishes the road user, such as "red sedan merging from right".
+
+Return one JSON object only, with no markdown or prose outside it:
+{
+  "clip_status": "ok | abstain",
+  "events": [
+    {
+      "event_start": 12.5,
+      "event_end": 15.0,
+      "event_type": "enter_ego_path",
+      "involved_object": "vehicle | pedestrian | cyclist | other | unknown",
+      "object_identity": "short distinguishing description",
+      "ego_relevant": true,
+      "boundary_status": "ok | truncated_start | truncated_end | truncated_both | uncertain",
+      "complete_event_visible": true,
+      "confidence": "high | medium | low",
+      "evidence": "brief visual evidence"
+    }
+  ],
+  "abstain_reason": null
+}
+
+The example event above illustrates schema only. Do not copy it unless it is actually observed. For no event, return "events": []. For abstention, return "clip_status": "abstain", an empty events list, and a short abstain_reason.

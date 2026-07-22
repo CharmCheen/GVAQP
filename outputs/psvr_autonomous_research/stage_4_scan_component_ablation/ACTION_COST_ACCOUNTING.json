@@ -1,0 +1,23 @@
+{
+  "physical_runs": {"smoke": 4, "formal": 24, "total": 28, "cap": 28},
+  "GPU_seconds": {
+    "smoke_total": 314.771597278,
+    "formal_total": 1848.469348955,
+    "all_total": 2163.240946233,
+    "formal_median": 77.288876006,
+    "formal_min": 63.654069874,
+    "formal_max": 81.456199504
+  },
+  "physical_VERIFY_calls": {"smoke": 20, "formal": 118, "total": 138},
+  "scan_actions": {"smoke": 116, "formal": 696, "per_run": 29},
+  "refinement_actions_definition": "D1/D2/D3 midpoint-hierarchy SCAN actions; D0 fixed-grid SCAN is reported separately",
+  "decoded_frames": {"smoke": 464, "formal": 2784, "total": 3248},
+  "proxy_batches": {"smoke": 116, "formal": 696},
+  "VERIFY_admitted": "equal to completed physical_VERIFY_calls per run",
+  "VERIFY_rejected": "one fail-closed post-action admission attempt per run when stop_reason begins verify_not_admitted",
+  "scheduler_overhead_seconds": "UNAVAILABLE: inherited physical runner does not separately timestamp the sandbox policy RPC; not reported as zero",
+  "snapshot_commit_seconds": "Measured per run as sum(checkpoint_elapsed - physical_action_end); see METHOD_DEADLINE_METRICS.csv",
+  "equal_action_count_enforced": false,
+  "equal_wall_clock_guard_primary": true,
+  "interpretation": "D3 failure cannot be attributed to less work: every D3 formal run completed 29 scans and five VERIFY calls."
+}

@@ -1,0 +1,102 @@
+{
+  "verdict": "PASS",
+  "checks": [
+    {
+      "check": "SOURCE_MANIFEST.csv hashes",
+      "status": "PASS",
+      "evidence": "14"
+    },
+    {
+      "check": "INPUT_MANIFEST.csv hashes",
+      "status": "PASS",
+      "evidence": "3"
+    },
+    {
+      "check": "no physical response exists or accessed",
+      "status": "PASS",
+      "evidence": "0 calls; 0 response files"
+    },
+    {
+      "check": "governing targets",
+      "status": "PASS",
+      "evidence": "recall=.8 cost<.7 dense=347"
+    },
+    {
+      "check": "ANY grid completeness",
+      "status": "PASS",
+      "evidence": "1152"
+    },
+    {
+      "check": "error simulator exact-baseline reproduction",
+      "status": "PASS",
+      "evidence": "201 calls, 21 events, 222.25/347"
+    },
+    {
+      "check": "adversarial false-negative injection active",
+      "status": "PASS",
+      "evidence": "all sub-unit sensitivity cells fail"
+    },
+    {
+      "check": "conservative feasible region",
+      "status": "PASS",
+      "evidence": "[{'effective_sensitivity': 1.0, 'effective_specificity': 0.99, 'unknown_rate': 0.0}, {'effective_sensitivity': 1.0, 'effective_specificity': 1.0, 'unknown_rate': 0.0}]"
+    },
+    {
+      "check": "threshold direction",
+      "status": "PASS",
+      "evidence": "no looser passing cell"
+    },
+    {
+      "check": "contract hash/immutability",
+      "status": "PASS",
+      "evidence": "832757575729275e4309e0ba69bdff52a9f60ccc265479ce96ef7d371a010809"
+    },
+    {
+      "check": "later decision precedence complete",
+      "status": "PASS",
+      "evidence": "['INTERVAL_OPERATOR_GPU_BLOCKED', 'INTERVAL_OPERATOR_INCOMPLETE', 'INTERVAL_OPERATOR_NO_GO', 'COUNT_GUIDED_INTERVAL_GO', 'ANY_HIERARCHICAL_GO']"
+    },
+    {
+      "check": "COUNT priority safety",
+      "status": "PASS",
+      "evidence": "non-pruning optional COUNT"
+    },
+    {
+      "check": "COUNT grid and recall invariance",
+      "status": "PASS",
+      "evidence": "450 cells; priority-only recall invariant"
+    },
+    {
+      "check": "abstain/failure safe fallback",
+      "status": "PASS",
+      "evidence": "all charged; only valid high complete negative prunes"
+    },
+    {
+      "check": "exact CP recomputation",
+      "status": "PASS",
+      "evidence": "one-sided 95%"
+    },
+    {
+      "check": "160-call accounting",
+      "status": "PASS",
+      "evidence": "160"
+    },
+    {
+      "check": "sample size infeasible",
+      "status": "PASS",
+      "evidence": "finite lower bound <1"
+    },
+    {
+      "check": "decision compliance",
+      "status": "PASS",
+      "evidence": "CONTRACT_INFEASIBLE_UNDER_160_CALLS"
+    },
+    {
+      "check": "all sealed file hashes",
+      "status": "PASS",
+      "evidence": "29"
+    }
+  ],
+  "physical_vlm_calls": 0,
+  "conclusion": "Contract is correctly infeasible under 160 calls; no physical gate is authorized."
+}

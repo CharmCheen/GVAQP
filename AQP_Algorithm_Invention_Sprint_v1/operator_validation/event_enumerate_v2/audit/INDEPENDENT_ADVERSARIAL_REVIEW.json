@@ -1,0 +1,116 @@
+{
+  "review_date_utc": "2026-07-12",
+  "review_identity": "/root/bounded_adversarial_review",
+  "review_scope": "Bounded adversarial review of the scientific terminal decision, processor-only evidence, held-out gate, physical-call compliance, and report claims.",
+  "overall": "PASS_WITH_CAVEATS",
+  "final_decision_supported": true,
+  "supported_decision": "HELDOUT_DATA_REQUIRED",
+  "scientific_blocker_found": false,
+  "independent_findings": [
+    {
+      "area": "terminal held-out gate",
+      "status": "PASS",
+      "finding": "No audited local family supplies a disjoint, exhaustive, trusted enter_ego_path relation; stopping before model generation is supported."
+    },
+    {
+      "area": "old metadata-compression diagnosis",
+      "status": "PASS_WITH_SCOPE_CAVEAT",
+      "finding": "The preserved runner source, warning, schedules, and outputs strongly support the 121-to-122-to-10-frame reconstruction, but the exact v1 dependency image and model-input tensors were not preserved."
+    },
+    {
+      "area": "old event-boundary diagnostic",
+      "status": "CORRECTION_REQUESTED",
+      "finding": "A coordinate warp derived from processor patch centers is not semantic event-localization ground truth and must be labeled and reported separately."
+    },
+    {
+      "area": "pre-execution evidence selectors",
+      "status": "CORRECTION_REQUESTED",
+      "finding": "The final-partial audit cited an abbreviated JUnit selector rather than the exact parametrized test name."
+    },
+    {
+      "area": "zero-call claim",
+      "status": "PASS_WITH_SCOPE_CAVEAT",
+      "finding": "The bundle demonstrates zero v2 calls locally; it is not an independent external scheduler/accounting audit."
+    },
+    {
+      "area": "future source-FPS eligibility",
+      "status": "RESIDUAL_CAVEAT",
+      "finding": "The frozen int(source_fps/2) stride plus 121-frame cap may reject some 60-second non-integer-FPS media and must be checked before future held-out authorization."
+    }
+  ],
+  "post_review_remediation": {
+    "verification_identity": "/root",
+    "status": "PASS",
+    "items": [
+      {
+        "request": "Exercise the exact old helper-to-processor call signature on a sentinel and cover every nominal legacy call.",
+        "resolution": "PASS: test_exact_v1_helper_to_processor_call_compresses_sentinel_frames and test_all_68_nominal_old_calls_have_the_reconstructed_compression both pass in the sealed 25-test JUnit result."
+      },
+      {
+        "request": "Separate coordinate-warp diagnostics from semantic localization.",
+        "resolution": "PASS: OLD_COORDINATE_WARP_DIAGNOSTICS.csv has 102 explicitly non-semantic boundary rows; OLD_COORDINATE_WARP_SUMMARY.json reports 67 interpolation-supported and 35 outside-timeline boundaries, while semantic localization remains NOT_MEASURED."
+      },
+      {
+        "request": "Use the exact final-partial JUnit selector.",
+        "resolution": "PASS: the pre-execution audit resolves the full timeline_73p4s_10fps.mp4-partial-70.0-73.4-7 selector."
+      },
+      {
+        "request": "State the scope of the zero-call evidence and the non-integer-FPS caveat.",
+        "resolution": "PASS: the final reporting identifies bundle-local evidence only and makes FPS/frame-count compatibility a preauthorization task."
+      }
+    ]
+  },
+  "residual_caveats": [
+    "The exact v1 dependency image, serialized chat, processor metadata object, input tensors, and temporal position IDs were not preserved; the reconstruction is artifact/source-supported under pinned current dependencies rather than a replay of old model generation.",
+    "Zero-call evidence is confined to bundle files, ledgers, and local process artifacts; no external scheduler or cluster-accounting audit was available.",
+    "Before any future reference is exposed to inference or any physical call is authorized, source FPS/frame counts must be checked against the frozen selection rule; incompatibility requires an event-independent refreeze and a repeated processor audit."
+  ],
+  "final_read_only_verification": {
+    "verification_identity": "/root/bounded_adversarial_review",
+    "verification_scope": "Post-remediation sealed bundle, distinct from the primary-agent remediation check.",
+    "verdict": "PASS_WITH_CAVEATS",
+    "blocking_discrepancies": 0,
+    "decision_supported": "HELDOUT_DATA_REQUIRED",
+    "verification_matrix": {
+      "old_compression_reproduction": "PASS_WITH_SCOPE_CAVEAT",
+      "corrected_metadata_path": "PASS",
+      "processor_visible_timeline": "PASS",
+      "timestamp_mapping": "PASS",
+      "heldout_independence": "PASS_TERMINAL",
+      "reference_provenance_or_absence": "PASS_TERMINAL",
+      "no_prompt_or_sampling_tuning": "PASS",
+      "physical_call_budget": "PASS_ZERO_CALLS",
+      "matched_dense_cost": "PASS_NOT_MEASURED",
+      "metric_recomputation": "PASS_NOT_MEASURED",
+      "decision_compliance": "PASS",
+      "file_manifest_hashes": "PASS_58_OF_58",
+      "reviewed_evidence_hashes": "PASS_12_OF_12",
+      "freeze_hashes": "PASS_10_SOURCES_3_ARTIFACTS",
+      "legacy_raw_response_hashes": "PASS_70_OF_70",
+      "physical_artifacts": "PASS_EMPTY_ATTEMPTS_HEADER_ONLY_LEDGER",
+      "sealed_junit": "PASS_25_OF_25",
+      "authoritative_pending_claims": "PASS_ZERO"
+    },
+    "coordinate_warp_accounting": {
+      "boundaries": 102,
+      "interpolation_supported": 67,
+      "outside_visible_timeline": 35,
+      "all_marked_non_semantic": true
+    },
+    "provenance_note": "The independent reviewer inspected but did not rerun the sealed JUnit and made no file edits."
+  },
+  "reviewed_evidence_sha256": {
+    "runtime/pytest_results.xml": "9d6f895cb270a035fdde0c1ca809b9aa8e6bf9c1de6832e55b5d49d1c4eb1f59",
+    "audit/PRE_EXECUTION_PROCESSOR_AUDIT.csv": "0497ce50f144c15b1628ebd38b1ca005f8bded6b88016fb9d8515bf21e60134f",
+    "audit/PRE_EXECUTION_PROCESSOR_AUDIT.json": "47db8231cf833d807d92f8339f17f9047a767d31a8338515cc08551e31b11fe2",
+    "audit/OLD_CALL_TIMELINE_RECONSTRUCTION.csv": "d2fd8169eb2c2c2ea65415d21945c2ad5743bce5c40f6bc8db563ab048d92317",
+    "audit/OLD_COORDINATE_WARP_DIAGNOSTICS.csv": "59904dfd31abd52e547fb736cde95f7f965c9aa11b07a7c7bc0ee0d4976461b5",
+    "audit/OLD_COORDINATE_WARP_SUMMARY.json": "2f2b1f37a0f042ddbda63c7561b398691f9fdc125b5c47e5e650ef9a83ae3c4e",
+    "data/HELDOUT_CANDIDATE_AUDIT.csv": "8d29b5651a532fcc07ca66eaae3b1700d728451539e5ec13c3f5014f38bfb572",
+    "data/HELDOUT_GATE.json": "6812ee43951880086950a50ed3d90edb135355b5e30c56ce7521d7a512a58b37",
+    "config/FROZEN_EVENT_ENUMERATE_V2_CONFIG.json": "d6304facaaaf14ddc1dd0fde4b0487b974e163606cd73244966f8135aa705ae2",
+    "config/.event_enumerate_v2_freeze.lock": "5065552534cc77659286ca51bb0d8bdbabe0fa68402031b76c06652e0fbe6e23",
+    "physical/NO_CALLS.json": "b572287842d70f775a5346cdefeeeb25bf5d5e60f1148e0029b0c61e66df0b91",
+    "physical/CALL_LEDGER.csv": "21dddcab94e96ac8aa696ebe492b438cfadc4ed7e78601e4e3067fecdd1a79fb"
+  }
+}

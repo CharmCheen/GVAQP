@@ -1,0 +1,78 @@
+{
+  "audit_id": "MF_PSVR_STAGE_A_EXECUTION_DIFFERENCE_AUDIT_V1",
+  "created_at_utc": "2026-07-19T05:53:00Z",
+  "status": "PASS_WITH_RECORDED_FROZEN_VERIFIER_DEFECT",
+  "differences": [
+    {
+      "id": "D4_MISSING_PHYSICAL_COST_WRITER",
+      "recovery_claim": "The frozen oracle runner includes the previously repaired physical-cost accounting path.",
+      "observed": "The runner requires STAGE_A_PHYSICAL_COST.json in its final artifact universe but contains no code that writes it.",
+      "scientific_effect": "None after independent reconstruction: the artifact was computed before finalization from the immutable 96-call attempt log, raw timing envelopes, preparation receipt, model-validation record, and inference start receipt.",
+      "disposition": "DO_NOT_EDIT_FROZEN_RUNNER; bind independently recomputed cost artifact in the frozen completion marker"
+    },
+    {
+      "id": "D5_PANDAS_NON_ROUNDTRIP_FLOAT_VERIFY",
+      "recovery_claim": "The frozen runner's finalize followed by verify path is internally self-consistent.",
+      "observed": "Finalize wrote generation_runtime_seconds=19.338814230635762 for call 001. pandas.read_csv with its default C parser materialized 19.33881423063576, and the verifier used bit-exact equality against the raw JSON float, so verify rejected its own finalized manifest.",
+      "scientific_effect": "The CSV text parsed with Python float() is bit-identical to the raw JSON number; all identities, hashes, labels, and cost records remain unchanged. This is a verifier parser/equality defect, not an evidence mismatch.",
+      "disposition": "PRESERVE_FROZEN_ARTIFACTS_AND_RUN_INDEPENDENT_CONTENT_VERIFIER"
+    },
+    {
+      "id": "D6_INDEPENDENT_REPORT_INDEX_CHECK",
+      "recovery_claim": "Not applicable; this was a newly added independent verifier.",
+      "observed": "Its first verification compared persisted RangeIndex values with inherited filtered DataFrame indices despite identical row content.",
+      "scientific_effect": "None. Verification was corrected to normalize indices before comparison and then passed without rewriting oracle artifacts.",
+      "disposition": "FIX_INDEPENDENT_VERIFIER_ONLY_AND_RERUN"
+    }
+  ],
+  "oracle_execution": {
+    "physical_attempts_started": 96,
+    "accepted_durable_calls": 96,
+    "uncertain_started_calls": 0,
+    "raw_artifacts": 96,
+    "parsed_artifacts": 96,
+    "call_manifest_rows": 96,
+    "label_manifest_rows": 192,
+    "parse_failures": 0,
+    "completion_status": "COMPLETE_COMMIT",
+    "completion_hash": "328c62401c88ede608e1c4088ce774918fa25d43d392d0ca553f00db132341db",
+    "support_decision": "STOP_ACQUIRE_LICENSED_QUERY_ENRICHED_SOURCE"
+  },
+  "frozen_runner_verification": {
+    "status": "FAIL",
+    "first_failure": "Call manifest numeric/physical fields changed for mf_psvr_stage_a_001",
+    "isolated_mismatch": {
+      "csv_text": "19.338814230635762",
+      "python_float_equals_raw_json": true,
+      "pandas_default_float": "19.33881423063576",
+      "pandas_default_float_equals_raw_json": false
+    }
+  },
+  "prior_report_reconciliation": {
+    "status": "PASS_PARTIAL_BINDING_AND_COUNT_RECONCILIATION",
+    "audit_path": "outputs/mf_psvr_publication_program/cycle_01_training_pool/stage_a/STAGE_A_COMPLETION_AUDIT.json",
+    "audit_hash": "2fe6caea6b86f8c688a9b86c8e76306b8eb065cb762a313e5c74c49f8df892eb",
+    "call_manifest_sha256": "4a7f29d6077b57ea9e78cfb0c808dc96d3cee0e82210540cf55d5e093a9b8cbf",
+    "label_manifest_sha256": "0735c04c15e55683191b91ff80dd8e3dc36e48049a21a30b91c08bf456771bf8",
+    "event_groups_sha256": "e968c8c196a8ef442e75544a89aded1e08ab5cdd308002cd3be38d383135519e",
+    "physical_cost_sha256": "60ae9bc2453312c388b8fac7004fb4770be223daa5f781f471d4b08c31846760",
+    "limitation": "This reporter checks completion-marker bindings, identities, counts, and summaries; it does not itself rerun the frozen raw parser/projection/K3 reconstruction."
+  },
+  "full_frozen_recomputation": {
+    "status_recorded_in_bound_receipt": true,
+    "audit_path": "outputs/mf_psvr_publication_program/cycle_01_training_pool/stage_a/STAGE_A_ORACLE_ROUNDTRIP_VERIFICATION_AUDIT.json",
+    "method": "Run the unchanged hash-frozen verifier with only its module-local pandas read_csv default changed to float_precision=round_trip.",
+    "required_result": "VERIFIED_COMPLETE_COMMIT"
+  },
+  "cost": {
+    "total_physical_cost_seconds": 2129.1209635050755,
+    "generation_runtime_seconds_sum": 1443.8174640852958,
+    "resident_model_load_seconds": 82.48489813134074,
+    "uncertain_calls": 0
+  },
+  "strongest_supported_conclusion": "The exact 96-call physical evidence and projections fully recompute through the unchanged frozen verifier when CSV floats are parsed round-trip; the default verifier command remains failed solely because its pandas parse changes one textual runtime before bit-exact comparison.",
+  "main_competing_explanation": "A hidden manifest corruption could imitate a numeric mismatch, but the full frozen raw-to-projection/K3/cost/completion verification passes under the parser-only round-trip shim.",
+  "key_uncertainty": "The standard unshimmed verifier command remains a reproducible false negative, so every completion claim must retain and bind the explicit parser exception receipt.",
+  "next_action": "Continue the mandated query-aligned dataset and grouped model phases; do not reinterpret the support STOP as model readiness.",
+  "heldout_opened": false
+}

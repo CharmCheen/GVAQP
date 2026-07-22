@@ -1,0 +1,38 @@
+{
+  "decision": "NECESSARY_PHYSICAL_INPUT_MISSING",
+  "required": {"independent_source_videos": 3, "queries_per_video": 2, "tasks": 6},
+  "available": {
+    "independent_sources_with_stable_complete_reference": 1,
+    "fully_supported_queries_per_source": 1,
+    "tasks": 1
+  },
+  "assets": [
+    {
+      "path": "data/realcam/long_video_data/long_video_dataset3.mp4",
+      "duration_seconds": 3462.93,
+      "independent": true,
+      "stable_complete_reference": true,
+      "supported_query": "enter_ego_path"
+    },
+    {
+      "path": "try_or_no/videos/realcartest_5k.mp4",
+      "duration_seconds": 208.333333,
+      "independent": false,
+      "stable_complete_reference": false,
+      "reason": "Existing cross-video input manifest identifies it as a short derivative of realcartest."
+    },
+    {
+      "path": "try_or_no/test.mov",
+      "duration_seconds": 43.043333,
+      "independent": true,
+      "stable_complete_reference": false,
+      "reason": "Existing oracle-label rows all abstained after max_workers failure; existing manifest marks it too short for meaningful limited-oracle validation."
+    }
+  ],
+  "missing": [
+    "two additional independent source videos with stable evaluator references",
+    "a second frozen query and stable evaluator reference for each of three videos"
+  ],
+  "heldout_opened": false,
+  "terminal_mapping": "PSVR_CORE_INNOVATION=BLOCKED"
+}

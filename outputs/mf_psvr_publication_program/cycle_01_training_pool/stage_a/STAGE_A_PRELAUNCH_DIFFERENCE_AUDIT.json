@@ -1,0 +1,66 @@
+{
+  "audit_id": "MF_PSVR_STAGE_A_PRELAUNCH_DIFFERENCE_AUDIT_V1",
+  "created_at_utc": "2026-07-19T04:39:03Z",
+  "postlaunch_amendment_at_utc": "2026-07-19T04:52:00Z",
+  "git_commit": "1a441186a94190254b29848089bb1f6327c6796e",
+  "charged_work_started_during_audit": false,
+  "differences": [
+    {
+      "id": "D1_GIT_PROVENANCE_STATUS",
+      "recovery_claim": "Core Stage-A files are tracked and unmodified at the working-tree level.",
+      "observed": "The candidate, freeze, and oracle runners; mf_psvr training-pool, selection, and oracle modules; and their focused tests are all untracked in the current Git index.",
+      "severity": "PROVENANCE_RECORD_DEFECT",
+      "frozen_behavior_mismatch": false,
+      "disposition": "PROCEED_ONLY_ON_DIRECT_CONTENT_HASH_EVIDENCE"
+    },
+    {
+      "id": "D2_FREEZE_HELP_INTERFACE",
+      "recovery_claim": "No explicit claim; the launch protocol requires checking each runner with --help.",
+      "observed": "freeze_mf_psvr_stage_a_sample.py has no argparse interface; --help enters main and correctly fails closed while candidate extraction is incomplete. Its actual frozen invocation is the zero-argument script after candidate completion.",
+      "severity": "DOCUMENTATION_INTERFACE_MISMATCH",
+      "frozen_behavior_mismatch": false,
+      "disposition": "DO_NOT_EDIT_FROZEN_SELECTION_RUNNER"
+    },
+    {
+      "id": "D3_BYTE_IDENTICAL_UNIT_MANIFEST_REWRITE",
+      "recovery_claim": "The frozen UNIT_MANIFEST.csv is already present and the launch instruction prohibits regenerating it.",
+      "observed": "Candidate preflight always calls atomic_csv(UNIT_MANIFEST, units), and the launch preflight rewrote the file at 2026-07-19T04:40:14Z. The pre-run and post-write SHA-256 are both 28e72b6d9497d0f4a9278add3e1df00898585045fdb90520026e0f37747c3053, so no provider, unit, anchor, or byte identity changed.",
+      "severity": "LITERAL_PROTOCOL_SIDE_EFFECT_WITHOUT_UNIVERSE_CHANGE",
+      "frozen_behavior_mismatch": false,
+      "disposition": "REQUIRE_INDEPENDENT_EXACT_UNIVERSE_AUDIT_BEFORE_STAGE_A_FREEZE"
+    }
+  ],
+  "direct_hash_checks": {
+    "scripts/run_mf_psvr_training_pool_candidates.py": "a8173595f840ddcacf932d6fbcc1a0658f50a1196ff8cd6ffdc1ad4eac86111a",
+    "scripts/freeze_mf_psvr_stage_a_sample.py": "c0590e965ac1b26a3dc322025f41ed6021f123d4c00136eccbd58e098b54fe22",
+    "scripts/run_mf_psvr_stage_a_oracle.py": "f2461781504c13cc6b675e870f88332c7b19a6d6fa1a330a3ff320d0c20e5326",
+    "src/garc_eval/mf_psvr/training_pool.py": "e4e30313882f11f1354a6f731ed72e0fcf502371efd559783ded5a2de1e14bac",
+    "src/garc_eval/mf_psvr/stage_a.py": "689b836f6c01d27d5868215218bfe63a1b0212ab6cb9ccb6aea2018ec7b0251a",
+    "src/garc_eval/mf_psvr/stage_a_oracle.py": "7acc25a13f42e931d07466f6103f49dfabfc4106c6c52391641a92109fbd700e"
+  },
+  "hash_binding_results": {
+    "candidate_runner_matches_preinference_audit": true,
+    "freeze_runner_matches_preinference_audit_and_acquisition_protocol": true,
+    "training_pool_core_matches_preinference_audit": true,
+    "selection_core_matches_preinference_audit_and_acquisition_protocol": true,
+    "oracle_runner_matches_execution_spec": true,
+    "oracle_core_matches_execution_spec": true,
+    "frozen_hash_mismatches": []
+  },
+  "live_gate_evidence": {
+    "active_stage_a_or_candidate_runner": false,
+    "active_gpu_compute_process": false,
+    "cuda_available": true,
+    "gpu": "NVIDIA A800-SXM4-80GB",
+    "candidate_state": "PREFLIGHT_PASS_GPU_NOT_RUN",
+    "completed_provider_videos": 0,
+    "unit_score_rows": 0,
+    "physical_oracle_attempts": 0,
+    "raw_oracle_outputs": 0,
+    "heldout_opened": false,
+    "focused_tests": "14 passed",
+    "py_compile": "PASS"
+  },
+  "conclusion": "The recovery memo is inaccurate about Git index provenance, and the frozen runner has a byte-identical UNIT_MANIFEST rewrite side effect that violates the literal no-regeneration instruction. Direct hashes prove that every frozen executable component checked is byte-identical to its binding and that the manifest universe did not change. Runner completion alone is insufficient; Stage-A freeze is gated on an independent exact-universe/content audit.",
+  "launch_decision": "CONDITIONAL_PASS_REQUIRE_INDEPENDENT_COMPLETION_AUDIT"
+}

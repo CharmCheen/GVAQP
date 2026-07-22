@@ -1,0 +1,91 @@
+{
+  "analysis_status": "EXPLORATORY_NOT_PREREGISTERED_OR_CRYPTOGRAPHICALLY_BLINDED",
+  "artifact_sha256": {
+    "BEST_STAGE_A_TEMPORAL_REFINER.json": "e300993b73a88adf13102d8936bcb16a4e89d9e3717b09d068f72fd409c1ae7a",
+    "BEST_STAGE_A_VALUE_MODEL.json": "27255491a32e7d023d6eb4466421a51112aaabe9567be63e71ee73d45fb50259",
+    "CALIBRATION_CURVES.csv": "3082149ec611c9c55897ae7c708f80d74dad7c1d97c3c65fad027fccb14b93f1",
+    "FEATURE_IMPORTANCE.csv": "e986b9bc0475f8adf18c57b005b7c1772694008e77a1324ae5f764b858223b47",
+    "HARD_NEGATIVE_CASES.csv": "cf64e55a0b0fdb38d1a1c96fbb75ae761194b33e892bda83a3b5ab3f28705b2f",
+    "HARD_POSITIVE_CASES.csv": "e6a1dd6e98e2847b54dce3aa04967357e49eabade2f543ec2e3bd71f78bfb9e9",
+    "MODEL_HASHES.json": "864c75b3fe9637f19482828b4f9e10c8621a0027a45e4f6fc7a90315d4890dde",
+    "STAGE_A_AUXILIARY_EVALUATION.csv": "bd724b25fcd6f65685b039ae33fc58ec8ba571a0cd4a87ebe6c06de73b306bd3",
+    "STAGE_A_CONTROL_SUMMARY.csv": "d12793735717ea1d570021acd6ded9144af5d9a36d7d85b39a66ea4ffd28eb9f",
+    "STAGE_A_GROUPED_PREDICTIONS.parquet": "573d9bee4f52f2b6c6b171d0f5e88fd88486cad4461ab98249f061dbbe15f078",
+    "STAGE_A_GROUP_BOOTSTRAP_INTERVALS.csv": "2cfbaf83c4f8a2b2aae3ca86de24838cdffd84aef75bb58679831c3eb573f563",
+    "STAGE_A_MODEL_CARD.md": "074ddfb661ad1e904e95e47a9975177c1999fb4aed43a7eaf2594b7928a65be9",
+    "STAGE_A_MODEL_METRICS.csv": "6230cee4ad0d6491e0506068c193133f34719f2ecf357876a4a21828c7a08938",
+    "STAGE_A_MODEL_READINESS_DECISION.json": "ce25b7243a6210b10019910b5f7f305be20179a0c2954193ee2b7e9c746e3b3a",
+    "STAGE_A_PER_QUERY_RESULTS.csv": "7a4969a613486ebdf752fb00ab68dd702f5d1ad946d7a6b0d8972a910fce797c",
+    "STAGE_A_PER_SOURCE_RESULTS.csv": "c325badb01bb058f8b0862ff829bc17c993e31a039e5eddfcbb2f2f933ba85e1",
+    "STAGE_A_TO_MODEL_FINAL_REPORT.md": "b132285eb3d166ff0c4670280f8247884b7d8610aac66b283ab6271f11eea417"
+  },
+  "audit_hash": "4dbfb789e089162725a289b282c921812fa14863303d47522f1780c647956d39",
+  "audit_id": "MF_PSVR_STAGE_A_MODELING_COMPLETION_AUDIT_V1",
+  "baseline_models": [
+    "B0_RAW_YOLO",
+    "B1_FIFO"
+  ],
+  "best_aggregate_model": "M0_LOGISTIC",
+  "best_temporal_model": "TCN_TEMPORAL",
+  "binary_evaluation_rows": 172,
+  "controls": [
+    "SHUFFLED_LABEL_M0",
+    "SOURCE_ID_ONLY",
+    "SESSION_ID_ONLY",
+    "QUERY_ID_ONLY",
+    "SELECTION_STRATUM_ONLY",
+    "ANCHOR_ID_ONLY"
+  ],
+  "created_at_utc": "2026-07-19T06:41:35Z",
+  "dataset_completion_audit_sha256": "d54f2bb318161c8656065609a37d9d8f495e31bb02c56ec54641b991db1ba62f",
+  "development_binary_rows": 144,
+  "development_source_session_groups": 69,
+  "execution_difference_audit_sha256": "38969406e856e08002ab4013509b47016ae5fc176baf92fb3eb42d1ee513675f",
+  "final_calibration_support": {
+    "deployable": false,
+    "interpretation": "A fitted Platt map is retained only to reproduce the exploratory audit; it is not a deployable calibrator.",
+    "negatives": 27,
+    "per_query": {
+      "Q1": {
+        "negatives": 13,
+        "positives": 1,
+        "rows": 14
+      },
+      "Q2": {
+        "negatives": 14,
+        "positives": 0,
+        "rows": 14
+      }
+    },
+    "positives": 1,
+    "rows": 28,
+    "status": "UNSUPPORTED_ONE_POSITIVE_NOT_DEPLOYABLE"
+  },
+  "fixed_pool_audit_binary_rows": 28,
+  "heldout_opened": false,
+  "leave_one_dataset_out_status": "NOT_IDENTIFIABLE",
+  "main_evaluation": "exact_leave_one_source_session_out",
+  "model_hash_manifest_sha256": "864c75b3fe9637f19482828b4f9e10c8621a0027a45e4f6fc7a90315d4890dde",
+  "modeling_protocol_provenance_sha256": "91a0e8d9b45a66f42ec61f19f1e7c59bffe68d1dc6f02909bb20701fa5be5918",
+  "modeling_protocol_sha256": "f02aed0f140650b69101bd983a94025b92562b7bb148c8c6bd24bec2086feedc",
+  "oracle_completion_audit_sha256": "9f7ebaf209125ff9c6bc9b38cb1b2f6129d762cd88e3c47ea1aec7b8094351e6",
+  "pool_audit_evaluated_after_selection": true,
+  "pool_audit_exclusion": "arithmetic_not_cryptographic",
+  "pool_audit_rows_used_for_fit_or_selection": 0,
+  "random_row_split_used": false,
+  "readiness_decision": "NOT_READY_FOR_PHYSICAL_PILOT",
+  "selected_representation": "M0_LOGISTIC",
+  "semantic_dataset_rows": 192,
+  "source_datasets": 1,
+  "source_sessions": 91,
+  "status": "PASS",
+  "trained_models": [
+    "M0_LOGISTIC",
+    "M1_CALIBRATED_LOGISTIC",
+    "M2_LIGHTGBM",
+    "TCN_TEMPORAL",
+    "GRU_TEMPORAL"
+  ],
+  "trainer_source_sha256": "3b1b5451cdd3b5b1e32ccabf7029d1994bc4f8895deba9697a9a9930d260ff31",
+  "training_wall_seconds": 176.2580926436931
+}

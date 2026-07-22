@@ -1,0 +1,91 @@
+{
+  "checks": [
+    {
+      "check": "method_and_budget_run_counts",
+      "details": {
+        "arc_shared_k3": 90,
+        "native_arc": 90,
+        "native_pstr": 90,
+        "pstr_shared_k3": 90
+      },
+      "passed": true
+    },
+    {
+      "check": "budget_upper_bound",
+      "details": {
+        "max_excess": 0
+      },
+      "passed": true
+    },
+    {
+      "check": "pstr_exact_budget",
+      "details": {
+        "rows": 180
+      },
+      "passed": true
+    },
+    {
+      "check": "file_integrity",
+      "details": [],
+      "passed": true
+    },
+    {
+      "check": "duplicate_query_check",
+      "details": [],
+      "passed": true
+    },
+    {
+      "check": "native_shared_materializer_separation",
+      "details": [],
+      "passed": true
+    },
+    {
+      "check": "evaluator_hash",
+      "details": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+      "passed": true
+    },
+    {
+      "check": "native_shared_identical_selection_trace",
+      "details": [],
+      "passed": true
+    },
+    {
+      "check": "prediction_metric_recomputation",
+      "details": [],
+      "passed": true
+    },
+    {
+      "check": "summary_and_auc_recomputation",
+      "details": [],
+      "passed": true
+    },
+    {
+      "check": "pstr_proxy_only_seal_replay",
+      "details": [],
+      "passed": true
+    },
+    {
+      "check": "frozen_input_hashes",
+      "details": [],
+      "passed": true
+    },
+    {
+      "check": "no_future_oracle_label_selection",
+      "details": {
+        "arc": "audited lazy __getitem__ oracle; trace equals all first accesses",
+        "prospective_status": false,
+        "pstr": "proxy-only sealed selections reproduced exactly"
+      },
+      "passed": true
+    },
+    {
+      "check": "required_root_deliverables",
+      "details": [],
+      "passed": true
+    }
+  ],
+  "k3_does_not_affect_arc_query_trace": true,
+  "statistical_power_insufficient": true,
+  "status": "PASS",
+  "verified_utc": "2026-07-13T04:04:52Z"
+}

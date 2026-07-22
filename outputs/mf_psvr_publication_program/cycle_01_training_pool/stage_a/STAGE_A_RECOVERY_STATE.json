@@ -1,0 +1,39 @@
+{
+  "recovered_stage_a_state": "NOT_PREPARED_ZERO_CALLS",
+  "actual_blocker": "UPSTREAM_CANDIDATE_EXTRACTION_INCOMPLETE",
+  "active_process_found": false,
+  "physical_attempts_started": 0,
+  "accepted_durable_calls": 0,
+  "uncertain_nonretriable_calls": 0,
+  "remaining_unstarted_calls": 96,
+  "last_valid_test_result": "9 passed (pre-interruption focused Stage-A tests)",
+  "post_recovery_test_result": "9 passed (py_compile OK + pytest -q tests/psvr_runtime/test_mf_stage_a_oracle.py)",
+  "stage_a_finalized": false,
+  "stage_a_support_decision": null,
+  "stage_a_positive_labels_q1": null,
+  "stage_a_positive_labels_q2": null,
+  "stage_a_event_groups_q1": null,
+  "stage_a_event_groups_q2": null,
+  "stage_a_total_physical_cost_seconds": null,
+  "next_research_stage": "UPSTREAM_FULL_POOL_Y8_CANDIDATE_EXTRACTION",
+  "next_exact_command": "python scripts/run_mf_psvr_training_pool_candidates.py extract --confirm-gpu",
+  "preconditions_for_stage_a_freeze": [
+    "candidates/CANDIDATE_EXTRACTION_STATE.json status == COMPLETE",
+    "completed_provider_videos == 603",
+    "candidates/UNIT_SCORES.csv exists with 5308 rows",
+    "candidates/UNIT_MANIFEST.csv present with 2654 units (already present)"
+  ],
+  "preconditions_for_stage_a_prepare_infer": [
+    "scripts/freeze_mf_psvr_stage_a_sample.py run (creates STAGE_A_FROZEN_SAMPLE.csv, STAGE_A_QUERY_OPPORTUNITIES.csv, STAGE_A_FREEZE_MANIFEST.json)",
+    "python scripts/run_mf_psvr_stage_a_oracle.py prepare --confirm-oracle",
+    "python scripts/run_mf_psvr_stage_a_oracle.py infer --confirm-oracle"
+  ],
+  "durable_checkpoint_notes": {
+    "execution_spec_frozen": true,
+    "execution_spec_hash": "b21f71dfa283f0f83a776f319688b5b0ead0a1425a60c5c74d6c1a21e25b1a72",
+    "preinference_audit_copy_present": true,
+    "oracle_call_manifest_empty": true,
+    "oracle_label_manifest_empty": true,
+    "code_patch_status": "COMPLETE_AND_GREEN"
+  }
+}

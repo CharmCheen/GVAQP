@@ -1,0 +1,14 @@
+{
+  "status": "FROZEN_RESULT_BLIND_EXECUTION_SEMANTICS",
+  "execution_authorized": false,
+  "base_preregistration": "H_ROLLOUT1B_PREREGISTRATION.json",
+  "precision_amendment": "H1B_PROTOCOL_PRECISION_AMENDMENT.json",
+  "primary_confirmatory_configuration": {"posterior_worlds": 64, "continuation_trajectories": 64, "policy": "APPROX_PLANNING_ADMISSION_LCB"},
+  "diagnostic_only_configurations": [{"posterior_worlds":4,"continuation_trajectories":4},{"posterior_worlds":16,"continuation_trajectories":16},{"posterior_worlds":256,"continuation_trajectories":256}],
+  "error_planner_only": true,
+  "planning_ticks": [0,2,5,10,20],
+  "continuous_neighborhood": {"axis":"planning_ticks","cells":[2,5,10],"fixed_dimensions":["error_magnitude","error_mechanism","error_form","primary_configuration"]},
+  "major_process_families": ["UNIFORM_SPARSE","UNIFORM_DENSE","BURSTY_CLUSTERED"],
+  "decision_priority": ["BLOCKED_EXECUTION_INTEGRITY","ACCEPT_APPROXIMATE_ROLLOUT","PARTIAL_NARROW_ROBUSTNESS_REGION","REJECT_PLANNING_COST_ERASES_GAIN","REJECT_MODEL_ERROR_ERASES_GAIN","REJECT_APPROXIMATION_UNSTABLE"],
+  "new_seed_generation": "PROHIBITED_UNTIL_FUTURE_IMPLEMENTATION_AND_FREEZE_REVIEW"
+}

@@ -1,0 +1,69 @@
+{
+  "PROXY_ARTIFACT_STRUCTURAL_AUDIT": "PASS",
+  "checks": [
+    "EXTRACTION_COMPLETE hashes match UNIT_SCORES, TRACK_CANDIDATES, and FULL_VIDEO_COST",
+    "exactly two unique query-unit score rows per frozen unit",
+    "all unit scores are finite",
+    "YP640 and YP320 Q2 scores and candidate counts are identically zero",
+    "V0 has exactly one one-frame clamp at unit 346 for every family",
+    "V1 has no frame clamp"
+  ],
+  "artifacts": [
+    {
+      "family": "Y8",
+      "video_id": "V0",
+      "unit_score_rows": 694,
+      "track_candidate_rows": 5006,
+      "tail_clamps": 1,
+      "sampled_frames": 17325,
+      "gpu_seconds_per_video_hour": 161.6107277354863
+    },
+    {
+      "family": "Y8",
+      "video_id": "V1",
+      "unit_score_rows": 1134,
+      "track_candidate_rows": 13734,
+      "tail_clamps": 0,
+      "sampled_frames": 28327,
+      "gpu_seconds_per_video_hour": 157.33711548970064
+    },
+    {
+      "family": "YP640",
+      "video_id": "V0",
+      "unit_score_rows": 694,
+      "track_candidate_rows": 8944,
+      "tail_clamps": 1,
+      "sampled_frames": 17325,
+      "gpu_seconds_per_video_hour": 173.63178813806155
+    },
+    {
+      "family": "YP640",
+      "video_id": "V1",
+      "unit_score_rows": 1134,
+      "track_candidate_rows": 17371,
+      "tail_clamps": 0,
+      "sampled_frames": 28327,
+      "gpu_seconds_per_video_hour": 129.99675854228752
+    },
+    {
+      "family": "YP320",
+      "video_id": "V0",
+      "unit_score_rows": 694,
+      "track_candidate_rows": 6528,
+      "tail_clamps": 1,
+      "sampled_frames": 17325,
+      "gpu_seconds_per_video_hour": 85.71376291615256
+    },
+    {
+      "family": "YP320",
+      "video_id": "V1",
+      "unit_score_rows": 1134,
+      "track_candidate_rows": 13454,
+      "tail_clamps": 0,
+      "sampled_frames": 28327,
+      "gpu_seconds_per_video_hour": 83.42825145663949
+    }
+  ],
+  "reference_files_read_by_audit": false,
+  "heldout_opened": false
+}

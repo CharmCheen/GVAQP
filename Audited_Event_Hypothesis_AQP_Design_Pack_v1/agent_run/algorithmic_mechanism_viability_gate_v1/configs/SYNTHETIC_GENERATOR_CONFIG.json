@@ -1,0 +1,14 @@
+{
+  "schema_version": "mechanism_gate_synthetic_v1",
+  "timeline_sizes": [120, 347, 1000],
+  "proxy_aurocs": [0.55, 0.65, 0.75, 0.85, 0.95],
+  "event_durations": [1, 2, 4, 8],
+  "candidate_recalls": [0.6, 0.8, 1.0],
+  "false_burdens": [0.2, 0.5, 0.8],
+  "fragmentation_factors": [1, 2, 4],
+  "canonical_seeds": 100,
+  "large_n_seeds": 50,
+  "class_conditionals": {"negative": "Normal(0,1)", "positive": "Normal(mu,1)", "mu": "sqrt(2)*NormalInverseCDF(target_auroc)"},
+  "calibration_stress": ["correct", "overconfident", "underconfident", "wrong_prior", "temporal_shift"],
+  "config_frozen_before_results": true
+}

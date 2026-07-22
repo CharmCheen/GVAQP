@@ -1,0 +1,127 @@
+{
+  "baseline_reruns": 0,
+  "benchmark_id": "cbbv2_514c0d360fd5b2a4b5fe",
+  "command_ledger": [
+    "PYTHONPATH=src python -m garc_eval.public_event_cell_gate_v1.run_gate run",
+    "PYTHONPATH=src python -m garc_eval.public_event_cell_gate_v1.run_gate seal"
+  ],
+  "completed_at": "2026-07-11T08:43:23.209749+00:00",
+  "config_hash": "a7a8048ea201f4bd447a93886407b69fe93ab3d2e57a153a7990917eb4e06c1b",
+  "decision": "PLANNER_ROUTE_REJECTED",
+  "expected_matrix": {
+    "budgets": [
+      5,
+      10,
+      20,
+      50,
+      80,
+      100
+    ],
+    "formal_runs": 1800,
+    "methods": [
+      "R0-P0",
+      "R0-P1",
+      "R1-P0",
+      "R1-P1"
+    ],
+    "s2_cells": 15,
+    "seeds_per_cell": 30
+  },
+  "experiment_id": "public_event_cell_representation_gate_v1",
+  "git_commit": "1a441186a94190254b29848089bb1f6327c6796e",
+  "git_status_at_seal": " D .agents/skills/aqp-event-budget-loop/SKILL.md\n D .agents/skills/aqp-event-budget-loop/agents/openai.yaml\n D .agents/skills/aqp-event-budget-loop/references/metric_definitions.md\n M AGENTS.md\n D BASELINE_SOURCE_DATA_AUDIT.md\n D CLAIMS_LEDGER.md\n D DECISIONS.md\n D EVENTLIFT_AQP_ALGORITHM_SPEC.md\n D EVENTLIFT_FULL_BENCHMARK_PLAN.md\n D EVENTLIFT_FULL_BENCHMARK_V1_REPORT.md\n D EVENTLIFT_RESULTS_SYNTHESIS.md\n D EVENTLIFT_STAGE1_DEV_REPORT.md\n D EVENTLIFT_STAGE2_DEV_REPORT.md\n D EVENTLIFT_STAGE2_MULTISEG_SMOKE_REPORT.md\n D EXPERIMENT_REGISTRY.csv\n D FAILURES.md\n D HANDOFF.md\n D HTS_AQP_DESIGN.md\n D HTS_EC_DELTA_AND_FEASIBILITY.md\n D HTS_EC_V0_STRICT_REPLAY_REPORT.md\n D PROJECT_STATE.md\n D PROXY_BIAS_DR_FEASIBILITY.md\n D RC_AQP_PREFLIGHT.md\n D TASK_QUEUE.yaml\n?? AEH_AQP_Agent_Handoff_Pack_v3/\n?? Audited_Event_Hypothesis_AQP_Design_Pack_v1/\n?? BCM_AQP_MATHEMATICAL_REFERENCE.md\n?? docs/FROZEN_CONFIG_FOR_CROSS_VIDEO.md\n?? outputs/baseline_adapter_dryrun/\n?? outputs/baseline_adapter_sanity_sweep/\n?? outputs/latent_event_diag_v1/\n?? outputs/ours_failure_audit_v1/\n?? outputs/ours_vs_baselines_realcartest_v1/\n?? outputs/pre_cross_video_audit/\n?? outputs/real_video_protocol_pilot_v1/\n?? outputs/real_video_protocol_pilot_v1_metric_repair/\n?? outputs/stage0_5_common_materializer_baseline_audit_v1/\n?? outputs/stage0_merge_only_repair_v1/\n?? outputs/stage_0_6_materializer_ablation/\n?? outputs/stage_0_7_minimal_operator_compression/\n?? outputs/stage_1a_diagnostic_native_arc_vs_map_bbem/\n?? outputs/stage_1a_map_anchor_only/\n?? outputs/stage_1b_map_anchor_barrier/\n?? outputs/stage_2_cross_video_validation/\n?? scripts/pre_cross_video_audit.py\n?? scripts/stage0_5_common_materializer_baseline_audit.py\n?? scripts/stage0_6_materializer_ablation.py\n?? scripts/stage0_7_minimal_operator_compression.py\n?? scripts/stage0_merge_only_repair.py\n?? scripts/stage1a_map_anchor_only.py\n?? scripts/stage1a_native_arc_vs_map_bbem_diagnostic.py\n?? scripts/stage1b_map_anchor_barrier.py\n?? scripts/stage2_cross_video_validation.py\n?? src/garc_eval/latent_event_diag/\n?? src/garc_eval/mechanism_gate_v1/\n?? src/garc_eval/public_event_cell_gate_v1/\n?? tests/\n",
+  "hardware": {
+    "execution": "CPU",
+    "numpy": "2.2.6",
+    "pandas": "2.2.2",
+    "python": "3.10.20"
+  },
+  "immutable_paths": [
+    "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict",
+    "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/hypothesis_construction_repair_v1",
+    "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/algorithmic_mechanism_viability_gate_v1"
+  ],
+  "input_manifest_hash": "46258fd717993e4a9b6d51f012deaa9fe17da46205ee4501c0ba046433b631f0",
+  "logical_oracle_calls": 180000,
+  "oracle_id": "strict_v2_frozen_presence_cache",
+  "parent_artifacts": [
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/BENCHMARK_ID.txt",
+      "sha256": "24d77077befa27387ea7e677ee26a9358c4073253b2d0477bbea652bb132321b"
+    },
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/units.csv",
+      "sha256": "bfbe4270936d267e36734b30174e83c47b0cb021cda3a9a9b6a7e7a7f709d182"
+    },
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/event_reference.csv",
+      "sha256": "56f617e759e108c96c7a865da26dc229689c87dcf2b633904255aa4c715633a3"
+    },
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/oracle/oracle_presence_observations.csv",
+      "sha256": "ed60bde05311511f8802e019534391542a56beba6412928912c20a0a62ae62d1"
+    },
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/evaluator_config.json",
+      "sha256": "2466f38a74c65e56a2c52a99b033f81a5dee80cad33a31433a1a1b7219f01aa5"
+    },
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/baselines/baseline_budget_curves.csv",
+      "sha256": "96e25853881b687b56a66abd2f528efe725db082cdf83debf38a2c62a7b853f6"
+    },
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/current_method/current_budget_curves.csv",
+      "sha256": "e54ecdf73a216fb42ec67842e42d1d2774ca17489b16588c55564ca378d9da60"
+    },
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/hypothesis_construction_repair_v1/runs/H1/b100/initial_hypotheses.csv",
+      "sha256": "0c1058c9808e6814bffb72b38b6023384adc274a2eb6f32d196cfd637d7cefea"
+    },
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/hypothesis_construction_repair_v1/runs/H1/b100/initial_exploration_cells.csv",
+      "sha256": "d58e116e07f54976148f708e66b3b149f2fb296080bc3dd5812f7bf906cb9337"
+    },
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/hypothesis_construction_repair_v1/analysis/per_budget_metrics.csv",
+      "sha256": "f91dc0c2e2167a41c65fed7700a26024faad1a15cd439fb8c9256710e440fe9a"
+    },
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/algorithmic_mechanism_viability_gate_v1/configs/SEMI_SYNTHETIC_CONFIG.json",
+      "sha256": "9c9d3bc7083d322e736a2059d25ee79b244e332832e8e9063b2a038658336aa1"
+    },
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/algorithmic_mechanism_viability_gate_v1/configs/POLICY_CONFIGS.json",
+      "sha256": "c2ce1dd15bb6dca74af0644b6186881b951b60e76d2bb539f64dd7fdeb7ccf67"
+    },
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/algorithmic_mechanism_viability_gate_v1/configs/EXPERIMENT_MATRIX.csv",
+      "sha256": "841402a720435b0b872af749dfd6d7c41114410aac70ffcfc84860c185c2af9c"
+    },
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/algorithmic_mechanism_viability_gate_v1/runs/synthetic_seed_metrics.csv.gz",
+      "sha256": "e52c725efd996dbf8caa9930f6034e8d77aa12dd1c1d5cb71992b85f19abadf2"
+    },
+    {
+      "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/algorithmic_mechanism_viability_gate_v1/runs/semi_synthetic_seed_metrics.csv.gz",
+      "sha256": "a7bad5117819a273b96d7565e28c4033f1ef3c721e372e99763de77c36bec667"
+    },
+    {
+      "path": "garc_eval/mechanism_gate_v1/run_gate.py",
+      "sha256": "a22425e7eabc03575f401008d8f4cc1b6ff0c25d7d0fa7f8dfea538f8ade135b"
+    },
+    {
+      "path": "garc_eval/mechanism_gate_v1/core.py",
+      "sha256": "c8c9fa74fa08e3c0787afd8841644eabf62d41cfee952a9d20ae3ceae858a3ca"
+    }
+  ],
+  "physical_vlm_calls": 0,
+  "skipped_phases": [
+    "P2 exploration",
+    "P3 counterfactual",
+    "VLM inference",
+    "baseline rerun",
+    "representation grid"
+  ],
+  "status": "SEALED_COMPLETE",
+  "updated_at": "2026-07-11T08:43:23.209705+00:00"
+}

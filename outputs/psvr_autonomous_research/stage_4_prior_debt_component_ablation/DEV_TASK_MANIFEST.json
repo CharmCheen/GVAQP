@@ -1,0 +1,59 @@
+{
+  "manifest_version": "psvr_stage_4_scan_component_ablation_v1",
+  "frozen_before_new_physical_run": true,
+  "scope": "DEVELOPMENT_ONLY_ONE_VIDEO_ONE_QUERY_ONE_A800_FINAL_SINGLE_TASK_CYCLE",
+  "objective": "Identify which component of the S1 composite scan priority causes the C1 marginal event-quality signal under fixed A0 allocation.",
+  "frozen_conclusions_from_H_FACT1": {
+    "H_FACT1": "VALID",
+    "COMPOSITE_SCAN_SIGNAL": "PRESENT_ON_CURRENT_DEV_TASK",
+    "ADAPTIVE_VERIFY_MAIN_EFFECT": "NOT_OBSERVED",
+    "H_COV1_COVERAGE_DEBT_MECHANISM": "NOT_ESTABLISHED",
+    "H_COV1_PROJECT_STATUS": "REVISE",
+    "GENERALIZATION": "UNTESTED"
+  },
+  "task": {
+    "video_id": "long_video_dataset3",
+    "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+    "query_id": "enter_ego_path",
+    "benchmark_id": "cbbv2_514c0d360fd5b2a4b5fe",
+    "reference_version": "consecutive_positive_units_v1",
+    "reference_sha256": "56f617e759e108c96c7a865da26dc229689c87dcf2b633904255aa4c715633a3"
+  },
+  "runtime_identity_hash": "08b384175d8b9debc38598faf09e3966a0cb19d4ccc5fdca3a5e0664c05679fb",
+  "hardware": "NVIDIA A800-SXM4-80GB, GPU-78772d8e-1166-c9c7-1f73-86ea2537431e, 565.57.01",
+  "shared_physical_rules": {
+    "allocation": "A0 fixed 29 SCAN batches followed by VERIFY",
+    "scan_quota_batches": 29,
+    "VERIFY_quota": 5,
+    "proxy_batch_size": 4,
+    "candidate_rule": "highest physically observed proxy score among scanned unqueried units",
+    "candidate_tie_break": "ascending unit_id",
+    "proxy": "physical YOLOv8n midpoint frame original decoded BGR",
+    "oracle": "fresh cache-free physical Qwen3-VL-32B-Instruct",
+    "K3": "unchanged_k3_bridge_safe_persistent_service",
+    "deadline_guard": "h_ds1_tail_guard_v2_persistent_k3",
+    "snapshots": "after every completed SCAN or VERIFY",
+    "initial_state": "fresh physical services and empty observed/queried state"
+  },
+  "deadlines_seconds": {
+    "T_transition": 121.747711537,
+    "T_high": 123.9524739725
+  },
+  "excluded_deadline": {"T_low": 76.891211381125, "reason": "all H-FACT1 cells had zero utility"},
+  "new_physical_matrix": {"variants": ["S2", "S3", "S4"], "deadlines": 2, "runtime_repeats": 3, "runs": 18, "physical_run_cap": 18},
+  "reuse": {
+    "methods": {"S0": "Stage-3 C0", "S1": "Stage-3 C1"},
+    "cells": 4,
+    "runs": 12,
+    "eligibility": "same task, deadlines, A0 schedule, scan/VERIFY quotas, candidate rule, operators, guard, K3, hardware and runtime identity",
+    "stage3_manifest_sha256": "c30697e3a0f0a2c1f41659624da817f3f2539dc342fb83e4fb01c5f73cc1721f",
+    "stage3_deadlines_sha256": "c555c38358bb3b24bf1e126ecd5cbf650b9d02be2ddd2811d598689885793a98",
+    "stage3_preregistration_sha256": "92f25881fcb1ea8197ed98e52d5ac15f0e438057a794ac88306abc6827c471d5",
+    "stage3_resolved_config_sha256": "9656235b01c47ad096b286c0a81a7af7bcb556f9f66cb77e1f567af829f34116",
+    "stage3_factor_policy_sha256": "d001be9f1ebefde6a4c4bb4d8c09dc8a9609f35babc01b9614844d4ddf31e76c",
+    "reused_complete_files_combined_sha256": "c228e1734953c8ada6c8af3fba788622e94b8d51a79563442d090f292c27c6ca"
+  },
+  "policy_visibility": "public units, physically observed proxy rows, queried ids, scan count only",
+  "evaluator_only": ["reference overlap", "positive cells", "positive candidate exposure", "reference event identity", "event metrics"],
+  "forbidden": ["weight tuning", "deadline changes", "T_low runs", "hidden proxy replay", "reference access by policy", "heldout", "second single-video parameter search", "multi-task execution in this cycle"]
+}

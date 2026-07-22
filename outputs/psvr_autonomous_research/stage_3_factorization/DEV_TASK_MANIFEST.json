@@ -1,0 +1,83 @@
+{
+  "manifest_version": "psvr_stage_3_dev_task_v1",
+  "frozen_at_utc": "2026-07-15T05:33:10Z",
+  "stage": "H-FACT1_physical_factorization",
+  "scope": "DEVELOPMENT_ONLY_ONE_VIDEO_ONE_QUERY_ONE_A800",
+  "video_id": "long_video_dataset3",
+  "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+  "query_id": "enter_ego_path",
+  "benchmark_id": "cbbv2_514c0d360fd5b2a4b5fe",
+  "benchmark_version": "clean_baseline_benchmark_v2_strict",
+  "reference": {
+    "type": "VLM_DEFINED_PSEUDO_ORACLE",
+    "version": "consecutive_positive_units_v1",
+    "event_count": 26,
+    "sha256": "56f617e759e108c96c7a865da26dc229689c87dcf2b633904255aa4c715633a3"
+  },
+  "runtime_identity_hash": "08b384175d8b9debc38598faf09e3966a0cb19d4ccc5fdca3a5e0664c05679fb",
+  "runtime_identity": {
+    "workload_id": "warm_oracle_cold_proxy:after_coarse:physical_service:persistent_k3:v2",
+    "hardware_id": "NVIDIA A800-SXM4-80GB, GPU-78772d8e-1166-c9c7-1f73-86ea2537431e, 565.57.01",
+    "oracle_model_id": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+    "proxy_model_id": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "oracle_contract_hash": "ba9ae8755c651acdaccb48f8415e4880ad7da92fcb8f36254e8334480567a201",
+    "proxy_config_hash": "4427a99f0aaf3ba3ad79eb01dd8265eb10ff5032b176d63b6e6bb615c88cb87f",
+    "serving_config_hash": "30460607e4abcd298bb9e213eeeca56e4386020190ce02cc447d44f0c1a54ec1",
+    "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+    "query_id": "enter_ego_path",
+    "batch_size": 4,
+    "resident_model_set": ["Qwen3-VL-32B-Instruct", "yolov8n"]
+  },
+  "frozen_operators": {
+    "proxy": "physical_YOLOv8n_midpoint_frame_original_decoded_BGR",
+    "physical_oracle": "physical_cache_free_Qwen3-VL-32B-Instruct",
+    "K3": "unchanged_k3_bridge_safe_persistent_service",
+    "deadline_guard": "h_ds1_tail_guard_v2_persistent_k3",
+    "action_tail_upper_seconds": 27.1050437105,
+    "commit_tail_upper_seconds": 0.2854655565,
+    "snapshot_checkpoints": "after_every_scan_or_verify_action",
+    "candidate_selection": "highest_observed_proxy_score_among_scanned_unqueried_units",
+    "candidate_tie_breaking": "ascending_unit_id",
+    "proxy_batch_size": 4
+  },
+  "factorization": {
+    "S0": "frozen_fixed_Coverage-Interleave_scan-cell_ordering",
+    "S1": "current_Coverage-Debt_composite_scan-cell_ordering_lambda0.5_beta0.25_revision0",
+    "A0": "frozen_fixed-periodic_SCAN_VERIFY_allocation",
+    "A1": "current_adaptive_SCAN_VERIFY_allocation",
+    "C0": "S0+A0",
+    "C1": "S1+A0",
+    "C2": "S0+A1",
+    "C3": "S1+A1_behavior_equivalent_to_stage2_coverage_debt_psvr"
+  },
+  "run_budget": {
+    "smoke_runs": 4,
+    "matrix_runs": 36,
+    "physical_run_cap": 40,
+    "repeats_per_method_deadline": 3
+  },
+  "heldout_opened": false,
+  "forbidden_changes": [
+    "benchmark_or_reference",
+    "K3",
+    "boundary_refinement",
+    "learned_scheduler",
+    "C3_parameters",
+    "safety_infrastructure_expansion",
+    "multi_video_query_execution_in_this_cycle"
+  ],
+  "source_contracts": {
+    "docs/PSVR_AUTONOMOUS_RESEARCH_CONTRACT.md": "MISSING_AT_FREEZE",
+    "docs/PSVR_RESEARCH_CONTRACT.md": "b4115259ed036ad24c9af83022e8f091e447134537c738f23a890183e25c0770",
+    "docs/PSVR_HYPOTHESIS_REGISTRY.md": "1572ea5b72feb2fc0b40545dfd97c931a5e7173e1a3b8238c5b3b4c807426e0c",
+    "docs/PSVR_DECISION_LEDGER.md": "6ed7c255f21bebab1fddf057fa2bdf846219b4eec49525fccbb13503d002b0b5",
+    "docs/PSVR_FAILURE_CATALOG.md": "7c16f14b76c1fc41b550d6a39fcf6ea2c38fb3480cd847059f60ea93672042e4",
+    "outputs/psvr_autonomous_research/RESEARCH_STATE.json": "58faa5afb294bee5941430147f148606eb98d7bd32ccb0bc28dc1a20f82c602f"
+  },
+  "stage2_evidence_hashes": {
+    "resolved_config.json": "59c74b2f87935f4c06185eb3b1caf9d3023fa9ad138f6d624bb8429f972f8184",
+    "physical_run_metrics.csv": "5ae3f552d30fa1ccd800be4e493ba374f5ea70929d7a433347124f5e6e765bb3",
+    "mechanism_curves.csv": "13cbe836541b993cfc02591685f0327ea0249ee10b0215853bae4f7241395885"
+  },
+  "missing_contract_handling": "The user-supplied bounded-cycle instructions and all other present PSVR contracts govern this cycle; the absent named contract is recorded, not silently reconstructed."
+}

@@ -1,0 +1,897 @@
+{
+  "common": {
+    "committed_set_initial": [],
+    "planning_cost_seconds": 0,
+    "policy_projection_removes": [
+      "latent_event_id",
+      "latent_events",
+      "required_behavioral_invariant"
+    ],
+    "region_duration_seconds": 10,
+    "tie_break": "GROUP_FIFO_V1"
+  },
+  "scenarios": [
+    {
+      "confirm_cost_seconds_by_witness": {
+        "w_e": 2,
+        "w_neg": 4
+      },
+      "group_closure": "confirming any member closes its hypothesis and suppresses remaining members",
+      "horizon_seconds": 8,
+      "initial_frontier_witnesses": [
+        {
+          "creation_time": 0,
+          "interval": [
+            0,
+            1
+          ],
+          "latent_event_id": null,
+          "query_id": "q",
+          "raw_score": 0.95,
+          "witness_id": "w_neg"
+        }
+      ],
+      "initial_hypothesis_members": {
+        "h_neg": [
+          "w_neg"
+        ]
+      },
+      "latent_events": [
+        {
+          "actor_id": "actor_e1",
+          "event_id": "e1",
+          "interval": [
+            11,
+            13
+          ],
+          "region_id": "r1"
+        }
+      ],
+      "materialization": "perfect",
+      "oracle": "perfect",
+      "primary_inference": false,
+      "regions": [
+        {
+          "interval": [
+            0,
+            10
+          ],
+          "region_id": "r0",
+          "scan_cost_seconds": 2
+        },
+        {
+          "interval": [
+            10,
+            20
+          ],
+          "region_id": "r1",
+          "scan_cost_seconds": 2
+        },
+        {
+          "interval": [
+            20,
+            30
+          ],
+          "region_id": "r2",
+          "scan_cost_seconds": 2
+        }
+      ],
+      "required_behavioral_invariant": "CONFIRM(w_neg) first leaves insufficient time for SCAN(r1)+CONFIRM(w_e); SCAN(r1) first can commit e1",
+      "scan_emissions": {
+        "r0": [],
+        "r1": [
+          {
+            "creation_time": 2,
+            "interval": [
+              2,
+              3
+            ],
+            "latent_event_id": "e1",
+            "query_id": "q",
+            "raw_score": 0.8,
+            "witness_id": "w_e"
+          }
+        ],
+        "r2": []
+      },
+      "scenario_id": "VERIFY_FIRST_FAILURE"
+    },
+    {
+      "confirm_cost_seconds_by_witness": {
+        "w_e": 2
+      },
+      "group_closure": "confirming any member closes its hypothesis and suppresses remaining members",
+      "horizon_seconds": 6,
+      "initial_frontier_witnesses": [
+        {
+          "creation_time": 0,
+          "interval": [
+            0,
+            1
+          ],
+          "latent_event_id": "e1",
+          "query_id": "q",
+          "raw_score": 0.9,
+          "witness_id": "w_e"
+        }
+      ],
+      "initial_hypothesis_members": {
+        "h_e": [
+          "w_e"
+        ]
+      },
+      "latent_events": [
+        {
+          "actor_id": "actor_e1",
+          "event_id": "e1",
+          "interval": [
+            1,
+            3
+          ],
+          "region_id": "r0"
+        }
+      ],
+      "materialization": "perfect",
+      "oracle": "perfect",
+      "primary_inference": false,
+      "regions": [
+        {
+          "interval": [
+            0,
+            10
+          ],
+          "region_id": "r0",
+          "scan_cost_seconds": 5
+        },
+        {
+          "interval": [
+            10,
+            20
+          ],
+          "region_id": "r1",
+          "scan_cost_seconds": 5
+        }
+      ],
+      "required_behavioral_invariant": "SCAN first leaves insufficient time for CONFIRM(w_e); CONFIRM first commits e1",
+      "scan_emissions": {
+        "r0": [],
+        "r1": []
+      },
+      "scenario_id": "SCAN_FIRST_FAILURE"
+    },
+    {
+      "confirm_cost_seconds_by_witness": {
+        "w1": 3,
+        "w2": 3
+      },
+      "group_closure": "confirming any member closes its hypothesis and suppresses remaining members",
+      "horizon_seconds": 13,
+      "initial_frontier_witnesses": [],
+      "initial_hypothesis_members": {},
+      "latent_events": [
+        {
+          "actor_id": "actor_e1",
+          "event_id": "e1",
+          "interval": [
+            1,
+            2
+          ],
+          "region_id": "r0"
+        },
+        {
+          "actor_id": "actor_e2",
+          "event_id": "e2",
+          "interval": [
+            31,
+            32
+          ],
+          "region_id": "r3"
+        }
+      ],
+      "materialization": "perfect",
+      "oracle": "perfect",
+      "primary_inference": false,
+      "regions": [
+        {
+          "interval": [
+            0,
+            10
+          ],
+          "region_id": "r0",
+          "scan_cost_seconds": 2
+        },
+        {
+          "interval": [
+            10,
+            20
+          ],
+          "region_id": "r1",
+          "scan_cost_seconds": 2
+        },
+        {
+          "interval": [
+            20,
+            30
+          ],
+          "region_id": "r2",
+          "scan_cost_seconds": 2
+        },
+        {
+          "interval": [
+            30,
+            40
+          ],
+          "region_id": "r3",
+          "scan_cost_seconds": 2
+        }
+      ],
+      "required_behavioral_invariant": "k=2 fixed periodic delays w1 relative to immediate CONFIRM and cannot both preserve its timing and reach/confirm w2",
+      "scan_emissions": {
+        "r0": [
+          {
+            "creation_time": 2,
+            "interval": [
+              2,
+              3
+            ],
+            "latent_event_id": "e1",
+            "query_id": "q",
+            "raw_score": 0.8,
+            "witness_id": "w1"
+          }
+        ],
+        "r1": [],
+        "r2": [],
+        "r3": [
+          {
+            "creation_time": 8,
+            "interval": [
+              8,
+              9
+            ],
+            "latent_event_id": "e2",
+            "query_id": "q",
+            "raw_score": 0.8,
+            "witness_id": "w2"
+          }
+        ]
+      },
+      "scenario_id": "FIXED_PERIODIC_FAILURE"
+    },
+    {
+      "confirm_cost_seconds_by_witness": {
+        "e1w": 3,
+        "n1": 3,
+        "n2": 3
+      },
+      "group_closure": "confirming any member closes its hypothesis and suppresses remaining members",
+      "horizon_seconds": 12,
+      "initial_frontier_witnesses": [
+        {
+          "creation_time": 0,
+          "interval": [
+            0,
+            1
+          ],
+          "latent_event_id": null,
+          "query_id": "q",
+          "raw_score": 0.9,
+          "witness_id": "n1"
+        },
+        {
+          "creation_time": 0,
+          "interval": [
+            0,
+            1
+          ],
+          "latent_event_id": null,
+          "query_id": "q",
+          "raw_score": 0.8,
+          "witness_id": "n2"
+        }
+      ],
+      "initial_hypothesis_members": {
+        "h_n1": [
+          "n1"
+        ],
+        "h_n2": [
+          "n2"
+        ]
+      },
+      "latent_events": [
+        {
+          "actor_id": "actor_e1",
+          "event_id": "e1",
+          "interval": [
+            21,
+            23
+          ],
+          "region_id": "r2"
+        }
+      ],
+      "materialization": "perfect",
+      "oracle": "perfect",
+      "primary_inference": false,
+      "regions": [
+        {
+          "interval": [
+            0,
+            10
+          ],
+          "region_id": "r0",
+          "scan_cost_seconds": 2
+        },
+        {
+          "interval": [
+            10,
+            20
+          ],
+          "region_id": "r1",
+          "scan_cost_seconds": 2
+        },
+        {
+          "interval": [
+            20,
+            30
+          ],
+          "region_id": "r2",
+          "scan_cost_seconds": 2
+        }
+      ],
+      "required_behavioral_invariant": "frontier-count capacity is satisfied by two negatives although productive SCAN(r2) exposes the only event",
+      "scan_emissions": {
+        "r0": [],
+        "r1": [],
+        "r2": [
+          {
+            "creation_time": 2,
+            "interval": [
+              2,
+              3
+            ],
+            "latent_event_id": "e1",
+            "query_id": "q",
+            "raw_score": 0.7,
+            "witness_id": "e1w"
+          }
+        ]
+      },
+      "scenario_id": "CAPACITY_MATCHING_LOW_QUALITY_FAILURE"
+    },
+    {
+      "confirm_cost_seconds_by_witness": {
+        "e1w": 2
+      },
+      "group_closure": "confirming any member closes its hypothesis and suppresses remaining members",
+      "horizon_seconds": 5,
+      "initial_frontier_witnesses": [
+        {
+          "creation_time": 0,
+          "interval": [
+            0,
+            1
+          ],
+          "latent_event_id": "e1",
+          "query_id": "q",
+          "raw_score": 0.99,
+          "witness_id": "e1w"
+        }
+      ],
+      "initial_hypothesis_members": {
+        "h_e1": [
+          "e1w"
+        ]
+      },
+      "latent_events": [
+        {
+          "actor_id": "actor_e1",
+          "event_id": "e1",
+          "interval": [
+            1,
+            2
+          ],
+          "region_id": "r0"
+        }
+      ],
+      "materialization": "perfect",
+      "oracle": "perfect",
+      "primary_inference": false,
+      "regions": [
+        {
+          "interval": [
+            0,
+            10
+          ],
+          "region_id": "r0",
+          "scan_cost_seconds": 4
+        }
+      ],
+      "required_behavioral_invariant": "CONFIRM(e1w) is safe and SCAN cannot leave the standard confirm reserve",
+      "scan_emissions": {
+        "r0": []
+      },
+      "scenario_id": "SINGLE_HIGH_VALUE_FRONTIER"
+    },
+    {
+      "confirm_cost_seconds_by_witness": {
+        "w1": 2,
+        "w2": 2,
+        "w3": 2,
+        "w4": 2
+      },
+      "group_closure": "confirming any member closes its hypothesis and suppresses remaining members",
+      "horizon_seconds": 12,
+      "initial_frontier_witnesses": [
+        {
+          "creation_time": 0,
+          "interval": [
+            0,
+            1
+          ],
+          "latent_event_id": "e1",
+          "query_id": "q",
+          "raw_score": 0.9,
+          "witness_id": "w1"
+        },
+        {
+          "creation_time": 0,
+          "interval": [
+            0,
+            1
+          ],
+          "latent_event_id": "e1",
+          "query_id": "q",
+          "raw_score": 0.85,
+          "witness_id": "w2"
+        },
+        {
+          "creation_time": 0,
+          "interval": [
+            0,
+            1
+          ],
+          "latent_event_id": "e1",
+          "query_id": "q",
+          "raw_score": 0.8,
+          "witness_id": "w3"
+        },
+        {
+          "creation_time": 0,
+          "interval": [
+            0,
+            1
+          ],
+          "latent_event_id": "e1",
+          "query_id": "q",
+          "raw_score": 0.75,
+          "witness_id": "w4"
+        }
+      ],
+      "initial_hypothesis_members": {
+        "h1": [
+          "w1"
+        ],
+        "h2": [
+          "w2"
+        ],
+        "h3": [
+          "w3"
+        ],
+        "h4": [
+          "w4"
+        ]
+      },
+      "latent_events": [
+        {
+          "actor_id": "actor_e1",
+          "event_id": "e1",
+          "interval": [
+            1,
+            4
+          ],
+          "region_id": "r0"
+        }
+      ],
+      "materialization": "perfect",
+      "oracle": "perfect",
+      "primary_inference": false,
+      "regions": [
+        {
+          "interval": [
+            0,
+            10
+          ],
+          "region_id": "r0",
+          "scan_cost_seconds": 3
+        }
+      ],
+      "required_behavioral_invariant": "only first durable commit of e1 earns utility; later positive confirms are duplicates with zero reward",
+      "scan_emissions": {
+        "r0": []
+      },
+      "scenario_id": "DUPLICATE_HEAVY_FRONTIER"
+    },
+    {
+      "confirm_cost_seconds_by_witness": {
+        "e1w": 5
+      },
+      "group_closure": "confirming any member closes its hypothesis and suppresses remaining members",
+      "horizon_seconds": 4,
+      "initial_frontier_witnesses": [
+        {
+          "creation_time": 0,
+          "interval": [
+            0,
+            1
+          ],
+          "latent_event_id": "e1",
+          "query_id": "q",
+          "raw_score": 0.9,
+          "witness_id": "e1w"
+        }
+      ],
+      "initial_hypothesis_members": {
+        "h_e1": [
+          "e1w"
+        ]
+      },
+      "latent_events": [
+        {
+          "actor_id": "actor_e1",
+          "event_id": "e1",
+          "interval": [
+            1,
+            2
+          ],
+          "region_id": "r0"
+        }
+      ],
+      "materialization": "perfect",
+      "oracle": "perfect",
+      "primary_inference": false,
+      "regions": [
+        {
+          "interval": [
+            0,
+            10
+          ],
+          "region_id": "r0",
+          "scan_cost_seconds": 3
+        }
+      ],
+      "required_behavioral_invariant": "unsafe CONFIRM is not started; SAFE_HARBOR returns the empty durable snapshot",
+      "scan_emissions": {
+        "r0": []
+      },
+      "scenario_id": "LATE_HORIZON_CLOSURE"
+    },
+    {
+      "confirm_cost_seconds_by_witness": {
+        "fast": 2,
+        "slow": 7
+      },
+      "group_closure": "confirming any member closes its hypothesis and suppresses remaining members",
+      "horizon_seconds": 8,
+      "initial_frontier_witnesses": [
+        {
+          "creation_time": 0,
+          "interval": [
+            0,
+            1
+          ],
+          "latent_event_id": "e1",
+          "query_id": "q",
+          "raw_score": 0.9,
+          "witness_id": "slow"
+        },
+        {
+          "creation_time": 0,
+          "interval": [
+            0,
+            1
+          ],
+          "latent_event_id": "e2",
+          "query_id": "q",
+          "raw_score": 0.9,
+          "witness_id": "fast"
+        }
+      ],
+      "initial_hypothesis_members": {
+        "h_fast": [
+          "fast"
+        ],
+        "h_slow": [
+          "slow"
+        ]
+      },
+      "latent_events": [
+        {
+          "actor_id": "actor_e1",
+          "event_id": "e1",
+          "interval": [
+            1,
+            2
+          ],
+          "region_id": "r0"
+        },
+        {
+          "actor_id": "actor_e2",
+          "event_id": "e2",
+          "interval": [
+            3,
+            4
+          ],
+          "region_id": "r0"
+        }
+      ],
+      "materialization": "perfect",
+      "oracle": "perfect",
+      "primary_inference": false,
+      "regions": [
+        {
+          "interval": [
+            0,
+            10
+          ],
+          "region_id": "r0",
+          "scan_cost_seconds": 3
+        }
+      ],
+      "required_behavioral_invariant": "equal-quality witnesses have unequal opportunity cost; continuation evaluation must retain complete per-witness costs",
+      "scan_emissions": {
+        "r0": []
+      },
+      "scenario_id": "HETEROGENEOUS_CONFIRM_COST"
+    },
+    {
+      "confirm_cost_seconds_by_witness": {
+        "w1": 2,
+        "w2": 2,
+        "w3": 2
+      },
+      "group_closure": "confirming any member closes its hypothesis and suppresses remaining members",
+      "horizon_seconds": 18,
+      "initial_frontier_witnesses": [],
+      "initial_hypothesis_members": {},
+      "latent_events": [
+        {
+          "actor_id": "actor_e1",
+          "event_id": "e1",
+          "interval": [
+            1,
+            2
+          ],
+          "region_id": "r0"
+        },
+        {
+          "actor_id": "actor_e2",
+          "event_id": "e2",
+          "interval": [
+            11,
+            12
+          ],
+          "region_id": "r1"
+        },
+        {
+          "actor_id": "actor_e3",
+          "event_id": "e3",
+          "interval": [
+            21,
+            22
+          ],
+          "region_id": "r2"
+        }
+      ],
+      "materialization": "perfect",
+      "oracle": "perfect",
+      "primary_inference": false,
+      "regions": [
+        {
+          "interval": [
+            0,
+            10
+          ],
+          "region_id": "r0",
+          "scan_cost_seconds": 2
+        },
+        {
+          "interval": [
+            10,
+            20
+          ],
+          "region_id": "r1",
+          "scan_cost_seconds": 2
+        },
+        {
+          "interval": [
+            20,
+            30
+          ],
+          "region_id": "r2",
+          "scan_cost_seconds": 2
+        }
+      ],
+      "required_behavioral_invariant": "homogeneous FIFO immediate confirms are a permitted best case and any pi0 win must be reported",
+      "scan_emissions": {
+        "r0": [
+          {
+            "creation_time": 2,
+            "interval": [
+              2,
+              3
+            ],
+            "latent_event_id": "e1",
+            "query_id": "q",
+            "raw_score": 0.9,
+            "witness_id": "w1"
+          }
+        ],
+        "r1": [
+          {
+            "creation_time": 6,
+            "interval": [
+              6,
+              7
+            ],
+            "latent_event_id": "e2",
+            "query_id": "q",
+            "raw_score": 0.9,
+            "witness_id": "w2"
+          }
+        ],
+        "r2": [
+          {
+            "creation_time": 10,
+            "interval": [
+              10,
+              11
+            ],
+            "latent_event_id": "e3",
+            "query_id": "q",
+            "raw_score": 0.9,
+            "witness_id": "w3"
+          }
+        ]
+      },
+      "scenario_id": "DENSE_HOMOGENEOUS_BASELINE_FAVORABLE"
+    },
+    {
+      "confirm_cost_seconds_by_witness": {
+        "w1": 2,
+        "w2": 2,
+        "w3": 2
+      },
+      "group_closure": "confirming any member closes its hypothesis and suppresses remaining members",
+      "horizon_seconds": 14,
+      "initial_frontier_witnesses": [
+        {
+          "creation_time": 0,
+          "interval": [
+            0,
+            1
+          ],
+          "latent_event_id": null,
+          "query_id": "q",
+          "raw_score": 0.95,
+          "witness_id": "n0"
+        }
+      ],
+      "initial_hypothesis_members": {
+        "h_n0": [
+          "n0"
+        ]
+      },
+      "latent_events": [
+        {
+          "actor_id": "actor_e1",
+          "event_id": "e1",
+          "interval": [
+            21,
+            22
+          ],
+          "region_id": "r2"
+        },
+        {
+          "actor_id": "actor_e2",
+          "event_id": "e2",
+          "interval": [
+            23,
+            24
+          ],
+          "region_id": "r2"
+        },
+        {
+          "actor_id": "actor_e3",
+          "event_id": "e3",
+          "interval": [
+            31,
+            32
+          ],
+          "region_id": "r3"
+        }
+      ],
+      "materialization": "perfect",
+      "oracle": "perfect",
+      "primary_inference": false,
+      "regions": [
+        {
+          "interval": [
+            0,
+            10
+          ],
+          "region_id": "r0",
+          "scan_cost_seconds": 2
+        },
+        {
+          "interval": [
+            10,
+            20
+          ],
+          "region_id": "r1",
+          "scan_cost_seconds": 2
+        },
+        {
+          "interval": [
+            20,
+            30
+          ],
+          "region_id": "r2",
+          "scan_cost_seconds": 2
+        },
+        {
+          "interval": [
+            30,
+            40
+          ],
+          "region_id": "r3",
+          "scan_cost_seconds": 2
+        }
+      ],
+      "required_behavioral_invariant": "productive scans into the burst can dominate immediate confirmation of the initial negative",
+      "scan_emissions": {
+        "r0": [],
+        "r1": [],
+        "r2": [
+          {
+            "creation_time": 6,
+            "interval": [
+              6,
+              7
+            ],
+            "latent_event_id": "e1",
+            "query_id": "q",
+            "raw_score": 0.8,
+            "witness_id": "w1"
+          },
+          {
+            "creation_time": 6,
+            "interval": [
+              6,
+              7
+            ],
+            "latent_event_id": "e2",
+            "query_id": "q",
+            "raw_score": 0.8,
+            "witness_id": "w2"
+          }
+        ],
+        "r3": [
+          {
+            "creation_time": 10,
+            "interval": [
+              10,
+              11
+            ],
+            "latent_event_id": "e3",
+            "query_id": "q",
+            "raw_score": 0.8,
+            "witness_id": "w3"
+          }
+        ]
+      },
+      "scenario_id": "BURSTY_SCAN_FAVORABLE"
+    }
+  ],
+  "spec_id": "PSVR_TOY_NAMED_SCENARIOS_V1",
+  "status": "FROZEN_DIAGNOSTIC_ONLY"
+}

@@ -1,0 +1,20 @@
+stage: 1B
+method: MAP-anchor-barrier
+materializer: K3_gap_duration_negative_barrier
+budgets: [5, 10, 20, 50, 80, 100]
+low_budget_policy: identical_to_stage_1a_map_anchor_only
+high_budget_action_mix:
+  CONFIRM_ANCHOR: 0.60
+  AUDIT_UNCOVERED: 0.20
+  PLACE_BARRIER: 0.20
+fallback_when_quota_action_exhausted: deterministic_AUDIT_UNCOVERED
+params:
+  G_max: 1
+  D_core_max: 40.0
+  D_seg_max: 60.0
+disabled:
+  SEHS: true
+  event_graph: true
+  proxy_valley: true
+  duplicate_suppression: true
+  selected_expansion: true

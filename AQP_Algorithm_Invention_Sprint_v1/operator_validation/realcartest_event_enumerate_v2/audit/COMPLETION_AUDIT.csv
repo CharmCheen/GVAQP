@@ -1,0 +1,11 @@
+requirement,evidence,status,interpretation
+Previous bundle integrity,audit/PREVIOUS_TERMINAL_BUNDLE_AUDIT.md,PASS,"35 files and 399 raw response hashes revalidated"
+Canonical video search,video/CANDIDATE_VIDEO_MANIFEST.csv,PASS_SEARCH_FAIL_IDENTITY,"only realcartest_5k present; expected realcartest.mp4 absent"
+Canonical response-source identity,video/CANONICAL_VIDEO_DECISION.csv,FAIL,"no accepted bytes"
+399-response binding,oracle/STATUS.md,NOT_RUN,"identity gate failed first"
+Exhaustive coverage,oracle/STATUS.md,NOT_RUN,"cannot map intervals to canonical bytes"
+51-event reconstruction,reference/STATUS.md,NOT_RUN,"no canonical binding"
+Processor audit,processor/STATUS.md,NOT_RUN,"identity stop precedes processor gate"
+Physical sample and execution,physical/STATUS.md,NOT_RUN,"zero physical calls"
+Exact decision,FINAL_DECISION.csv,PASS,"REALCARTEST_VIDEO_IDENTITY_BLOCKED required by Phase 1"
+Independent review,audit/INDEPENDENT_ADVERSARIAL_REVIEW.json,PASS_WITH_MATERIAL_CAVEATS,"prefix lineage corrected; complete-source identity remains blocked"

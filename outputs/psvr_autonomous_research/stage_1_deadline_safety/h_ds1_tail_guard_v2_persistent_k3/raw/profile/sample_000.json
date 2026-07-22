@@ -1,0 +1,2048 @@
+{
+  "attempt_start_ns": 11345300437943204,
+  "cache_replay": false,
+  "coarse_seconds": 12.830027462,
+  "coarse_wall_start_ns": 11345446462536851,
+  "commit": {
+    "materializer_mode": "persistent_clean_spawn_predeadline",
+    "raw_observation_commit": {
+      "atomic_replace_seconds": 0.000891302,
+      "fsync_seconds": 0.000884409,
+      "payload_sha256": "a4510d2a036a773ddfeb5efad55faabaccfd918a9ec38c21d8370e71e802416c",
+      "serialize_seconds": 0.000206606,
+      "total_seconds": 0.003757257
+    },
+    "snapshot_commit": {
+      "atomic_replace_seconds": 0.000778552,
+      "fsync_seconds": 0.000598496,
+      "payload_sha256": "246a2ce1c8deb373382c026952d9d2fac739f05b7d0c222fe5d791f93f9fde27",
+      "serialize_seconds": 0.000125324,
+      "total_seconds": 0.002256578
+    },
+    "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/stage_1_deadline_safety/h_ds1_tail_guard_v2_persistent_k3/raw/profile/sample_000_snapshot.json",
+    "stage_seconds": {
+      "atomic_replace": 0.000778552,
+      "fsync": 0.000598496,
+      "materialize": 0.016359069,
+      "observation_persist": 0.003757257,
+      "serialize": 0.000125324
+    },
+    "total_seconds": 0.024780594
+  },
+  "commit_wall_end_ns": 11345481981148389,
+  "commit_wall_seconds": 0.025021463,
+  "commit_wall_start_ns": 11345481956126926,
+  "confirmed_events": 1,
+  "fixture_scan_seconds": 0.333880958,
+  "measurement_start_ns": 11345446459480472,
+  "oracle_result": {
+    "cache_replay": false,
+    "confidence": "high",
+    "cuda_synchronized_before_and_after": true,
+    "end_time": 510.0,
+    "frame_identity_verified": true,
+    "logical_oracle_call": true,
+    "oracle_build_id": "strict_oracle_3b9ba1187c0449426978",
+    "parse_status": "ok",
+    "parsed": {
+      "abstain_reason": null,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "ego_relevant": true,
+      "event_end": 0.7,
+      "event_start": 0.0,
+      "event_type": "enter_ego_path",
+      "evidence": "\u57280\u79d2\u65f6\uff0c\u4e00\u8f86\u767d\u8272\u8f7f\u8f66\u5728\u524d\u65b9\u76f4\u884c\uff0c\u800c\u53f3\u4fa7\u6709\u8f66\u8f86\u4ece\u9ad8\u67b6\u6865\u4e0b\u9a76\u51fa\uff0c\u8fdb\u5165\u4e3b\u8def\uff0c\u5176\u8f68\u8ff9\u4e0e ego \u8f66\u8f86\u7684\u672a\u6765\u8def\u5f84\u53d1\u751f\u91cd\u53e0\uff0c\u6784\u6210\u6f5c\u5728\u51b2\u7a81\u3002\u57280.7\u79d2\u65f6\uff0c\u8be5\u8f66\u8f86\u5df2\u660e\u663e\u8fdb\u5165\u4e3b\u8def\u8f66\u9053\uff0c\u4f4d\u4e8e ego \u8f66\u8f86\u53f3\u4fa7\u524d\u65b9\uff0c\u5f62\u6210\u5207\u5165\u884c\u4e3a\u3002",
+      "involved_object": "vehicle",
+      "label": "positive",
+      "negative_reason": null
+    },
+    "parsed_label": "positive",
+    "physical_oracle_invocation": true,
+    "raw": "{\n  \"label\": \"positive\",\n  \"event_start\": 0.0,\n  \"event_end\": 0.7,\n  \"event_type\": \"enter_ego_path\",\n  \"involved_object\": \"vehicle\",\n  \"ego_relevant\": true,\n  \"boundary_status\": \"ok\",\n  \"complete_event_visible\": true,\n  \"confidence\": \"high\",\n  \"evidence\": \"\u57280\u79d2\u65f6\uff0c\u4e00\u8f86\u767d\u8272\u8f7f\u8f66\u5728\u524d\u65b9\u76f4\u884c\uff0c\u800c\u53f3\u4fa7\u6709\u8f66\u8f86\u4ece\u9ad8\u67b6\u6865\u4e0b\u9a76\u51fa\uff0c\u8fdb\u5165\u4e3b\u8def\uff0c\u5176\u8f68\u8ff9\u4e0e ego \u8f66\u8f86\u7684\u672a\u6765\u8def\u5f84\u53d1\u751f\u91cd\u53e0\uff0c\u6784\u6210\u6f5c\u5728\u51b2\u7a81\u3002\u57280.7\u79d2\u65f6\uff0c\u8be5\u8f66\u8f86\u5df2\u660e\u663e\u8fdb\u5165\u4e3b\u8def\u8f66\u9053\uff0c\u4f4d\u4e8e ego \u8f66\u8f86\u53f3\u4fa7\u524d\u65b9\uff0c\u5f62\u6210\u5207\u5165\u884c\u4e3a\u3002\",\n  \"negative_reason\": null,\n  \"abstain_reason\": null\n}",
+    "raw_sha256": "74da3dc29c71ed8ad1917dcb23366295ea12f90272426385325eef928b3f599e",
+    "recorded_at_utc": "2026-07-15T00:37:20.486512+00:00",
+    "service_total_seconds": 22.321542778,
+    "stage_seconds": {
+      "cleanup": 0.533732043,
+      "clip_extraction": 0.652791939,
+      "oracle_inference": 19.552834464,
+      "oracle_parse": 0.000290942,
+      "oracle_postprocess": 0.000652948,
+      "oracle_preprocess": 1.581146106
+    },
+    "start_time": 500.0,
+    "unit_id": 50
+  },
+  "physical_oracle_invocation": true,
+  "post_oracle_query_count": 1,
+  "prior_oracle_query_count": 0,
+  "profile_eligibility_errors": [],
+  "proxy_decode_failures": 0,
+  "proxy_operator_rows": [
+    {
+      "duration_seconds": 0.032096097,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "video_open",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.122287595,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 15.0
+    },
+    {
+      "duration_seconds": 0.092349704,
+      "invocation_type": "none",
+      "iteration": 1,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 45.0
+    },
+    {
+      "duration_seconds": 0.105870689,
+      "invocation_type": "none",
+      "iteration": 2,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 75.0
+    },
+    {
+      "duration_seconds": 0.091781885,
+      "invocation_type": "none",
+      "iteration": 3,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 105.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 8.62e-07,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.022866754,
+      "invocation_type": "physical_proxy",
+      "iteration": 0,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.00087398,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.089670728,
+      "invocation_type": "none",
+      "iteration": 4,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 135.0
+    },
+    {
+      "duration_seconds": 0.117717592,
+      "invocation_type": "none",
+      "iteration": 5,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 165.0
+    },
+    {
+      "duration_seconds": 0.102796427,
+      "invocation_type": "none",
+      "iteration": 6,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 195.0
+    },
+    {
+      "duration_seconds": 0.106378667,
+      "invocation_type": "none",
+      "iteration": 7,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 225.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 9.22e-07,
+      "invocation_type": "none",
+      "iteration": 1,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.019487914,
+      "invocation_type": "physical_proxy",
+      "iteration": 1,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.00092291,
+      "invocation_type": "none",
+      "iteration": 1,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.106296904,
+      "invocation_type": "none",
+      "iteration": 8,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 255.0
+    },
+    {
+      "duration_seconds": 0.10187587,
+      "invocation_type": "none",
+      "iteration": 9,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 285.0
+    },
+    {
+      "duration_seconds": 0.098123311,
+      "invocation_type": "none",
+      "iteration": 10,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 315.0
+    },
+    {
+      "duration_seconds": 0.115041491,
+      "invocation_type": "none",
+      "iteration": 11,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 345.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 9.12e-07,
+      "invocation_type": "none",
+      "iteration": 2,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.024173181,
+      "invocation_type": "physical_proxy",
+      "iteration": 2,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000885281,
+      "invocation_type": "none",
+      "iteration": 2,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.089727584,
+      "invocation_type": "none",
+      "iteration": 12,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 375.0
+    },
+    {
+      "duration_seconds": 0.097408218,
+      "invocation_type": "none",
+      "iteration": 13,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 405.0
+    },
+    {
+      "duration_seconds": 0.081474753,
+      "invocation_type": "none",
+      "iteration": 14,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 435.0
+    },
+    {
+      "duration_seconds": 0.090109106,
+      "invocation_type": "none",
+      "iteration": 15,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 465.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 8.01e-07,
+      "invocation_type": "none",
+      "iteration": 3,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.022631867,
+      "invocation_type": "physical_proxy",
+      "iteration": 3,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000574081,
+      "invocation_type": "none",
+      "iteration": 3,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.096764798,
+      "invocation_type": "none",
+      "iteration": 16,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 495.0
+    },
+    {
+      "duration_seconds": 0.100100298,
+      "invocation_type": "none",
+      "iteration": 17,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 525.0
+    },
+    {
+      "duration_seconds": 0.097715361,
+      "invocation_type": "none",
+      "iteration": 18,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 555.0
+    },
+    {
+      "duration_seconds": 0.129379882,
+      "invocation_type": "none",
+      "iteration": 19,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 585.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 1.153e-06,
+      "invocation_type": "none",
+      "iteration": 4,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.018400856,
+      "invocation_type": "physical_proxy",
+      "iteration": 4,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000470237,
+      "invocation_type": "none",
+      "iteration": 4,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.112223727,
+      "invocation_type": "none",
+      "iteration": 20,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 615.0
+    },
+    {
+      "duration_seconds": 0.102907934,
+      "invocation_type": "none",
+      "iteration": 21,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 645.0
+    },
+    {
+      "duration_seconds": 0.106966804,
+      "invocation_type": "none",
+      "iteration": 22,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 675.0
+    },
+    {
+      "duration_seconds": 0.113868575,
+      "invocation_type": "none",
+      "iteration": 23,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 705.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 1.323e-06,
+      "invocation_type": "none",
+      "iteration": 5,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.03102567,
+      "invocation_type": "physical_proxy",
+      "iteration": 5,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000491978,
+      "invocation_type": "none",
+      "iteration": 5,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.120907121,
+      "invocation_type": "none",
+      "iteration": 24,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 735.0
+    },
+    {
+      "duration_seconds": 0.113183397,
+      "invocation_type": "none",
+      "iteration": 25,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 765.0
+    },
+    {
+      "duration_seconds": 0.112194513,
+      "invocation_type": "none",
+      "iteration": 26,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 795.0
+    },
+    {
+      "duration_seconds": 0.102665301,
+      "invocation_type": "none",
+      "iteration": 27,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 825.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 1.062e-06,
+      "invocation_type": "none",
+      "iteration": 6,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.023194115,
+      "invocation_type": "physical_proxy",
+      "iteration": 6,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000727196,
+      "invocation_type": "none",
+      "iteration": 6,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.105092317,
+      "invocation_type": "none",
+      "iteration": 28,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 855.0
+    },
+    {
+      "duration_seconds": 0.093999751,
+      "invocation_type": "none",
+      "iteration": 29,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 885.0
+    },
+    {
+      "duration_seconds": 0.108061866,
+      "invocation_type": "none",
+      "iteration": 30,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 915.0
+    },
+    {
+      "duration_seconds": 0.092567671,
+      "invocation_type": "none",
+      "iteration": 31,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 945.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 1.443e-06,
+      "invocation_type": "none",
+      "iteration": 7,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.021948892,
+      "invocation_type": "physical_proxy",
+      "iteration": 7,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000558631,
+      "invocation_type": "none",
+      "iteration": 7,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.096596003,
+      "invocation_type": "none",
+      "iteration": 32,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 975.0
+    },
+    {
+      "duration_seconds": 0.093572714,
+      "invocation_type": "none",
+      "iteration": 33,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1005.0
+    },
+    {
+      "duration_seconds": 0.098742717,
+      "invocation_type": "none",
+      "iteration": 34,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1035.0
+    },
+    {
+      "duration_seconds": 0.101505177,
+      "invocation_type": "none",
+      "iteration": 35,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1065.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 8.92e-07,
+      "invocation_type": "none",
+      "iteration": 8,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.023170521,
+      "invocation_type": "physical_proxy",
+      "iteration": 8,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000593777,
+      "invocation_type": "none",
+      "iteration": 8,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.103777937,
+      "invocation_type": "none",
+      "iteration": 36,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1095.0
+    },
+    {
+      "duration_seconds": 0.091117937,
+      "invocation_type": "none",
+      "iteration": 37,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1125.0
+    },
+    {
+      "duration_seconds": 0.096582478,
+      "invocation_type": "none",
+      "iteration": 38,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1155.0
+    },
+    {
+      "duration_seconds": 0.095418777,
+      "invocation_type": "none",
+      "iteration": 39,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1185.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 8.81e-07,
+      "invocation_type": "none",
+      "iteration": 9,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.016994173,
+      "invocation_type": "physical_proxy",
+      "iteration": 9,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.00055226,
+      "invocation_type": "none",
+      "iteration": 9,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.108636868,
+      "invocation_type": "none",
+      "iteration": 40,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1215.0
+    },
+    {
+      "duration_seconds": 0.1214908,
+      "invocation_type": "none",
+      "iteration": 41,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1245.0
+    },
+    {
+      "duration_seconds": 0.104012043,
+      "invocation_type": "none",
+      "iteration": 42,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1275.0
+    },
+    {
+      "duration_seconds": 0.105457388,
+      "invocation_type": "none",
+      "iteration": 43,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1305.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 8.82e-07,
+      "invocation_type": "none",
+      "iteration": 10,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.01808652,
+      "invocation_type": "physical_proxy",
+      "iteration": 10,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000542521,
+      "invocation_type": "none",
+      "iteration": 10,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.094329576,
+      "invocation_type": "none",
+      "iteration": 44,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1335.0
+    },
+    {
+      "duration_seconds": 0.128375188,
+      "invocation_type": "none",
+      "iteration": 45,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1365.0
+    },
+    {
+      "duration_seconds": 0.114296944,
+      "invocation_type": "none",
+      "iteration": 46,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1395.0
+    },
+    {
+      "duration_seconds": 0.122819607,
+      "invocation_type": "none",
+      "iteration": 47,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1425.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 8.12e-07,
+      "invocation_type": "none",
+      "iteration": 11,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.016864661,
+      "invocation_type": "physical_proxy",
+      "iteration": 11,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000574912,
+      "invocation_type": "none",
+      "iteration": 11,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.106563973,
+      "invocation_type": "none",
+      "iteration": 48,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1455.0
+    },
+    {
+      "duration_seconds": 0.107582802,
+      "invocation_type": "none",
+      "iteration": 49,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1485.0
+    },
+    {
+      "duration_seconds": 0.110863961,
+      "invocation_type": "none",
+      "iteration": 50,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1515.0
+    },
+    {
+      "duration_seconds": 0.116464597,
+      "invocation_type": "none",
+      "iteration": 51,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1545.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 9.22e-07,
+      "invocation_type": "none",
+      "iteration": 12,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.018214789,
+      "invocation_type": "physical_proxy",
+      "iteration": 12,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000582396,
+      "invocation_type": "none",
+      "iteration": 12,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.093728024,
+      "invocation_type": "none",
+      "iteration": 52,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1575.0
+    },
+    {
+      "duration_seconds": 0.101754163,
+      "invocation_type": "none",
+      "iteration": 53,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1605.0
+    },
+    {
+      "duration_seconds": 0.116715754,
+      "invocation_type": "none",
+      "iteration": 54,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1635.0
+    },
+    {
+      "duration_seconds": 0.11009616,
+      "invocation_type": "none",
+      "iteration": 55,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1665.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 9.02e-07,
+      "invocation_type": "none",
+      "iteration": 13,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.01708359,
+      "invocation_type": "physical_proxy",
+      "iteration": 13,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.00055184,
+      "invocation_type": "none",
+      "iteration": 13,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.104125194,
+      "invocation_type": "none",
+      "iteration": 56,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1695.0
+    },
+    {
+      "duration_seconds": 0.118589519,
+      "invocation_type": "none",
+      "iteration": 57,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1725.0
+    },
+    {
+      "duration_seconds": 0.102761942,
+      "invocation_type": "none",
+      "iteration": 58,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1755.0
+    },
+    {
+      "duration_seconds": 0.116117008,
+      "invocation_type": "none",
+      "iteration": 59,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1785.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 9.32e-07,
+      "invocation_type": "none",
+      "iteration": 14,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.01849951,
+      "invocation_type": "physical_proxy",
+      "iteration": 14,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000556287,
+      "invocation_type": "none",
+      "iteration": 14,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.101665176,
+      "invocation_type": "none",
+      "iteration": 60,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1815.0
+    },
+    {
+      "duration_seconds": 0.097005436,
+      "invocation_type": "none",
+      "iteration": 61,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1845.0
+    },
+    {
+      "duration_seconds": 0.105566161,
+      "invocation_type": "none",
+      "iteration": 62,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1875.0
+    },
+    {
+      "duration_seconds": 0.087396968,
+      "invocation_type": "none",
+      "iteration": 63,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1905.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 9.22e-07,
+      "invocation_type": "none",
+      "iteration": 15,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.017059253,
+      "invocation_type": "physical_proxy",
+      "iteration": 15,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000543464,
+      "invocation_type": "none",
+      "iteration": 15,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.079184582,
+      "invocation_type": "none",
+      "iteration": 64,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1935.0
+    },
+    {
+      "duration_seconds": 0.098745412,
+      "invocation_type": "none",
+      "iteration": 65,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1965.0
+    },
+    {
+      "duration_seconds": 0.082406761,
+      "invocation_type": "none",
+      "iteration": 66,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 1995.0
+    },
+    {
+      "duration_seconds": 0.104282748,
+      "invocation_type": "none",
+      "iteration": 67,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2025.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 8.896e-06,
+      "invocation_type": "none",
+      "iteration": 16,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.019603708,
+      "invocation_type": "physical_proxy",
+      "iteration": 16,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000620096,
+      "invocation_type": "none",
+      "iteration": 16,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.100999816,
+      "invocation_type": "none",
+      "iteration": 68,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2055.0
+    },
+    {
+      "duration_seconds": 0.097011267,
+      "invocation_type": "none",
+      "iteration": 69,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2085.0
+    },
+    {
+      "duration_seconds": 0.095313191,
+      "invocation_type": "none",
+      "iteration": 70,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2115.0
+    },
+    {
+      "duration_seconds": 0.126102841,
+      "invocation_type": "none",
+      "iteration": 71,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2145.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 1.112e-06,
+      "invocation_type": "none",
+      "iteration": 17,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.016962012,
+      "invocation_type": "physical_proxy",
+      "iteration": 17,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.00056341,
+      "invocation_type": "none",
+      "iteration": 17,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.100717879,
+      "invocation_type": "none",
+      "iteration": 72,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2175.0
+    },
+    {
+      "duration_seconds": 0.114572297,
+      "invocation_type": "none",
+      "iteration": 73,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2205.0
+    },
+    {
+      "duration_seconds": 0.109391004,
+      "invocation_type": "none",
+      "iteration": 74,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2235.0
+    },
+    {
+      "duration_seconds": 0.104882336,
+      "invocation_type": "none",
+      "iteration": 75,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2265.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 7.02e-07,
+      "invocation_type": "none",
+      "iteration": 18,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.018234105,
+      "invocation_type": "physical_proxy",
+      "iteration": 18,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.00053054,
+      "invocation_type": "none",
+      "iteration": 18,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.10170474,
+      "invocation_type": "none",
+      "iteration": 76,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2295.0
+    },
+    {
+      "duration_seconds": 0.103533711,
+      "invocation_type": "none",
+      "iteration": 77,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2325.0
+    },
+    {
+      "duration_seconds": 0.108007905,
+      "invocation_type": "none",
+      "iteration": 78,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2355.0
+    },
+    {
+      "duration_seconds": 0.113614862,
+      "invocation_type": "none",
+      "iteration": 79,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2385.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 8.61e-07,
+      "invocation_type": "none",
+      "iteration": 19,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.018257268,
+      "invocation_type": "physical_proxy",
+      "iteration": 19,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000581846,
+      "invocation_type": "none",
+      "iteration": 19,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.105561002,
+      "invocation_type": "none",
+      "iteration": 80,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2415.0
+    },
+    {
+      "duration_seconds": 0.105190821,
+      "invocation_type": "none",
+      "iteration": 81,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2445.0
+    },
+    {
+      "duration_seconds": 0.11543194,
+      "invocation_type": "none",
+      "iteration": 82,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2475.0
+    },
+    {
+      "duration_seconds": 0.115423395,
+      "invocation_type": "none",
+      "iteration": 83,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2505.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 6.81e-07,
+      "invocation_type": "none",
+      "iteration": 20,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.023457777,
+      "invocation_type": "physical_proxy",
+      "iteration": 20,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000906641,
+      "invocation_type": "none",
+      "iteration": 20,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.105284246,
+      "invocation_type": "none",
+      "iteration": 84,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2535.0
+    },
+    {
+      "duration_seconds": 0.116396699,
+      "invocation_type": "none",
+      "iteration": 85,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2565.0
+    },
+    {
+      "duration_seconds": 0.102457133,
+      "invocation_type": "none",
+      "iteration": 86,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2595.0
+    },
+    {
+      "duration_seconds": 0.107557365,
+      "invocation_type": "none",
+      "iteration": 87,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2625.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 8.82e-07,
+      "invocation_type": "none",
+      "iteration": 21,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.017049667,
+      "invocation_type": "physical_proxy",
+      "iteration": 21,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000565204,
+      "invocation_type": "none",
+      "iteration": 21,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.107594985,
+      "invocation_type": "none",
+      "iteration": 88,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2655.0
+    },
+    {
+      "duration_seconds": 0.106376122,
+      "invocation_type": "none",
+      "iteration": 89,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2685.0
+    },
+    {
+      "duration_seconds": 0.12167351,
+      "invocation_type": "none",
+      "iteration": 90,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2715.0
+    },
+    {
+      "duration_seconds": 0.10900229,
+      "invocation_type": "none",
+      "iteration": 91,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2745.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 7.31e-07,
+      "invocation_type": "none",
+      "iteration": 22,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.029389358,
+      "invocation_type": "physical_proxy",
+      "iteration": 22,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000725563,
+      "invocation_type": "none",
+      "iteration": 22,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.106646526,
+      "invocation_type": "none",
+      "iteration": 92,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2775.0
+    },
+    {
+      "duration_seconds": 0.121584043,
+      "invocation_type": "none",
+      "iteration": 93,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2805.0
+    },
+    {
+      "duration_seconds": 0.102542353,
+      "invocation_type": "none",
+      "iteration": 94,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2835.0
+    },
+    {
+      "duration_seconds": 0.120902112,
+      "invocation_type": "none",
+      "iteration": 95,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2865.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 9.72e-07,
+      "invocation_type": "none",
+      "iteration": 23,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.026683382,
+      "invocation_type": "physical_proxy",
+      "iteration": 23,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000904958,
+      "invocation_type": "none",
+      "iteration": 23,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.110918062,
+      "invocation_type": "none",
+      "iteration": 96,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2895.0
+    },
+    {
+      "duration_seconds": 0.11111492,
+      "invocation_type": "none",
+      "iteration": 97,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2925.0
+    },
+    {
+      "duration_seconds": 0.12469744,
+      "invocation_type": "none",
+      "iteration": 98,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2955.0
+    },
+    {
+      "duration_seconds": 0.102254084,
+      "invocation_type": "none",
+      "iteration": 99,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 2985.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 6.592e-06,
+      "invocation_type": "none",
+      "iteration": 24,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.022629662,
+      "invocation_type": "physical_proxy",
+      "iteration": 24,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000597224,
+      "invocation_type": "none",
+      "iteration": 24,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.09908304,
+      "invocation_type": "none",
+      "iteration": 100,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3015.0
+    },
+    {
+      "duration_seconds": 0.106580864,
+      "invocation_type": "none",
+      "iteration": 101,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3045.0
+    },
+    {
+      "duration_seconds": 0.103417294,
+      "invocation_type": "none",
+      "iteration": 102,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3075.0
+    },
+    {
+      "duration_seconds": 0.106585142,
+      "invocation_type": "none",
+      "iteration": 103,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3105.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 8.72e-07,
+      "invocation_type": "none",
+      "iteration": 25,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.025737849,
+      "invocation_type": "physical_proxy",
+      "iteration": 25,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.001128795,
+      "invocation_type": "none",
+      "iteration": 25,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.097144696,
+      "invocation_type": "none",
+      "iteration": 104,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3135.0
+    },
+    {
+      "duration_seconds": 0.090146045,
+      "invocation_type": "none",
+      "iteration": 105,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3165.0
+    },
+    {
+      "duration_seconds": 0.113826386,
+      "invocation_type": "none",
+      "iteration": 106,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3195.0
+    },
+    {
+      "duration_seconds": 0.113999128,
+      "invocation_type": "none",
+      "iteration": 107,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3225.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 5.91e-07,
+      "invocation_type": "none",
+      "iteration": 26,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.02890741,
+      "invocation_type": "physical_proxy",
+      "iteration": 26,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000893477,
+      "invocation_type": "none",
+      "iteration": 26,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.093032838,
+      "invocation_type": "none",
+      "iteration": 108,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3255.0
+    },
+    {
+      "duration_seconds": 0.093647775,
+      "invocation_type": "none",
+      "iteration": 109,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3285.0
+    },
+    {
+      "duration_seconds": 0.10954374,
+      "invocation_type": "none",
+      "iteration": 110,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3315.0
+    },
+    {
+      "duration_seconds": 0.103884676,
+      "invocation_type": "none",
+      "iteration": 111,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3345.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 8.32e-07,
+      "invocation_type": "none",
+      "iteration": 27,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.024426623,
+      "invocation_type": "physical_proxy",
+      "iteration": 27,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.00055777,
+      "invocation_type": "none",
+      "iteration": 27,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.098316552,
+      "invocation_type": "none",
+      "iteration": 112,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3375.0
+    },
+    {
+      "duration_seconds": 0.100237083,
+      "invocation_type": "none",
+      "iteration": 113,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3405.0
+    },
+    {
+      "duration_seconds": 0.107790089,
+      "invocation_type": "none",
+      "iteration": 114,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3435.0
+    },
+    {
+      "duration_seconds": 0.056805206,
+      "invocation_type": "none",
+      "iteration": 115,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok",
+      "timestamp_seconds": 3462.832666673084
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 8.72e-07,
+      "invocation_type": "none",
+      "iteration": 28,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.027848716,
+      "invocation_type": "physical_proxy",
+      "iteration": 28,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000700366,
+      "invocation_type": "none",
+      "iteration": 28,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_coarse",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.043100048,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "video_open",
+      "phase": "h_ds1_profile_fixture_50",
+      "status": "ok"
+    },
+    {
+      "duration_seconds": 0.066880175,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_fixture_50",
+      "status": "ok",
+      "timestamp_seconds": 501.0
+    },
+    {
+      "duration_seconds": 0.061925465,
+      "invocation_type": "none",
+      "iteration": 1,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_fixture_50",
+      "status": "ok",
+      "timestamp_seconds": 503.0
+    },
+    {
+      "duration_seconds": 0.086357649,
+      "invocation_type": "none",
+      "iteration": 2,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_fixture_50",
+      "status": "ok",
+      "timestamp_seconds": 505.0
+    },
+    {
+      "duration_seconds": 0.049083316,
+      "invocation_type": "none",
+      "iteration": 3,
+      "operator": "decode_seek",
+      "phase": "h_ds1_profile_fixture_50",
+      "status": "ok",
+      "timestamp_seconds": 507.0
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 8.01e-07,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "proxy_preprocessing",
+      "phase": "h_ds1_profile_fixture_50",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.022208698,
+      "invocation_type": "physical_proxy",
+      "iteration": 0,
+      "operator": "proxy_inference",
+      "phase": "h_ds1_profile_fixture_50",
+      "status": "ok"
+    },
+    {
+      "batch_size": 4,
+      "duration_seconds": 0.000678546,
+      "invocation_type": "none",
+      "iteration": 0,
+      "operator": "proxy_postprocessing",
+      "phase": "h_ds1_profile_fixture_50",
+      "status": "ok"
+    }
+  ],
+  "query_to_commit_seconds": 22.347219622,
+  "query_wall_end_ns": 11345481956126926,
+  "query_wall_seconds": 22.322198159,
+  "query_wall_start_ns": 11345459633928767,
+  "raw_observation_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/stage_1_deadline_safety/h_ds1_tail_guard_v2_persistent_k3/raw/profile/sample_000_oracle.json",
+  "raw_result_errors": [],
+  "recorded_at_utc": "2026-07-15T00:37:20.486512+00:00",
+  "resolved_config_sha256": "0abe3533eff112b8490b7f1f7adcd20ed751b6f3a556d2ef37b3a918fedb6689",
+  "runtime_identity_hash": "08b384175d8b9debc38598faf09e3966a0cb19d4ccc5fdca3a5e0664c05679fb",
+  "runtime_initialization": {
+    "materializer": {
+      "worker_root": "/",
+      "worker_uid": 65534
+    },
+    "oracle": {
+      "cache_loaded": false,
+      "initialization_seconds": 67.239122441,
+      "physical_oracle": true,
+      "pid": 1550,
+      "torch_cuda_version": "12.6",
+      "torch_version": "2.12.0+cu126",
+      "verified_configuration": {
+        "model_file_count": 28,
+        "observed_hashes": {
+          "frozen_oracle_source": "4e52a5d9dc4de906350dc4e69b2c26cfb414d41f4a4281822acefa42120d1458",
+          "input_identities": "48c513e121f1df2d43d64586d9936de937080585258a062facd5ba735420351e",
+          "model_manifest": "a27032176f0193562426fed825fc8822f6a8f562c83383f5ba9aab2e7aae1d00",
+          "prompt": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+          "strict_manifest": "be3ab70c136260f550c781739678534fedacf63b308ecb04326e3bc220bbe8f3",
+          "video": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+        },
+        "oracle_build_id": "strict_oracle_3b9ba1187c0449426978"
+      }
+    },
+    "runtime_identity_hash": "08b384175d8b9debc38598faf09e3966a0cb19d4ccc5fdca3a5e0664c05679fb",
+    "selector": {
+      "worker_root": "/",
+      "worker_uid": 65534
+    }
+  },
+  "sample_index": 0,
+  "scan_wall_end_ns": 11345459631112645,
+  "selection": {
+    "candidate_unit_id": 50,
+    "candidate_was_scanned": true,
+    "legal_action_trace_sha256": "a3a5aad0bddb86fc264db819a917d58d8517f4bb9ba2227397dde95dee01ab0c",
+    "policy": {
+      "mode": "fixed_scanned_unit",
+      "unit_id": 50
+    },
+    "queried_ids": [],
+    "scanned_unit_count": 117,
+    "visible_label_count": 0
+  },
+  "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/stage_1_deadline_safety/h_ds1_tail_guard_v2_persistent_k3/raw/profile/sample_000_snapshot.json",
+  "status": "ok",
+  "unit_id": 50
+}

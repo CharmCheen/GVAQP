@@ -1,0 +1,50 @@
+{
+  "generation_config": {
+    "device_map": "auto",
+    "generation_config_sha256": "1e241830b48b397cb0900101421df5450baddc7adf01e5fc86b5615865f3bae4",
+    "max_new_tokens": 256,
+    "sampling_flags_explicit": {},
+    "temperature": 0.1,
+    "torch_dtype": "bfloat16",
+    "trust_remote_code": true
+  },
+  "generation_config_hash": "1e736848fe36a1749e2be336faa46cbf6403d55861c9945b9e677df2b24031db",
+  "model_hash": "921540a4c33c8f8608f77c34af99741ff0828e79e66cd79af13bdc702b02f0ea",
+  "parser_hash": "2b0c34cb3d759aaab5d0ca3801c2c2b78bfb208f13d9449e6c9ab07b0c2bb30e",
+  "parser_source_hash": "5e800ebc86e314d31bb682fd178aa17c060c933ca5633c08cbe6f1786aaff772",
+  "processor_files": {
+    "chat_template.json": "5c72a170d2a4a1a3bc5adad2e689ae28138a9700e5b8c96c0266331e86c0acce",
+    "config.json": "d2dd0c60d01b9e195d9447c52da61c7302d28828524914c044d9c6e1b81d0427",
+    "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+    "preprocessor_config.json": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+    "tokenizer.json": "a5d85b6dcc535e6b93115a9ef287e6132fdbf30270da6218194ba742261173c7",
+    "tokenizer_config.json": "c2da771801886ad9ae98181793ffd3dfb7f1af30f6f7c6a4e15d7dbba52e2399",
+    "video_preprocessor_config.json": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "processor_hash": "d511a3af5ed95c352b5a05397ddf9f9f4a4c89c1045555d5e8e09fe9b869749d",
+  "prompt_hash": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+  "runtime_versions": {
+    "opencv": "4.13.0",
+    "opencv_python": "4.13.0.92",
+    "pillow": "10.4.0",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.12.0+cu126",
+    "transformers": "5.10.0.dev0"
+  },
+  "sampling_code_hash": "a64dd0acdbf1913662073d303ea5818999932defbc3e04061a3c2fb0353024b8",
+  "sampling_semantics_hash": "b26c36218bdc3022636f68556ed9b5c7a2553851d8f26c90472205f1ad87358c",
+  "video_processor_config": {
+    "color": "cv2.COLOR_BGR2RGB",
+    "container": "list[PIL.Image]",
+    "end_index": "int(clip_end*video_fps)",
+    "frame_interval": "max(1,int(video_fps/fps))",
+    "inclusive_end_loop": true,
+    "loader": "cv2.VideoCapture",
+    "message_fps": 2.0,
+    "qwen_process": "process_vision_info(messages)",
+    "start_index": "int(clip_start*video_fps)",
+    "target_decode_fps": 2.0
+  },
+  "video_processor_hash": "b26c36218bdc3022636f68556ed9b5c7a2553851d8f26c90472205f1ad87358c"
+}

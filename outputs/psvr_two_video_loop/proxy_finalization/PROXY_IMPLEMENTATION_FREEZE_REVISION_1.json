@@ -1,0 +1,18 @@
+{
+  "YOLOP_Q2": "fail closed with zero candidates and score 0",
+  "decode_path": "For each requested unit, seek to start_frame and sequentially decode through end_frame; sample every round(video_fps/5) frames relative to start_frame.",
+  "frame_membership": "Use each frozen unit's inclusive start_frame/end_frame fields; no timestamp-boundary duplication.",
+  "freeze_hash": "573463e1fb1eaea70e14586709685fe24fd73405a203b0e051358f4195c1fe66",
+  "freeze_id": "PSVR_TWO_VIDEO_PROXY_IMPLEMENTATION_V1",
+  "frozen_before_proxy_candidate_execution": true,
+  "heldout_opened": false,
+  "implementation_path": "/qiuyeqing/llama_prl/G-ARC/scripts/run_psvr_two_video_proxy.py",
+  "implementation_sha256": "f825afc4441af9ddf338a02f0b4a54c85ace543128b9c40e514f7d595428ad11",
+  "offline_normalization_population": "all raw candidates in the complete video-query task",
+  "online_normalization_population": "all and only raw candidates from units whose scan has durably completed by the decision timestamp",
+  "online_score_update": "Recompute zero-anchored deterministic average-rank percentiles after each completed SCAN batch; previously exposed scores may be updated only from newly observed past/current candidates, never from future units.",
+  "outcome_information_used": false,
+  "preregistration_hash": "17d8a2be6bd502df9ef7a4bde5c4e07e1d4a9976f81e7a49101bbab95dfdd47f",
+  "tracker_scope": "Fresh frozen-parameter ByteTrack state per unit. This makes an arbitrary temporal scan order causal and makes raw unit features invariant to future or previously unscanned units.",
+  "unit_score": "maximum current candidate score; track_id ascending deterministic tie-break"
+}

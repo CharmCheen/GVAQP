@@ -1,0 +1,103 @@
+{
+  "cache_replay": false,
+  "commit": {
+    "materializer_mode": "persistent_clean_spawn_predeadline",
+    "raw_observation_commit": {
+      "atomic_replace_seconds": 0.000763295,
+      "fsync_seconds": 0.00063181,
+      "payload_sha256": "903b78917894342d1ef35f953c38df023c5cf05640e5090f617c463f6d846d9f",
+      "serialize_seconds": 0.000139631,
+      "total_seconds": 0.002471635
+    },
+    "snapshot_commit": {
+      "atomic_replace_seconds": 0.000785146,
+      "fsync_seconds": 0.00046038,
+      "payload_sha256": "71553147b30e18e8ba48e352bf49dfa598a5727bbb191fd7682b0542a1ec09c7",
+      "serialize_seconds": 6.6074e-05,
+      "total_seconds": 0.001940433
+    },
+    "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_two_video_loop/deadlines/raw_profile/V0/sample_001_snapshot.json",
+    "stage_seconds": {
+      "atomic_replace": 0.000785146,
+      "fsync": 0.00046038,
+      "materialize": 0.015518427,
+      "observation_persist": 0.002471635,
+      "serialize": 6.6074e-05
+    },
+    "total_seconds": 0.020875438
+  },
+  "commit_wall_seconds": 0.020903481,
+  "confirmed_events": 0,
+  "oracle_result": {
+    "cache_replay": false,
+    "confidence": "high",
+    "cuda_synchronized_before_and_after": true,
+    "end_time": 530.0,
+    "frame_identity_verified": true,
+    "generic_parsed_label": "negative",
+    "logical_oracle_call": true,
+    "oracle_build_id": "strict_oracle_3b9ba1187c0449426978",
+    "parse_status": "ok",
+    "parsed": {
+      "abstain_reason": null,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "ego_relevant": false,
+      "event_end": null,
+      "event_start": null,
+      "event_type": "none",
+      "evidence": "The video shows normal urban driving with vehicles and cyclists moving in their respective lanes or paths. No object is observed entering the ego vehicle's future driving path. Traffic flows smoothly without any merging, cutting, or crossing into the ego path. All road users remain within their designated lanes or paths.",
+      "involved_object": "none",
+      "label": "negative",
+      "negative_reason": "no_ego_path_interaction"
+    },
+    "parsed_label": "negative",
+    "physical_oracle_invocation": true,
+    "projection_allowed_involved_objects": [
+      "cyclist",
+      "vehicle"
+    ],
+    "query_id": "Q1",
+    "raw": "{\n  \"label\": \"negative\",\n  \"event_start\": null,\n  \"event_end\": null,\n  \"event_type\": \"none\",\n  \"involved_object\": \"none\",\n  \"ego_relevant\": false,\n  \"boundary_status\": \"ok\",\n  \"complete_event_visible\": true,\n  \"confidence\": \"high\",\n  \"evidence\": \"The video shows normal urban driving with vehicles and cyclists moving in their respective lanes or paths. No object is observed entering the ego vehicle's future driving path. Traffic flows smoothly without any merging, cutting, or crossing into the ego path. All road users remain within their designated lanes or paths.\",\n  \"negative_reason\": \"no_ego_path_interaction\",\n  \"abstain_reason\": null\n}",
+    "raw_sha256": "804e0c9885ed6ef2160cac20c2f46589c35a21354afae97963e31086568a42ee",
+    "recorded_at_utc": "2026-07-18T02:31:58.845172+00:00",
+    "rng_seed": 20260762,
+    "service_total_seconds": 22.196631496,
+    "session_id": "deadline_profile_V0_001",
+    "stage_seconds": {
+      "cleanup": 0.193438229,
+      "clip_extraction": 0.710379387,
+      "oracle_inference": 16.432850311,
+      "oracle_parse": 0.000128841,
+      "oracle_postprocess": 0.000603266,
+      "oracle_preprocess": 4.859112389
+    },
+    "start_time": 520.0,
+    "unit_id": 52,
+    "video_id": "V0"
+  },
+  "physical_oracle_only": true,
+  "query_wall_seconds": 22.197173358,
+  "recorded_at_utc": "2026-07-18T02:31:58.845172+00:00",
+  "sample_index": 1,
+  "service_total_seconds": 22.196631496,
+  "session_initialization": {
+    "prior_query_count": 0,
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V0_001",
+    "video_id": "V0"
+  },
+  "session_summary": {
+    "physical_calls": 1,
+    "queried_ids": [
+      52
+    ],
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V0_001",
+    "video_id": "V0"
+  },
+  "status": "ok",
+  "unit_id": 52,
+  "video_id": "V0"
+}

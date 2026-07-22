@@ -1,0 +1,78 @@
+{
+  "H-COV1": "REVISE",
+  "MINIMAL_PHYSICAL_BASELINES": "VALID",
+  "PSVR_CORE_INNOVATION_PILOT": "WEAK",
+  "baseline_checks": {
+    "all_12_method_deadline_cells_have_3_runs": true,
+    "cache_replay_zero": true,
+    "candidate_observation_violations_zero": true,
+    "deadline_misses_zero": true,
+    "future_proxy_access_zero": true
+  },
+  "comparison": {
+    "AnytimeAUC_F1_gain_vs_best_simple": 0.0028220179811467914,
+    "best_simple_gap_method": "coverage_interleave",
+    "best_simple_quality_method": "coverage_interleave",
+    "early_recall_gain_vs_best_simple": 0.019230769230769232,
+    "gap_auc_reduction_vs_best_simple": -0.006693865338778998,
+    "macro_metrics": [
+      {
+        "AnytimeAUC_F1": 0.0028220179811467914,
+        "GPU_seconds": 52.467254325333336,
+        "early_recall": 0.019230769230769232,
+        "future": 0,
+        "gap_auc": 0.15826306640103024,
+        "method": "coverage_debt_psvr",
+        "misses": 0
+      },
+      {
+        "AnytimeAUC_F1": 0.0,
+        "GPU_seconds": 34.953848213444445,
+        "early_recall": 0.0,
+        "future": 0,
+        "gap_auc": 0.15156920106225125,
+        "method": "coverage_interleave",
+        "misses": 0
+      },
+      {
+        "AnytimeAUC_F1": 0.0,
+        "GPU_seconds": 48.22956259911111,
+        "early_recall": 0.0,
+        "future": 0,
+        "gap_auc": 0.9688734359166591,
+        "method": "sequential_interleave",
+        "misses": 0
+      },
+      {
+        "AnytimeAUC_F1": 0.0,
+        "GPU_seconds": 50.722287810666664,
+        "early_recall": 0.0,
+        "future": 0,
+        "gap_auc": 0.15631032166336062,
+        "method": "uniform_temporal_interleave",
+        "misses": 0
+      }
+    ]
+  },
+  "coverage_debt_parameters": {
+    "beta": 0.25,
+    "lambda": 0.5,
+    "revision": 0
+  },
+  "current_best_method": "coverage_debt_psvr",
+  "deadlines_seconds": {
+    "T_long": 123.9524739725,
+    "T_mid": 76.891211381125,
+    "T_short": 30.82994878975
+  },
+  "evidence_scope": "DEVELOPMENT_ONLY_ONE_VIDEO_ONE_QUERY_ONE_A800",
+  "hcov1_checks": {
+    "coverage_debt_lowers_gap_auc_vs_best_simple": false,
+    "deadline_misses_not_increased": true,
+    "future_proxy_accesses_zero": true,
+    "quality_or_early_recall_beats_best_simple": true,
+    "same_hardware_and_all_gpu_cost_accounted": true
+  },
+  "heldout_opened": false,
+  "physical_completed_runs": 45
+}

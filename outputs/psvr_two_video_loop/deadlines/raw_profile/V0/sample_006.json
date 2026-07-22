@@ -1,0 +1,103 @@
+{
+  "cache_replay": false,
+  "commit": {
+    "materializer_mode": "persistent_clean_spawn_predeadline",
+    "raw_observation_commit": {
+      "atomic_replace_seconds": 0.001088202,
+      "fsync_seconds": 0.000752976,
+      "payload_sha256": "7cf74c05840cfdad4a52cb67ca33e52e15b011d8480f2df1df501cb84a3769c5",
+      "serialize_seconds": 0.000206746,
+      "total_seconds": 0.00311673
+    },
+    "snapshot_commit": {
+      "atomic_replace_seconds": 0.000972125,
+      "fsync_seconds": 0.000523748,
+      "payload_sha256": "87966c29d5972724af284f2785eed743775fdceb34d3c8916b2b345153ac9d01",
+      "serialize_seconds": 6.7897e-05,
+      "total_seconds": 0.002160895
+    },
+    "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_two_video_loop/deadlines/raw_profile/V0/sample_006_snapshot.json",
+    "stage_seconds": {
+      "atomic_replace": 0.000972125,
+      "fsync": 0.000523748,
+      "materialize": 0.015505412,
+      "observation_persist": 0.00311673,
+      "serialize": 6.7897e-05
+    },
+    "total_seconds": 0.021802811
+  },
+  "commit_wall_seconds": 0.021831344,
+  "confirmed_events": 0,
+  "oracle_result": {
+    "cache_replay": false,
+    "confidence": "high",
+    "cuda_synchronized_before_and_after": true,
+    "end_time": 2260.0,
+    "frame_identity_verified": true,
+    "generic_parsed_label": "negative",
+    "logical_oracle_call": true,
+    "oracle_build_id": "strict_oracle_3b9ba1187c0449426978",
+    "parse_status": "ok",
+    "parsed": {
+      "abstain_reason": null,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "ego_relevant": false,
+      "event_end": null,
+      "event_start": null,
+      "event_type": "none",
+      "evidence": "The video shows a straight road with green construction barriers on both sides. There are no moving objects entering the ego vehicle's path. A few parked vehicles and a bicycle are visible, but they remain static and do not enter the driving corridor. Traffic is minimal and no pedestrian or cyclist crosses into the path.",
+      "involved_object": "none",
+      "label": "negative",
+      "negative_reason": "no_ego_path_interaction"
+    },
+    "parsed_label": "negative",
+    "physical_oracle_invocation": true,
+    "projection_allowed_involved_objects": [
+      "cyclist",
+      "vehicle"
+    ],
+    "query_id": "Q1",
+    "raw": "{\n  \"label\": \"negative\",\n  \"event_start\": null,\n  \"event_end\": null,\n  \"event_type\": \"none\",\n  \"involved_object\": \"none\",\n  \"ego_relevant\": false,\n  \"boundary_status\": \"ok\",\n  \"complete_event_visible\": true,\n  \"confidence\": \"high\",\n  \"evidence\": \"The video shows a straight road with green construction barriers on both sides. There are no moving objects entering the ego vehicle's path. A few parked vehicles and a bicycle are visible, but they remain static and do not enter the driving corridor. Traffic is minimal and no pedestrian or cyclist crosses into the path.\",\n  \"negative_reason\": \"no_ego_path_interaction\",\n  \"abstain_reason\": null\n}",
+    "raw_sha256": "86070576720dda53860529c6512a78b0f7a9cfd0d21bce52235ff4013cf1da4c",
+    "recorded_at_utc": "2026-07-18T02:33:49.420216+00:00",
+    "rng_seed": 20260935,
+    "service_total_seconds": 22.438482585,
+    "session_id": "deadline_profile_V0_006",
+    "stage_seconds": {
+      "cleanup": 1.58047198,
+      "clip_extraction": 0.544717114,
+      "oracle_inference": 15.531763905,
+      "oracle_parse": 0.0001283,
+      "oracle_postprocess": 0.000513469,
+      "oracle_preprocess": 4.780776076
+    },
+    "start_time": 2250.0,
+    "unit_id": 225,
+    "video_id": "V0"
+  },
+  "physical_oracle_only": true,
+  "query_wall_seconds": 22.439290042,
+  "recorded_at_utc": "2026-07-18T02:33:49.420216+00:00",
+  "sample_index": 6,
+  "service_total_seconds": 22.438482585,
+  "session_initialization": {
+    "prior_query_count": 0,
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V0_006",
+    "video_id": "V0"
+  },
+  "session_summary": {
+    "physical_calls": 1,
+    "queried_ids": [
+      225
+    ],
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V0_006",
+    "video_id": "V0"
+  },
+  "status": "ok",
+  "unit_id": 225,
+  "video_id": "V0"
+}

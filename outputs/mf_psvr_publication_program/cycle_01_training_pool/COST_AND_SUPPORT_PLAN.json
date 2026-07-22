@@ -1,0 +1,40 @@
+{
+  "basis": {
+    "frame_cost_scaling": "exact planned sampled frames, not source-video duration",
+    "oracle_initialization_path": "outputs/psvr_two_video_loop/deadlines/PROFILE_INITIALIZATION.json",
+    "oracle_initialization_sha256": "aceb74016e8bfd015fca80fb1c5a07ffe89101b842e5fe8e727f617c35ea06b8",
+    "oracle_p95_seconds_per_verify_upper_envelope": 37.16705570069997,
+    "oracle_p95_source": "outputs/psvr_two_video_loop/deadlines/TASK_DEADLINE_MANIFEST.json",
+    "y8_physical_cost_path": "outputs/psvr_two_video_loop/proxy_finalization/physical_cost/Y8_PHYSICAL_COST.json",
+    "y8_physical_cost_sha256": "39a619c5cf2e95a4152862e280907ccb839e09e0133c2e35ff5b88c1a4f96a19"
+  },
+  "candidate_unit_window_hours_including_overlap": 6.773422431111111,
+  "eligible_nominal_units": 2654,
+  "eligible_video_hours": 6.293306354166669,
+  "maximum_calls": 320,
+  "maximum_oracle_sequential_reservation_hours_p95_plus_initialization": 3.3242832916497194,
+  "note": "Planning estimates, not billing promises; all physical costs must be recorded.",
+  "oracle_initialization_seconds": 73.962025715,
+  "oracle_time_semantics": "Service wall-clock / GPU reservation envelope; active GPU kernel time was not separately measured and is not claimed.",
+  "planned_sampled_frames": 122694,
+  "short_clip_overhead_profile": {
+    "observed_sum_seconds": 31.942934529000084,
+    "p95_product_envelope_seconds": 13.8754918863,
+    "path": "outputs/mf_psvr_publication_program/cycle_01_training_pool/SHORT_CLIP_OVERHEAD_PROFILE.json",
+    "planning_addend_seconds": 31.942934529000084,
+    "residual_limitation": "This isolates structural CPU overhead; concurrent detector/decode interactions are measured only by the authorized full extraction.",
+    "scope": "CPU-only VideoCapture open/metadata/close and fresh ByteTrack construction",
+    "sha256": "c5d5d7294d69491945c78481d4ccdce4d68dcc7fe8dffa4ee1745207e71be04d"
+  },
+  "stage_a_calls": 96,
+  "stage_a_oracle_call_wall_seconds_p95_envelope": 3568.037347267197,
+  "stage_a_oracle_sequential_reservation_hours_p95_plus_initialization": 1.0116664924950547,
+  "unit_window_inflation_over_source_duration_fraction": 0.07628995792117554,
+  "y8_cpu_seconds_frame_component": 1216.2172346028276,
+  "y8_detector_gpu_seconds_frame_component": 1019.077470473634,
+  "y8_initialization_seconds": 61.773684138,
+  "y8_mean_wall_seconds_frame_component": 2235.2947050764615,
+  "y8_p95_wall_seconds_frame_component": 2730.561497688881,
+  "y8_p95_wall_seconds_plus_initialization_and_profiled_short_clip_overhead": 2824.278116355881,
+  "y8_p95_wall_seconds_plus_initialization_before_short_clip_overhead": 2792.335181826881
+}

@@ -1,0 +1,50 @@
+{
+  "MINIMAL_PHYSICAL_BASELINES": "VALID",
+  "H-COV1": "REVISE",
+  "PSVR_CORE_INNOVATION_PILOT": "WEAK",
+  "current_best_method": "coverage_debt_psvr",
+  "physical_completed_runs": 45,
+  "corrected_failed_runs": 0,
+  "deadline_misses": 0,
+  "cache_replays": 0,
+  "future_proxy_accesses": 0,
+  "candidate_observation_violations": 0,
+  "runtime_identity_count": 1,
+  "quality": {
+    "coverage_debt_macro_anytime_auc_f1": 0.0028220179811467914,
+    "best_simple_macro_anytime_auc_f1": 0.0,
+    "gain": 0.0028220179811467914,
+    "coverage_debt_t_long_f1": 0.07407407407407407,
+    "coverage_debt_t_long_precision": 1.0,
+    "coverage_debt_t_long_recall": 0.038461538461538464,
+    "coverage_debt_t_long_unique_events": 1,
+    "coverage_debt_t_long_replicates_with_event": 3,
+    "coverage_debt_t_long_replicates": 3,
+    "correct_short_mid_early_recall_gain": 0.0
+  },
+  "mechanism": {
+    "coverage_debt_macro_normalized_gap_integral": 0.15826306640103024,
+    "uniform_temporal_macro_normalized_gap_integral": 0.15631032166336062,
+    "fixed_coverage_macro_normalized_gap_integral": 0.15156920106225125,
+    "coverage_debt_lowers_gap_integral_vs_best_simple": false
+  },
+  "acceptance_checks": {
+    "coverage_debt_lowers_gap": false,
+    "anytime_auc_f1_beats_best_simple": true,
+    "deadline_misses_not_increased": true,
+    "same_hardware_and_gpu_cost_accounted": true,
+    "future_proxy_accesses_zero": true
+  },
+  "generated_decision_diagnostic_superseded": {
+    "field": "comparison.early_recall_gain_vs_best_simple",
+    "reason": "lexicographic row-order aggregation included T_long",
+    "generated_value": 0.019230769230769232,
+    "correct_value_for_T_short_and_T_mid": 0.0,
+    "decision_impact": "none; quality acceptance is independently true from AnytimeAUC_F1"
+  },
+  "parameter_revision_used": false,
+  "parameter_revision_reason": "lambda/beta cannot repair the scan-action allocation required to match fixed coverage gap",
+  "evidence_scope": "DEVELOPMENT_ONLY_ONE_VIDEO_ONE_QUERY_ONE_A800",
+  "heldout_opened": false,
+  "authoritative_review": "reports/ADVERSARIAL_REVIEW.md"
+}

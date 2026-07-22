@@ -1,0 +1,293 @@
+{
+  "candidates": {
+    "Y8": {
+      "class_support": {
+        "Q1": [
+          "bicycle",
+          "car",
+          "motorcycle",
+          "bus",
+          "truck"
+        ],
+        "Q2": [
+          "person",
+          "bicycle",
+          "motorcycle"
+        ]
+      },
+      "detector": "YOLOv8n",
+      "family": "YOLOV8",
+      "resolution": 640,
+      "road_geometry": false,
+      "weight_path": "/qiuyeqing/llama_prl/G-ARC/models/yolo/yolov8n.pt",
+      "weight_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36"
+    },
+    "YP320": {
+      "class_support": {
+        "Q1": [
+          "vehicle"
+        ],
+        "Q2": []
+      },
+      "detector": "YOLOP-320",
+      "detector_classes": 1,
+      "family": "YOLOP",
+      "onnx_output_shape": [
+        1,
+        6300,
+        6
+      ],
+      "resolution": 320,
+      "road_geometry": true,
+      "weight_path": "/qiuyeqing/llama_prl/G-ARC/YOLOP/weights/yolop-320-320.onnx",
+      "weight_sha256": "86d6e8b6dfdef195c061e9bcad82d9487bb5ee1ac4a1cf9a3dc4736657a07369"
+    },
+    "YP640": {
+      "class_support": {
+        "Q1": [
+          "vehicle"
+        ],
+        "Q2": []
+      },
+      "detector": "YOLOP-640",
+      "detector_classes": 1,
+      "family": "YOLOP",
+      "onnx_output_shape": [
+        1,
+        25200,
+        6
+      ],
+      "resolution": 640,
+      "road_geometry": true,
+      "weight_path": "/qiuyeqing/llama_prl/G-ARC/YOLOP/weights/yolop-640-640.onnx",
+      "weight_sha256": "cd66a3e0087a7258ae07768cc02cb742eed93865727ae4c9baf969b8fa190696"
+    }
+  },
+  "causal_normalization_repair": {
+    "V1_reference_finalized_before_repair": false,
+    "offline_population": "complete frozen video-task candidate set",
+    "online_population": "only track candidates whose physical score-availability timestamp is no later than the current decision timestamp",
+    "outcome_information_used": false,
+    "proxy_candidate_run_before_repair": false,
+    "reason": "Revision 0 defined empirical percentiles over the complete video-task candidate set. That is valid for terminal offline ranking but would reveal future proxy observations during online PSVR execution.",
+    "registered_at_utc": "2026-07-16T18:28:10.694113+00:00",
+    "scope": "normalization population only; candidates, features, weights, and ties unchanged"
+  },
+  "common_pipeline": {
+    "candidate_aggregation": "Build one candidate per eligible track×unit; unit score is the maximum candidate score with track_id as deterministic tie-break. Offline evaluation uses the complete video-task normalization population. Online execution recomputes the same ranks using only causally available candidates.",
+    "confidence_threshold": 0.25,
+    "decode": "sequential OpenCV decode; identical sampled frame indices for all families",
+    "fallback": "no eligible track => unit score 0 and explicit empty evidence",
+    "nms_iou": 0.45,
+    "normalization": "Zero-anchored empirical percentile: raw values <=0 map to 0; positive values use deterministic average-rank percentile among positive values. Offline population is the complete video-task candidate set; online population contains only candidates already physically observed. No reference labels.",
+    "online_score_update": "At each completed SCAN batch, recompute deterministic average-rank percentiles over all and only currently observed candidates; record the score-availability timestamp and never expose later candidates.",
+    "sample_fps": 5,
+    "serialization_schema": "PSVR_TRACK_CANDIDATE_V1",
+    "tracker": {
+      "implementation": "Ultralytics BYTETracker",
+      "implementation_path": "/qiuyeqing/tools/miniconda3/envs/garc/lib/python3.10/site-packages/ultralytics/trackers/byte_tracker.py",
+      "implementation_sha256": "05545b07876311937097fdd61a47cfba7dc09fd3695fd35603eb61be09c0b40d",
+      "parameters": {
+        "fuse_score": true,
+        "match_thresh": 0.8,
+        "new_track_thresh": 0.25,
+        "track_buffer": 30,
+        "track_high_thresh": 0.25,
+        "track_low_thresh": 0.1
+      },
+      "ultralytics_version": "8.4.51"
+    },
+    "unitization": "frozen center-10-second units including the final clipped window"
+  },
+  "feature_definitions": {
+    "approximate_ttc_urgency": "maximum positive relative box-height growth per second; larger means shorter TTC",
+    "boundary_crossing": "binary change across a frozen left/right ego-corridor boundary, multiplied by reliability",
+    "box_growth": "maximum positive per-second log box-area growth",
+    "ego_corridor_overlap": "maximum bottom-center inclusion in the estimated ego corridor/drivable region, multiplied by reliability",
+    "front_region_occupancy": "maximum triangular center-corridor membership multiplied by normalized box-bottom y",
+    "lane_relative_motion": "maximum positive per-second reduction in distance to the estimated YOLOP lane center, multiplied by road-geometry reliability",
+    "path_directed_lateral_motion": "maximum positive per-second reduction in |bbox_center_x - 0.5|",
+    "road_geometry_reliability": "bounded score from nondegenerate lane/drivable masks and plausible corridor width",
+    "track_persistence": "number of eligible active observations for one track in the unit"
+  },
+  "frozen_inputs": {
+    "query_protocol_hash": "5705a1365e6033445932c06f4aa2432ff6bdcdfcb813ee822dfad39da3ae25c0",
+    "video_manifest_sha256": "3c6d254cbb7ada2ad475fbda5a8fe49ef4fa8b9cf53f64bb5a1a6eac458338c7",
+    "video_sha256": {
+      "V0": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+      "V1": "64cb0cfac6c37e52045552b4ed24e8aa20fd2c1fddc22509cf33dd957d14fd09"
+    }
+  },
+  "heldout_opened": false,
+  "hypothesis_id": "H-PROXY-2VIDEO",
+  "neutral_psvr_pilot": {
+    "K3": "frozen k3_bridge_safe",
+    "deadline_guard": "frozen H-DS1",
+    "deadlines": [
+      "T_transition",
+      "T_high"
+    ],
+    "frontier": "score-only deterministic",
+    "only_changed_variable": "proxy family and query-specific proxy score with physical cost",
+    "repeats": 3,
+    "scanner": "Uniform-Temporal-Interleave",
+    "snapshot_checkpoints": "frozen",
+    "verify_allocator": "A0 Fixed-Periodic"
+  },
+  "no_tuning": {
+    "continuous_weight_sweep": false,
+    "detector_finetuning": false,
+    "drivingdojo_learned_head_primary_evidence": false,
+    "learned_scheduler": false,
+    "reference_label_training": false,
+    "threshold_sweep": false
+  },
+  "offline_metrics": [
+    "Unit_AUPRC",
+    "Candidate_Precision@10/20/50",
+    "Candidate_Recall@10/20/50",
+    "Unique_Event_Recall@10/20/50",
+    "first_positive_rank",
+    "positive_event_exposure_AUC",
+    "false_positives_before_first_hit"
+  ],
+  "physical_cost_protocol": {
+    "included_stages": [
+      "decode",
+      "preprocess",
+      "detector",
+      "NMS",
+      "segmentation",
+      "tracking",
+      "road_geometry",
+      "rule_scoring",
+      "serialization"
+    ],
+    "measured_frames_minimum": 1000,
+    "physical_repeats": 3,
+    "reported_metrics": [
+      "end_to_end_FPS",
+      "p50_latency",
+      "p90_latency",
+      "p95_latency",
+      "peak_GPU_memory",
+      "GPU_seconds_per_video_hour",
+      "CPU_seconds_per_video_hour"
+    ],
+    "warmup_frames": 20
+  },
+  "preregistration_hash": "17d8a2be6bd502df9ef7a4bde5c4e07e1d4a9976f81e7a49101bbab95dfdd47f",
+  "query_heads": {
+    "Q1": {
+      "Y8": {
+        "eligible_coco_class_ids": [
+          1,
+          2,
+          3,
+          5,
+          7
+        ],
+        "features": [
+          "track_persistence",
+          "path_directed_lateral_motion",
+          "box_growth",
+          "front_region_occupancy",
+          "approximate_ttc_urgency"
+        ],
+        "weights": {
+          "approximate_ttc_urgency": 0.2,
+          "box_growth": 0.2,
+          "front_region_occupancy": 0.2,
+          "path_directed_lateral_motion": 0.2,
+          "track_persistence": 0.2
+        }
+      },
+      "YOLOP": {
+        "eligible_detector_class_ids": [
+          0
+        ],
+        "features": [
+          "track_persistence",
+          "path_directed_lateral_motion",
+          "box_growth",
+          "front_region_occupancy",
+          "approximate_ttc_urgency",
+          "lane_relative_motion",
+          "boundary_crossing",
+          "ego_corridor_overlap",
+          "road_geometry_reliability"
+        ],
+        "weights": {
+          "approximate_ttc_urgency": 0.1111111111111111,
+          "boundary_crossing": 0.1111111111111111,
+          "box_growth": 0.1111111111111111,
+          "ego_corridor_overlap": 0.1111111111111111,
+          "front_region_occupancy": 0.1111111111111111,
+          "lane_relative_motion": 0.1111111111111111,
+          "path_directed_lateral_motion": 0.1111111111111111,
+          "road_geometry_reliability": 0.1111111111111111,
+          "track_persistence": 0.1111111111111111
+        }
+      }
+    },
+    "Q2": {
+      "Y8": {
+        "eligible_coco_class_ids": [
+          0,
+          1,
+          3
+        ],
+        "features": [
+          "track_persistence",
+          "path_directed_lateral_motion",
+          "box_growth",
+          "front_region_occupancy",
+          "approximate_ttc_urgency"
+        ],
+        "weights": {
+          "approximate_ttc_urgency": 0.2,
+          "box_growth": 0.2,
+          "front_region_occupancy": 0.2,
+          "path_directed_lateral_motion": 0.2,
+          "track_persistence": 0.2
+        }
+      },
+      "YOLOP": {
+        "eligible_detector_class_ids": [],
+        "features": [],
+        "score_policy": "FAIL_CLOSED_ZERO_UNSUPPORTED_TARGET_CLASSES",
+        "weights": {}
+      }
+    }
+  },
+  "registered_at_utc": "2026-07-16T17:37:01.308041+00:00",
+  "revision": 1,
+  "scientific_question": "Which single frozen proxy family supplies the best four-task quality/cost frontier under neutral PSVR execution?",
+  "selection_rule": {
+    "cost_near_tie_fraction": 0.1,
+    "invalid_elimination": [
+      "deadline miss",
+      "replay",
+      "future access",
+      "visibility violation",
+      "snapshot failure"
+    ],
+    "near_best_quality": {
+      "macro_anytime_auc_fraction_of_best": 0.9,
+      "macro_f1_absolute_tolerance": 0.02,
+      "macro_precision_absolute_tolerance": 0.02,
+      "macro_ttfc_multiplier": 1.2,
+      "ttfc_exception": "or more unique events",
+      "unique_events_rule": "best<=2: same; best>=3: at most one fewer per task"
+    },
+    "primary_tiebreak": "minimum total GPU-seconds",
+    "secondary_tiebreaks": [
+      "lower p95 latency",
+      "higher candidate precision",
+      "less redundant VERIFY",
+      "simpler deployment dependencies"
+    ],
+    "yolop_resolution_rule": "Choose 320 only if AnytimeAUC>=95% of 640, identical unique events, UR@20>=95% of 640, and GPU cost at least 25% lower; otherwise 640."
+  },
+  "status": "REGISTERED_WITH_CAUSAL_NORMALIZATION_REPAIR_BEFORE_V1_REFERENCE_EVALUATION"
+}

@@ -1,0 +1,61 @@
+{
+  "active_deadline_protocol": "h_ds1_tail_guard_v2_persistent_k3",
+  "anytime_auc": "right_continuous_event_f1_wall_clock_integral_divided_by_deadline",
+  "batch_size": 4,
+  "benchmark_id": "cbbv2_514c0d360fd5b2a4b5fe",
+  "controlled_comparison": [
+    "sequential_interleave",
+    "uniform_temporal_interleave",
+    "coverage_interleave",
+    "coverage_debt_psvr"
+  ],
+  "coverage_debt_parameters": {
+    "beta": 0.25,
+    "lambda": 0.5,
+    "revision": 0
+  },
+  "deadline_decision_sha256": "43badcaf1b679d318cf72b9680a33b40ab69f59769ef0e2e51ec6708283a4255",
+  "deadlines_seconds": {
+    "T_long": 123.9524739725,
+    "T_mid": 76.891211381125,
+    "T_short": 30.82994878975
+  },
+  "evidence_scope": "DEVELOPMENT_ONLY_ONE_VIDEO_ONE_QUERY_ONE_A800",
+  "experiment_id": "psvr_stage_2_core_pilot_v1",
+  "heldout_opened": false,
+  "implementation_hashes": {
+    "deadline_runner": "166749f01ba53d3ff6531958ba878aa04a9ce40499edcbf2dcdde82a7c68ecd7",
+    "materializer_evaluator": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+    "policy": "1357bf8116ba19cc625b5e65f03aeb9955b708f909567808a57d7aaad4dc29c3",
+    "profiler": "4ea965643eb86ef482936949f1b15cd93b28cdf20929a36ab3649b961b5c7588",
+    "runner": "7e30dbcc637b7a67fec4bd9b429997ac8eb4d36ac2ad95167b11f0aaf696a889"
+  },
+  "materializer": "unchanged_k3_bridge_safe_persistent_service",
+  "methods": {
+    "coverage_debt_psvr": "Coverage-Debt PSVR",
+    "coverage_interleave": "B3 Coverage-Interleave",
+    "scan_then_verify": "B0 Scan-Then-Verify",
+    "sequential_interleave": "B1 Sequential-Interleave",
+    "uniform_temporal_interleave": "B2 Uniform-Temporal-Interleave"
+  },
+  "oracle": "physical_cache_free_Qwen3-VL-32B-Instruct",
+  "proxy_observation": "physical_YOLOv8n_midpoint_frame_original_decoded_BGR",
+  "runtime_identity": {
+    "batch_size": 4,
+    "hardware_id": "NVIDIA A800-SXM4-80GB, GPU-78772d8e-1166-c9c7-1f73-86ea2537431e, 565.57.01",
+    "oracle_contract_hash": "ba9ae8755c651acdaccb48f8415e4880ad7da92fcb8f36254e8334480567a201",
+    "oracle_model_id": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+    "proxy_config_hash": "4427a99f0aaf3ba3ad79eb01dd8265eb10ff5032b176d63b6e6bb615c88cb87f",
+    "proxy_model_id": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "query_id": "enter_ego_path",
+    "resident_model_set": [
+      "Qwen3-VL-32B-Instruct",
+      "yolov8n"
+    ],
+    "serving_config_hash": "30460607e4abcd298bb9e213eeeca56e4386020190ce02cc447d44f0c1a54ec1",
+    "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+    "workload_id": "warm_oracle_cold_proxy:after_coarse:physical_service:persistent_k3:v2"
+  },
+  "runtime_identity_hash": "08b384175d8b9debc38598faf09e3966a0cb19d4ccc5fdca3a5e0664c05679fb",
+  "snapshot_checkpoint": "after_every_scan_or_verify_action"
+}

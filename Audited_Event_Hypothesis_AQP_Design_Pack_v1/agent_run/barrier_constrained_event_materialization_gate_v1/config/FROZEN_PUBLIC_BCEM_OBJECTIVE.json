@@ -1,0 +1,31 @@
+{
+  "schema_version": "public_bcem_objective_v1",
+  "authorization_source": "aggregates/HEADROOM_GATE.json:MATERIALIZER_HEADROOM_GO",
+  "frozen_before_public_evaluator_execution": true,
+  "objective_id": "CAP_NORMALIZED_DESCRIPTION_LENGTH_V1",
+  "group_cost": {
+    "event_open_cost": 1.0,
+    "duration_cost": "group_span_seconds / core_cap_seconds",
+    "unqueried_gap_cost": "unknown_internal_unit_count * unit_seconds / core_cap_seconds",
+    "public_support_cost": 0.0
+  },
+  "constants_provenance": {
+    "event_open_cost": "dimensionless unit count; parameter-free partition cardinality term",
+    "core_cap_seconds": 40.0,
+    "unit_seconds": 10.0,
+    "weights_tuned_on_reference": false,
+    "parameter_grid": false
+  },
+  "tie_break": "lexicographically smallest ordered anchor tuples",
+  "predeclared_ablations": [
+    "WITHOUT_DURATION_COST",
+    "WITHOUT_UNQUERIED_GAP_COST",
+    "WITHOUT_INCREMENTAL_OPTIMIZATION",
+    "ORIGINAL_K3_CONSTRAINTS",
+    "K3_SAFE_ADJACENCY_ONLY_CONSTRAINTS"
+  ],
+  "public_support_ablation": "NOT_APPLICABLE_TERM_ABSENT",
+  "reference_inputs": [],
+  "physical_vlm_calls": 0,
+  "baseline_acquisition_reruns": 0
+}

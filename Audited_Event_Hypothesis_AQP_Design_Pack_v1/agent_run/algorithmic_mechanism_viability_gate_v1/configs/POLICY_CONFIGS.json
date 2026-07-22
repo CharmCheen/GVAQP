@@ -1,0 +1,13 @@
+{
+  "schema_version": "mechanism_gate_policies_v1",
+  "policies": ["R0_RANDOM", "R1_UNIFORM_TEMPORAL", "P0_POSITIVE_PROBABILITY", "P1_EVENT_SATURATION", "P2_SATURATION_PLUS_EXPLORE", "P3_FROZEN", "P3_GENERATIVE_CALIBRATED", "MAP_LIKE", "ORACLE_INFORMED"],
+  "primary_materializer": "k3_bridge_safe",
+  "secondary_materializer": "original_k3",
+  "p3_structural_risk_weight": 0.8,
+  "exploration_uncovered_multiplier": 1.35,
+  "exploration_ownerless_multiplier": 1.35,
+  "tie_break": ["score_desc", "public_score_desc", "unit_id_asc"],
+  "no_hyperparameter_search": true,
+  "physical_vlm_calls": 0,
+  "config_frozen_before_results": true
+}

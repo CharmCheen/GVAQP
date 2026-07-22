@@ -1,0 +1,33 @@
+{
+  "base_policy_reference": "D2-L / BASE_POLICY_SPEC.json logical policy, rebound to exact toy bounds",
+  "binding_version": "D2_T_EXACT_SUPPORT_V1",
+  "configuration_universe": "frozen development and heldout parameter supports in TOY_CONSTRUCTION_SPEC.json; named fixtures are diagnostic only",
+  "confirm_bound_function": "B_C(x,h,w)=confirm_nominal(x,h,w)*(1+cost_variance(x))+I[mode switch]*0.25",
+  "dependency_hashes": {
+    "base_policy": "70386f1958c4629e729f416ab81eecd9049c91ea90b22a2f5d3d7fa15a78ffa4",
+    "construction": "7a103ce7d3cc80721d60d0a4a7ccb6d5eb63c1d2c10ea699511eec03f5d06402",
+    "environment_schema": "e81a6a3951ee81c5df8547c9f8be518dc40da1bd8a5e3f0e7e4b2b5460d100c9",
+    "parameter_distribution": "48cf39b381c09ba1d7bfa64c74c8e9bdd659a3e03df476436ef4f5936a6b3916"
+  },
+  "derivation": {
+    "confirm": "sup(5*(0.5+U))*(1+0.8)+0.25 = 13.75",
+    "scan": "5*5*(0.75+0.5*2/2)*(1+0.8)+0.25 = 56.5"
+  },
+  "duration_distribution_family": "bounded two-point core duration plus bounded deterministic mode-switch cost",
+  "physical_safety_claim": false,
+  "scan_bound_function": "B_S(x,r)=scan_nominal(x,r)*(1+cost_variance(x))+I[mode switch]*0.25",
+  "standard_confirm_reserve": 13.75,
+  "support_bounds": {
+    "confirm_complete_seconds_supremum": 13.75,
+    "confirm_core_seconds_supremum": 13.5,
+    "confirm_nominal_seconds_supremum": 7.5,
+    "cost_variance_supremum": 0.8,
+    "duration_multiplier_supremum": 1.8,
+    "mode_switch_seconds_supremum": 0.25,
+    "scan_complete_seconds_supremum": 56.5,
+    "scan_core_seconds_supremum": 56.25,
+    "scan_nominal_seconds_supremum": 31.25
+  },
+  "toy_safety_semantics": "deterministic admission against exact mathematical support upper bounds; no empirical quantile or observed maximum",
+  "validation_status": "MATHEMATICAL_BINDING_COMPLETE_IMPLEMENTATION_VALIDATION_PENDING"
+}

@@ -1,0 +1,54 @@
+{
+  "batch_size": 4,
+  "benchmark_id": "cbbv2_514c0d360fd5b2a4b5fe",
+  "deadlines": {
+    "T_mid": 76.891211381125,
+    "T_short": 30.82994878975
+  },
+  "evidence_scope": "DEVELOPMENT_ONLY_ONE_VIDEO_ONE_QUERY",
+  "experiment_id": "h_ds1_tail_guard_v1",
+  "heldout_opened": false,
+  "hypothesis": "H-DS1",
+  "materializer": "unchanged_k3_bridge_safe",
+  "oracle_model": "/qiuyeqing/llama_prl/G-ARC/models/vlm/qwen3_vl/Qwen3-VL-32B-Instruct",
+  "profile": {
+    "action_epsilon_seconds": 0.5,
+    "action_required_stages": [
+      "clip_extraction",
+      "oracle_preprocess",
+      "oracle_inference",
+      "oracle_postprocess",
+      "oracle_parse",
+      "cleanup"
+    ],
+    "commit_epsilon_seconds": 0.25,
+    "commit_required_stages": [
+      "materialize",
+      "serialize",
+      "fsync",
+      "atomic_replace"
+    ],
+    "maximum_age_seconds": 86400.0,
+    "minimum_samples": 10,
+    "quantile_alpha": 0.9,
+    "version": "tail_upper_v1"
+  },
+  "proxy_model": "/qiuyeqing/llama_prl/G-ARC/models/yolo/yolov8n.pt",
+  "runtime_identity": {
+    "batch_size": 4,
+    "hardware_id": "NVIDIA A800-SXM4-80GB, GPU-400c5faf-4ef3-a76e-19ed-71cd83a65927, 565.57.01",
+    "oracle_contract_hash": "1555c37f6f974e07d8e2de050dac8f4581046621c2761f5c444df20760c801ee",
+    "oracle_model_id": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+    "proxy_config_hash": "95e5fbb7102b8f716448f4b31dbc45aa0734b179d210a592ec8b7c996f22ffee",
+    "proxy_model_id": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "query_id": "enter_ego_path",
+    "resident_model_set": [
+      "Qwen3-VL-32B-Instruct",
+      "yolov8n"
+    ],
+    "serving_config_hash": "d439e906931e7797d5875c9a90a1a94ec0f3428c9d60750e258262c59abd3550",
+    "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+    "workload_id": "warm_oracle_cold_proxy:after_coarse:physical_service:v1"
+  },
+  "video": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4"
+}

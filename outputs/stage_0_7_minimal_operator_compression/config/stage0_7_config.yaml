@@ -1,0 +1,12 @@
+stage: 0.7
+goal: minimal_operator_compression_for_BB_EM
+budgets: [5, 10, 20, 50, 80, 100]
+variants: ['C6_full_EVENT_MATERIALIZE', 'K0_naive_merge', 'K1_gap_limited', 'K2_gap_duration', 'K3_gap_duration_negative_barrier', 'K4_gap_duration_negative_barrier_selected_expand']
+params:
+  G_max: 1
+  D_core_max: 40.0
+  D_seg_max: 60.0
+  E: 1
+  nms_iou_for_C6_only: 0.7
+  low_proxy_quantile_for_C6_only: 0.3
+fixed_across_methods_and_budgets: true

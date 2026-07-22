@@ -1,0 +1,92 @@
+{
+  "$schema": "Proxy Front-End Tracking Annotation Schema v1",
+  "format": "MOT Challenge CSV with extensions",
+  "info": {
+    "description": "H-PROXY1 tracking ground truth for 6 target-domain video clips",
+    "version": "1.0",
+    "year": 2026,
+    "date_created": "2026-07-16"
+  },
+  "files": {
+    "per_clip_csv": {
+      "naming": "gt_tracks_{clip_id}.csv",
+      "encoding": "UTF-8",
+      "columns": [
+        "frame_index",
+        "track_id",
+        "x1",
+        "y1",
+        "x2",
+        "y2",
+        "class_id",
+        "confidence",
+        "visibility",
+        "track_state",
+        "annotator_flags"
+      ]
+    }
+  },
+  "column_specs": {
+    "frame_index": {
+      "type": "integer",
+      "description": "Video frame index (matches detection image_id)",
+      "validation": ">= 0, within clip frame range"
+    },
+    "track_id": {
+      "type": "integer",
+      "description": "Unique track identifier within a clip. Same vehicle = same ID across all frames.",
+      "validation": ">= 1, contiguous within clip"
+    },
+    "x1": {"type": "float", "description": "Top-left x coordinate of bounding box (pixels, 0-indexed)"},
+    "y1": {"type": "float", "description": "Top-left y coordinate"},
+    "x2": {"type": "float", "description": "Bottom-right x"),
+    "y2": {"type": "float", "description": "Bottom-right y"},
+    "class_id": {
+      "type": "integer",
+      "description": "0=car 1=truck 2=bus 3=motorcycle 4=bicycle 5=person, -1=ignore"
+    },
+    "confidence": {
+      "type": "float",
+      "description": "Annotator confidence in this box: 1.0=certain, 0.5=unsure, 0.0=guess",
+      "validation": "0.0 <= x <= 1.0"
+    },
+    "visibility": {
+      "type": "float",
+      "description": "Fraction of object visible (unoccluded): 1.0=fully visible, 0.3=mostly hidden"
+    },
+    "track_state": {
+      "type": "string",
+      "enum": ["active", "occluded", "out_of_view", "stationary", "ambiguous"],
+      "description": "Track state at this frame"
+    },
+    "annotator_flags": {
+      "type": "string",
+      "description": "Semicolon-separated flags: 'id_switch_corrected;trajectory_broken;ghost_removed;box_corrected;new_target_added;ambiguous_class'"
+    }
+  },
+  "clip_specs": {
+    "description": "Clips selected for tracking annotation",
+    "selection_criteria": "12 windows from SAMPLE_PLAN.json, first 6 windows selected deterministically",
+    "clip_ids": ["clip_000", "clip_001", "clip_002", "clip_003", "clip_004", "clip_005"],
+    "frames_per_clip": 100,
+    "fps": 5,
+    "total_frames": 600
+  },
+  "pre_annotations": {
+    "description": "ByteTrack outputs from all 3 detection models, merged and anonymized",
+    "source_trackers": ["ByteTrack(Kalman+Hungarian)@B0", "ByteTrack(Kalman+Hungarian)@B1", "ByteTrack(Kalman+Hungarian)@B3"],
+    "pre_annotation_format": "Same CSV schema, with track_id values prefixed by source_idx",
+    "note": "Pre-annotation track_ids are model-specific. Annotators unify them into a single ground-truth track space."
+  },
+  "priority_targets": {
+    "description": "Targets that MUST be annotated with full track continuity",
+    "criteria": [
+      "Vehicles in ego lane or directly ahead",
+      "Vehicles in adjacent lanes showing lateral motion",
+      "Pedestrians/cyclists near roadway",
+      "Vehicles making lane changes"
+    ],
+    "minimum_per_clip": 3,
+    "maximum_per_clip": 10
+  }
+}

@@ -1,0 +1,24 @@
+# Correctness and Leakage Test Report
+
+Result: **PASS** (18/18).
+
+| test                                        | status   | evidence                                                                                                                                                                         |
+|:--------------------------------------------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| public_tables_no_hidden_fields              | PASS     | dict_keys(['unit_ids', 'scores', 'probabilities', 'frozen_probabilities', 'hypothesis_ids', 'region_ids', 'candidate_mask', 'support_start', 'support_end', 'generator_public']) |
+| policy_no_hidden_access                     | PASS     | static policy section scan                                                                                                                                                       |
+| proxy_auroc_statistical                     | PASS     | mean=0.747637                                                                                                                                                                    |
+| shared_seed_identity                        | PASS     | c0d3a48afc6c15fd7fad4ec306ffe2610a67e292023f303917512a81ffb21c5f                                                                                                                 |
+| posterior_matches_generator                 | PASS     | maxerr=0.0                                                                                                                                                                       |
+| deterministic_rerun                         | PASS     | [87, 33, 63, 42, 28]                                                                                                                                                             |
+| duration1_sanity                            | PASS     | small allowed delta                                                                                                                                                              |
+| duplicate_event_saturation                  | PASS     | P1 unique>=P0                                                                                                                                                                    |
+| negative_barrier_case                       | PASS     | eligible=456                                                                                                                                                                     |
+| destructive_positive_bridge_case            | PASS     | positive_delta=2.0,negative_delta=0.0                                                                                                                                            |
+| exploration_only_event_case                 | PASS     | 18                                                                                                                                                                               |
+| candidate_recall_mask                       | PASS     | positive candidates removed                                                                                                                                                      |
+| p3_branches_reference_free                  | PASS     | static isolation                                                                                                                                                                 |
+| vectorized_counterfactual_equals_bruteforce | PASS     | maxerr=0.0                                                                                                                                                                       |
+| oracle_policy_isolated                      | PASS     | separate evaluator entry point                                                                                                                                                   |
+| metric_materializer_replay                  | PASS     | both replayed                                                                                                                                                                    |
+| shared_candidate_universe                   | PASS     | one PublicInstance                                                                                                                                                               |
+| no_vlm_calls                                | PASS     | core has no VLM import/call                                                                                                                                                      |

@@ -1,0 +1,40 @@
+{
+  "status": "BLOCKED",
+  "checks": {
+    "unit_count_347": true,
+    "coverage_347": true,
+    "all_raw_hashes_match": true,
+    "all_raw_response_text_hashes_match": true,
+    "all_parsed_hashes_match": true,
+    "all_calls_physical": true,
+    "no_cache_replay_in_build": true,
+    "all_parse_success": true,
+    "all_raw_responses_reparse": true,
+    "prompt_hash_matches": true,
+    "parser_source_present": true,
+    "parser_source_hash_matches": true,
+    "frame_sampling_frozen": true,
+    "model_readable": true,
+    "video_readable": true,
+    "reference_materializer_code_frozen": true,
+    "reference_reconstructs_exactly": true,
+    "unit_labels_reconstruct_exactly": true,
+    "raw_normalized_observations_reconstruct_exactly": true,
+    "stale_frozen_raw_paths": 0
+  },
+  "critical_failures": [
+    "runtime_no_leakage"
+  ],
+  "limitations": [
+    "Reference semantic label is legacy 'VLM_DEFINED_PSEUDO_ORACLE', not the v3 name, although lineage and contents reconstruct exactly."
+  ],
+  "oracle_model_path": "/qiuyeqing/llama_prl/G-ARC/models/vlm/qwen3_vl/Qwen3-VL-32B-Instruct",
+  "oracle_model_hash": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+  "video_path": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4",
+  "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+  "prompt_path": "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/oracle/oracle_prompt.txt",
+  "prompt_sha256": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+  "parser_hash": "9a7413407d52df0484c0a338f0a12ae6b57553bdfa16753d7542f60977b558cb",
+  "sampling_code_hash": "5b038acb5450d76928b43d873d73decd1792969e0aa072f121b8f23b751e0240",
+  "oracle_build_id": "strict_oracle_3b9ba1187c0449426978"
+}

@@ -1,0 +1,114 @@
+{
+  "BRANCH_DECISION": "REJECT_NO_CROSS_VIDEO_QUALITY_SIGNAL",
+  "BRANCH_HYPOTHESIS": "H-STAGE1",
+  "KEY_ABLATION_OR_REVISION": "NOT_RUN_BRANCH_REJECTED",
+  "PSVR_CORE_METHOD_CANDIDATE": "NONE",
+  "PSVR_TWO_VIDEO_SEARCH": "NO_GO",
+  "cross_video_quality_signal": false,
+  "decision_hash": "7940fa849ce3007e302476ea83c9f8b8fd4b44e3fda2023833efb809081094cb",
+  "dynamic_survival_metric_status": "LEGACY_EVERY_3_SCAN_SURVIVAL_NOT_USED; actual lifecycle tables are authoritative",
+  "heldout_opened": false,
+  "macro_metrics": [
+    {
+      "AnytimeAUC_F1": 0.04496228540071998,
+      "F1_at_deadline": 0.05416666666666667,
+      "TTFC_censored": 110.90618603794769,
+      "method": "F0",
+      "positive_candidate_to_VERIFY_conversion": 0.5,
+      "positive_units_scanned": 0.5,
+      "total_GPU_seconds": 1253.303531981,
+      "total_wall_clock": 1242.920891844,
+      "unique_confirmed_events": 0.5,
+      "unique_reference_events_touched": 0.5
+    },
+    {
+      "AnytimeAUC_F1": 0.04754672840190052,
+      "F1_at_deadline": 0.07333333333333333,
+      "TTFC_censored": 116.74327754148936,
+      "method": "ST1",
+      "positive_candidate_to_VERIFY_conversion": 0.2222222222222222,
+      "positive_units_scanned": 3.4166666666666665,
+      "total_GPU_seconds": 3077.691062204,
+      "total_wall_clock": 3829.190815361,
+      "unique_confirmed_events": 0.75,
+      "unique_reference_events_touched": 3.375
+    }
+  ],
+  "mechanism_exposure_alignment": true,
+  "nonworse_tasks": 3,
+  "physical_validity_gate": "PASS",
+  "preregistered_correctness_gate": "FAIL_EXACT_REPEAT_SIGNATURE",
+  "quality_thresholds": {
+    "four_task_unique_event_gain_2": false,
+    "macro_TTFC_reduction_20pct": false,
+    "macro_absolute_F1_gain_005": false,
+    "macro_anytime_relative_gain_10pct": false
+  },
+  "task_results": [
+    {
+      "F0_AnytimeAUC_F1": 0.1108546288191605,
+      "F0_F1": 0.1333333333333333,
+      "F0_candidate_to_VERIFY": 1.0,
+      "F0_positive_units_scanned": 1.0,
+      "F0_unique_events": 1.0,
+      "ST1_AnytimeAUC_F1": 0.1022953083593442,
+      "ST1_F1": 0.1333333333333333,
+      "ST1_candidate_to_VERIFY": 0.5,
+      "ST1_positive_units_scanned": 2.0,
+      "ST1_unique_events": 1.0,
+      "task_id": "V0_Q1",
+      "winner": "F0"
+    },
+    {
+      "F0_AnytimeAUC_F1": 0.0694931861764828,
+      "F0_F1": 0.0833333333333333,
+      "F0_candidate_to_VERIFY": 1.0,
+      "F0_positive_units_scanned": 1.0,
+      "F0_unique_events": 1.0,
+      "ST1_AnytimeAUC_F1": 0.0885300299847551,
+      "ST1_F1": 0.16,
+      "ST1_candidate_to_VERIFY": 0.4,
+      "ST1_positive_units_scanned": 5.0,
+      "ST1_unique_events": 2.0,
+      "task_id": "V0_Q2",
+      "winner": "ST1"
+    },
+    {
+      "F0_AnytimeAUC_F1": 0.0,
+      "F0_F1": 0.0,
+      "F0_candidate_to_VERIFY": 0.0,
+      "F0_positive_units_scanned": 0.0,
+      "F0_unique_events": 0.0,
+      "ST1_AnytimeAUC_F1": 0.0,
+      "ST1_F1": 0.0,
+      "ST1_candidate_to_VERIFY": 0.0,
+      "ST1_positive_units_scanned": 2.5,
+      "ST1_unique_events": 0.0,
+      "task_id": "V1_Q1",
+      "winner": "TIE"
+    },
+    {
+      "F0_AnytimeAUC_F1": 0.0,
+      "F0_F1": 0.0,
+      "F0_candidate_to_VERIFY": 0.0,
+      "F0_positive_units_scanned": 0.0,
+      "F0_unique_events": 0.0,
+      "ST1_AnytimeAUC_F1": 0.0,
+      "ST1_F1": 0.0,
+      "ST1_candidate_to_VERIFY": 0.0,
+      "ST1_positive_units_scanned": 4.0,
+      "ST1_unique_events": 0.0,
+      "task_id": "V1_Q2",
+      "winner": "TIE"
+    }
+  ],
+  "updated_task_bottleneck_map": {
+    "V0_Q1": "VERIFY_ORDER_SIGNAL_NOT_IMPROVED; ST1 over-allocation worsens AUC",
+    "V0_Q2": "SCAN_EXPOSURE_RECOVERED_SECOND_EVENT",
+    "V1_Q1": "FRONTIER_RETENTION_OR_ADMISSION_LIMITED",
+    "V1_Q2": "FRONTIER_OR_VERIFY_ORDER_LIMITED with VERIFY_BUDGET_LIMITED alternative"
+  },
+  "winning_tasks": [
+    "V0_Q2"
+  ]
+}

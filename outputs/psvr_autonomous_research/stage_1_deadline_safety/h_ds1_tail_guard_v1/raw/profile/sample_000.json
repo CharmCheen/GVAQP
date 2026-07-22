@@ -1,0 +1,84 @@
+{
+  "cache_replay": false,
+  "coarse_seconds": 19.595536197,
+  "coarse_wall_end_ns": 11313850670866762,
+  "coarse_wall_start_ns": 11313831075309395,
+  "commit": {
+    "raw_observation_commit": {
+      "atomic_replace_seconds": 0.000621338,
+      "fsync_seconds": 0.000572558,
+      "payload_sha256": "d0b5c7cef81dd581fec7d9186f876b324e7825ab0853d6b95bda27cdfe526b17",
+      "serialize_seconds": 0.000453305,
+      "total_seconds": 0.002229017
+    },
+    "snapshot_commit": {
+      "atomic_replace_seconds": 0.000794192,
+      "fsync_seconds": 0.0006809,
+      "payload_sha256": "bde24b6078830dfe4e68501e4394a1615cc8e902a46971ac26f1c9ecca53182c",
+      "serialize_seconds": 6.0002e-05,
+      "total_seconds": 0.002389596
+    },
+    "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/stage_1_deadline_safety/h_ds1_tail_guard_v1/raw/profile/sample_000_snapshot.json",
+    "stage_seconds": {
+      "atomic_replace": 0.000794192,
+      "fsync": 0.0006809,
+      "materialize": 14.517971043,
+      "observation_persist": 0.002229017,
+      "serialize": 6.0002e-05
+    },
+    "total_seconds": 14.525111298
+  },
+  "commit_wall_end_ns": 11313885844239158,
+  "commit_wall_seconds": 14.525232996,
+  "commit_wall_start_ns": 11313871319006162,
+  "confirmed_events": 0,
+  "oracle_result": {
+    "cache_replay": false,
+    "confidence": "high",
+    "cuda_synchronized_before_and_after": true,
+    "end_time": 3170.0,
+    "frame_identity_verified": true,
+    "logical_oracle_call": true,
+    "oracle_build_id": "strict_oracle_3b9ba1187c0449426978",
+    "parse_status": "ok",
+    "parsed": {
+      "abstain_reason": null,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "ego_relevant": false,
+      "event_end": null,
+      "event_start": null,
+      "event_type": "none",
+      "evidence": "The ego vehicle is in a multi-lane road with normal traffic flow. All vehicles are following their respective lanes without any merging, cutting, or crossing into the ego path. No pedestrians, cyclists, or other road users are seen entering the ego path. The scene shows typical urban driving with no spatial conflict.",
+      "involved_object": "none",
+      "label": "negative",
+      "negative_reason": "normal_following"
+    },
+    "parsed_label": "negative",
+    "physical_oracle_invocation": true,
+    "raw": "{\n  \"label\": \"negative\",\n  \"event_start\": null,\n  \"event_end\": null,\n  \"event_type\": \"none\",\n  \"involved_object\": \"none\",\n  \"ego_relevant\": false,\n  \"boundary_status\": \"ok\",\n  \"complete_event_visible\": true,\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is in a multi-lane road with normal traffic flow. All vehicles are following their respective lanes without any merging, cutting, or crossing into the ego path. No pedestrians, cyclists, or other road users are seen entering the ego path. The scene shows typical urban driving with no spatial conflict.\",\n  \"negative_reason\": \"normal_following\",\n  \"abstain_reason\": null\n}",
+    "raw_sha256": "b2cfea9ef34b63e180183ca51c40adb69127c3b5dffcb3215a8df4b518255e01",
+    "recorded_at_utc": "2026-07-14T15:50:29.847910+00:00",
+    "service_total_seconds": 20.642590913,
+    "stage_seconds": {
+      "cleanup": 0.183702366,
+      "clip_extraction": 0.712324915,
+      "oracle_inference": 17.859986393,
+      "oracle_parse": 0.00030555,
+      "oracle_postprocess": 0.000760639,
+      "oracle_preprocess": 1.885375608
+    },
+    "start_time": 3160.0,
+    "unit_id": 316
+  },
+  "physical_oracle_invocation": true,
+  "query_to_commit_seconds": 35.170182297,
+  "query_wall_end_ns": 11313871317343882,
+  "query_wall_seconds": 20.643287021,
+  "query_wall_start_ns": 11313850674056861,
+  "recorded_at_utc": "2026-07-14T15:50:29.847910+00:00",
+  "sample_index": 0,
+  "status": "ok",
+  "unit_id": 316
+}

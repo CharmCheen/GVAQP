@@ -1,0 +1,3 @@
+# Lossless evidence contract
+
+Evidence is canonical compressed JSON plus a SHA-256 commitment. It stores identity, action and planning sequences, visible-history hashes, timeline, completion state, source hashes, deterministic replay keys, and evaluator sidecars. For every approximate paired sample it also retains the complete A4 transition chain for both candidate and base continuation: canonical pre-state, action, A4 key, A1/A2 sign key and sign, `P0`, transformed probability/distribution, shared uniform where applicable, baseline and perturbed outcomes, duration transform metadata, canonical post-state, and transition hash. No selected, fallback, failed, or tail sample is dropped.

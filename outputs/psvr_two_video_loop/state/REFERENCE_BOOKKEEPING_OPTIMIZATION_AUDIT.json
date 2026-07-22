@@ -1,0 +1,24 @@
+{
+  "change_id": "V1_REFERENCE_BOOKKEEPING_LINEARIZATION_V1",
+  "decision": "ACCEPTED_RESOURCE_EFFICIENCY_REPAIR",
+  "scientific_semantics_changed": false,
+  "oracle_model_changed": false,
+  "oracle_prompt_changed": false,
+  "frame_sampling_changed": false,
+  "parser_changed": false,
+  "raw_envelopes_changed": false,
+  "changes": [
+    "Attempt events are appended with append+flush+fsync instead of rewriting all immutable prior lines.",
+    "After each new envelope passes raw_valid, completed coverage is advanced from the verified starting count instead of reparsing every prior envelope."
+  ],
+  "pre_pause_accepted_units": 131,
+  "interrupted_unit_id": 131,
+  "interrupted_attempt_id": "two_video_v1_oracle_7e37193ced4063695206_u0131_a001",
+  "interrupted_attempt_had_durable_raw_envelope": false,
+  "retry_policy": "The existing frozen maximum of two physical attempts remains unchanged; unit 131 resumes with attempt 2.",
+  "measured_pre_repair_end_to_end_seconds_per_accepted_unit": 27.16923076923077,
+  "measured_post_repair_seconds_per_accepted_unit_first_10_intervals": 21.6,
+  "observed_throughput_improvement_fraction_first_10_intervals": 0.2057163120567376,
+  "typical_generation_runtime_seconds": "approximately 15",
+  "heldout_opened": false
+}

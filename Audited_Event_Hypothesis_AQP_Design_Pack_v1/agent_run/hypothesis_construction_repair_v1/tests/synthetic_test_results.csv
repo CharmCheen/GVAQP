@@ -1,0 +1,17 @@
+test,status,evidence
+one_island_three_local_peaks,PASS,"[((3, 4, 5, 6, 7), (3, 5, 7))]"
+two_disjoint_islands,PASS,two
+uncovered_cell_zero_hypotheses,PASS,disjoint
+positive_exploration_creates_one,PASS,4
+negative_exploration_creates_none,PASS,3
+owner_saturation,PASS,saturated
+nearby_fragment_inside_materialized_event_absorbed,PASS,"[{'call_idx': 1, 'trigger': 'owner_update', 'source_hypothesis': 'main', 'target_hypothesis': 'main', 'cause': 'positive'}, {'call_idx': 1, 'trigger': 'materialized_support_absorption', 'source_hypothesis': 'fragment', 'target_hypothesis': 'main', 'cause': 'support_inside_0_1'}]"
+queried_negative_barrier_no_illegal_absorption,PASS,not absorbed
+adjacent_distinct_hypotheses_stay_distinct,PASS,no relation merge
+same_unit_deduplicated,PASS,4
+dynamic_creation_deterministic,PASS,2d842d4491bc6da962658d0980a7b48e9ded1bf23ef6ec3ab987f8b9d3933870
+simulated_branches_immutable,PASS,d45ebbd00ab1e6e241b7fe25e58bb2d0a84b7df782f072309967d89b4b8e0cd6
+reference_column_leakage_sentinel,PASS,"['unit_id', 'start_time', 'end_time']"
+H0_reproduction,PASS,0.2942701472213108
+trace_replay_both_materializers,PASS,1/1
+single_core_owner,PASS,"[1, 8, 11]"

@@ -1,0 +1,39 @@
+{
+  "model": "Qwen3-VL-32B-Instruct",
+  "model_path": "/qiuyeqing/llama_prl/G-ARC/models/vlm/qwen3_vl/Qwen3-VL-32B-Instruct",
+  "model_type": "qwen3_vl",
+  "hidden_size": "unknown",
+  "torch_dtype": "bfloat16",
+  "prompt_path": "/qiuyeqing/llama_prl/G-ARC/src/garc_eval/event_enumerate_v2/prompts/event_enumerate_v2.txt",
+  "prompt_sha256": "ffb65213017a79b5312bce98d5cf9a3d270cf69347ed560176119be347167bc8",
+  "prompt_preview": "You are a driving safety analyst. Examine the entire chronological driving video clip. The sampled clip runs from t=0.0 seconds through t=__CLIP_DURATION_SECONDS__ seconds, with frames presented at 2 frames per second.\n\nEnumerate EVERY distinct \"object enters ego path\" event visible in the clip.\n\nDefinition: An object (vehicle, pedestrian, cyclist, or other road user) starts outside or near the boundary of the ego vehicle's future driving path, then enters or clearly overlaps the ego path, creat",
+  "query_definition": "OTHER_AGENT_ENTERS_EGO_PATH",
+  "query_semantics": "A non-ego vehicle/motorcycle/bicycle/dynamic agent that enters, crosses, or occupies the ego vehicle's potential driving path from outside it.",
+  "exclusions": [
+    "ego lane change creating relative motion",
+    "adjacent vehicles driving in parallel without intrusion",
+    "being overtaken without ego-path entry",
+    "curve-induced apparent lateral motion",
+    "distant lane change not affecting ego path",
+    "parked/static vehicles",
+    "vehicles merely present in frame"
+  ],
+  "label_schema": {
+    "POSITIVE": "other_agent_enters_ego_path confirmed (high/medium confidence)",
+    "HARD_NEGATIVE": "no path intrusion but lateral motion/close proximity present",
+    "ORDINARY_NEGATIVE": "normal driving, no relevant interaction",
+    "AMBIGUOUS": "cannot determine from available frames",
+    "UNUSABLE": "frames are corrupted, too dark, or unusable"
+  },
+  "keep_criteria": "confidence=high|medium AND label NOT IN (AMBIGUOUS, UNUSABLE)",
+  "inference_config": {
+    "do_sample": false,
+    "max_new_tokens": 2048,
+    "temperature": 0.0,
+    "sampling_fps": 2
+  },
+  "frozen_at": "2026-07-16T06:35:46Z",
+  "frozen_oracle_reference": "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict",
+  "existing_oracle_labels_count": 347,
+  "notes": "SAME oracle as PSVR benchmark. Qwen3-VL-32B-Instruct, cache-free, hash-bound."
+}

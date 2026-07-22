@@ -1,0 +1,39 @@
+requirement,status,evidence
+frozen_facts_reproduced,PASS,12/12 facts
+source_manifest_valid,PASS,all source hashes
+input_manifest_valid,PASS,all input hashes
+theory_code_audit_complete,PASS,executable/prose differences
+formal_model_present,PASS,three theory artifacts
+exact_dp_bruteforce_pass,PASS,13 tests; 100+100 random trials
+abstain_not_coerced,PASS,zero frozen abstains; explicit error test
+fixed_trace_matrix_complete,PASS,738 unique trace runs
+selector_budget_matrix_complete,PASS,8 variants x six budgets
+selector_budget_seed_registry_exact,PASS,exact 738-run frozen registry/run-ID set equality
+ceiling_metrics_finite,PASS,all numeric per-trace ceiling metrics
+trace_hashes_valid,PASS,per-run saved trace hashes
+no_query_order_or_outcome_changes,PASS,every saved trace independently evaluated; 79 legitimately nonnested
+k3_safe_reproduced,PASS,saved strict metrics
+ceiling_dominates_k3_safe,PASS,per trace
+ceiling_legality,PASS,738 ceilings
+formal_noncrossing_repair_equivalent,PASS,738/738 dependent runs exactly reassessed
+headroom_gate_go,PASS,frozen gate
+public_objective_frozen,PASS,pre-evaluation hash
+public_reference_inputs_empty,PASS,structural separation
+public_fixed_trace_matrix_complete,PASS,public replay
+public_metrics_finite,PASS,all numeric per-trace public metrics
+positive_anchor_coverage,PASS,all public runs
+barrier_safety,PASS,all public runs
+core_and_output_caps,PASS,all public runs
+deterministic_ties_and_row_order,PASS,all public runs
+incremental_batch_equivalence,PASS,all saved query prefixes
+public_operator_failure_reproduced,PASS,primary public comparison
+final_decision_compliant,PASS,headroom GO + public delta negative
+duration_ablation_present,PASS,predeclared
+gap_ablation_present,PASS,predeclared
+constraint_incremental_ablations_present,PASS,predeclared
+physical_vlm_calls_zero,PASS,public primitives
+baseline_acquisition_reruns_zero,PASS,public primitives
+closed_planner_not_reopened,PASS,run artifacts
+required_deliverables_present,PASS,required tree
+independent_review_pass,PASS,adversarial review
+final_file_manifest_validation,PASS,seal rebuild and hash check

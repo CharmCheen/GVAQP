@@ -1,0 +1,51 @@
+{
+  "oracle_result": {
+    "cache_replay": false,
+    "confidence": "high",
+    "cuda_synchronized_before_and_after": true,
+    "end_time": 1740.0,
+    "frame_identity_verified": true,
+    "generic_parsed_label": "positive",
+    "logical_oracle_call": true,
+    "oracle_build_id": "strict_oracle_3b9ba1187c0449426978",
+    "parse_status": "ok",
+    "parsed": {
+      "abstain_reason": null,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "ego_relevant": true,
+      "event_end": 0.7,
+      "event_start": 0.0,
+      "event_type": "enter_ego_path",
+      "evidence": "At 0.0s, the road is clear. By 0.7s, a cyclist on the right sidewalk begins to move into the ego vehicle's path, crossing the road from right to left, entering the driving lane and overlapping the ego path, requiring attention.",
+      "involved_object": "cyclist",
+      "label": "positive",
+      "negative_reason": null
+    },
+    "parsed_label": "positive",
+    "physical_oracle_invocation": true,
+    "projection_allowed_involved_objects": [
+      "cyclist",
+      "vehicle"
+    ],
+    "query_id": "Q1",
+    "raw": "{\n  \"label\": \"positive\",\n  \"event_start\": 0.0,\n  \"event_end\": 0.7,\n  \"event_type\": \"enter_ego_path\",\n  \"involved_object\": \"cyclist\",\n  \"ego_relevant\": true,\n  \"boundary_status\": \"ok\",\n  \"complete_event_visible\": true,\n  \"confidence\": \"high\",\n  \"evidence\": \"At 0.0s, the road is clear. By 0.7s, a cyclist on the right sidewalk begins to move into the ego vehicle's path, crossing the road from right to left, entering the driving lane and overlapping the ego path, requiring attention.\",\n  \"negative_reason\": null,\n  \"abstain_reason\": null\n}",
+    "raw_sha256": "e368f669a31ce652a4f6cfbbd3b444756390722333fd7793e871b0b45c8002fa",
+    "recorded_at_utc": "2026-07-17T16:56:58.962402+00:00",
+    "rng_seed": 20260883,
+    "service_total_seconds": 17.583697807,
+    "session_id": "C00__Y8__V0_Q1__T_high__r00__attempt_001",
+    "stage_seconds": {
+      "cleanup": 0.197628096,
+      "clip_extraction": 0.740639289,
+      "oracle_inference": 14.918730014,
+      "oracle_parse": 0.000129872,
+      "oracle_postprocess": 0.000453396,
+      "oracle_preprocess": 1.725990122
+    },
+    "start_time": 1730.0,
+    "unit_id": 173,
+    "video_id": "V0"
+  }
+}

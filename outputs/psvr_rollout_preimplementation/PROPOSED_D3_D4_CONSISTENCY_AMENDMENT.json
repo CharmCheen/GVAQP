@@ -1,0 +1,42 @@
+{
+  "activated": false,
+  "amendment_id": "PROPOSED_D3_D4_CONSISTENCY_V1",
+  "authorization_required": true,
+  "current_status": "BLOCKED_INTERNAL_INCONSISTENCY",
+  "decision_critical_missing_semantics": [
+    "ratio draw position in ordered SplitMix64 schedule",
+    "visible-history observation likelihood and posterior state for M1",
+    "conditional rollout sampler independent of realized future tape",
+    "visibility classification of seed, split index, episode parameters, and RNG state"
+  ],
+  "preserved_without_change": [
+    "D1 utility and lambda",
+    "D2-L logical policy",
+    "D2-T exact support bounds",
+    "event-process marginals",
+    "parameter-distribution marginals",
+    "development and heldout seed lists",
+    "named scenarios",
+    "methods and comparators",
+    "acceptance branches and gates",
+    "forbidden post-hoc changes"
+  ],
+  "recommended_branch": "A_BAYESIAN_VISIBLE_HISTORY_KERNEL",
+  "rejected_branches": {
+    "B_PUBLIC_SEED_OR_EPISODE_PARAMETERS": "changes information structure and risks pseudorandom future identification",
+    "C_CLONE_REALIZED_LATENT_EPISODE": "forbidden future/evaluator leakage and collapses M1 toward C0"
+  },
+  "results_visible": false,
+  "heldout_runner_authorized": false,
+  "heldout_runner_executed": false,
+  "development_smoke_run": false,
+  "unfrozen_readiness": {
+    "conditional_firewall": "src/garc_eval/psvr_rollout_toy/conditional.py",
+    "realized_episode_reference_held_by_evaluator": false,
+    "requires_visible_state_match": true,
+    "symmetric_continuation": "B1_SHIELDED_PI0_TO_FULL_HORIZON",
+    "ci_rule_implemented": "99_PERCENT_HALF_WIDTH_OR_NUMERICAL_BLOCK",
+    "posterior_kernel_implemented": false,
+    "tests_passed": 7
+  }
+}

@@ -1,0 +1,32 @@
+check,path,status,details
+csv_readable,outputs/real_video_protocol_pilot_v1_metric_repair/oracle_upper_bound_repaired_metrics.csv,PASS,rows=10
+csv_readable,outputs/real_video_protocol_pilot_v1_metric_repair/baseline_repaired_metrics.csv,PASS,rows=100
+csv_readable,outputs/real_video_protocol_pilot_v1_metric_repair/per_reference_detection_matrix.csv,PASS,rows=20
+expected_methods,baseline_repaired_metrics.csv,PASS,"methods=['ABae-stratified-confirmed', 'ARC-proxy-only', 'ARC-refinement', 'SUPG-RT-all-selected', 'SUPG-RT-confirmed-only']"
+expected_budgets,baseline_repaired_metrics.csv,PASS,"budgets=[5, 10, 20, 50]"
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/abae_b10,PASS,ABae-stratified-confirmed B=10 calls=10
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/abae_b20,PASS,ABae-stratified-confirmed B=20 calls=20
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/abae_b5,PASS,ABae-stratified-confirmed B=5 calls=5
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/abae_b50,PASS,ABae-stratified-confirmed B=50 calls=50
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/arc_proxy_b10,PASS,ARC-proxy-only B=10 calls=0
+arc_proxy_oracle_calls_zero,outputs/real_video_protocol_pilot_v1/baseline_results/arc_proxy_b10,PASS,calls=0
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/arc_proxy_b20,PASS,ARC-proxy-only B=20 calls=0
+arc_proxy_oracle_calls_zero,outputs/real_video_protocol_pilot_v1/baseline_results/arc_proxy_b20,PASS,calls=0
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/arc_proxy_b5,PASS,ARC-proxy-only B=5 calls=0
+arc_proxy_oracle_calls_zero,outputs/real_video_protocol_pilot_v1/baseline_results/arc_proxy_b5,PASS,calls=0
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/arc_proxy_b50,PASS,ARC-proxy-only B=50 calls=0
+arc_proxy_oracle_calls_zero,outputs/real_video_protocol_pilot_v1/baseline_results/arc_proxy_b50,PASS,calls=0
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/arc_refinement_b10,PASS,ARC-refinement B=10 calls=10
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/arc_refinement_b20,PASS,ARC-refinement B=20 calls=20
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/arc_refinement_b5,PASS,ARC-refinement B=5 calls=5
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/arc_refinement_b50,PASS,ARC-refinement B=50 calls=50
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/supg_all_selected_b10,PASS,SUPG-RT-all-selected B=10 calls=9
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/supg_all_selected_b20,PASS,SUPG-RT-all-selected B=20 calls=18
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/supg_all_selected_b5,PASS,SUPG-RT-all-selected B=5 calls=5
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/supg_all_selected_b50,PASS,SUPG-RT-all-selected B=50 calls=43
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/supg_confirmed_only_b10,PASS,SUPG-RT-confirmed-only B=10 calls=9
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/supg_confirmed_only_b20,PASS,SUPG-RT-confirmed-only B=20 calls=18
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/supg_confirmed_only_b5,PASS,SUPG-RT-confirmed-only B=5 calls=5
+oracle_calls_le_budget,outputs/real_video_protocol_pilot_v1/baseline_results/supg_confirmed_only_b50,PASS,SUPG-RT-confirmed-only B=50 calls=43
+upper_bound_has_rules,oracle_upper_bound_repaired_metrics.csv,PASS,"['iou_0.1', 'iou_0.3', 'iou_0.5', 'overlap_any', 'overlap_min_seconds_1.0']"
+per_reference_rows,per_reference_detection_matrix.csv,PASS,rows=20

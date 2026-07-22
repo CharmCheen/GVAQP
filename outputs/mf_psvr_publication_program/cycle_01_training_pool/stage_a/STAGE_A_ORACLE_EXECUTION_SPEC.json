@@ -1,0 +1,79 @@
+{
+  "bindings": {
+    "acquisition_protocol_hash": "84631247f37f309385e78350e4599f070014d9d9cad8a9eb5f2ef1afea454843",
+    "acquisition_protocol_sha256": "1639b349c13c77c5d152a1804d71f1f4acce7ffb6af9641d81b5f444e4e49f84",
+    "audit_manifest_sha256": "2bcd6d49a9a8e37bf6ab9bb515c2ce4dca2d86244dc19a1bcba3ec1715efac4e",
+    "core_source_sha256": "7acc25a13f42e931d07466f6103f49dfabfc4106c6c52391641a92109fbd700e",
+    "frame_config": {
+      "color": "cv2.COLOR_BGR2RGB",
+      "decoded_end_inclusive": true,
+      "fallback_decode_fps": 4.0,
+      "message_fps": 2.0,
+      "minimum_frames_before_fallback": 5,
+      "primary_decode_fps": 2.0
+    },
+    "frozen_builder_path": "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/scripts/build_strict_oracle.py",
+    "frozen_builder_sha256": "4e52a5d9dc4de906350dc4e69b2c26cfb414d41f4a4281822acefa42120d1458",
+    "generation_config": {
+      "do_sample": false,
+      "max_new_tokens": 256,
+      "randomness_policy": "greedy_with_per_unit_rng_identity_recorded",
+      "temperature": null
+    },
+    "heldout_opened": false,
+    "model_file_count": 28,
+    "model_full_content_hash": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+    "model_path": "/qiuyeqing/llama_prl/G-ARC/models/vlm/qwen3_vl/Qwen3-VL-32B-Instruct",
+    "oracle_config_sha256": "9d69bfb45f640e938d8cffe840c79414db612ac25fe73a0356b152083ceed9cd",
+    "oracle_runtime_config_sha256": "e4a0e5e62d5db3779caec0b08b7e77af62d7c5262d993b23bfb71c86d40f02c8",
+    "parser_schema_hash": "9a7413407d52df0484c0a338f0a12ae6b57553bdfa16753d7542f60977b558cb",
+    "parser_source_hash": "c02b545c0c5d2969508eea9a5470f0cb67d71282b25059948106504f9f4edd31",
+    "projection_source_sha256": "e4e30313882f11f1354a6f731ed72e0fcf502371efd559783ded5a2de1e14bac",
+    "prompt_path": "/qiuyeqing/llama_prl/G-ARC/Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/oracle/oracle_prompt.txt",
+    "prompt_sha256": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+    "runner_source_sha256": "f2461781504c13cc6b675e870f88332c7b19a6d6fa1a330a3ff320d0c20e5326",
+    "sampling_code_hash": "5b038acb5450d76928b43d873d73decd1792969e0aa072f121b8f23b751e0240"
+  },
+  "call_accounting": {
+    "attempt_bound": "accepted durable calls + uncertain started calls; never infer count from label rows",
+    "one_call_shared_by_queries": true,
+    "physical_call_rows": 96,
+    "query_projected_label_rows": 192
+  },
+  "call_order": "physical_call_id ascending, exactly mf_psvr_stage_a_001..096",
+  "execution_id": "MF_PSVR_CYCLE1_STAGE_A_ORACLE_EXECUTION_V1",
+  "execution_spec_hash": "b21f71dfa283f0f83a776f319688b5b0ead0a1425a60c5c74d6c1a21e25b1a72",
+  "hard_case_quartiles": {
+    "hard_negative": "projected negative with unit_score >= query q75",
+    "hard_positive": "projected positive with unit_score <= query q25",
+    "method": "pandas Series.quantile(q, interpolation='linear')",
+    "population": "all 2,654 eligible unit scores for the query"
+  },
+  "heldout_opened": false,
+  "input_identity_policy": "Decode and durably hash every selected unit's exact frame indices and RGB content before loading the model or starting physical call 1.",
+  "interruption_policy": "A STARTED attempt without a valid durable raw envelope becomes RECOVERED_UNCERTAIN; the run blocks and never retries or replaces that identity without a separately authorized protocol amendment.",
+  "maximum_physical_calls": 96,
+  "model_residency": "load once and keep resident across all calls in an invocation",
+  "oracle_abstain_policy": "Retain projected abstain; exclude it from positive/negative gate counts.",
+  "parse_failure_policy": "The physical call remains charged and retained with INVALID_PARSE; projected_label is empty, the row is excluded from positive/negative gate counts, and no retry or replacement is permitted.",
+  "projection_policy": {
+    "Q1": [
+      "cyclist",
+      "vehicle"
+    ],
+    "Q2": [
+      "cyclist",
+      "pedestrian"
+    ]
+  },
+  "resume_policy": "Reuse only a valid durable raw envelope from the same execution/build/input identity.",
+  "rng_policy": {
+    "base_seed": 20260710,
+    "cublas_workspace_config": ":4096:8",
+    "do_sample": false,
+    "formula": "base_seed + one_based_call_ordinal - 1",
+    "torch_deterministic_algorithms": true,
+    "unique_seeds": true
+  },
+  "status": "FROZEN_BEFORE_CANDIDATE_EXTRACTION_OR_ORACLE_CALLS"
+}

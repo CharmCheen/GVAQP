@@ -1,0 +1,240 @@
+{
+  "arc": {
+    "adaptation_warning": "Original ARC CDF features are unavailable on these videos. The native ARC change-point clustering algorithm is applied to [1-public_proxy, public_proxy].",
+    "configuration": {
+      "cluster_algorithm": "ARC sequential Jensen-Shannon change points",
+      "cluster_input": "two-class public-proxy posterior [1-s,s]",
+      "cluster_threshold": 0.001,
+      "confidence": 0.9,
+      "exact_fill": false,
+      "iou_threshold": 0.5,
+      "lp_enabled": true,
+      "proxy_threshold": 0.4,
+      "ps_enabled": true,
+      "startup_sampling_rate": 0.002,
+      "tau_units": 1,
+      "tc_enabled": true
+    },
+    "native_output_version": "arc_native_candidate_clips_with_exposed_native_confidence_v1",
+    "source_files": {
+      "refe_repos/ARC-main/arc/arc.py": "53e920d4141041614216c45424a0f2c8f36c508dcedfac24273350e8b55f29cd",
+      "refe_repos/ARC-main/arc/pruning_phase.py": "395be122d56d764528ec3ea7672809d2e81a24f5e864c43fd9f189ab22c00750",
+      "refe_repos/ARC-main/arc/refinement_phase.py": "7c5bed418ec42a03dae678f8a90c27bd32c1e02e21c79bd3ac179a80486cbb04",
+      "refe_repos/ARC-main/arc/tools.py": "16a9010eef2cf8329600b324b2a58ac5bc8a75096b3649b7d501472a92444617",
+      "refe_repos/adapter/arc_baseline/run.py": "220be4e6f813329fc2a144cbb376ff5aa6f778f2881bf0146c14a3c9292ed9c9"
+    }
+  },
+  "budgets": [
+    5,
+    10,
+    20,
+    50,
+    80,
+    100
+  ],
+  "datasets": [
+    {
+      "absolute_slice_seconds": [
+        0.0,
+        3470.0
+      ],
+      "dataset": "dataset3",
+      "domain": "dataset3_development",
+      "frozen_files": {
+        "oracle": {
+          "path": "BSEC_AQP_Development_Gate_v1/outputs/native_arc_vs_pstr/frozen_inputs/dataset3_development/oracle_labels.csv",
+          "sha256": "30176c719e4f537d74756a02735f2af08532cc32ca3878e067f7c521d9be1d01"
+        },
+        "proxy": {
+          "path": "BSEC_AQP_Development_Gate_v1/outputs/native_arc_vs_pstr/frozen_inputs/dataset3_development/proxy_only.csv",
+          "sha256": "66fec4325d9d98ef48167035afff462d2466426f7cd247b052152c0251129e1d"
+        },
+        "reference": {
+          "path": "BSEC_AQP_Development_Gate_v1/outputs/native_arc_vs_pstr/frozen_inputs/dataset3_development/reference_events.csv",
+          "sha256": "e8257fc3172c604ab994eef254cfc55bc641c13473fdc15f27103bcacefa8323"
+        },
+        "units": {
+          "path": "BSEC_AQP_Development_Gate_v1/outputs/native_arc_vs_pstr/frozen_inputs/dataset3_development/units.csv",
+          "sha256": "e874fd2418ba10964de51aabca33e586797d1504f71dbc1e239faea9e2e18062"
+        }
+      },
+      "raw_sources": {
+        "oracle": {
+          "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/oracle_observations.csv",
+          "sha256": "ed60bde05311511f8802e019534391542a56beba6412928912c20a0a62ae62d1"
+        },
+        "proxy": {
+          "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/public_proxy.csv",
+          "sha256": "7edd7fc87f849ce9f32bb26edc368aaf986952100c3f2184cd95cef015c33815"
+        },
+        "reference": {
+          "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/event_reference.csv",
+          "sha256": "56f617e759e108c96c7a865da26dc229689c87dcf2b633904255aa4c715633a3"
+        },
+        "units": {
+          "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/frozen_inputs/units.csv",
+          "sha256": "bfbe4270936d267e36734b30174e83c47b0cb021cda3a9a9b6a7e7a7f709d182"
+        }
+      },
+      "reference_event_count": 26,
+      "unit_count": 347,
+      "video_id": "long_video_dataset3"
+    },
+    {
+      "absolute_slice_seconds": [
+        0.0,
+        1570.0
+      ],
+      "dataset": "realcartest",
+      "domain": "realcartest_0_1570",
+      "frozen_files": {
+        "oracle": {
+          "path": "BSEC_AQP_Development_Gate_v1/outputs/native_arc_vs_pstr/frozen_inputs/realcartest_0_1570/oracle_labels.csv",
+          "sha256": "f9bdf194400a8d09f9bf8951f14d9836b6911a2c6447c949ed264eb7c9b5cc38"
+        },
+        "proxy": {
+          "path": "BSEC_AQP_Development_Gate_v1/outputs/native_arc_vs_pstr/frozen_inputs/realcartest_0_1570/proxy_only.csv",
+          "sha256": "dbabcf84a83e4e9f1b69bbf1f4054d05e9b40e1fd2316de47d4af09487120b5f"
+        },
+        "reference": {
+          "path": "BSEC_AQP_Development_Gate_v1/outputs/native_arc_vs_pstr/frozen_inputs/realcartest_0_1570/reference_events.csv",
+          "sha256": "ebe75819d7edfd7ff2a487fa15bf59888add8648a952710db687fe83094ba668"
+        },
+        "units": {
+          "path": "BSEC_AQP_Development_Gate_v1/outputs/native_arc_vs_pstr/frozen_inputs/realcartest_0_1570/units.csv",
+          "sha256": "0ec688b47582976f603659a8f2198848ac922b241221019c6c2742979d29f409"
+        }
+      },
+      "raw_sources": {
+        "grid": {
+          "path": "outputs/late_aqp_frozen_cross_segment_v1/grid_realcartest_0_1570.csv",
+          "sha256": "5fe80a5b4b8d0c02f0d41a301cd78af186b5ba696b2fd63eebcc43b8015fc0f7"
+        },
+        "reference": {
+          "path": "outputs/late_aqp_frozen_cross_segment_v1/ref_events_realcartest_0_1570.csv",
+          "sha256": "a118f346a1f3736835604526f1e0bda182fb5f6f60850fe1ee664da873856cda"
+        }
+      },
+      "reference_event_count": 20,
+      "unit_count": 157,
+      "video_id": "realcartest"
+    },
+    {
+      "absolute_slice_seconds": [
+        2000.0,
+        3200.0
+      ],
+      "dataset": "realcartest",
+      "domain": "realcartest_2000_3200",
+      "frozen_files": {
+        "oracle": {
+          "path": "BSEC_AQP_Development_Gate_v1/outputs/native_arc_vs_pstr/frozen_inputs/realcartest_2000_3200/oracle_labels.csv",
+          "sha256": "c017c11903e3d6e2bee29966e7e63aa229ef2117c1edcc69a137a870a8bf624f"
+        },
+        "proxy": {
+          "path": "BSEC_AQP_Development_Gate_v1/outputs/native_arc_vs_pstr/frozen_inputs/realcartest_2000_3200/proxy_only.csv",
+          "sha256": "954b27f64f06ea2f95cab3b7b385b6e6f2b1ba52e0956ab65e715aa3e295ab2b"
+        },
+        "reference": {
+          "path": "BSEC_AQP_Development_Gate_v1/outputs/native_arc_vs_pstr/frozen_inputs/realcartest_2000_3200/reference_events.csv",
+          "sha256": "15d94d4d862a4072a5d46c7e54f002f2f10ac01b461c29748fbe5be5254d978a"
+        },
+        "units": {
+          "path": "BSEC_AQP_Development_Gate_v1/outputs/native_arc_vs_pstr/frozen_inputs/realcartest_2000_3200/units.csv",
+          "sha256": "ae20fd28ee9e7defa266e490e5a57594f09946dddb8781e87a7c6f369fecab8d"
+        }
+      },
+      "raw_sources": {
+        "grid": {
+          "path": "outputs/real_video_protocol_pilot_v1/frame_scores_adapter_ready.csv",
+          "sha256": "6ca8c9eebc8b5808abd933879cca3890bda799128ac9e0911ebfc988591d66bf"
+        },
+        "reference": {
+          "path": "outputs/real_video_protocol_pilot_v1/reference_segments_adapter_ready.csv",
+          "sha256": "230e9da196e8b04e0d3f562db67b66a53d5929da3a1d0662279e60e478ec83f9"
+        }
+      },
+      "reference_event_count": 20,
+      "unit_count": 120,
+      "video_id": "realcartest"
+    }
+  ],
+  "decision_rule": {
+    "arc_superior": "symmetric rule",
+    "forced_status_for_posthoc_or_low_power": "INCONCLUSIVE",
+    "otherwise": "BUDGET_DEPENDENT or INCONCLUSIVE per preregistered conditions",
+    "pstr_superior": "native recall AUC significantly higher, native precision AUC not significantly lower, recall no lower at most budgets, and no single-domain dominance"
+  },
+  "evaluator": {
+    "matching_rule": "maximize overlap cardinality, then temporal IoU; one prediction and one reference at most once",
+    "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/scripts/benchmark_lib.py",
+    "sha256": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+    "tiou_denominator": "reference event count",
+    "version": "benchmark_lib overlap-any one-to-one Hungarian matching"
+  },
+  "frozen_before_method_execution": true,
+  "frozen_utc": "2026-07-13T04:04:29Z",
+  "native_materializers": {
+    "native_arc": "ARC cand_clips, ARC boundaries, and ARC per-candidate confidence",
+    "native_pstr": {
+      "name": "pstr_native_minimal_materializer",
+      "reason": "PSTR has no independent repository-native clip materializer",
+      "rule": "one exact unit-boundary event per queried-positive unit; no merging or bridging",
+      "version": "v1"
+    }
+  },
+  "objective": "Compare full native ARC and native PSTR; use shared K3 only as a mechanism control.",
+  "oracle_cost": {
+    "definition": "one first access to one unique ten-second unit label equals one logical exact-oracle call",
+    "duplicate_queries_forbidden": true,
+    "same_for_arc_and_pstr": true,
+    "upper_bound_rule": "exact_oracle_calls <= budget"
+  },
+  "output_root": "BSEC_AQP_Development_Gate_v1/outputs/native_arc_vs_pstr",
+  "pstr": {
+    "cell_overhead": 0.25,
+    "method_id": "pstr_5_to_4",
+    "parameter_source": "five-domain leave-one-domain-out development replay",
+    "parameter_source_path": "BSEC_AQP_Development_Gate_v1/outputs/pstr_exploration_v2/leave_one_domain_out.csv",
+    "parameter_source_sha256": "900dc0eec5396b3d69a29b67a78cdfa90823118137158146a2cede4c68479a26",
+    "posthoc_warning": "All included target domains were open before PSTR was proposed; LODO reduces same-domain tuning but is not prospective or cross-video-independent.",
+    "sealer_path": "BSEC_AQP_Development_Gate_v1/scripts/seal_pstr_selections.py",
+    "sealer_sha256": "5895df63594a4dc5b72e95d2db4b5d021ae8e05d182b9910ef4f2d3cbb2a09e1",
+    "selection_policy_frozen": true,
+    "selection_rule": "M=min(n,B+floor(B/4)); best proxy unit per temporal cell; top B winners"
+  },
+  "research_status": "EXPLORATORY_POSTHOC_OPEN_LABEL_REPLAY",
+  "runner": {
+    "path": "BSEC_AQP_Development_Gate_v1/scripts/run_native_arc_vs_pstr.py",
+    "sha256": "531382fd6d9f3a9b78de67e501fd8cedc5bab208029ebe9ce8aa5fd07c63200b"
+  },
+  "schema_version": "native_arc_vs_pstr_v1",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "shared_k3": {
+    "arc_exact_fill": false,
+    "configuration": {
+      "d_core_max": 40.0,
+      "d_seg_max": 60.0,
+      "g_max": 1
+    },
+    "implementation_path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/scripts/benchmark_lib.py",
+    "implementation_sha256": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+    "name": "k3_bridge_safe",
+    "terminal_only": true
+  },
+  "statistical_plan": {
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20260713,
+    "bootstrap_unit": "independent source video after seed and within-video-domain averaging",
+    "multiple_comparison_correction": "Holm within comparison and metric across six budgets",
+    "pairing": "domain x video x ARC seed x budget; deterministic PSTR repeated only to form ARC-seed pairs",
+    "permutation_unit": "independent source video",
+    "power_rule": "fewer than five independent source videos => statistical_power_insufficient"
+  }
+}

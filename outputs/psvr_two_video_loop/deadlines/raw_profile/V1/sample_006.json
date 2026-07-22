@@ -1,0 +1,103 @@
+{
+  "cache_replay": false,
+  "commit": {
+    "materializer_mode": "persistent_clean_spawn_predeadline",
+    "raw_observation_commit": {
+      "atomic_replace_seconds": 0.001222773,
+      "fsync_seconds": 0.000825682,
+      "payload_sha256": "fae0107eb0396382e5c972164298841e6edab54a0279397abee20e2b9262aabe",
+      "serialize_seconds": 0.000222785,
+      "total_seconds": 0.003412752
+    },
+    "snapshot_commit": {
+      "atomic_replace_seconds": 0.001673124,
+      "fsync_seconds": 0.000689197,
+      "payload_sha256": "db06fabfaf3b4ceb029ad2b78d611d3f6b111ff10d35ff1007c58dfbbcfe12a4",
+      "serialize_seconds": 8.2114e-05,
+      "total_seconds": 0.00311694
+    },
+    "snapshot_path": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_two_video_loop/deadlines/raw_profile/V1/sample_006_snapshot.json",
+    "stage_seconds": {
+      "atomic_replace": 0.001673124,
+      "fsync": 0.000689197,
+      "materialize": 0.020299123,
+      "observation_persist": 0.003412752,
+      "serialize": 8.2114e-05
+    },
+    "total_seconds": 0.027886059
+  },
+  "commit_wall_seconds": 0.027919722,
+  "confirmed_events": 0,
+  "oracle_result": {
+    "cache_replay": false,
+    "confidence": "high",
+    "cuda_synchronized_before_and_after": true,
+    "end_time": 3690.0,
+    "frame_identity_verified": true,
+    "generic_parsed_label": "positive",
+    "logical_oracle_call": true,
+    "oracle_build_id": "two_video_v1_oracle_7e37193ced4063695206",
+    "parse_status": "ok",
+    "parsed": {
+      "abstain_reason": null,
+      "boundary_status": "ok",
+      "complete_event_visible": true,
+      "confidence": "high",
+      "ego_relevant": true,
+      "event_end": 0.7,
+      "event_start": 0.0,
+      "event_type": "enter_ego_path",
+      "evidence": "A pedestrian in a pink shirt and white hat is seen on the right sidewalk near a blue tricycle, stepping forward and crossing into the ego vehicle's path from the right side, moving into the driving corridor as the vehicle proceeds forward. The pedestrian starts outside the ego path and clearly enters it, requiring attention.",
+      "involved_object": "pedestrian",
+      "label": "positive",
+      "negative_reason": null
+    },
+    "parsed_label": "negative",
+    "physical_oracle_invocation": true,
+    "projection_allowed_involved_objects": [
+      "cyclist",
+      "vehicle"
+    ],
+    "query_id": "Q1",
+    "raw": "{\n  \"label\": \"positive\",\n  \"event_start\": 0.0,\n  \"event_end\": 0.7,\n  \"event_type\": \"enter_ego_path\",\n  \"involved_object\": \"pedestrian\",\n  \"ego_relevant\": true,\n  \"boundary_status\": \"ok\",\n  \"complete_event_visible\": true,\n  \"confidence\": \"high\",\n  \"evidence\": \"A pedestrian in a pink shirt and white hat is seen on the right sidewalk near a blue tricycle, stepping forward and crossing into the ego vehicle's path from the right side, moving into the driving corridor as the vehicle proceeds forward. The pedestrian starts outside the ego path and clearly enters it, requiring attention.\",\n  \"negative_reason\": null,\n  \"abstain_reason\": null\n}",
+    "raw_sha256": "86d00ef0de6a6582e80239ec0016e362222f964e75ec8e446a6b3fa3f7bfd2c2",
+    "recorded_at_utc": "2026-07-18T02:37:29.848691+00:00",
+    "rng_seed": 20261078,
+    "service_total_seconds": 22.819732939,
+    "session_id": "deadline_profile_V1_006",
+    "stage_seconds": {
+      "cleanup": 0.327762375,
+      "clip_extraction": 0.639582701,
+      "oracle_inference": 16.90038592,
+      "oracle_parse": 0.000129432,
+      "oracle_postprocess": 0.000625909,
+      "oracle_preprocess": 4.951122573
+    },
+    "start_time": 3680.0,
+    "unit_id": 368,
+    "video_id": "V1"
+  },
+  "physical_oracle_only": true,
+  "query_wall_seconds": 22.820342247,
+  "recorded_at_utc": "2026-07-18T02:37:29.848691+00:00",
+  "sample_index": 6,
+  "service_total_seconds": 22.819732939,
+  "session_initialization": {
+    "prior_query_count": 0,
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V1_006",
+    "video_id": "V1"
+  },
+  "session_summary": {
+    "physical_calls": 1,
+    "queried_ids": [
+      368
+    ],
+    "query_id": "Q1",
+    "session_id": "deadline_profile_V1_006",
+    "video_id": "V1"
+  },
+  "status": "ok",
+  "unit_id": 368,
+  "video_id": "V1"
+}

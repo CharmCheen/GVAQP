@@ -1,0 +1,113 @@
+{
+  "schema_version": "pstr_external_confirmation_v5",
+  "frozen_utc": "2026-07-13T02:38:00Z",
+  "research_status": "FROZEN_BEFORE_ACQUIRING_ANY_EXTERNAL_CONFIRMATION_VIDEO",
+  "supersedes_candidate_protocol_sha256": "8da4c56f651839120a7975dbc3bbbf209fb76db746c8f3993189cd32da17cff2",
+  "objective": "Test whether temporal stratification of a fixed cheap proxy improves event-F1 AUC at identical exact-oracle budgets under one shared EventRelation materializer.",
+  "candidate": {
+    "method_id": "pstr_5_to_4",
+    "name": "Proxy-Stratified Temporal Retrieval",
+    "selection_rule": [
+      "For population n and per-video budget B, set M=min(n,B+floor(B/4)).",
+      "Partition temporal unit IDs into M cells with boundaries floor(n*c/M).",
+      "Keep each cell's maximum-proxy unit; break ties by smaller unit ID.",
+      "Rank winners by decreasing proxy then smaller unit ID and return exactly B."
+    ],
+    "nested_across_budgets": false,
+    "oracle_use_during_selection": "none",
+    "label_blind_selector": "scripts/seal_pstr_selections.py",
+    "label_blind_selector_sha256": "5895df63594a4dc5b72e95d2db4b5d021ae8e05d182b9910ef4f2d3cbb2a09e1"
+  },
+  "development_evidence": {
+    "status": "POSTHOC_OPEN_DATA_ONLY",
+    "domains": 5,
+    "independent_source_videos": 2,
+    "decision_sha256": "8f03eecb8cf12d6db092c14099c56e5b0e7eb6dc135eade5fa5ac87ac5065bf2",
+    "leave_one_domain_out_sha256": "900dc0eec5396b3d69a29b67a78cdfa90823118137158146a2cede4c68479a26",
+    "selected_candidate_auc_sha256": "346505406af65c1ec3304e3db7eb0a2a9d3feb476a8d7a5b76cfe59e2a81b74e",
+    "baseline_auc_sha256": "5259c88c40bed36d14ffacc23aa86c93279ca788af7a109de12e56972ef16f5c",
+    "baseline_per_budget_runs_sha256": "f719076899559924b3e5b46718da080081ee5b403cef324ca9d2969e0fec8a81",
+    "runner_sha256": "104e9cb628cc02afc8c0bb548926e2071e4dde33dd62e2f1edbf996e24718c13",
+    "leave_one_domain_out_result": "four strict controlled-ARC wins, one tie, zero losses",
+    "warning": "Four of five domains share realcartest and all labels were open before PSTR was proposed."
+  },
+  "external_data": {
+    "minimum_independently_sourced_videos": 5,
+    "minimum_full_ten_second_units_per_primary_video": 100,
+    "unit_grid": "Per video, unit i is the half-open interval [10*i,10*(i+1)); discard a final partial interval shorter than 10 seconds; unit IDs start at zero.",
+    "primary_budgets_per_video": [5, 10, 20, 50, 80, 100],
+    "budget_semantics": "Each method receives B unique observations separately on each video, so total logical calls at budget B equal B times the number of primary videos.",
+    "short_video_rule": "Videos with fewer than 100 full units are excluded from the primary analysis and reported separately on all feasible budgets without a success claim.",
+    "label_sealing": "Video hashes, unit grids, proxy-only tables, PSTR selections, and every label-blind comparator selection must be sealed before any oracle label or event reference is opened.",
+    "reference": "Primary references must be human-adjudicated; VLM pseudo-references may be reported only as a secondary analysis."
+  },
+  "external_public_proxy": {
+    "name": "roadclip_score_count_v2_frozen",
+    "road_segment_filter_script_sha256": "8d24ac96c890aee3fea0efe012f088a8d190d98d605c5a23c148f3db1cf6b00b",
+    "clip_script_sha256": "9494bb2959bcbfc6ae90c84389a2d1c43cf8f5f28d2872ab3515a86c21732632",
+    "proxy_script_sha256": "bba68237d6c621961f7f76f8a344e825e50b71914401503b5b523755a03323f0",
+    "common_script_sha256": "034d8f875ba544b3ec48fe1f66bc7965eb588634baa9f9f04a527fddf97ed09f",
+    "config_sha256": "0b0709fbe8d2401e73d1fca0b1d01cbdb6ecc89b576abba80dfde660827e5621",
+    "yolo_model": "yolov8n.pt",
+    "yolo_model_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "aggregation_to_unit": "Maximum score_count among proxy clips with nonempty temporal overlap with the ten-second unit.",
+    "normalization": "none after score_count; deterministic ordering is by raw aggregate then unit ID",
+    "missing_value_rule": "If no scored clip overlaps a unit, proxy_score=0.0. Any NaN or non-finite scored value blocks the gate.",
+    "timeline_offset": "All clip and unit timestamps are seconds from the start of the hashed source video; no learned or post-label offset is allowed.",
+    "seal_requirement": "All code/model/config/video/proxy-table hashes and proxy-only columns must be recorded before labels are opened."
+  },
+  "shared_evaluation": {
+    "materializer": "k3_bridge_safe",
+    "materializer_config": {"g_max": 1, "d_core_max": 40.0, "d_seg_max": 60.0},
+    "materializer_and_evaluator_implementation_sha256": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+    "primary_metric": "normalized trapezoidal event-F1 AUC over [5,10,20,50,80,100] independently per video",
+    "video_aggregation": "unweighted arithmetic mean of per-video normalized AUCs; each video has equal primary weight regardless of event count",
+    "secondary_aggregation": "event-pooled curves and event-weighted AUC, clearly labeled secondary",
+    "exact_call_rule": "Every primary method must select exactly B unique units on every primary video and use identical oracle observations and materialization."
+  },
+  "comparators": {
+    "pure_proxy_topk": "descending frozen raw proxy, unit-ID tie break",
+    "arc_shared_k3": {
+      "name": "threshold-0.4 ARC-refinement + proxy-order exact-fill, shared K3",
+      "adapter_sha256": "220be4e6f813329fc2a144cbb376ff5aa6f778f2881bf0146c14a3c9292ed9c9",
+      "threshold": 0.4,
+      "cluster_mode": "each_frame",
+      "seeds": "integers 0 through 999 inclusive",
+      "aggregate": "For each video and budget, mean event-F1 across the 1000 seeds; then compute per-video normalized AUC. Proxy-fill unqueried units to exact B for every seed.",
+      "native_arc": "descriptive only and never substituted for the exact-call primary comparator"
+    },
+    "clip_topk": {
+      "model": "openai/clip-vit-base-patch32",
+      "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+      "scorer_sha256": "cf20bf9576adcf21c8a0dec098910e147ab9a854149ffcb36eef76a8a97f1a30"
+    },
+    "mmr_and_facility": {
+      "implementation_sha256": "44ff37df83d0ba9a9a0e684dd3d3765759bd8ae174ba6139c3cf2806285b4844",
+      "mmr_lambda": 0.5,
+      "facility_relevance_power": 8
+    },
+    "dpp": {
+      "name": "quality-weighted greedy DPP",
+      "selector_sha256": "aefcf3e34756e198bea1b3fadd7eb0df2bf6a1f004715cd1afd9d1ae7f8105f0",
+      "kernel": "diag(exp(2*CLIP-rank-percentile)) times normalized-CLIP-embedding Gram times the same diagonal, plus 1e-9 I"
+    },
+    "supg": {
+      "adapter_sha256": "c994c136c09753cbed0f358b89590dcff2ce8784f6facadc3bd2c30953477f2b",
+      "variants": ["SUPG-RT-all-selected", "SUPG-RT-confirmed-only"],
+      "seeds": "integers 0 through 999 inclusive",
+      "exact_fill": "append unused units in frozen raw-proxy order until B"
+    },
+    "random": "1000 fixed nested permutations with seeds 20260713 through 20261712"
+  },
+  "decision_rule": {
+    "strongest_baseline": "For each comparator family, compute video-macro normalized AUC. The strongest baseline is the maximum family value, including pure proxy, ARC mean, CLIP, NMS-h10, MMR, facility, DPP, both SUPG variants, and random mean.",
+    "primary_effect": "PSTR video-macro normalized event-F1 AUC must strictly exceed the strongest baseline.",
+    "uncertainty": "Using seed 20260713, perform 10000 paired bootstrap resamples of primary videos. The 2.5th percentile of PSTR-minus-strongest-baseline video-macro AUC must be greater than zero.",
+    "budget_shape": "At no fewer than four of six budgets, PSTR video-macro event-F1 must be no lower than the strongest baseline at that budget; ties count as no lower, not as wins.",
+    "distinct_event_check": "PSTR must have higher video-macro distinct-reference-event discoveries than the strongest baseline at no fewer than three budgets.",
+    "output_efficiency": "Report returned seconds, overcoverage, and distinct events at every budget. A primary pass is invalid if a code or configuration audit finds a different materializer or broader per-selected-unit K3 rule.",
+    "missing_baseline": "If any named primary comparator cannot be sealed and run, the gate is incomplete and cannot pass.",
+    "failure_action": "Reject PSTR-5:4 without changing its cell overhead, proxy contract, or decision rule using external labels."
+  },
+  "claim_limit": "A pass would support PSTR under this proxy, query, unit grid, exact-call adapter, K3 evaluator, and sampled video population. It would not establish universal or native-ARC superiority."
+}

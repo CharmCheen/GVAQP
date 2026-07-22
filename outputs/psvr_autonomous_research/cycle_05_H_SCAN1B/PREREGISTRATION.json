@@ -1,0 +1,73 @@
+{
+  "heldout_opened": false,
+  "hypothesis_id": "H-SCAN1B",
+  "identifiability_warning_frozen": {
+    "component_identity_nonidentifiable": true,
+    "constraint": "The factorial can establish sufficiency of a span-order term, but cannot identify duration/coverage versus hierarchy-debt semantics.",
+    "fact": "For positive span, U and L are both strictly increasing functions of the same span.",
+    "prediction": "With identical eligibility and TB0, F10 and F01 must induce exactly the same scan action sequence."
+  },
+  "physical_cap": 33,
+  "question": "Is the H-SCAN1A structural result robust to exact ties, and is one structural term sufficient?",
+  "revision": 0,
+  "stage_5a_tie_gate": {
+    "decision_rules": {
+      "ANOMALOUS": "TB0 lacks stable effect; do not interpret alternatives as robustness",
+      "FAIL": "TB0 has stable effect and both TB1/TB2 lack stable effect",
+      "STRONG": "TB0, TB1, and TB2 all have stable effect",
+      "WEAK": "TB0 has stable effect and exactly one of TB1/TB2 has stable effect"
+    },
+    "equality": "bitwise-equal Python float value; no tolerance",
+    "gate": "Run factorial only for STRONG or WEAK. FAIL moves to H-TIE1; ANOMALOUS audits reproduction.",
+    "matrix": "TB0/TB1/TB2 x T_transition x 3 fresh physical repeats",
+    "methods": {
+      "TB0": "D2 structural priority; exact equal-priority cells ordered by ascending unit_id",
+      "TB1": "D2 structural priority; only exact equal-priority cells ordered by descending unit_id",
+      "TB2": "D2 structural priority; only exact equal-priority cells ordered by SHA256(seed,cell_id)"
+    },
+    "seed_TB2": 20260715,
+    "stable_effect": "positive F1 and AnytimeAUC in all three repeats"
+  },
+  "stage_5b_factorial": {
+    "conditional_on": [
+      "STRONG",
+      "WEAK"
+    ],
+    "decision_rules": {
+      "L": "F01 and F11 stably effective; F10 and F00 not",
+      "NONE": "no structural arm stably effective",
+      "SIMPLE": "F10,F01,F11 stably effective and F00 not",
+      "U": "F10 and F11 stably effective; F01 and F00 not",
+      "UL": "only F11 stably effective",
+      "ZERO": "F00 stably effective, invalidating structural attribution"
+    },
+    "invariants": [
+      "eligible cells",
+      "midpoint hierarchy",
+      "A0",
+      "TB0",
+      "normalization",
+      "weights",
+      "candidate selector",
+      "guard",
+      "K3",
+      "physical operators"
+    ],
+    "matrix": "F00/F10/F01/F11 x T_transition/T_high x 3 fresh physical repeats",
+    "methods": {
+      "F00": "neither term: all eligible-cell priorities zero",
+      "F01": "L only, L=0.5*log2(unobserved_span_units+1)/log2(N+1)",
+      "F10": "U only, U=unobserved_span_units/N",
+      "F11": "U+L, identical to H-SCAN1A D2"
+    }
+  },
+  "status": "FROZEN_BEFORE_NEW_PHYSICAL_RUNS",
+  "valid_run": [
+    "physical oracle",
+    "deadline_met",
+    "cache_replay=false",
+    "future_proxy_access=false",
+    "visibility_violation=false",
+    "durable snapshot"
+  ]
+}

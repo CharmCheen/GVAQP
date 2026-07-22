@@ -1,0 +1,141 @@
+{
+  "attempt_id": "mf_psvr_stage_a_oracle_97ddc1a50f36e153c847__mf_psvr_stage_a_010__a001",
+  "cache_input_identity_sha256": "f3fea360a0ad0e6a36e64ca2cacd0f06629cd4a81185a929870438812331de23",
+  "call_completed_at_utc": "2026-07-19T05:19:52Z",
+  "call_started_at_utc": "2026-07-19T05:19:37Z",
+  "decoded_frame_indices": [
+    783,
+    797,
+    811,
+    825,
+    839,
+    853,
+    867,
+    881,
+    895,
+    909,
+    923
+  ],
+  "decoded_frame_timestamps_seconds": [
+    26.363636364,
+    26.835016835,
+    27.306397306,
+    27.777777778,
+    28.249158249,
+    28.720538721,
+    29.191919192,
+    29.663299663,
+    30.134680135,
+    30.606060606,
+    31.077441077
+  ],
+  "generation_config": {
+    "do_sample": false,
+    "max_new_tokens": 256,
+    "randomness_policy": "greedy_with_per_unit_rng_identity_recorded",
+    "temperature": null
+  },
+  "generation_runtime_seconds": 15.1953951343894,
+  "model_input_manifest": {
+    "model_input_identity_sha256": "a793fffbd62dab0b5a40506c14547e33daabbf0c46769fe0c97bfea8b3505940",
+    "prompt_text_sha256": "610ba5aa7cc988325be7185a7a7720c86839e6a526fb02d80469946cd79d94ee",
+    "tensors": [
+      {
+        "dtype": "torch.int64",
+        "name": "attention_mask",
+        "sha256": "ed1a65c9cfa0f6cd6a60a4e5d3f2f17ef91dc6a8b0c4b6eae05a779eff209d06",
+        "shape": [
+          1,
+          1750
+        ]
+      },
+      {
+        "dtype": "torch.int64",
+        "name": "input_ids",
+        "sha256": "174eed4e61ad4186e8b0575e92857f25ddeae05017b7979fa8d7f536c5e3bd18",
+        "shape": [
+          1,
+          1750
+        ]
+      },
+      {
+        "dtype": "torch.int64",
+        "name": "mm_token_type_ids",
+        "sha256": "49d8b011d3a880067d897fc476d6078db64ab144b6144a7a417368708819e3d6",
+        "shape": [
+          1,
+          1750
+        ]
+      },
+      {
+        "dtype": "torch.float32",
+        "name": "pixel_values_videos",
+        "sha256": "dc8dfb1719a1d3eb1dc44e9b4ac308a96e5c2810098584aeafbace0e5c604897",
+        "shape": [
+          4608,
+          1536
+        ]
+      },
+      {
+        "dtype": "torch.int64",
+        "name": "video_grid_thw",
+        "sha256": "c7c79f525de065973ce5fcb94b0efd230ee911a99a0afdd38356f1f9afb39edd",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  "model_load_seconds": 0.0,
+  "model_loaded_this_invocation": false,
+  "oracle_build_id": "mf_psvr_stage_a_oracle_97ddc1a50f36e153c847",
+  "peak_gpu_memory_allocated_bytes": 67656331776,
+  "peak_gpu_memory_reserved_bytes": 67830284288,
+  "per_frame_content_sha256": [
+    "e35fded432a3fa952cf13e0bb48bcf5e4cbea5645878c01db65014e63c65e424",
+    "ef5683970d549fb30f2748dfff61110a4ee6d6f0c1a96f133ac764ea3cdd435b",
+    "25cd78f88e0041fffc3492495d945d47bf39d7ac5fd49860a0727f2876a081c4",
+    "043d182c503f50af81e3255673ff9f06d7ef90ca172393b19855eb190127bea4",
+    "95289c797bb8ac4fa6401e961172c865a4ea35f4c3c597fe423bff476eb2480e",
+    "6a0d6adc4d8caeeb0ed63daecd397aa5596bfcfdc6a5c6896828c79b0a57c386",
+    "2ab5828df2666e9f3fa6bb4754286c36f0de19e87dc8dfad37c8cce4a6c71288",
+    "fcb8ca289d271c6a7450a54c328477b90c9c0def4647e7bd1102be0e617d7016",
+    "80725505b781c91a68b062f3676cd1ff9f4ecd260e3ce10cd7db416d47cd146a",
+    "045270eb54d00f0d2878925c8fe8951c47d0d7c996bd759c27125081ead94d45",
+    "6d4d8a12f189fa22a0d102fa9ddcac3d64f038edcf0a592548229719e9cc354e"
+  ],
+  "physical_call_id": "mf_psvr_stage_a_010",
+  "physical_vlm_call": true,
+  "raw": "{\n  \"label\": \"abstain\",\n  \"event_start\": null,\n  \"event_end\": null,\n  \"event_type\": \"unclear\",\n  \"involved_object\": \"unknown\",\n  \"ego_relevant\": false,\n  \"boundary_status\": \"uncertain\",\n  \"complete_event_visible\": false,\n  \"confidence\": \"low\",\n  \"evidence\": \"The video is extremely dark with heavy red lighting, likely from emergency or brake lights, and the camera view is blurred and unstable. The dashboard is visible but no clear road or external objects can be identified. The ego vehicle's path is not discernible due to poor visibility and motion blur.\",\n  \"negative_reason\": null,\n  \"abstain_reason\": \"poor_view\"\n}",
+  "raw_response_sha256": "cc377584ea50a5a017d0d6150d3d2748488eac9812281bd1fc84aa6ed13bf0f6",
+  "resolved_inference_runtime_sha256": "bc4a048d675d7cba29f47c0872f93b39c21d293bf719a99e7635dc1dc83e3107",
+  "rng_identity": {
+    "cublas_workspace_config": ":4096:8",
+    "cuda_rng_state_sha256": [
+      "0e14d0ad9790ad9a4f4ebd89012ac5a934923fc18e077a380168374774b969eb"
+    ],
+    "deterministic_algorithms_enabled": true,
+    "numpy_rng_state": {
+      "bit_generator": "MT19937",
+      "cached_gaussian": 0.0,
+      "has_gaussian": 0,
+      "position": 624,
+      "state_sha256": "e5f6b80741d0b3d43dc5daf2dd78b640ee77621f363735d6cd40774391b7ed4e"
+    },
+    "numpy_seed": 20260719,
+    "python_rng_state_sha256": "faf9c3d2458eba6dc80590a79ace7ae8ae52211b7483bd447ed760064a1b3d4c",
+    "python_seed": 20260719,
+    "rng_state_identity_sha256": "4455aa0d9d3cc378679d39a3b039a82f5ae0c603bacfa7ff0e00e6d2f206e559",
+    "torch_cpu_rng_state_sha256": "0c018b8d708a61a4f48f96f02371e2ac9b3aa2f332eaef72274d5fdb579b9e90",
+    "torch_cuda_seed_all": 20260719,
+    "torch_initial_seed": 20260719,
+    "torch_seed": 20260719,
+    "warn_only": false
+  },
+  "rng_seed": 20260719,
+  "source_sha256": "9a07329ee7d0c5bcf7789ec0a8445c556d108f25bb77b205f30379f5bc30520e",
+  "unit_end_seconds": 31.380471,
+  "unit_id": 3,
+  "unit_start_seconds": 26.380471
+}

@@ -1,0 +1,88 @@
+{
+  "checks": [
+    {
+      "attack": "fixed physical cover leaves variable-resolution advantage simulation-only",
+      "challenge": "novelty_claim",
+      "evidence": "typed set-valued relation-cover plan; prompt/long-clip novelty explicitly excluded",
+      "verdict": "NARROWLY_SUPPORTED"
+    },
+    {
+      "attack": "must retain ARC/SUPG+same-operator baselines; included",
+      "challenge": "ARC_SUPG_non_equivalence",
+      "evidence": "direct variable-cardinality EventRelation edges plus ownership and dense/enumeration cover",
+      "verdict": "SUPPORTED_AT_QUERY_OBJECT_LEVEL"
+    },
+    {
+      "challenge": "failed_idea_reuse",
+      "evidence": "no proxy rescue, BLOCK_ANY pruning, exploration, counterfactual merge, or K3 heuristic is claimed",
+      "verdict": "PASS"
+    },
+    {
+      "challenge": "evaluator_leakage",
+      "evidence": "uniform chronological sample manifest declares and structurally avoids reference access; evaluator imported only post-run",
+      "verdict": "PASS_WITH_SINGLE_VIDEO_CAVEAT"
+    },
+    {
+      "attack": "347-call dense A100 total was estimated, not physically rerun",
+      "challenge": "cost_accounting",
+      "evidence": "same-GPU 20-call median denominator; generation, wall, cold, frames, tokens, memory separated; ratio=0.240987",
+      "verdict": "PASS_WITH_ESTIMATION_CAVEAT"
+    },
+    {
+      "challenge": "cold_warm_amortization",
+      "evidence": "model load and W=1/10/100 costs separated; no cold semantic index hidden",
+      "verdict": "PASS"
+    },
+    {
+      "challenge": "headroom_simulation",
+      "evidence": "correlated tails disclosed pre-run, but post-processor metadata resampling was absent",
+      "verdict": "OVEROPTIMISTIC_PHYSICAL_MODEL"
+    },
+    {
+      "challenge": "physical_call_budget",
+      "evidence": "105 durable started checkpoints; hard cap 200; retries all zero",
+      "verdict": "PASS"
+    },
+    {
+      "challenge": "strengthened_baseline_fairness",
+      "evidence": "native baselines separate; ARC/SUPG/ABae/MAP/CLIP reorder identical enumeration outputs",
+      "verdict": "PASS_WITH_QUERY_OBJECT_SEPARATION"
+    },
+    {
+      "challenge": "theorem_assumptions",
+      "evidence": "DP optimal only for additive upward-discretized risk; no independence/certificate claim",
+      "verdict": "FORMAL_PROPERTY_VALID_BUT_LIMITED"
+    },
+    {
+      "challenge": "decision_compliance",
+      "evidence": "physical gate=FAIL; exact allowed decision=PHYSICAL_PILOT_NO_GO; no WEAK GO",
+      "verdict": "PASS"
+    },
+    {
+      "challenge": "final_hashes",
+      "evidence": {
+        "AQP_Algorithm_Invention_Sprint_v1/FINAL_DECISION.csv": "3c86cb004351c257f7115c3bad3788f20af911eeb4ea3ae4b6c25ea374664c5a",
+        "AQP_Algorithm_Invention_Sprint_v1/FINAL_REPORT.md": "795ecdc115198e1a1f5012a1e6ddaf4dbeffc5f037f3343c8f16ae87e32e5b61",
+        "AQP_Algorithm_Invention_Sprint_v1/RESEARCH_STATE.md": "317708e5bd9111a2657ceb06058f9d384b728d7ddcb7b14c4102f05652661267",
+        "AQP_Algorithm_Invention_Sprint_v1/baselines/STRENGTHENED_BASELINE_COMPARISON.csv": "c0f54974822f389d7fd6e2a2034b6d110b50f5a6662352f36e00ee4e5ce6f4d3",
+        "AQP_Algorithm_Invention_Sprint_v1/physical/CALL_LEDGER.csv": "5ab7478e8849ac658605caeb6925d5c87bfa738564e50962ca2d50d421f8d908",
+        "AQP_Algorithm_Invention_Sprint_v1/physical/FROZEN_PHYSICAL_CONFIG.json": "962920465eb2f930d65e558bbccc85f17df93fc1287ae497aa6ef2af99322cc5",
+        "AQP_Algorithm_Invention_Sprint_v1/physical/PHYSICAL_DECISION.json": "5c1544a3ad0c42fdefea6a58ec5ebb980b4e3f788e0776e3138fbcfc1182c1c7",
+        "AQP_Algorithm_Invention_Sprint_v1/results/VERA_EVENT_MATCHES.csv": "2e64a3e0ffa4c22217da0d2e1c8e2a4fdc22e961634e1a71f90bf1ca1ea807b5",
+        "AQP_Algorithm_Invention_Sprint_v1/results/VERA_EVENT_SEGMENTS.csv": "a614bb8b9f661748884ae77ca76b96cbe83fb36a72598dddc8fba1a4285cfd06",
+        "AQP_Algorithm_Invention_Sprint_v1/simulation/HEADROOM_GRID.csv": "5903346c39a70332852361e0fc1210077ad4b42e185d3a9f17d46235fca1b10b",
+        "src/garc_eval/aqp_invention_v1/contract.py": "02d5b2ec6a6459a69275a04e80c401e68be31f2647b44c058d511aaa18f032fc",
+        "src/garc_eval/aqp_invention_v1/planner.py": "27b5ff7e252aa0976acf7fddbe532754d62256c987d8b85e320a35d338879ac8",
+        "src/garc_eval/aqp_invention_v1/run_physical.py": "69575d911c165b1aa0a99d5a694a0cf901188fc69f64a197802003db3908bfb0"
+      },
+      "note": "FILE_MANIFEST.csv is generated last and excludes itself to avoid circularity",
+      "verdict": "PASS"
+    }
+  ],
+  "final_decision": "PHYSICAL_PILOT_NO_GO",
+  "overall": "FINAL_DECISION_SUPPORTED",
+  "rebuttal_limit": "This explanation requires a new experiment and cannot rescue the frozen result.",
+  "review_identity": "independent_rule_based_adversarial_audit_v1",
+  "review_scope": "consequential novelty, leakage, physical, cost, baseline, theorem, decision, and hash claims",
+  "strongest_competing_explanation": "metadata-free Qwen processor resampling, not the abstract relation-cover mechanism, caused physical omissions"
+}
