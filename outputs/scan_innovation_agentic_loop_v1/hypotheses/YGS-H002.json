@@ -1,0 +1,99 @@
+{
+  "combined_preview_cost_ratio": 0.05292539989339196,
+  "combined_preview_costs_sec": {
+    "PSP_V0_SHORT": 48.42713980656117,
+    "PSP_V1_LONG": 53.0535420095548
+  },
+  "contract_hash": "a736eb8945fa0242d86d0f0fe59f9b55a3885fc1791a3f274efb50425aca1c60",
+  "decision": "PROHIBIT_SCHEDULER_FOR_H002",
+  "global_checks": {
+    "all_per_video_checks": false,
+    "beats_time_index_macro": true,
+    "net_yield_primary_nonnegative_both": false,
+    "one_common_budget_positive_both": false,
+    "total_preview_cost_ratio_le_0p10": true
+  },
+  "hypothesis_id": "YGS-H002",
+  "implementation_hash": "1f8b6b2954d24a653ada5478090ab5bd00c983e85a7f63cb2c3f16ce3fe91419",
+  "metrics": [
+    {
+      "best_region_contribution_ratio_at_20": 0.13043478260869565,
+      "binary_auprc": 0.7371951183192365,
+      "binary_brier_score": 0.21871080368855153,
+      "count_mae": 0.8667324982176341,
+      "dropped_best_region_id": "PSP_V0_SHORT_L040_R0001",
+      "leave_best_region_out_recall_at_20": 0.3484848484848485,
+      "ranking_event_recall_auc": 0.5935714285714286,
+      "recall_at_10": 0.14285714285714285,
+      "recall_at_20": 0.32857142857142857,
+      "recall_at_30": 0.4142857142857143,
+      "selected_config_id": "H002_LGBM_D3",
+      "selected_family": "SHALLOW_LIGHTGBM",
+      "spearman_count": 0.38723182531007727,
+      "used_cost_fraction_at_10": 0.09774426742289365,
+      "used_cost_fraction_at_20": 0.190816323290886,
+      "used_cost_fraction_at_30": 0.28455966799629684,
+      "video_id": "PSP_V0_SHORT"
+    },
+    {
+      "best_region_contribution_ratio_at_20": 0.08196721311475409,
+      "binary_auprc": 0.8497379701636187,
+      "binary_brier_score": 0.2168558601701339,
+      "count_mae": 0.9367989311064956,
+      "dropped_best_region_id": "PSP_V1_LONG_L040_R0008",
+      "leave_best_region_out_recall_at_20": 0.2978723404255319,
+      "ranking_event_recall_auc": 0.6091450777202071,
+      "recall_at_10": 0.12435233160621761,
+      "recall_at_20": 0.3160621761658031,
+      "recall_at_30": 0.46632124352331605,
+      "selected_config_id": "H002_LR_C1",
+      "selected_family": "LOGISTIC_REGRESSION",
+      "spearman_count": 0.40413974022225235,
+      "used_cost_fraction_at_10": 0.09629325806448778,
+      "used_cost_fraction_at_20": 0.19625123615942922,
+      "used_cost_fraction_at_30": 0.2964674585472902,
+      "video_id": "PSP_V1_LONG"
+    }
+  ],
+  "per_video_checks": {
+    "PSP_V0_SHORT": {
+      "auc_gt_0p55": true,
+      "beats_p0": true,
+      "beats_p1l": false,
+      "beats_shuffled": true,
+      "best_region_contribution_lt_0p50": true,
+      "enrichment_gt_1p5": true,
+      "leave_best_nonnegative_vs_p1l": true,
+      "recall20_ge_0p40": false
+    },
+    "PSP_V1_LONG": {
+      "auc_gt_0p55": true,
+      "beats_p0": true,
+      "beats_p1l": false,
+      "beats_shuffled": true,
+      "best_region_contribution_lt_0p50": true,
+      "enrichment_gt_1p5": true,
+      "leave_best_nonnegative_vs_p1l": false,
+      "recall20_ge_0p40": false
+    }
+  },
+  "q1_costs_sec": {
+    "PSP_V0_SHORT": 26.957250270992517,
+    "PSP_V1_LONG": 35.79987789876759
+  },
+  "q2_costs_sec": {
+    "PSP_V0_SHORT": 21.46988953556865,
+    "PSP_V1_LONG": 17.253664110787213
+  },
+  "random_mean_recall20": {
+    "PSP_V0_SHORT": 0.1924285714285714,
+    "PSP_V1_LONG": 0.19502590673575124
+  },
+  "shuffled_mean_recall20": {
+    "PSP_V0_SHORT": 0.19928571428571426,
+    "PSP_V1_LONG": 0.19746113989637304
+  },
+  "static_observability_gate_pass": false,
+  "status": "REJECTED",
+  "time_index_macro_recall20": 0.20817912657290888
+}

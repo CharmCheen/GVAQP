@@ -1,0 +1,113 @@
+{
+  "all_reference_event_count": 268,
+  "candidate": {
+    "family": "M0_UNIVARIATE_HEURISTIC",
+    "feature": "luma_std__std",
+    "orientation": -1,
+    "selected_on": "TWO_DESIGN_VIDEOS_EXPLORATORY_ONLY"
+  },
+  "candidate_calibration": [
+    {
+      "binary_brier_score_lovo_calibrated": 0.29759450220743394,
+      "calibration_only_does_not_change_ranking": true,
+      "count_mae_lovo_calibrated": 1.0276123921516114,
+      "video_id": "PSP_V0_SHORT"
+    },
+    {
+      "binary_brier_score_lovo_calibrated": 0.25244127241061975,
+      "calibration_only_does_not_change_ranking": true,
+      "count_mae_lovo_calibrated": 1.0379180854586454,
+      "video_id": "PSP_V1_LONG"
+    }
+  ],
+  "candidate_selection_bias_note": "Pooled B4 is design-selected; nested LOVO is the cross-video stability evidence",
+  "full_scan_ceiling_all_reference": 0.9813432835820896,
+  "leave_best_region_out": [
+    {
+      "dropped_event_count": 4,
+      "dropped_region_id": "PSP_V0_SHORT_L040_R0001",
+      "recall_at_20_after_drop": 0.22727272727272727,
+      "video_id": "PSP_V0_SHORT"
+    },
+    {
+      "dropped_event_count": 5,
+      "dropped_region_id": "PSP_V1_LONG_L040_R0008",
+      "recall_at_20_after_drop": 0.2712765957446808,
+      "video_id": "PSP_V1_LONG"
+    }
+  ],
+  "macro_enrichment_at_20": 1.3827417483020086,
+  "macro_ranking_auc": 0.5462971872686898,
+  "macro_recall_at_20": 0.2678386380458919,
+  "nested_leave_one_video_out_direction": [
+    {
+      "direction_vs_random": "POSITIVE",
+      "test_delta_vs_random": 0.02185714285714288,
+      "test_random_mean_recall_at_20": 0.1924285714285714,
+      "test_ranking_auc": 0.49228571428571427,
+      "test_recall_at_20": 0.21428571428571427,
+      "test_spearman": 0.10852487689530528,
+      "test_video_id": "PSP_V0_SHORT",
+      "train_recall_at_20": 0.27461139896373055,
+      "train_selected_feature": "histogram_l1_change__mean",
+      "train_selected_orientation": -1,
+      "train_video_id": "PSP_V1_LONG"
+    },
+    {
+      "direction_vs_random": "POSITIVE",
+      "test_delta_vs_random": 0.0018652849740933286,
+      "test_random_mean_recall_at_20": 0.19502590673575124,
+      "test_ranking_auc": 0.49194300518134715,
+      "test_recall_at_20": 0.19689119170984457,
+      "test_spearman": 0.027583210402123748,
+      "test_video_id": "PSP_V1_LONG",
+      "train_recall_at_20": 0.32857142857142857,
+      "train_selected_feature": "saturation_mean__mean",
+      "train_selected_orientation": 1,
+      "train_video_id": "PSP_V0_SHORT"
+    }
+  ],
+  "offset0_exposable_event_count": 263,
+  "per_video": [
+    {
+      "best_region_contribution_ratio_at_20": 0.21052631578947367,
+      "binary_auprc": 0.5834365395668442,
+      "candidate_minus_random_recall_at_20": 0.07900000000000001,
+      "enrichment_at_20": 1.4105419450631034,
+      "geometric_recall_at_20": 0.2285714285714285,
+      "offline_oracle_recall_at_20": 0.6142857142857143,
+      "oracle_minus_candidate_recall_at_20": 0.3428571428571429,
+      "random_mean_recall_at_20": 0.1924285714285714,
+      "random_std_recall_at_20": 0.04555957768167152,
+      "ranking_event_recall_auc": 0.5414285714285714,
+      "recall_at_10": 0.11428571428571428,
+      "recall_at_20": 0.2714285714285714,
+      "recall_at_30": 0.35714285714285715,
+      "spearman_count": 0.1372275553725489,
+      "used_cost_fraction_at_10": 0.08848411427255082,
+      "used_cost_fraction_at_20": 0.19965516967787147,
+      "used_cost_fraction_at_30": 0.2975112104533349,
+      "video_id": "PSP_V0_SHORT"
+    },
+    {
+      "best_region_contribution_ratio_at_20": 0.09803921568627451,
+      "binary_auprc": 0.7891059723604396,
+      "candidate_minus_random_recall_at_20": 0.06922279792746117,
+      "enrichment_at_20": 1.354941551540914,
+      "geometric_recall_at_20": 0.2124352331606217,
+      "offline_oracle_recall_at_20": 0.5129533678756477,
+      "oracle_minus_candidate_recall_at_20": 0.24870466321243528,
+      "random_mean_recall_at_20": 0.19502590673575126,
+      "random_std_recall_at_20": 0.02953611186021256,
+      "ranking_event_recall_auc": 0.5511658031088082,
+      "recall_at_10": 0.13471502590673576,
+      "recall_at_20": 0.26424870466321243,
+      "recall_at_30": 0.37823834196891193,
+      "spearman_count": 0.15998392316835972,
+      "used_cost_fraction_at_10": 0.09657352796777549,
+      "used_cost_fraction_at_20": 0.1957334264912966,
+      "used_cost_fraction_at_30": 0.29915815185339045,
+      "video_id": "PSP_V1_LONG"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "freeze_script_hash": "a08d9ccdab7b0555787f14670388ca43c50654208f13cfab269855dc3aaafee4",
+  "frozen_before_q2_execution": true,
+  "hypothesis_id": "YGS-H002",
+  "input_hashes": {
+    "q1_features": "ac851a3324144127703f28b0099748e006d9d86ff7f7fd16a73e8427fb02d395",
+    "q1_predictions": "9f6d74e7f4652204555c8e712b85268be36423a0fb16d850ec6598de0ed11311",
+    "region_table": "54ee535cecb0e1b459b5eeb3ae03eb944b848d31fcd0f906e1d14ee5bb234c3e",
+    "selection_csv": "c38c6a573cd8fe9e508c3852d73f9b3f12bb1f84c31fff5a3356511dbde68edd"
+  },
+  "operator": {
+    "classes": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      7
+    ],
+    "confidence": 0.25,
+    "decoded_resolution": "320x180",
+    "inference_imgsz": 320,
+    "iou": 0.7,
+    "model": "models/yolo/yolov8n.pt",
+    "model_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "rate_fps": 2.0,
+    "region_state_reset": true,
+    "repeat_count": 2,
+    "tracking": false
+  },
+  "selection": {
+    "allocation_boundary_cost_fraction": 0.2,
+    "high_score_only_selection": false,
+    "label_access": false,
+    "per_video_duration_cap_fraction": 0.1,
+    "priority": [
+      "boundary_rank_distance",
+      "abs(binary_probability-0.5)",
+      "region_id"
+    ],
+    "source": "cross-fitted frozen Q1-L predictions plus public region geometry/cost"
+  },
+  "selection_summary": [
+    {
+      "selected_duration_ratio": 0.09902898689391226,
+      "selected_duration_sec": 342.93049900000005,
+      "selected_regions": 9,
+      "video_id": "PSP_V0_SHORT"
+    },
+    {
+      "selected_duration_ratio": 0.0988432631843583,
+      "selected_duration_sec": 560.0,
+      "selected_regions": 14,
+      "video_id": "PSP_V1_LONG"
+    }
+  ],
+  "single_changed_mechanism": "selected-region 2-FPS YOLO detection escalation",
+  "static_gate": "outputs/scan_innovation_agentic_loop_v1/contracts/static_gate.json",
+  "value_models": {
+    "complexity_tie_rule": "prefer Logistic when primary difference <0.02",
+    "families": [
+      "LOGISTIC_REGRESSION",
+      "POISSON_REGRESSION",
+      "SHALLOW_LIGHTGBM"
+    ],
+    "feature_selection": "train-fold-only, max two features per feature family",
+    "nested_protocol": "leave-one-complete-video-out"
+  }
+}

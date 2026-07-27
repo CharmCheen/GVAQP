@@ -1,0 +1,14 @@
+[
+  {
+    "affected_artifacts": [],
+    "after_hash": "7fd8332117a51cb3c6dbffc736552969348413cc34a55a64c217c4c3e99d86b1",
+    "before_hash": "NOT_APPLICABLE_NO_ARTIFACT_PRODUCED",
+    "claim_impact": "none; failure occurred before ffmpeg launch and before output creation",
+    "experiments_rerun": [
+      "P0 preview extraction from start"
+    ],
+    "issue": "preview source-path schema mismatch before extraction",
+    "repair_cycle_type": "ALLOWED_SCHEMA_ERROR",
+    "root_cause": "implementation used source_path while immutable videos.csv defines video_path"
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "freeze_script_hash": "41d5b077014627000f13a13820ee534aee0628fc268c508e0e6c6d784f90d932",
+  "frozen_before_execution": true,
+  "hypothesis_id": "YGS-H003",
+  "input_contract": "FROZEN_SELECTION_CSV_AND_SOURCE_VIDEO_BYTES_ONLY",
+  "operator": {
+    "algorithm": "Farneback",
+    "features": [
+      "residual flow magnitude",
+      "lateral/vertical balance",
+      "signed lateral flow",
+      "positive divergence",
+      "center/lower-center residual flow",
+      "frame difference"
+    ],
+    "rate_fps": 5.0,
+    "region_state_reset": true,
+    "repeat_count": 2,
+    "resolution": "320x180",
+    "subtract_global_median_flow": true
+  },
+  "selected_region_count": 23,
+  "selection_hash": "c38c6a573cd8fe9e508c3852d73f9b3f12bb1f84c31fff5a3356511dbde68edd",
+  "selection_inherited_exactly_from": "YGS-H002 Q1 20%-cost boundary uncertainty selection",
+  "single_changed_mechanism": "selected-region 5-FPS directional residual optical flow",
+  "total_preview_cost_ratio_cap": 0.1,
+  "value_model_protocol": "same frozen nested LOVO families and Gate as H002"
+}

@@ -1,0 +1,22 @@
+benchmark_id: SCAN_CONFIRM_DECISION_BENCHMARK_V1
+budgets_sec: [30.0, 60.0, 120.0, 240.0]
+seeds: [0, 1, 2]
+frontier_capacity: 10
+scan_policy: ANYTIME_LARGEST_GAP
+frontier_policy: SCORE_DESCENDING
+cost_quantile: 0.90
+minimum_bucket_samples: 3
+coverage_buckets: [0.3333333333333333, 0.6666666666666666]
+confirm_score_buckets: [0.3333333333333333, 0.6666666666666666]
+priors:
+  uninformative: {alpha_s: 1.0, beta_s: 1.0, alpha_c: 1.0, beta_c: 1.0}
+  empirical_strength_2: {strength: 2.0}
+margins: [0.0, 0.001]
+default_tie_break: SCAN
+bootstrap_replicates: 10000
+offline_beam_width: 2048
+development_groups: [V0_Q1, V0_Q2, V1_Q1, V1_Q2]
+validation_groups: []
+test_status: SEALED
+new_oracle_calls: PROHIBITED
+

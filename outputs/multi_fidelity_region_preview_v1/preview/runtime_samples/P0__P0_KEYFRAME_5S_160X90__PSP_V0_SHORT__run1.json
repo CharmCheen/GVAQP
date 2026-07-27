@@ -1,0 +1,31 @@
+{
+  "decode_and_pipe_wait_sec": 19.936959808692336,
+  "feature_compute_sec": 0.4291434343904257,
+  "ffmpeg_command": [
+    "ffmpeg",
+    "-v",
+    "error",
+    "-skip_frame",
+    "nokey",
+    "-i",
+    "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4",
+    "-vf",
+    "fps=1/5,scale=160:90",
+    "-pix_fmt",
+    "rgb24",
+    "-f",
+    "rawvideo",
+    "-"
+  ],
+  "max_rss_kib_process_lifetime": 145316,
+  "model_inference_sec": 0.0,
+  "operator_id": "P0_KEYFRAME_5S_160X90",
+  "run_index": 1,
+  "sample_count": 692,
+  "sample_period_sec": 5.0,
+  "seconds_per_video_hour": 21.201980845753035,
+  "source_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610",
+  "video_duration_sec": 3462.930499,
+  "video_id": "PSP_V0_SHORT",
+  "wallclock_sec": 20.39471836388111
+}

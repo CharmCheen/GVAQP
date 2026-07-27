@@ -1,0 +1,70 @@
+{
+  "actual_conservative_cost_sec": 62.75712816976011,
+  "actual_preview_cost_ratio": 0.03272983631075618,
+  "asset_hashes": {
+    "models/yolo/yolov8n.pt": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "outputs/multi_fidelity_region_preview_v1/contracts/preview_contracts/P1_L.json": "44f383dc2adca2a7551170be70ebf9dd369af53a6da2e87c0fb2432656782f4c",
+    "outputs/multi_fidelity_region_preview_v1/preview/p1_l/region_features_run1.parquet": "51491631d4ac66f57b2d9905f092375dc88346533b21345a3652bb9829dc1b7b",
+    "outputs/multi_fidelity_region_preview_v1/preview/p1_l/region_features_run2.parquet": "51491631d4ac66f57b2d9905f092375dc88346533b21345a3652bb9829dc1b7b",
+    "outputs/multi_fidelity_region_preview_v1/preview/p1_l/sample_features_run1.parquet": "d6af76f0fcbf511a7a719e627ee9b10210750d4388a50adb63be69aed3ac7d83",
+    "outputs/multi_fidelity_region_preview_v1/preview/p1_l/sample_features_run2.parquet": "d6af76f0fcbf511a7a719e627ee9b10210750d4388a50adb63be69aed3ac7d83"
+  },
+  "checks": {
+    "contract_operator_exact": true,
+    "contract_rate_exact": true,
+    "contract_resolution_exact": true,
+    "cost_ratio_le_10pct": true,
+    "full_timeline_coverage": true,
+    "implementation_forbidden_literal_absent": true,
+    "leakage_parent_pass": true,
+    "metrics_exactly_recomputed": true,
+    "model_hash_match": true,
+    "no_missing_feature_cells": true,
+    "parent_canonical_determinism_pass": true,
+    "two_run_byte_determinism": true
+  },
+  "decision": "RETAIN_Q1_L_AS_FROZEN_GLOBAL_PREVIEW_BUT_DO_NOT_ADMIT_SCHEDULER",
+  "forbidden_literals": [],
+  "hypothesis_id": "YGS-H001",
+  "implementation_hash": "2406d45693db3eef640a4a330f57074a8d5c81f25b365c69ea291b17b68116b3",
+  "interpretation": "Q1-L is legal, deterministic, and cheap, but its Recall@20 is below 0.40 on both videos.",
+  "operator": {
+    "family": "LOW_RATE_LOW_RESOLUTION_DETECTOR",
+    "full_scan_cache": false,
+    "model_path": "models/yolo/yolov8n.pt",
+    "model_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "operator": "YOLOV8N_DETECTION_ONLY_0P2FPS_320",
+    "repeat_count": 2,
+    "resolution": "320x180_letterbox_to_320",
+    "target_rate_fps": 0.2,
+    "tracking": false
+  },
+  "recomputed_metrics": [
+    {
+      "binary_auprc": 0.7371951183192365,
+      "metric_match": true,
+      "published_auc": 0.5935714285714286,
+      "published_recall_at_20": 0.3285714285714285,
+      "ranking_event_recall_auc": 0.5935714285714286,
+      "recall_at_20": 0.32857142857142857,
+      "spearman_count": 0.38723182531007727,
+      "video_id": "PSP_V0_SHORT"
+    },
+    {
+      "binary_auprc": 0.8558475363130351,
+      "metric_match": true,
+      "published_auc": 0.6129792746113989,
+      "published_recall_at_20": 0.3212435233160621,
+      "ranking_event_recall_auc": 0.6129792746113989,
+      "recall_at_20": 0.32124352331606215,
+      "spearman_count": 0.40848904120906293,
+      "video_id": "PSP_V1_LONG"
+    }
+  ],
+  "static_gate_all_checks_pass": false,
+  "static_gate_failed_checks": [
+    "recall_at_20_ge_0_40_both"
+  ],
+  "status": "ACCEPTED",
+  "verification_script_hash": "c8e29c7489ba2762b42cd3a909f2ab30102ad6819c0901fa49b10b11f49f1ca1"
+}

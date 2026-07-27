@@ -8,7 +8,7 @@
 
 ## Missing input
 
-The development pool needs **2 additional independent source videos**. Existing references to `long_video_dataset2.mp4` and `realcartest.mp4` do not help because their bytes are absent; dataset2 was also later identified as an in-cabin driver-facing view unsuitable for ego-path queries.
+The development pool needs **1 additional independent source videos**. Existing references to `long_video_dataset2.mp4` and `realcartest.mp4` do not help because their bytes are absent; dataset2 was also later identified as an in-cabin driver-facing view unsuitable for ego-path queries.
 
 ## Rejected local candidates
 

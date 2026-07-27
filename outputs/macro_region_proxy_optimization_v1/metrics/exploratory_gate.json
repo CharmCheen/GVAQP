@@ -1,0 +1,88 @@
+{
+  "all_exploratory_checks_pass": false,
+  "best_combination_model": {
+    "C": 0.01,
+    "class_weight": null,
+    "config_id": "CFG_16",
+    "family": "M1_LOGISTIC",
+    "feature_set": "S5_STABLE"
+  },
+  "candidate_config": {
+    "family": "M0_UNIVARIATE_HEURISTIC",
+    "feature": "luma_std__std",
+    "orientation": -1,
+    "selected_on": "TWO_DESIGN_VIDEOS_EXPLORATORY_ONLY"
+  },
+  "checks": {
+    "beats_shuffled_score_both": true,
+    "beats_time_index_macro": true,
+    "enrichment_gt_1_5_both": false,
+    "net_event_yield_nonnegative_both": false,
+    "preview_cost_ratio_le_0_10": true,
+    "recall_at_20_ge_0_40_both": false
+  },
+  "exploratory_proxy_signal": "NOT_ESTABLISHED",
+  "formal_selection_status": "IMPOSSIBLE_WITH_TWO_DESIGN_VIDEOS",
+  "guarded_marginal_scan": "STOPPED_BY_PRIOR_HEADROOM_AUDIT",
+  "macro_recall_at_20": 0.2678386380458919,
+  "macro_time_index_best_recall_at_20": 0.20817912657290888,
+  "net_event_yield_60s_per_video": [
+    {
+      "coverage_event_count": 5,
+      "coverage_recall": 0.07142857142857142,
+      "coverage_scan_cost_used_sec": 51.60582522302866,
+      "delta_event_count": -1,
+      "preview_cost_sec": 20.39471836388111,
+      "proxy_available_scan_budget_sec": 39.60528163611889,
+      "proxy_event_count": 4,
+      "proxy_recall": 0.05714285714285714,
+      "proxy_scan_cost_used_sec": 32.2620319314301,
+      "total_budget_sec": 60.0,
+      "video_id": "PSP_V0_SHORT"
+    },
+    {
+      "coverage_event_count": 8,
+      "coverage_recall": 0.04145077720207254,
+      "coverage_scan_cost_used_sec": 53.95668559893966,
+      "delta_event_count": -2,
+      "preview_cost_sec": 35.05121189914644,
+      "proxy_available_scan_budget_sec": 24.948788100853562,
+      "proxy_event_count": 6,
+      "proxy_recall": 0.031088082901554404,
+      "proxy_scan_cost_used_sec": 20.866457045078278,
+      "total_budget_sec": 60.0,
+      "video_id": "PSP_V1_LONG"
+    }
+  ],
+  "next_stage": "MULTI_FIDELITY_PREVIEW_OR_NEW_VISIBLE_SIGNAL",
+  "one_step_allocator": "NOT_ALLOWED",
+  "per_video": [
+    {
+      "best_region_contribution_ratio_at_20": 0.21052631578947367,
+      "binary_auprc": 0.5834365395668442,
+      "enrichment_at_20": 1.4105419450631034,
+      "ranking_event_recall_auc": 0.5414285714285714,
+      "recall_at_10": 0.11428571428571428,
+      "recall_at_20": 0.2714285714285714,
+      "recall_at_30": 0.35714285714285715,
+      "shuffled_score_mean_recall_at_20": 0.19414285714285712,
+      "spearman_count": 0.1372275553725489,
+      "video_id": "PSP_V0_SHORT"
+    },
+    {
+      "best_region_contribution_ratio_at_20": 0.09803921568627451,
+      "binary_auprc": 0.7891059723604396,
+      "enrichment_at_20": 1.3549415515409142,
+      "ranking_event_recall_auc": 0.5511658031088082,
+      "recall_at_10": 0.13471502590673576,
+      "recall_at_20": 0.26424870466321243,
+      "recall_at_30": 0.37823834196891193,
+      "shuffled_score_mean_recall_at_20": 0.19880829015544038,
+      "spearman_count": 0.15998392316835972,
+      "video_id": "PSP_V1_LONG"
+    }
+  ],
+  "preview_cost_ratio": 0.02891681430510288,
+  "selection_scope_note": "B4 orientation and feature were selected on the two design videos; no validation claim",
+  "selection_uses_leave_one_video_out_predictions": false
+}

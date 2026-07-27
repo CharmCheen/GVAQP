@@ -1,0 +1,19 @@
+{
+  "recovery_id": "ONLINE_MACRO_ACTIVITY_EVIDENCE_RECOVERY_V1",
+  "scope": "archival discovery, hashing, and metric recomputation only",
+  "method_mutation": "PROHIBITED",
+  "historical_online_claim": "INVALID_DUE_TO_FUTURE_OBSERVATION_LOOKAHEAD",
+  "artifacts": [
+    {"id": "v2_online_trace", "path": "outputs/partial_scan_method_development_v2/m5_falsification_audit/m5_audit_trace.csv", "role": "V2 per-action online-only trace", "status": "RECOVERED_AND_RECOMPUTED"},
+    {"id": "v2_online_summary", "path": "outputs/partial_scan_method_development_v2/m5_falsification_audit/m5_falsification_summary.csv", "role": "V2 per-video method summary", "status": "RECOVERED_AND_RECOMPUTED"},
+    {"id": "v2_online_config", "path": "outputs/partial_scan_method_development_v2/m5_falsification_audit/audit_manifest.json", "role": "V2 frozen method configuration", "status": "RECOVERED"},
+    {"id": "v2_generator", "path": "scripts/run_partial_scan_m5_falsification_audit.py", "role": "V2 generating program", "status": "RECOVERED"},
+    {"id": "v1_m5_action_trace", "path": "outputs/partial_scan_method_development_v1/mechanism_ablation/ablation_action_trace.csv", "role": "V1 M5 action trace embedded in ablation trace", "status": "RECOVERED_NOT_ONLINE_VALID"},
+    {"id": "v1_m5_auc_table", "path": "outputs/partial_scan_method_development_v1/mechanism_ablation/ablation_auc_by_video.csv", "role": "V1 development AUC table", "status": "RECOVERED_NOT_ONLINE_VALID"}
+  ],
+  "unresolved": [
+    "No separately versioned V1 M5 implementation/configuration artifact was located in this recovery pass.",
+    "No commit identity can be attested from this worktree because repository ownership prevents local git inspection.",
+    "V1's action trace does not restore its online-method evidentiary status."
+  ]
+}

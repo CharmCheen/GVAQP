@@ -1,0 +1,92 @@
+{
+  "all_candidate_operator_determinism_pass": true,
+  "all_candidate_operator_missingness_pass": true,
+  "candidate_operators": [
+    {
+      "eligible_under_cost_ceiling": true,
+      "family": "P0_METADATA_FRAMESTAT",
+      "mean_region_support_fraction": 0.9985443959243085,
+      "operator_id": "P0_KEYFRAME_10S_160X90",
+      "period_sec": 10.0,
+      "preview_to_full_scan_cost_ratio": 0.028870070944096042,
+      "sample_count": 913,
+      "total_wallclock_sec": 55.356303200125694
+    },
+    {
+      "eligible_under_cost_ceiling": true,
+      "family": "P0_METADATA_FRAMESTAT",
+      "mean_region_support_fraction": 0.9983988355167395,
+      "operator_id": "P0_KEYFRAME_5S_160X90",
+      "period_sec": 5.0,
+      "preview_to_full_scan_cost_ratio": 0.02891681430510288,
+      "sample_count": 1825,
+      "total_wallclock_sec": 55.44593026302755
+    }
+  ],
+  "chosen_repeat_runtime_sec": 55.34554214030504,
+  "chosen_run1_hash": "bebfe7982cf332f7e60dc2894ba0c03f3895e7abff9c3f526f1f1f38b859ab27",
+  "chosen_run2_hash": "bebfe7982cf332f7e60dc2894ba0c03f3895e7abff9c3f526f1f1f38b859ab27",
+  "determinism_repeat_hash_match": true,
+  "feature_extraction_hash": "7fd8332117a51cb3c6dbffc736552969348413cc34a55a64c217c4c3e99d86b1",
+  "feature_families": [
+    "brightness_contrast",
+    "entropy_texture",
+    "edge_structure",
+    "color_saturation",
+    "frame_difference",
+    "histogram_change",
+    "spatial_center_border",
+    "sampling_support"
+  ],
+  "full_scan_cache_or_label_inputs": [],
+  "macro_region_length_sec": 40,
+  "model_hash": "NOT_APPLICABLE_P0_NO_DNN",
+  "per_operator_determinism": {
+    "P0_KEYFRAME_10S_160X90": {
+      "hash_match": true,
+      "run1_feature_hash": "4d2cf2529fee5a9fff910c70cba658387765625bee9e4b96c730f4d85e24ff9d",
+      "run2_feature_hash": "4d2cf2529fee5a9fff910c70cba658387765625bee9e4b96c730f4d85e24ff9d",
+      "videos_repeated": [
+        "PSP_V0_SHORT",
+        "PSP_V1_LONG"
+      ]
+    },
+    "P0_KEYFRAME_5S_160X90": {
+      "hash_match": true,
+      "run1_feature_hash": "bebfe7982cf332f7e60dc2894ba0c03f3895e7abff9c3f526f1f1f38b859ab27",
+      "run2_feature_hash": "bebfe7982cf332f7e60dc2894ba0c03f3895e7abff9c3f526f1f1f38b859ab27",
+      "videos_repeated": [
+        "PSP_V0_SHORT",
+        "PSP_V1_LONG"
+      ]
+    }
+  },
+  "per_operator_observability": {
+    "P0_KEYFRAME_10S_160X90": {
+      "feature_column_count": 27,
+      "mean_support_fraction": 0.9985443959243085,
+      "minimum_support_fraction": 0.6666666666666666,
+      "missing_feature_cell_count": 0,
+      "region_count": 229,
+      "zero_sample_region_count": 0
+    },
+    "P0_KEYFRAME_5S_160X90": {
+      "feature_column_count": 27,
+      "mean_support_fraction": 0.9983988355167395,
+      "minimum_support_fraction": 0.8,
+      "missing_feature_cell_count": 0,
+      "region_count": 229,
+      "zero_sample_region_count": 0
+    }
+  },
+  "preview_cost_model": "MEASURED_FULL_TWO_VIDEO_WALLCLOCK_NO_EXTRAPOLATION",
+  "resolution": "160x90",
+  "sampling_rate_hz": 0.2,
+  "selected_operator_id": "P0_KEYFRAME_5S_160X90",
+  "selection_rule": "MAX_TEMPORAL_SAMPLE_SUPPORT_SUBJECT_TO_DEPLOYED_COST_RATIO_LE_0.10",
+  "selection_uses_event_labels": false,
+  "source_inputs": [
+    "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4",
+    "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/驾驶-大理.mp4"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "bytetrack": {
+    "fuse_score": true,
+    "match_thresh": 0.8,
+    "new_track_thresh": 0.25,
+    "track_buffer": 30,
+    "track_high_thresh": 0.25,
+    "track_low_thresh": 0.1
+  },
+  "confidence": 0.25,
+  "contract_hash": "6fe126a25a0acbb1e1c1dc8fdc9b6213a10bd181dcd3294608f6edb4a11096d2",
+  "cross_unit_track_stitching": "PROHIBITED",
+  "decoder": "OpenCV VideoCapture seek + sequential decode",
+  "detector_nms_iou": 0.45,
+  "hardware_environment": {
+    "cpu_count": 192,
+    "created_at_utc": "2026-07-23T15:36:32.486105+00:00",
+    "gpu": "NVIDIA H20-3e, 565.57.01, 143771 MiB, 27, 345 MHz",
+    "packages": {
+      "cv2": "4.13.0",
+      "numpy": "2.2.6",
+      "pandas": "2.2.2",
+      "pyarrow": "24.0.0",
+      "torch": "2.12.0+cu126",
+      "ultralytics": "8.4.51"
+    },
+    "platform": "linux",
+    "python": "3.10.20 (main, Mar 11 2026, 17:46:40) [GCC 14.3.0]"
+  },
+  "implementation_path": "scripts/partial_scan_pilot_common.py",
+  "implementation_sha256": "51dc575702d10c490dbe63955326b3552e205191a105202d844b97090e711e0a",
+  "input_resolution": "native decode; YOLO imgsz=640",
+  "motor_class_ids": [
+    2,
+    3,
+    5,
+    7
+  ],
+  "reused_proxy_source_sha256": "880f0ba3be6fb8b3164f279f5c6574dacd5342dab339a55cd2381f0459b36a68",
+  "sampling_fps": 5.0,
+  "temporal_nms_iou": 0.5,
+  "tracker_reset_per_action": true,
+  "trigger": {
+    "min_front_region_occupancy": 0.05,
+    "min_observations": 3,
+    "motion": "positive lateral-to-centre OR positive bbox growth"
+  },
+  "visible_subset_admission": "zero-anchored rank percentiles over visible raw candidates only",
+  "yolo_model": "YOLOv8n",
+  "yolo_weight_path": "models/yolo/yolov8n.pt",
+  "yolo_weight_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36"
+}

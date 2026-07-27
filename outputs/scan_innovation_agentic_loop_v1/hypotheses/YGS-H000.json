@@ -1,0 +1,61 @@
+{
+  "comparison_rule": {
+    "60sec_auc": "compare against each video's best single causal 60-second-AUC policy",
+    "full_replay_auc": "compare against each video's best single causal full-grid-AUC policy",
+    "low_budget_recall": "compare against pointwise maximum among frozen causal policies",
+    "no_cross_video_single_baseline_claim": true
+  },
+  "decision": "FREEZE_PER_VIDEO_AND_PER_HORIZON_CAUSAL_COVERAGE_BASELINES",
+  "hypothesis_id": "YGS-H000",
+  "implementation_hash": "a8c98ce1430ad440ea4404b12649bd422d7cdd1c8aa2aa1b91b73de0af197be4",
+  "interpretation": {
+    "full_horizon": "Short: Anytime Largest-Gap; Long: Macro-region Largest-Gap.",
+    "headroom": "Large evaluator-only headroom remains, but does not identify a causal signal.",
+    "m8": "M8 is not the strongest 60-second comparator on either video.",
+    "physical_sixty_second_among_tested": "Short: Sequential; Long: Uniform-prefix (Macro-region was not physically run).",
+    "replay_sixty_second": "Short: Sequential; Long: Macro-region Largest-Gap."
+  },
+  "observed_winners": [
+    {
+      "auc60": 0.1320966574948813,
+      "auc60_winner": "SEQUENTIAL",
+      "full_horizon_auc": 0.5296428571428572,
+      "full_horizon_winner": "ANYTIME_LARGEST_GAP",
+      "m8_auc60_normalized": 0.07745246890081882,
+      "offline_oracle_auc60": 0.353929716407898,
+      "offline_oracle_full_auc": 0.9039285714285714,
+      "physical_auc60": 0.1327158956957005,
+      "physical_auc60_winner_among_tested": "SEQUENTIAL",
+      "remaining_auc60_headroom": 0.2218330589130167,
+      "remaining_full_auc_headroom": 0.3742857142857142,
+      "video_id": "PSP_V0_SHORT"
+    },
+    {
+      "auc60": 0.0501774330072374,
+      "auc60_winner": "MACRO_REGION_LARGEST_GAP",
+      "full_horizon_auc": 0.5282383419689118,
+      "full_horizon_winner": "MACRO_REGION_LARGEST_GAP",
+      "m8_auc60_normalized": 0.03554599127506654,
+      "offline_oracle_auc60": 0.1945715965611767,
+      "offline_oracle_full_auc": 0.8637305699481864,
+      "physical_auc60": 0.04969273827067655,
+      "physical_auc60_winner_among_tested": "UNIFORM_PREFIX",
+      "remaining_auc60_headroom": 0.1443941635539393,
+      "remaining_full_auc_headroom": 0.3354922279792746,
+      "video_id": "PSP_V1_LONG"
+    }
+  ],
+  "row_counts": {
+    "checkpoints": 880,
+    "m8": 2,
+    "physical": 32,
+    "runs": 110
+  },
+  "source_assets": {
+    "outputs/partial_scan_method_development_v1/mechanism_ablation/ablation_summary.csv": "a16df5cef9bf60eda3d1c1495fad36ef8caa4090362d4146d2efb614b2c33e88",
+    "outputs/scan_optimization_headroom_audit_v1/physical_run_summary.csv": "ecaf238eaaf62d6b10f27dfa885aaded3f64f3ea0d75121369924cfdd8e75c0f",
+    "outputs/scan_optimization_headroom_audit_v1/replay_budget_checkpoints.csv": "c70e4f83ef6be1110274fe40a328460aefbf781c1cc7ad824663f0ce8c9213f3",
+    "outputs/scan_optimization_headroom_audit_v1/replay_run_summary.csv": "a05e306d4623f00e80a93f6798e553aa2016c7dcfe13ae01a54a9e64ef3f17ad"
+  },
+  "status": "ACCEPTED"
+}

@@ -1,0 +1,36 @@
+# MFRP-V1 Completion Matrix
+
+| requirement                                                | status                                           | authoritative_evidence                                                                         |
+|:-----------------------------------------------------------|:-------------------------------------------------|:-----------------------------------------------------------------------------------------------|
+| Full prompt copied and hash-frozen before new metrics      | PASS                                             | docs/MULTI_FIDELITY_REGION_PREVIEW_CONTRACT_V1.md; contracts/frozen_contract.json              |
+| Code commit, parent hashes, and environment frozen         | PASS                                             | contracts/parent_asset_hashes.json; environment_lock.json                                      |
+| Authoritative timeline/reference/exposure assets inherited | PASS                                             | audits/asset_audit.json; audits/label_audit.json                                               |
+| Two design videos only                                     | PASS                                             | audits/asset_audit.json                                                                        |
+| Formal validation >=4 new complete videos                  | CORRECTLY_BLOCKED_INSUFFICIENT_VALIDATION_VIDEOS | audits/asset_audit.json                                                                        |
+| 40/60/90/120 macro sensitivity and one frozen length       | PASS                                             | experiments/macro_region_sensitivity/; contracts/macro_region_selection.json                   |
+| Midpoint unique event mapping and 263/268 ceiling          | PASS                                             | labels/event_region_map.parquet; audits/label_audit.json                                       |
+| P0 frozen without retuning                                 | PASS                                             | preview/p0/inheritance_manifest.json                                                           |
+| P1-L full timeline run twice                               | PASS                                             | preview/p1_l/; preview/runtime_samples/                                                        |
+| P1-M full timeline run twice                               | PASS                                             | preview/p1_m/; preview/runtime_samples/                                                        |
+| P2 full timeline run twice                                 | PASS                                             | preview/p2/; preview/runtime_samples/                                                          |
+| P3 component precondition                                  | CORRECTLY_NOT_IMPLEMENTED_COMPONENT_GATES_FAILED | metrics/exploratory_gate.json                                                                  |
+| Decode/model/feature/total/runtime/memory costs            | PASS                                             | audits/preview_cost_audit.json; audits/preview_runtime_samples.csv                             |
+| All preview ratios <=0.10                                  | PASS                                             | audits/preview_cost_audit.json                                                                 |
+| Determinism, missingness, timeline coverage                | PASS                                             | audits/determinism_audit.json                                                                  |
+| Feature legality table exact fields and <=8 families       | PASS                                             | audits/feature_legality_audit.csv                                                              |
+| No forbidden/reference/full-SCAN/future input              | PASS                                             | audits/leakage_audit.json                                                                      |
+| Every legal feature univariate metrics                     | PASS                                             | experiments/univariate/all_feature_per_video_metrics.parquet                                   |
+| Model grid frozen before feature-label metrics             | PASS                                             | contracts/model_search_manifest.json                                                           |
+| Nested whole-video feature/schema/hyperparameter selection | PASS                                             | experiments/models/nested_feature_selections.json; predictions/nested_lovo_predictions.parquet |
+| Model families/config search budget respected              | PASS                                             | experiments/models/all_45_config_nested_metrics.parquet                                        |
+| B0-B9 mandatory controls                                   | PASS                                             | experiments/controls/                                                                          |
+| Random 100 fixed seeds                                     | PASS                                             | metrics/random_baseline_distribution.json                                                      |
+| Primary complete-region Recall@20 and actual used cost     | PASS                                             | metrics/per_video_metrics.csv; metrics/per_region_metrics.csv                                  |
+| All mandatory secondary metrics                            | PASS                                             | metrics/per_video_metrics.csv                                                                  |
+| Feature-family ablation                                    | PASS                                             | experiments/ablations/candidate_family_ablation.csv                                            |
+| Net yield at 60s/20%/30% with infeasible cells explicit    | PASS                                             | metrics/net_event_yield_budget_grid.csv                                                        |
+| All ten failure-analysis categories                        | PASS                                             | reports/FAILURE_ANALYSIS.md; metrics/failure_analysis_metrics.json                             |
+| Exploratory Gate automatically evaluated                   | PASS                                             | metrics/exploratory_gate.json                                                                  |
+| Allocator/Guarded Marginal/RL/Bandit not implemented       | PASS_NOT_IMPLEMENTED                             | reports/FINAL_PREVIEW_DECISION.md                                                              |
+| Required deliverable tree                                  | PASS                                             | artifact_hash_manifest.json                                                                    |
+| Final decision terminal fields                             | PASS                                             | reports/FINAL_PREVIEW_DECISION.md                                                              |
