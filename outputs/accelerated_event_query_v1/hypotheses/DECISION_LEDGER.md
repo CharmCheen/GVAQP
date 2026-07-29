@@ -47,3 +47,12 @@
 - Key uncertainty: the repaired seal has not yet received an independent GO, and physical oracle calls remain 0/32.
 - CPU-only verification: the sealed DALI/HANGZHOU/WUHAN schedules passed at 10/11/11 calls; all current model, video, exact-frame, and call identities matched. This consumes no oracle calls and does not test H1.
 - Next action: return the exact seal to the independent reviewer. Any material defect requires a new seal; only GO permits a user compute-approval request.
+
+## Cycle 04 — 2026-07-29 — SECOND AUDIT / PROCESSED-INPUT AUTHENTICATION REPAIR
+
+- Decision: retain `REVISE_ORACLE_PROTOCOL`; the second audit returned NO-GO for seal `4af47311...` and no compute approval may be requested for it.
+- Decisive evidence: the ledger, record, and reproducibility gates used metadata/frame-derived input identity without requiring equality of the actual processed token/pixel tensor hash. Different processed tensors could therefore pass the declared identical-input gates.
+- Scope of finding: the same audit passed the original eight blocker areas—schedule/source sealing, current model provenance, exact accepted triples, 32-call/no-retry/approval enforcement, pre-load recovery/locking, complete positive grounding, finalizer logic, and recursive duplicate-key rejection.
+- Repair: PREPARED and INFERENCE_STARTED must carry the same nonempty processed-input hash; an accepted record must match it; repeat pairs and all three replica-anchor observations require processed-input equality; all 32 records require one preprocessing-runtime fingerprint covering Python, NumPy, Pillow, PyTorch, Transformers, qwen-vl-utils, and processor class.
+- Verification: processed-input ledger mismatch and repeat/replica tensor mismatch tests were added. The focused suite passes 51/51, the replacement seal is `58f84d2c...`, all three CPU-only schedules pass at 10/11/11, and raw/attempt counts remain 0/32.
+- Key uncertainty and next action: independent re-review must confirm this exact replacement seal closes the defect without a new bypass. Only GO permits a user compute-approval request.

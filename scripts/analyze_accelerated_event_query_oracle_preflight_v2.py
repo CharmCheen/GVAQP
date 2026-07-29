@@ -59,6 +59,7 @@ def validate_attempt_chain(path: Path) -> list[dict]:
     previous = None
     states = {}
     identities = {}
+    processed_inputs = {}
     for row in rows:
         claimed = row.get("event_sha256")
         payload = {key: value for key, value in row.items() if key != "event_sha256"}
@@ -80,6 +81,14 @@ def validate_attempt_chain(path: Path) -> list[dict]:
         if attempt in identities and identities[attempt] != identity:
             raise RuntimeError("attempt identity changed across events")
         identities[attempt] = identity
+        if event == "PREPARED":
+            processed = row.get("processed_input_sha256")
+            if not isinstance(processed, str) or not processed:
+                raise RuntimeError("PREPARED event lacks processed-input hash")
+            processed_inputs[attempt] = processed
+        elif event == "INFERENCE_STARTED":
+            if row.get("processed_input_sha256") != processed_inputs.get(attempt):
+                raise RuntimeError("processed-input hash changed before inference")
         states[attempt] = event
     if any(state not in {"ACCEPTED", "PRE_INFERENCE_ABORTED", "GENERATION_FAILED",
                          "UNCERTAIN_INTERRUPTION", "FAILED_POST_INFERENCE"}
@@ -157,6 +166,13 @@ def validate_record(runner, expected: dict, record: dict) -> None:
             raise RuntimeError(f"runtime provenance mismatch for {key}: {expected['artifact']}")
     if not isinstance(runtime.get("hf_device_map"), dict):
         raise RuntimeError(f"missing resolved device map: {expected['artifact']}")
+    preprocessing_runtime = runtime.get("preprocessing_runtime")
+    required_runtime_keys = {
+        "python", "numpy", "pillow", "torch", "transformers", "qwen_vl_utils", "processor_class",
+    }
+    if not isinstance(preprocessing_runtime, dict) or set(preprocessing_runtime) != required_runtime_keys \
+            or any(not isinstance(value, str) or not value for value in preprocessing_runtime.values()):
+        raise RuntimeError(f"invalid preprocessing runtime provenance: {expected['artifact']}")
     approval_relative = runtime.get("compute_approval_path")
     if not isinstance(approval_relative, str):
         raise RuntimeError(f"missing compute approval path: {expected['artifact']}")
@@ -176,13 +192,20 @@ def evaluate_records(prereg: dict, selection: dict, review: dict, records: dict)
         shard = clip["video_id"]
         left = records[(shard, f"{candidate}_fps2_r0.json")]
         right = records[(shard, f"{candidate}_fps2_r1.json")]
-        equal_input = left["model_input_identity_sha256"] == right["model_input_identity_sha256"]
+        equal_metadata_input = left["model_input_identity_sha256"] == right["model_input_identity_sha256"]
+        equal_processed_input = (
+            isinstance(left.get("processed_input_sha256"), str)
+            and left["processed_input_sha256"] == right.get("processed_input_sha256")
+        )
+        equal_input = equal_metadata_input and equal_processed_input
         equal_raw = left["raw_response_sha256"] == right["raw_response_sha256"]
         pair_ok = equal_input and equal_raw and left["parse_status"] == right["parse_status"] == "ok"
         reproducible &= pair_ok
         consensus = left["effective_label"] if pair_ok else None
         base[candidate] = left if consensus is not None else None
         pairs.append({"candidate_id": candidate, "model_input_equal": equal_input,
+                      "metadata_input_equal": equal_metadata_input,
+                      "processed_input_equal": equal_processed_input,
                       "raw_equal": equal_raw, "reproducible": pair_ok, "consensus_label": consensus})
 
     anchor = prereg["workload"]["cross_replica_anchor_candidate_id"]
@@ -192,6 +215,8 @@ def evaluate_records(prereg: dict, selection: dict, review: dict, records: dict)
     ]
     cross_replica = (
         len({row["model_input_identity_sha256"] for row in anchor_rows}) == 1
+        and len({row.get("processed_input_sha256") for row in anchor_rows}) == 1
+        and all(isinstance(row.get("processed_input_sha256"), str) for row in anchor_rows)
         and len({row["raw_response_sha256"] for row in anchor_rows}) == 1
         and all(row["parse_status"] == "ok" for row in anchor_rows)
     )
@@ -363,6 +388,13 @@ def validate_authorized_accounting(calls: list[dict], records: dict, all_events:
         started = next(event for event in relevant if event["event"] == "INFERENCE_STARTED")
         completed = next(event for event in relevant if event["event"] == "INFERENCE_COMPLETED")
         accepted = next(event for event in relevant if event["event"] == "ACCEPTED")
+        prepared = [event for event in relevant
+                    if event["event"] == "PREPARED" and event["attempt_id"] == started["attempt_id"]]
+        if len(prepared) != 1 or any(
+            event.get("processed_input_sha256") != record.get("processed_input_sha256")
+            for event in (prepared[0], started)
+        ):
+            raise RuntimeError(f"processed-input ledger/raw mismatch: {row['artifact']}")
         if len({started["attempt_id"], completed["attempt_id"], accepted["attempt_id"], record["attempt_id"]}) != 1:
             raise RuntimeError(f"attempt linkage mismatch: {row['artifact']}")
         if completed.get("generated_token_ids_sha256") != record["generated_token_ids_sha256"]:
@@ -420,6 +452,7 @@ def main() -> None:
     git_heads = set()
     gpu_pairs_by_shard = defaultdict(set)
     compute_approval_hashes = set()
+    preprocessing_runtime_hashes = set()
     for row in calls:
         record = load(RAW / row["shard"] / row["artifact"])
         validate_record(runner, row, record)
@@ -428,10 +461,13 @@ def main() -> None:
         git_heads.add(record["runtime"]["git_head"])
         gpu_pairs_by_shard[row["shard"]].add(tuple(record["runtime"]["declared_physical_gpus"]))
         compute_approval_hashes.add(record["runtime"]["compute_approval_sha256"])
+        preprocessing_runtime_hashes.add(canonical_hash(record["runtime"]["preprocessing_runtime"]))
     if len(runner_hashes) != 1 or len(git_heads) != 1:
         raise RuntimeError("mixed runner source or git commits across raw records")
     if len(compute_approval_hashes) != 1:
         raise RuntimeError("mixed compute approvals across raw records")
+    if len(preprocessing_runtime_hashes) != 1:
+        raise RuntimeError("mixed preprocessing runtimes across raw records")
     if any(len(pairs) != 1 for pairs in gpu_pairs_by_shard.values()):
         raise RuntimeError("a shard used multiple physical GPU pairs")
     resolved_pairs = [next(iter(gpu_pairs_by_shard[shard])) for shard in runner.SHARDS]
@@ -450,6 +486,7 @@ def main() -> None:
               "analyzer_source_sha256": sha256_file(Path(__file__)),
               "execution_seal_sha256": sha256_file(SEAL),
               "compute_approval_sha256": next(iter(compute_approval_hashes)),
+              "preprocessing_runtime_sha256": next(iter(preprocessing_runtime_hashes)),
               "attempt_event_counts": attempt_counts,
               "authorized_generation_accounting_pass": True,
               "physical_generation_event_counts": dict(physical_counts),

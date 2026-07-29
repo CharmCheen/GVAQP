@@ -7,8 +7,10 @@ import argparse
 import fcntl
 import gc
 import hashlib
+import importlib.metadata
 import json
 import os
+import platform
 import random
 import subprocess
 import time
@@ -307,6 +309,7 @@ def read_attempts(shard: str) -> list[dict]:
     previous = None
     states = {}
     identities = {}
+    processed_inputs = {}
     for row in rows:
         claimed = row.get("event_sha256")
         payload = {key: value for key, value in row.items() if key != "event_sha256"}
@@ -328,6 +331,14 @@ def read_attempts(shard: str) -> list[dict]:
         if attempt_id in identities and identity != identities[attempt_id]:
             raise RuntimeError("attempt identity changed across events")
         identities[attempt_id] = identity
+        if event == "PREPARED":
+            processed = row.get("processed_input_sha256")
+            if not isinstance(processed, str) or not processed:
+                raise RuntimeError("PREPARED event lacks processed-input hash")
+            processed_inputs[attempt_id] = processed
+        elif event == "INFERENCE_STARTED":
+            if row.get("processed_input_sha256") != processed_inputs.get(attempt_id):
+                raise RuntimeError("processed-input hash changed before inference")
         states[attempt_id] = event
     return rows
 
@@ -411,6 +422,14 @@ def reconcile_shard(
             ) == triple and row.get("generated_token_ids_sha256") == record.get("generated_token_ids_sha256")]
             if len(matching) != 1:
                 raise RuntimeError(f"raw lacks exactly one accepted artifact/input/hash triple: {artifact}")
+            accepted_attempt = matching[0]["attempt_id"]
+            input_events = [row for row in rows if row["attempt_id"] == accepted_attempt
+                            and row["event"] in {"PREPARED", "INFERENCE_STARTED"}]
+            if len(input_events) != 2 or any(
+                row.get("processed_input_sha256") != record.get("processed_input_sha256")
+                for row in input_events
+            ):
+                raise RuntimeError(f"ledger/raw processed-input mismatch: {artifact}")
         elif starts_by_artifact.get(artifact, 0):
             raise RuntimeError(f"refusing physical retry: {artifact}")
         else:
@@ -547,6 +566,15 @@ def run_physical(args, approval_path: Path, compute_approval_sha256: str) -> Non
     hf_device_map = {
         str(key): str(value) for key, value in sorted(getattr(model, "hf_device_map", {}).items())
     }
+    preprocessing_runtime = {
+        "python": platform.python_version(),
+        "numpy": np.__version__,
+        "pillow": importlib.metadata.version("Pillow"),
+        "torch": torch.__version__,
+        "transformers": transformers.__version__,
+        "qwen_vl_utils": importlib.metadata.version("qwen-vl-utils"),
+        "processor_class": f"{processor.__class__.__module__}.{processor.__class__.__qualname__}",
+    }
 
     git_head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     git_status = subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True)
@@ -633,6 +661,7 @@ def run_physical(args, approval_path: Path, compute_approval_sha256: str) -> Non
                     "hf_device_map": hf_device_map,
                     "cublas_workspace_config": os.environ["CUBLAS_WORKSPACE_CONFIG"],
                     "deterministic_algorithms_enabled": torch.are_deterministic_algorithms_enabled(),
+                    "preprocessing_runtime": preprocessing_runtime,
                     "torch": torch.__version__, "transformers": transformers.__version__,
                 },
             }

@@ -53,6 +53,7 @@ def synthetic_records(labels, sensitivity_overrides=None):
             raw = raw_for(label)
             records[(shard, RUNNER.artifact_name(call))] = {
                 "model_input_identity_sha256": f"{candidate}:2" if call["sampling_fps"] == 2.0 else f"{candidate}:4",
+                "processed_input_sha256": f"{candidate}:{call['sampling_fps']:g}",
                 "raw_response_sha256": hashlib.sha256(raw.encode()).hexdigest(),
                 "parse_status": "ok",
                 "effective_label": label,
@@ -225,6 +226,10 @@ def authenticated_record_fixture(monkeypatch):
                     "cublas_workspace_config": ":4096:8",
                     "deterministic_algorithms_enabled": True},
     }
+    record["runtime"]["preprocessing_runtime"] = {
+        "python": "3.test", "numpy": "test", "pillow": "test", "torch": "test",
+        "transformers": "test", "qwen_vl_utils": "test", "processor_class": "test.Processor",
+    }
     record["runtime"]["compute_approval_path"] = "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/COMPUTE_APPROVAL_V2.json"
     record["runtime"]["compute_approval_sha256"] = approval_hash
     record["record_sha256"] = canonical_hash(record)
@@ -257,12 +262,16 @@ def test_authorized_accounting_rejects_wrong_accepted_triple():
         input_hash = canonical_hash(row["identity"])
         attempt = f"attempt-{index}"
         record = {"input_identity_sha256": input_hash, "record_sha256": f"record-{index}",
-                  "attempt_id": attempt, "generated_token_ids_sha256": f"tokens-{index}"}
+                  "attempt_id": attempt, "processed_input_sha256": f"processed-{index}",
+                  "generated_token_ids_sha256": f"tokens-{index}"}
         records[(row["shard"], row["artifact"])] = record
         common = {"artifact": row["artifact"], "call_spec_sha256": row["call"]["call_spec_sha256"],
                   "input_identity_sha256": input_hash, "attempt_id": attempt}
         events.extend([
-            {"event": "INFERENCE_STARTED", **common},
+            {"event": "PREPARED", **common,
+             "processed_input_sha256": record["processed_input_sha256"]},
+            {"event": "INFERENCE_STARTED", **common,
+             "processed_input_sha256": record["processed_input_sha256"]},
             {"event": "INFERENCE_COMPLETED", **common,
              "generated_token_ids_sha256": record["generated_token_ids_sha256"]},
             {"event": "ACCEPTED", **common, "record_sha256": record["record_sha256"]},
@@ -271,6 +280,48 @@ def test_authorized_accounting_rejects_wrong_accepted_triple():
     events[-1]["record_sha256"] = "wrong-record"
     with pytest.raises(RuntimeError, match="accepted artifact/input/record triple"):
         ANALYZER.validate_authorized_accounting(calls, records, events)
+
+
+def test_authorized_accounting_rejects_processed_input_mismatch():
+    _, _, _, _, calls = ANALYZER.expected_calls()
+    records = {}
+    events = []
+    for index, row in enumerate(calls):
+        input_hash = canonical_hash(row["identity"])
+        attempt = f"attempt-{index}"
+        record = {"input_identity_sha256": input_hash, "record_sha256": f"record-{index}",
+                  "attempt_id": attempt, "processed_input_sha256": f"processed-{index}",
+                  "generated_token_ids_sha256": f"tokens-{index}"}
+        records[(row["shard"], row["artifact"])] = record
+        common = {"artifact": row["artifact"], "call_spec_sha256": row["call"]["call_spec_sha256"],
+                  "input_identity_sha256": input_hash, "attempt_id": attempt}
+        events.extend([
+            {"event": "PREPARED", **common, "processed_input_sha256": record["processed_input_sha256"]},
+            {"event": "INFERENCE_STARTED", **common, "processed_input_sha256": record["processed_input_sha256"]},
+            {"event": "INFERENCE_COMPLETED", **common,
+             "generated_token_ids_sha256": record["generated_token_ids_sha256"]},
+            {"event": "ACCEPTED", **common, "record_sha256": record["record_sha256"]},
+        ])
+    events[1]["processed_input_sha256"] = "different-processed-input"
+    with pytest.raises(RuntimeError, match="processed-input ledger/raw mismatch"):
+        ANALYZER.validate_authorized_accounting(calls, records, events)
+
+
+def test_repeat_and_replica_reproducibility_require_actual_processed_input_equality():
+    selection = RUNNER.frozen_context()[2]
+    prereg, selection, records = synthetic_records(aligned_labels(selection))
+    records[("DALI", "DALI_u0548_fps2_r1.json")]["processed_input_sha256"] = "changed-repeat"
+    result = ANALYZER.evaluate_records(prereg, selection, review_consensus(prereg), records)
+    assert result["same_process_reproducibility_pass"] is False
+    assert result["numeric_gate_pass"] is False
+
+    prereg, selection, records = synthetic_records(aligned_labels(selection))
+    records[("HANGZHOU", "DALI_u0555_fps2_cross_replica_HANGZHOU.json")][
+        "processed_input_sha256"
+    ] = "changed-replica"
+    result = ANALYZER.evaluate_records(prereg, selection, review_consensus(prereg), records)
+    assert result["cross_replica_reproducibility_pass"] is False
+    assert result["numeric_gate_pass"] is False
 
 
 def test_finalizer_has_no_pass_path_for_missing_unsupported_or_indeterminate_claims():
