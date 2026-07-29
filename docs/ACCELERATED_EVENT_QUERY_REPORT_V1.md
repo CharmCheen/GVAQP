@@ -1,6 +1,6 @@
 # Accelerated Event Query Report V1
 
-Current status: `IN_PROGRESS — ORACLE PREFLIGHT FROZEN, EXECUTION AWAITING APPROVAL`
+Current status: `IN_PROGRESS — V1 PREFLIGHT REJECTED; V2 PROTOCOL REVISION IN PROGRESS`
 
 ## Strongest supported conclusion
 
@@ -22,7 +22,9 @@ The previous binary-SMDP stop remains valid for its old two-video, ego-path-entr
 
 At the observed 24.7-second mean inference, a sequential 1,475-unit 32B pass is approximately 10.1 inference-hours before decode/preprocess overhead. Three two-GPU replicas would reduce ideal inference wall time to about 3.4 hours, but this is an estimate, not an execution record. The preregistered 30-call cross-video stability/parse/frame-sampling preflight has higher information value than immediately launching the complete oracle.
 
-The preflight is now fully frozen, including its adversarial review comparator; zero of 30 physical calls have been made. Therefore no H1 conclusion is yet justified. The next evidential step remains the approved 30-call preflight, not a full oracle pass or controller training.
+Independent pre-outcome review rejected the V1 preflight as an execution gate. The contact sheets omitted the endpoint frame supplied to the model; nominal 4 fps extraction was actually about 4.286 fps; malformed label-conditional outputs could parse successfully; raw inputs were not authenticated; and degenerate all-unknown or single-class outputs could pass. Zero of 30 V1 physical calls were made, so no outcome was overwritten.
+
+V2 now freezes an exact endpoint-inclusive target grid (21 frames at 2 fps and 41 at 4 fps), per-frame RGB identities, strict whole-string/label-conditional parsing, two pre-outcome reviews, bidirectional semantic screening, usable-class-support gates, and a 32-call design with one cross-replica anchor. The two reviewers agreed on 10 of 12 clips; the two disagreements are retained as `unknown`. V2 execution and analyzer authentication are not yet complete, so no compute launch is currently valid.
 
 ## Competing hypotheses
 

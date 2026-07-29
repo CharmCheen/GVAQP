@@ -19,3 +19,13 @@
 - Verification: the manifest is hash-bound from the review, the analyzer fails closed on a manifest or clip-ID mismatch, and 21 targeted tests pass.
 - Remaining blocker: the 30 physical 32B calls are a substantial compute/oracle action and remain unexecuted pending explicit approval (expected 30, observed 0).
 - Next highest-value action: after approval, run the three frozen video shards and evaluate the preregistered gates; do not extrapolate to the full oracle if the result fails or requires adjudication.
+
+## Cycle 02 — 2026-07-29 — INDEPENDENT PREFLIGHT FALSIFICATION / PROTOCOL REVISION
+
+- Decision: `REVISE_ORACLE_PROTOCOL`; do not run V1.
+- Decisive evidence: independent review directly demonstrated exact-frame mismatch (20 review frames versus 21 model frames), nominal 4 fps drift to about 4.286 fps, permissive label-inconsistent parsing, unauthenticated raw inputs, and false passes for degenerate oracle outputs.
+- Alternative explanation rejected: these are not merely low-power concerns; they make the measurement internally inconsistent even before considering sample representativeness.
+- Preserved failure: V1 remains at commit `3cf559648`, its expected/observed call count is 30/0, and `PREFLIGHT_V1_INVALIDATION_AUDIT.json` records the rejection without fabricating an outcome.
+- V2 evidence: exact precomputed RGB identities now cover 12 base and six sensitivity frame sets; two reviewers independently re-inspected exact sheets and agreed on 10/12 labels. Disagreements remain unknown.
+- Key uncertainty: V2's physical runner and analyzer do not yet enforce the new bindings and gates; H1 remains untested.
+- Next action: implement authenticated execution/analysis and obtain another independent code-level review before requesting the 32-call budget.

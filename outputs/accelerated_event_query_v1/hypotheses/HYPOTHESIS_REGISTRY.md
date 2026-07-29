@@ -2,14 +2,14 @@
 
 ## H1 — Operational-oracle adequacy
 
-Status: `ACTIVE — NEXT TEST`
+Status: `ACTIVE — V1 TEST DESIGN FALSIFIED; V2 REVISION IN PROGRESS`
 
 - Why important: every formal reference and downstream conclusion depends on the 32B response-required label being parseable and sufficiently stable.
-- Expected observation under H1: repeated identical clips yield identical labels and materially consistent boundaries; parse success is complete; disagreements/unknowns are not concentrated in one video; adversarial review finds no systematic unsupported response claims.
+- Expected observation under H1: authenticated identical inputs are exactly reproducible within and across replicas; strict parse success is complete; both decided classes have cross-video support; unknowns do not collapse the sample; exact 2/4 fps inputs do not cause unresolved polarity/boundary/response instability; post-output review finds no systematic unsupported or missed claims.
 - Main counter-hypothesis: response necessity cannot be inferred reliably from sparse visual frames, and the prior unsupported Hangzhou positive generalizes to this prompt.
-- Pass standard: preregistered sample has 100% parse success, at least 90% exact repeat-label agreement, no high-confidence relevant/not-relevant flips, and no systematic unsupported high-confidence positives in independent review.
-- Fail standard: any parse corruption not retained as unknown, exact repeat agreement below 90%, a high-confidence polarity flip, or systematic unsupported high-confidence positives.
-- Minimal experiment: fixed cross-video sample spanning old-oracle polarity, proxy score, and boundary strata; two identical calls per sampled clip plus blinded visual audit.
+- Pass standard: all V2 authentication and strict-parse gates pass; 12/12 same-process pairs and the cross-replica anchor are byte-reproducible; class-support/unknown gates pass; no sampling polarity failure; every semantic disagreement and model-positive cause claim is adjudicated under the frozen rules.
+- Fail standard: any artifact/identity failure, parse failure, reproducibility failure, class collapse, unresolved sensitivity transition, systematic bidirectional semantic contradiction, or unsupported cause pattern.
+- Minimal experiment: the targeted 32-call V2 pilot. A pass supports only a larger content-blind representative audit, not the full oracle.
 
 ## H2 — YOLO/K3 event-recall ceiling is adequate
 
