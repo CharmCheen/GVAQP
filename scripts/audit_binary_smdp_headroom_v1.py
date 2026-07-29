@@ -49,10 +49,15 @@ def main() -> None:
     # Preserve the required dataset location without relabeling a bounded pilot
     # as a completed formal dataset.
     pilot_frame = pd.read_parquet(OUT / "dataset/pilot/state_action_values.parquet")
+    formal_path_frame = pilot_frame.assign(
+        artifact_status="INCOMPLETE_HEADROOM_GATE_STOP",
+        formal_eligibility=False,
+        source_dataset="dataset/pilot/state_action_values.parquet",
+    )
     formal_path = OUT / "dataset/state_action_values.parquet"
     formal_path.parent.mkdir(parents=True, exist_ok=True)
     temporary = formal_path.with_suffix(".parquet.tmp")
-    pilot_frame.to_parquet(temporary, index=False)
+    formal_path_frame.to_parquet(temporary, index=False)
     os.replace(temporary, formal_path)
 
     git_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
@@ -64,6 +69,11 @@ def main() -> None:
     dataset_manifest = {
         "artifact_status": "INCOMPLETE_HEADROOM_GATE_STOP",
         "source": "dataset/pilot/state_action_values.parquet",
+        "formal_path": "dataset/state_action_values.parquet",
+        "formal_path_row_guard": {
+            "artifact_status": "INCOMPLETE_HEADROOM_GATE_STOP",
+            "formal_eligibility": False,
+        },
         "rows": len(pilot_frame),
         "videos": sorted(pilot_frame.video_id.unique().tolist()),
         "queries": sorted(pilot_frame.query_id.unique().tolist()),
@@ -87,13 +97,13 @@ def main() -> None:
         "decision": "INSUFFICIENT_EVIDENCE",
         "learning_mainline_authorized": False,
         "gates": {
-            "stable_oracle_headroom_over_r4": False,
-            "both_actions_informative": False,
-            "multiple_video_contribution": False,
-            "leave_best_video_out_positive": False,
-            "nonnegative_low_budget": False,
-            "zero_deadline_overrun": False,
-            "top_candidate_pathology_excluded": False,
+            "stable_oracle_headroom_over_r4": {"status": "NOT_ESTABLISHED", "passed": None},
+            "both_actions_informative": {"status": "NOT_ESTABLISHED", "passed": None},
+            "multiple_video_contribution": {"status": "NOT_EVALUABLE", "passed": None},
+            "leave_best_video_out_positive": {"status": "NOT_EVALUABLE", "passed": None},
+            "nonnegative_low_budget": {"status": "NOT_EVALUABLE", "passed": None},
+            "zero_deadline_overrun": {"status": "FAILED", "passed": False},
+            "top_candidate_pathology_excluded": {"status": "NOT_EXCLUDED", "passed": False},
         },
         "observed": {
             "conditioned_scan_better_states": 1,
@@ -173,10 +183,11 @@ evaluated video, plus complete V0 replay costs.
 
 Per the frozen contract, full dataset labeling, PUBLIC model comparison, MLP/
 LightGBM training, replay aggregation and learned-controller claims stop here.
-The bounded dataset is retained with status
-`INCOMPLETE_HEADROOM_GATE_STOP`; it is not renamed as a formal cross-video
-dataset. Revision requires new independent cost calibration and non-imputed V0
-cost evidence, after which the headroom gate must be rerun unchanged.
+The required formal-path parquet is an explicitly row-tagged copy of the
+bounded pilot (`artifact_status=INCOMPLETE_HEADROOM_GATE_STOP` and
+`formal_eligibility=false`); it is not a formal cross-video dataset. Revision
+requires new independent cost calibration and non-imputed V0 cost evidence,
+after which the headroom gate must be rerun unchanged.
 """
     atomic_text(OUT / "reports/ORACLE_HEADROOM_REPORT.md", report)
     for directory in (

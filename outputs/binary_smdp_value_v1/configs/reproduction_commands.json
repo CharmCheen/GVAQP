@@ -1,0 +1,19 @@
+{
+  "notes": [
+    "Formal oracle dataset expansion is intentionally not listed because the headroom gate stopped it.",
+    "The 32B checkpoint dequantizes on A100 and requires two visible GPUs plus the recorded BF16 compatibility normalization.",
+    "Contact sheets are derived audit artifacts; the source video is unchanged."
+  ],
+  "commands": [
+    "PYTHONPATH=src pytest -q tests/test_smdp_*.py",
+    "PYTHONPATH=src python scripts/audit_binary_smdp_headroom_v1.py",
+    "CUDA_VISIBLE_DEVICES=1 PYTHONPATH=src python scripts/run_hangzhou_qwen_vl_probe_v1.py --model 8b --declared-physical-gpus 1",
+    "CUDA_VISIBLE_DEVICES=1,2 PYTHONPATH=src python scripts/run_hangzhou_qwen_vl_probe_v1.py --model 32b --declared-physical-gpus 1,2",
+    "python scripts/analyze_hangzhou_qwen_vl_probe_v1.py"
+  ],
+  "seeds": {
+    "hangzhou_probe": 20260729,
+    "model_training": [0, 1, 2],
+    "oracle_behavior": [0, 1, 2]
+  }
+}

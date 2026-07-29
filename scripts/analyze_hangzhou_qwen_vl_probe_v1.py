@@ -67,7 +67,7 @@ def main() -> None:
             "physical validation gate",
         ],
         "clips": [clip["clip_id"] for clip in protocol["clips"]],
-        "input_identity_equal_across_models": True,
+        "decoded_frame_hashes_and_tensor_shapes_equal_across_models": True,
         "parse_success": {"8b": "4/4", "32b": "4/4"},
         "formal_call_failure_rate": {"8b": 0.0, "32b": 0.0},
         "mean_inference_seconds": {
@@ -157,8 +157,8 @@ correct 2-fps metadata are excluded.
 
 ## Supported interpretation
 
-The 8B model is the only plausible online verifier of the two on this A100
-host: it is about {summary['mean_inference_seconds']['32b'] / summary['mean_inference_seconds']['8b']:.2f}x faster per clip and uses one GPU. The 32B checkpoint is an expensive offline
+Of the two tested paths, the 8B model is the more plausible online-verifier
+candidate on this A100 host: it is about {summary['mean_inference_seconds']['32b'] / summary['mean_inference_seconds']['8b']:.2f}x faster per clip and uses one GPU. The 32B checkpoint is an expensive offline
 reviewer and shows a concrete unsupported positive in this small sample. With
 only three content-blind clips and no human labels, neither accuracy nor event
 prevalence is estimated.

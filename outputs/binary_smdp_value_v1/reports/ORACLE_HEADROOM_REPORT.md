@@ -48,7 +48,8 @@ evaluated video, plus complete V0 replay costs.
 
 Per the frozen contract, full dataset labeling, PUBLIC model comparison, MLP/
 LightGBM training, replay aggregation and learned-controller claims stop here.
-The bounded dataset is retained with status
-`INCOMPLETE_HEADROOM_GATE_STOP`; it is not renamed as a formal cross-video
-dataset. Revision requires new independent cost calibration and non-imputed V0
-cost evidence, after which the headroom gate must be rerun unchanged.
+The required formal-path parquet is an explicitly row-tagged copy of the
+bounded pilot (`artifact_status=INCOMPLETE_HEADROOM_GATE_STOP` and
+`formal_eligibility=false`); it is not a formal cross-video dataset. Revision
+requires new independent cost calibration and non-imputed V0 cost evidence,
+after which the headroom gate must be rerun unchanged.

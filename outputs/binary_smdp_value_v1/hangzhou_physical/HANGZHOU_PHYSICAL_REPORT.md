@@ -38,8 +38,8 @@ correct 2-fps metadata are excluded.
 
 ## Supported interpretation
 
-The 8B model is the only plausible online verifier of the two on this A100
-host: it is about 2.99x faster per clip and uses one GPU. The 32B checkpoint is an expensive offline
+Of the two tested paths, the 8B model is the more plausible online-verifier
+candidate on this A100 host: it is about 2.99x faster per clip and uses one GPU. The 32B checkpoint is an expensive offline
 reviewer and shows a concrete unsupported positive in this small sample. With
 only three content-blind clips and no human labels, neither accuracy nor event
 prevalence is estimated.

@@ -33,6 +33,7 @@ class HeadroomGateFallbackController(ScanConfirmController):
         baseline = self.baseline.choose_action(public_state)
         baseline_action = Action(baseline["action"])
         shield = self.shield.enforce(baseline_action, public_state)
+        effective_costs = self.shield.effective_costs(public_state)
         return {
             "action": shield.action.value,
             "reason": "headroom_gate_failed_r4_fallback",
@@ -49,6 +50,7 @@ class HeadroomGateFallbackController(ScanConfirmController):
                 "scan": self.shield.scan_cost_upper_sec,
                 "verify": self.shield.verify_cost_upper_sec,
             },
+            "effective_admission_cost": effective_costs,
             "support_score": None,
             "ood_status": "LEARNING_NOT_AUTHORIZED_HEADROOM_GATE_FAILED",
         }
