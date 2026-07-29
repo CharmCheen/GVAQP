@@ -1,0 +1,28 @@
+{
+  "artifact_role": "independent physical VLM cost/agreement probe; not controller validation",
+  "clip_duration_seconds": 10.0,
+  "clip_selection": "content-blind fixed quartile-adjacent timestamps frozen before decoding",
+  "clips": [
+    {"clip_id": "HZ_1400", "end_seconds": 1410.0, "start_seconds": 1400.0},
+    {"clip_id": "HZ_2800", "end_seconds": 2810.0, "start_seconds": 2800.0},
+    {"clip_id": "HZ_4200", "end_seconds": 4210.0, "start_seconds": 4200.0}
+  ],
+  "frame_sampling": {
+    "decoded_end_inclusive": true,
+    "message_fps": 2.0,
+    "primary_decode_fps": 2.0
+  },
+  "generation": {"do_sample": false, "max_new_tokens": 256},
+  "models": {
+    "32b": "models/Qwen3-VL-32B-Instruct-FP8",
+    "8b": "models/Qwen3-VL-8B-Instruct"
+  },
+  "parser_source": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/scripts/build_strict_oracle.py",
+  "parser_version": "presence_json_parser_v1_stage2_compatible",
+  "prompt_path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/oracle/oracle_prompt.txt",
+  "prompt_sha256": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+  "repeat_policy": "repeat HZ_2800 once per model with identical greedy seed to test raw-output stability",
+  "rng_seed": 20260729,
+  "video_path": "data/杭州.mp4",
+  "video_sha256": "69649cd2fbd9d6fde3786627781f8f8ee959b4571c40b6d512d7e574cf4c0155"
+}

@@ -1,0 +1,37 @@
+{
+  "gpu_host": {
+    "available_devices": 8,
+    "device_name": "NVIDIA A100-SXM4-80GB",
+    "32b_fp8_native_supported": false,
+    "32b_completed_physical_gpu_ids": [1, 2],
+    "8b_completed_physical_gpu_ids": [1]
+  },
+  "packages": {
+    "accelerate": "1.13.0",
+    "av": "18.0.0",
+    "numpy": "2.4.6",
+    "opencv-python-headless": "4.13.0.92",
+    "pillow": "12.1.1",
+    "pyarrow": "24.0.0",
+    "qwen-vl-utils": "0.0.14",
+    "scikit-learn": "1.8.0",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0"
+  },
+  "environment_mutations_for_probe": [
+    "installed qwen-vl-utils==0.0.14",
+    "installed av==18.0.0",
+    "installed opencv-python-headless==4.13.0.92"
+  ],
+  "video_probe": {
+    "audio_codec": "aac",
+    "duration_seconds": 5600.566,
+    "fps": 30.0,
+    "height": 480,
+    "integrity": "ffprobe completed without error",
+    "original_modified": false,
+    "proxy_or_index_required_for_fixed_probe": false,
+    "video_codec": "h264",
+    "width": 852
+  }
+}
