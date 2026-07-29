@@ -1,4 +1,6 @@
 from pathlib import Path
+import json
+import time
 
 import pytest
 
@@ -114,7 +116,7 @@ def test_idle_cost_is_accounted_before_next_call_reservation(tmp_path, monkeypat
         tmp_path,
         execution_seal_sha256="s" * 64,
         worker_bindings=WORKERS,
-        envelope_a100_gpu_hours=80.0 / 3600.0,
+        envelope_a100_gpu_hours=78.0 / 3600.0,
         call_reservation_wall_seconds=23.5,
         model_load_reservation_wall_seconds=30.0,
         loaded_worker_emergency_reservation_wall_seconds=8.0,
@@ -132,3 +134,31 @@ def test_idle_cost_is_accounted_before_next_call_reservation(tmp_path, monkeypat
     assert state["status"] == "STOPPED"
     assert state["actual_gpu_seconds"] <= state["envelope_gpu_seconds"]
     assert state["attempted_unit_ids"] == []
+
+
+def test_complete_call_accounts_coordinator_state_read_gap(tmp_path, monkeypatch):
+    """Regression for the rejected-v6 post-caller-timer accounting hole."""
+
+    value = loaded(coordinator(tmp_path))
+    value.reserve_call(
+        worker_id="W0", gpu_pair=[1, 2], unit_id="U0", call_spec_sha256="a"
+    )
+    original_state = value.state
+    before = original_state()["actual_gpu_seconds"]
+
+    def delayed_state():
+        result = original_state()
+        time.sleep(0.03)
+        return result
+
+    monkeypatch.setattr(value, "state", delayed_state)
+    value.complete_call(worker_id="W0", unit_id="U0", wall_seconds=0.0)
+    after = original_state()["actual_gpu_seconds"]
+    assert after - before >= 0.05  # two GPUs times at least 25 ms
+    completed = [
+        json.loads(line)
+        for line in value.ledger_path.read_text(encoding="utf-8").splitlines()
+        if json.loads(line)["event"] == "CALL_COMPLETED"
+    ][0]
+    assert completed["caller_observed_wall_seconds"] == 0.0
+    assert completed["accounted_wall_seconds"] >= 0.025

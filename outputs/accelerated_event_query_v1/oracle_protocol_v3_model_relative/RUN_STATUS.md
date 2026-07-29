@@ -251,3 +251,33 @@ parallel processes. The candidate was rejected without review or GPU use. The
 mock now opens, executes, closes, and accounts each already-fixed static shard
 when that shard begins; formal concurrency and the eight-second gate are not
 changed.
+
+## Second exact-package review: continuous clock and tail visibility
+
+Seal V6 `d2f35022…` reproduced all 1,475 units and 30,932 frame occurrences,
+passed 130 tests and a complete mock with 2,964 global-ledger events, and bound
+25 review artifacts with zero hash mismatch. Independent review returned
+`REVISE_FULL_GRID_PREREGISTRATION` before any formal inference.
+
+Decisive negative evidence:
+
+- `complete_call()` advanced the loaded-worker clock only after a caller-side
+  duration had been measured. Lock acquisition and full hash-chain state reads
+  between those points were neither in the supplied call duration nor the next
+  idle segment. A 0.25-second injected state read yielded about 0.508 uncharged
+  two-GPU seconds while status remained `READY`.
+- The 12/2/6-frame tails were physically legal but model-visible text still
+  called them 10-second units. Tail identity and true duration appeared only in
+  provenance, not processor tensors.
+- The preregistration did not explicitly bind the unchanged V2
+  `REVISE_ORACLE_PROTOCOL` decision/evidence.
+
+Revision in progress: authoritative cost uses a gap-free coordinator-side
+residency clock from load reservation through observed process exit; caller
+timers are diagnostic. Normal units retain exact base-prompt bytes, while the
+three tails deterministically replace the nominal-duration sentence with an
+explicit legal truncated-final declaration including true duration, distinct
+real frame count, 2-fps grid, and no-padding/no-repeat statement. The V2
+decision and evidence manifest are now prospective bindings. Targeted
+counterexample tests pass 19/19. Expanded-authorization A100 use remains 0.0
+hours, and no formal raw/reference exists.

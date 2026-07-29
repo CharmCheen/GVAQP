@@ -13,7 +13,7 @@ This audit checks the original 24-section research specification against current
 | Causal public state and future-information rejection | `state.py`, causality tests | Schema/guard tested; replay/controller not built |
 | Frozen three real videos and 1,475-unit grid | video manifests and freeze audit | Established |
 | Adequate fallible 32B operational oracle for the new query | exact 32/32 V2 records, metrics, independent grounding, finalizer | Contradicted: 31/32 parse, systematic three-video contradictions, 2/4 unsupported positives |
-| Full 1,475-unit operational oracle and raw provenance | no authorized full-run design or outputs | Missing and unauthorized after H1 failure |
+| Full 1,475-unit model-relative oracle and raw provenance | expanded user authorization; six preserved rejected preregistration seals; current continuous-clock/tail-input revision | Authorized in principle but not executed; no formal raw output exists |
 | K3 operational reference events parquet | `operational_reference_events/STATUS.md` | Missing; gated by oracle evidence |
 | Frozen YOLO/proxy execution and candidate join | `scan_candidates/STATUS.md` | Missing |
 | Candidate coverage and `SCAN_EVENT_RECALL_CEILING` on all videos | no real new-query references/candidates | Missing |
@@ -34,9 +34,19 @@ This audit checks the original 24-section research specification against current
 
 ## Decision-critical path
 
-1. Stop the executed line at `REVISE_ORACLE_PROTOCOL`; the exact approval is exhausted.
-2. Preserve the impossible boundary, three cross-video contradictions, and two unsupported positives as rejection evidence.
-3. Do not request a representative/full oracle or downstream YOLO/replay/controller compute from this pilot.
-4. Any future cycle must first explain the timestamp-coordinate failure and traffic-signal/lane attribution failures, then freeze and independently review a materially revised minimal protocol.
+1. Preserve V2 at `REVISE_ORACLE_PROTOCOL`; V3 does not repair or overwrite its
+   impossible boundary, cross-video contradictions, or unsupported positives.
+2. Complete and independently review the prospective V3 model-relative
+   full-grid package. The current blockers are continuous GPU-residency cost
+   accounting and explicit tail-unit model visibility, not user authorization.
+3. Execute 1,475 calls only under an exact reviewed seal and idle/exclusive GPU
+   profile; partial outputs remain non-reference evidence.
+4. Only an authenticated complete V3 run may release K3 reference events and
+   open the SCAN ceiling/cost/replay/headroom gates. No downstream result exists
+   yet.
 
-The preregistered revision observations occurred. Reproducibility alone cannot rescue an operational oracle that violates its output coordinate contract and produces systematic/unsupported semantic claims.
+The V2 rejection remains historical evidence. V3 intentionally narrows the
+authority boundary to a model-relative unit label with K3-owned event timing;
+this is a prospective construct, not a claim of human-driving semantic
+accuracy or representative adequacy. The full research objective remains
+incomplete until physical full-grid and downstream gates are evaluated.

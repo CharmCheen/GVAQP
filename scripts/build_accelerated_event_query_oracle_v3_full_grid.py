@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import math
 import os
@@ -48,6 +49,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_runner import (
 )
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_processing import (
     load_frozen_processor,
+    model_visible_query_text,
     prepare_frozen_model_inputs,
     runtime_environment_identity,
     tensor_bundle_sha256,
@@ -70,6 +72,8 @@ CONFIG = BASE / "configs/oracle_v3_execution_config.json"
 K3 = BASE / "k3_eventization/K3_UNIT_EVENT_CONFIG_V3.json"
 MODEL_MANIFEST = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/MODEL_FILE_MANIFEST_V2.json"
 MODEL_AUDIT = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/MODEL_IDENTITY_AUDIT_V1.json"
+V2_DECISION = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/TARGETED_PILOT_DECISION_V2.json"
+V2_EVIDENCE = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/PILOT_EVIDENCE_MANIFEST_V2.json"
 
 
 GPU_PAIRS = {"DALI": [1, 2], "HANGZHOU": [3, 5], "WUHAN": [6, 7]}
@@ -138,6 +142,9 @@ def _processor_tail_audit(
             "model_visible_grid_duration_seconds": (unit["frame_count"] - 1) / 2.0,
             "processor_tensor_shapes": processed["tensor_shapes"],
             "processor_tensor_bundle_sha256": processed["processed_input_sha256"],
+            "explicit_model_visible_tail_declaration": True,
+            "model_visible_text_sha256": processed["model_visible_text_sha256"],
+            "model_visible_text": processed["model_visible_text"],
             "do_sample_frames": False,
             "padding_or_repeated_source_frame_added_by_protocol": False,
         })
@@ -213,9 +220,12 @@ and rechecks the exact parent, so supervisor death cannot orphan GPU workers.
 Every call is reserved before frame decode/processor work and remains open
 through durable raw-output and ACCEPTED-ledger persistence. Each loaded worker
 also holds a prospective eight-second emergency reservation throughout model
-residency. The two-second idle lease plus polling/termination tail therefore
-cannot cross the envelope before detection. The reservation is consumed only
-after the supervisor observes process exit. Model tensors and cached allocations
+residency. An authoritative coordinator-side clock partitions residency
+continuously from load reservation through every call/idle boundary and the
+supervisor-observed process exit; caller-side timers are diagnostic only. The
+two-second idle lease plus polling/termination tail therefore cannot cross the
+envelope before detection. The reservation is consumed only after the
+supervisor observes process exit. Model tensors and cached allocations
 are explicitly released before session close.
 
 The launcher authenticates zero compute contexts, zero utilization, and at
@@ -301,6 +311,16 @@ def main() -> None:
     processor_class = f"{processor.__class__.__module__}.{processor.__class__.__qualname__}"
     processor_environment = runtime_environment_identity()
     prompt = PROMPT.read_text(encoding="utf-8")
+    v2_decision = load_json(V2_DECISION)
+    v2_evidence = load_json(V2_EVIDENCE)
+    if not (
+        v2_decision.get("experiment_id") == "AEQ_ORACLE_PREFLIGHT_V2"
+        and v2_decision.get("decision") == "REVISE_ORACLE_PROTOCOL"
+        and v2_evidence.get("status") == "PASS_COMPLETE_INTEGRITY_INVENTORY"
+        and v2_evidence.get("decision") == "REVISE_ORACLE_PROTOCOL"
+        and int(v2_evidence.get("observed_raw_records", -1)) == 32
+    ):
+        raise RuntimeError("V2 historical evidence no longer matches its frozen decision")
 
     flat_frames: list[dict[str, Any]] = []
     unit_rows: list[dict[str, Any]] = []
@@ -316,10 +336,20 @@ def main() -> None:
         )
         public = [public_frame(row) for row in decoded]
         frame_set_sha = canonical_hash(public)
+        model_visible_text = model_visible_query_text(
+            prompt=prompt,
+            unit_kind=kind,
+            true_duration_seconds=grid_row["duration_seconds"],
+            supplied_frame_count=len(public),
+            sampling_fps=2.0,
+        )
+        model_visible_text_sha = hashlib.sha256(model_visible_text.encode("utf-8")).hexdigest()
         processed_inputs = prepare_frozen_model_inputs(
             processor,
             prompt=prompt,
             rgb_frames=[row["rgb"] for row in decoded],
+            unit_kind=kind,
+            true_duration_seconds=grid_row["duration_seconds"],
             sampling_fps=2.0,
         )
         processed_sha = tensor_bundle_sha256(processed_inputs)
@@ -351,11 +381,18 @@ def main() -> None:
             "parsed_output_relative_path": f"parsed/{grid_row['video_id']}/{grid_row['unit_id']}.json",
             "attempt_ledger_relative_path": ledger,
             "model_input_tail_representation": {
+                "explicit_tail_declaration_applied": kind == "truncated_final",
                 "true_duration_seconds": grid_row["duration_seconds"],
                 "supplied_frame_count": len(public),
                 "supplied_sampling_fps": 2.0,
                 "grid_duration_seconds": (len(public) - 1) / 2.0,
-                "prompt_bytes_unchanged": True,
+                "base_prompt_file_bytes_unchanged": True,
+                "model_visible_text_sha256": model_visible_text_sha,
+                "tail_prompt_policy": (
+                    "replace the unique nominal 10-second instruction with a deterministic explicit legal truncated-final declaration"
+                    if kind == "truncated_final" else
+                    "exact base prompt bytes"
+                ),
                 "finite_stream_boundary_resolution": "retain ideal request and use unique nearest available final video frame only when ideal index exceeds stream support",
             },
         }
@@ -368,6 +405,10 @@ def main() -> None:
             "unit_kind": kind,
             "frame_count": len(public),
             "frame_set_sha256": frame_set_sha,
+            "model_visible_text_sha256": model_visible_text_sha,
+            "model_visible_text": (
+                model_visible_text if kind == "truncated_final" else None
+            ),
             "processed_input_sha256": processed_sha,
             "tensor_shapes": shapes,
         })
@@ -505,8 +546,8 @@ def main() -> None:
         "base_operations_plus_simultaneous_emergency_reservations_a100_gpu_hours": reserved,
         "aggregate_reserved_a100_gpu_hours": reserved,
         "reservation_fits_envelope": reserved <= ENVELOPE_A100_GPU_HOURS,
-        "cost_shield": "call reservation remains open from pre-decode through durable raw and ACCEPTED persistence; a reusable prospective emergency reservation remains active per loaded worker; elapsed idle consumes and must refresh that reservation before another call; no start above envelope",
-        "actual_gpu_residency_accounting": "two GPUs times model load, call through durable acceptance, every inter-call gap, explicit model release, and supervisor-observed process-exit tail",
+        "cost_shield": "call reservation remains open from pre-decode through durable raw and ACCEPTED persistence; a reusable prospective emergency reservation remains active per loaded worker; a coordinator-side continuous residency clock, not caller timing, accounts lock/hash-chain/persistence gaps; elapsed idle consumes and must refresh the emergency reservation before another call; no start above envelope",
+        "actual_gpu_residency_accounting": "continuous coordinator-side two-GPU residency segments from model-load reservation through call/durable acceptance, every coordinator and inter-call gap, explicit model release, and supervisor-observed process-exit tail",
         "gpu_profile_authentication": "all sealed GPUs must have zero compute contexts, zero utilization, and <=16 MiB used memory before initialization and again on each pair before model load",
         "unused_envelope_cannot_authorize_extra_calls_reloads_or_retries": True,
     }, "cost_estimate_payload_sha256")
@@ -610,8 +651,10 @@ def main() -> None:
         "# Full-Grid Tail Unit Audit", "", "Status: `FROZEN_PASS_NO_MODEL_INFERENCE`", "",
         "The three legal final units use only exact source-anchored `k/2` targets not",
         "exceeding the true endpoint. No target, padding frame, repeated final frame,",
-        "or invented off-grid endpoint was added. The unchanged prompt is paired with",
-        "model-visible frame count, 2-fps metadata, and true-duration provenance.", "",
+        "or invented off-grid endpoint was added. The base query file remains unchanged;",
+        "for each tail, its exact model-visible text deterministically replaces the false",
+        "nominal 10-second sentence with the legal truncated-final identity, true source",
+        "duration, real frame count, 2-fps grid, and no-padding/no-repeat declaration.", "",
         "| Unit | Video | Absolute interval | Frames | Last target | Ideal/resolved/decoded last index | Resolution | Contact SHA |",
         "|---|---|---:|---:|---:|---:|---|---|",
     ]
@@ -704,6 +747,8 @@ def main() -> None:
         "k3_config": binding(K3),
         "model_file_manifest": binding(MODEL_MANIFEST),
         "model_identity_audit": binding(MODEL_AUDIT),
+        "v2_targeted_pilot_decision": binding(V2_DECISION),
+        "v2_pilot_evidence_manifest": binding(V2_EVIDENCE),
         "unit_manifest": binding(PACKAGE / "FULL_GRID_UNIT_MANIFEST.json"),
         "frame_manifest": binding(PACKAGE / "FULL_GRID_FRAME_MANIFEST.json"),
         "processed_input_manifest": binding(PACKAGE / "FULL_GRID_PROCESSED_INPUT_MANIFEST.json"),
@@ -727,7 +772,14 @@ def main() -> None:
         "query_id": QUERY_ID,
         "source_commit": git_head,
         "scope": "exact 1475-unit model-relative full grid only; no downstream work",
-        "ground_truth_definition": "authoritative label emitted for each exact frozen unit by the bound Qwen3-VL-32B checkpoint, unchanged prompt, processor inputs, 2-fps sampling, and deterministic decoding",
+        "ground_truth_definition": "authoritative label emitted for each exact frozen unit by the bound Qwen3-VL-32B checkpoint, frozen base query plus deterministic explicit tail-unit composition, exact processor inputs, 2-fps sampling, and deterministic decoding",
+        "v2_historical_evidence": {
+            "status": "UNCHANGED_AND_NOT_OVERRIDDEN_BY_V3",
+            "decision": "REVISE_ORACLE_PROTOCOL",
+            "targeted_pilot_decision_binding": bindings["v2_targeted_pilot_decision"],
+            "evidence_manifest_binding": bindings["v2_pilot_evidence_manifest"],
+            "interpretation": "V3 changes the prospective model-relative authority boundary; it does not relabel, repair, or supersede any V2 raw output, analyzer result, grounding finding, or final decision.",
+        },
         "inherited_preflight_evidence": {
             "decision": "V3_SCHEMA_DETERMINISM_PASS_FULL_GRID_APPROVAL_REQUIRED",
             "execution_seal_sha256": "bf35f7f3c9f897f337a838f36991ab502cf538fd602b779ab8afd245b0b9ce61",

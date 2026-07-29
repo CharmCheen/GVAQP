@@ -2,6 +2,10 @@ import math
 
 import pytest
 
+from garc_eval.accelerated_event_query.oracle_v3_full_grid_processing import (
+    model_visible_query_text,
+)
+
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_manifest import (
     full_grid_sample_indices,
     resolve_targets_to_available_frames,
@@ -57,3 +61,42 @@ def test_boundary_resolution_refuses_repeated_padding_frame():
     _, targets = full_grid_sample_indices(0.0, 0.566, 30.0, 2.0)
     with pytest.raises(RuntimeError, match="repeat"):
         resolve_targets_to_available_frames(targets, available_frame_count=1)
+
+
+BASE_PROMPT = (
+    "Header\nInspect this 10-second ego-driving unit and decide whether it is relevant.\n"
+)
+
+
+def test_normal_unit_preserves_exact_base_prompt_bytes():
+    assert model_visible_query_text(
+        prompt=BASE_PROMPT,
+        unit_kind="normal",
+        true_duration_seconds=10.0,
+        supplied_frame_count=21,
+        sampling_fps=2.0,
+    ) == BASE_PROMPT
+
+
+@pytest.mark.parametrize(
+    ("duration", "frame_count"),
+    [(5.535333, 12), (0.566, 2), (2.930499, 6)],
+)
+def test_tail_unit_is_explicitly_and_deterministically_model_visible(
+    duration, frame_count
+):
+    kwargs = {
+        "prompt": BASE_PROMPT,
+        "unit_kind": "truncated_final",
+        "true_duration_seconds": duration,
+        "supplied_frame_count": frame_count,
+        "sampling_fps": 2.0,
+    }
+    observed = model_visible_query_text(**kwargs)
+    assert observed == model_visible_query_text(**kwargs)
+    assert "legal shorter truncated-final" in observed
+    assert f"{duration:.6f} seconds" in observed
+    assert f"contains {frame_count} distinct real source frames" in observed
+    assert "2.000000-fps grid" in observed
+    assert "No padding, repeated frame, or invented off-grid endpoint" in observed
+    assert "Inspect this 10-second ego-driving unit" not in observed

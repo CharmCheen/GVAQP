@@ -248,3 +248,39 @@
   evidence-chain variant was rejected internally. The current prediction also
   requires initialization/preload UUID continuity and independent analyzer
   validation of every raw snapshot.
+
+## H20 — Coordinator-side partitioning closes every loaded-residency clock gap
+
+- Prediction: authoritative cost for model load and each call is elapsed time
+  between consecutive coordinator timestamps, taken after lock/state
+  validation; coordinator tail work after one timestamp is charged in the next
+  call/idle/session segment. Caller timers cannot reduce charged residency.
+- Falsification: inject delay anywhere after reservation and before the next
+  timestamp and observe a smaller increase in `actual_gpu_seconds` than two
+  GPU-seconds per wall second, or status `READY` after physical cost exceeds the
+  envelope.
+- Competing explanation: operation timers plus idle timers appear exhaustive
+  but can leave seams at lock/hash-chain/persistence boundaries.
+- Status: `REVISED_AFTER_REJECTED_V6_COUNTEREXAMPLE; TARGETED_TEST_SUPPORTED`.
+
+## H21 — Tail legality is part of the actual model input, not provenance only
+
+- Prediction: all normal units retain the exact frozen base-prompt bytes; each
+  12/2/6-frame tail instead has deterministic model-visible text that explicitly
+  states legal truncated-final identity, true source duration, distinct real
+  frame count, frozen 2-fps grid, and no padding/repetition.
+- Falsification: the processor tensor for a tail equals the old nominal
+  10-second tensor, the nominal instruction remains, or the declared text/hash
+  is absent from the processed-input and tail audits.
+- Competing explanation: frame count/fps make shortness inferable, but do not
+  establish legality and conflict with an explicit 10-second assertion.
+- Status: `IMPLEMENTED_IN_SOURCE; FULL_REPROCESS_AND_REVIEW_REQUIRED`.
+
+## H22 — V3 preserves rather than rewrites V2 historical evidence
+
+- Prediction: package construction fails unless both the write-once V2 targeted
+  decision and evidence manifest still report 32 records and
+  `REVISE_ORACLE_PROTOCOL`; both exact files are seal bindings.
+- Falsification: V3 can build while either V2 artifact changes or preregistration
+  implies that model-relative V3 repairs/supersedes V2 findings.
+- Status: `IMPLEMENTED_IN_SOURCE; PACKAGE_BINDING_REQUIRED`.

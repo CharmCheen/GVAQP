@@ -393,6 +393,8 @@ def validate_worker_inputs(
                 processor,
                 prompt=prompt,
                 rgb_frames=[row["rgb"] for row in decoded],
+                unit_kind=unit["unit_kind"],
+                true_duration_seconds=unit["duration_seconds"],
                 sampling_fps=2.0,
             )
             observed = tensor_bundle_sha256(inputs)
@@ -510,6 +512,8 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
                 processor,
                 prompt=prompt,
                 rgb_frames=[row["rgb"] for row in frames],
+                unit_kind=unit["unit_kind"],
+                true_duration_seconds=unit["duration_seconds"],
                 sampling_fps=2.0,
             ).to(model.device)
             processed_hash = tensor_bundle_sha256(inputs)

@@ -181,6 +181,13 @@ class GlobalFailStopCoordinator:
                 self.load_reservation_gpu_seconds
                 + self.loaded_worker_emergency_reservation_gpu_seconds
             )
+            # Start the authoritative continuous residency clock before the
+            # coordinator persists the load transition.  This conservatively
+            # covers coordinator tail work before model construction begins.
+            load_clock_start = time.time_ns()
+            state["last_gpu_accounted_unix_ns_by_worker"][worker_id] = (
+                load_clock_start
+            )
             self._write_state(state)
             append_hash_chain(self.ledger_path, {
                 "event": "MODEL_LOAD_STARTED",
@@ -188,6 +195,7 @@ class GlobalFailStopCoordinator:
                 "gpu_pair": gpu_pair,
                 "reserved_gpu_seconds": self.load_reservation_gpu_seconds,
                 "emergency_reservation_gpu_seconds": self.loaded_worker_emergency_reservation_gpu_seconds,
+                "residency_clock_started_unix_ns": load_clock_start,
             })
 
     def complete_model_load(self, worker_id: str, wall_seconds: float) -> None:
@@ -200,11 +208,12 @@ class GlobalFailStopCoordinator:
             if worker_id in state["model_load_completed_workers"]:
                 self._stop_locked(state, "unauthorized_model_reload", worker_id)
                 raise RuntimeError("duplicate model load completion")
-            actual = 2.0 * wall_seconds
+            now_unix_ns = time.time_ns()
+            actual = self._elapsed_gpu_seconds_locked(state, worker_id, now_unix_ns)
             state["reserved_gpu_seconds"] -= self.load_reservation_gpu_seconds
             state["actual_gpu_seconds"] += actual
             state["model_load_completed_workers"].append(worker_id)
-            state["last_gpu_accounted_unix_ns_by_worker"][worker_id] = time.time_ns()
+            state["last_gpu_accounted_unix_ns_by_worker"][worker_id] = now_unix_ns
             if actual > self.load_reservation_gpu_seconds + 1e-9:
                 self._stop_locked(state, "cost_envelope_exceeded", f"model_load:{worker_id}")
                 raise RuntimeError("model load exceeded its sealed reservation")
@@ -217,7 +226,8 @@ class GlobalFailStopCoordinator:
             append_hash_chain(self.ledger_path, {
                 "event": "MODEL_LOAD_COMPLETED",
                 "worker_id": worker_id,
-                "wall_seconds": wall_seconds,
+                "caller_observed_wall_seconds": wall_seconds,
+                "accounted_wall_seconds": actual / 2.0,
                 "actual_gpu_seconds": actual,
             })
 
@@ -261,15 +271,25 @@ class GlobalFailStopCoordinator:
         with self._locked():
             state = self.state()
             self._require_running(state)
+            if unit_id not in self.worker_bindings.get(worker_id, {}).get("unit_ids", []):
+                self._stop_locked(state, "missing_attempt_ledger_transition", unit_id)
+                raise RuntimeError("call completion worker does not own unit")
             if unit_id not in state["in_flight_unit_ids"]:
                 self._stop_locked(state, "missing_attempt_ledger_transition", unit_id)
                 raise RuntimeError("call completed without reservation")
-            actual = 2.0 * wall_seconds
+            # Measure at the coordinator after lock acquisition, state/hash
+            # validation and all caller-side raw/ACCEPTED persistence.  The
+            # prior clock was advanced inside reserve_call.  This partitions
+            # loaded GPU residency continuously and makes caller timing only a
+            # diagnostic; coordinator tail work after this timestamp is
+            # charged by the next idle/call/session boundary.
+            now_unix_ns = time.time_ns()
+            actual = self._elapsed_gpu_seconds_locked(state, worker_id, now_unix_ns)
             state["in_flight_unit_ids"].remove(unit_id)
             state["completed_unit_ids"].append(unit_id)
             state["reserved_gpu_seconds"] -= self.call_reservation_gpu_seconds
             state["actual_gpu_seconds"] += actual
-            state["last_gpu_accounted_unix_ns_by_worker"][worker_id] = time.time_ns()
+            state["last_gpu_accounted_unix_ns_by_worker"][worker_id] = now_unix_ns
             if actual > self.call_reservation_gpu_seconds + 1e-9:
                 self._stop_locked(state, "cost_envelope_exceeded", f"call:{unit_id}")
                 raise RuntimeError("call exceeded its sealed reservation")
@@ -283,7 +303,8 @@ class GlobalFailStopCoordinator:
                 "event": "CALL_COMPLETED",
                 "worker_id": worker_id,
                 "unit_id": unit_id,
-                "wall_seconds": wall_seconds,
+                "caller_observed_wall_seconds": wall_seconds,
+                "accounted_wall_seconds": actual / 2.0,
                 "actual_gpu_seconds": actual,
             })
 
@@ -379,14 +400,12 @@ class GlobalFailStopCoordinator:
         *,
         consume_emergency_reservation: bool,
     ) -> float:
-        previous = state["last_gpu_accounted_unix_ns_by_worker"].get(worker_id)
-        if previous is None:
-            self._stop_locked(state, "missing_attempt_ledger_transition", worker_id)
-            raise RuntimeError("loaded-worker cost clock is missing")
+        idle_gpu_seconds = self._elapsed_gpu_seconds_locked(
+            state, worker_id, now_unix_ns
+        )
         if worker_id not in state["loaded_worker_emergency_reservation_workers"]:
             self._stop_locked(state, "missing_attempt_ledger_transition", worker_id)
             raise RuntimeError("loaded-worker emergency reservation is missing")
-        idle_gpu_seconds = max(0.0, 2.0 * (now_unix_ns - previous) / 1e9)
         state["reserved_gpu_seconds"] -= (
             self.loaded_worker_emergency_reservation_gpu_seconds
         )
@@ -414,6 +433,20 @@ class GlobalFailStopCoordinator:
             )
             state["loaded_worker_emergency_reservation_workers"].append(worker_id)
         return idle_gpu_seconds
+
+    def _elapsed_gpu_seconds_locked(
+        self, state: dict[str, Any], worker_id: str, now_unix_ns: int
+    ) -> float:
+        """Return the next gap-free two-GPU residency segment."""
+
+        previous = state["last_gpu_accounted_unix_ns_by_worker"].get(worker_id)
+        if previous is None:
+            self._stop_locked(state, "missing_attempt_ledger_transition", worker_id)
+            raise RuntimeError("loaded-worker cost clock is missing")
+        if now_unix_ns < previous:
+            self._stop_locked(state, "unknown_runner_version", f"clock_regression:{worker_id}")
+            raise RuntimeError("loaded-worker cost clock regressed")
+        return 2.0 * (now_unix_ns - previous) / 1e9
 
     def _account_and_refresh_idle_locked(
         self, state: dict[str, Any], worker_id: str, now_unix_ns: int
