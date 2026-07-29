@@ -244,3 +244,7 @@
 - Competing explanation: UUID identity alone proves hardware identity but not
   runtime comparability or lack of contention.
 - Status: `SUPPORTED_BY_MOCKS_AND_REAL_BUSY_GPU_REJECTION_AWAITING_IDLE_RUN`.
+  The first implementation was runner-enforced but not analyzer-grounded; that
+  evidence-chain variant was rejected internally. The current prediction also
+  requires initialization/preload UUID continuity and independent analyzer
+  validation of every raw snapshot.

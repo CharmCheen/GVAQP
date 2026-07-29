@@ -234,3 +234,11 @@ Implemented local revision:
 
 Current decision: rebuild/reseal and independently review the prospective cost
 shield. Do not start formal execution while any sealed GPU fails exclusivity.
+
+An internal evidence-chain audit then stopped the first empty rebuild attempt:
+the runner recorded launcher/preload exclusivity snapshots, but the analyzer did
+not yet authenticate them. The analyzer now rejects missing/mutated snapshots,
+non-idle values, context presence, non-A100 identity strings, UUID changes from
+initialization to preload, and reserved-cost residue at completion. The frozen
+finalizer maps these failures to `FULL_GRID_ABORTED_AUTHENTICATION`. 130 tests
+pass; no package files or GPU calls were produced by the interrupted build.

@@ -676,6 +676,7 @@ def main() -> None:
         "output_schemas": binding(PACKAGE / "FULL_GRID_OUTPUT_SCHEMAS.json"),
         "checks": [
             "call and ledger accounting", "input/frame/frozen-processed hashes", "worker/GPU/supervisor binding",
+            "launcher and per-worker GPU exclusivity snapshots with unchanged UUIDs",
             "three model loads and zero reload/retry", "strict parse and distribution",
             "unknown/parse_failure coverage", "runtime/cost", "K3 order and diagnostic independence",
             "staged reference identities and hashes",

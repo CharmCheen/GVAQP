@@ -95,6 +95,7 @@ def decide(metrics: dict[str, Any], mapping: dict[str, Any]) -> str:
     if any(error.startswith((
         "extra_raw_outputs", "invalid_raw:", "ledger_identity:",
         "ledger_processed_input:", "ledger_output_join:", "ledger_wrong_worker:",
+        "invalid_initialization_audit:", "missing_initialization_audit",
     )) for error in errors):
         return "FULL_GRID_ABORTED_AUTHENTICATION"
     if any(error.startswith((

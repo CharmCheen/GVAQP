@@ -38,6 +38,53 @@ class FullGridAnalysisProducts:
     upper_bound_relation: ModelRelativeEventRelation
 
 
+def _validate_gpu_exclusivity_snapshot(
+    snapshot: dict[str, Any],
+    expected_gpu_ids: list[int],
+    expected_uuid_by_index: dict[int, str] | None = None,
+) -> None:
+    if not all((
+        snapshot.get("authenticated_exclusive_idle") is True,
+        snapshot.get("physical_gpu_ids") == sorted(expected_gpu_ids),
+        snapshot.get("compute_contexts") == [],
+        snapshot.get("maximum_memory_used_mib") == 16,
+        snapshot.get("maximum_utilization_percent") == 0,
+    )):
+        raise RuntimeError("GPU exclusivity snapshot policy mismatch")
+    rows = snapshot.get("gpus")
+    if not isinstance(rows, list) or {
+        row.get("index") for row in rows if isinstance(row, dict)
+    } != set(expected_gpu_ids):
+        raise RuntimeError("GPU exclusivity snapshot membership mismatch")
+    for row in rows:
+        if not all((
+            isinstance(row.get("uuid"), str) and row["uuid"].startswith("GPU-"),
+            row.get("utilization_percent") == 0,
+            isinstance(row.get("memory_used_mib"), int),
+            row["memory_used_mib"] <= 16,
+        )):
+            raise RuntimeError("GPU exclusivity snapshot is not idle")
+        if (
+            expected_uuid_by_index is not None
+            and row["uuid"] != expected_uuid_by_index.get(row["index"])
+        ):
+            raise RuntimeError("GPU exclusivity snapshot UUID mismatch")
+
+
+def _gpu_uuid_map_from_identity_strings(
+    identities: list[str], expected_gpu_ids: list[int]
+) -> dict[int, str]:
+    result: dict[int, str] = {}
+    for identity in identities:
+        tokens = [token.strip() for token in identity.split(",")]
+        if len(tokens) != 3 or "NVIDIA A100-SXM4-80GB" not in tokens[1]:
+            raise RuntimeError("GPU identity string is invalid")
+        result[int(tokens[0])] = tokens[2]
+    if set(result) != set(expected_gpu_ids):
+        raise RuntimeError("GPU identity membership mismatch")
+    return result
+
+
 def _validate_record(
     record: dict[str, Any],
     unit: dict[str, Any],
@@ -102,6 +149,14 @@ def _validate_record(
             raise RuntimeError(f"invalid runtime field: {key}")
     if runtime.get("worker_id") != unit["worker_id"]:
         raise RuntimeError("runtime worker mismatch")
+    runtime_gpu_uuids = _gpu_uuid_map_from_identity_strings(
+        runtime.get("gpu_identities", []), worker["physical_gpu_ids"]
+    )
+    _validate_gpu_exclusivity_snapshot(
+        runtime.get("worker_preload_gpu_exclusivity", {}),
+        worker["physical_gpu_ids"],
+        runtime_gpu_uuids,
+    )
     return parsed.parse_status, parsed.effective_label, parsed.parsed
 
 
@@ -301,6 +356,55 @@ def analyze_execution(
             errors.append(f"invalid_supervisor_audit:{type(exc).__name__}:{exc}")
     else:
         errors.append("missing_supervisor_audit")
+    initialization_path = execution_root / "INITIALIZATION_AUDIT.json"
+    initialization: dict[str, Any] = {}
+    initialization_gpu_uuids: dict[int, str] = {}
+    initialization_pass = False
+    if initialization_path.exists():
+        try:
+            initialization = load_json(initialization_path)
+            validate_payload_hash(initialization, "initialization_payload_sha256")
+            expected_gpu_ids = sorted({
+                index
+                for worker in schedule["workers"]
+                for index in worker["physical_gpu_ids"]
+            })
+            for worker in schedule["workers"]:
+                worker_map = _gpu_uuid_map_from_identity_strings(
+                    initialization.get("gpu_identities", {}).get(
+                        worker["worker_id"], []
+                    ),
+                    worker["physical_gpu_ids"],
+                )
+                if set(initialization_gpu_uuids) & set(worker_map):
+                    raise RuntimeError("GPU initialization identity overlap")
+                initialization_gpu_uuids.update(worker_map)
+            _validate_gpu_exclusivity_snapshot(
+                initialization.get("gpu_exclusivity", {}),
+                expected_gpu_ids,
+                initialization_gpu_uuids,
+            )
+            initialization_pass = all((
+                initialization.get("status") == "INITIALIZED_NO_MODEL_LOAD",
+                initialization.get("execution_seal_sha256") == seal_sha,
+                initialization.get("exact_worker_count") == 3,
+                initialization.get("exact_call_count") == EXPECTED_UNIT_COUNT,
+                initialization.get("checkpoint_loaded") is False,
+            ))
+            if not initialization_pass:
+                errors.append("invalid_initialization_audit:content")
+        except Exception as exc:
+            errors.append(f"invalid_initialization_audit:{type(exc).__name__}:{exc}")
+    else:
+        errors.append("missing_initialization_audit")
+    if initialization_pass:
+        for unit_id, record in records.items():
+            snapshot = record["runtime"]["worker_preload_gpu_exclusivity"]
+            for row in snapshot["gpus"]:
+                if row["uuid"] != initialization_gpu_uuids.get(row["index"]):
+                    errors.append(
+                        f"invalid_raw:{unit_id}:GPU initialization/preload identity mismatch"
+                    )
     global_pass = all((
         global_state.get("status") == "PHYSICAL_CALLS_COMPLETE_AWAITING_ANALYSIS",
         global_state.get("execution_seal_sha256") == seal_sha,
@@ -317,6 +421,7 @@ def analyze_execution(
         float(global_state.get("actual_gpu_seconds", float("inf"))) <= 19.4 * 3600,
         bool(global_events) and global_events[-1].get("event") == "PHYSICAL_CALLS_COMPLETE",
         supervisor_pass,
+        initialization_pass,
     ))
     if not global_pass:
         errors.append("global_execution_state_incomplete_or_stopped")
@@ -372,6 +477,7 @@ def analyze_execution(
         "authentication_errors": errors,
         "global_execution_state_pass": global_pass,
         "supervisor_audit_pass": supervisor_pass,
+        "initialization_audit_pass": initialization_pass,
         "global_stop_trigger": global_state.get("stop_trigger"),
         "global_stop_detail": global_state.get("stop_detail"),
         "model_load_count": len(global_state.get("model_load_workers", [])),

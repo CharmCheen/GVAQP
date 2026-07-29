@@ -86,9 +86,26 @@ def _mock_raw(unit: dict[str, Any], worker: dict[str, Any], seal_sha: str) -> di
         "parsed": parsed,
         "runtime": {
             "worker_id": unit["worker_id"],
+            "gpu_identities": [
+                f"{index}, NVIDIA A100-SXM4-80GB, GPU-MOCK-{index}"
+                for index in worker["physical_gpu_ids"]
+            ],
+            "worker_preload_gpu_exclusivity": {
+                "physical_gpu_ids": sorted(worker["physical_gpu_ids"]),
+                "gpus": [{
+                    "index": index,
+                    "uuid": f"GPU-MOCK-{index}",
+                    "utilization_percent": 0,
+                    "memory_used_mib": 4,
+                } for index in sorted(worker["physical_gpu_ids"])],
+                "compute_contexts": [],
+                "maximum_memory_used_mib": 16,
+                "maximum_utilization_percent": 0,
+                "authenticated_exclusive_idle": True,
+            },
             "model_load_seconds": 0.01,
             "inference_seconds": 0.001,
-            "total_call_seconds": 0.002,
+            "pre_persistence_call_seconds": 0.002,
         },
     }
     record["record_payload_sha256"] = canonical_hash(record)
@@ -111,6 +128,43 @@ def run_complete_mock(execution_root: Path) -> dict[str, Any]:
         model_load_reservation_wall_seconds=30.0,
     )
     coordinator.initialize()
+    all_gpu_ids = sorted({
+        index for worker in workers.values() for index in worker["physical_gpu_ids"]
+    })
+    initialization = {
+        "status": "INITIALIZED_NO_MODEL_LOAD",
+        "execution_seal_sha256": seal_sha,
+        "compute_approval_sha256": "MOCK_NOT_APPROVAL",
+        "model_file_manifest_sha256": "MOCK_NOT_MODEL_AUDIT",
+        "gpu_identities": {
+            worker_id: [
+                f"{index}, NVIDIA A100-SXM4-80GB, GPU-MOCK-{index}"
+                for index in row["physical_gpu_ids"]
+            ]
+            for worker_id, row in workers.items()
+        },
+        "gpu_exclusivity": {
+            "physical_gpu_ids": all_gpu_ids,
+            "gpus": [{
+                "index": index,
+                "uuid": f"GPU-MOCK-{index}",
+                "utilization_percent": 0,
+                "memory_used_mib": 4,
+            } for index in all_gpu_ids],
+            "compute_contexts": [],
+            "maximum_memory_used_mib": 16,
+            "maximum_utilization_percent": 0,
+            "authenticated_exclusive_idle": True,
+        },
+        "exact_worker_count": 3,
+        "exact_call_count": EXPECTED_UNIT_COUNT,
+        "checkpoint_loaded": False,
+    }
+    initialization["initialization_payload_sha256"] = canonical_hash(initialization)
+    atomic_text(
+        execution_root / "INITIALIZATION_AUDIT.json",
+        json.dumps(initialization, indent=2, sort_keys=True) + "\n",
+    )
     for worker_id, worker in workers.items():
         ledger = execution_root / worker["attempt_ledger_relative_path"]
         coordinator.start_model_load(worker_id, worker["physical_gpu_ids"])
@@ -136,14 +190,14 @@ def run_complete_mock(execution_root: Path) -> dict[str, Any]:
             "attempt_id": record["attempt_id"],
             "execution_session_id": record["execution_session_id"],
         }
-        append_hash_chain(ledger, {
-            "event": "PREPARED", **common,
-            "processed_input_sha256": record["processed_input_sha256"],
-        })
         coordinator.reserve_call(
             worker_id=unit["worker_id"], gpu_pair=worker["physical_gpu_ids"],
             unit_id=unit["unit_id"], call_spec_sha256=unit["call_spec_sha256"],
         )
+        append_hash_chain(ledger, {
+            "event": "PREPARED", **common,
+            "processed_input_sha256": record["processed_input_sha256"],
+        })
         append_hash_chain(ledger, {
             "event": "INFERENCE_STARTED", **common,
             "processed_input_sha256": record["processed_input_sha256"],
@@ -349,12 +403,12 @@ def run_fault_injections(root: Path) -> dict[str, Any]:
     ) == "FULL_GRID_ABORTED_AUTHENTICATION"
 
     partial_root = root / "partial"
-    # No supervisor audit or records is a frozen runtime abort, and must publish
-    # nothing formal.  Other incomplete paths without a higher-priority hard
-    # failure map to INSUFFICIENT_EVIDENCE.
+    # A root lacking the authenticated initialization snapshot is an
+    # authentication abort and must publish nothing formal. Other incomplete
+    # paths without a higher-priority hard failure map to insufficient evidence.
     partial = finalize_execution(execution_root=partial_root, allow_mock=True)
     results["partial_nonpublication"] = all((
-        partial["would_emit_formal_decision"] == "FULL_GRID_ABORTED_RUNTIME",
+        partial["would_emit_formal_decision"] == "FULL_GRID_ABORTED_AUTHENTICATION",
         not (partial_root / "FORMAL_REFERENCE_RELEASE.json").exists(),
     ))
     if not all(results.values()):
