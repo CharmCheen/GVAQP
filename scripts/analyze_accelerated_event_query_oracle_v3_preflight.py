@@ -26,10 +26,12 @@ def _evidence_manifest(result: dict, parsed_outputs: list[dict]) -> dict:
     for call in calls:
         path = ROOT / call["artifact_path"]
         if path.exists():
+            record = load_json(path)
             raw_outputs.append({
                 "artifact_name": call["artifact_name"],
                 "path": call["artifact_path"],
                 "file_sha256": sha256_file(path),
+                "record_sha256": record["record_sha256"],
             })
     parsed_manifest = []
     for row in parsed_outputs:

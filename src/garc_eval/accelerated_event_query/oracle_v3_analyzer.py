@@ -372,6 +372,30 @@ def _decision_status(
     return "V3_SCHEMA_DETERMINISM_PASS_FULL_GRID_APPROVAL_REQUIRED"
 
 
+def _authenticated_input_mismatch(
+    raw_errors: list[str], attempt_errors: list[str],
+    observed_expected_raw_count: int, expected_call_count: int,
+) -> bool:
+    authenticated_join_prefixes = (
+        "attempt_wrong_shard:",
+        "attempt_identity_mismatch:",
+        "attempt_raw_id_mismatch:",
+        "attempt_raw_session_mismatch:",
+        "attempt_processed_input_mismatch:",
+        "attempt_generated_tokens_mismatch:",
+        "attempt_record_mismatch:",
+        "attempt_acceptance_recovery_flag_invalid:",
+    )
+    invalid_complete_raw_set = (
+        observed_expected_raw_count == expected_call_count
+        and any(error.startswith("invalid_raw:") for error in raw_errors)
+    )
+    authenticated_join_mismatch = any(
+        error.startswith(authenticated_join_prefixes) for error in attempt_errors
+    )
+    return invalid_complete_raw_set or authenticated_join_mismatch
+
+
 def analyze_bundle() -> tuple[dict, list[dict]]:
     seal, prereg = validate_execution_seal("analyzer")
     prereg2, _, frame_sets, call_manifest = frozen_context()
@@ -387,9 +411,11 @@ def analyze_bundle() -> tuple[dict, list[dict]]:
     errors = [*raw_errors, *attempt_errors]
     expected_paths = {ROOT / row["artifact_path"] for row in call_manifest["calls"]}
     observed_expected_raw_count = sum(path.exists() for path in expected_paths)
-    authenticated_input_mismatch = (
-        observed_expected_raw_count == prereg["workload"]["total_physical_calls"]
-        and any(error.startswith("invalid_raw:") for error in raw_errors)
+    authenticated_input_mismatch = _authenticated_input_mismatch(
+        raw_errors,
+        attempt_errors,
+        observed_expected_raw_count,
+        prereg["workload"]["total_physical_calls"],
     )
     complete = len(records) == prereg["workload"]["total_physical_calls"] and not errors
     if not complete:

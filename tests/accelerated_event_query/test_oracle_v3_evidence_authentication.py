@@ -71,6 +71,41 @@ def test_processed_or_session_mismatch_routes_to_input_binding_revision():
     assert decision == "REVISE_V3_INPUT_BINDING"
 
 
+@pytest.mark.parametrize("error", [
+    "attempt_raw_session_mismatch:call.json",
+    "attempt_processed_input_mismatch:call.json:PREPARED",
+    "attempt_generated_tokens_mismatch:call.json:ACCEPTED",
+    "attempt_record_mismatch:call.json",
+])
+def test_authenticated_ledger_raw_join_mismatch_overrides_incomplete(error):
+    mismatch = analyzer._authenticated_input_mismatch([], [error], 11, 11)
+    decision = analyzer._decision_status(
+        complete=False,
+        authenticated_input_mismatch=mismatch,
+        input_binding_pass=False,
+        parse_pass=False,
+        label_reproducibility_pass=False,
+        class_support_pass=False,
+        eventization_pass=False,
+    )
+    assert decision == "REVISE_V3_INPUT_BINDING"
+
+
+def test_missing_or_unauthenticated_attempt_is_insufficient_not_binding_revision():
+    errors = ["incomplete_attempt:call.json:{}"]
+    mismatch = analyzer._authenticated_input_mismatch([], errors, 10, 11)
+    decision = analyzer._decision_status(
+        complete=False,
+        authenticated_input_mismatch=mismatch,
+        input_binding_pass=False,
+        parse_pass=False,
+        label_reproducibility_pass=False,
+        class_support_pass=False,
+        eventization_pass=False,
+    )
+    assert decision == "INSUFFICIENT_EVIDENCE"
+
+
 def test_same_process_and_cross_replica_session_relations_are_hard_gates():
     prereg = {"determinism_groups": [
         {"group_id": "same", "kind": "same_process", "artifact_names": ["a", "b"]},
