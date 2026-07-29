@@ -58,7 +58,15 @@
     "maximum_high_confidence_polarity_flips": 0,
     "maximum_repeat_boundary_difference_seconds_for_relevant_pairs": 1.0,
     "require_exact_repeat_response_set_for_relevant_pairs": true,
-    "unsupported_high_confidence_positive_policy": "no systematic pattern under adversarial contact-sheet review",
+    "unsupported_high_confidence_positive_policy": {
+      "review_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v1/BLINDED_CONTACT_SHEET_REVIEW_V1.json",
+      "model_positive_consensus": "both identical 2 fps base calls parse successfully, return relevant, and report high confidence",
+      "contradiction": "frozen review is not_relevant with medium or high confidence",
+      "unknown_policy": "review unknown never counts as a contradiction or negative",
+      "single_contradiction_action": "REVIEW_REQUIRED; no preflight pass without independent adjudication",
+      "systematic_failure": "at least two contradiction candidates across at least two videos",
+      "same_video_cluster_action": "REVIEW_REQUIRED"
+    },
     "unknown_policy": "retain; never score as negative"
   },
   "failure_action": "do not launch the full oracle; choose oracle-protocol revision or INSUFFICIENT_EVIDENCE",

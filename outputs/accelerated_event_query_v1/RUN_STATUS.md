@@ -17,7 +17,9 @@ Under the same hard deadline and event-precision requirement, determine whether 
 - Existing Dali/Wuhan operational labels are not semantically interchangeable with the new query.
 - Prior 32B A100 execution is feasible only as a two-GPU BF16-dequantized path and is fallible.
 - Prior binary-SMDP headroom evidence remains insufficient: one approximate SCAN-better state, no VERIFY-better states, four ties, and incomplete/unsafe cost support.
-- New event/K3/matching/state-boundary/oracle-schema unit tests: 18 passed with `PYTHONPATH=src pytest -q tests/accelerated_event_query`.
+- New event/K3/matching/state-boundary/oracle-schema/preflight-review unit tests: 21 passed with `PYTHONPATH=src pytest -q tests/accelerated_event_query`.
+- A twelve-clip, 2 fps contact-sheet review was frozen before any new-query 32B output. It is explicitly a fallible adversarial screen, not human ground truth; five clips are qualitatively `not_relevant`, four `relevant`, and three `unknown`.
+- The unsupported-positive gate is now machine-checkable: one stable high-confidence contradiction requires independent review; at least two across two videos fail as systematic. Review `unknown` cannot count as negative.
 
 ## Active hypotheses
 
@@ -39,10 +41,11 @@ Under the same hard deadline and event-precision requirement, determine whether 
 - frozen query/oracle/K3/matching config and prompt
 - three-video identity manifest
 - incremental event K3, event matcher, causal state schema, and targeted tests
+- hash-bound contact-sheet manifest, pre-outcome blinded review, and tested contradiction analyzer
 
 ## Missing decision-critical evidence
 
-- H1 cross-video stability/parse preflight (30-call workload preregistered: 24 identical-input calls plus six 2 fps/4 fps sensitivity calls; all three shards pass validate-only preflight; physical calls not yet authorized/run)
+- H1 cross-video stability/parse preflight (30-call workload preregistered: 24 identical-input calls plus six 2 fps/4 fps sensitivity calls; all three shards pass validate-only preflight; expected 30, observed 0; physical calls not yet authorized/run)
 - complete new-query 32B oracle with raw output retention
 - operational reference events
 - full YOLO scan and K3 event-recall ceiling
@@ -52,4 +55,4 @@ Under the same hard deadline and event-precision requirement, determine whether 
 
 ## Next action
 
-Run the deterministic freeze materializer, preregister the H1 sample without reading its new-query outcomes, and request approval before launching the substantial 32B oracle workload.
+After explicit compute approval, recheck GPU availability and launch the frozen 30-call H1 preflight on three independent two-GPU replicas. Analyze only the preregistered numeric and blinded-review gates. Do not launch the full 1,475-unit oracle without separate approval.

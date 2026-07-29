@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -14,10 +15,19 @@ OUT = ROOT / "outputs/accelerated_event_query_v1"
 PREREG = OUT / "operational_oracle/PREFLIGHT_V1_PREREGISTRATION.json"
 RAW = OUT / "operational_oracle/preflight_v1/raw"
 METRICS = OUT / "operational_oracle/preflight_v1/PREFLIGHT_METRICS.json"
+REVIEW = OUT / "operational_oracle/preflight_v1/BLINDED_CONTACT_SHEET_REVIEW_V1.json"
 
 
 def load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        while chunk := handle.read(8 * 1024 * 1024):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def write_once(path: Path, value: dict) -> None:
@@ -32,11 +42,81 @@ def write_once(path: Path, value: dict) -> None:
     os.replace(temporary, path)
 
 
+def classify_visual_review(prereg: dict, review: dict, records: dict) -> dict:
+    """Apply the pre-outcome contradiction rule to completed base-call records."""
+    review_by_id = {row["candidate_id"]: row for row in review["reviews"]}
+    expected_ids = {clip["candidate_id"] for clip in prereg["clips"]}
+    if set(review_by_id) != expected_ids:
+        raise RuntimeError("blinded review candidate IDs do not exactly match preregistered clips")
+    contradiction_candidates = []
+    review_rows = []
+    for clip in prereg["clips"]:
+        left = records[(clip["candidate_id"], "base", 2.0, 0)]
+        right = records[(clip["candidate_id"], "base", 2.0, 1)]
+        frozen = review_by_id[clip["candidate_id"]]
+        model_positive_consensus = all([
+            left["parse_status"] == "ok",
+            right["parse_status"] == "ok",
+            left["effective_label"] == "relevant",
+            right["effective_label"] == "relevant",
+            left["parsed"].get("confidence") == "high",
+            right["parsed"].get("confidence") == "high",
+        ])
+        contradiction = all([
+            model_positive_consensus,
+            frozen["label"] == "not_relevant",
+            frozen["confidence"] in {"medium", "high"},
+        ])
+        if contradiction:
+            contradiction_candidates.append({
+                "candidate_id": clip["candidate_id"],
+                "video_id": clip["video_id"],
+                "frozen_review_confidence": frozen["confidence"],
+                "frozen_review_evidence": frozen["evidence"],
+            })
+        review_rows.append({
+            "candidate_id": clip["candidate_id"],
+            "video_id": clip["video_id"],
+            "frozen_review_label": frozen["label"],
+            "frozen_review_confidence": frozen["confidence"],
+            "model_high_confidence_relevant_consensus": model_positive_consensus,
+            "contradiction_candidate": contradiction,
+        })
+
+    contradiction_videos = sorted({row["video_id"] for row in contradiction_candidates})
+    systematic_contradiction = (
+        len(contradiction_candidates) >= 2 and len(contradiction_videos) >= 2
+    )
+    if systematic_contradiction:
+        visual_status = "FAIL_SYSTEMATIC_UNSUPPORTED_HIGH_CONFIDENCE_POSITIVES"
+    elif contradiction_candidates:
+        visual_status = "REVIEW_REQUIRED_CONTRADICTION_CANDIDATE"
+    else:
+        visual_status = "PASS_ADVERSARIAL_SCREEN"
+    return {
+        "visual_review_status": visual_status,
+        "contradiction_candidate_count": len(contradiction_candidates),
+        "contradiction_videos": contradiction_videos,
+        "systematic_contradiction": systematic_contradiction,
+        "visual_review_comparison": review_rows,
+        "contradiction_candidates": contradiction_candidates,
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check-completeness-only", action="store_true")
     args = parser.parse_args()
     prereg = load(PREREG)
+    review = load(REVIEW)
+    manifest_path = ROOT / review["contact_sheet_manifest"]["path"]
+    expected_manifest_hash = review["contact_sheet_manifest"]["sha256"]
+    observed_manifest_hash = sha256_file(manifest_path)
+    if observed_manifest_hash != expected_manifest_hash:
+        raise RuntimeError(
+            "contact-sheet manifest changed after blinded review: "
+            f"expected {expected_manifest_hash}, observed {observed_manifest_hash}"
+        )
     sensitivity_ids = set(prereg["frame_sampling_sensitivity"]["single_sensitivity_call_candidate_ids"])
     expected = []
     for clip in prereg["clips"]:
@@ -119,6 +199,8 @@ def main() -> None:
             "high_confidence_polarity_flip": high_flip,
         })
 
+    visual = classify_visual_review(prereg, review, records)
+
     gate = prereg["pass_gate"]
     numeric_pass = all([
         parse_successes / len(all_rows) >= float(gate["parse_success_fraction"]),
@@ -128,6 +210,14 @@ def main() -> None:
         response_set_failures == 0,
         sensitivity_high_flips == 0,
     ])
+    if not numeric_pass:
+        overall_status = "FAIL_NUMERIC_GATE"
+    elif visual["systematic_contradiction"]:
+        overall_status = "FAIL_VISUAL_GATE"
+    elif visual["contradiction_candidates"]:
+        overall_status = "REVIEW_REQUIRED"
+    else:
+        overall_status = "PASS"
     result = {
         **completeness,
         "parse_success_fraction": parse_successes / len(all_rows),
@@ -137,8 +227,9 @@ def main() -> None:
         "repeat_response_set_failures": response_set_failures,
         "high_confidence_sampling_polarity_flips": sensitivity_high_flips,
         "numeric_gate_pass": numeric_pass,
-        "visual_review_status": "PENDING_ADVERSARIAL_CONTACT_SHEET_REVIEW",
-        "overall_gate_status": "PENDING_VISUAL_REVIEW" if numeric_pass else "FAIL_NUMERIC_GATE",
+        "blinded_review_path": str(REVIEW.relative_to(ROOT)),
+        **visual,
+        "overall_gate_status": overall_status,
         "repeat_pairs": pair_rows,
         "sampling_sensitivity": sensitivity_rows,
     }

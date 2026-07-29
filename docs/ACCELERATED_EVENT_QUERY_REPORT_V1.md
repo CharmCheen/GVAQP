@@ -1,6 +1,6 @@
 # Accelerated Event Query Report V1
 
-Current status: `IN_PROGRESS — PRE-ORACLE AUDIT`
+Current status: `IN_PROGRESS — ORACLE PREFLIGHT FROZEN, EXECUTION AWAITING APPROVAL`
 
 ## Strongest supported conclusion
 
@@ -13,11 +13,16 @@ The previous binary-SMDP stop remains valid for its old two-video, ego-path-entr
 - Local Qwen3-VL-32B-FP8 previously required two A100s after BF16 dequantization. Four measured inference calls took 23.609–27.116 seconds, and the model produced at least one qualitatively unsupported positive in the prior probe. It must be treated as fallible.
 - All 19 current local model files, including all seven checkpoint shards (34 GB total), were directly SHA-256 checked against the prior full manifest and matched.
 - The complete old Dali/Wuhan oracle has 914 ten-second units but asks about ego-path entry. The new response-required query is broader/different, so label reuse would be semantic leakage.
-- A tested event-level kernel now distinguishes probable from verified events, updates K3 incrementally, enforces negative barriers and duration caps, rejects post-deadline mutations, and uses one-to-one event matching. Eighteen targeted tests pass.
+- A tested event-level kernel now distinguishes probable from verified events, updates K3 incrementally, enforces negative barriers and duration caps, rejects post-deadline mutations, and uses one-to-one event matching.
+- Before any new-query 32B output existed, deterministic 2 fps contact sheets were generated for all twelve preflight clips and hash-bound to a blinded adversarial review. The review records four qualitative positives, five negatives, and three unknowns. These judgments are screening evidence, not independent human ground truth.
+- The previously qualitative “no systematic unsupported positives” gate is now operationalized before outcomes: a contradiction requires two stable high-confidence 2 fps oracle positives against a medium/high frozen `not_relevant` review; one candidate requires adjudication, while two across two videos fail the gate. Review `unknown` never counts as negative.
+- Twenty-one targeted tests pass, including fail-closed tests of the visual-contradiction classifier.
 
 ## Derived implications
 
 At the observed 24.7-second mean inference, a sequential 1,475-unit 32B pass is approximately 10.1 inference-hours before decode/preprocess overhead. Three two-GPU replicas would reduce ideal inference wall time to about 3.4 hours, but this is an estimate, not an execution record. The preregistered 30-call cross-video stability/parse/frame-sampling preflight has higher information value than immediately launching the complete oracle.
+
+The preflight is now fully frozen, including its adversarial review comparator; zero of 30 physical calls have been made. Therefore no H1 conclusion is yet justified. The next evidential step remains the approved 30-call preflight, not a full oracle pass or controller training.
 
 ## Competing hypotheses
 

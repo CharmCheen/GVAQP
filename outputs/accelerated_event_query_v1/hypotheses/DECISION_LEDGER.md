@@ -9,3 +9,13 @@
 - Preserved failure evidence: binary-SMDP `INSUFFICIENT_EVIDENCE`, V0 imputed costs, overrun counts, 32B disagreement, parse/unknown policies, and all historical result directories remain unchanged.
 - Next highest-value action: materialize and verify the frozen grid, then preregister the smallest cross-video 32B stability sample.
 - Revision trigger: if H1 fails, stop the full oracle launch and revise/declare insufficient evidence; if H1 passes, run the full oracle and test H2 before controller work.
+
+## Cycle 01 — 2026-07-29 — PRE-OUTCOME ADVERSARIAL FREEZE
+
+- Decision: `CONTINUE`; freeze the qualitative contradiction screen before spending oracle budget.
+- Observed evidence: all twelve deterministic 2 fps contact sheets were generated and content-hashed while zero new-query 32B output artifacts existed. The blinded review contains four qualitative positives, five negatives, and three unknowns.
+- Interpretation limit: the reviewer is the research agent, not an independent human adjudicator; sparse visual frames do not measure ego braking or steering. The review is a falsification screen, not semantic truth.
+- Preregistered discriminator: only two identical high-confidence 2 fps oracle positives against a medium/high frozen `not_relevant` review form a contradiction candidate. One candidate requires independent adjudication; at least two candidates across at least two videos fail as a systematic pattern. Frozen `unknown` cannot count as a contradiction.
+- Verification: the manifest is hash-bound from the review, the analyzer fails closed on a manifest or clip-ID mismatch, and 21 targeted tests pass.
+- Remaining blocker: the 30 physical 32B calls are a substantial compute/oracle action and remain unexecuted pending explicit approval (expected 30, observed 0).
+- Next highest-value action: after approval, run the three frozen video shards and evaluate the preregistered gates; do not extrapolate to the full oracle if the result fails or requires adjudication.

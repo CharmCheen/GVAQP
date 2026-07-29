@@ -1,0 +1,159 @@
+{
+  "status": "FROZEN_BEFORE_NEW_QUERY_ORACLE_EXECUTION",
+  "experiment_id": "AEQ_ORACLE_PREFLIGHT_V1",
+  "query_id": "Q_DRIVER_RESPONSE_V1",
+  "query_zh": "查找需要驾驶员明显减速、制动或避让的事件。",
+  "reviewer_role": "Adversarial qualitative review by the research agent; not independent human adjudication and not semantic ground truth.",
+  "information_boundary": {
+    "new_query_32b_outputs_observed": 0,
+    "inputs": "The frozen 2 fps chronological contact sheets only. Selected full-resolution 2 fps frames were inspected when sheet scale was ambiguous.",
+    "old_query_labels": "Known only as preregistered sampling strata; not used as outcomes or truth for this query."
+  },
+  "contact_sheet_manifest": {
+    "path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v1/CONTACT_SHEET_MANIFEST.json",
+    "sha256": "e748cfd02913e1217b723e162741326c8768c16203a52d0d2488a42e1c836c16"
+  },
+  "limitations": [
+    "Sparse frames do not directly measure ego speed, braking, steering, or optical flow.",
+    "A visible road user or traffic control is not sufficient unless the sampled clip supports a marked ego response.",
+    "Unknown is retained when the response or causal timing cannot be established from the sampled visual evidence.",
+    "Review disagreement identifies a contradiction candidate for adjudication; it is not automatically an oracle error."
+  ],
+  "comparison_policy": {
+    "model_high_confidence_relevant_consensus": "Both identical 2 fps base calls parse successfully, label the clip relevant, and report high confidence.",
+    "review_contradiction": "The frozen review labels the clip not_relevant with medium or high confidence.",
+    "unknown_handling": "A frozen unknown never counts as a contradiction or a negative.",
+    "single_contradiction": "REVIEW_REQUIRED; the preflight cannot pass without independent adjudication.",
+    "systematic_failure": "FAIL when at least two contradiction candidates occur across at least two videos.",
+    "same_video_cluster": "Two or more contradiction candidates confined to one video remain REVIEW_REQUIRED, not systematic failure.",
+    "zero_contradictions": "The adversarial screen passes, subject to all separately frozen numeric gates."
+  },
+  "aggregate": {
+    "clip_count": 12,
+    "relevant": 4,
+    "not_relevant": 5,
+    "unknown": 3
+  },
+  "reviews": [
+    {
+      "candidate_id": "DALI_u0437",
+      "video_id": "DALI",
+      "label": "not_relevant",
+      "required_response": [],
+      "cause": null,
+      "confidence": "medium",
+      "evidence": "Daytime urban driving with a white van offset to the left; no sampled road user, obstacle, or control visibly requires a marked ego response.",
+      "uncertainty": "Sparse frames cannot exclude mild speed adjustment."
+    },
+    {
+      "candidate_id": "DALI_u0501",
+      "video_id": "DALI",
+      "label": "unknown",
+      "required_response": [],
+      "cause": "A scooter or cyclist appears near the right edge while ego follows a red car.",
+      "confidence": "medium",
+      "evidence": "The edge road user changes apparent position late in the clip, but the contact sheet does not establish entry into the ego path or a marked driver response.",
+      "uncertainty": "Motion and lateral clearance are ambiguous at 2 fps."
+    },
+    {
+      "candidate_id": "DALI_u0548",
+      "video_id": "DALI",
+      "label": "relevant",
+      "required_response": ["slowdown", "avoid"],
+      "cause": "Scooters and pedestrians occupy or approach the night roadway near the ego path.",
+      "confidence": "medium",
+      "evidence": "Multiple vulnerable road users become close to the forward path, supporting a marked cautious speed or path response.",
+      "uncertainty": "Exact causal onset and ego maneuver are not directly observed."
+    },
+    {
+      "candidate_id": "DALI_u0555",
+      "video_id": "DALI",
+      "label": "relevant",
+      "required_response": ["slowdown", "brake", "avoid"],
+      "cause": "A pedestrian occupies/crosses the roadway while a scooter is directly ahead.",
+      "confidence": "high",
+      "evidence": "The pedestrian and scooter are visibly close to the ego path in the middle of the clip and require a marked cautious response.",
+      "uncertainty": "The relative contribution of pedestrian versus scooter cannot be separated from frames alone."
+    },
+    {
+      "candidate_id": "HANGZHOU_u0140",
+      "video_id": "HANGZHOU",
+      "label": "not_relevant",
+      "required_response": [],
+      "cause": null,
+      "confidence": "high",
+      "evidence": "Steady divided-road travel behind a distant vehicle; no sampled conflict or marked-response trigger is visible.",
+      "uncertainty": "Ego telemetry is unavailable."
+    },
+    {
+      "candidate_id": "HANGZHOU_u0234",
+      "video_id": "HANGZHOU",
+      "label": "not_relevant",
+      "required_response": [],
+      "cause": null,
+      "confidence": "high",
+      "evidence": "Ordinary multi-lane approach behind a white lead vehicle under green control with no visible conflict.",
+      "uncertainty": "Ego telemetry is unavailable."
+    },
+    {
+      "candidate_id": "HANGZHOU_u0280",
+      "video_id": "HANGZHOU",
+      "label": "unknown",
+      "required_response": [],
+      "cause": "Cross traffic is visible in a broad intersection.",
+      "confidence": "medium",
+      "evidence": "The ego vehicle traverses an intersection and other vehicles appear, but sampled frames do not establish an immediate conflict or marked response.",
+      "uncertainty": "Traffic-control phase and relative motion are insufficiently clear."
+    },
+    {
+      "candidate_id": "HANGZHOU_u0420",
+      "video_id": "HANGZHOU",
+      "label": "not_relevant",
+      "required_response": [],
+      "cause": null,
+      "confidence": "medium",
+      "evidence": "Urban boulevard travel continues behind traffic; a black sedan changes apparent lane position, but no sampled pedestrian crossing or marked ego-path threat is visible.",
+      "uncertainty": "The sedan's relative motion could imply an unobserved mild adjustment."
+    },
+    {
+      "candidate_id": "WUHAN_u0134",
+      "video_id": "WUHAN",
+      "label": "unknown",
+      "required_response": [],
+      "cause": "Traffic queues near a downstream signal late in the clip.",
+      "confidence": "medium",
+      "evidence": "The ego vehicle approaches downstream traffic, but frames do not establish whether a noticeable slowdown begins within this unit.",
+      "uncertainty": "The response may straddle the unit boundary and speed is not measured."
+    },
+    {
+      "candidate_id": "WUHAN_u0171",
+      "video_id": "WUHAN",
+      "label": "relevant",
+      "required_response": ["slowdown", "brake"],
+      "cause": "A red signal requires stopping while a cyclist and pedestrians cross the ego path.",
+      "confidence": "high",
+      "evidence": "The red signal and multiple crossing road users are clearly visible as ego approaches the crosswalk.",
+      "uncertainty": "Frames do not distinguish braking intensity from an already-planned stop."
+    },
+    {
+      "candidate_id": "WUHAN_u0217",
+      "video_id": "WUHAN",
+      "label": "relevant",
+      "required_response": ["slowdown", "avoid"],
+      "cause": "An oncoming cyclist approaches along the ego side of a narrow street while parked and lead vehicles constrain clearance.",
+      "confidence": "medium",
+      "evidence": "The cyclist grows substantially in scale near the left portion of the available lane, supporting a cautious speed/clearance response.",
+      "uncertainty": "Exact lane geometry and the ego response are not directly measured."
+    },
+    {
+      "candidate_id": "WUHAN_u0298",
+      "video_id": "WUHAN",
+      "label": "not_relevant",
+      "required_response": [],
+      "cause": null,
+      "confidence": "high",
+      "evidence": "The clip begins at a controlled intersection and ego proceeds after the signal changes; no new marked-response trigger is visible within the sampled interval.",
+      "uncertainty": "Any prior stopping response likely began before the clip."
+    }
+  ]
+}
