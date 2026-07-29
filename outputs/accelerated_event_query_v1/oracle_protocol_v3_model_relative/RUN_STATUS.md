@@ -153,3 +153,37 @@ The user has expanded authority to 64 A100 GPU-hours and permits direct formal
 execution after a GO review. Current A100 use in this expanded authorization is
 0.0 hours. Expanded authority does not relax authentication, zero-retry per
 formal execution, label hiding, deadline, or partial-publication gates.
+
+## Second supervision review and lifecycle revision
+
+Observed evidence:
+
+- Seal V3 `f84a1861…` passed the complete 1,475-record mock, ten fault
+  injections, 120 tests, and reproduced the already frozen 30,932 frame and
+  1,475 processed-tensor identities. No Qwen generation occurred.
+- Independent review verified that the three V1 blockers were closed, but
+  returned `REVISE_FULL_GRID_PREREGISTRATION` on two new lifecycle gaps.
+- A supervisor process death could orphan workers created in new sessions;
+  their one-time parent check did not terminate them after reparenting.
+- A loaded worker could stall indefinitely before `reserve_call`, outside both
+  the model-load and call leases and outside complete GPU-residency accounting.
+
+Implemented revision evidence:
+
+- Every formal worker now installs Linux `PR_SET_PDEATHSIG=SIGKILL` against the
+  exact sealed supervisor before importing the model stack. A real subprocess
+  test confirms that its `/proc` entry disappears when the parent exits.
+- The global call reservation now opens before frame decode and processor work.
+  After a call closes, the loaded-worker idle gap remains subject to a two-second
+  supervisor lease until the next reservation or an explicit terminal worker
+  session close.
+- Actual GPU cost now includes load time, whole-call time, inter-call gaps, raw
+  persistence/ledger gaps, and the final session-close gap. A complete run
+  requires exactly three closed worker sessions.
+- 123 accelerated-event-query tests pass. Expanded-authorization A100 use is
+  still 0.0 hours; no formal raw output or reference exists.
+
+Current decision: rebuild and reseal the exact package, rerun its full mock and
+fault suite, and request a third independent adversarial judgment. Execute the
+1,475 calls directly only if that exact package receives
+`GO_TO_REQUEST_FULL_GRID_APPROVAL` and its approval artifact binds the new seal.

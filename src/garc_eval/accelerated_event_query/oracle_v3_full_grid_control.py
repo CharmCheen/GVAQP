@@ -131,6 +131,8 @@ class GlobalFailStopCoordinator:
                 "reserved_gpu_seconds": 0.0,
                 "model_load_workers": [],
                 "model_load_completed_workers": [],
+                "worker_sessions_completed": [],
+                "last_gpu_accounted_unix_ns_by_worker": {},
                 "attempted_unit_ids": [],
                 "in_flight_unit_ids": [],
                 "completed_unit_ids": [],
@@ -187,6 +189,7 @@ class GlobalFailStopCoordinator:
             state["reserved_gpu_seconds"] -= self.load_reservation_gpu_seconds
             state["actual_gpu_seconds"] += actual
             state["model_load_completed_workers"].append(worker_id)
+            state["last_gpu_accounted_unix_ns_by_worker"][worker_id] = time.time_ns()
             if actual > self.load_reservation_gpu_seconds + 1e-9:
                 self._stop_locked(state, "cost_envelope_exceeded", f"model_load:{worker_id}")
                 raise RuntimeError("model load exceeded its sealed reservation")
@@ -225,6 +228,7 @@ class GlobalFailStopCoordinator:
             if unit_id in state["attempted_unit_ids"]:
                 self._stop_locked(state, "duplicate_unit_attempt", unit_id)
                 raise RuntimeError("duplicate unit attempt")
+            self._account_idle_locked(state, worker_id, time.time_ns())
             self._reserve_or_stop(state, self.call_reservation_gpu_seconds)
             state["attempted_unit_ids"].append(unit_id)
             state["in_flight_unit_ids"].append(unit_id)
@@ -250,6 +254,7 @@ class GlobalFailStopCoordinator:
             state["completed_unit_ids"].append(unit_id)
             state["reserved_gpu_seconds"] -= self.call_reservation_gpu_seconds
             state["actual_gpu_seconds"] += actual
+            state["last_gpu_accounted_unix_ns_by_worker"][worker_id] = time.time_ns()
             if actual > self.call_reservation_gpu_seconds + 1e-9:
                 self._stop_locked(state, "cost_envelope_exceeded", f"call:{unit_id}")
                 raise RuntimeError("call exceeded its sealed reservation")
@@ -267,6 +272,31 @@ class GlobalFailStopCoordinator:
                 "actual_gpu_seconds": actual,
             })
 
+    def complete_worker_session(self, worker_id: str) -> None:
+        """Account the final loaded-model gap and close one worker permanently."""
+
+        with self._locked():
+            state = self.state()
+            self._require_running(state)
+            if worker_id not in state["model_load_completed_workers"]:
+                self._stop_locked(state, "missing_attempt_ledger_transition", worker_id)
+                raise RuntimeError("worker session ended without completed model load")
+            if worker_id in state["worker_sessions_completed"]:
+                self._stop_locked(state, "retry", f"duplicate_session_end:{worker_id}")
+                raise RuntimeError("worker session already completed")
+            expected = set(self.worker_bindings[worker_id]["unit_ids"])
+            completed = set(state["completed_unit_ids"])
+            if not expected <= completed:
+                self._stop_locked(state, "integrity_mismatch", f"incomplete_worker:{worker_id}")
+                raise RuntimeError("cannot close an incomplete worker session")
+            self._account_idle_locked(state, worker_id, time.time_ns())
+            state["worker_sessions_completed"].append(worker_id)
+            self._write_state(state)
+            append_hash_chain(self.ledger_path, {
+                "event": "WORKER_SESSION_COMPLETED",
+                "worker_id": worker_id,
+            })
+
     def trigger_stop(self, trigger: str, detail: str) -> None:
         if trigger not in FAIL_STOP_TRIGGERS:
             raise ValueError("unknown global fail-stop trigger")
@@ -282,6 +312,7 @@ class GlobalFailStopCoordinator:
             if not all((
                 len(state["model_load_workers"]) == 3,
                 len(state["model_load_completed_workers"]) == 3,
+                len(state["worker_sessions_completed"]) == 3,
                 len(state["attempted_unit_ids"]) == expected_unit_count,
                 len(state["completed_unit_ids"]) == expected_unit_count,
                 not state["in_flight_unit_ids"],
@@ -297,6 +328,24 @@ class GlobalFailStopCoordinator:
         if projected > state["envelope_gpu_seconds"] + 1e-9:
             self._stop_locked(state, "cost_envelope_exceeded", f"projected={projected}")
             raise RuntimeError("cost reservation exceeds authorization envelope")
+
+    def _account_idle_locked(
+        self, state: dict[str, Any], worker_id: str, now_unix_ns: int
+    ) -> None:
+        previous = state["last_gpu_accounted_unix_ns_by_worker"].get(worker_id)
+        if previous is None:
+            self._stop_locked(state, "missing_attempt_ledger_transition", worker_id)
+            raise RuntimeError("loaded-worker cost clock is missing")
+        idle_gpu_seconds = max(0.0, 2.0 * (now_unix_ns - previous) / 1e9)
+        state["actual_gpu_seconds"] += idle_gpu_seconds
+        state["last_gpu_accounted_unix_ns_by_worker"][worker_id] = now_unix_ns
+        if state["actual_gpu_seconds"] + state["reserved_gpu_seconds"] > (
+            state["envelope_gpu_seconds"] + 1e-9
+        ):
+            self._stop_locked(
+                state, "cost_envelope_exceeded", f"loaded_idle:{worker_id}"
+            )
+            raise RuntimeError("loaded-worker idle time exceeded cost envelope")
 
     def _require_running(self, state: dict[str, Any]) -> None:
         if state["status"] != "READY":

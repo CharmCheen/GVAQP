@@ -180,6 +180,27 @@ def _validate_supervisor_authority(worker_id: str) -> None:
         raise RuntimeError("worker was not launched by the sealed supervisor")
 
 
+def install_supervisor_parent_death_signal() -> int:
+    """Ask Linux to SIGKILL this worker if its exact supervisor dies."""
+
+    import ctypes
+    import signal
+
+    declared = os.environ.get("FULL_GRID_SUPERVISOR_PID")
+    if declared is None or not declared.isdigit():
+        raise RuntimeError("sealed supervisor PID is not declared")
+    expected_parent = int(declared)
+    if os.getppid() != expected_parent:
+        raise RuntimeError("worker parent differs before PDEATHSIG installation")
+    libc = ctypes.CDLL(None, use_errno=True)
+    if libc.prctl(1, signal.SIGKILL, 0, 0, 0) != 0:  # PR_SET_PDEATHSIG
+        error = ctypes.get_errno()
+        raise OSError(error, "PR_SET_PDEATHSIG failed")
+    if os.getppid() != expected_parent:
+        os.kill(os.getpid(), signal.SIGKILL)
+    return expected_parent
+
+
 def initialize_execution(execution_root: Path = EXECUTION) -> dict[str, Any]:
     """Approval-gated host audit; performs no model load and no inference."""
 
@@ -316,6 +337,7 @@ def validate_worker_inputs(
 def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
     """Execute one fixed shard after approval.  Not called during preregistration."""
 
+    install_supervisor_parent_death_signal()
     import numpy as np
     import torch
     import transformers
@@ -394,6 +416,16 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
                 raise RuntimeError("global fail-stop is active")
             unit = unit_map[unit_id]
             call_started = time.perf_counter()
+            attempt_id = f"{worker_id}:{unit_id}:{time.time_ns()}"
+            common = {
+                "worker_id": worker_id, "unit_id": unit_id,
+                "call_spec_sha256": unit["call_spec_sha256"],
+                "attempt_id": attempt_id, "execution_session_id": session_id,
+            }
+            coordinator.reserve_call(
+                worker_id=worker_id, gpu_pair=declared_physical_gpus,
+                unit_id=unit_id, call_spec_sha256=unit["call_spec_sha256"],
+            )
             frames = _decode_and_validate_unit(unit, videos[unit["video_id"]], frame_map[unit_id])
             inputs = prepare_frozen_model_inputs(
                 processor,
@@ -409,20 +441,10 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
                 raise RuntimeError(
                     f"processed input differs from preregistration: {unit_id}"
                 )
-            attempt_id = f"{worker_id}:{unit_id}:{time.time_ns()}"
-            common = {
-                "worker_id": worker_id, "unit_id": unit_id,
-                "call_spec_sha256": unit["call_spec_sha256"],
-                "attempt_id": attempt_id, "execution_session_id": session_id,
-            }
             append_hash_chain(ledger, {
                 "event": "PREPARED", **common,
                 "processed_input_sha256": processed_hash,
             })
-            coordinator.reserve_call(
-                worker_id=worker_id, gpu_pair=declared_physical_gpus,
-                unit_id=unit_id, call_spec_sha256=unit["call_spec_sha256"],
-            )
             append_hash_chain(ledger, {
                 "event": "INFERENCE_STARTED", **common,
                 "processed_input_sha256": processed_hash,
@@ -444,6 +466,9 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
             raw = processor.batch_decode(trimmed, skip_special_tokens=True)[0]
             parsed = parse_oracle_v3_response(raw)
             call_seconds = time.perf_counter() - call_started
+            coordinator.complete_call(
+                worker_id=worker_id, unit_id=unit_id, wall_seconds=call_seconds
+            )
             identity = {
                 "experiment_id": prereg["experiment_id"],
                 "execution_seal_sha256": sha256_file(SEAL),
@@ -503,9 +528,7 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
                 "event": "ACCEPTED", **common,
                 "record_payload_sha256": record["record_payload_sha256"],
             })
-            coordinator.complete_call(
-                worker_id=worker_id, unit_id=unit_id, wall_seconds=call_seconds
-            )
+        coordinator.complete_worker_session(worker_id)
         state = coordinator.state()
         if len(state["completed_unit_ids"]) == EXPECTED_UNIT_COUNT:
             coordinator.mark_complete(EXPECTED_UNIT_COUNT)

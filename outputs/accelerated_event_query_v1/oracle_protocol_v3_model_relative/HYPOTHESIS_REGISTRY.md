@@ -188,3 +188,31 @@
 - Competing explanation: Python capabilities and import roots are useful API
   hygiene but are not security boundaries under the same UID.
 - Status: `SUPPORTED_BY_REAL_SETUID_TEST_AWAITING_INDEPENDENT_REVIEW`.
+
+## H16 — Supervisor authority survives supervisor death as a kernel-enforced boundary
+
+- Prediction: every formal worker receives `SIGKILL` from Linux if its exact
+  sealed supervisor dies, including workers launched in independent sessions;
+  reparenting cannot leave a GPU inference process alive.
+- Minimal falsification: launch a worker child with the production death-signal
+  installer, let its parent exit normally, and observe whether the child PID
+  remains in `/proc` beyond five seconds.
+- Competing explanation: supervisor polling closes ordinary worker failure but
+  cannot close failure of the supervisor itself.
+- Impact: any surviving child rejects the package before model loading.
+- Status: `SUPPORTED_BY_REAL_SUBPROCESS_TEST_AWAITING_PACKAGE_REVIEW`.
+
+## H17 — No loaded-model GPU-residency interval is unleased or unaccounted
+
+- Prediction: model-load, decode, preprocessing, inference, parsing, output
+  persistence, ledger writes, inter-call gaps, and final shutdown are covered
+  by either an open operation lease or a maximum two-second loaded-idle lease;
+  all elapsed residency contributes two GPU-seconds per wall second.
+- Minimal falsification: freeze a loaded worker before decode or after call
+  completion and test whether peers continue past the idle limit or whether the
+  cost clock omits the interval.
+- Competing explanation: per-operation reservations alone bound inference but
+  not arbitrary Python/I/O stalls around it.
+- Impact: any unbounded or unaccounted interval rejects the package and the
+  19.4 A100 GPU-hour claim.
+- Status: `SUPPORTED_BY_UNIT_AND_FAULT_TESTS_AWAITING_COMPLETE_DRY_RUN`.

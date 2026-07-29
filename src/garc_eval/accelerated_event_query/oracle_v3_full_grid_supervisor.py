@@ -35,6 +35,7 @@ from .oracle_v3_manifest import atomic_text, canonical_hash, load_json, sha256_f
 POLL_SECONDS = 0.20
 STARTUP_LEASE_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 5.0
+LOADED_WORKER_IDLE_LEASE_SECONDS = 2.0
 
 
 @dataclass
@@ -72,6 +73,54 @@ def _lease_violation(execution_root: Path, now_ns: int) -> str | None:
         elapsed = (now_ns - started_ns) / 1e9
         if elapsed > limit:
             return f"{kind}:{identity}:elapsed={elapsed:.6f}:limit={limit:.6f}"
+    return None
+
+
+def _loaded_worker_idle_violation(
+    execution_root: Path,
+    *,
+    running_worker_ids: set[str],
+    now_ns: int,
+) -> str | None:
+    """Cover every GPU-loaded gap not represented by an open operation."""
+
+    state = load_json(execution_root / "GLOBAL_EXECUTION_STATE.json")
+    loaded = (
+        set(state.get("model_load_completed_workers", []))
+        - set(state.get("worker_sessions_completed", []))
+    ) & running_worker_ids
+    if not loaded:
+        return None
+    rows = _read_jsonl(execution_root / "GLOBAL_EXECUTION_LEDGER.jsonl")
+    last_activity: dict[str, int] = {}
+    open_workers: set[str] = set()
+    call_worker: dict[str, str] = {}
+    for row in rows:
+        event = row.get("event")
+        worker_id = row.get("worker_id")
+        if isinstance(worker_id, str):
+            last_activity[worker_id] = row["recorded_at_unix_ns"]
+        if event == "MODEL_LOAD_STARTED":
+            open_workers.add(row["worker_id"])
+        elif event == "MODEL_LOAD_COMPLETED":
+            open_workers.discard(row["worker_id"])
+        elif event == "CALL_RESERVED":
+            call_worker[row["unit_id"]] = row["worker_id"]
+            open_workers.add(row["worker_id"])
+        elif event == "CALL_COMPLETED":
+            owner = call_worker.pop(row["unit_id"], row.get("worker_id"))
+            if owner is not None:
+                open_workers.discard(owner)
+    for worker_id in sorted(loaded - open_workers):
+        timestamp = last_activity.get(worker_id)
+        if timestamp is None:
+            return f"loaded_worker_without_activity:{worker_id}"
+        elapsed = (now_ns - timestamp) / 1e9
+        if elapsed > LOADED_WORKER_IDLE_LEASE_SECONDS:
+            return (
+                f"loaded_worker_idle:{worker_id}:elapsed={elapsed:.6f}:"
+                f"limit={LOADED_WORKER_IDLE_LEASE_SECONDS:.6f}"
+            )
     return None
 
 
@@ -119,6 +168,21 @@ def supervise_workers(
                 emergency_global_stop(execution_root, "cost_envelope_exceeded", lease)
                 _terminate_all(workers)
                 raise RuntimeError(f"worker operation exceeded sealed lease: {lease}")
+            running_ids = {
+                worker.worker_id for worker in workers
+                if worker.process.poll() is None
+            }
+            idle = _loaded_worker_idle_violation(
+                execution_root,
+                running_worker_ids=running_ids,
+                now_ns=current_ns,
+            )
+            if idle is not None:
+                emergency_global_stop(
+                    execution_root, "cost_envelope_exceeded", idle
+                )
+                _terminate_all(workers)
+                raise RuntimeError(f"loaded worker exceeded idle lease: {idle}")
             started = set(state.get("model_load_workers", []))
             for worker in workers:
                 returncode = worker.process.poll()

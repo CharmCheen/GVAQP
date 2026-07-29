@@ -304,6 +304,7 @@ def analyze_execution(
         global_state.get("execution_seal_sha256") == seal_sha,
         len(global_state.get("model_load_workers", [])) == 3,
         len(global_state.get("model_load_completed_workers", [])) == 3,
+        len(global_state.get("worker_sessions_completed", [])) == 3,
         len(global_state.get("attempted_unit_ids", [])) == EXPECTED_UNIT_COUNT,
         len(global_state.get("completed_unit_ids", [])) == EXPECTED_UNIT_COUNT,
         not global_state.get("in_flight_unit_ids", ["missing"]),

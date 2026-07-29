@@ -14,10 +14,18 @@ from pathlib import Path
 from typing import Any
 
 from .oracle_v3_full_grid_analyzer import analyze_execution
-from .oracle_v3_full_grid_control import GlobalFailStopCoordinator, append_hash_chain
+from .oracle_v3_full_grid_control import (
+    GlobalFailStopCoordinator,
+    _read_jsonl,
+    append_hash_chain,
+)
 from .oracle_v3_full_grid_finalizer import decide, finalize_execution
 from .oracle_v3_full_grid_manifest import EXPECTED_UNIT_COUNT
-from .oracle_v3_full_grid_supervisor import WorkerProcess, supervise_workers
+from .oracle_v3_full_grid_supervisor import (
+    WorkerProcess,
+    _loaded_worker_idle_violation,
+    supervise_workers,
+)
 from .oracle_v3_full_grid_package import DECISIONS, PACKAGE, SCHEDULE, SEAL, UNITS
 from .oracle_v3_manifest import atomic_text, canonical_hash, load_json, sha256_file
 
@@ -153,6 +161,8 @@ def run_complete_mock(execution_root: Path) -> dict[str, Any]:
         coordinator.complete_call(
             worker_id=unit["worker_id"], unit_id=unit["unit_id"], wall_seconds=0.002
         )
+        if unit["unit_id"] == worker["unit_ids"][-1]:
+            coordinator.complete_worker_session(unit["worker_id"])
     coordinator.mark_complete(EXPECTED_UNIT_COUNT)
     supervisor = {
         "status": "MOCK_SUPERVISOR_COMPLETE_NOT_ORACLE",
@@ -249,6 +259,24 @@ def run_fault_injections(root: Path) -> dict[str, Any]:
         c.initialize()
     except RuntimeError:
         results["resume_prohibited"] = True
+
+    c = make("loaded_idle")
+    c.initialize()
+    c.start_model_load(first_worker["worker_id"], first_worker["physical_gpu_ids"])
+    c.complete_model_load(first_worker["worker_id"], 0.01)
+    last = _read_jsonl(c.ledger_path)[-1]["recorded_at_unix_ns"]
+    idle = _loaded_worker_idle_violation(
+        c.root,
+        running_worker_ids={first_worker["worker_id"]},
+        now_ns=last + 3_000_000_000,
+    )
+    if idle is not None:
+        c.trigger_stop("cost_envelope_exceeded", idle)
+    results["loaded_worker_idle_global_stop"] = all((
+        idle is not None,
+        c.state()["status"] == "STOPPED",
+        c.state()["stop_trigger"] == "cost_envelope_exceeded",
+    ))
 
     c = make("abrupt_death")
     c.initialize()

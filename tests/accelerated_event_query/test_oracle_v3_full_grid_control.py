@@ -80,3 +80,26 @@ def test_emergency_stop_covers_post_initialization_validation_failure(tmp_path):
     emergency_global_stop(tmp_path, "authentication_mismatch", "source changed")
     assert value.state()["status"] == "STOPPED"
     assert value.state()["stop_trigger"] == "authentication_mismatch"
+
+
+def test_three_closed_worker_sessions_are_required_for_complete_state(tmp_path):
+    value = coordinator(tmp_path)
+    value.initialize()
+    for worker_id, binding in WORKERS.items():
+        value.start_model_load(worker_id, binding["physical_gpu_ids"])
+        value.complete_model_load(worker_id, 0.01)
+        for unit_id in binding["unit_ids"]:
+            value.reserve_call(
+                worker_id=worker_id,
+                gpu_pair=binding["physical_gpu_ids"],
+                unit_id=unit_id,
+                call_spec_sha256=unit_id,
+            )
+            value.complete_call(
+                worker_id=worker_id, unit_id=unit_id, wall_seconds=0.01
+            )
+        value.complete_worker_session(worker_id)
+    value.mark_complete(4)
+    state = value.state()
+    assert state["status"] == "PHYSICAL_CALLS_COMPLETE_AWAITING_ANALYSIS"
+    assert set(state["worker_sessions_completed"]) == set(WORKERS)

@@ -206,6 +206,10 @@ The only production entry point is the sealed three-process supervisor. It
 launches exactly the frozen workers, monitors child exit status and operation
 leases, and terminates all peers after any nonzero/abrupt death or global stop.
 Workers reject direct launch without the supervisor authority and parent PID.
+Before importing the model stack, each worker installs Linux `PDEATHSIG=SIGKILL`
+and rechecks the exact parent, so supervisor death cannot orphan GPU workers.
+Every call is reserved before frame decode/processor work; a two-second loaded
+worker idle lease covers the otherwise unreserved gaps between operations.
 
 The execution uses one global fail-stop coordinator. Authentication, frame or
 processed-input mismatch, an unknown runner/parser, wrong GPU, duplicate or
@@ -486,7 +490,8 @@ def main() -> None:
         "per_load_hard_reservation_wall_seconds": MODEL_LOAD_RESERVATION_WALL_SECONDS,
         "aggregate_reserved_a100_gpu_hours": reserved,
         "reservation_fits_envelope": reserved <= ENVELOPE_A100_GPU_HOURS,
-        "cost_shield": "hash-chained actual plus in-flight reservation accounting; no start above envelope; operation above its reservation triggers global fail-stop",
+        "cost_shield": "hash-chained actual GPU residency plus in-flight reservation accounting; calls reserve before decode/processing; loaded idle gaps are timed and bounded; no start above envelope",
+        "actual_gpu_residency_accounting": "two GPUs times model load, every call, every inter-call output/ledger gap, and final session-close gap",
         "unused_envelope_cannot_authorize_extra_calls_reloads_or_retries": True,
     }, "cost_estimate_payload_sha256")
     write_json_once(PACKAGE / "FULL_GRID_COST_ESTIMATE.json", cost)
