@@ -17,7 +17,7 @@ Under the same hard deadline and event-precision requirement, determine whether 
 - Existing Dali/Wuhan operational labels are not semantically interchangeable with the new query.
 - Prior 32B A100 execution is feasible only as a two-GPU BF16-dequantized path and is fallible.
 - Prior binary-SMDP headroom evidence remains insufficient: one approximate SCAN-better state, no VERIFY-better states, four ties, and incomplete/unsafe cost support.
-- New event/K3/matching/state-boundary/oracle-schema/protocol tests: 31 passed with `PYTHONPATH=src pytest -q tests/accelerated_event_query`.
+- New event/K3/matching/state-boundary/oracle-schema/protocol tests: 38 passed with `PYTHONPATH=src pytest -q tests/accelerated_event_query`.
 - A twelve-clip, 2 fps contact-sheet review was frozen before any new-query 32B output. It is explicitly a fallible adversarial screen, not human ground truth; five clips are qualitatively `not_relevant`, four `relevant`, and three `unknown`.
 - V1 attempted a machine-checkable unsupported-positive gate, but independent review showed it ignored medium-confidence and false-negative failures; it is retained only as rejected evidence.
 - Independent critique falsified that V1 gate before execution: reviewer/model frame mismatch, incorrect nominal 4 fps, permissive parsing, unauthenticated raw records, degenerate false passes, and insufficient authorization scope.
@@ -48,7 +48,6 @@ Under the same hard deadline and event-precision requirement, determine whether 
 
 ## Missing decision-critical evidence
 
-- authenticated V2 physical runner, raw-record validator, and analyzer (not yet implemented/frozen)
 - independent V2 implementation review
 - H1 V2 32-call targeted pilot (expected 32, observed 0; not yet ready for approval)
 - complete new-query 32B oracle with raw output retention
@@ -60,4 +59,4 @@ Under the same hard deadline and event-precision requirement, determine whether 
 
 ## Next action
 
-Implement and test V2 artifact authentication, repeat/sensitivity/class-support gates, attempt accounting, and fail-closed analysis. Then obtain an independent implementation review. Only after those pass should compute approval be requested for the 32-call targeted pilot.
+Independently review the implemented V2 artifact authentication, repeat/sensitivity/class-support gates, attempt accounting, crash recovery, and fail-closed analysis. Repair any defect before freezing execution-source hashes. Only then should compute approval be requested for the 32-call targeted pilot.

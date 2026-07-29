@@ -2,7 +2,7 @@
 
 Current loop decision: `REVISE_ORACLE_PROTOCOL` (not a terminal research decision).
 
-Independent review showed that the V1 preflight could produce a false pass and did not present reviewers and Qwen with identical frames. It is preserved as rejected before execution. The highest-value next action is to finish and independently audit V2's authenticated physical runner and analyzer before requesting any oracle compute.
+Independent review showed that the V1 preflight could produce a false pass and did not present reviewers and Qwen with identical frames. It is preserved as rejected before execution. V2's authenticated physical runner and analyzer are now implemented; the highest-value next action is an independent implementation audit and repair of any remaining pre-outcome defect before requesting oracle compute.
 
 The adversarial comparison is now frozen before any new-query oracle output: a contradiction candidate requires both identical 2 fps calls to return `relevant` at high confidence while the blinded review is medium/high `not_relevant`. One candidate requires independent adjudication and prevents an automatic pass; at least two candidates across two videos fail the visual gate. A review label of `unknown` is never treated as negative.
 

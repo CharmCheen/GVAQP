@@ -24,7 +24,7 @@ At the observed 24.7-second mean inference, a sequential 1,475-unit 32B pass is 
 
 Independent pre-outcome review rejected the V1 preflight as an execution gate. The contact sheets omitted the endpoint frame supplied to the model; nominal 4 fps extraction was actually about 4.286 fps; malformed label-conditional outputs could parse successfully; raw inputs were not authenticated; and degenerate all-unknown or single-class outputs could pass. Zero of 30 V1 physical calls were made, so no outcome was overwritten.
 
-V2 now freezes an exact endpoint-inclusive target grid (21 frames at 2 fps and 41 at 4 fps), per-frame RGB identities, strict whole-string/label-conditional parsing, two pre-outcome reviews, bidirectional semantic screening, usable-class-support gates, and a 32-call design with one cross-replica anchor. The two reviewers agreed on 10 of 12 clips; the two disagreements are retained as `unknown`. V2 execution and analyzer authentication are not yet complete, so no compute launch is currently valid.
+V2 now freezes an exact endpoint-inclusive target grid (21 frames at 2 fps and 41 at 4 fps), per-frame RGB identities, strict whole-string/label-conditional parsing, two pre-outcome reviews, bidirectional semantic screening, usable-class-support gates, and a 32-call design with one cross-replica anchor. The two reviewers agreed on 10 of 12 clips; the two disagreements are retained as `unknown`. An authenticated runner and analyzer are implemented: CPU validation resolves all 32 exact inputs, and synthetic attacks confirm that single-class collapse and raw/frame tampering cannot pass. Independent implementation review remains required before compute approval.
 
 ## Competing hypotheses
 

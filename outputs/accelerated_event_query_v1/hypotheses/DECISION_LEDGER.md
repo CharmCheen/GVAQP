@@ -29,3 +29,10 @@
 - V2 evidence: exact precomputed RGB identities now cover 12 base and six sensitivity frame sets; two reviewers independently re-inspected exact sheets and agreed on 10/12 labels. Disagreements remain unknown.
 - Key uncertainty: V2's physical runner and analyzer do not yet enforce the new bindings and gates; H1 remains untested.
 - Next action: implement authenticated execution/analysis and obtain another independent code-level review before requesting the 32-call budget.
+
+### Cycle 02 implementation update
+
+- Implemented evidence: all three CPU-only runner shards authenticate their frozen bindings and exact frames, yielding the preregistered 10/11/11-call schedule and 32 total inputs.
+- Fail-closed evidence: the analyzer rehashes raw records, reparses raw text, compares exact frames/model-input identities, validates GPU provenance and attempt chains, rejects mixed runner commits, requires three disjoint GPU pairs, and cannot emit final pass before positive-claim grounding.
+- Falsification tests: synthetic all-unknown, all-negative, and all-positive oracles fail class support; raw and frame tampering fail authentication; a valid mixed result remains pending claim review. The focused suite has 38 passing tests.
+- Remaining uncertainty: these claims require independent code inspection; no physical oracle call has occurred.
