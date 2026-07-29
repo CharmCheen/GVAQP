@@ -57,3 +57,14 @@
 - Verification: processed-input ledger mismatch and repeat/replica tensor mismatch tests were added. The focused suite passes 51/51, the replacement seal is `58f84d2c...`, all three CPU-only schedules pass at 10/11/11, and raw/attempt counts remain 0/32.
 - Independent re-review result: GO for requesting user approval of commit `b09f99974` / seal `58f84d2c...`. The reviewer injected a processed-input reconciliation mismatch and observed fail-closed behavior; all 51 tests, source hashes, and preregistration bindings passed, with raw/attempt counts still 0.
 - Key uncertainty and next action: H1 remains empirically untested. Request explicit user approval for only the frozen 32-call pilot; no larger run is authorized by the review.
+
+## Cycle 05 — 2026-07-29 — EXACT V2 PHYSICAL PILOT / ORACLE PROTOCOL REJECTION
+
+- Decision: `REVISE_ORACLE_PROTOCOL`; stop before any representative/full oracle or downstream compute.
+- Authorization and execution: the user explicitly approved only seal `58f84d2c...`. The exact 10/11/11 schedule completed on disjoint GPU pairs `(1,2)`, `(3,5)`, `(6,7)` with 32 raw records and exactly 32 PREPARED/STARTED/COMPLETED/ACCEPTED events. There were zero retries, generation failures, uncertain interruptions, extras, or missing calls.
+- Positive engineering evidence: artifact authentication, processed-input/runtime identity, all 12 repeat pairs, the three-observation cross-replica anchor, and cross-video class support passed. Total inference was 790.671 seconds or 0.439262 two-GPU A100 hours, closely matching the preregistered estimate.
+- Decisive negative evidence: strict parse success was 31/32 because a 10-second 4-fps input produced bounds `17.0–20.0`; three decided-polarity contradictions spanned all three videos; independent exact-frame grounding marked 2/4 unique positive claims unsupported.
+- Independent grounding detail: WUHAN's claimed 6.0-second red transition was contradicted by red signals already visible at 4.5–5.5 seconds. HANGZHOU's claimed straight-ahead red/pedestrian hazard was contradicted by a continuously green straight arrow, a left-turn red indication, and an empty crosswalk.
+- Alternative explanation: sparse-frame review can be uncertain, but cannot explain impossible relative timestamps; the unsupported positives rest on directly visible signal/lane facts rather than inferred ego dynamics.
+- Frozen outcome: analyzer `FAIL_NUMERIC_OR_SUPPORT_GATE`; grounding 2 SUPPORTED / 2 UNSUPPORTED; user-authorized mapper `REVISE_ORACLE_PROTOCOL`.
+- Stop reason: deterministic behavior does not establish adequate semantics. The current oracle protocol cannot justify representative reference construction, so H2/H3 and controller work remain suspended. Any future cycle requires a new offline diagnosis, freeze, review, and separate authorization.

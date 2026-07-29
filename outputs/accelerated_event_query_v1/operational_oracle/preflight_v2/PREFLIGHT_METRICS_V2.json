@@ -1,0 +1,384 @@
+{
+  "analyzer_source_sha256": "2a0735ae2250c1268f9c67d79cf9453e89fab2de63aaf00378551042e08d2693",
+  "artifact_authentication_pass": true,
+  "attempt_event_counts": {
+    "DALI": 40,
+    "HANGZHOU": 44,
+    "WUHAN": 44
+  },
+  "authorized_generation_accounting_pass": true,
+  "class_support_pass": true,
+  "complete": true,
+  "compute_approval_sha256": "3704ba8d2c3eec3cc8ed85e6476b4ab17eb9528817451ab5646d5750989b1c41",
+  "consensus_label_counts": {
+    "not_relevant": 8,
+    "relevant": 4
+  },
+  "consensus_label_videos": {
+    "not_relevant": [
+      "DALI",
+      "HANGZHOU",
+      "WUHAN"
+    ],
+    "relevant": [
+      "DALI",
+      "HANGZHOU",
+      "WUHAN"
+    ]
+  },
+  "cross_replica_reproducibility_pass": true,
+  "execution_seal_sha256": "58f84d2ce389aa3cf8122137911b0ec8429d6db80d84766afd88ee870b6b7576",
+  "expected_calls": 32,
+  "git_head": "ec425267d292e989d1bb2cecdf852f1f9cb85e8b",
+  "grounding_queue_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/GROUNDING_QUEUE_V2.json",
+  "grounding_queue_payload_sha256": "de4c581069a7cbd2436e8fb1e7e3e06e56ba120bd8797004a7a4f956e40eb467",
+  "missing_artifacts": [],
+  "model_unknown_on_review_decided": [],
+  "numeric_gate_pass": false,
+  "observed_calls": 32,
+  "overall_gate_status": "FAIL_NUMERIC_OR_SUPPORT_GATE",
+  "parse_success_fraction": 0.96875,
+  "physical_generation_event_counts": {
+    "ACCEPTED": 32,
+    "INFERENCE_COMPLETED": 32,
+    "INFERENCE_STARTED": 32,
+    "PREPARED": 32
+  },
+  "positive_claims_pending_grounding": [
+    {
+      "cause": "two pedestrians crossing the road directly in front of the ego vehicle in the middle of the street, requiring immediate braking or evasive maneuver to avoid collision",
+      "claim_id": "6ae46ca082c30def9ba0ed99dc37dacdbeffe55567dc4f82b3b4e0099a24e56d",
+      "event_end_sec": 10.0,
+      "event_start_sec": 9.0,
+      "evidence": "In frames 9.0 to 10.0, two pedestrians are clearly visible stepping into the roadway from the right sidewalk, directly into the path of the ego vehicle. Their movement is sudden and they are in the active travel lane, creating an immediate hazard. The ego vehicle must respond with braking or avoidance to prevent collision.",
+      "model_input_identity_sha256": "ad6984513610cf3003e55e90e8ae422c27ec8cb8d1909377b8ab27004bb6b2e2",
+      "raw_response_sha256": "3fc1eb1f65b3ff91986cd9a08d15e33c81a756e0bf3f5e4cdf3f8d4b5d9e8658",
+      "required_response": [
+        "brake",
+        "avoid"
+      ],
+      "source_artifacts": [
+        "DALI/DALI_u0548_fps2_r0.json",
+        "DALI/DALI_u0548_fps2_r1.json"
+      ]
+    },
+    {
+      "cause": "Traffic light ahead is red, requiring the ego vehicle to stop at the intersection.",
+      "claim_id": "8245c3e05324371439af63d14b9b076b0ecac638c3ac1b971b8503bcf0ea8416",
+      "event_end_sec": 10.0,
+      "event_start_sec": 8.0,
+      "evidence": "From 8.0 seconds to 10.0 seconds, the traffic light directly ahead of the ego vehicle is visibly red, and the vehicle is approaching an intersection with multiple lanes and traffic signals. The presence of a red light necessitates a braking action to stop before the crosswalk or stop line. The ego vehicle is still moving forward and has not yet stopped, indicating the need for a brake response during this interval.",
+      "model_input_identity_sha256": "418f9ce189832639fc45a2abbd9031cb823229e9de6ba6fa110a0520a843bd5f",
+      "raw_response_sha256": "753459d315fb9d315edf718e5542ff98fe2daa63af1fe460fbfc2b8319608675",
+      "required_response": [
+        "brake"
+      ],
+      "source_artifacts": [
+        "WUHAN/WUHAN_u0134_fps2_r0.json",
+        "WUHAN/WUHAN_u0134_fps2_r1.json"
+      ]
+    },
+    {
+      "cause": "pedestrians crossing the road at the crosswalk ahead, with traffic light showing red for the ego direction",
+      "claim_id": "c1d874eecf6eab5004136cb0591b33ad4a591c8096deec7dbb9825752f590b2f",
+      "event_end_sec": 9.0,
+      "event_start_sec": 6.0,
+      "evidence": "From 6.0 seconds onwards, pedestrians are visible crossing the crosswalk directly in the path of the ego vehicle. The traffic light for the ego direction turns red at 6.0 seconds and remains red through 9.0 seconds, indicating a legal and necessary stop. The crosswalk is clearly marked, and the pedestrians are actively crossing, requiring the ego driver to brake or slow down to avoid collision.",
+      "model_input_identity_sha256": "84d5d29bcc4ad80d9cb1a5d93bbe156f71616fae25588b84f1cd0f9713abe5ba",
+      "raw_response_sha256": "cfe53801bbee9f2a1d7bf8ac2a77965bb136353ff6745a3426775d794cf77c7c",
+      "required_response": [
+        "brake",
+        "slowdown"
+      ],
+      "source_artifacts": [
+        "WUHAN/WUHAN_u0171_fps2_r0.json",
+        "WUHAN/WUHAN_u0171_fps2_r1.json"
+      ]
+    },
+    {
+      "cause": "The traffic light for the straight-ahead lane turns red, requiring the ego vehicle to stop before the crosswalk.",
+      "claim_id": "dd8a48171d96d29294faebda9c46fd3445d91616c5c6452de4ca30e5acaa713f",
+      "event_end_sec": 10.0,
+      "event_start_sec": 8.0,
+      "evidence": "At 8.0 seconds, the traffic light for the straight-ahead lane changes from green to red. The ego vehicle is approaching the intersection and must brake to stop before the crosswalk, as indicated by the red light and the presence of the pedestrian crossing. The countdown timer on the navigation overlay also shows the green light duration ending around this time, confirming the timing of the signal change.",
+      "model_input_identity_sha256": "4068efdfa742fe26d209c0f3542c98e6615abe389d56cf9bb2f5d9deb9ff3837",
+      "raw_response_sha256": "bb445afbc854e95f68969e836d56d5a4cfe34d44038a9712a6614c65335e50d1",
+      "required_response": [
+        "brake"
+      ],
+      "source_artifacts": [
+        "HANGZHOU/HANGZHOU_u0234_fps2_r0.json",
+        "HANGZHOU/HANGZHOU_u0234_fps2_r1.json"
+      ]
+    }
+  ],
+  "preprocessing_runtime_sha256": "1fec0e18428b28f5c7e7951984b14d14af742614c50692351973ea5216add580",
+  "repeat_pairs": [
+    {
+      "candidate_id": "DALI_u0437",
+      "consensus_label": "not_relevant",
+      "metadata_input_equal": true,
+      "model_input_equal": true,
+      "processed_input_equal": true,
+      "raw_equal": true,
+      "reproducible": true
+    },
+    {
+      "candidate_id": "DALI_u0501",
+      "consensus_label": "not_relevant",
+      "metadata_input_equal": true,
+      "model_input_equal": true,
+      "processed_input_equal": true,
+      "raw_equal": true,
+      "reproducible": true
+    },
+    {
+      "candidate_id": "DALI_u0548",
+      "consensus_label": "relevant",
+      "metadata_input_equal": true,
+      "model_input_equal": true,
+      "processed_input_equal": true,
+      "raw_equal": true,
+      "reproducible": true
+    },
+    {
+      "candidate_id": "DALI_u0555",
+      "consensus_label": "not_relevant",
+      "metadata_input_equal": true,
+      "model_input_equal": true,
+      "processed_input_equal": true,
+      "raw_equal": true,
+      "reproducible": true
+    },
+    {
+      "candidate_id": "HANGZHOU_u0140",
+      "consensus_label": "not_relevant",
+      "metadata_input_equal": true,
+      "model_input_equal": true,
+      "processed_input_equal": true,
+      "raw_equal": true,
+      "reproducible": true
+    },
+    {
+      "candidate_id": "HANGZHOU_u0234",
+      "consensus_label": "relevant",
+      "metadata_input_equal": true,
+      "model_input_equal": true,
+      "processed_input_equal": true,
+      "raw_equal": true,
+      "reproducible": true
+    },
+    {
+      "candidate_id": "HANGZHOU_u0280",
+      "consensus_label": "not_relevant",
+      "metadata_input_equal": true,
+      "model_input_equal": true,
+      "processed_input_equal": true,
+      "raw_equal": true,
+      "reproducible": true
+    },
+    {
+      "candidate_id": "HANGZHOU_u0420",
+      "consensus_label": "not_relevant",
+      "metadata_input_equal": true,
+      "model_input_equal": true,
+      "processed_input_equal": true,
+      "raw_equal": true,
+      "reproducible": true
+    },
+    {
+      "candidate_id": "WUHAN_u0134",
+      "consensus_label": "relevant",
+      "metadata_input_equal": true,
+      "model_input_equal": true,
+      "processed_input_equal": true,
+      "raw_equal": true,
+      "reproducible": true
+    },
+    {
+      "candidate_id": "WUHAN_u0171",
+      "consensus_label": "relevant",
+      "metadata_input_equal": true,
+      "model_input_equal": true,
+      "processed_input_equal": true,
+      "raw_equal": true,
+      "reproducible": true
+    },
+    {
+      "candidate_id": "WUHAN_u0217",
+      "consensus_label": "not_relevant",
+      "metadata_input_equal": true,
+      "model_input_equal": true,
+      "processed_input_equal": true,
+      "raw_equal": true,
+      "reproducible": true
+    },
+    {
+      "candidate_id": "WUHAN_u0298",
+      "consensus_label": "not_relevant",
+      "metadata_input_equal": true,
+      "model_input_equal": true,
+      "processed_input_equal": true,
+      "raw_equal": true,
+      "reproducible": true
+    }
+  ],
+  "runner_source_sha256": "6708f2236352293be44e7a417c973d12dbceee77745583ddb51ae7e297ab9680",
+  "same_process_reproducibility_pass": true,
+  "sampling_boundary_failures": 0,
+  "sampling_polarity_failures": 0,
+  "sampling_response_set_failures": 0,
+  "sampling_sensitivity": [
+    {
+      "base_label": "relevant",
+      "candidate_id": "DALI_u0548",
+      "maximum_boundary_difference_seconds": null,
+      "polarity_flip": false,
+      "response_set_equal": null,
+      "sensitivity_label": null,
+      "unknown_transition": false
+    },
+    {
+      "base_label": "not_relevant",
+      "candidate_id": "DALI_u0555",
+      "maximum_boundary_difference_seconds": null,
+      "polarity_flip": false,
+      "response_set_equal": null,
+      "sensitivity_label": "not_relevant",
+      "unknown_transition": false
+    },
+    {
+      "base_label": "not_relevant",
+      "candidate_id": "HANGZHOU_u0280",
+      "maximum_boundary_difference_seconds": null,
+      "polarity_flip": false,
+      "response_set_equal": null,
+      "sensitivity_label": "not_relevant",
+      "unknown_transition": false
+    },
+    {
+      "base_label": "not_relevant",
+      "candidate_id": "HANGZHOU_u0420",
+      "maximum_boundary_difference_seconds": null,
+      "polarity_flip": false,
+      "response_set_equal": null,
+      "sensitivity_label": "not_relevant",
+      "unknown_transition": false
+    },
+    {
+      "base_label": "not_relevant",
+      "candidate_id": "WUHAN_u0217",
+      "maximum_boundary_difference_seconds": null,
+      "polarity_flip": false,
+      "response_set_equal": null,
+      "sensitivity_label": "not_relevant",
+      "unknown_transition": false
+    },
+    {
+      "base_label": "not_relevant",
+      "candidate_id": "WUHAN_u0298",
+      "maximum_boundary_difference_seconds": null,
+      "polarity_flip": false,
+      "response_set_equal": null,
+      "sensitivity_label": "not_relevant",
+      "unknown_transition": false
+    }
+  ],
+  "sampling_unknown_transitions": 0,
+  "semantic_contradictions": [
+    {
+      "candidate_id": "DALI_u0555",
+      "model_label": "not_relevant",
+      "review_label": "relevant",
+      "video_id": "DALI"
+    },
+    {
+      "candidate_id": "HANGZHOU_u0234",
+      "model_label": "relevant",
+      "review_label": "not_relevant",
+      "video_id": "HANGZHOU"
+    },
+    {
+      "candidate_id": "WUHAN_u0217",
+      "model_label": "not_relevant",
+      "review_label": "relevant",
+      "video_id": "WUHAN"
+    }
+  ],
+  "semantic_screen": [
+    {
+      "candidate_id": "DALI_u0437",
+      "decided_polarity_contradiction": false,
+      "model_label": "not_relevant",
+      "review_label": "not_relevant"
+    },
+    {
+      "candidate_id": "DALI_u0501",
+      "decided_polarity_contradiction": false,
+      "model_label": "not_relevant",
+      "review_label": "unknown"
+    },
+    {
+      "candidate_id": "DALI_u0548",
+      "decided_polarity_contradiction": false,
+      "model_label": "relevant",
+      "review_label": "relevant"
+    },
+    {
+      "candidate_id": "DALI_u0555",
+      "decided_polarity_contradiction": true,
+      "model_label": "not_relevant",
+      "review_label": "relevant"
+    },
+    {
+      "candidate_id": "HANGZHOU_u0140",
+      "decided_polarity_contradiction": false,
+      "model_label": "not_relevant",
+      "review_label": "not_relevant"
+    },
+    {
+      "candidate_id": "HANGZHOU_u0234",
+      "decided_polarity_contradiction": true,
+      "model_label": "relevant",
+      "review_label": "not_relevant"
+    },
+    {
+      "candidate_id": "HANGZHOU_u0280",
+      "decided_polarity_contradiction": false,
+      "model_label": "not_relevant",
+      "review_label": "unknown"
+    },
+    {
+      "candidate_id": "HANGZHOU_u0420",
+      "decided_polarity_contradiction": false,
+      "model_label": "not_relevant",
+      "review_label": "not_relevant"
+    },
+    {
+      "candidate_id": "WUHAN_u0134",
+      "decided_polarity_contradiction": false,
+      "model_label": "relevant",
+      "review_label": "unknown"
+    },
+    {
+      "candidate_id": "WUHAN_u0171",
+      "decided_polarity_contradiction": false,
+      "model_label": "relevant",
+      "review_label": "relevant"
+    },
+    {
+      "candidate_id": "WUHAN_u0217",
+      "decided_polarity_contradiction": true,
+      "model_label": "not_relevant",
+      "review_label": "relevant"
+    },
+    {
+      "candidate_id": "WUHAN_u0298",
+      "decided_polarity_contradiction": false,
+      "model_label": "not_relevant",
+      "review_label": "not_relevant"
+    }
+  ],
+  "systematic_semantic_failure": true,
+  "unknown_counts_by_video": {}
+}

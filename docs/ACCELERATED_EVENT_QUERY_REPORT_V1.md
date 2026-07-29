@@ -1,10 +1,10 @@
 # Accelerated Event Query Report V1
 
-Current status: `IN_PROGRESS — V1 PREFLIGHT REJECTED; V2 SEALED AND REVIEWED; USER COMPUTE APPROVAL PENDING`
+Current status: `IN_PROGRESS — V2 TARGETED PILOT COMPLETE; REVISE_ORACLE_PROTOCOL`
 
 ## Strongest supported conclusion
 
-The previous binary-SMDP stop remains valid for its old two-video, ego-path-entry task, but it neither proves nor disproves dynamic event querying for the new driver-response query. The new experiment cannot reuse those semantic labels. Three hash-bound videos and a compatible 1,475-unit grid are available; the decision-critical evidence now missing is stable new-query 32B labeling and the resulting YOLO+K3 event-recall ceiling.
+The exact targeted V2 experiment falsified adequacy of the current operational-oracle protocol. Qwen3-VL-32B was perfectly reproducible across all repeat and replica checks, but produced one impossible relative-time boundary, three decided-polarity contradictions across three videos, and two unsupported claims among four independently grounded positives. The resulting decision is `REVISE_ORACLE_PROTOCOL`; no representative/full oracle or downstream YOLO/controller claim is authorized.
 
 ## Observed evidence
 
@@ -17,6 +17,9 @@ The previous binary-SMDP stop remains valid for its old two-video, ego-path-entr
 - Before any new-query 32B output existed, deterministic 2 fps contact sheets were generated for all twelve preflight clips and hash-bound to a blinded adversarial review. The review records four qualitative positives, five negatives, and three unknowns. These judgments are screening evidence, not independent human ground truth.
 - The previously qualitative “no systematic unsupported positives” gate is now operationalized before outcomes: a contradiction requires two stable high-confidence 2 fps oracle positives against a medium/high frozen `not_relevant` review; one candidate requires adjudication, while two across two videos fail the gate. Review `unknown` never counts as negative.
 - Fifty-one focused tests pass, including call-manifest mutation, stale model evidence, ledger and raw tampering, physical-retry prevention, crash recovery, concurrent-shard locking, duplicate JSON keys, sensitivity/semantic failure gates, processed-tensor identity, and finalizer failure paths.
+- The approved 10/11/11 physical schedule completed exactly 32 calls with zero retry/failure/uncertain events. All 12 repeat pairs and the cross-replica anchor matched in actual processed-tensor and raw-response hashes.
+- Strict parse success was 31/32. The failed 4-fps response assigned `17.0–20.0` to a 10-second relative-time input and was preserved as `invalid_relevant_boundary`.
+- The frozen semantic screen found contradictions on DALI, Hangzhou, and Wuhan. Independent post-output review marked two of four unique positive cause/evidence claims unsupported.
 
 ## Derived implications
 
@@ -24,7 +27,7 @@ At the observed 24.7-second mean inference, a sequential 1,475-unit 32B pass is 
 
 Independent pre-outcome review rejected the V1 preflight as an execution gate. The contact sheets omitted the endpoint frame supplied to the model; nominal 4 fps extraction was actually about 4.286 fps; malformed label-conditional outputs could parse successfully; raw inputs were not authenticated; and degenerate all-unknown or single-class outputs could pass. Zero of 30 V1 physical calls were made, so no outcome was overwritten.
 
-V2 now freezes an exact endpoint-inclusive target grid (21 frames at 2 fps and 41 at 4 fps), per-frame RGB identities, strict whole-string/label-conditional parsing, two pre-outcome reviews, bidirectional semantic screening, usable-class-support gates, and an explicit 32-call manifest. The two reviewers agreed on 10 of 12 clips; the two disagreements are retained as `unknown`. The reviewed runner authenticates the current 19-file model, videos, frames, processed tensors, preprocessing runtime, GPU identities, and exact physical-generation ledger. The analyzer cannot pass on a single-class collapse, sensitivity failure, wrong accepted triple, different repeat/replica tensors, or incomplete claim grounding. Independent re-review returned GO only for requesting user approval of this targeted pilot.
+V2 froze an exact endpoint-inclusive target grid (21 frames at 2 fps and 41 at 4 fps), per-frame RGB identities, strict whole-string/label-conditional parsing, dual pre-outcome review, bidirectional semantic screening, class-support gates, and an explicit 32-call manifest. Authentication succeeded, demonstrating that the negative result is not explained by input drift, mixed software, retries, or nondeterminism. The failed numeric and semantic gates instead isolate the dominant defect to oracle prompt/protocol adequacy—especially relative timestamp compliance and traffic-signal/lane attribution.
 
 ## Competing hypotheses
 
@@ -34,4 +37,4 @@ V2 now freezes an exact endpoint-inclusive target grid (21 frames at 2 fps and 4
 
 ## Unresolved required answers
 
-All twelve final report questions remain open. In particular, no new-query operational references, formal scan ceiling, probable-event calibration, observed complete-path cost shield, label-hiding replay, safe dynamic headroom, public-state model, learned controller, closed-loop comparison, or ablation matrix has yet been run. The targeted preflight is a prerequisite measurement, not evidence of accelerated event querying.
+All twelve full-system report questions remain open because H1 failed before representative reference construction. No new-query operational references, formal scan ceiling, probable-event calibration, observed complete-path cost shield, label-hiding replay, safe dynamic headroom, public-state model, learned controller, closed-loop comparison, or ablation matrix has been run. This targeted rejection is evidence about the oracle protocol only, not accelerated event-query performance.

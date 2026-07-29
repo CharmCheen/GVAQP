@@ -12,8 +12,8 @@ This audit checks the original 24-section research specification against current
 | Incremental K3 after actions and post-deadline immutability | `incremental_k3.py`, K3/deadline tests | Kernel tested; full SCAN/VERIFY loop absent |
 | Causal public state and future-information rejection | `state.py`, causality tests | Schema/guard tested; replay/controller not built |
 | Frozen three real videos and 1,475-unit grid | video manifests and freeze audit | Established |
-| Adequate fallible 32B operational oracle for the new query | reviewed V2 preflight seal; physical raw/attempt count 0/32 | Decision-critical evidence missing; explicit user approval required |
-| Full 1,475-unit operational oracle and raw provenance | no authorized full-run design or outputs | Missing |
+| Adequate fallible 32B operational oracle for the new query | exact 32/32 V2 records, metrics, independent grounding, finalizer | Contradicted: 31/32 parse, systematic three-video contradictions, 2/4 unsupported positives |
+| Full 1,475-unit operational oracle and raw provenance | no authorized full-run design or outputs | Missing and unauthorized after H1 failure |
 | K3 operational reference events parquet | `operational_reference_events/STATUS.md` | Missing; gated by oracle evidence |
 | Frozen YOLO/proxy execution and candidate join | `scan_candidates/STATUS.md` | Missing |
 | Candidate coverage and `SCAN_EVENT_RECALL_CEILING` on all videos | no real new-query references/candidates | Missing |
@@ -29,14 +29,14 @@ This audit checks the original 24-section research specification against current
 | Event-query curves, deadline recall/precision/AUC, timing and K3 diagnostics | `figures/STATUS.md` | Missing |
 | Required ablation matrix | `ablations/STATUS.md` | Correctly deferred |
 | Twelve explicit final-report answers | report records all as open | Missing |
-| One terminal decision from the frozen set | current nonterminal decision is `REVISE_ORACLE_PROTOCOL` | Missing |
+| One user-authorized targeted-pilot decision | `TARGETED_PILOT_DECISION_V2.json` | Established: `REVISE_ORACLE_PROTOCOL` |
+| One terminal decision for the full research objective | downstream gates cannot be evaluated after H1 failure | Not yet justified; do not misstate the targeted decision as full-system evidence |
 
 ## Decision-critical path
 
-1. Obtain explicit user approval or rejection for only the independently reviewed 32-call V2 pilot.
-2. If approved, execute exactly the 10/11/11 shards and apply the frozen analyzer plus independent claim-grounding finalizer.
-3. If the pilot passes, design and separately approve a content-blind representative oracle audit; a targeted pass does not authorize the full grid.
-4. Only adequate representative oracle evidence permits full operational references, the YOLO/K3 ceiling, observed safety costs, replay, and headroom in that order.
-5. Learned-controller and ablation work remains conditional on the dynamic-headroom gate.
+1. Stop the executed line at `REVISE_ORACLE_PROTOCOL`; the exact approval is exhausted.
+2. Preserve the impossible boundary, three cross-video contradictions, and two unsupported positives as rejection evidence.
+3. Do not request a representative/full oracle or downstream YOLO/replay/controller compute from this pilot.
+4. Any future cycle must first explain the timestamp-coordinate failure and traffic-signal/lane attribution failures, then freeze and independently review a materially revised minimal protocol.
 
-The observation that would revise this path immediately is a preflight numeric, reproducibility, sensitivity, semantic, or grounding failure; that would stop expansion and route to oracle-protocol revision or `INSUFFICIENT_EVIDENCE` rather than downstream controller work.
+The preregistered revision observations occurred. Reproducibility alone cannot rescue an operational oracle that violates its output coordinate contract and produces systematic/unsupported semantic claims.
