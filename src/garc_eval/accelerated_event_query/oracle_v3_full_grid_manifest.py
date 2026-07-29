@@ -105,12 +105,19 @@ def decode_full_grid_unit(
     unit_kind, targets = full_grid_sample_indices(
         clip_start, clip_end, video_fps, sampling_fps
     )
-    by_index = {int(row["requested_index"]): row for row in targets}
-    first = min(by_index)
-    last = max(by_index)
     cap = cv2.VideoCapture(str(video_path))
     if not cap.isOpened():
         raise RuntimeError(f"cannot open video: {video_path}")
+    available_frame_count = int(round(cap.get(cv2.CAP_PROP_FRAME_COUNT)))
+    if available_frame_count <= 0:
+        cap.release()
+        raise RuntimeError(f"video reports no decodable frames: {video_path}")
+    resolved_targets = resolve_targets_to_available_frames(
+        targets, available_frame_count=available_frame_count
+    )
+    by_index = {int(row["requested_index"]): row for row in resolved_targets}
+    first = min(by_index)
+    last = max(by_index)
     cap.set(cv2.CAP_PROP_POS_FRAMES, first)
     frames: list[dict[str, Any]] = []
     for requested_index in range(first, last + 1):
@@ -139,6 +146,42 @@ def decode_full_grid_unit(
     if len(frames) != len(targets):
         raise RuntimeError(f"decoded {len(frames)} of {len(targets)} required frames")
     return unit_kind, frames
+
+
+def resolve_targets_to_available_frames(
+    targets: list[dict[str, int | float]], *, available_frame_count: int
+) -> list[dict[str, int | float | str]]:
+    """Resolve ideal CFR requests against finite decoded video-stream support.
+
+    Container duration can exceed the video stream because of audio or stream
+    time-base metadata.  At the right video boundary only, the closest legal
+    source frame is therefore the last available frame.  The ideal request is
+    retained explicitly, the resolved request is unique, and no prior frame is
+    repeated to pad an input.
+    """
+
+    if available_frame_count <= 0:
+        raise ValueError("available frame count must be positive")
+    last_available = available_frame_count - 1
+    rows: list[dict[str, int | float | str]] = []
+    for target in targets:
+        ideal = int(target["requested_index"])
+        if ideal < 0:
+            raise ValueError("negative ideal frame request")
+        requested = min(ideal, last_available)
+        rows.append({
+            **target,
+            "ideal_requested_index": ideal,
+            "requested_index": requested,
+            "source_boundary_resolution": (
+                "nearest_available_final_video_frame"
+                if requested != ideal else "exact_ideal_cfr_index"
+            ),
+        })
+    requested = [int(row["requested_index"]) for row in rows]
+    if len(set(requested)) != len(requested):
+        raise RuntimeError("finite-stream boundary resolution would repeat a source frame")
+    return rows
 
 
 def public_frame(row: dict[str, Any]) -> dict[str, Any]:
@@ -259,7 +302,9 @@ def validate_frame_manifest(
             "ordinal": row["unit_frame_ordinal"],
             "target_relative_seconds": row["target_relative_seconds"],
             "target_absolute_seconds": row["target_absolute_seconds"],
+            "ideal_requested_index": row["ideal_requested_index"],
             "requested_index": row["requested_index"],
+            "source_boundary_resolution": row["source_boundary_resolution"],
             "decoded_index": row["decoded_index"],
             "decoded_timestamp_seconds": row["decoded_timestamp_seconds"],
             "content_sha256": row["content_sha256"],

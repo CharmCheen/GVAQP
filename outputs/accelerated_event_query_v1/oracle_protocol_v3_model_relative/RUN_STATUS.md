@@ -1,6 +1,6 @@
 # V3 Run Status
 
-State: `FULL_GRID_PREREGISTRATION_IMPLEMENTATION_IN_PROGRESS_NO_INFERENCE`
+State: `REVISE_FULL_GRID_PREREGISTRATION_INPUT_BOUNDARY_NO_INFERENCE`
 
 Current decision: `V3_SCHEMA_DETERMINISM_PASS_FULL_GRID_APPROVAL_REQUIRED`
 
@@ -90,3 +90,20 @@ independent adversarial review.
 
 Next action: commit the tested implementation, decode and freeze all 1,475
 inputs without loading model weights, then run package dry-runs and review.
+
+Observed negative evidence from the first real decode attempt:
+
+- The builder stopped before writing any manifest after decoding only 11 of the
+  proposed 12 DALI tail targets.
+- Frozen grid/container end is `5665.535333s`, but the video stream has 169,962
+  frames and ends near `5665.381s`; ideal CFR request index 169,965 therefore
+  has no source frame.
+- The nearest available source frame is the unique final frame 169,961. It is
+  not a repeat of the prior 5.0-second target and preserves the 5.5-second
+  target plus explicit requested/decoded provenance.
+
+Decision: enter `REVISE_FULL_GRID_PREREGISTRATION` before any seal. Add an
+explicit ideal-index and finite-video-stream boundary resolution field, reject
+any resolution that would repeat a frame, then rerun all tests and the complete
+decode. The 12/2/6 target counts, prompt, authoritative schema, and K3 contract
+remain unchanged.

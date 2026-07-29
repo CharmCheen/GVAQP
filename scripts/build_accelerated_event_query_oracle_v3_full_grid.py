@@ -49,6 +49,7 @@ from garc_eval.accelerated_event_query.oracle_v3_manifest import (
     sha256_file,
     write_json_once,
 )
+from garc_eval.accelerated_event_query.oracle_protocol import rgb_content_hash
 
 
 UNIT_GRID = ROOT / "outputs/accelerated_event_query_v1/video_manifests/frozen_unit_grid_v1.csv"
@@ -173,6 +174,52 @@ def _processor_tail_audit(
     return self_hash(result, "processor_audit_payload_sha256")
 
 
+def _video_stream_audit(videos: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    import cv2
+
+    rows = []
+    for video_id in VIDEO_ORDER:
+        video = videos[video_id]
+        path = ROOT / video["path"]
+        cap = cv2.VideoCapture(str(path))
+        if not cap.isOpened():
+            raise RuntimeError(f"cannot open video for stream audit: {video_id}")
+        frame_count = int(round(cap.get(cv2.CAP_PROP_FRAME_COUNT)))
+        decoder_fps = float(cap.get(cv2.CAP_PROP_FPS))
+        last_index = frame_count - 1
+        cap.set(cv2.CAP_PROP_POS_FRAMES, last_index)
+        ok, frame = cap.read()
+        if not ok:
+            cap.release()
+            raise RuntimeError(f"cannot decode final video-stream frame: {video_id}")
+        decoded_index = int(round(cap.get(cv2.CAP_PROP_POS_FRAMES))) - 1
+        timestamp = float(cap.get(cv2.CAP_PROP_POS_MSEC)) / 1000.0
+        rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        cap.release()
+        if decoded_index != last_index:
+            raise RuntimeError(f"final stream index mismatch: {video_id}")
+        rows.append({
+            "video_id": video_id,
+            "path": video["path"],
+            "video_sha256": video["sha256"],
+            "container_duration_seconds": video["duration_seconds"],
+            "nominal_fps": video["nominal_fps"],
+            "decoder_reported_fps": decoder_fps,
+            "decoded_frame_count": frame_count,
+            "last_available_decoded_index": last_index,
+            "last_available_decoded_timestamp_seconds": timestamp,
+            "last_available_rgb_sha256": rgb_content_hash(rgb),
+            "container_duration_may_exceed_video_stream_support": (
+                timestamp < float(video["duration_seconds"])
+            ),
+        })
+    return self_hash({
+        "status": "FROZEN_VIDEO_STREAM_BOUNDARY_AUDIT",
+        "source": "OpenCV decoder frame-count and exact final-frame decode",
+        "videos": rows,
+    }, "video_stream_audit_payload_sha256")
+
+
 def _failure_policy() -> str:
     return """# Full-Grid Failure Policy
 
@@ -246,6 +293,7 @@ def main() -> None:
     for video_id, video in videos.items():
         if sha256_file(ROOT / video["path"]) != video["sha256"]:
             raise RuntimeError(f"source video hash mismatch: {video_id}")
+    stream_audit = _video_stream_audit(videos)
 
     flat_frames: list[dict[str, Any]] = []
     unit_rows: list[dict[str, Any]] = []
@@ -287,6 +335,7 @@ def main() -> None:
                 "supplied_sampling_fps": 2.0,
                 "grid_duration_seconds": (len(public) - 1) / 2.0,
                 "prompt_bytes_unchanged": True,
+                "finite_stream_boundary_resolution": "retain ideal request and use unique nearest available final video frame only when ideal index exceeds stream support",
             },
         }
         base["call_spec_sha256"] = canonical_hash(base)
@@ -333,10 +382,12 @@ def main() -> None:
             for row in flat_frames
         }),
         "duplicate_occurrences_are_only_explicit_shared_unit_endpoints": True,
+        "finite_video_stream_boundary_rule": "ideal CFR request is retained; a right-boundary request beyond stream support resolves to the unique nearest available final frame; repeated-frame padding is forbidden",
         "frames": flat_frames,
     }, "frame_manifest_payload_sha256")
     validate_unit_manifest(unit_manifest)
     validate_frame_manifest(frame_manifest, unit_manifest)
+    write_json_once(PACKAGE / "FULL_GRID_VIDEO_STREAM_AUDIT.json", stream_audit)
     write_json_once(PACKAGE / "FULL_GRID_UNIT_MANIFEST.json", unit_manifest)
     write_json_once(PACKAGE / "FULL_GRID_FRAME_MANIFEST.json", frame_manifest)
 
@@ -462,6 +513,9 @@ def main() -> None:
             "last_target_absolute_seconds": frames[-1]["target_absolute_seconds"],
             "first_decoded_index": frames[0]["decoded_index"],
             "last_decoded_index": frames[-1]["decoded_index"],
+            "last_ideal_requested_index": frames[-1]["ideal_requested_index"],
+            "last_requested_index": frames[-1]["requested_index"],
+            "last_source_boundary_resolution": frames[-1]["source_boundary_resolution"],
             "first_decoded_timestamp_seconds": frames[0]["decoded_timestamp_seconds"],
             "last_decoded_timestamp_seconds": frames[-1]["decoded_timestamp_seconds"],
             "frame_set_sha256": unit_by_id[unit_id]["frame_set_sha256"],
@@ -475,14 +529,15 @@ def main() -> None:
         "exceeding the true endpoint. No target, padding frame, repeated final frame,",
         "or invented off-grid endpoint was added. The unchanged prompt is paired with",
         "model-visible frame count, 2-fps metadata, and true-duration provenance.", "",
-        "| Unit | Video | Absolute interval | Frames | Last target | Source index range | Contact SHA |",
-        "|---|---|---:|---:|---:|---:|---|",
+        "| Unit | Video | Absolute interval | Frames | Last target | Ideal/resolved/decoded last index | Resolution | Contact SHA |",
+        "|---|---|---:|---:|---:|---:|---|---|",
     ]
     for row in tail_audit_rows:
         md.append(
             f"| {row['unit_id']} | {row['video_id']} | {row['start_time']:.6f}–{row['end_time']:.6f} | "
             f"{row['frame_count']} | {row['last_target_absolute_seconds']:.6f} | "
-            f"{row['first_decoded_index']}–{row['last_decoded_index']} | "
+            f"{row['last_ideal_requested_index']}/{row['last_requested_index']}/{row['last_decoded_index']} | "
+            f"{row['last_source_boundary_resolution']} | "
             f"`{row['contact_sheet']['sha256']}` |"
         )
     md.extend([
@@ -568,6 +623,7 @@ def main() -> None:
         "output_schemas": binding(PACKAGE / "FULL_GRID_OUTPUT_SCHEMAS.json"),
         "tail_unit_audit": binding(PACKAGE / "FULL_GRID_TAIL_UNIT_AUDIT.md"),
         "tail_processor_audit": binding(PACKAGE / "FULL_GRID_TAIL_PROCESSOR_AUDIT.json"),
+        "video_stream_audit": binding(PACKAGE / "FULL_GRID_VIDEO_STREAM_AUDIT.json"),
         "failure_policy": binding(PACKAGE / "FULL_GRID_FAILURE_POLICY.md"),
         "label_hiding_audit": binding(PACKAGE / "FULL_GRID_LABEL_HIDING_AUDIT.md"),
         "source_bindings": binding(PACKAGE / "FULL_GRID_SOURCE_BINDINGS.json"),
@@ -609,6 +665,7 @@ def main() -> None:
             "sampling_fps": 2.0,
             "normal_unit_seconds": 10.0,
             "tail_frame_counts": {key: value["frame_count"] for key, value in EXPECTED_TAILS.items()},
+            "finite_stream_boundary_rule": "preserve temporal target and ideal CFR index; resolve an out-of-stream right-boundary request to the unique last available source frame; reject any repeated-frame result",
             "model_load_count": 3, "reload_count": 0, "retry_count": 0,
         },
         "model": {

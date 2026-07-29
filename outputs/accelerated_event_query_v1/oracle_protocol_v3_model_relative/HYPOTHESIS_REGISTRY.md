@@ -96,7 +96,10 @@
 - Competing explanation: processor-internal temporal patch mechanics may differ
   from source padding but still accept the legal supplied frames.
 - Impact: failure yields `REVISE_TRUNCATED_UNIT_PROTOCOL` and stops sealing.
-- Status: `IMPLEMENTED_AWAITING_REAL_DECODE_AND_PROCESSOR_AUDIT`.
+- Status: `FIRST_DECODE_FALSIFIED_NAIVE_CFR_INDEX_BINDING`; DALI container
+  duration exceeds video-stream support. Revised prediction: its 5.5-second
+  target resolves to unique final frame 169,961 with the ideal 169,965 request
+  retained; any repeated-frame resolution remains forbidden.
 
 ## H8 — Exact manifests form a complete disjoint 1,475-call identity
 
