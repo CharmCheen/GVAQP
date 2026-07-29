@@ -344,6 +344,7 @@ def build_prereg(call_manifest: dict) -> None:
         "label_source": ROOT / "src/garc_eval/accelerated_event_query/model_relative_labels.py",
         "frame_extraction_source": ROOT / "src/garc_eval/accelerated_event_query/oracle_protocol.py",
         "package_builder_source": ROOT / "scripts/build_accelerated_event_query_oracle_v3_preflight.py",
+        "diagnostic_protocol": BASE / "diagnostics/V3_CONSTRUCT_VALIDITY_DIAGNOSTIC_PROTOCOL.json",
     }
     for name, path in paths.items():
         bindings[f"{name}_path"] = str(path.relative_to(ROOT))

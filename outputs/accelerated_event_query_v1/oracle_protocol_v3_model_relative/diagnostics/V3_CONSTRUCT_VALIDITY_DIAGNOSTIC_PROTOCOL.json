@@ -1,0 +1,42 @@
+{
+  "status": "FROZEN_BEFORE_V3_ORACLE_EXECUTION",
+  "protocol_id": "AEQ_V3_CONSTRUCT_VALIDITY_DIAGNOSTICS_1",
+  "purpose": "Preserve human/agent semantic concerns without changing the authoritative model-relative label or protocol decision.",
+  "authoritative_label_rule": "The strictly parsed V3 Qwen3-VL-32B label remains authoritative regardless of any diagnostic verdict.",
+  "required_post_output_items": [
+    "agent reviewer polarity disagreement",
+    "agent explanation grounding",
+    "traffic-signal lane attribution",
+    "ego-path attribution",
+    "evidence plausibility",
+    "human semantic construct concern"
+  ],
+  "required_regression_cases": {
+    "DALI_u0548": "Report the removed 17-20 second V2 coordinate failure and verify that V3 emits no authoritative time field.",
+    "DALI_u0555": "Report any agent/model polarity disagreement as a non-gating roadway/scooter/pedestrian diagnostic.",
+    "HANGZHOU_u0234": "Report signal-lane and crosswalk interpretation; preserve the V2 unsupported explanation finding.",
+    "WUHAN_u0217": "Report ego-path and lane-clearance interpretation disagreement.",
+    "WUHAN_u0171": "Report the V2 unsupported red-transition explanation independently of the authoritative label."
+  },
+  "allowed_diagnostic_verdicts": [
+    "PLAUSIBLE",
+    "UNSUPPORTED",
+    "INDETERMINATE",
+    "AGENT_MODEL_DISAGREEMENT",
+    "NO_CONCERN"
+  ],
+  "review_requirements": {
+    "inspect_exact_frozen_frames": true,
+    "quote_or_hash_bind_exact_v3_raw_explanation": true,
+    "do_not_relabel_authoritative_label": true,
+    "do_not_change_protocol_gate": true,
+    "record_competing_explanation_and_uncertainty": true
+  },
+  "output_path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/diagnostics/V3_CONSTRUCT_VALIDITY_DIAGNOSTICS.json",
+  "formal_report_sections": [
+    "A. Protocol adequacy",
+    "B. Construct-validity diagnostics"
+  ],
+  "decision_effect": "none",
+  "scope": "Diagnostic evidence supports limitations and case analysis; it is not human ground truth and cannot establish a model-relative label error."
+}
