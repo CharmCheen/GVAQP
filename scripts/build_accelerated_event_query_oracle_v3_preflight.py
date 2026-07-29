@@ -34,6 +34,7 @@ REGRESSION = BASE / "regression/V2_REGRESSION_CASES_FOR_V3.json"
 MAPPING = BASE / "preflight/V3_SCHEMA_PREFLIGHT_DECISION_MAPPING.json"
 COST = BASE / "execution_seal/V3_SCHEMA_PREFLIGHT_COST_ESTIMATE.json"
 PREREG = BASE / "preflight/V3_SCHEMA_PREFLIGHT_PREREGISTRATION.json"
+PROVENANCE = BASE / "preflight/V3_SCHEMA_PREFLIGHT_PROVENANCE_MANIFEST.json"
 CODE_VERSION = BASE / "code_version.json"
 
 
@@ -273,7 +274,8 @@ def build_mapping() -> None:
         "precedence": [
             "INCOMPLETE_OR_UNAUTHENTICATED_TO_INSUFFICIENT_EVIDENCE",
             "AUTHENTICATED_INPUT_MISMATCH_TO_REVISE_V3_INPUT_BINDING",
-            "SCHEMA_PARSE_LABEL_OR_DETERMINISM_FAILURE_TO_REVISE_V3_SCHEMA",
+            "SESSION_OR_PROCESSED_INPUT_REPEAT_MISMATCH_TO_REVISE_V3_INPUT_BINDING",
+            "SCHEMA_PARSE_OR_LABEL_REPRODUCIBILITY_FAILURE_TO_REVISE_V3_SCHEMA",
             "K3_DETERMINISM_OR_BOUNDARY_FAILURE_TO_REVISE_K3_EVENTIZATION",
             "ALL_HARD_GATES_PASS_TO_V3_SCHEMA_DETERMINISM_PASS_FULL_GRID_APPROVAL_REQUIRED",
         ],
@@ -408,8 +410,13 @@ def build_prereg(call_manifest: dict) -> None:
         "hard_gates": {
             "authentication": "exact 11 calls and all bound identities; zero retry/extra/missing/failure",
             "parsing": "11/11 strict parse; exact keys; frozen label vocabulary; no time field",
-            "same_process_label_reproducibility": "all three pairs match authoritative label",
-            "cross_replica_label_reproducibility": "DALI_u0555 anchor labels and processed inputs match",
+            "same_process_label_reproducibility": (
+                "all three pairs share one authenticated execution-session identity and match label"
+            ),
+            "cross_replica_label_reproducibility": (
+                "DALI_u0555 pair uses distinct execution sessions and its labels, model-input "
+                "identities, and processed inputs match"
+            ),
             "exact_raw_reproducibility": "reported diagnostic because decoding is deterministic",
             "class_support": "at least one relevant and one not_relevant; unknown not required",
             "eventization": "order and diagnostics invariant; boundaries only from units; K3 hash exact",
@@ -417,6 +424,7 @@ def build_prereg(call_manifest: dict) -> None:
         "non_gating_diagnostics": [
             "agent polarity disagreement", "agent claim grounding", "signal-lane interpretation",
             "ego-path interpretation", "evidence plausibility", "human semantic concern",
+            "2-fps versus 4-fps authoritative-label sensitivity",
         ],
         "scope": (
             "A pass supports requesting separate approval for 1475-unit labeling only; it does not "
@@ -453,6 +461,58 @@ def build_code_version() -> None:
     })
 
 
+def build_preexecution_provenance(call_manifest: dict) -> None:
+    prereg = load_json(PREREG)
+    bindings = []
+    for key, relative in sorted(prereg["bindings"].items()):
+        if not key.endswith("_path"):
+            continue
+        hash_key = key.removesuffix("_path") + "_sha256"
+        if hash_key in prereg["bindings"]:
+            bindings.append({
+                "binding": key.removesuffix("_path"),
+                "path": relative,
+                "sha256": prereg["bindings"][hash_key],
+            })
+    expected_calls = []
+    for call in call_manifest["calls"]:
+        expected_calls.append({
+            "ordinal": call["ordinal"],
+            "artifact_name": call["artifact_name"],
+            "execution_shard": call["execution_shard"],
+            "call_spec_sha256": call["call_spec_sha256"],
+            "frame_set_sha256": call["frame_set_sha256"],
+            "expected_raw_path": call["artifact_path"],
+            "expected_parsed_path": str((
+                BASE / "parsed" / call["execution_shard"] / call["artifact_name"]
+            ).relative_to(ROOT)),
+        })
+    payload = {
+        "status": "FROZEN_PREEXECUTION_PROVENANCE",
+        "experiment_id": prereg["experiment_id"],
+        "preregistration_path": str(PREREG.relative_to(ROOT)),
+        "preregistration_sha256": sha256_file(PREREG),
+        "bound_inputs_and_sources": bindings,
+        "expected_calls": expected_calls,
+        "expected_attempt_ledgers": [
+            str((BASE / f"preflight/attempt_ledgers/{shard}.jsonl").relative_to(ROOT))
+            for shard in ("DALI", "HANGZHOU", "WUHAN")
+        ],
+        "expected_metrics_path": str((
+            BASE / "preflight/V3_SCHEMA_PREFLIGHT_METRICS.json"
+        ).relative_to(ROOT)),
+        "expected_evidence_manifest_path": str((
+            BASE / "preflight/V3_SCHEMA_PREFLIGHT_EVIDENCE_MANIFEST.json"
+        ).relative_to(ROOT)),
+        "producer_source_path": prereg["bindings"]["analyzer_cli_source_path"],
+        "producer_source_sha256": prereg["bindings"]["analyzer_cli_source_sha256"],
+        "physical_outputs_present_when_frozen": False,
+        "write_once": True,
+    }
+    payload["provenance_payload_sha256"] = canonical_hash(payload)
+    write_json_once(PROVENANCE, payload)
+
+
 def main() -> None:
     build_schema_and_k3()
     frame_manifest = build_frames_and_selection()
@@ -461,6 +521,7 @@ def main() -> None:
     build_mapping()
     build_cost()
     build_prereg(call_manifest)
+    build_preexecution_provenance(call_manifest)
     build_code_version()
     print(json.dumps({
         "status": "BUILT_UNSEALED",

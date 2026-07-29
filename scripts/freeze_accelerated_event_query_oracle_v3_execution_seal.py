@@ -12,6 +12,7 @@ from garc_eval.accelerated_event_query.oracle_v3_manifest import (
     load_json,
     sha256_file,
     validate_call_manifest,
+    validate_payload_hash,
     write_json_once,
 )
 
@@ -21,6 +22,7 @@ BASE = ROOT / "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relat
 PREREG = BASE / "preflight/V3_SCHEMA_PREFLIGHT_PREREGISTRATION.json"
 SEAL = BASE / "execution_seal/V3_SCHEMA_PREFLIGHT_EXECUTION_SEAL.json"
 APPROVAL_TEMPLATE = BASE / "execution_seal/V3_SCHEMA_PREFLIGHT_APPROVAL_TEMPLATE.md"
+PROVENANCE = BASE / "preflight/V3_SCHEMA_PREFLIGHT_PROVENANCE_MANIFEST.json"
 
 
 SOURCE_KEYS = {
@@ -52,6 +54,29 @@ def build_seal() -> dict:
     validate_call_manifest(call_manifest, 11)
     if not all(call_manifest["assertions"].values()):
         raise RuntimeError("authorized call manifest assertions failed")
+    provenance = load_json(PROVENANCE)
+    validate_payload_hash(provenance, "provenance_payload_sha256")
+    if not all((
+        provenance.get("status") == "FROZEN_PREEXECUTION_PROVENANCE",
+        provenance.get("experiment_id") == prereg["experiment_id"],
+        provenance.get("preregistration_sha256") == sha256_file(PREREG),
+        len(provenance.get("expected_calls", [])) == 11,
+        provenance.get("producer_source_sha256")
+            == prereg["bindings"]["analyzer_cli_source_sha256"],
+        provenance.get("physical_outputs_present_when_frozen") is False,
+    )):
+        raise RuntimeError("preexecution provenance manifest mismatch")
+    forbidden_preexecution = [
+        *(ROOT / row["artifact_path"] for row in call_manifest["calls"]),
+        *(ROOT / row["expected_parsed_path"] for row in provenance["expected_calls"]),
+        *(ROOT / path for path in provenance["expected_attempt_ledgers"]),
+        ROOT / provenance["expected_metrics_path"],
+        ROOT / provenance["expected_evidence_manifest_path"],
+        BASE / "preflight/V3_SCHEMA_PREFLIGHT_DECISION.json",
+        BASE / "execution_seal/V3_SCHEMA_PREFLIGHT_COMPUTE_APPROVAL.json",
+    ]
+    if any(path.exists() for path in forbidden_preexecution):
+        raise RuntimeError("physical or postrun V3 artifact exists before sealing")
     sources = {}
     for public_name, binding_name in SOURCE_KEYS.items():
         path = prereg["bindings"][f"{binding_name}_path"]
@@ -96,9 +121,13 @@ def build_seal() -> dict:
         "raw_output_root": str((BASE / "raw").relative_to(ROOT)),
         "parsed_output_root": str((BASE / "parsed").relative_to(ROOT)),
         "attempt_ledger_root": str((BASE / "preflight/attempt_ledgers").relative_to(ROOT)),
-        "provenance_manifest_path": str((
-            BASE / "preflight/V3_SCHEMA_PREFLIGHT_PROVENANCE_MANIFEST.json"
-        ).relative_to(ROOT)),
+        "provenance_manifest_path": str(PROVENANCE.relative_to(ROOT)),
+        "provenance_manifest_sha256": sha256_file(PROVENANCE),
+        "postrun_evidence_manifest_path": provenance["expected_evidence_manifest_path"],
+        "execution_session_rule": (
+            "same-process pairs must share one authenticated session identity; cross-replica "
+            "members must have distinct authenticated session identities"
+        ),
         "independent_review_path": str((
             BASE / "execution_seal/V3_SCHEMA_PREFLIGHT_INDEPENDENT_REVIEW.md"
         ).relative_to(ROOT)),

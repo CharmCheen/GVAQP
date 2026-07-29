@@ -31,6 +31,7 @@ from .oracle_v3_manifest import (
     sha256_file,
     validate_call_manifest,
     validate_frame_set,
+    validate_payload_hash,
     write_json_once,
 )
 from .oracle_v3_parser import parse_oracle_v3_response
@@ -53,6 +54,13 @@ def validate_execution_seal(component: str = "runner") -> tuple[dict, dict]:
         raise RuntimeError("V3 execution seal is not awaiting approval")
     if seal.get("preregistration_sha256") != sha256_file(PREREG):
         raise RuntimeError("execution seal/preregistration mismatch")
+    provenance_path = ROOT / seal["provenance_manifest_path"]
+    if sha256_file(provenance_path) != seal.get("provenance_manifest_sha256"):
+        raise RuntimeError("execution seal/provenance-manifest mismatch")
+    provenance = load_json(provenance_path)
+    validate_payload_hash(provenance, "provenance_payload_sha256")
+    if provenance.get("preregistration_sha256") != sha256_file(PREREG):
+        raise RuntimeError("provenance/preregistration mismatch")
     sources = seal.get("sources", {})
     path_key = f"{component}_source_path"
     hash_key = f"{component}_source_sha256"
@@ -218,6 +226,11 @@ def _validate_existing_record(record: dict, payload: dict, frame_set: dict) -> N
         raise RuntimeError("raw input identity mismatch")
     if record.get("frames") != frame_set["frames"]:
         raise RuntimeError("raw frame identity mismatch")
+    expected_model_identity = model_input_identity(
+        payload, [{**frame, "rgb": None} for frame in frame_set["frames"]]
+    )
+    if record.get("model_input_identity_sha256") != expected_model_identity:
+        raise RuntimeError("raw model-input identity mismatch")
     raw = record.get("raw")
     if not isinstance(raw, str) or record.get("raw_response_sha256") != hashlib.sha256(raw.encode()).hexdigest():
         raise RuntimeError("raw response hash mismatch")
@@ -226,6 +239,71 @@ def _validate_existing_record(record: dict, payload: dict, frame_set: dict) -> N
         record.get("parsed"), record.get("parse_status"), record.get("effective_label")
     ) != (parsed.parsed, parsed.parse_status, parsed.effective_label):
         raise RuntimeError("stored parse result mismatch")
+    for key in (
+        "attempt_id", "execution_session_id", "processed_input_sha256",
+        "generated_token_ids_sha256",
+    ):
+        if not isinstance(record.get(key), str) or not record[key]:
+            raise RuntimeError(f"raw record lacks authenticated {key}")
+    prereg = load_json(PREREG)
+    seal = load_json(SEAL)
+    runtime = record.get("runtime")
+    if not isinstance(runtime, dict):
+        raise RuntimeError("raw record lacks runtime provenance")
+    if runtime.get("execution_session_id") != record["execution_session_id"]:
+        raise RuntimeError("raw/runtime execution-session mismatch")
+    expected_gpus = prereg["gpu_schedule"][payload["execution_shard"]]["physical_gpu_ids"]
+    if runtime.get("declared_physical_gpus") != expected_gpus:
+        raise RuntimeError("runtime GPU schedule mismatch")
+    identities = runtime.get("gpu_identities")
+    if not isinstance(identities, list) or len(identities) != 2 or any(
+        not isinstance(text, str) or not text.startswith(f"{index},")
+        or "NVIDIA A100-SXM4-80GB" not in text
+        for text, index in zip(identities, expected_gpus)
+    ):
+        raise RuntimeError("runtime GPU identity mismatch")
+    expected_runtime = {
+        "runner_source_sha256": seal["sources"]["runner_source_sha256"],
+        "execution_seal_sha256": sha256_file(SEAL),
+        "model_file_manifest_sha256": prereg["bindings"]["model_file_manifest_sha256"],
+        "git_head": seal["source_commit"],
+        "parameter_dtypes": ["torch.bfloat16"],
+        "logical_cuda_devices": [0, 1],
+        "cublas_workspace_config": EXPECTED_CUBLAS_WORKSPACE_CONFIG,
+        "deterministic_algorithms_enabled": True,
+    }
+    for key, expected in expected_runtime.items():
+        if runtime.get(key) != expected:
+            raise RuntimeError(f"runtime provenance mismatch: {key}")
+    if not isinstance(runtime.get("hf_device_map"), dict) or not runtime["hf_device_map"]:
+        raise RuntimeError("runtime lacks resolved model device map")
+    required_preprocessing = {
+        "python", "numpy", "pillow", "torch", "transformers",
+        "qwen_vl_utils", "processor_class",
+    }
+    preprocessing = runtime.get("preprocessing_runtime")
+    if (
+        not isinstance(preprocessing, dict)
+        or set(preprocessing) != required_preprocessing
+        or any(not isinstance(value, str) or not value for value in preprocessing.values())
+    ):
+        raise RuntimeError("runtime preprocessing provenance mismatch")
+    if not all((
+        runtime.get("torch") == preprocessing["torch"],
+        runtime.get("transformers") == preprocessing["transformers"],
+    )):
+        raise RuntimeError("runtime library-version provenance mismatch")
+    for key in ("model_load_seconds", "inference_seconds", "total_call_seconds"):
+        value = runtime.get(key)
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or value < 0:
+            raise RuntimeError(f"invalid runtime duration: {key}")
+    approval_relative = runtime.get("compute_approval_path")
+    if not isinstance(approval_relative, str):
+        raise RuntimeError("runtime lacks compute approval path")
+    approval_path = ROOT / approval_relative
+    observed_approval_sha256 = validate_compute_approval(approval_path, prereg)
+    if runtime.get("compute_approval_sha256") != observed_approval_sha256:
+        raise RuntimeError("runtime compute approval hash mismatch")
 
 
 def _read_attempts(shard: str) -> list[dict]:
@@ -251,7 +329,12 @@ def _read_attempts(shard: str) -> list[dict]:
         event = row.get("event")
         if event not in allowed.get(states.get(attempt_id), set()):
             raise RuntimeError("invalid attempt state transition")
-        identity = (row.get("artifact"), row.get("call_spec_sha256"), row.get("input_identity_sha256"))
+        identity = (
+            row.get("artifact"), row.get("call_spec_sha256"),
+            row.get("input_identity_sha256"), row.get("execution_session_id"),
+        )
+        if not isinstance(row.get("execution_session_id"), str) or not row["execution_session_id"]:
+            raise RuntimeError("attempt event lacks execution-session identity")
         if attempt_id in identities and identities[attempt_id] != identity:
             raise RuntimeError("attempt identity changed")
         identities[attempt_id] = identity
@@ -281,9 +364,12 @@ def _append_attempt(shard: str, event: dict) -> None:
     atomic_text(path, "".join(json.dumps(row, sort_keys=True) + "\n" for row in [*rows, payload]))
 
 
-def _event_identity(call: dict, input_identity: str, attempt_id: str) -> dict:
+def _event_identity(
+    call: dict, input_identity: str, attempt_id: str, execution_session_id: str
+) -> dict:
     return {
         "attempt_id": attempt_id,
+        "execution_session_id": execution_session_id,
         "artifact": call["artifact_name"],
         "call_spec_sha256": call["call_spec_sha256"],
         "input_identity_sha256": input_identity,
@@ -317,7 +403,10 @@ def reconcile_shard(
                 events_by_attempt.setdefault(row["attempt_id"], []).append(row)
         for events in events_by_attempt.values():
             last = events[-1]["event"]
-            identity = _event_identity(call, input_identity, events[0]["attempt_id"])
+            identity = _event_identity(
+                call, input_identity, events[0]["attempt_id"],
+                events[0]["execution_session_id"],
+            )
             if last == "PREPARED":
                 _append_attempt(shard, {"event": "PRE_INFERENCE_ABORTED", **identity,
                                         "reason": "prior process ended before generation"})
@@ -342,6 +431,7 @@ def reconcile_shard(
             matching = [row for row in accepted if (
                 row["input_identity_sha256"] == input_identity
                 and row.get("record_sha256") == record["record_sha256"]
+                and row.get("execution_session_id") == record["execution_session_id"]
             )]
             if len(matching) != 1:
                 raise RuntimeError("raw artifact lacks exactly one accepted attempt")
@@ -491,13 +581,21 @@ def run_physical(args, approval_path: Path, approval_sha256: str) -> None:
     }
     git_head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     git_status = subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True)
+    execution_session_id = canonical_hash({
+        "execution_shard": args.execution_shard,
+        "process_id": os.getpid(),
+        "started_time_ns": time.time_ns(),
+        "nonce_sha256": hashlib.sha256(os.urandom(32)).hexdigest(),
+    })
     for call in schedule:
         frame_set = frame_sets[(call["candidate_id"], float(call["sampling_fps"]))]
         payload = identity_payload(prereg, call, frame_set)
         input_identity = canonical_hash(payload)
         destination = ROOT / call["artifact_path"]
         attempt_id = f"{args.execution_shard}:{call['artifact_name']}:{time.time_ns()}"
-        attempt_identity = _event_identity(call, input_identity, attempt_id)
+        attempt_identity = _event_identity(
+            call, input_identity, attempt_id, execution_session_id
+        )
         generation_started = generation_completed = False
         try:
             call_started = time.perf_counter()
@@ -559,6 +657,7 @@ def run_physical(args, approval_path: Path, approval_sha256: str) -> None:
             record = {
                 "identity": payload,
                 "attempt_id": attempt_id,
+                "execution_session_id": execution_session_id,
                 "input_identity_sha256": input_identity,
                 "model_input_identity_sha256": model_input_identity(payload, frames),
                 "frames": [public_frame_record(row) for row in frames],
@@ -570,6 +669,7 @@ def run_physical(args, approval_path: Path, approval_sha256: str) -> None:
                 "processed_input_sha256": processed_input_sha256,
                 "generated_token_ids_sha256": generated_token_ids_sha256,
                 "runtime": {
+                    "execution_session_id": execution_session_id,
                     "declared_physical_gpus": declared,
                     "gpu_identities": gpu_identities,
                     "model_load_seconds": load_seconds,

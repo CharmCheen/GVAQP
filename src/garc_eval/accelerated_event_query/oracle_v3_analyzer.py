@@ -18,6 +18,7 @@ from .oracle_v3_manifest import (
 from .oracle_v3_parser import parse_oracle_v3_response
 from .oracle_v3_runner import (
     BASE,
+    ATTEMPTS,
     PREREG,
     RAW,
     ROOT,
@@ -35,7 +36,7 @@ def _artifact_records(prereg: dict, frame_sets: dict, call_manifest: dict) -> tu
     records = {}
     errors = []
     expected_paths = {ROOT / row["artifact_path"] for row in call_manifest["calls"]}
-    observed_paths = set(RAW.glob("*/*.json"))
+    observed_paths = set(RAW.rglob("*.json"))
     extras = sorted(str(path.relative_to(ROOT)) for path in observed_paths - expected_paths)
     missing = sorted(str(path.relative_to(ROOT)) for path in expected_paths - observed_paths)
     if extras:
@@ -59,11 +60,20 @@ def _artifact_records(prereg: dict, frame_sets: dict, call_manifest: dict) -> tu
     return records, errors
 
 
-def _attempt_accounting(call_manifest: dict) -> tuple[dict[str, int], list[str]]:
+def _attempt_accounting(
+    prereg: dict, frame_sets: dict, call_manifest: dict, records: dict
+) -> tuple[dict[str, int], list[str]]:
+    """Join every successful ledger chain to one exact authorized raw record."""
     counts = Counter()
     errors = []
-    expected = {row["artifact_name"] for row in call_manifest["calls"]}
+    calls = {row["artifact_name"]: row for row in call_manifest["calls"]}
+    expected = set(calls)
     by_artifact = {artifact: Counter() for artifact in expected}
+    rows_by_artifact = {artifact: [] for artifact in expected}
+    expected_ledgers = {ATTEMPTS / f"{shard}.jsonl" for shard in SHARDS}
+    observed_ledgers = set(ATTEMPTS.glob("*.jsonl")) if ATTEMPTS.exists() else set()
+    for path in sorted(observed_ledgers - expected_ledgers):
+        errors.append(f"unauthorized_attempt_ledger:{path.relative_to(ROOT)}")
     try:
         for shard in SHARDS:
             for row in _read_attempts(shard):
@@ -71,17 +81,66 @@ def _attempt_accounting(call_manifest: dict) -> tuple[dict[str, int], list[str]]
                 if artifact not in expected:
                     errors.append(f"unauthorized_attempt_artifact:{artifact}")
                     continue
+                call = calls[artifact]
+                if shard != call["execution_shard"]:
+                    errors.append(f"attempt_wrong_shard:{artifact}:{shard}")
                 counts[row["event"]] += 1
                 by_artifact[artifact][row["event"]] += 1
+                rows_by_artifact[artifact].append(row)
     except Exception as exc:
         errors.append(f"invalid_attempt_ledger:{type(exc).__name__}:{exc}")
-    for artifact, observed in by_artifact.items():
-        required = {"PREPARED": 1, "INFERENCE_STARTED": 1, "INFERENCE_COMPLETED": 1, "ACCEPTED": 1}
+    required = {
+        "PREPARED": 1, "INFERENCE_STARTED": 1,
+        "INFERENCE_COMPLETED": 1, "ACCEPTED": 1,
+    }
+    for artifact in sorted(expected):
+        observed = by_artifact[artifact]
+        rows = rows_by_artifact[artifact]
+        call = calls[artifact]
+        frame_set = frame_sets[(call["candidate_id"], float(call["sampling_fps"]))]
+        expected_input = canonical_hash(identity_payload(prereg, call, frame_set))
         if any(observed[event] != count for event, count in required.items()):
             errors.append(f"incomplete_attempt:{artifact}:{dict(observed)}")
-        forbidden = {"GENERATION_FAILED", "UNCERTAIN_INTERRUPTION", "FAILED_POST_INFERENCE"}
-        if any(observed[event] for event in forbidden):
+        if set(observed) - set(required):
             errors.append(f"failed_or_uncertain_attempt:{artifact}:{dict(observed)}")
+        if not rows:
+            continue
+        attempt_ids = {row.get("attempt_id") for row in rows}
+        session_ids = {row.get("execution_session_id") for row in rows}
+        if len(attempt_ids) != 1 or None in attempt_ids:
+            errors.append(f"attempt_id_mismatch:{artifact}")
+        if len(session_ids) != 1 or None in session_ids:
+            errors.append(f"attempt_session_mismatch:{artifact}")
+        for row in rows:
+            if not all((
+                row.get("call_spec_sha256") == call["call_spec_sha256"],
+                row.get("input_identity_sha256") == expected_input,
+                row.get("artifact") == artifact,
+            )):
+                errors.append(f"attempt_identity_mismatch:{artifact}:{row.get('event')}")
+        record = records.get(artifact)
+        if record is None:
+            continue
+        if attempt_ids != {record["attempt_id"]}:
+            errors.append(f"attempt_raw_id_mismatch:{artifact}")
+        if session_ids != {record["execution_session_id"]}:
+            errors.append(f"attempt_raw_session_mismatch:{artifact}")
+        indexed = {row["event"]: row for row in rows if row.get("event") in required}
+        for event in ("PREPARED", "INFERENCE_STARTED"):
+            if indexed.get(event, {}).get("processed_input_sha256") != record[
+                "processed_input_sha256"
+            ]:
+                errors.append(f"attempt_processed_input_mismatch:{artifact}:{event}")
+        for event in ("INFERENCE_COMPLETED", "ACCEPTED"):
+            if indexed.get(event, {}).get("generated_token_ids_sha256") != record[
+                "generated_token_ids_sha256"
+            ]:
+                errors.append(f"attempt_generated_tokens_mismatch:{artifact}:{event}")
+        accepted = indexed.get("ACCEPTED", {})
+        if accepted.get("record_sha256") != record["record_sha256"]:
+            errors.append(f"attempt_record_mismatch:{artifact}")
+        if accepted.get("recovered_after_crash") not in {True, False}:
+            errors.append(f"attempt_acceptance_recovery_flag_invalid:{artifact}")
     return dict(counts), errors
 
 
@@ -102,6 +161,11 @@ def _determinism(prereg: dict, records: dict) -> dict:
             "processed_input_identity_equal": len(rows) == len(members) and len({
                 row["processed_input_sha256"] for row in rows
             }) == 1,
+            "execution_session_relation_pass": len(rows) == len(members) and (
+                len({row["execution_session_id"] for row in rows}) == 1
+                if group["kind"] == "same_process"
+                else len({row["execution_session_id"] for row in rows}) == len(rows)
+            ),
             "authoritative_label_equal": len(rows) == len(members) and len({
                 row["effective_label"] for row in rows
             }) == 1,
@@ -110,15 +174,125 @@ def _determinism(prereg: dict, records: dict) -> dict:
             }) == 1,
         }
         (same_process if group["kind"] == "same_process" else cross_replica).append(result)
-    required_fields = (
-        "complete", "model_input_identity_equal", "processed_input_identity_equal",
-        "authoritative_label_equal",
+    all_rows = [*same_process, *cross_replica]
+    input_binding_hard_pass = all(
+        all(row[field] for field in (
+            "complete", "model_input_identity_equal", "processed_input_identity_equal",
+            "execution_session_relation_pass",
+        ))
+        for row in all_rows
     )
-    hard_pass = all(
-        all(row[field] for field in required_fields)
-        for row in [*same_process, *cross_replica]
+    label_reproducibility_hard_pass = all(
+        row["complete"] and row["authoritative_label_equal"] for row in all_rows
     )
-    return {"hard_pass": hard_pass, "same_process": same_process, "cross_replica": cross_replica}
+    return {
+        "hard_pass": input_binding_hard_pass and label_reproducibility_hard_pass,
+        "input_binding_hard_pass": input_binding_hard_pass,
+        "label_reproducibility_hard_pass": label_reproducibility_hard_pass,
+        "same_process": same_process,
+        "cross_replica": cross_replica,
+    }
+
+
+def _sampling_sensitivity(records: dict) -> dict:
+    artifacts = ["DALI_u0548_fps2_r0.json", "DALI_u0548_fps4_sensitivity.json"]
+    rows = [records[name] for name in artifacts if name in records]
+    return {
+        "status": "NON_GATING_DIAGNOSTIC",
+        "artifact_names": artifacts,
+        "complete": len(rows) == len(artifacts),
+        "authoritative_labels": {
+            name: records[name]["effective_label"] for name in artifacts if name in records
+        },
+        "authoritative_label_equal": len(rows) == len(artifacts) and len({
+            row["effective_label"] for row in rows
+        }) == 1,
+        "interpretation": (
+            "Reports 2/4-fps label sensitivity only; strict parsing remains globally gating, "
+            "but label equality across sampling rates is not a V3 preflight hard gate."
+        ),
+    }
+
+
+def _execution_profile(prereg: dict, call_manifest: dict, records: dict) -> dict:
+    preprocessing_hashes = {
+        canonical_hash(row["runtime"]["preprocessing_runtime"])
+        for row in records.values()
+    }
+    library_pairs = {
+        (row["runtime"]["torch"], row["runtime"]["transformers"])
+        for row in records.values()
+    }
+    sessions_by_shard = {}
+    for shard in SHARDS:
+        artifacts = [
+            call["artifact_name"] for call in call_manifest["calls"]
+            if call["execution_shard"] == shard
+        ]
+        sessions_by_shard[shard] = sorted({
+            records[name]["execution_session_id"] for name in artifacts if name in records
+        })
+    one_session_per_shard = all(
+        len(sessions_by_shard[shard]) == 1 for shard in SHARDS
+    )
+    distinct_shard_sessions = one_session_per_shard and len({
+        sessions_by_shard[shard][0] for shard in SHARDS
+    }) == len(SHARDS)
+    hard_pass = all((
+        len(records) == prereg["workload"]["total_physical_calls"],
+        len(preprocessing_hashes) == 1,
+        len(library_pairs) == 1,
+        one_session_per_shard,
+        distinct_shard_sessions,
+    ))
+    return {
+        "hard_pass": hard_pass,
+        "preprocessing_runtime_equal": len(preprocessing_hashes) == 1,
+        "preprocessing_runtime_sha256": (
+            next(iter(preprocessing_hashes)) if len(preprocessing_hashes) == 1 else None
+        ),
+        "library_versions_equal": len(library_pairs) == 1,
+        "one_execution_session_per_shard": one_session_per_shard,
+        "distinct_execution_sessions_across_shards": distinct_shard_sessions,
+        "execution_session_ids_by_shard": sessions_by_shard,
+    }
+
+
+def _parsed_output_payloads(prereg: dict, call_manifest: dict, records: dict) -> list[dict]:
+    payloads = []
+    for call in call_manifest["calls"]:
+        artifact = call["artifact_name"]
+        record = records[artifact]
+        parsed = record["parsed"]
+        payload = {
+            "status": "AUTHENTICATED_PARSED_V3_OUTPUT",
+            "experiment_id": prereg["experiment_id"],
+            "artifact_name": artifact,
+            "execution_shard": call["execution_shard"],
+            "source_raw_path": call["artifact_path"],
+            "source_raw_file_sha256": sha256_file(ROOT / call["artifact_path"]),
+            "source_record_sha256": record["record_sha256"],
+            "attempt_id": record["attempt_id"],
+            "execution_session_id": record["execution_session_id"],
+            "input_identity_sha256": record["input_identity_sha256"],
+            "model_input_identity_sha256": record["model_input_identity_sha256"],
+            "processed_input_sha256": record["processed_input_sha256"],
+            "generated_token_ids_sha256": record["generated_token_ids_sha256"],
+            "parse_status": record["parse_status"],
+            "authoritative_label": record["effective_label"],
+            "parsed": parsed,
+            "diagnostic_confidence": parsed.get("confidence") if parsed else None,
+            "diagnostic_evidence": parsed.get("evidence") if parsed else None,
+            "unknown_and_parse_failure_are_preserved": True,
+        }
+        payload["parsed_payload_sha256"] = canonical_hash(payload)
+        payloads.append({
+            "path": str((
+                BASE / "parsed" / call["execution_shard"] / artifact
+            ).relative_to(ROOT)),
+            "payload": payload,
+        })
+    return payloads
 
 
 def _eventization(prereg: dict, call_manifest: dict, records: dict) -> dict:
@@ -179,7 +353,26 @@ def _eventization(prereg: dict, call_manifest: dict, records: dict) -> dict:
     }
 
 
-def analyze() -> dict:
+def _decision_status(
+    *, complete: bool, authenticated_input_mismatch: bool,
+    input_binding_pass: bool, parse_pass: bool,
+    label_reproducibility_pass: bool, class_support_pass: bool,
+    eventization_pass: bool,
+) -> str:
+    if authenticated_input_mismatch:
+        return "REVISE_V3_INPUT_BINDING"
+    if not complete:
+        return "INSUFFICIENT_EVIDENCE"
+    if not input_binding_pass:
+        return "REVISE_V3_INPUT_BINDING"
+    if not parse_pass or not label_reproducibility_pass or not class_support_pass:
+        return "REVISE_V3_SCHEMA"
+    if not eventization_pass:
+        return "REVISE_K3_EVENTIZATION"
+    return "V3_SCHEMA_DETERMINISM_PASS_FULL_GRID_APPROVAL_REQUIRED"
+
+
+def analyze_bundle() -> tuple[dict, list[dict]]:
     seal, prereg = validate_execution_seal("analyzer")
     prereg2, _, frame_sets, call_manifest = frozen_context()
     if prereg2 != prereg:
@@ -188,7 +381,9 @@ def analyze() -> dict:
     for frame_set in frame_sets.values():
         validate_frame_set(frame_set)
     records, raw_errors = _artifact_records(prereg, frame_sets, call_manifest)
-    attempt_counts, attempt_errors = _attempt_accounting(call_manifest)
+    attempt_counts, attempt_errors = _attempt_accounting(
+        prereg, frame_sets, call_manifest, records
+    )
     errors = [*raw_errors, *attempt_errors]
     expected_paths = {ROOT / row["artifact_path"] for row in call_manifest["calls"]}
     observed_expected_raw_count = sum(path.exists() for path in expected_paths)
@@ -197,16 +392,21 @@ def analyze() -> dict:
         and any(error.startswith("invalid_raw:") for error in raw_errors)
     )
     complete = len(records) == prereg["workload"]["total_physical_calls"] and not errors
-    if authenticated_input_mismatch:
-        status = "REVISE_V3_INPUT_BINDING"
-        determinism = {"hard_pass": False, "same_process": [], "cross_replica": []}
+    if not complete:
+        determinism = {
+            "hard_pass": False,
+            "input_binding_hard_pass": False,
+            "label_reproducibility_hard_pass": False,
+            "same_process": [],
+            "cross_replica": [],
+        }
         eventization = {"hard_pass": False, "complete": False}
-    elif not complete:
-        status = "INSUFFICIENT_EVIDENCE"
-        determinism = {"hard_pass": False, "same_process": [], "cross_replica": []}
-        eventization = {"hard_pass": False, "complete": False}
+        execution_profile = {"hard_pass": False}
+        parse_pass = False
+        class_support_pass = False
     else:
         determinism = _determinism(prereg, records)
+        execution_profile = _execution_profile(prereg, call_manifest, records)
         eventization = _eventization(prereg, call_manifest, records)
         parse_counts = Counter(row["parse_status"] for row in records.values())
         parse_pass = parse_counts == {"ok": prereg["workload"]["total_physical_calls"]}
@@ -214,20 +414,20 @@ def analyze() -> dict:
             records[name]["effective_label"] for name in prereg["class_support_artifacts"]
         )
         class_support_pass = labels["relevant"] >= 1 and labels["not_relevant"] >= 1
-        input_binding_pass = not errors and all(
-            row["model_input_identity_sha256"] and row["processed_input_sha256"]
-            for row in records.values()
-        )
-        if not input_binding_pass:
-            status = "REVISE_V3_INPUT_BINDING"
-        elif not parse_pass or not determinism["hard_pass"] or not class_support_pass:
-            status = "REVISE_V3_SCHEMA"
-        elif not eventization["hard_pass"]:
-            status = "REVISE_K3_EVENTIZATION"
-        else:
-            status = "V3_SCHEMA_DETERMINISM_PASS_FULL_GRID_APPROVAL_REQUIRED"
+    status = _decision_status(
+        complete=complete,
+        authenticated_input_mismatch=authenticated_input_mismatch,
+        input_binding_pass=(
+            determinism["input_binding_hard_pass"] and execution_profile["hard_pass"]
+        ),
+        parse_pass=parse_pass,
+        label_reproducibility_pass=determinism["label_reproducibility_hard_pass"],
+        class_support_pass=class_support_pass,
+        eventization_pass=eventization["hard_pass"],
+    )
     parse_counts = Counter(row["parse_status"] for row in records.values())
     label_counts = Counter(row["effective_label"] for row in records.values())
+    parsed_outputs = _parsed_output_payloads(prereg, call_manifest, records) if complete else []
     result = {
         "experiment_id": prereg["experiment_id"],
         "complete": complete,
@@ -239,7 +439,13 @@ def analyze() -> dict:
         "parse_status_counts": dict(sorted(parse_counts.items())),
         "physical_label_counts": dict(sorted(label_counts.items())),
         "determinism": determinism,
+        "execution_profile": execution_profile,
+        "sampling_sensitivity": _sampling_sensitivity(records),
         "eventization": eventization,
+        "parsed_output_manifest": [{
+            "path": row["path"],
+            "parsed_payload_sha256": row["payload"]["parsed_payload_sha256"],
+        } for row in parsed_outputs],
         "protocol_adequacy_decision": status,
         "construct_validity_diagnostics_are_non_gating": True,
         "execution_seal_sha256": sha256_file(SEAL),
@@ -247,4 +453,8 @@ def analyze() -> dict:
         "scope": "11-call V3 schema-and-determinism preflight only; never full-grid authorization",
     }
     result["metrics_payload_sha256"] = canonical_hash(result)
-    return result
+    return result, parsed_outputs
+
+
+def analyze() -> dict:
+    return analyze_bundle()[0]
