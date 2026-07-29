@@ -95,7 +95,9 @@ def _validate_record(
     runtime = record.get("runtime")
     if not isinstance(runtime, dict):
         raise RuntimeError("raw record lacks runtime")
-    for key in ("model_load_seconds", "total_call_seconds", "inference_seconds"):
+    for key in (
+        "model_load_seconds", "pre_persistence_call_seconds", "inference_seconds"
+    ):
         if not isinstance(runtime.get(key), (int, float)) or runtime[key] < 0:
             raise RuntimeError(f"invalid runtime field: {key}")
     if runtime.get("worker_id") != unit["worker_id"]:
@@ -305,9 +307,12 @@ def analyze_execution(
         len(global_state.get("model_load_workers", [])) == 3,
         len(global_state.get("model_load_completed_workers", [])) == 3,
         len(global_state.get("worker_sessions_completed", [])) == 3,
+        len(global_state.get("worker_processes_exited", [])) == 3,
         len(global_state.get("attempted_unit_ids", [])) == EXPECTED_UNIT_COUNT,
         len(global_state.get("completed_unit_ids", [])) == EXPECTED_UNIT_COUNT,
         not global_state.get("in_flight_unit_ids", ["missing"]),
+        not global_state.get("loaded_worker_emergency_reservation_workers", ["missing"]),
+        abs(float(global_state.get("reserved_gpu_seconds", float("inf")))) <= 1e-9,
         global_state.get("stop_trigger") is None,
         float(global_state.get("actual_gpu_seconds", float("inf"))) <= 19.4 * 3600,
         bool(global_events) and global_events[-1].get("event") == "PHYSICAL_CALLS_COMPLETE",

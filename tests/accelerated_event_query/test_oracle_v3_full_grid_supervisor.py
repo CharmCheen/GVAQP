@@ -65,7 +65,12 @@ def test_abrupt_worker_death_stops_peers_before_another_reservation(
         spawned_at_unix_ns=time.time_ns(),
     ) for worker_id, process in zip(WORKERS, processes)]
     with pytest.raises(RuntimeError, match="abrupt_worker_exit"):
-        supervise_workers(rows, execution_root=tmp_path, sleep=lambda _value: None)
+        supervise_workers(
+            rows,
+            execution_root=tmp_path,
+            coordinator=coordinator,
+            sleep=lambda _value: None,
+        )
     assert coordinator.state()["stop_trigger"] == "post_load_process_fault"
     assert processes[1].poll() == processes[2].poll() == -15
     with pytest.raises(RuntimeError, match="not accepting"):

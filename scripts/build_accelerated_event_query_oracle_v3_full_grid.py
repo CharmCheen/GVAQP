@@ -42,6 +42,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_package import (
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_runner import (
     CALL_RESERVATION_WALL_SECONDS,
     ENVELOPE_A100_GPU_HOURS,
+    LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS,
     LOADED_WORKER_IDLE_LEASE_SECONDS,
     MODEL_LOAD_RESERVATION_WALL_SECONDS,
 )
@@ -209,10 +210,17 @@ leases, and terminates all peers after any nonzero/abrupt death or global stop.
 Workers reject direct launch without the supervisor authority and parent PID.
 Before importing the model stack, each worker installs Linux `PDEATHSIG=SIGKILL`
 and rechecks the exact parent, so supervisor death cannot orphan GPU workers.
-Every call is reserved before frame decode/processor work; a two-second loaded
-worker idle lease covers the otherwise unreserved gaps between operations and
-remains active after session close until the worker process exits. Model tensors
-and cached allocations are explicitly released before session close.
+Every call is reserved before frame decode/processor work and remains open
+through durable raw-output and ACCEPTED-ledger persistence. Each loaded worker
+also holds a prospective eight-second emergency reservation throughout model
+residency. The two-second idle lease plus polling/termination tail therefore
+cannot cross the envelope before detection. The reservation is consumed only
+after the supervisor observes process exit. Model tensors and cached allocations
+are explicitly released before session close.
+
+The launcher authenticates zero compute contexts, zero utilization, and at
+most 16 MiB used memory on every sealed GPU before initialization. Each worker
+repeats that exact-pair check immediately before its single model load.
 
 The execution uses one global fail-stop coordinator. Authentication, frame or
 processed-input mismatch, an unknown runner/parser, wrong GPU, duplicate or
@@ -477,7 +485,7 @@ def main() -> None:
     reserved = 2 * (
         EXPECTED_UNIT_COUNT * CALL_RESERVATION_WALL_SECONDS
         + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
-        + 3 * LOADED_WORKER_IDLE_LEASE_SECONDS
+        + 3 * LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
     ) / 3600
     cost = self_hash({
         "status": "FROZEN_FULL_GRID_COST_AND_RESERVATION_PLAN",
@@ -493,10 +501,13 @@ def main() -> None:
         "per_call_hard_reservation_wall_seconds": CALL_RESERVATION_WALL_SECONDS,
         "per_load_hard_reservation_wall_seconds": MODEL_LOAD_RESERVATION_WALL_SECONDS,
         "post_session_process_exit_lease_wall_seconds_per_worker": LOADED_WORKER_IDLE_LEASE_SECONDS,
+        "per_loaded_worker_reusable_emergency_reservation_wall_seconds": LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS,
+        "base_operations_plus_simultaneous_emergency_reservations_a100_gpu_hours": reserved,
         "aggregate_reserved_a100_gpu_hours": reserved,
         "reservation_fits_envelope": reserved <= ENVELOPE_A100_GPU_HOURS,
-        "cost_shield": "hash-chained actual GPU residency plus in-flight reservation accounting; calls reserve before decode/processing; loaded idle gaps are timed and bounded; no start above envelope",
-        "actual_gpu_residency_accounting": "two GPUs times model load, every call, every inter-call output/ledger gap, and explicit model release through session close; the bounded post-close/process-exit tail is included in the aggregate reservation",
+        "cost_shield": "call reservation remains open from pre-decode through durable raw and ACCEPTED persistence; a reusable prospective emergency reservation remains active per loaded worker; elapsed idle consumes and must refresh that reservation before another call; no start above envelope",
+        "actual_gpu_residency_accounting": "two GPUs times model load, call through durable acceptance, every inter-call gap, explicit model release, and supervisor-observed process-exit tail",
+        "gpu_profile_authentication": "all sealed GPUs must have zero compute contexts, zero utilization, and <=16 MiB used memory before initialization and again on each pair before model load",
         "unused_envelope_cannot_authorize_extra_calls_reloads_or_retries": True,
     }, "cost_estimate_payload_sha256")
     write_json_once(PACKAGE / "FULL_GRID_COST_ESTIMATE.json", cost)

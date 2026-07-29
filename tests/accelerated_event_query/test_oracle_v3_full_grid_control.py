@@ -6,6 +6,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_control import (
     GlobalFailStopCoordinator,
     emergency_global_stop,
 )
+import garc_eval.accelerated_event_query.oracle_v3_full_grid_control as control
 
 
 WORKERS = {
@@ -99,7 +100,35 @@ def test_three_closed_worker_sessions_are_required_for_complete_state(tmp_path):
                 worker_id=worker_id, unit_id=unit_id, wall_seconds=0.01
             )
         value.complete_worker_session(worker_id)
+        value.complete_worker_process_exit(worker_id)
     value.mark_complete(4)
     state = value.state()
     assert state["status"] == "PHYSICAL_CALLS_COMPLETE_AWAITING_ANALYSIS"
     assert set(state["worker_sessions_completed"]) == set(WORKERS)
+    assert set(state["worker_processes_exited"]) == set(WORKERS)
+    assert state["reserved_gpu_seconds"] == pytest.approx(0.0)
+
+
+def test_idle_cost_is_accounted_before_next_call_reservation(tmp_path, monkeypatch):
+    value = GlobalFailStopCoordinator(
+        tmp_path,
+        execution_seal_sha256="s" * 64,
+        worker_bindings=WORKERS,
+        envelope_a100_gpu_hours=80.0 / 3600.0,
+        call_reservation_wall_seconds=23.5,
+        model_load_reservation_wall_seconds=30.0,
+        loaded_worker_emergency_reservation_wall_seconds=8.0,
+    )
+    value.initialize()
+    value.start_model_load("W0", [1, 2])
+    value.complete_model_load("W0", 1.0)
+    previous = value.state()["last_gpu_accounted_unix_ns_by_worker"]["W0"]
+    monkeypatch.setattr(control.time, "time_ns", lambda: previous + 8_000_000_000)
+    with pytest.raises(RuntimeError, match="cost reservation"):
+        value.reserve_call(
+            worker_id="W0", gpu_pair=[1, 2], unit_id="U0", call_spec_sha256="a"
+        )
+    state = value.state()
+    assert state["status"] == "STOPPED"
+    assert state["actual_gpu_seconds"] <= state["envelope_gpu_seconds"]
+    assert state["attempted_unit_ids"] == []

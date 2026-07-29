@@ -163,6 +163,7 @@ def run_complete_mock(execution_root: Path) -> dict[str, Any]:
         )
         if unit["unit_id"] == worker["unit_ids"][-1]:
             coordinator.complete_worker_session(unit["worker_id"])
+            coordinator.complete_worker_process_exit(unit["worker_id"])
     coordinator.mark_complete(EXPECTED_UNIT_COUNT)
     supervisor = {
         "status": "MOCK_SUPERVISOR_COMPLETE_NOT_ORACLE",
@@ -301,7 +302,7 @@ def run_fault_injections(root: Path) -> dict[str, Any]:
     os.killpg(processes[0].pid, signal.SIGKILL)
     processes[0].wait(timeout=5)
     try:
-        supervise_workers(supervised, execution_root=c.root)
+        supervise_workers(supervised, execution_root=c.root, coordinator=c)
     except RuntimeError:
         state = c.state()
         results["abrupt_worker_death_global_stop"] = all((

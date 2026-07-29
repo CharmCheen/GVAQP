@@ -220,3 +220,27 @@
   post-session exclusion. The repaired prediction additionally requires model
   and tensor release before close and keeps a closed-but-live PID under the
   same lease until exit; the new fault test passes.
+
+## H18 — A reusable emergency reservation prevents retrospective envelope crossing
+
+- Prediction: each loaded worker holds eight seconds of two-GPU emergency
+  reservation continuously from load start to observed exit; every idle gap
+  consumes the prior reservation, and the next call cannot start unless both a
+  refreshed emergency reserve and its complete call reserve fit under 19.4.
+- Falsification: construct an elapsed gap whose cost leaves insufficient room
+  for the next call and observe any new attempt, or observe actual physical cost
+  above the envelope before STOPPED.
+- Competing explanation: merely recording idle time at the next call detects
+  but does not prevent an overrun when no prospective reserve exists.
+- Status: `SUPPORTED_BY_PROSPECTIVE_RESERVATION_TEST_AWAITING_PACKAGE_REVIEW`.
+
+## H19 — Formal execution rejects a changed or contended GPU profile
+
+- Prediction: before coordinator initialization and again before each model
+  load, all sealed GPUs have zero compute contexts, zero utilization, <=16 MiB
+  used memory, and exact index/name/UUID identity.
+- Falsification: a busy, memory-occupied, or foreign-context GPU reaches
+  `start_model_load` or produces an initialization audit marked exclusive.
+- Competing explanation: UUID identity alone proves hardware identity but not
+  runtime comparability or lack of contention.
+- Status: `SUPPORTED_BY_MOCKS_AND_REAL_BUSY_GPU_REJECTION_AWAITING_IDLE_RUN`.

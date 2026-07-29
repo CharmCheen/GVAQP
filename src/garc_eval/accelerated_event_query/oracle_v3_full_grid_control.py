@@ -106,6 +106,7 @@ class GlobalFailStopCoordinator:
         envelope_a100_gpu_hours: float,
         call_reservation_wall_seconds: float,
         model_load_reservation_wall_seconds: float,
+        loaded_worker_emergency_reservation_wall_seconds: float = 8.0,
     ):
         self.root = root
         self.state_path = root / "GLOBAL_EXECUTION_STATE.json"
@@ -116,6 +117,9 @@ class GlobalFailStopCoordinator:
         self.envelope_gpu_seconds = envelope_a100_gpu_hours * 3600.0
         self.call_reservation_gpu_seconds = 2.0 * call_reservation_wall_seconds
         self.load_reservation_gpu_seconds = 2.0 * model_load_reservation_wall_seconds
+        self.loaded_worker_emergency_reservation_gpu_seconds = (
+            2.0 * loaded_worker_emergency_reservation_wall_seconds
+        )
 
     def initialize(self) -> dict[str, Any]:
         self.root.mkdir(parents=True, exist_ok=True)
@@ -132,6 +136,8 @@ class GlobalFailStopCoordinator:
                 "model_load_workers": [],
                 "model_load_completed_workers": [],
                 "worker_sessions_completed": [],
+                "worker_processes_exited": [],
+                "loaded_worker_emergency_reservation_workers": [],
                 "last_gpu_accounted_unix_ns_by_worker": {},
                 "attempted_unit_ids": [],
                 "in_flight_unit_ids": [],
@@ -164,15 +170,24 @@ class GlobalFailStopCoordinator:
             if len(state["model_load_workers"]) >= 3:
                 self._stop_locked(state, "unauthorized_model_reload", "fourth model load")
                 raise RuntimeError("fourth model load is forbidden")
-            self._reserve_or_stop(state, self.load_reservation_gpu_seconds)
+            self._reserve_or_stop(
+                state,
+                self.load_reservation_gpu_seconds
+                + self.loaded_worker_emergency_reservation_gpu_seconds,
+            )
             state["model_load_workers"].append(worker_id)
-            state["reserved_gpu_seconds"] += self.load_reservation_gpu_seconds
+            state["loaded_worker_emergency_reservation_workers"].append(worker_id)
+            state["reserved_gpu_seconds"] += (
+                self.load_reservation_gpu_seconds
+                + self.loaded_worker_emergency_reservation_gpu_seconds
+            )
             self._write_state(state)
             append_hash_chain(self.ledger_path, {
                 "event": "MODEL_LOAD_STARTED",
                 "worker_id": worker_id,
                 "gpu_pair": gpu_pair,
                 "reserved_gpu_seconds": self.load_reservation_gpu_seconds,
+                "emergency_reservation_gpu_seconds": self.loaded_worker_emergency_reservation_gpu_seconds,
             })
 
     def complete_model_load(self, worker_id: str, wall_seconds: float) -> None:
@@ -228,7 +243,7 @@ class GlobalFailStopCoordinator:
             if unit_id in state["attempted_unit_ids"]:
                 self._stop_locked(state, "duplicate_unit_attempt", unit_id)
                 raise RuntimeError("duplicate unit attempt")
-            self._account_idle_locked(state, worker_id, time.time_ns())
+            self._account_and_refresh_idle_locked(state, worker_id, time.time_ns())
             self._reserve_or_stop(state, self.call_reservation_gpu_seconds)
             state["attempted_unit_ids"].append(unit_id)
             state["in_flight_unit_ids"].append(unit_id)
@@ -289,11 +304,35 @@ class GlobalFailStopCoordinator:
             if not expected <= completed:
                 self._stop_locked(state, "integrity_mismatch", f"incomplete_worker:{worker_id}")
                 raise RuntimeError("cannot close an incomplete worker session")
-            self._account_idle_locked(state, worker_id, time.time_ns())
+            self._account_idle_locked(
+                state, worker_id, time.time_ns(), consume_emergency_reservation=False
+            )
             state["worker_sessions_completed"].append(worker_id)
             self._write_state(state)
             append_hash_chain(self.ledger_path, {
                 "event": "WORKER_SESSION_COMPLETED",
+                "worker_id": worker_id,
+            })
+
+    def complete_worker_process_exit(self, worker_id: str) -> None:
+        """Conservatively account session-close through observed process exit."""
+
+        with self._locked():
+            state = self.state()
+            self._require_running(state)
+            if worker_id not in state["worker_sessions_completed"]:
+                self._stop_locked(state, "missing_attempt_ledger_transition", worker_id)
+                raise RuntimeError("worker exited before session close")
+            if worker_id in state["worker_processes_exited"]:
+                self._stop_locked(state, "retry", f"duplicate_process_exit:{worker_id}")
+                raise RuntimeError("worker process exit already recorded")
+            self._account_idle_locked(
+                state, worker_id, time.time_ns(), consume_emergency_reservation=True
+            )
+            state["worker_processes_exited"].append(worker_id)
+            self._write_state(state)
+            append_hash_chain(self.ledger_path, {
+                "event": "WORKER_PROCESS_EXITED",
                 "worker_id": worker_id,
             })
 
@@ -313,9 +352,12 @@ class GlobalFailStopCoordinator:
                 len(state["model_load_workers"]) == 3,
                 len(state["model_load_completed_workers"]) == 3,
                 len(state["worker_sessions_completed"]) == 3,
+                len(state["worker_processes_exited"]) == 3,
                 len(state["attempted_unit_ids"]) == expected_unit_count,
                 len(state["completed_unit_ids"]) == expected_unit_count,
                 not state["in_flight_unit_ids"],
+                not state["loaded_worker_emergency_reservation_workers"],
+                abs(state["reserved_gpu_seconds"]) <= 1e-9,
             )):
                 self._stop_locked(state, "integrity_mismatch", "incomplete terminal accounting")
                 raise RuntimeError("cannot mark incomplete run complete")
@@ -330,15 +372,32 @@ class GlobalFailStopCoordinator:
             raise RuntimeError("cost reservation exceeds authorization envelope")
 
     def _account_idle_locked(
-        self, state: dict[str, Any], worker_id: str, now_unix_ns: int
-    ) -> None:
+        self,
+        state: dict[str, Any],
+        worker_id: str,
+        now_unix_ns: int,
+        *,
+        consume_emergency_reservation: bool,
+    ) -> float:
         previous = state["last_gpu_accounted_unix_ns_by_worker"].get(worker_id)
         if previous is None:
             self._stop_locked(state, "missing_attempt_ledger_transition", worker_id)
             raise RuntimeError("loaded-worker cost clock is missing")
+        if worker_id not in state["loaded_worker_emergency_reservation_workers"]:
+            self._stop_locked(state, "missing_attempt_ledger_transition", worker_id)
+            raise RuntimeError("loaded-worker emergency reservation is missing")
         idle_gpu_seconds = max(0.0, 2.0 * (now_unix_ns - previous) / 1e9)
+        state["reserved_gpu_seconds"] -= (
+            self.loaded_worker_emergency_reservation_gpu_seconds
+        )
+        state["loaded_worker_emergency_reservation_workers"].remove(worker_id)
         state["actual_gpu_seconds"] += idle_gpu_seconds
         state["last_gpu_accounted_unix_ns_by_worker"][worker_id] = now_unix_ns
+        if idle_gpu_seconds > self.loaded_worker_emergency_reservation_gpu_seconds + 1e-9:
+            self._stop_locked(
+                state, "cost_envelope_exceeded", f"loaded_idle_reservation:{worker_id}"
+            )
+            raise RuntimeError("loaded-worker idle exceeded emergency reservation")
         if state["actual_gpu_seconds"] + state["reserved_gpu_seconds"] > (
             state["envelope_gpu_seconds"] + 1e-9
         ):
@@ -346,6 +405,25 @@ class GlobalFailStopCoordinator:
                 state, "cost_envelope_exceeded", f"loaded_idle:{worker_id}"
             )
             raise RuntimeError("loaded-worker idle time exceeded cost envelope")
+        if not consume_emergency_reservation:
+            self._reserve_or_stop(
+                state, self.loaded_worker_emergency_reservation_gpu_seconds
+            )
+            state["reserved_gpu_seconds"] += (
+                self.loaded_worker_emergency_reservation_gpu_seconds
+            )
+            state["loaded_worker_emergency_reservation_workers"].append(worker_id)
+        return idle_gpu_seconds
+
+    def _account_and_refresh_idle_locked(
+        self, state: dict[str, Any], worker_id: str, now_unix_ns: int
+    ) -> None:
+        self._account_idle_locked(
+            state,
+            worker_id,
+            now_unix_ns,
+            consume_emergency_reservation=False,
+        )
 
     def _require_running(self, state: dict[str, Any]) -> None:
         if state["status"] != "READY":

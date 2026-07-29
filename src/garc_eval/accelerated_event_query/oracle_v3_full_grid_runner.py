@@ -56,7 +56,10 @@ from .oracle_v3_parser import parse_oracle_v3_response
 CALL_RESERVATION_WALL_SECONDS = 23.579961206763983
 MODEL_LOAD_RESERVATION_WALL_SECONDS = 30.0
 LOADED_WORKER_IDLE_LEASE_SECONDS = 2.0
+LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS = 8.0
 ENVELOPE_A100_GPU_HOURS = 19.4
+GPU_IDLE_MAX_MEMORY_MIB = 16
+GPU_IDLE_MAX_UTILIZATION_PERCENT = 0
 EXPECTED_CUBLAS_WORKSPACE_CONFIG = ":4096:8"
 if os.environ.get("CUBLAS_WORKSPACE_CONFIG") not in {
     None, EXPECTED_CUBLAS_WORKSPACE_CONFIG
@@ -86,6 +89,9 @@ def _coordinator(schedule: dict[str, Any], seal_sha256: str, execution_root: Pat
         envelope_a100_gpu_hours=ENVELOPE_A100_GPU_HOURS,
         call_reservation_wall_seconds=CALL_RESERVATION_WALL_SECONDS,
         model_load_reservation_wall_seconds=MODEL_LOAD_RESERVATION_WALL_SECONDS,
+        loaded_worker_emergency_reservation_wall_seconds=(
+            LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
+        ),
     )
 
 
@@ -137,6 +143,71 @@ def _gpu_identity(index: int) -> str:
     if not value.startswith(f"{index},") or "NVIDIA A100-SXM4-80GB" not in value:
         raise RuntimeError(f"unexpected physical GPU identity: {value}")
     return value
+
+
+def authenticate_gpu_exclusivity(indices: list[int]) -> dict[str, Any]:
+    """Require exact target GPUs to be idle and free of compute contexts."""
+
+    requested = set(indices)
+    if len(requested) != len(indices):
+        raise RuntimeError("duplicate GPU in exclusivity request")
+    table = subprocess.check_output([
+        "nvidia-smi",
+        "--query-gpu=index,uuid,utilization.gpu,memory.used",
+        "--format=csv,noheader,nounits",
+    ], text=True)
+    rows: dict[int, dict[str, Any]] = {}
+    for line in table.splitlines():
+        tokens = [token.strip() for token in line.split(",")]
+        if len(tokens) != 4:
+            raise RuntimeError("unparseable GPU telemetry")
+        index = int(tokens[0])
+        if index in requested:
+            rows[index] = {
+                "index": index,
+                "uuid": tokens[1],
+                "utilization_percent": int(tokens[2]),
+                "memory_used_mib": int(tokens[3]),
+            }
+    if set(rows) != requested:
+        raise RuntimeError("GPU telemetry lacks a sealed target")
+    applications = subprocess.check_output([
+        "nvidia-smi",
+        "--query-compute-apps=gpu_uuid,pid,used_memory",
+        "--format=csv,noheader,nounits",
+    ], text=True)
+    target_uuids = {row["uuid"] for row in rows.values()}
+    contexts = []
+    for line in applications.splitlines():
+        if not line.strip():
+            continue
+        tokens = [token.strip() for token in line.split(",")]
+        if len(tokens) != 3:
+            raise RuntimeError("unparseable GPU process telemetry")
+        if tokens[0] in target_uuids:
+            contexts.append({
+                "gpu_uuid": tokens[0],
+                "pid": tokens[1],
+                "used_memory_mib": tokens[2],
+            })
+    idle = all(
+        row["utilization_percent"] <= GPU_IDLE_MAX_UTILIZATION_PERCENT
+        and row["memory_used_mib"] <= GPU_IDLE_MAX_MEMORY_MIB
+        for row in rows.values()
+    )
+    if contexts or not idle:
+        raise RuntimeError(
+            f"GPU exclusivity/idleness authentication failed: "
+            f"rows={list(rows.values())}:contexts={contexts}"
+        )
+    return {
+        "physical_gpu_ids": sorted(requested),
+        "gpus": [rows[index] for index in sorted(rows)],
+        "compute_contexts": contexts,
+        "maximum_memory_used_mib": GPU_IDLE_MAX_MEMORY_MIB,
+        "maximum_utilization_percent": GPU_IDLE_MAX_UTILIZATION_PERCENT,
+        "authenticated_exclusive_idle": True,
+    }
 
 
 def _verify_model_files(prereg: dict[str, Any]) -> str:
@@ -213,6 +284,11 @@ def initialize_execution(execution_root: Path = EXECUTION) -> dict[str, Any]:
         row["worker_id"]: [_gpu_identity(index) for index in row["physical_gpu_ids"]]
         for row in schedule["workers"]
     }
+    exclusivity = authenticate_gpu_exclusivity(sorted({
+        index
+        for row in schedule["workers"]
+        for index in row["physical_gpu_ids"]
+    }))
     model_manifest_sha256 = _verify_model_files(prereg)
     seal_sha = sha256_file(SEAL)
     coordinator = _coordinator(schedule, seal_sha, execution_root)
@@ -223,6 +299,7 @@ def initialize_execution(execution_root: Path = EXECUTION) -> dict[str, Any]:
         "compute_approval_sha256": sha256_file(APPROVAL),
         "model_file_manifest_sha256": model_manifest_sha256,
         "gpu_identities": identities,
+        "gpu_exclusivity": exclusivity,
         "exact_worker_count": 3,
         "exact_call_count": EXPECTED_UNIT_COUNT,
         "checkpoint_loaded": False,
@@ -360,6 +437,7 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
     if torch.cuda.device_count() != 2:
         raise RuntimeError("worker must see exactly two logical CUDA devices")
     identities = [_gpu_identity(index) for index in declared_physical_gpus]
+    worker_gpu_exclusivity = authenticate_gpu_exclusivity(declared_physical_gpus)
     initialization = load_json(EXECUTION / "INITIALIZATION_AUDIT.json")
     if initialization.get("execution_seal_sha256") != sha256_file(SEAL):
         raise RuntimeError("missing exact initialization audit")
@@ -466,10 +544,7 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
             trimmed = [output[len(ids):] for ids, output in zip(inputs.input_ids, generated)]
             raw = processor.batch_decode(trimmed, skip_special_tokens=True)[0]
             parsed = parse_oracle_v3_response(raw)
-            call_seconds = time.perf_counter() - call_started
-            coordinator.complete_call(
-                worker_id=worker_id, unit_id=unit_id, wall_seconds=call_seconds
-            )
+            pre_persistence_call_seconds = time.perf_counter() - call_started
             identity = {
                 "experiment_id": prereg["experiment_id"],
                 "execution_seal_sha256": sha256_file(SEAL),
@@ -511,9 +586,10 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
                     "worker_id": worker_id,
                     "physical_gpu_ids": declared_physical_gpus,
                     "gpu_identities": identities,
+                    "worker_preload_gpu_exclusivity": worker_gpu_exclusivity,
                     "model_load_seconds": load_seconds,
                     "inference_seconds": inference_seconds,
-                    "total_call_seconds": call_seconds,
+                    "pre_persistence_call_seconds": pre_persistence_call_seconds,
                     "processor_class": f"{processor.__class__.__module__}.{processor.__class__.__qualname__}",
                     "python": platform.python_version(),
                     "torch": torch.__version__,
@@ -529,6 +605,10 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
                 "event": "ACCEPTED", **common,
                 "record_payload_sha256": record["record_payload_sha256"],
             })
+            call_seconds = time.perf_counter() - call_started
+            coordinator.complete_call(
+                worker_id=worker_id, unit_id=unit_id, wall_seconds=call_seconds
+            )
         # End GPU residency before declaring the worker session closed.  A
         # hang anywhere before this point remains covered by the loaded-idle
         # lease; a live process after closure remains covered until exit.
@@ -539,9 +619,6 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
         torch.cuda.empty_cache()
         torch.cuda.synchronize()
         coordinator.complete_worker_session(worker_id)
-        state = coordinator.state()
-        if len(state["completed_unit_ids"]) == EXPECTED_UNIT_COUNT:
-            coordinator.mark_complete(EXPECTED_UNIT_COUNT)
     except Exception as exc:
         try:
             if coordinator.state()["status"] == "READY":

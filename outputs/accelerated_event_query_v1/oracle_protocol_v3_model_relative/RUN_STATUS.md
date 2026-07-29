@@ -197,3 +197,40 @@ synchronizes before session close. A closed-but-live worker remains under the
 two-second idle lease until process exit; that worst-case tail is included in
 the aggregate envelope reservation. 124 tests pass, including a direct
 closed-session/live-process fault. A100 use remains 0.0 hours.
+
+## Third review: prospective cost and GPU-profile rejection
+
+Seal V4 `48c71239…` reproduced byte-identical 1,475-unit, 30,932-frame, and
+1,475-tensor identities. Three independent processes redecoded/reprocessed
+567/561/347 units successfully; 124 tests and the complete mock with eleven
+fault injections passed. Independent review nevertheless returned
+`REVISE_FULL_GRID_PREREGISTRATION`.
+
+Decisive negative evidence:
+
+- The advertised 19.3758015-hour reservation included call/load maxima and
+  process-exit tails but not 1,475 cumulative durable-output/ledger gaps. Only
+  29.53 ms average wall gap per call remained in the envelope, while detection
+  was retrospective and could occur after physical overrun.
+- All sealed GPUs became occupied by a foreign eight-GPU workload during
+  review. The runner authenticated identity, but not zero utilization or
+  absence of compute contexts, so it would have accepted a changed cost/runtime
+  profile.
+
+Implemented local revision:
+
+- A call reservation now remains open from before decode through durable raw
+  output and ACCEPTED-ledger persistence.
+- Every worker prospectively holds a reusable eight-second emergency
+  reservation from load start until supervisor-observed process exit. Idle
+  cost consumes the old reservation; a fresh reservation and next call are
+  admitted only if the remaining envelope supports both.
+- The supervisor, rather than the last worker, records all three process exits
+  and only then marks physical completion.
+- Initialization and each worker preload now require zero compute contexts,
+  zero utilization, and <=16 MiB used memory on the exact sealed GPUs. The
+  current foreign workload is correctly rejected.
+- 129 tests pass. Formal calls and expanded-budget GPU use remain zero.
+
+Current decision: rebuild/reseal and independently review the prospective cost
+shield. Do not start formal execution while any sealed GPU fails exclusivity.

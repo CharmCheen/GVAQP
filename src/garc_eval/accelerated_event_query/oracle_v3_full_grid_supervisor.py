@@ -27,6 +27,7 @@ from .oracle_v3_full_grid_runner import (
     CALL_RESERVATION_WALL_SECONDS,
     LOADED_WORKER_IDLE_LEASE_SECONDS,
     MODEL_LOAD_RESERVATION_WALL_SECONDS,
+    _coordinator,
     initialize_execution,
     validate_compute_approval,
 )
@@ -147,6 +148,7 @@ def supervise_workers(
     workers: list[WorkerProcess],
     *,
     execution_root: Path,
+    coordinator: Any,
     sleep: Callable[[float], None] = time.sleep,
     now_ns: Callable[[], int] = time.time_ns,
 ) -> dict[str, Any]:
@@ -207,9 +209,11 @@ def supervise_workers(
                     )
                     _terminate_all(workers)
                     raise RuntimeError(detail)
+                coordinator.complete_worker_process_exit(worker.worker_id)
                 completed.add(worker.worker_id)
             if len(completed) < 3:
                 sleep(POLL_SECONDS)
+        coordinator.mark_complete(1475)
         state = load_json(execution_root / "GLOBAL_EXECUTION_STATE.json")
         if state.get("status") != "PHYSICAL_CALLS_COMPLETE_AWAITING_ANALYSIS":
             emergency_global_stop(
@@ -276,7 +280,10 @@ def launch_supervised_execution(execution_root: Path = EXECUTION) -> dict[str, A
             process=process,
             spawned_at_unix_ns=time.time_ns(),
         ))
-    result = supervise_workers(workers, execution_root=execution_root)
+    coordinator = _coordinator(schedule, sha256_file(SEAL), execution_root)
+    result = supervise_workers(
+        workers, execution_root=execution_root, coordinator=coordinator
+    )
     audit = {
         **result,
         "initialization_payload_sha256": initialization[
