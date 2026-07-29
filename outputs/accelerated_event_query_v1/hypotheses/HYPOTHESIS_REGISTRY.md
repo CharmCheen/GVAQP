@@ -2,7 +2,7 @@
 
 ## H1 — Operational-oracle adequacy
 
-Status: `ACTIVE — V1 FALSIFIED; V2 PROCESSED-INPUT REPAIR SEALED, REREVIEW PENDING`
+Status: `ACTIVE — V1 FALSIFIED; V2 SEALED AND INDEPENDENTLY CLEARED FOR APPROVAL REQUEST`
 
 - Why important: every formal reference and downstream conclusion depends on the 32B response-required label being parseable and sufficiently stable.
 - Expected observation under H1: authenticated identical inputs are exactly reproducible within and across replicas; strict parse success is complete; both decided classes have cross-video support; unknowns do not collapse the sample; exact 2/4 fps inputs do not cause unresolved polarity/boundary/response instability; post-output review finds no systematic unsupported or missed claims.

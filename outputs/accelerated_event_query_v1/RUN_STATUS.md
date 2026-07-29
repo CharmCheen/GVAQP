@@ -26,6 +26,7 @@ Under the same hard deadline and event-precision requirement, determine whether 
 - The repair now binds an explicit 32-entry call manifest (24 base, six sensitivity, two replica anchors), a direct full-file 35.53 GB model rehash, duplicate-key rejection, a pre-model-load crash audit under per-shard locks, exact `INFERENCE_STARTED`/`INFERENCE_COMPLETED`/`ACCEPTED` accounting, a mandatory exact-scope user-approval artifact, and a sealed grounding/finalization protocol. These repairs have passed local falsification tests but not yet the second independent audit.
 - CPU-only validation passed for the sealed 10/11/11 shard schedules: all bindings, 19 current model files, three video hashes, exact frame indices/RGB hashes, and 32 call identities matched. Physical oracle calls remain 0/32.
 - The second audit passed the eight original blocker areas but returned NO-GO on one new linked defect: metadata/frame identities could match while the actual processor tensor bundle differed. The replacement seal now forces the ledger's PREPARED and INFERENCE_STARTED tensor hashes to equal the accepted record, requires actual processed-input equality for repeats and replica anchors, and requires one preprocessing-runtime fingerprint. Local tests and CPU-only 10/11/11 validation pass; independent re-review of this replacement seal is pending.
+- Independent re-review of commit `b09f99974` / seal `58f84d2c...` returned GO for requesting explicit user approval. The reviewer independently injected a processed-input reconciliation mismatch and observed fail-closed behavior; all sealed bindings matched and no new blocking bypass was found.
 
 ## Active hypotheses
 
@@ -52,8 +53,8 @@ Under the same hard deadline and event-precision requirement, determine whether 
 
 ## Missing decision-critical evidence
 
-- independent re-review of the processed-input replacement seal
-- H1 V2 32-call targeted pilot (expected 32, observed 0; approval is premature until the second review passes)
+- explicit user approval for the exact H1 V2 32-call targeted pilot
+- H1 V2 targeted pilot execution and post-output grounding (expected 32, observed 0)
 - complete new-query 32B oracle with raw output retention
 - operational reference events
 - full YOLO scan and K3 event-recall ceiling
@@ -63,4 +64,4 @@ Under the same hard deadline and event-precision requirement, determine whether 
 
 ## Next action
 
-Obtain a second independent review of the exact execution seal, generation accounting, crash behavior, model provenance, and finalizer. Request compute approval for the 32-call targeted pilot only if that review returns GO.
+Request explicit user approval for the exact sealed 32-call targeted pilot. If approved, materialize the approval artifact and run only the three authorized 10/11/11 shards; if not approved, retain the current nonterminal state without spending oracle budget.

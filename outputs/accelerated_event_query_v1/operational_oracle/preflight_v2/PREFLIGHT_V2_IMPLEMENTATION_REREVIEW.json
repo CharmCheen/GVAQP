@@ -1,0 +1,34 @@
+{
+  "status": "PASS_INDEPENDENT_IMPLEMENTATION_REREVIEW",
+  "decision": "GO_FOR_REQUESTING_EXPLICIT_USER_COMPUTE_APPROVAL",
+  "reviewer": "preflight_adversarial_review (Fermat)",
+  "reviewed_commit": "b09f99974",
+  "reviewed_execution_seal_sha256": "58f84d2ce389aa3cf8122137911b0ec8429d6db80d84766afd88ee870b6b7576",
+  "physical_oracle_calls_observed": 0,
+  "attempt_ledgers_observed": 0,
+  "verification": {
+    "prepared_started_accepted_record_processed_input_equality": "PASS",
+    "preload_crash_reconciliation_processed_input_check": "PASS",
+    "same_process_actual_processed_tensor_equality": "PASS",
+    "three_anchor_actual_processed_tensor_equality": "PASS",
+    "preprocessing_runtime_provenance_and_global_equality": "PASS",
+    "sealed_source_and_preregistration_bindings": "PASS",
+    "focused_tests": "51/51 PASS",
+    "injected_reconciliation_mismatch": "FAILED_CLOSED_AS_REQUIRED"
+  },
+  "original_eight_blocker_areas": {
+    "explicit_32_call_schedule_and_source_seal": "PASS",
+    "direct_current_19_file_model_provenance": "PASS",
+    "exact_accepted_artifact_input_record_triples": "PASS",
+    "exact_generation_accounting_no_retry_and_explicit_approval": "PASS",
+    "preload_recovery_and_shard_locking": "PASS",
+    "all_unique_positive_claims_including_4fps_and_anchors_grounded": "PASS",
+    "frozen_fail_closed_finalizer": "PASS",
+    "recursive_duplicate_json_key_rejection": "PASS"
+  },
+  "nonblocking_limitations": [
+    "user approval evidence and reviewer independence are governance assertions, not cryptographic identity proofs",
+    "a recovered ACCEPTED event may be appended before the final processed-input reconciliation check, but the runner immediately raises on mismatch and the analyzer independently rejects it, so it cannot pass or retry"
+  ],
+  "scope": "This GO permits only a request for explicit user approval of the exact 32-call targeted pilot. It is not compute approval and does not authorize a representative or full oracle."
+}
