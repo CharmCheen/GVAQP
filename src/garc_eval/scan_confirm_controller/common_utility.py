@@ -31,6 +31,7 @@ def congestion_bucket(size: int) -> str:
 class FixedUpperCostEstimator:
     def __init__(self, samples: list[float]):
         values = np.asarray(samples, dtype=float)
+        self.mean = float(values.mean())
         q99 = float(np.quantile(values, 0.99))
         self.delta = max(0.25, float(values.max()) - q99 + 0.25)
         self.bound = q99 + self.delta

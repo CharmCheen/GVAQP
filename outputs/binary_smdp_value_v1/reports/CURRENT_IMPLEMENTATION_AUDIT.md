@@ -29,6 +29,15 @@ time plus median post-processing fallback where necessary. Admission in the
 parent environment uses a causal estimator's Q90; the common-utility safe replay
 replaces it with the workload's observed maximum plus 0.25 s.
 
+Asset recheck after attempting a clean environment construction found an
+important qualification: the V1 per-unit cost set is complete (567/567), but
+the untracked V0 raw JSONL named by `runner.py` is absent from Git and from the
+server. Only a few V0 costs survive in complete combined traces. The repaired
+loader therefore marks missing V0 durations as `IMPUTED_TASK_MEDIAN_MISSING_V0_RAW`
+to keep diagnostic replay executable. Results depending on those durations are
+cost-sensitivity evidence, not complete measured-trace evidence, and cannot by
+themselves establish cross-video headroom.
+
 ## Oracle and counterfactual support
 
 `TraceReplayEnvironment` is deepcopy-able in current tests and inspection: its
