@@ -13,9 +13,9 @@ from pathlib import Path
 
 from garc_eval.accelerated_event_query.oracle_protocol import (
     canonical_hash,
-    parse_response_strict,
     sha256_file,
 )
+from garc_eval.accelerated_event_query.oracle_response_protocol import loads_unique, parse_response_strict
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,14 +24,26 @@ PREREG = OUT / "operational_oracle/PREFLIGHT_V2_PREREGISTRATION.json"
 RAW = OUT / "operational_oracle/preflight_v2/raw"
 ATTEMPTS = OUT / "operational_oracle/preflight_v2/attempts"
 METRICS = OUT / "operational_oracle/preflight_v2/PREFLIGHT_METRICS_V2.json"
+GROUNDING_QUEUE = OUT / "operational_oracle/preflight_v2/GROUNDING_QUEUE_V2.json"
 RUNNER_PATH = ROOT / "scripts/run_accelerated_event_query_oracle_preflight_v2.py"
+SEAL = OUT / "operational_oracle/preflight_v2/PREFLIGHT_V2_EXECUTION_SEAL.json"
 
 
 def load(path: Path) -> dict:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return loads_unique(path.read_text(encoding="utf-8"))
 
 
 def load_runner():
+    seal = load(SEAL)
+    if seal.get("status") != "FROZEN_BEFORE_NEW_QUERY_ORACLE_EXECUTION":
+        raise RuntimeError("execution seal is not frozen")
+    if seal.get("preregistration_sha256") != sha256_file(PREREG):
+        raise RuntimeError("execution seal/preregistration mismatch")
+    sources = seal["sources"]
+    if sha256_file(RUNNER_PATH) != sources["runner_source_sha256"]:
+        raise RuntimeError("sealed runner source mismatch")
+    if sha256_file(Path(__file__)) != sources["analyzer_source_sha256"]:
+        raise RuntimeError("sealed analyzer source mismatch")
     spec = importlib.util.spec_from_file_location("aeq_preflight_v2_runner", RUNNER_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError("cannot import V2 runner")
@@ -43,10 +55,10 @@ def load_runner():
 def validate_attempt_chain(path: Path) -> list[dict]:
     if not path.exists():
         raise RuntimeError(f"missing attempt ledger: {path}")
-    rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
+    rows = [loads_unique(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
     previous = None
-    starts = {}
-    terminals = set()
+    states = {}
+    identities = {}
     for row in rows:
         claimed = row.get("event_sha256")
         payload = {key: value for key, value in row.items() if key != "event_sha256"}
@@ -54,21 +66,24 @@ def validate_attempt_chain(path: Path) -> list[dict]:
             raise RuntimeError(f"invalid attempt hash chain: {path}")
         previous = claimed
         attempt = row.get("attempt_id")
-        if row.get("event") == "STARTED":
-            if attempt in starts:
-                raise RuntimeError("duplicate STARTED attempt")
-            starts[attempt] = row
-        elif row.get("event") in {"ACCEPTED", "FAILED", "RECOVERED_ACCEPTED", "RECOVERED_UNCERTAIN"}:
-            if attempt not in starts or attempt in terminals:
-                raise RuntimeError("orphan or duplicate terminal attempt")
-            if (row.get("artifact"), row.get("input_identity_sha256")) != (
-                starts[attempt].get("artifact"), starts[attempt].get("input_identity_sha256")
-            ):
-                raise RuntimeError("attempt terminal identity mismatch")
-            terminals.add(attempt)
-        else:
-            raise RuntimeError("unknown attempt event")
-    if set(starts) != terminals:
+        event = row.get("event")
+        prior = states.get(attempt)
+        allowed = {
+            None: {"PREPARED"},
+            "PREPARED": {"INFERENCE_STARTED", "PRE_INFERENCE_ABORTED"},
+            "INFERENCE_STARTED": {"INFERENCE_COMPLETED", "GENERATION_FAILED", "UNCERTAIN_INTERRUPTION"},
+            "INFERENCE_COMPLETED": {"ACCEPTED", "FAILED_POST_INFERENCE"},
+        }
+        if event not in allowed.get(prior, set()):
+            raise RuntimeError(f"invalid attempt transition {prior!r}->{event!r}")
+        identity = (row.get("artifact"), row.get("call_spec_sha256"), row.get("input_identity_sha256"))
+        if attempt in identities and identities[attempt] != identity:
+            raise RuntimeError("attempt identity changed across events")
+        identities[attempt] = identity
+        states[attempt] = event
+    if any(state not in {"ACCEPTED", "PRE_INFERENCE_ABORTED", "GENERATION_FAILED",
+                         "UNCERTAIN_INTERRUPTION", "FAILED_POST_INFERENCE"}
+           for state in states.values()):
         raise RuntimeError(f"unterminated attempts in {path}")
     return rows
 
@@ -88,6 +103,8 @@ def expected_calls() -> tuple[object, dict, dict, dict, list[dict]]:
                 "identity": runner.identity_payload(prereg, call, frame_set),
             })
     review = load(ROOT / prereg["bindings"]["review_consensus_path"])
+    if len(calls) != 32 or len({(row["shard"], row["artifact"]) for row in calls}) != 32:
+        raise RuntimeError("sealed authorization did not resolve to exactly 32 unique calls")
     return runner, prereg, selection, review, calls
 
 
@@ -114,6 +131,9 @@ def validate_record(runner, expected: dict, record: dict) -> None:
     effective = parsed.get("label") if status == "ok" else "parse_failure"
     if (record.get("parsed"), record.get("parse_status"), record.get("effective_label")) != (parsed, status, effective):
         raise RuntimeError(f"stored parse mismatch: {expected['artifact']}")
+    for key in ("attempt_id", "processed_input_sha256", "generated_token_ids_sha256"):
+        if not isinstance(record.get(key), str) or not record[key]:
+            raise RuntimeError(f"missing authenticated {key}: {expected['artifact']}")
     runtime = record.get("runtime", {})
     declared = runtime.get("declared_physical_gpus")
     identities = runtime.get("gpu_identities")
@@ -122,6 +142,28 @@ def validate_record(runner, expected: dict, record: dict) -> None:
     if any(not isinstance(text, str) or not text.startswith(f"{index},")
            for text, index in zip(identities, declared)):
         raise RuntimeError(f"GPU identity/declaration mismatch: {expected['artifact']}")
+    seal = load(SEAL)
+    expected_runtime = {
+        "runner_source_sha256": seal["sources"]["runner_source_sha256"],
+        "execution_seal_sha256": sha256_file(SEAL),
+        "model_file_manifest_sha256": load(PREREG)["bindings"]["model_file_manifest_sha256"],
+        "parameter_dtypes": ["torch.bfloat16"],
+        "logical_cuda_devices": [0, 1],
+        "cublas_workspace_config": ":4096:8",
+        "deterministic_algorithms_enabled": True,
+    }
+    for key, value in expected_runtime.items():
+        if runtime.get(key) != value:
+            raise RuntimeError(f"runtime provenance mismatch for {key}: {expected['artifact']}")
+    if not isinstance(runtime.get("hf_device_map"), dict):
+        raise RuntimeError(f"missing resolved device map: {expected['artifact']}")
+    approval_relative = runtime.get("compute_approval_path")
+    if not isinstance(approval_relative, str):
+        raise RuntimeError(f"missing compute approval path: {expected['artifact']}")
+    approval_path = ROOT / approval_relative
+    observed_approval_sha256 = runner.validate_compute_approval(approval_path, load(PREREG))
+    if runtime.get("compute_approval_sha256") != observed_approval_sha256:
+        raise RuntimeError(f"compute approval hash mismatch: {expected['artifact']}")
 
 
 def evaluate_records(prereg: dict, selection: dict, review: dict, records: dict) -> dict:
@@ -205,7 +247,6 @@ def evaluate_records(prereg: dict, selection: dict, review: dict, records: dict)
     semantic = []
     contradictions = []
     model_unknown_on_decided = []
-    positive_claims = []
     for candidate, clip in clips.items():
         model = base[candidate]
         model_label = model["effective_label"] if model else None
@@ -216,9 +257,6 @@ def evaluate_records(prereg: dict, selection: dict, review: dict, records: dict)
                                    "model_label": model_label, "review_label": review_label})
         if model_label == "unknown" and review_label in {"relevant", "not_relevant"}:
             model_unknown_on_decided.append(candidate)
-        if model_label == "relevant":
-            positive_claims.append({"candidate_id": candidate, "cause": model["parsed"]["cause"],
-                                    "evidence": model["parsed"]["evidence"]})
         semantic.append({"candidate_id": candidate, "model_label": model_label,
                          "review_label": review_label, "decided_polarity_contradiction": opposite})
     contradiction_videos = {row["video_id"] for row in contradictions}
@@ -254,7 +292,7 @@ def evaluate_records(prereg: dict, selection: dict, review: dict, records: dict)
         "semantic_contradictions": contradictions,
         "model_unknown_on_review_decided": model_unknown_on_decided,
         "systematic_semantic_failure": systematic,
-        "positive_claims_pending_grounding": positive_claims,
+        "positive_claims_pending_grounding": positive_claims_from_records(records),
         "numeric_gate_pass": numeric_pass,
         "overall_gate_status": overall,
         "repeat_pairs": pairs,
@@ -263,12 +301,99 @@ def evaluate_records(prereg: dict, selection: dict, review: dict, records: dict)
     }
 
 
+def positive_claims_from_records(records: dict) -> list[dict]:
+    """Return every unique positive raw claim, including 4-fps and replica calls."""
+    claims = {}
+    for (shard, artifact), record in sorted(records.items()):
+        if record.get("effective_label") != "relevant" or record.get("parse_status") != "ok":
+            continue
+        parsed = record["parsed"]
+        identity = {
+            "model_input_identity_sha256": record["model_input_identity_sha256"],
+            "raw_response_sha256": record["raw_response_sha256"],
+            "event_start_sec": parsed["event_start_sec"],
+            "event_end_sec": parsed["event_end_sec"],
+            "required_response": parsed["required_response"],
+            "cause": parsed["cause"],
+            "evidence": parsed["evidence"],
+        }
+        claim_id = canonical_hash(identity)
+        if claim_id not in claims:
+            claims[claim_id] = {"claim_id": claim_id, **identity, "source_artifacts": []}
+        claims[claim_id]["source_artifacts"].append(f"{shard}/{artifact}")
+    return [claims[key] for key in sorted(claims)]
+
+
+def build_grounding_queue(prereg: dict, records: dict) -> dict:
+    claims = positive_claims_from_records(records)
+    queue = {
+        "status": "AWAITING_INDEPENDENT_VISUAL_REVIEW",
+        "experiment_id": prereg["experiment_id"],
+        "execution_seal_sha256": sha256_file(SEAL),
+        "grounding_protocol_sha256": prereg["bindings"]["grounding_protocol_sha256"],
+        "claim_count": len(claims),
+        "claims": claims,
+    }
+    queue["queue_payload_sha256"] = canonical_hash(queue)
+    return queue
+
+
+def validate_authorized_accounting(calls: list[dict], records: dict, all_events: list[dict]) -> Counter:
+    forbidden = {"GENERATION_FAILED", "UNCERTAIN_INTERRUPTION", "FAILED_POST_INFERENCE"}
+    if any(row["event"] in forbidden for row in all_events):
+        raise RuntimeError("failed or uncertain physical generation is incompatible with PASS")
+    authorized_event_identities = {
+        (row["artifact"], row["call"]["call_spec_sha256"], canonical_hash(row["identity"]))
+        for row in calls
+    }
+    if any((event.get("artifact"), event.get("call_spec_sha256"),
+            event.get("input_identity_sha256")) not in authorized_event_identities
+           for event in all_events):
+        raise RuntimeError("attempt ledger contains an unauthorized artifact/input/call triple")
+    for row in calls:
+        record = records[(row["shard"], row["artifact"])]
+        relevant = [event for event in all_events
+                    if event["artifact"] == row["artifact"]
+                    and event["call_spec_sha256"] == row["call"]["call_spec_sha256"]
+                    and event["input_identity_sha256"] == record["input_identity_sha256"]]
+        for event_name in ("INFERENCE_STARTED", "INFERENCE_COMPLETED", "ACCEPTED"):
+            selected = [event for event in relevant if event["event"] == event_name]
+            if len(selected) != 1:
+                raise RuntimeError(f"{row['artifact']} does not have exactly one {event_name}")
+        started = next(event for event in relevant if event["event"] == "INFERENCE_STARTED")
+        completed = next(event for event in relevant if event["event"] == "INFERENCE_COMPLETED")
+        accepted = next(event for event in relevant if event["event"] == "ACCEPTED")
+        if len({started["attempt_id"], completed["attempt_id"], accepted["attempt_id"], record["attempt_id"]}) != 1:
+            raise RuntimeError(f"attempt linkage mismatch: {row['artifact']}")
+        if completed.get("generated_token_ids_sha256") != record["generated_token_ids_sha256"]:
+            raise RuntimeError(f"completion/output hash mismatch: {row['artifact']}")
+        exact_triple = (row["artifact"], record["input_identity_sha256"], record["record_sha256"])
+        if (accepted["artifact"], accepted["input_identity_sha256"], accepted.get("record_sha256")) != exact_triple:
+            raise RuntimeError(f"accepted artifact/input/record triple mismatch: {row['artifact']}")
+    physical_counts = Counter(row["event"] for row in all_events)
+    if any(physical_counts[name] != 32 for name in ("INFERENCE_STARTED", "INFERENCE_COMPLETED", "ACCEPTED")):
+        raise RuntimeError(f"authorized physical generation counts are not exact: {dict(physical_counts)}")
+    return physical_counts
+
+
 def write_once(path: Path, value: dict) -> None:
     if path.exists():
         raise RuntimeError(f"refusing to overwrite metrics: {path}")
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(".json.tmp")
     temporary.write_text(json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False, allow_nan=False) + "\n", encoding="utf-8")
+    os.replace(temporary, path)
+
+
+def write_once_or_match(path: Path, value: dict) -> None:
+    payload = json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False, allow_nan=False) + "\n"
+    if path.exists():
+        if path.read_text(encoding="utf-8") != payload:
+            raise RuntimeError(f"existing write-once artifact differs: {path}")
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(".json.tmp")
+    temporary.write_text(payload, encoding="utf-8")
     os.replace(temporary, path)
 
 
@@ -286,10 +411,15 @@ def main() -> None:
         return
     if missing:
         raise RuntimeError(f"preflight incomplete: {len(missing)} missing artifacts")
+    expected_raw_paths = {(RAW / row["shard"] / row["artifact"]).resolve() for row in calls}
+    observed_raw_paths = {path.resolve() for path in RAW.glob("*/*.json")} if RAW.exists() else set()
+    if observed_raw_paths != expected_raw_paths:
+        raise RuntimeError("raw directory contains missing or unauthorized JSON artifacts")
     records = {}
     runner_hashes = set()
     git_heads = set()
     gpu_pairs_by_shard = defaultdict(set)
+    compute_approval_hashes = set()
     for row in calls:
         record = load(RAW / row["shard"] / row["artifact"])
         validate_record(runner, row, record)
@@ -297,27 +427,36 @@ def main() -> None:
         runner_hashes.add(record["runtime"]["runner_source_sha256"])
         git_heads.add(record["runtime"]["git_head"])
         gpu_pairs_by_shard[row["shard"]].add(tuple(record["runtime"]["declared_physical_gpus"]))
+        compute_approval_hashes.add(record["runtime"]["compute_approval_sha256"])
     if len(runner_hashes) != 1 or len(git_heads) != 1:
         raise RuntimeError("mixed runner source or git commits across raw records")
+    if len(compute_approval_hashes) != 1:
+        raise RuntimeError("mixed compute approvals across raw records")
     if any(len(pairs) != 1 for pairs in gpu_pairs_by_shard.values()):
         raise RuntimeError("a shard used multiple physical GPU pairs")
     resolved_pairs = [next(iter(gpu_pairs_by_shard[shard])) for shard in runner.SHARDS]
     if len(set(resolved_pairs)) != 3 or len({gpu for pair in resolved_pairs for gpu in pair}) != 6:
         raise RuntimeError("cross-replica shards did not use three disjoint GPU pairs")
     attempt_counts = {}
+    all_events = []
     for shard in runner.SHARDS:
         events = validate_attempt_chain(ATTEMPTS / f"{shard}.jsonl")
-        accepted_hashes = {row.get("record_sha256") for row in events
-                           if row["event"] in {"ACCEPTED", "RECOVERED_ACCEPTED"}}
-        required_hashes = {record["record_sha256"] for (record_shard, _), record in records.items()
-                           if record_shard == shard}
-        if not required_hashes.issubset(accepted_hashes):
-            raise RuntimeError(f"raw records lack accepted attempt evidence for {shard}")
+        all_events.extend(events)
         attempt_counts[shard] = len(events)
+    physical_counts = validate_authorized_accounting(calls, records, all_events)
+    queue = build_grounding_queue(prereg, records)
     result = {**completeness, "artifact_authentication_pass": True,
               "runner_source_sha256": next(iter(runner_hashes)), "git_head": next(iter(git_heads)),
+              "analyzer_source_sha256": sha256_file(Path(__file__)),
+              "execution_seal_sha256": sha256_file(SEAL),
+              "compute_approval_sha256": next(iter(compute_approval_hashes)),
               "attempt_event_counts": attempt_counts,
+              "authorized_generation_accounting_pass": True,
+              "physical_generation_event_counts": dict(physical_counts),
+              "grounding_queue_path": str(GROUNDING_QUEUE.relative_to(ROOT)),
+              "grounding_queue_payload_sha256": queue["queue_payload_sha256"],
               **evaluate_records(prereg, selection, review, records)}
+    write_once_or_match(GROUNDING_QUEUE, queue)
     write_once(METRICS, result)
     print(json.dumps(result, indent=2, sort_keys=True))
 

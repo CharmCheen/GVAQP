@@ -36,3 +36,14 @@
 - Fail-closed evidence: the analyzer rehashes raw records, reparses raw text, compares exact frames/model-input identities, validates GPU provenance and attempt chains, rejects mixed runner commits, requires three disjoint GPU pairs, and cannot emit final pass before positive-claim grounding.
 - Falsification tests: synthetic all-unknown, all-negative, and all-positive oracles fail class support; raw and frame tampering fail authentication; a valid mixed result remains pending claim review. The focused suite has 38 passing tests.
 - Remaining uncertainty: these claims require independent code inspection; no physical oracle call has occurred.
+
+## Cycle 03 — 2026-07-29 — FIRST V2 IMPLEMENTATION REVIEW / FAIL-CLOSED REPAIR
+
+- Decision: retain `REVISE_ORACLE_PROTOCOL`; do not request or spend oracle compute yet.
+- Decisive evidence: independent review rejected the first V2 runner/analyzer because schedule and source execution were not sealed, model provenance was insufficiently direct, accepted ledgers were not exact triples, physical retries and crash ambiguity were possible, sensitivity positives escaped grounding, duplicate JSON keys were accepted, and no frozen final PASS path existed.
+- Main competing explanation: the 32-call arithmetic and raw self-hashes looked sufficient under normal completion. This was rejected because mutation and crash cases could still change the physical experiment or admit unauthenticated evidence.
+- Repair evidence: an explicit self-hashed 32-call manifest now fixes 24/6/2 calls across 10/11/11 shards; all 19 model files (35,532,291,229 bytes) were directly rehashed; source/protocol hashes are execution-sealed; ledger transitions distinguish pre-inference preparation from physical generation; a started call can never be automatically retried; and every unique positive, including 4 fps output, is routed through a frozen review/finalizer.
+- Falsification evidence: mutated call totals, stale model-audit status, wrong accepted triples, concurrent shard launch, interrupted generation, post-generation crash recovery, duplicate JSON keys, sensitivity boundary/response failures, systematic semantic contradictions, incomplete/unsupported grounding, and malformed compute approval were tested. The focused suite has 49 passing tests.
+- Key uncertainty: the repaired seal has not yet received an independent GO, and physical oracle calls remain 0/32.
+- CPU-only verification: the sealed DALI/HANGZHOU/WUHAN schedules passed at 10/11/11 calls; all current model, video, exact-frame, and call identities matched. This consumes no oracle calls and does not test H1.
+- Next action: return the exact seal to the independent reviewer. Any material defect requires a new seal; only GO permits a user compute-approval request.

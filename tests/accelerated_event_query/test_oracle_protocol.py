@@ -4,8 +4,8 @@ import pytest
 
 from garc_eval.accelerated_event_query.oracle_protocol import (
     exact_sample_indices,
-    parse_response_strict,
 )
+from garc_eval.accelerated_event_query.oracle_response_protocol import parse_response_strict
 
 
 def response(**overrides) -> str:
@@ -69,3 +69,9 @@ def test_strict_parser_accepts_all_three_well_formed_labels():
         cause="occluded pedestrian",
         unknown_reason="occlusion prevents path assessment",
     ))[1] == "ok"
+
+
+def test_strict_parser_rejects_duplicate_json_keys():
+    duplicate = response().replace('"label": "relevant"', '"label": "relevant", "label": "not_relevant"')
+    _, status = parse_response_strict(duplicate)
+    assert status == "parse_error:ValueError"

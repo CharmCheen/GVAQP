@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import fcntl
 import gc
 import hashlib
 import json
@@ -14,17 +15,20 @@ import time
 from fractions import Fraction
 from pathlib import Path
 
-os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
-os.environ.setdefault("HF_HUB_OFFLINE", "1")
-os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+EXPECTED_CUBLAS_WORKSPACE_CONFIG = ":4096:8"
+if os.environ.get("CUBLAS_WORKSPACE_CONFIG") not in {None, EXPECTED_CUBLAS_WORKSPACE_CONFIG}:
+    raise RuntimeError("conflicting CUBLAS_WORKSPACE_CONFIG was set before oracle startup")
+os.environ["CUBLAS_WORKSPACE_CONFIG"] = EXPECTED_CUBLAS_WORKSPACE_CONFIG
+os.environ["HF_HUB_OFFLINE"] = "1"
+os.environ["TRANSFORMERS_OFFLINE"] = "1"
 
 from garc_eval.accelerated_event_query.oracle_protocol import (
     canonical_hash,
     extract_exact_frames,
-    parse_response_strict,
     public_frame_record,
     sha256_file,
 )
+from garc_eval.accelerated_event_query.oracle_response_protocol import loads_unique, parse_response_strict
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,11 +36,13 @@ OUT = ROOT / "outputs/accelerated_event_query_v1"
 PREREG = OUT / "operational_oracle/PREFLIGHT_V2_PREREGISTRATION.json"
 RAW = OUT / "operational_oracle/preflight_v2/raw"
 ATTEMPTS = OUT / "operational_oracle/preflight_v2/attempts"
+LOCKS = OUT / "operational_oracle/preflight_v2/locks"
+SEAL = OUT / "operational_oracle/preflight_v2/PREFLIGHT_V2_EXECUTION_SEAL.json"
 SHARDS = ("DALI", "HANGZHOU", "WUHAN")
 
 
 def load(path: Path) -> dict:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return loads_unique(path.read_text(encoding="utf-8"))
 
 
 def atomic_json(path: Path, value: object) -> None:
@@ -61,6 +67,19 @@ def atomic_text(path: Path, value: str) -> None:
         os.close(directory_fd)
 
 
+def validate_execution_seal(component: str = "runner") -> dict:
+    seal = load(SEAL)
+    if seal.get("status") != "FROZEN_BEFORE_NEW_QUERY_ORACLE_EXECUTION":
+        raise RuntimeError("execution seal is not frozen")
+    if seal.get("preregistration_sha256") != sha256_file(PREREG):
+        raise RuntimeError("execution seal/preregistration mismatch")
+    source_key = f"{component}_source_sha256"
+    source_path = ROOT / seal["sources"][f"{component}_source_path"]
+    if Path(__file__).resolve() == source_path.resolve() and sha256_file(source_path) != seal["sources"][source_key]:
+        raise RuntimeError(f"execution seal/{component} source mismatch")
+    return seal
+
+
 def validate_bindings(prereg: dict) -> None:
     for key, expected in prereg["bindings"].items():
         if not key.endswith("_path"):
@@ -73,11 +92,71 @@ def validate_bindings(prereg: dict) -> None:
         if observed != prereg["bindings"][hash_key]:
             raise RuntimeError(f"binding mismatch for {path}: {observed}")
     model_audit = load(ROOT / prereg["bindings"]["model_identity_audit_path"])
-    if model_audit["expected_model_content_hash"] != prereg["bindings"]["model_content_hash"]:
+    if not all([
+        model_audit.get("status") == "PASS",
+        model_audit.get("all_current_sha256_values_match_prior_manifest") is True,
+        model_audit.get("expected_model_content_hash") == prereg["bindings"]["model_content_hash"],
+    ]):
         raise RuntimeError("model audit/content binding mismatch")
+    model_manifest = load(ROOT / prereg["bindings"]["model_file_manifest_path"])
+    if not all([
+        model_manifest.get("status") == "PASS_DIRECT_FULL_REHASH",
+        model_manifest.get("file_count") == 19,
+        model_manifest.get("model_content_hash") == prereg["bindings"]["model_content_hash"],
+        canonical_hash(model_manifest.get("files")) == prereg["bindings"]["model_content_hash"],
+    ]):
+        raise RuntimeError("full model-file manifest is invalid")
+
+
+def verify_current_model_files(prereg: dict, config: dict) -> str:
+    manifest_path = ROOT / prereg["bindings"]["model_file_manifest_path"]
+    manifest = load(manifest_path)
+    model_path = ROOT / config["oracle"]["model_path"]
+    expected = {row["file"]: row for row in manifest["files"]}
+    observed_names = {path.name for path in model_path.iterdir() if path.is_file()}
+    if observed_names != set(expected):
+        raise RuntimeError("current model file set differs from frozen manifest")
+    rows = []
+    for name in sorted(expected):
+        path = model_path / name
+        row = {"file": name, "sha256": sha256_file(path), "size_bytes": path.stat().st_size}
+        if row != expected[name]:
+            raise RuntimeError(f"current model file mismatch: {name}")
+        rows.append(row)
+    if canonical_hash(rows) != prereg["bindings"]["model_content_hash"]:
+        raise RuntimeError("current canonical model hash mismatch")
+    return sha256_file(manifest_path)
+
+
+def validate_compute_approval(path: Path, prereg: dict) -> str:
+    resolved = path.resolve()
+    if not resolved.is_relative_to((OUT / "operational_oracle/preflight_v2").resolve()):
+        raise RuntimeError("compute approval must be stored inside the sealed preflight directory")
+    approval = load(resolved)
+    expected_keys = {
+        "status", "experiment_id", "execution_seal_sha256", "authorized_call_manifest_sha256",
+        "approved_physical_call_count", "approval_scope", "user_approval_evidence",
+    }
+    if set(approval) != expected_keys:
+        raise RuntimeError("compute approval schema mismatch")
+    expected_scope = "exactly the 32 manifest calls; no automatic physical-generation retry; no representative or full oracle"
+    if not all([
+        approval["status"] == "APPROVED_BY_USER",
+        approval["experiment_id"] == prereg["experiment_id"],
+        approval["execution_seal_sha256"] == sha256_file(SEAL),
+        approval["authorized_call_manifest_sha256"] == prereg["bindings"]["authorized_call_manifest_sha256"],
+        approval["approved_physical_call_count"] == prereg["workload"]["total_physical_calls"] == 32,
+        approval["approval_scope"] == expected_scope,
+        isinstance(approval["user_approval_evidence"], str),
+        bool(approval["user_approval_evidence"].strip()),
+        "FILL" not in approval["user_approval_evidence"],
+    ]):
+        raise RuntimeError("compute approval does not authorize this exact sealed 32-call pilot")
+    return sha256_file(resolved)
 
 
 def frozen_context() -> tuple[dict, dict, dict, dict, dict]:
+    validate_execution_seal("runner")
     prereg = load(PREREG)
     validate_bindings(prereg)
     config = load(ROOT / prereg["bindings"]["config_path"])
@@ -96,21 +175,49 @@ def frozen_context() -> tuple[dict, dict, dict, dict, dict]:
 
 def schedule_for_shard(prereg: dict, selection: dict, shard: str) -> list[dict]:
     clips = {row["candidate_id"]: row for row in selection["clips"]}
+    manifest = load(ROOT / prereg["bindings"]["authorized_call_manifest_path"])
+    counts = manifest["counts_by_variant"]
+    workload = prereg["workload"]
+    required = {
+        "total": (manifest["authorized_call_count"], workload["total_physical_calls"], 32),
+        "base": (counts.get("base"), workload["same_process_base_calls"], 24),
+        "sensitivity": (counts.get("fps_sensitivity"), workload["sampling_sensitivity_calls"], 6),
+        "anchor": (counts.get("cross_replica_anchor"), workload["additional_cross_replica_calls"], 2),
+    }
+    if any(len(set(values)) != 1 for values in required.values()) or not all(manifest["assertions"].values()):
+        raise RuntimeError(f"authorized call manifest/prereg arithmetic mismatch: {required}")
+    if [row["ordinal"] for row in manifest["calls"]] != list(range(32)):
+        raise RuntimeError("authorized call ordinals are not canonical")
+    if len({row["artifact_path"] for row in manifest["calls"]}) != 32:
+        raise RuntimeError("authorized artifact paths are not unique")
     schedule = []
-    sensitivity = set(prereg["workload"]["sensitivity_candidate_ids"])
-    for clip in selection["clips"]:
-        if clip["video_id"] != shard:
+    for row in manifest["calls"]:
+        unsigned = {key: value for key, value in row.items() if key != "call_spec_sha256"}
+        if row.get("call_spec_sha256") != canonical_hash(unsigned):
+            raise RuntimeError(f"call manifest self-hash mismatch: {row.get('artifact_name')}")
+        expected_path = f"outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/{row['execution_shard']}/{row['artifact_name']}"
+        if row.get("artifact_path") != expected_path:
+            raise RuntimeError(f"call manifest artifact-path mismatch: {row['artifact_name']}")
+        if row["execution_shard"] != shard:
             continue
-        for repeat in (0, 1):
-            schedule.append({"clip": clip, "variant": "base", "repeat_index": repeat,
-                             "sampling_fps": 2.0, "execution_shard": shard})
-        if clip["candidate_id"] in sensitivity:
-            schedule.append({"clip": clip, "variant": "fps_sensitivity", "repeat_index": 0,
-                             "sampling_fps": 4.0, "execution_shard": shard})
-    if shard != "DALI":
-        anchor = clips[prereg["workload"]["cross_replica_anchor_candidate_id"]]
-        schedule.append({"clip": anchor, "variant": "cross_replica_anchor", "repeat_index": 0,
-                         "sampling_fps": 2.0, "execution_shard": shard})
+        clip = clips[row["candidate_id"]]
+        for field in ("video_id", "start_time", "end_time"):
+            if row[field] != clip[field]:
+                raise RuntimeError(f"call manifest/selection mismatch: {row['artifact_name']}:{field}")
+        call = {"clip": clip, "variant": row["variant"], "repeat_index": row["repeat_index"],
+                "sampling_fps": float(row["sampling_fps"]), "execution_shard": shard,
+                "call_spec_sha256": row["call_spec_sha256"]}
+        if artifact_name(call) != row["artifact_name"]:
+            raise RuntimeError("call manifest artifact-name mismatch")
+        frame_manifest = load(ROOT / prereg["bindings"]["frame_manifest_path"])
+        matched = [item for item in frame_manifest["frame_sets"]
+                   if item["candidate_id"] == row["candidate_id"]
+                   and float(item["sampling_fps"]) == float(row["sampling_fps"])]
+        if len(matched) != 1 or (matched[0]["frame_count"], matched[0]["frame_set_sha256"]) != (
+            row["frame_count"], row["frame_set_sha256"]
+        ):
+            raise RuntimeError(f"call/frame manifest mismatch: {row['artifact_name']}")
+        schedule.append(call)
     return schedule
 
 
@@ -129,6 +236,9 @@ def identity_payload(prereg: dict, call: dict, frame_set: dict) -> dict:
     clip = call["clip"]
     return {
         "experiment_id": prereg["experiment_id"],
+        "execution_seal_sha256": sha256_file(SEAL),
+        "authorized_call_manifest_sha256": prereg["bindings"]["authorized_call_manifest_sha256"],
+        "call_spec_sha256": call["call_spec_sha256"],
         "execution_shard": call["execution_shard"],
         "candidate_id": clip["candidate_id"],
         "video_id": clip["video_id"],
@@ -150,7 +260,7 @@ def identity_payload(prereg: dict, call: dict, frame_set: dict) -> dict:
 
 def model_input_identity(payload: dict, frames: list[dict]) -> str:
     stable = {key: value for key, value in payload.items()
-              if key not in {"execution_shard", "variant", "repeat_index"}}
+              if key not in {"execution_shard", "variant", "repeat_index", "call_spec_sha256"}}
     return canonical_hash({**stable, "frames": [public_frame_record(row) for row in frames]})
 
 
@@ -193,10 +303,10 @@ def append_attempt(shard: str, event: dict) -> None:
 
 def read_attempts(shard: str) -> list[dict]:
     path = ATTEMPTS / f"{shard}.jsonl"
-    rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()] if path.exists() else []
+    rows = [loads_unique(line) for line in path.read_text(encoding="utf-8").splitlines()] if path.exists() else []
     previous = None
-    started = set()
-    terminal = set()
+    states = {}
+    identities = {}
     for row in rows:
         claimed = row.get("event_sha256")
         payload = {key: value for key, value in row.items() if key != "event_sha256"}
@@ -204,39 +314,119 @@ def read_attempts(shard: str) -> list[dict]:
             raise RuntimeError(f"attempt ledger hash-chain mismatch: {path}")
         previous = claimed
         attempt_id = row.get("attempt_id")
-        if row.get("event") == "STARTED":
-            if attempt_id in started:
-                raise RuntimeError("duplicate STARTED attempt")
-            started.add(attempt_id)
-        elif row.get("event") in {"ACCEPTED", "FAILED", "RECOVERED_ACCEPTED", "RECOVERED_UNCERTAIN"}:
-            if attempt_id not in started or attempt_id in terminal:
-                raise RuntimeError("orphan or duplicate terminal attempt")
-            terminal.add(attempt_id)
-        else:
-            raise RuntimeError("unknown attempt event")
+        event = row.get("event")
+        prior = states.get(attempt_id)
+        allowed = {
+            None: {"PREPARED"},
+            "PREPARED": {"INFERENCE_STARTED", "PRE_INFERENCE_ABORTED"},
+            "INFERENCE_STARTED": {"INFERENCE_COMPLETED", "GENERATION_FAILED", "UNCERTAIN_INTERRUPTION"},
+            "INFERENCE_COMPLETED": {"ACCEPTED", "FAILED_POST_INFERENCE"},
+        }
+        if event not in allowed.get(prior, set()):
+            raise RuntimeError(f"invalid attempt transition {prior!r}->{event!r}")
+        identity = (row.get("artifact"), row.get("call_spec_sha256"), row.get("input_identity_sha256"))
+        if attempt_id in identities and identity != identities[attempt_id]:
+            raise RuntimeError("attempt identity changed across events")
+        identities[attempt_id] = identity
+        states[attempt_id] = event
     return rows
 
 
-def close_interrupted_attempts(
-    shard: str, artifact: str, input_identity: str, raw_record_sha256: str | None
-) -> None:
+def event_identity(call: dict, input_identity: str, attempt_id: str) -> dict:
+    return {
+        "attempt_id": attempt_id,
+        "artifact": artifact_name(call),
+        "call_spec_sha256": call["call_spec_sha256"],
+        "input_identity_sha256": input_identity,
+    }
+
+
+def reconcile_shard(
+    schedule: list[dict], prereg: dict, frame_sets: dict, shard: str,
+    compute_approval_sha256: str | None = None,
+) -> list[dict]:
+    """Reconcile durable state before model load; never retry a started generation."""
+    authorized = {}
+    for call in schedule:
+        frame_set = frame_sets[(call["clip"]["candidate_id"], call["sampling_fps"])]
+        payload = identity_payload(prereg, call, frame_set)
+        authorized[artifact_name(call)] = (call, frame_set, payload, canonical_hash(payload))
     rows = read_attempts(shard)
-    terminal = {row["attempt_id"] for row in rows if row["event"] != "STARTED"}
-    open_rows = [row for row in rows if row["event"] == "STARTED"
-                 and row["attempt_id"] not in terminal
-                 and row.get("artifact") == artifact
-                 and row.get("input_identity_sha256") == input_identity]
-    if len(open_rows) > 1:
-        raise RuntimeError("multiple interrupted attempts for one artifact")
-    if open_rows:
-        append_attempt(shard, {
-            "event": "RECOVERED_ACCEPTED" if raw_record_sha256 else "RECOVERED_UNCERTAIN",
-            "attempt_id": open_rows[0]["attempt_id"],
-            "artifact": artifact,
-            "input_identity_sha256": input_identity,
-            "record_sha256": raw_record_sha256,
-            "recovery_reason": "valid durable raw exists" if raw_record_sha256 else "prior process ended without durable raw",
-        })
+    by_attempt = {}
+    starts_by_artifact = {}
+    for row in rows:
+        artifact = row.get("artifact")
+        if artifact not in authorized:
+            raise RuntimeError(f"unauthorized artifact in attempt ledger: {artifact}")
+        call, _, _, input_identity = authorized[artifact]
+        expected = (call["call_spec_sha256"], input_identity)
+        if (row.get("call_spec_sha256"), row.get("input_identity_sha256")) != expected:
+            raise RuntimeError(f"attempt identity mismatch: {artifact}")
+        by_attempt.setdefault(row["attempt_id"], []).append(row)
+        if row["event"] == "INFERENCE_STARTED":
+            starts_by_artifact[artifact] = starts_by_artifact.get(artifact, 0) + 1
+    if any(count > 1 for count in starts_by_artifact.values()):
+        raise RuntimeError("physical generation retry detected")
+
+    pending = []
+    for artifact, (call, frame_set, payload, input_identity) in authorized.items():
+        destination = RAW / shard / artifact
+        record = load(destination) if destination.exists() else None
+        if record is not None:
+            validate_existing_record(record, payload, frame_set)
+            if compute_approval_sha256 is not None and record.get("runtime", {}).get(
+                "compute_approval_sha256"
+            ) != compute_approval_sha256:
+                raise RuntimeError(f"raw/compute-approval mismatch: {artifact}")
+        attempts = [events for events in by_attempt.values() if events[0]["artifact"] == artifact]
+        for events in attempts:
+            last = events[-1]["event"]
+            identity = event_identity(call, input_identity, events[0]["attempt_id"])
+            if last == "PREPARED":
+                append_attempt(shard, {"event": "PRE_INFERENCE_ABORTED", **identity,
+                                       "reason": "prior process ended before generation"})
+            elif last == "INFERENCE_STARTED":
+                append_attempt(shard, {"event": "UNCERTAIN_INTERRUPTION", **identity,
+                                       "reason": "generation start was durable but completion was not"})
+                raise RuntimeError(f"uncertain prior physical generation; approval required: {artifact}")
+            elif last == "INFERENCE_COMPLETED":
+                if record is None:
+                    append_attempt(shard, {"event": "FAILED_POST_INFERENCE", **identity,
+                                           "reason": "generation completed without durable raw"})
+                    raise RuntimeError(f"completed generation lost its raw artifact: {artifact}")
+                if record.get("attempt_id") != events[0]["attempt_id"]:
+                    raise RuntimeError(f"raw/attempt mismatch: {artifact}")
+                append_attempt(shard, {"event": "ACCEPTED", **identity,
+                                       "record_sha256": record["record_sha256"],
+                                       "generated_token_ids_sha256": record["generated_token_ids_sha256"],
+                                       "recovered_after_crash": True})
+            elif last in {"GENERATION_FAILED", "UNCERTAIN_INTERRUPTION", "FAILED_POST_INFERENCE"}:
+                raise RuntimeError(f"prior physical generation failed/uncertain; approval required: {artifact}")
+        rows = read_attempts(shard)
+        accepted = [row for row in rows if row["event"] == "ACCEPTED" and row["artifact"] == artifact]
+        if record is not None:
+            triple = (artifact, input_identity, record["record_sha256"])
+            matching = [row for row in accepted if (
+                row["artifact"], row["input_identity_sha256"], row.get("record_sha256")
+            ) == triple and row.get("generated_token_ids_sha256") == record.get("generated_token_ids_sha256")]
+            if len(matching) != 1:
+                raise RuntimeError(f"raw lacks exactly one accepted artifact/input/hash triple: {artifact}")
+        elif starts_by_artifact.get(artifact, 0):
+            raise RuntimeError(f"refusing physical retry: {artifact}")
+        else:
+            pending.append(call)
+    return pending
+
+
+def acquire_shard_lock(shard: str):
+    LOCKS.mkdir(parents=True, exist_ok=True)
+    handle = (LOCKS / f"{shard}.lock").open("a+", encoding="utf-8")
+    try:
+        fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        handle.close()
+        raise RuntimeError(f"execution shard is already locked: {shard}")
+    return handle
 
 
 def verify_video_files(schedule: list[dict], videos: dict) -> None:
@@ -263,9 +453,10 @@ def validate_frames(call: dict, videos: dict, frame_set: dict) -> list[dict]:
 
 
 def validate_only(shard: str) -> dict:
-    prereg, _, selection, videos, frame_sets = frozen_context()
+    prereg, config, selection, videos, frame_sets = frozen_context()
     schedule = schedule_for_shard(prereg, selection, shard)
     verify_video_files(schedule, videos)
+    model_manifest_sha256 = verify_current_model_files(prereg, config)
     rows = []
     for call in schedule:
         frame_set = frame_sets[(call["clip"]["candidate_id"], call["sampling_fps"])]
@@ -274,19 +465,34 @@ def validate_only(shard: str) -> dict:
         rows.append({"artifact": artifact_name(call), "frame_count": len(frames),
                      "input_identity_sha256": canonical_hash(payload),
                      "model_input_identity_sha256": model_input_identity(payload, frames)})
-    return {"status": "PASS", "execution_shard": shard, "expected_calls": len(schedule), "calls": rows}
+    return {"status": "PASS", "execution_shard": shard, "expected_calls": len(schedule),
+            "model_file_manifest_sha256": model_manifest_sha256, "calls": rows}
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--execution-shard", choices=SHARDS, required=True)
-    parser.add_argument("--declared-physical-gpus", required=True)
-    parser.add_argument("--validate-only", action="store_true")
-    args = parser.parse_args()
-    if args.validate_only:
-        print(json.dumps(validate_only(args.execution_shard), indent=2, sort_keys=True))
-        return
+def tensor_bundle_sha256(values) -> str:
+    digest = hashlib.sha256()
+    for key in sorted(values):
+        value = values[key]
+        digest.update(key.encode())
+        if hasattr(value, "detach"):
+            tensor = value.detach().cpu().contiguous()
+            digest.update(str(tensor.dtype).encode())
+            digest.update(json.dumps(list(tensor.shape)).encode())
+            digest.update(tensor.view(dtype=__import__("torch").uint8).numpy().tobytes())
+        else:
+            digest.update(repr(value).encode())
+    return digest.hexdigest()
 
+
+def _logical_cuda_devices(model) -> list[int]:
+    devices = set()
+    for parameter in model.parameters():
+        if parameter.device.type == "cuda":
+            devices.add(int(parameter.device.index))
+    return sorted(devices)
+
+
+def run_physical(args, approval_path: Path, compute_approval_sha256: str) -> None:
     import numpy as np
     import torch
     import transformers
@@ -308,6 +514,13 @@ def main() -> None:
     prereg, config, selection, videos, frame_sets = frozen_context()
     schedule = schedule_for_shard(prereg, selection, args.execution_shard)
     verify_video_files(schedule, videos)
+    model_manifest_sha256 = verify_current_model_files(prereg, config)
+    schedule = reconcile_shard(
+        schedule, prereg, frame_sets, args.execution_shard, compute_approval_sha256
+    )
+    if not schedule:
+        print(json.dumps({"status": "ALREADY_COMPLETE", "execution_shard": args.execution_shard}))
+        return
     prompt = (ROOT / prereg["bindings"]["prompt_path"]).read_text(encoding="utf-8")
     model_path = ROOT / config["oracle"]["model_path"]
     load_started = time.perf_counter()
@@ -325,6 +538,15 @@ def main() -> None:
     torch.cuda.manual_seed_all(int(prereg["workload"]["seed"]))
     torch.cuda.synchronize()
     load_seconds = time.perf_counter() - load_started
+    logical_cuda_devices = _logical_cuda_devices(model)
+    if logical_cuda_devices != [0, 1]:
+        raise RuntimeError(f"model parameters do not occupy both visible GPUs: {logical_cuda_devices}")
+    parameter_dtypes = sorted({str(parameter.dtype) for parameter in model.parameters()})
+    if parameter_dtypes != ["torch.bfloat16"]:
+        raise RuntimeError(f"model did not resolve to BF16 parameters: {parameter_dtypes}")
+    hf_device_map = {
+        str(key): str(value) for key, value in sorted(getattr(model, "hf_device_map", {}).items())
+    }
 
     git_head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     git_status = subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True)
@@ -333,25 +555,10 @@ def main() -> None:
         payload = identity_payload(prereg, call, frame_set)
         input_identity = canonical_hash(payload)
         destination = RAW / args.execution_shard / artifact_name(call)
-        existing_record = load(destination) if destination.exists() else None
-        if existing_record is not None:
-            validate_existing_record(existing_record, payload, frame_set)
-        close_interrupted_attempts(args.execution_shard, artifact_name(call), input_identity,
-                                   existing_record.get("record_sha256") if existing_record else None)
-        if destination.exists():
-            rows = read_attempts(args.execution_shard)
-            accepted = any(row["event"] in {"ACCEPTED", "RECOVERED_ACCEPTED"}
-                           and row.get("artifact") == artifact_name(call)
-                           and row.get("input_identity_sha256") == input_identity
-                           and row.get("record_sha256") == existing_record["record_sha256"]
-                           and row.get("attempt_id") for row in rows)
-            if not accepted:
-                raise RuntimeError("durable raw lacks an accepted attempt event")
-            continue
         attempt_id = f"{args.execution_shard}:{artifact_name(call)}:{time.time_ns()}"
-        append_attempt(args.execution_shard, {"event": "STARTED", "attempt_id": attempt_id,
-                                               "artifact": artifact_name(call),
-                                               "input_identity_sha256": input_identity})
+        attempt_identity = event_identity(call, input_identity, attempt_id)
+        generation_started = False
+        generation_completed = False
         try:
             call_started = time.perf_counter()
             frames = validate_frames(call, videos, frame_set)
@@ -371,20 +578,36 @@ def main() -> None:
                 video_metadata=[row[1] for row in video_inputs], padding=True,
                 return_tensors="pt", **kwargs,
             ).to(model.device)
+            processed_input_sha256 = tensor_bundle_sha256(inputs)
+            append_attempt(args.execution_shard, {"event": "PREPARED", **attempt_identity,
+                                                   "processed_input_sha256": processed_input_sha256})
             torch.cuda.synchronize()
             inference_started = time.perf_counter()
-            with torch.no_grad():
-                generated = model.generate(
-                    **inputs, do_sample=False,
-                    max_new_tokens=int(prereg["workload"]["generation"]["max_new_tokens"]),
-                )
+            append_attempt(args.execution_shard, {"event": "INFERENCE_STARTED", **attempt_identity,
+                                                   "processed_input_sha256": processed_input_sha256})
+            generation_started = True
+            try:
+                with torch.no_grad():
+                    generated = model.generate(
+                        **inputs, do_sample=False,
+                        max_new_tokens=int(prereg["workload"]["generation"]["max_new_tokens"]),
+                    )
+            except Exception as exc:
+                append_attempt(args.execution_shard, {"event": "GENERATION_FAILED", **attempt_identity,
+                                                       "error_type": type(exc).__name__, "error": str(exc)})
+                raise
             torch.cuda.synchronize()
             inference_seconds = time.perf_counter() - inference_started
+            generated_token_ids_sha256 = tensor_bundle_sha256({"generated": generated})
+            append_attempt(args.execution_shard, {"event": "INFERENCE_COMPLETED", **attempt_identity,
+                                                   "generated_token_ids_sha256": generated_token_ids_sha256})
+            generation_completed = True
             trimmed = [output[len(ids):] for ids, output in zip(inputs.input_ids, generated)]
             raw = processor.batch_decode(trimmed, skip_special_tokens=True)[0]
             parsed, parse_status = parse_response_strict(raw)
             record = {
                 "identity": payload,
+                "attempt_id": attempt_id,
                 "input_identity_sha256": input_identity,
                 "model_input_identity_sha256": model_input_identity(payload, frames),
                 "frames": [public_frame_record(row) for row in frames],
@@ -393,13 +616,23 @@ def main() -> None:
                 "parsed": parsed,
                 "raw": raw,
                 "raw_response_sha256": hashlib.sha256(raw.encode()).hexdigest(),
+                "processed_input_sha256": processed_input_sha256,
+                "generated_token_ids_sha256": generated_token_ids_sha256,
                 "runtime": {
                     "declared_physical_gpus": declared, "gpu_identities": gpu_identities,
                     "model_load_seconds": load_seconds, "inference_seconds": inference_seconds,
                     "total_call_seconds": time.perf_counter() - call_started,
                     "git_head": git_head, "git_status_sha256": hashlib.sha256(git_status.encode()).hexdigest(),
                     "runner_source_sha256": sha256_file(Path(__file__)),
-                    "parameter_dtypes": sorted({str(parameter.dtype) for parameter in model.parameters()}),
+                    "execution_seal_sha256": sha256_file(SEAL),
+                    "compute_approval_path": str(approval_path.relative_to(ROOT)),
+                    "compute_approval_sha256": compute_approval_sha256,
+                    "model_file_manifest_sha256": model_manifest_sha256,
+                    "parameter_dtypes": parameter_dtypes,
+                    "logical_cuda_devices": logical_cuda_devices,
+                    "hf_device_map": hf_device_map,
+                    "cublas_workspace_config": os.environ["CUBLAS_WORKSPACE_CONFIG"],
+                    "deterministic_algorithms_enabled": torch.are_deterministic_algorithms_enabled(),
                     "torch": torch.__version__, "transformers": transformers.__version__,
                 },
             }
@@ -408,20 +641,49 @@ def main() -> None:
                 raise RuntimeError("destination appeared during inference")
             atomic_json(destination, record)
             append_attempt(args.execution_shard, {"event": "ACCEPTED", "attempt_id": attempt_id,
-                                                   "artifact": artifact_name(call),
-                                                   "input_identity_sha256": input_identity,
-                                                   "record_sha256": record["record_sha256"]})
+                                                   **{k: v for k, v in attempt_identity.items() if k != "attempt_id"},
+                                                   "record_sha256": record["record_sha256"],
+                                                   "generated_token_ids_sha256": generated_token_ids_sha256,
+                                                   "recovered_after_crash": False})
             print(json.dumps({"artifact": str(destination.relative_to(ROOT)),
                               "parse_status": parse_status, "label": record["effective_label"],
                               "inference_seconds": inference_seconds}), flush=True)
             del frames, pil_frames, messages, inputs, generated, trimmed
             gc.collect(); torch.cuda.empty_cache(); torch.cuda.synchronize()
         except Exception as exc:
-            append_attempt(args.execution_shard, {"event": "FAILED", "attempt_id": attempt_id,
-                                                   "artifact": artifact_name(call),
-                                                   "input_identity_sha256": input_identity,
-                                                   "error_type": type(exc).__name__, "error": str(exc)})
+            if not generation_started:
+                rows = read_attempts(args.execution_shard)
+                if rows and rows[-1].get("attempt_id") == attempt_id and rows[-1]["event"] == "PREPARED":
+                    append_attempt(args.execution_shard, {"event": "PRE_INFERENCE_ABORTED", **attempt_identity,
+                                                           "error_type": type(exc).__name__, "error": str(exc)})
+            elif generation_completed and not destination.exists():
+                append_attempt(args.execution_shard, {"event": "FAILED_POST_INFERENCE", **attempt_identity,
+                                                       "error_type": type(exc).__name__, "error": str(exc)})
             raise
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--execution-shard", choices=SHARDS, required=True)
+    parser.add_argument("--declared-physical-gpus", required=True)
+    parser.add_argument("--compute-approval", type=Path)
+    parser.add_argument("--validate-only", action="store_true")
+    args = parser.parse_args()
+    if args.validate_only:
+        print(json.dumps(validate_only(args.execution_shard), indent=2, sort_keys=True))
+        return
+    if args.compute_approval is None:
+        raise RuntimeError("physical execution requires --compute-approval from explicit user authorization")
+    approval_path = args.compute_approval if args.compute_approval.is_absolute() else ROOT / args.compute_approval
+    prereg = load(PREREG)
+    validate_execution_seal("runner")
+    compute_approval_sha256 = validate_compute_approval(approval_path, prereg)
+    lock = acquire_shard_lock(args.execution_shard)
+    try:
+        run_physical(args, approval_path, compute_approval_sha256)
+    finally:
+        fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
+        lock.close()
 
 
 if __name__ == "__main__":

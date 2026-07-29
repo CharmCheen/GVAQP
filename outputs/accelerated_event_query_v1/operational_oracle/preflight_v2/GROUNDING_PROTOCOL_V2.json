@@ -1,0 +1,42 @@
+{
+  "status": "FROZEN_BEFORE_NEW_QUERY_ORACLE_EXECUTION",
+  "protocol_id": "AEQ_PREFLIGHT_V2_INDEPENDENT_CLAIM_GROUNDING",
+  "purpose": "Visually adjudicate every unique positive cause/evidence claim emitted by any authorized base, 4-fps sensitivity, or cross-replica raw response.",
+  "reviewer_requirements": {
+    "independent_from_oracle_generation": true,
+    "must_inspect_exact_frozen_frames": true,
+    "must_not_infer_unseen_motion_or_causality": true,
+    "reviewer_id_required": true
+  },
+  "queue_rule": "Deduplicate only records with the same model-input identity, raw-response hash, temporal bounds, required-response set, cause, and evidence. Preserve every source artifact.",
+  "allowed_verdicts": [
+    "SUPPORTED",
+    "UNSUPPORTED",
+    "INDETERMINATE"
+  ],
+  "review_schema": {
+    "required_top_level_fields": [
+      "status",
+      "protocol_sha256",
+      "queue_file_sha256",
+      "metrics_file_sha256",
+      "reviewer_id",
+      "independence_declaration",
+      "reviews"
+    ],
+    "required_review_fields": [
+      "claim_id",
+      "verdict",
+      "visual_rationale"
+    ],
+    "exactly_one_review_per_queue_claim": true,
+    "extra_claim_reviews_forbidden": true
+  },
+  "decision_rule": {
+    "metrics_failure": "Preserve the analyzer failure status.",
+    "missing_or_indeterminate_claim": "REVIEW_REQUIRED",
+    "any_unsupported_claim": "FAIL_CLAIM_GROUNDING_GATE",
+    "all_claims_supported_and_analyzer_pending_grounding": "PASS_TARGETED_PILOT"
+  },
+  "scope_limitation": "PASS_TARGETED_PILOT validates this targeted protocol challenge only; it is not a population precision or recall estimate and does not authorize a larger oracle run."
+}
