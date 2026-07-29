@@ -242,3 +242,12 @@ non-idle values, context presence, non-A100 identity strings, UUID changes from
 initialization to preload, and reserved-cost residue at completion. The frozen
 finalizer maps these failures to `FULL_GRID_ABORTED_AUTHENTICATION`. 130 tests
 pass; no package files or GPU calls were produced by the interrupted build.
+
+The next sealed candidate passed 130 tests but its complete mock exposed a
+fixture mismatch: all three mock sessions were opened, then the canonical
+video-major manifest was serialized, so HANGZHOU/WUHAN accumulated minutes of
+artificial idle while DALI mock ledgers were written. Formal workers are three
+parallel processes. The candidate was rejected without review or GPU use. The
+mock now opens, executes, closes, and accounts each already-fixed static shard
+when that shard begins; formal concurrency and the eight-second gate are not
+changed.

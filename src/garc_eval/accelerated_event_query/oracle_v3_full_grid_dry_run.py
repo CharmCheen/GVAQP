@@ -165,24 +165,27 @@ def run_complete_mock(execution_root: Path) -> dict[str, Any]:
         execution_root / "INITIALIZATION_AUDIT.json",
         json.dumps(initialization, indent=2, sort_keys=True) + "\n",
     )
-    for worker_id, worker in workers.items():
-        ledger = execution_root / worker["attempt_ledger_relative_path"]
-        coordinator.start_model_load(worker_id, worker["physical_gpu_ids"])
-        append_hash_chain(ledger, {
-            "event": "MODEL_LOAD_STARTED", "worker_id": worker_id,
-            "physical_gpu_ids": worker["physical_gpu_ids"],
-        })
-        coordinator.complete_model_load(worker_id, 0.01)
-        append_hash_chain(ledger, {
-            "event": "MODEL_LOAD_COMPLETED", "worker_id": worker_id,
-            "physical_gpu_ids": worker["physical_gpu_ids"],
-            "execution_session_id": f"MOCK_SESSION:{worker_id}",
-            "wall_seconds": 0.01,
-        })
     unit_map = {row["unit_id"]: row for row in units["units"]}
+    loaded_workers: set[str] = set()
     for unit in units["units"]:
         worker = workers[unit["worker_id"]]
         ledger = execution_root / worker["attempt_ledger_relative_path"]
+        if unit["worker_id"] not in loaded_workers:
+            coordinator.start_model_load(
+                unit["worker_id"], worker["physical_gpu_ids"]
+            )
+            append_hash_chain(ledger, {
+                "event": "MODEL_LOAD_STARTED", "worker_id": unit["worker_id"],
+                "physical_gpu_ids": worker["physical_gpu_ids"],
+            })
+            coordinator.complete_model_load(unit["worker_id"], 0.01)
+            append_hash_chain(ledger, {
+                "event": "MODEL_LOAD_COMPLETED", "worker_id": unit["worker_id"],
+                "physical_gpu_ids": worker["physical_gpu_ids"],
+                "execution_session_id": f"MOCK_SESSION:{unit['worker_id']}",
+                "wall_seconds": 0.01,
+            })
+            loaded_workers.add(unit["worker_id"])
         record = _mock_raw(unit, worker, seal_sha)
         common = {
             "worker_id": unit["worker_id"], "unit_id": unit["unit_id"],
