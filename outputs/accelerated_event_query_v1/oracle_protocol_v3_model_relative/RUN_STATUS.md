@@ -1,6 +1,6 @@
 # V3 Run Status
 
-State: `PREFLIGHT_PASS_FULL_GRID_PROPOSAL_REVIEWED_STOPPED_NOT_AUTHORIZED`
+State: `FULL_GRID_PREREGISTRATION_IMPLEMENTATION_IN_PROGRESS_NO_INFERENCE`
 
 Current decision: `V3_SCHEMA_DETERMINISM_PASS_FULL_GRID_APPROVAL_REQUIRED`
 
@@ -62,3 +62,31 @@ Full-grid proposal state:
 Next highest-value action: stop and ask whether the user authorizes preparation
 and sealing of the exact full-grid package. The review `GO` does not authorize
 frame expansion, model loading, any of the 1,475 calls, or downstream work.
+
+## Authorized preregistration preparation cycle
+
+The user subsequently authorized preparation, input decoding/freezing,
+no-inference dry-runs, sealing, and independent review. This authority does not
+include any Qwen3-VL-32B generation call.
+
+Observed implementation evidence so far:
+
+- The repository is on clean `dspro`; all eight A100s had no compute process at
+  cycle start.
+- New full-grid-only modules leave every frozen preflight source/output
+  untouched.
+- The tail rule is source-anchored `k/2 <= true duration` and leaves all normal
+  endpoint-inclusive units unchanged.
+- Global fail-stop, three-load/zero-reload accounting, complete-only atomic
+  publication, evaluator-only labels, and Ed25519-authenticated causal VERIFY
+  history are implemented.
+- 115 focused accelerated-event-query tests currently pass; exact source-video
+  decode and real processor-only tail validation remain pending.
+
+Decision-critical uncertainty: whether the real decoder and frozen Qwen
+processor accept all three 12/2/6-frame tails with exact provenance and whether
+the resulting 30,932-frame manifest survives a second full decode and
+independent adversarial review.
+
+Next action: commit the tested implementation, decode and freeze all 1,475
+inputs without loading model weights, then run package dry-runs and review.

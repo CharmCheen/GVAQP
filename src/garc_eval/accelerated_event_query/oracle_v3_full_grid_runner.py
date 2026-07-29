@@ -1,0 +1,463 @@
+"""Sealed three-worker runner for the V3 1,475-unit full grid.
+
+Importing or validating this module never loads the checkpoint.  Checkpoint
+loading is reachable only through :func:`run_worker` after an exact approval
+artifact, package validation, initialization audit, and GPU binding check.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import importlib.metadata
+import json
+import os
+import platform
+import random
+import subprocess
+import time
+from pathlib import Path
+from typing import Any
+
+from .oracle_v3_full_grid_control import GlobalFailStopCoordinator, append_hash_chain
+from .oracle_v3_full_grid_manifest import (
+    EXPECTED_UNIT_COUNT,
+    decode_full_grid_unit,
+    fraction_fps,
+    public_frame,
+)
+from .oracle_v3_full_grid_package import (
+    APPROVAL,
+    EXECUTION,
+    FRAMES,
+    PACKAGE,
+    ROOT,
+    SCHEDULE,
+    SEAL,
+    UNITS,
+    validate_execution_seal,
+)
+from .oracle_v3_manifest import atomic_text, canonical_hash, load_json, sha256_file
+from .oracle_v3_parser import parse_oracle_v3_response
+
+
+CALL_RESERVATION_WALL_SECONDS = 23.579961206763983
+MODEL_LOAD_RESERVATION_WALL_SECONDS = 30.0
+ENVELOPE_A100_GPU_HOURS = 19.4
+EXPECTED_CUBLAS_WORKSPACE_CONFIG = ":4096:8"
+if os.environ.get("CUBLAS_WORKSPACE_CONFIG") not in {
+    None, EXPECTED_CUBLAS_WORKSPACE_CONFIG
+}:
+    raise RuntimeError("conflicting CUBLAS_WORKSPACE_CONFIG was set before runner import")
+os.environ["CUBLAS_WORKSPACE_CONFIG"] = EXPECTED_CUBLAS_WORKSPACE_CONFIG
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+
+
+def _worker_map(schedule: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    return {row["worker_id"]: row for row in schedule["workers"]}
+
+
+def _coordinator(schedule: dict[str, Any], seal_sha256: str, execution_root: Path) -> GlobalFailStopCoordinator:
+    bindings = {
+        row["worker_id"]: {
+            "physical_gpu_ids": row["physical_gpu_ids"],
+            "unit_ids": row["unit_ids"],
+        }
+        for row in schedule["workers"]
+    }
+    return GlobalFailStopCoordinator(
+        execution_root,
+        execution_seal_sha256=seal_sha256,
+        worker_bindings=bindings,
+        envelope_a100_gpu_hours=ENVELOPE_A100_GPU_HOURS,
+        call_reservation_wall_seconds=CALL_RESERVATION_WALL_SECONDS,
+        model_load_reservation_wall_seconds=MODEL_LOAD_RESERVATION_WALL_SECONDS,
+    )
+
+
+def validate_compute_approval(path: Path = APPROVAL) -> dict[str, Any]:
+    approval = load_json(path)
+    expected = {
+        "status", "experiment_id", "execution_seal_sha256",
+        "review_bundle_sha256", "final_package_manifest_sha256",
+        "approved_call_count", "estimated_a100_gpu_hours",
+        "authorization_envelope_a100_gpu_hours", "parallel_wall_hours",
+        "worker_gpu_pairs", "model_load_count", "reload_count", "retry_count",
+        "partial_results_are_not_formal_reference", "downstream_not_authorized",
+        "user_approval_evidence",
+    }
+    review_bundle = PACKAGE / "FULL_GRID_REVIEW_BUNDLE.json"
+    final_package = PACKAGE / "FULL_GRID_PACKAGE_MANIFEST.json"
+    schedule = load_json(SCHEDULE)
+    if set(approval) != expected or not all((
+        approval.get("status") == "APPROVED_BY_USER_FOR_EXACT_FULL_GRID_SEAL",
+        approval.get("experiment_id") == "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+        approval.get("execution_seal_sha256") == sha256_file(SEAL),
+        approval.get("review_bundle_sha256") == sha256_file(review_bundle),
+        approval.get("final_package_manifest_sha256") == sha256_file(final_package),
+        approval.get("approved_call_count") == EXPECTED_UNIT_COUNT,
+        approval.get("estimated_a100_gpu_hours") == 16.09712320568816,
+        approval.get("authorization_envelope_a100_gpu_hours") == ENVELOPE_A100_GPU_HOURS,
+        approval.get("parallel_wall_hours") == 3.0931814077885096,
+        approval.get("worker_gpu_pairs") == {
+            row["worker_id"]: row["physical_gpu_ids"] for row in schedule["workers"]
+        },
+        approval.get("model_load_count") == 3,
+        approval.get("reload_count") == 0,
+        approval.get("retry_count") == 0,
+        approval.get("partial_results_are_not_formal_reference") is True,
+        approval.get("downstream_not_authorized") is True,
+        isinstance(approval.get("user_approval_evidence"), str),
+        bool(approval.get("user_approval_evidence", "").strip()),
+        "FILL" not in approval.get("user_approval_evidence", ""),
+    )):
+        raise RuntimeError("approval does not bind the exact reviewed full-grid package")
+    return approval
+
+
+def _gpu_identity(index: int) -> str:
+    value = subprocess.check_output([
+        "nvidia-smi", f"--id={index}", "--query-gpu=index,name,uuid",
+        "--format=csv,noheader",
+    ], text=True).strip()
+    if not value.startswith(f"{index},") or "NVIDIA A100-SXM4-80GB" not in value:
+        raise RuntimeError(f"unexpected physical GPU identity: {value}")
+    return value
+
+
+def _verify_model_files(prereg: dict[str, Any]) -> str:
+    binding = prereg["bindings"]["model_file_manifest"]
+    manifest = load_json(ROOT / binding["path"])
+    model_path = ROOT / prereg["model"]["path"]
+    expected = {row["file"]: row for row in manifest["files"]}
+    observed_names = {path.name for path in model_path.iterdir() if path.is_file()}
+    if observed_names != set(expected):
+        raise RuntimeError("current model file set differs from the frozen manifest")
+    rows = []
+    for name in sorted(expected):
+        path = model_path / name
+        row = {"file": name, "sha256": sha256_file(path), "size_bytes": path.stat().st_size}
+        if row != expected[name]:
+            raise RuntimeError(f"current model file mismatch: {name}")
+        rows.append(row)
+    if canonical_hash(rows) != prereg["model"]["content_hash"]:
+        raise RuntimeError("current canonical model content hash mismatch")
+    return sha256_file(ROOT / binding["path"])
+
+
+def initialize_execution(execution_root: Path = EXECUTION) -> dict[str, Any]:
+    """Approval-gated host audit; performs no model load and no inference."""
+
+    _, prereg = validate_execution_seal("runner")
+    approval = validate_compute_approval()
+    schedule = load_json(SCHEDULE)
+    identities = {
+        row["worker_id"]: [_gpu_identity(index) for index in row["physical_gpu_ids"]]
+        for row in schedule["workers"]
+    }
+    model_manifest_sha256 = _verify_model_files(prereg)
+    seal_sha = sha256_file(SEAL)
+    coordinator = _coordinator(schedule, seal_sha, execution_root)
+    coordinator.initialize()
+    audit = {
+        "status": "INITIALIZED_NO_MODEL_LOAD",
+        "execution_seal_sha256": seal_sha,
+        "compute_approval_sha256": sha256_file(APPROVAL),
+        "model_file_manifest_sha256": model_manifest_sha256,
+        "gpu_identities": identities,
+        "exact_worker_count": 3,
+        "exact_call_count": EXPECTED_UNIT_COUNT,
+        "checkpoint_loaded": False,
+    }
+    audit["initialization_payload_sha256"] = canonical_hash(audit)
+    atomic_text(
+        execution_root / "INITIALIZATION_AUDIT.json",
+        json.dumps(audit, indent=2, sort_keys=True) + "\n",
+    )
+    return audit
+
+
+def _frames_by_unit(frame_manifest: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
+    result: dict[str, list[dict[str, Any]]] = {}
+    for row in frame_manifest["frames"]:
+        result.setdefault(row["unit_id"], []).append({
+            "ordinal": row["unit_frame_ordinal"],
+            "target_relative_seconds": row["target_relative_seconds"],
+            "target_absolute_seconds": row["target_absolute_seconds"],
+            "requested_index": row["requested_index"],
+            "decoded_index": row["decoded_index"],
+            "decoded_timestamp_seconds": row["decoded_timestamp_seconds"],
+            "content_sha256": row["content_sha256"],
+        })
+    return result
+
+
+def _decode_and_validate_unit(
+    unit: dict[str, Any], video: dict[str, Any], expected_frames: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    kind, frames = decode_full_grid_unit(
+        ROOT / video["path"],
+        unit["start_time"],
+        unit["end_time"],
+        fraction_fps(video["nominal_fps"]),
+        include_rgb=True,
+    )
+    public = [public_frame(row) for row in frames]
+    if kind != unit["unit_kind"] or public != expected_frames:
+        raise RuntimeError(f"decoded input differs from frozen manifest: {unit['unit_id']}")
+    if canonical_hash(public) != unit["frame_set_sha256"]:
+        raise RuntimeError(f"frame-set hash mismatch: {unit['unit_id']}")
+    return frames
+
+
+def validate_worker_inputs(worker_id: str, *, redecode: bool = False) -> dict[str, Any]:
+    """No-checkpoint validation path used by preregistration dry-runs."""
+
+    _, prereg = validate_execution_seal("runner")
+    units = load_json(UNITS)
+    schedule = load_json(SCHEDULE)
+    frames = load_json(FRAMES)
+    worker = _worker_map(schedule).get(worker_id)
+    if worker is None:
+        raise ValueError("unknown worker")
+    unit_map = {row["unit_id"]: row for row in units["units"]}
+    frame_map = _frames_by_unit(frames)
+    videos = {
+        row["video_id"]: row
+        for row in load_json(ROOT / prereg["bindings"]["video_manifest"]["path"])["videos"]
+    }
+    checked_frames = 0
+    for unit_id in worker["unit_ids"]:
+        unit = unit_map[unit_id]
+        if redecode:
+            _decode_and_validate_unit(unit, videos[unit["video_id"]], frame_map[unit_id])
+        checked_frames += len(frame_map[unit_id])
+    return {
+        "status": "PASS_NO_MODEL_LOAD_NO_INFERENCE",
+        "worker_id": worker_id,
+        "exact_call_count": len(worker["unit_ids"]),
+        "frame_occurrence_count": checked_frames,
+        "redecoded": redecode,
+        "checkpoint_loaded": False,
+    }
+
+
+def _tensor_bundle_sha256(values: Any) -> str:
+    digest = hashlib.sha256()
+    for key in sorted(values):
+        value = values[key]
+        digest.update(key.encode())
+        if hasattr(value, "detach"):
+            tensor = value.detach().cpu().contiguous()
+            digest.update(str(tensor.dtype).encode())
+            digest.update(json.dumps(list(tensor.shape)).encode())
+            digest.update(tensor.view(dtype=__import__("torch").uint8).numpy().tobytes())
+        else:
+            digest.update(repr(value).encode())
+    return digest.hexdigest()
+
+
+def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
+    """Execute one fixed shard after approval.  Not called during preregistration."""
+
+    import numpy as np
+    import torch
+    import transformers
+    from PIL import Image
+    from qwen_vl_utils import process_vision_info
+    from transformers import AutoProcessor, Qwen3VLForConditionalGeneration
+
+    _, prereg = validate_execution_seal("runner")
+    validate_compute_approval()
+    schedule = load_json(SCHEDULE)
+    units = load_json(UNITS)
+    frame_manifest = load_json(FRAMES)
+    workers = _worker_map(schedule)
+    worker = workers.get(worker_id)
+    if worker is None or worker["physical_gpu_ids"] != declared_physical_gpus:
+        raise RuntimeError("worker/GPU declaration differs from seal")
+    if os.environ.get("CUDA_VISIBLE_DEVICES") != ",".join(map(str, declared_physical_gpus)):
+        raise RuntimeError("CUDA_VISIBLE_DEVICES differs from sealed GPU pair")
+    if torch.cuda.device_count() != 2:
+        raise RuntimeError("worker must see exactly two logical CUDA devices")
+    identities = [_gpu_identity(index) for index in declared_physical_gpus]
+    initialization = load_json(EXECUTION / "INITIALIZATION_AUDIT.json")
+    if initialization.get("execution_seal_sha256") != sha256_file(SEAL):
+        raise RuntimeError("missing exact initialization audit")
+    coordinator = _coordinator(schedule, sha256_file(SEAL), EXECUTION)
+    prompt = (ROOT / prereg["bindings"]["prompt"]["path"]).read_text(encoding="utf-8")
+    unit_map = {row["unit_id"]: row for row in units["units"]}
+    frame_map = _frames_by_unit(frame_manifest)
+    videos = {
+        row["video_id"]: row
+        for row in load_json(ROOT / prereg["bindings"]["video_manifest"]["path"])["videos"]
+    }
+    ledger = EXECUTION / worker["attempt_ledger_relative_path"]
+    if ledger.exists() or any((EXECUTION / unit_map[unit_id]["raw_output_relative_path"]).exists()
+                              for unit_id in worker["unit_ids"]):
+        coordinator.trigger_stop("output_path_collision", worker_id)
+        raise RuntimeError("in-approval resume or output collision is forbidden")
+    coordinator.start_model_load(worker_id, declared_physical_gpus)
+    append_hash_chain(ledger, {
+        "event": "MODEL_LOAD_STARTED", "worker_id": worker_id,
+        "physical_gpu_ids": declared_physical_gpus,
+    })
+    try:
+        load_started = time.perf_counter()
+        model_path = ROOT / prereg["model"]["path"]
+        model = Qwen3VLForConditionalGeneration.from_pretrained(
+            model_path, dtype=torch.bfloat16, device_map="balanced",
+            trust_remote_code=True, local_files_only=True,
+        )
+        model.to(dtype=torch.bfloat16)
+        processor = AutoProcessor.from_pretrained(
+            model_path, trust_remote_code=True, local_files_only=True
+        )
+        model.eval()
+        torch.use_deterministic_algorithms(True, warn_only=False)
+        seed = int(prereg["decoding"]["seed"])
+        random.seed(seed); np.random.seed(seed); torch.manual_seed(seed); torch.cuda.manual_seed_all(seed)
+        torch.cuda.synchronize()
+        load_seconds = time.perf_counter() - load_started
+        coordinator.complete_model_load(worker_id, load_seconds)
+        session_id = canonical_hash({
+            "worker_id": worker_id, "pid": os.getpid(), "time_ns": time.time_ns(),
+            "nonce": hashlib.sha256(os.urandom(32)).hexdigest(),
+        })
+        append_hash_chain(ledger, {
+            "event": "MODEL_LOAD_COMPLETED", "worker_id": worker_id,
+            "physical_gpu_ids": declared_physical_gpus,
+            "execution_session_id": session_id, "wall_seconds": load_seconds,
+        })
+        for unit_id in worker["unit_ids"]:
+            if coordinator.state()["status"] != "READY":
+                raise RuntimeError("global fail-stop is active")
+            unit = unit_map[unit_id]
+            call_started = time.perf_counter()
+            frames = _decode_and_validate_unit(unit, videos[unit["video_id"]], frame_map[unit_id])
+            pil_frames = [Image.fromarray(row["rgb"]) for row in frames]
+            messages = [{"role": "user", "content": [
+                {"type": "video", "video": pil_frames, "fps": 2.0},
+                {"type": "text", "text": prompt},
+            ]}]
+            prompt_text = processor.apply_chat_template(
+                messages, tokenize=False, add_generation_prompt=True
+            )
+            image_inputs, video_inputs, kwargs = process_vision_info(
+                messages, return_video_kwargs=True, return_video_metadata=True
+            )
+            if kwargs != {"do_sample_frames": False}:
+                raise RuntimeError(f"unexpected processor sampling kwargs: {kwargs}")
+            inputs = processor(
+                text=[prompt_text], images=image_inputs,
+                videos=[row[0] for row in video_inputs],
+                video_metadata=[row[1] for row in video_inputs],
+                padding=True, return_tensors="pt", **kwargs,
+            ).to(model.device)
+            processed_hash = _tensor_bundle_sha256(inputs)
+            attempt_id = f"{worker_id}:{unit_id}:{time.time_ns()}"
+            common = {
+                "worker_id": worker_id, "unit_id": unit_id,
+                "call_spec_sha256": unit["call_spec_sha256"],
+                "attempt_id": attempt_id, "execution_session_id": session_id,
+            }
+            append_hash_chain(ledger, {
+                "event": "PREPARED", **common,
+                "processed_input_sha256": processed_hash,
+            })
+            coordinator.reserve_call(
+                worker_id=worker_id, gpu_pair=declared_physical_gpus,
+                unit_id=unit_id, call_spec_sha256=unit["call_spec_sha256"],
+            )
+            append_hash_chain(ledger, {
+                "event": "INFERENCE_STARTED", **common,
+                "processed_input_sha256": processed_hash,
+            })
+            inference_started = time.perf_counter()
+            with torch.no_grad():
+                generated = model.generate(
+                    **inputs, do_sample=False,
+                    max_new_tokens=int(prereg["decoding"]["max_new_tokens"]),
+                )
+            torch.cuda.synchronize()
+            inference_seconds = time.perf_counter() - inference_started
+            generated_hash = _tensor_bundle_sha256({"generated": generated})
+            append_hash_chain(ledger, {
+                "event": "INFERENCE_COMPLETED", **common,
+                "generated_token_ids_sha256": generated_hash,
+            })
+            trimmed = [output[len(ids):] for ids, output in zip(inputs.input_ids, generated)]
+            raw = processor.batch_decode(trimmed, skip_special_tokens=True)[0]
+            parsed = parse_oracle_v3_response(raw)
+            call_seconds = time.perf_counter() - call_started
+            identity = {
+                "experiment_id": prereg["experiment_id"],
+                "execution_seal_sha256": sha256_file(SEAL),
+                "unit_id": unit_id,
+                "call_spec_sha256": unit["call_spec_sha256"],
+                "frame_set_sha256": unit["frame_set_sha256"],
+                "unit_kind": unit["unit_kind"],
+                "true_duration_seconds": unit["duration_seconds"],
+                "model_visible_frame_count": unit["frame_count"],
+                "model_visible_sampling_fps": 2.0,
+            }
+            record = {
+                "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+                "mock_not_oracle": False,
+                "experiment_id": prereg["experiment_id"],
+                "execution_seal_sha256": sha256_file(SEAL),
+                "unit_id": unit_id,
+                "unit_ordinal": unit["ordinal"],
+                "video_id": unit["video_id"],
+                "worker_id": worker_id,
+                "physical_gpu_ids": declared_physical_gpus,
+                "call_spec_sha256": unit["call_spec_sha256"],
+                "frame_set_sha256": unit["frame_set_sha256"],
+                "frame_count": unit["frame_count"],
+                "execution_session_id": session_id,
+                "attempt_id": attempt_id,
+                "input_identity_sha256": canonical_hash(identity),
+                "model_input_identity_sha256": canonical_hash({
+                    **identity, "frames": frame_map[unit_id]
+                }),
+                "processed_input_sha256": processed_hash,
+                "generated_token_ids_sha256": generated_hash,
+                "raw": raw,
+                "raw_response_sha256": hashlib.sha256(raw.encode()).hexdigest(),
+                "parse_status": parsed.parse_status,
+                "authoritative_label": parsed.effective_label,
+                "parsed": parsed.parsed,
+                "runtime": {
+                    "worker_id": worker_id,
+                    "physical_gpu_ids": declared_physical_gpus,
+                    "gpu_identities": identities,
+                    "model_load_seconds": load_seconds,
+                    "inference_seconds": inference_seconds,
+                    "total_call_seconds": call_seconds,
+                    "processor_class": f"{processor.__class__.__module__}.{processor.__class__.__qualname__}",
+                    "python": platform.python_version(),
+                    "torch": torch.__version__,
+                    "transformers": transformers.__version__,
+                    "qwen_vl_utils": importlib.metadata.version("qwen-vl-utils"),
+                    "cublas_workspace_config": os.environ.get("CUBLAS_WORKSPACE_CONFIG"),
+                },
+            }
+            record["record_payload_sha256"] = canonical_hash(record)
+            destination = EXECUTION / unit["raw_output_relative_path"]
+            atomic_text(destination, json.dumps(record, indent=2, sort_keys=True) + "\n")
+            append_hash_chain(ledger, {
+                "event": "ACCEPTED", **common,
+                "record_payload_sha256": record["record_payload_sha256"],
+            })
+            coordinator.complete_call(
+                worker_id=worker_id, unit_id=unit_id, wall_seconds=call_seconds
+            )
+        state = coordinator.state()
+        if len(state["completed_unit_ids"]) == EXPECTED_UNIT_COUNT:
+            coordinator.mark_complete(EXPECTED_UNIT_COUNT)
+    except Exception as exc:
+        try:
+            if coordinator.state()["status"] == "READY":
+                coordinator.trigger_stop("post_load_process_fault", f"{worker_id}:{type(exc).__name__}:{exc}")
+        finally:
+            raise

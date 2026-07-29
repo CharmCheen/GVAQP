@@ -83,3 +83,71 @@
 - Impact: authority leakage revises the protocol; otherwise report limitations.
 - Status: `SUPPORTED`; post-output review retained three polarity disagreements
   and explanation limitations with zero authoritative relabels or gate changes.
+
+## H7 — The three shorter final units are legal processor inputs
+
+- Importance: dropping, padding, repeating, or textually redefining the tails
+  would change the 1,475-unit reference identity.
+- Minimal experiment: decode exact 12/2/6 source-anchored frames and run the
+  real frozen AutoProcessor without loading checkpoint weights or generating.
+- Expected result: all three tensorize with `do_sample_frames=false`; exact
+  decoded targets/hashes remain the transport authority.
+- Failure condition: processor rejection or a required sampling/prompt change.
+- Competing explanation: processor-internal temporal patch mechanics may differ
+  from source padding but still accept the legal supplied frames.
+- Impact: failure yields `REVISE_TRUNCATED_UNIT_PROTOCOL` and stops sealing.
+- Status: `IMPLEMENTED_AWAITING_REAL_DECODE_AND_PROCESSOR_AUDIT`.
+
+## H8 — Exact manifests form a complete disjoint 1,475-call identity
+
+- Importance: one duplicate, omission, or traversal-order dependency invalidates
+  the expensive reference.
+- Minimal experiment: canonical grid traversal, self-hashed unit/frame rows,
+  independent worker union validation, and complete re-decode.
+- Failure condition: any count/hash/index/timestamp/video/worker mismatch.
+- Competing explanation: shared endpoint frames are legitimate occurrences,
+  not duplicate unit attempts.
+- Impact: failure revises input binding before any approval request.
+- Status: `VALIDATORS_TESTED_AWAITING_REAL_MANIFEST`.
+
+## H9 — Global fail-stop preserves interpretability under worker failure
+
+- Importance: best-effort continuation could mix sessions, loads, retries, or
+  partial reference state.
+- Minimal experiment: no-inference injections for duplicate, wrong GPU, reload,
+  cost, authentication, incomplete transition, and resume.
+- Expected result: a terminal global stop prevents all later call reservations.
+- Failure condition: any worker can start after a hard trigger.
+- Impact: failure revises the execution coordinator.
+- Status: `SUPPORTED_BY_UNIT_TESTS`; full 1,475-record mock remains pending.
+
+## H10 — Preregistered coverage gates prevent post-hoc oracle adequacy claims
+
+- Importance: unknown/invalid prevalence is unobserved in the targeted preflight.
+- Frozen prediction: formal release requires global and each-video determined
+  coverage >=99% and exactly zero parse failures.
+- Competing explanation: the threshold may prove conservative, but changing it
+  after labels would be scientifically invalid.
+- Impact: a lower observed coverage yields the frozen insufficient/protocol
+  decision and no formal reference.
+- Status: `FROZEN_IN_IMPLEMENTATION_BEFORE_OUTPUTS`.
+
+## H11 — Evaluator labels cannot leak into public controller state
+
+- Importance: exhaustive labels would trivialize later SCAN/VERIFY decisions.
+- Minimal experiment: evaluator capability rejection, signed causal results,
+  forged/future rejection, hidden-label permutation, and path isolation.
+- Failure condition: controller lookup or next-state change from unrevealed
+  label permutation.
+- Impact: revise the interface; do not run replay.
+- Status: `SUPPORTED_BY_INTERFACE_TESTS`; no replay/controller claim is made.
+
+## H12 — Partial files cannot become a formal operational reference
+
+- Importance: a crash between three output writes could expose an incomplete
+  table or relation.
+- Minimal experiment: versioned evaluator-only staging and one final atomic
+  release pointer; mocks and incomplete runs must produce no pointer.
+- Failure condition: downstream-addressable formal release without all gates.
+- Impact: revise finalizer/publication protocol.
+- Status: `SUPPORTED_BY_ATOMIC_PUBLICATION_TEST`; end-to-end mock pending.
