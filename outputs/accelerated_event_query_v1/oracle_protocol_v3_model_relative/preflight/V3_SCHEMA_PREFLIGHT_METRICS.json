@@ -1,0 +1,183 @@
+{
+  "analyzer_source_sha256": "9bc1c72905b1d5ba720c12ddac2f112cabf258a5272e192a0e1b151ce1d9c87e",
+  "attempt_event_counts": {
+    "ACCEPTED": 11,
+    "INFERENCE_COMPLETED": 11,
+    "INFERENCE_STARTED": 11,
+    "PREPARED": 11
+  },
+  "authentication_errors": [],
+  "complete": true,
+  "construct_validity_diagnostics_are_non_gating": true,
+  "determinism": {
+    "cross_replica": [
+      {
+        "artifact_names": [
+          "DALI_u0555_fps2_r0.json",
+          "DALI_u0555_fps2_cross_replica_HANGZHOU.json"
+        ],
+        "authoritative_label_equal": true,
+        "complete": true,
+        "exact_raw_response_equal_diagnostic": true,
+        "execution_session_relation_pass": true,
+        "group_id": "cross_DALI_u0555",
+        "kind": "cross_replica",
+        "model_input_identity_equal": true,
+        "processed_input_identity_equal": true
+      }
+    ],
+    "hard_pass": true,
+    "input_binding_hard_pass": true,
+    "label_reproducibility_hard_pass": true,
+    "same_process": [
+      {
+        "artifact_names": [
+          "DALI_u0555_fps2_r0.json",
+          "DALI_u0555_fps2_r1.json"
+        ],
+        "authoritative_label_equal": true,
+        "complete": true,
+        "exact_raw_response_equal_diagnostic": true,
+        "execution_session_relation_pass": true,
+        "group_id": "same_DALI_u0555",
+        "kind": "same_process",
+        "model_input_identity_equal": true,
+        "processed_input_identity_equal": true
+      },
+      {
+        "artifact_names": [
+          "HANGZHOU_u0234_fps2_r0.json",
+          "HANGZHOU_u0234_fps2_r1.json"
+        ],
+        "authoritative_label_equal": true,
+        "complete": true,
+        "exact_raw_response_equal_diagnostic": true,
+        "execution_session_relation_pass": true,
+        "group_id": "same_HANGZHOU_u0234",
+        "kind": "same_process",
+        "model_input_identity_equal": true,
+        "processed_input_identity_equal": true
+      },
+      {
+        "artifact_names": [
+          "WUHAN_u0217_fps2_r0.json",
+          "WUHAN_u0217_fps2_r1.json"
+        ],
+        "authoritative_label_equal": true,
+        "complete": true,
+        "exact_raw_response_equal_diagnostic": true,
+        "execution_session_relation_pass": true,
+        "group_id": "same_WUHAN_u0217",
+        "kind": "same_process",
+        "model_input_identity_equal": true,
+        "processed_input_identity_equal": true
+      }
+    ]
+  },
+  "eventization": {
+    "boundary_sources_only": true,
+    "complete": true,
+    "diagnostic_variant_relation_sha256": "9d4a40f31c799ee0b301cb697b4a3da17cacf9b7bdaf60f8bdcf22024773408f",
+    "event_count": 1,
+    "forward_relation_sha256": "9d4a40f31c799ee0b301cb697b4a3da17cacf9b7bdaf60f8bdcf22024773408f",
+    "hard_pass": true,
+    "k3_config_sha256": "7906ab2da20cab7edbe0f379224b60160c7a857cd81ab7f4fec42f54ab9629b9",
+    "parse_failure_unit_ids": [],
+    "reverse_relation_sha256": "9d4a40f31c799ee0b301cb697b4a3da17cacf9b7bdaf60f8bdcf22024773408f",
+    "unknown_unit_ids": []
+  },
+  "execution_profile": {
+    "distinct_execution_sessions_across_shards": true,
+    "execution_session_ids_by_shard": {
+      "DALI": [
+        "20b23ed3378fb30a3377c04f84a4937c53de5a5fbf66677467bc3889043ffaa0"
+      ],
+      "HANGZHOU": [
+        "dd87f3245aaf10e5b1bc0fdd8af6635d50b1faa9dec8a4d6e650caf01af70657"
+      ],
+      "WUHAN": [
+        "bcb15682b23891caf8e9accfe6ef43dc599ae854eef37d8f5fe6d9d7c15f1cfe"
+      ]
+    },
+    "hard_pass": true,
+    "library_versions_equal": true,
+    "one_execution_session_per_shard": true,
+    "preprocessing_runtime_equal": true,
+    "preprocessing_runtime_sha256": "1fec0e18428b28f5c7e7951984b14d14af742614c50692351973ea5216add580"
+  },
+  "execution_seal_sha256": "bf35f7f3c9f897f337a838f36991ab502cf538fd602b779ab8afd245b0b9ce61",
+  "expected_calls": 11,
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_SCHEMA_PREFLIGHT",
+  "metrics_payload_sha256": "5621987fa9c20b77f0b86407523185dc6dde82d31e1483b5fe81d6f3e2fccbc3",
+  "observed_calls": 11,
+  "observed_expected_raw_files": 11,
+  "parse_status_counts": {
+    "ok": 11
+  },
+  "parsed_output_manifest": [
+    {
+      "parsed_payload_sha256": "b2df0e63168b9652a526742f1ef29f50b3775bae07e8cb7f614cbf3d8b743e45",
+      "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/parsed/DALI/DALI_u0548_fps2_r0.json"
+    },
+    {
+      "parsed_payload_sha256": "b037e7b6bb5112004a08e02de8aea6be31fd40a105de32ff8872e9e8cccecb7a",
+      "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/parsed/DALI/DALI_u0548_fps4_sensitivity.json"
+    },
+    {
+      "parsed_payload_sha256": "679b4c1a7336985db16dbfcff5fddfe7b649d6bd7d10b461606c6b1b6dc8ded9",
+      "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/parsed/DALI/DALI_u0555_fps2_r0.json"
+    },
+    {
+      "parsed_payload_sha256": "2953999146423738893cd49405af086652f19be70b00918e9dddd0c9482f9e90",
+      "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/parsed/DALI/DALI_u0555_fps2_r1.json"
+    },
+    {
+      "parsed_payload_sha256": "4fc3a6b80becd2c2db88be306e05aa7e0992aa6028e90ffc6d7500ad6a5feffd",
+      "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/parsed/DALI/DALI_u0501_fps2_potential_unknown.json"
+    },
+    {
+      "parsed_payload_sha256": "208035463568952e94432a5f786a6a6906ec11520c9e77df707dd29c0a8fe786",
+      "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/parsed/HANGZHOU/HANGZHOU_u0234_fps2_r0.json"
+    },
+    {
+      "parsed_payload_sha256": "8b088a44ec6b476698ab0b832538b3dfb70210b818bd5203fc8953b9680b15b3",
+      "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/parsed/HANGZHOU/HANGZHOU_u0234_fps2_r1.json"
+    },
+    {
+      "parsed_payload_sha256": "a12091d8745743cd1904275869b56f2af619a6d40977842950a37b1e96a86f92",
+      "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/parsed/HANGZHOU/DALI_u0555_fps2_cross_replica_HANGZHOU.json"
+    },
+    {
+      "parsed_payload_sha256": "0fdb15b9d7fa0889705b6e79abe075698565536ba5a18afe93f3f48d80563b91",
+      "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/parsed/WUHAN/WUHAN_u0217_fps2_r0.json"
+    },
+    {
+      "parsed_payload_sha256": "80ea92857395ac36397cf177cca483e176374037ac9646f9f6f68177286ee348",
+      "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/parsed/WUHAN/WUHAN_u0217_fps2_r1.json"
+    },
+    {
+      "parsed_payload_sha256": "03c120c2c5d60af7451c7dd65c03cceef40f9be3095a42536f9d6d634de2078a",
+      "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/parsed/WUHAN/WUHAN_u0171_fps2_r0.json"
+    }
+  ],
+  "physical_label_counts": {
+    "not_relevant": 10,
+    "relevant": 1
+  },
+  "protocol_adequacy_decision": "V3_SCHEMA_DETERMINISM_PASS_FULL_GRID_APPROVAL_REQUIRED",
+  "sampling_sensitivity": {
+    "artifact_names": [
+      "DALI_u0548_fps2_r0.json",
+      "DALI_u0548_fps4_sensitivity.json"
+    ],
+    "authoritative_label_equal": true,
+    "authoritative_labels": {
+      "DALI_u0548_fps2_r0.json": "not_relevant",
+      "DALI_u0548_fps4_sensitivity.json": "not_relevant"
+    },
+    "complete": true,
+    "interpretation": "Reports 2/4-fps label sensitivity only; strict parsing remains globally gating, but label equality across sampling rates is not a V3 preflight hard gate.",
+    "status": "NON_GATING_DIAGNOSTIC"
+  },
+  "scope": "11-call V3 schema-and-determinism preflight only; never full-grid authorization"
+}

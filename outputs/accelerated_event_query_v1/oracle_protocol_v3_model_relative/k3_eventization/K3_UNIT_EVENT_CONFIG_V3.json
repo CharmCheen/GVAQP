@@ -1,0 +1,31 @@
+{
+  "construct_validity_limit": "Adjacent relevant units from distinct latent human events are observationally indistinguishable from one event under unit labels alone and merge until the frozen cap.",
+  "k3_config_sha256": "7906ab2da20cab7edbe0f379224b60160c7a857cd81ab7f4fec42f54ab9629b9",
+  "matching": {
+    "assignment": "one_to_one_max_cardinality_then_tiou",
+    "boundary_tolerance_seconds": 0.0,
+    "duplicate_rule": "unmatched overlapping prediction is a duplicate false positive",
+    "eligibility": "strict_positive_temporal_overlap",
+    "minimum_tiou": 0.0
+  },
+  "parameters": {
+    "adjacent_distinct_event_rule": "merge_observationally_indistinguishable_adjacent_positives_until_duration_cap",
+    "boundary_rule": "min_positive_unit_start_to_max_positive_unit_end",
+    "dedup_rule": "deduplicate_exact_unit_id_then_canonical_temporal_grouping",
+    "event_identity_rule": "sha256(query,video,earliest_positive_unit,k3_config)",
+    "maximum_core_duration_seconds": 40.0,
+    "maximum_event_duration_seconds": 60.0,
+    "maximum_merge_gap_seconds": 10.0,
+    "maximum_unknown_gap_units": 1,
+    "merge_adjacent_positive_units": true,
+    "negative_gap_rule": "hard_barrier",
+    "overlap_rule": "merge_overlapping_positive_windows",
+    "parse_failure_gap_rule": "indeterminate_hard_barrier_not_negative",
+    "protocol_id": "AEQ_MODEL_RELATIVE_K3_V3_1",
+    "unit_duration_seconds": 10.0,
+    "unit_stride_seconds": 10.0,
+    "unknown_gap_rule": "bridge_one_fully_covering_unknown_unit_within_maximum_gap"
+  },
+  "probable_identity_scope": "Existing IncrementalK3 owns online PROBABLE_EVENT identity; exhaustive V3 reference materialization emits only VERIFIED_EVENT records from relevant unit labels.",
+  "status": "FROZEN_BEFORE_V3_ORACLE_EXECUTION"
+}

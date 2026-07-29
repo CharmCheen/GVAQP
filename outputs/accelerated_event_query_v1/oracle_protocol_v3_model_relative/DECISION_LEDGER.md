@@ -1,0 +1,27 @@
+# V3 Decision Ledger
+
+| Cycle | Observation | Decision | Evidence | Next action |
+|---|---|---|---|---|
+| 01 OBSERVE | V2 failed strict parse at 31/32 and had semantic/grounding concerns. | Preserve V2 `REVISE_ORACLE_PROTOCOL`; no post-hoc repair. | V2 decision and `eef5050cd`. | Define a new authority boundary. |
+| 02 HYPOTHESIZE | The dominant protocol failure is free-form event timing; V2 labels were deterministic. | Test label-authoritative semantics with K3 timing. | V2 raw/repeat hashes. | Build minimal schema/parser. |
+| 03 DESIGN | Existing online K3 treats all nonnegative candidates as support. | Add a reference-only unit adapter; leave existing K3 unchanged. | `incremental_k3.py` audit. | Test gap/deadline semantics. |
+| 04 IMPLEMENT/TEST | Parser, label store, adapter, fail-closed runner/analyzer, and tests exist. | Accept local evidence only. | 94 tests pass. | Freeze physical design. |
+| 05 FREEZE | Eleven calls cover regressions, repeats, replica, fps, videos, and potential unknown. | Freeze 5/3/3, zero retry, 0.19-hour estimate. | Frozen manifests. | Seal and validate. |
+| 06 AUDIT | First review found unauthenticated evidence-chain and same-process claims. | Reject old seal and repair before any compute. | Independent `NO-GO` for `84d352fb…`. | Bind sessions, ledger/raw/runtime, parsed outputs, and provenance. |
+| 07 RESEAL | Repairs pass 94 tests; all model files and 251 frame occurrences revalidate; tensors/labels remain unobserved. | `INSUFFICIENT_EVIDENCE`. | Seal `bf35f7f3…`; CPU validation. | Repeat independent review, then request approval only on `GO`. |
+| 08 REVIEW | Final reviewer found no remaining blocker for the exact reseal. | `GO` to request exact compute approval; not permission to execute. | Independent review for `bf35f7f3…` at `921fa8b9c`. | Stop and await user approval. |
+| 09 APPROVE | User explicitly replied `批准` to the exact seal request. | Create the bound approval artifact only after revalidating all bindings and idle scheduled GPUs. | Approval SHA `f41aa836…`. | Execute three frozen shards once. |
+| 10 EXECUTE | All 11 calls completed with 11/11 strict parse, 44 successful ledger events, and no failure/retry. | Accept physical evidence. | Raw, parsed, runtime summary, and evidence manifest. | Run frozen analyzer. |
+| 11 AUDIT | Authentication, input binding, label reproducibility, class support, and K3 eventization all pass; diagnostics remain non-gating. | Candidate PASS. | Metrics `2003e29a…`; three diagnostic disagreements retained. | Run frozen finalizer. |
+| 12 DECIDE | Finalizer recomputed analyzer output and authenticated parsed/evidence membership. | `V3_SCHEMA_DETERMINISM_PASS_FULL_GRID_APPROVAL_REQUIRED`. | Decision payload `4dc2292a…`. | Stop; prepare/review proposal only, with no full-grid execution. |
+| 13 PROPOSE | The exact grid has 1,475 units; three final units are truncated and rejected by the current integral-interval sampler. | Propose 567/561/347 calls, about 16.097 A100 GPU-hours, and a source-anchored tail rule; do not expand inputs. | Frozen grid/video hashes and preflight runtime. | Seek independent proposal review. |
+| 14 ADVERSARIAL AUDIT | Counts/cost/tail arithmetic passed, but the current controller API exposes caller-requested labels; reload, cross-shard failure, and partial-publication semantics were open. | `REVISE_FULL_GRID_PROPOSAL`. | Independent review of JSON `21bf20d5…`; preserved as `FULL_GRID_PROPOSAL_REVIEW_V1.md`. | Freeze capability, load, global-stop, and complete-only publication boundaries. |
+| 15 REVISE/REVIEW | Revision 2 closes all four blockers without changing the 1,475-call model/protocol workload. | `GO_TO_PREPARE_FULL_GRID_PREREGISTRATION`; proposal-stage GO only. | Independent re-review of JSON `ffc47c8b…` and document `69be8d05…`. | Stop and request separate authority to implement/freeze/seal; no full-grid compute. |
+
+Revision mapping:
+
+- schema/parse/label reproducibility: `REVISE_V3_SCHEMA`;
+- authenticated input, processed-tensor, or session mismatch:
+  `REVISE_V3_INPUT_BINDING`;
+- K3 nondeterminism/authority leak: `REVISE_K3_EVENTIZATION`;
+- incomplete/unauthenticated evidence: `INSUFFICIENT_EVIDENCE`.

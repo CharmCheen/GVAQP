@@ -1,0 +1,167 @@
+{
+  "proposal_revision": 2,
+  "basis": {
+    "decision": "V3_SCHEMA_DETERMINISM_PASS_FULL_GRID_APPROVAL_REQUIRED",
+    "decision_file_sha256": "be04bc401d65835f32709f88a7ed492dac8ddf9136cecd14939e20a3ba59eb90",
+    "preflight_actual_a100_gpu_hours": 0.15172439083974396,
+    "preflight_call_count": 11,
+    "preflight_execution_seal_sha256": "bf35f7f3c9f897f337a838f36991ab502cf538fd602b779ab8afd245b0b9ce61"
+  },
+  "call_plan": {
+    "calls_by_video": {
+      "DALI": 567,
+      "HANGZHOU": 561,
+      "WUHAN": 347
+    },
+    "exact_physical_call_count": 1475,
+    "sampling_fps": 2.0,
+    "unit_duration_seconds": 10.0,
+    "unit_grid_path": "outputs/accelerated_event_query_v1/video_manifests/frozen_unit_grid_v1.csv",
+    "unit_grid_sha256": "570ba03ce2678ec9168fb213f92d4ef30ec8306369c93159827e33ea3cc5b908",
+    "unit_stride_seconds": 10.0,
+    "estimated_submitted_frame_occurrences": 30932,
+    "frame_estimate_note": "1472 full units at 21 endpoint-inclusive 2-fps frames plus proposed truncated-final-unit counts 12/2/6. The current sampler rejects non-integral half-second durations, so a separately tested/frozen final-unit rule and exact decoded manifest are mandatory before sealing.",
+    "truncated_final_unit_sampling_rule": "For only the three truncated final units, use the source-anchored exact 2-fps targets k/2 such that k/2 <= true unit duration. Never synthesize, repeat, round past the video end, or add an off-grid endpoint. Retain the true unit end only for K3 boundary authority."
+  },
+  "checkpoint_loading_overhead": {
+    "observed_preflight_model_load_seconds_by_replica": {
+      "DALI": 17.88046159595251,
+      "HANGZHOU": 18.119151646271348,
+      "WUHAN": 17.44721078313887
+    },
+    "observed_three_load_seconds_total": 53.44682402536273,
+    "planned_model_load_count": 3,
+    "maximum_model_loads_under_eventual_approval": 3,
+    "reload_budget": 0,
+    "accounting_rule": "The 16.097-hour estimate assumes one uninterrupted process and one hash-chained checkpoint-load record per video shard. No fourth load or post-load process restart is permitted under the eventual original approval; either requires a separately sealed continuation request."
+  },
+  "controller_label_hiding": {
+    "hidden_fields": [
+      "every unrevealed or future authoritative unit label",
+      "reference event identity",
+      "reference event boundary"
+    ],
+    "current_interface_audit": "ModelRelativeLabelStore.controller_view accepts caller-supplied unit IDs and returns their labels. It demonstrates queried-only filtering but is not an authorization or causal-reveal boundary and must not be cited as sufficient label hiding.",
+    "required_interface": "The exhaustive label store is evaluator/reference-only. A distinct capability must reveal a unit label to controller state only after an authenticated durable VERIFY completion for that exact unit; the action selector may see public observations and causally prior verified results, but cannot request arbitrary IDs or read unrevealed labels, future labels, reference event IDs, or reference boundaries.",
+    "required_leakage_tests": [
+      "With public observations and causally revealed VERIFY history fixed, permuting every unrevealed/future oracle label and reference event must leave controller-visible state and the next action unchanged.",
+      "An arbitrary unit-ID request without an authenticated completed VERIFY must fail closed.",
+      "The full-grid labeling run instantiates no controller and writes exhaustive labels only into evaluator-owned outputs."
+    ]
+  },
+  "cost_estimate": {
+    "basis_2fps_preflight_call_count": 10,
+    "estimated_a100_gpu_hours_including_three_loads_and_call_overhead": 16.09712320568816,
+    "estimated_parallel_wall_hours_on_three_two_gpu_replicas": 3.0931814077885096,
+    "mean_2fps_inference_seconds_per_call": 18.086503091081976,
+    "mean_2fps_total_call_seconds_excluding_model_load": 19.607711827941237,
+    "recommended_planning_envelope_a100_gpu_hours": 19.4,
+    "retry_compute_included": false,
+    "uncertainty_rule": "The direct 20 percent result is 19.3165478468 A100 GPU-hours and 19.4 is its conservative upward rounding. It is not permission for retries, reloads, or extra calls; unused margin cannot be repurposed.",
+    "required_cost_shield": "Before seal, freeze a hash-chained two-GPU-second ledger for checkpoint loads and calls plus a fail-closed pre-start reservation rule. No model load or call may start if its sealed reservation would exceed the 19.4 A100 GPU-hour eventual approval ceiling; any accounting mismatch triggers the global stop rule."
+  },
+  "execution_schedule": {
+    "DALI": {
+      "call_count": 567,
+      "estimated_a100_gpu_hours": 6.186362815577019,
+      "estimated_wall_hours": 3.0931814077885096,
+      "physical_gpu_ids": [
+        1,
+        2
+      ]
+    },
+    "HANGZHOU": {
+      "call_count": 561,
+      "estimated_a100_gpu_hours": 6.1211363817340585,
+      "estimated_wall_hours": 3.0605681908670292,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    },
+    "WUHAN": {
+      "call_count": 347,
+      "estimated_a100_gpu_hours": 3.789624008377082,
+      "estimated_wall_hours": 1.894812004188541,
+      "physical_gpu_ids": [
+        6,
+        7
+      ]
+    }
+  },
+  "failure_and_resume_policy": {
+    "failed_generation": "Preserve the ledger event and missing label; do not retry under the original approval. The run becomes incomplete and no authoritative full-grid EventRelation may be published.",
+    "global_fail_stop": "Choose global rather than shard-local stop. After any shard records GENERATION_FAILED, UNCERTAIN_INTERRUPTION, post-load process fault, cost-shield violation, or integrity mismatch, a coordinator prevents every shard from issuing another INFERENCE_STARTED event. Calls already durably started may reach a terminal record and are preserved; no new call may start.",
+    "parse_failure": "Preserve as parse_failure without regeneration or relabeling; K3 treats it as an indeterminate hard barrier.",
+    "resume": "There is no post-model-load restart or resume under the eventual original approval. A future separately reviewed and approved continuation may reuse authenticated accepted records and propose only call slots with no durable INFERENCE_STARTED; a started call lacking a terminal record remains UNCERTAIN_INTERRUPTION and cannot be regenerated unless the new request explicitly authorizes that retry.",
+    "preload_validation": "A validation abort before any durable MODEL_LOAD_STARTED record consumes no model-load/call budget and may be corrected before execution; once any shard starts loading, the three-load/no-restart rule applies globally.",
+    "checkpoint_reload_budget": 0,
+    "retry_budget": 0,
+    "unknown": "Preserve as unknown without regeneration or negative coercion; K3 may bridge exactly one short unknown under the frozen rule."
+  },
+  "integrity_audit": {
+    "expected_success_events_if_complete": 5900,
+    "requirements": [
+      "exact 1475-call self-hashed call manifest",
+      "exact decoded frame manifest and source-video hashes",
+      "current complete checkpoint rehash before model load",
+      "one authenticated execution session per video shard",
+      "exact approval/seal/runner/analyzer/finalizer binding",
+      "one global fail-stop coordinator and hash-chained load/cost ledger",
+      "hash-chained attempt ledgers joined to every raw record",
+      "write-once raw, parsed, runtime, metrics, evidence, and decision artifacts",
+      "complete/incomplete finalizer mapping that cannot publish a partial authoritative reference",
+      "independent post-run integrity review",
+      "zero extra, missing, replaced, or silently retried input"
+    ]
+  },
+  "k3_eventization": {
+    "config_file_sha256": "ebcc3907a64b463060ce36ec5e4b4c188ecc12c3c1e434e1e8554b22112be200",
+    "k3_parameter_sha256": "7906ab2da20cab7edbe0f379224b60160c7a857cd81ab7f4fec42f54ab9629b9",
+    "schedule": "Only after all 1475 authorized call slots have authenticated accepted raw/parse outcomes with zero missing, generation-failed, or uncertain unit, order units by video/start, materialize each video independently with the frozen K3 adapter, then concatenate deterministically and recompute in reverse input order. Unknown and parse_failure remain explicit outcomes and barriers under the frozen rule.",
+    "time_authority": "Only frozen unit boundaries; VLM diagnostic prose is ignored."
+  },
+  "model_and_protocol": {
+    "decoding_config_sha256": "07f186338d3daace6f56dd023b730811e9cc8aeb9818c20b9a312d740d59e81c",
+    "generation": {
+      "do_sample": false,
+      "max_new_tokens": 192,
+      "seed": 20260729
+    },
+    "model_content_hash": "3febe26ff0cee468bf48dc733e4bca559c8f13f8fe09f931a1e0808ba7c58873",
+    "model_file_manifest_sha256": "9001114c2b733d29339bb95aacc7089cd7e660876821bfc8076dfb6d139a2f6b",
+    "model_path": "models/Qwen3-VL-32B-Instruct-FP8",
+    "parser_sha256": "4820b25ba2652dd3fb9fb734aadb5e6f0e06c513539b2b568d4e889cfbe11390",
+    "prompt_sha256": "ffab97aeb65b7b8fddf8ce6fa9964319cda8b740aa87f90a3ed1df80c7c5c99e",
+    "schema_sha256": "a1024e4d6ed6b1277f13d5d5eade0c6f246bcf4a9c7486fe2a4a64bb7ecb0615"
+  },
+  "output_shards": {
+    "attempt_ledgers": "full_grid/attempt_ledgers/{DALI,HANGZHOU,WUHAN}.jsonl",
+    "coverage_report": "full_grid/oracle_coverage_report.json",
+    "event_relation": "full_grid/k3_operational_event_relation.parquet",
+    "incomplete_diagnostics": "full_grid/incomplete_diagnostics/",
+    "parsed": "full_grid/parsed/{DALI,HANGZHOU,WUHAN}/*.json",
+    "raw": "full_grid/raw/{DALI,HANGZHOU,WUHAN}/*.json",
+    "unit_labels": "full_grid/unit_labels.parquet",
+    "publication_rule": "The three named authoritative deliverables are atomically finalized only after the complete finalizer gate. An incomplete run writes only explicitly INCOMPLETE diagnostic manifests under incomplete_diagnostics and those artifacts are forbidden for downstream scoring, replay, ceiling, headroom, or controller use."
+  },
+  "publication_decision_mapping": {
+    "FULL_GRID_COMPLETE_REFERENCE_PUBLISHED": "Exactly 1475 authenticated accepted raw/parse outcomes, no missing/generation-failed/uncertain call, exact manifests and ledgers, deterministic K3 equality, and atomic publication of the three authoritative deliverables.",
+    "FULL_GRID_INCOMPLETE_NO_AUTHORITATIVE_REFERENCE": "Any missing, generation-failed, uncertain, extra, retried, unauthenticated, cost, or integrity condition; preserve diagnostics but publish no authoritative unit_labels or EventRelation and permit no downstream use."
+  },
+  "preexecution_requirements": [
+    "Implement and test the explicit truncated-final-unit 2-fps rule; prove exact target counts 12/2/6 and no source-frame overrun.",
+    "Decode and freeze all 1475 exact frame sets without observing model outputs.",
+    "Build exact call, frame, provenance, cost, analyzer, finalizer, and decision manifests.",
+    "Implement the evaluator-only label capability and authenticated causal VERIFY reveal boundary; pass arbitrary-request rejection and unrevealed-label permutation tests.",
+    "Implement and test the global fail-stop coordinator, exactly-three-load ledger, zero-reload rule, 19.4-hour cost shield, and complete/incomplete atomic publication gate.",
+    "Freeze exact Parquet/coverage schemas, row ordering, status vocabulary, and payload/file hashes.",
+    "Seal an executable full-grid package with zero retry and exact output paths.",
+    "Obtain a new independent GO for that exact seal.",
+    "Obtain explicit user approval referencing that exact full-grid seal before any model load."
+  ],
+  "scope": "Proposal only. It authorizes no frame-freeze expansion, model inference, retry, full-grid execution, or downstream experiment.",
+  "status": "PROPOSAL_REVISION_2_AWAITING_INDEPENDENT_REREVIEW_NOT_PREREGISTERED_NOT_AUTHORIZED",
+  "video_manifest_path": "outputs/accelerated_event_query_v1/video_manifests/frozen_videos_v1.json",
+  "video_manifest_sha256": "2953eba0ca1bffd7bfad0e5681cc6242d01143ac2665820a89c9a203116c0ec9"
+}

@@ -1,0 +1,56 @@
+{
+  "alternative_asset_audit": {
+    "disposition": "Do not use metadata-only collision/near-collision tags to claim the four missing semantic strata; derived labels are provenance, not human event truth.",
+    "human_adjudicated": false,
+    "locally_available_video_count": 0,
+    "manifest": "outputs/mf_psvr_publication_program/cycle_01_training_pool/candidates/UNIT_MANIFEST.csv",
+    "sampling_tag_video_counts": {
+      "collision_or_near_collision": 200,
+      "normal_driving": 403
+    },
+    "status": "METADATA_ONLY_NO_LOCAL_VIDEO_BYTES",
+    "unique_video_locator_count": 603
+  },
+  "available_legacy_pool_counts": {
+    "legacy_boundary_disagreement": 44,
+    "legacy_cut_in_hard_negative": 60,
+    "legacy_cut_in_positive": 247,
+    "normal_traffic_control": 253
+  },
+  "available_selected_video_count": 0,
+  "missing_external_pools": [
+    "intersection_conflict_candidate",
+    "longitudinal_conflict_candidate",
+    "road_hazard_candidate",
+    "vulnerable_road_user_crossing_candidate"
+  ],
+  "missing_selected_video_paths": [
+    "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/long_video_dataset3.mp4",
+    "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/\u9a7e\u9a76-\u5927\u7406.mp4"
+  ],
+  "reason": "Legacy provenance supports cut-in and control selection metadata only. The selected source video bytes are absent in this checkout, and selecting other hazard families without an independent pool would fabricate semantic coverage.",
+  "required_external_pool_counts": {
+    "intersection_conflict_candidate": 5,
+    "longitudinal_conflict_candidate": 5,
+    "road_hazard_candidate": 5,
+    "vulnerable_road_user_crossing_candidate": 5
+  },
+  "selected_legacy_counts": {
+    "legacy_boundary_disagreement": 5,
+    "legacy_cut_in_hard_negative": 5,
+    "legacy_cut_in_positive": 10,
+    "normal_traffic_control": 10
+  },
+  "selected_sample_count": 30,
+  "selected_unique_video_count": 2,
+  "status": "BLOCKED_MISSING_INDEPENDENT_SEMANTIC_POOLS_AND_MISSING_SELECTED_SOURCE_VIDEO_BYTES",
+  "target_total_range": [
+    45,
+    55
+  ],
+  "v1_hashes_verified": {
+    "immutable/contracts/query_contract.yaml": "6965be01d0a6424025c13282979fe5730d8eaef55a43d39117df3c3c02e3bced",
+    "immutable/reference_events.csv": "ca25d34744cb231dbc7dc48811fe56e7e42ecc59f2aa1b2b98c4949f11f55642"
+  },
+  "vlm_launch_allowed": false
+}

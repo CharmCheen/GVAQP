@@ -1,0 +1,90 @@
+{
+  "candidate_count": 6,
+  "candidates": [
+    {
+      "candidate_id": "DALI_u0501",
+      "end_time": 5020.0,
+      "sampling_fps": [
+        2.0
+      ],
+      "selection_rationale": "potential unknown selected from frozen V2 pre-outcome consensus unknown",
+      "start_time": 5010.0,
+      "video_id": "DALI"
+    },
+    {
+      "candidate_id": "DALI_u0548",
+      "end_time": 5490.0,
+      "sampling_fps": [
+        2.0,
+        4.0
+      ],
+      "selection_rationale": "hard V2 17-20 second schema regression and 2/4-fps coverage",
+      "start_time": 5480.0,
+      "video_id": "DALI"
+    },
+    {
+      "candidate_id": "DALI_u0555",
+      "end_time": 5560.0,
+      "sampling_fps": [
+        2.0
+      ],
+      "selection_rationale": "V2 deterministic not_relevant label plus same/cross-replica anchor",
+      "start_time": 5550.0,
+      "video_id": "DALI"
+    },
+    {
+      "candidate_id": "HANGZHOU_u0234",
+      "end_time": 2350.0,
+      "sampling_fps": [
+        2.0
+      ],
+      "selection_rationale": "V2 relevant label and traffic-signal diagnostic disagreement",
+      "start_time": 2340.0,
+      "video_id": "HANGZHOU"
+    },
+    {
+      "candidate_id": "WUHAN_u0171",
+      "end_time": 1720.0,
+      "sampling_fps": [
+        2.0
+      ],
+      "selection_rationale": "V2 relevant label and unsupported timestamp explanation diagnostic",
+      "start_time": 1710.0,
+      "video_id": "WUHAN"
+    },
+    {
+      "candidate_id": "WUHAN_u0217",
+      "end_time": 2180.0,
+      "sampling_fps": [
+        2.0
+      ],
+      "selection_rationale": "V2 deterministic not_relevant label and ego-path diagnostic disagreement",
+      "start_time": 2170.0,
+      "video_id": "WUHAN"
+    }
+  ],
+  "coverage": {
+    "potential_unknown": [
+      "DALI_u0501"
+    ],
+    "required_v2_regressions": [
+      "DALI_u0548",
+      "DALI_u0555",
+      "HANGZHOU_u0234",
+      "WUHAN_u0217",
+      "WUHAN_u0171"
+    ],
+    "sampling_fps": [
+      2.0,
+      4.0
+    ],
+    "videos": [
+      "DALI",
+      "HANGZHOU",
+      "WUHAN"
+    ]
+  },
+  "no_post_outcome_adjustment": true,
+  "selection_rule": "11-call high-information design within the allowed 8-12 range; it repeats all three V2 contradiction anchors in-process, adds one cross-replica anchor, and reuses V2 frames",
+  "status": "FROZEN_WITHOUT_OBSERVING_ANY_V3_OUTPUT"
+}

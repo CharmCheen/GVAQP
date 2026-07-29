@@ -1,0 +1,17 @@
+{
+  "taxonomy_version": "SAFETY_CRITICAL_DRIVING_EVENT_TAXONOMY_V1",
+  "positive_hazard_rule": "is_hazard is true if and only if risk_level is L2 or L3",
+  "families": {
+    "lateral_conflict": ["vehicle_cut_in", "unsafe_merge", "lane_intrusion", "close_lateral_approach"],
+    "longitudinal_conflict": ["lead_vehicle_hard_braking", "rapid_closing", "stopped_object_ahead", "unsafe_following"],
+    "crossing_conflict": ["pedestrian_crossing", "cyclist_crossing", "animal_crossing", "vehicle_crossing"],
+    "intersection_conflict": ["turning_conflict", "failure_to_yield", "intersection_encroachment"],
+    "oncoming_conflict": ["wrong_way_vehicle", "oncoming_path_intrusion"],
+    "collision_or_near_collision": ["collision", "near_collision"],
+    "ego_behavior": ["ego_lane_departure", "ego_unsafe_merge", "ego_tailgating", "ego_signal_violation"],
+    "road_hazard": ["road_debris", "blocked_lane", "work_zone_conflict", "road_surface_hazard"],
+    "visibility_or_control_hazard": ["severe_visibility_loss", "apparent_loss_of_control"],
+    "other": ["other"]
+  },
+  "open_set_rule": "Unknown supported events use family=other, event_type=other, a non-empty proposed_event_type, and review_required=true."
+}
