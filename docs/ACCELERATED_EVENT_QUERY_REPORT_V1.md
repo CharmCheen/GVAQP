@@ -1,6 +1,6 @@
 # Accelerated Event Query Report V1
 
-Current status: `IN_PROGRESS — V1 PREFLIGHT REJECTED; V2 PROTOCOL REVISION IN PROGRESS`
+Current status: `IN_PROGRESS — V1 PREFLIGHT REJECTED; V2 SEALED AND REVIEWED; USER COMPUTE APPROVAL PENDING`
 
 ## Strongest supported conclusion
 
@@ -16,7 +16,7 @@ The previous binary-SMDP stop remains valid for its old two-video, ego-path-entr
 - A tested event-level kernel now distinguishes probable from verified events, updates K3 incrementally, enforces negative barriers and duration caps, rejects post-deadline mutations, and uses one-to-one event matching.
 - Before any new-query 32B output existed, deterministic 2 fps contact sheets were generated for all twelve preflight clips and hash-bound to a blinded adversarial review. The review records four qualitative positives, five negatives, and three unknowns. These judgments are screening evidence, not independent human ground truth.
 - The previously qualitative “no systematic unsupported positives” gate is now operationalized before outcomes: a contradiction requires two stable high-confidence 2 fps oracle positives against a medium/high frozen `not_relevant` review; one candidate requires adjudication, while two across two videos fail the gate. Review `unknown` never counts as negative.
-- Twenty-one targeted tests pass, including fail-closed tests of the visual-contradiction classifier.
+- Fifty-one focused tests pass, including call-manifest mutation, stale model evidence, ledger and raw tampering, physical-retry prevention, crash recovery, concurrent-shard locking, duplicate JSON keys, sensitivity/semantic failure gates, processed-tensor identity, and finalizer failure paths.
 
 ## Derived implications
 
@@ -24,7 +24,7 @@ At the observed 24.7-second mean inference, a sequential 1,475-unit 32B pass is 
 
 Independent pre-outcome review rejected the V1 preflight as an execution gate. The contact sheets omitted the endpoint frame supplied to the model; nominal 4 fps extraction was actually about 4.286 fps; malformed label-conditional outputs could parse successfully; raw inputs were not authenticated; and degenerate all-unknown or single-class outputs could pass. Zero of 30 V1 physical calls were made, so no outcome was overwritten.
 
-V2 now freezes an exact endpoint-inclusive target grid (21 frames at 2 fps and 41 at 4 fps), per-frame RGB identities, strict whole-string/label-conditional parsing, two pre-outcome reviews, bidirectional semantic screening, usable-class-support gates, and a 32-call design with one cross-replica anchor. The two reviewers agreed on 10 of 12 clips; the two disagreements are retained as `unknown`. An authenticated runner and analyzer are implemented: CPU validation resolves all 32 exact inputs, and synthetic attacks confirm that single-class collapse and raw/frame tampering cannot pass. Independent implementation review remains required before compute approval.
+V2 now freezes an exact endpoint-inclusive target grid (21 frames at 2 fps and 41 at 4 fps), per-frame RGB identities, strict whole-string/label-conditional parsing, two pre-outcome reviews, bidirectional semantic screening, usable-class-support gates, and an explicit 32-call manifest. The two reviewers agreed on 10 of 12 clips; the two disagreements are retained as `unknown`. The reviewed runner authenticates the current 19-file model, videos, frames, processed tensors, preprocessing runtime, GPU identities, and exact physical-generation ledger. The analyzer cannot pass on a single-class collapse, sensitivity failure, wrong accepted triple, different repeat/replica tensors, or incomplete claim grounding. Independent re-review returned GO only for requesting user approval of this targeted pilot.
 
 ## Competing hypotheses
 
@@ -34,4 +34,4 @@ V2 now freezes an exact endpoint-inclusive target grid (21 frames at 2 fps and 4
 
 ## Unresolved required answers
 
-All twelve final report questions remain open. In particular, no new-query operational references, formal scan ceiling, probable-event calibration, safe dynamic headroom, public-state model, learned controller, or ablation matrix has yet been run.
+All twelve final report questions remain open. In particular, no new-query operational references, formal scan ceiling, probable-event calibration, observed complete-path cost shield, label-hiding replay, safe dynamic headroom, public-state model, learned controller, closed-loop comparison, or ablation matrix has yet been run. The targeted preflight is a prerequisite measurement, not evidence of accelerated event querying.
