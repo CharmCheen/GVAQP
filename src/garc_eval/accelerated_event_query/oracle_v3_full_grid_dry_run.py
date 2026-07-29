@@ -320,11 +320,12 @@ def run_fault_injections(root: Path) -> dict[str, Any]:
     ) == "FULL_GRID_ABORTED_AUTHENTICATION"
 
     partial_root = root / "partial"
-    # No records: finalizer must report insufficient evidence and publish nothing formal.
-    # Create empty valid worker ledgers so the analyzer can exercise incomplete accounting.
+    # No supervisor audit or records is a frozen runtime abort, and must publish
+    # nothing formal.  Other incomplete paths without a higher-priority hard
+    # failure map to INSUFFICIENT_EVIDENCE.
     partial = finalize_execution(execution_root=partial_root, allow_mock=True)
     results["partial_nonpublication"] = all((
-        partial["would_emit_formal_decision"] == "INSUFFICIENT_EVIDENCE",
+        partial["would_emit_formal_decision"] == "FULL_GRID_ABORTED_RUNTIME",
         not (partial_root / "FORMAL_REFERENCE_RELEASE.json").exists(),
     ))
     if not all(results.values()):

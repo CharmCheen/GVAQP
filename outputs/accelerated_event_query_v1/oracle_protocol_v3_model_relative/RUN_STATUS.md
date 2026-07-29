@@ -140,3 +140,16 @@ Revision actions now implemented locally:
 
 Current decision: preserve rejected seal V1 and continue revision without any
 Qwen3-VL-32B inference. Do not request compute approval yet.
+
+Seal V2 `f986ddc4…` subsequently froze 1,475 distinct processed tensor hashes;
+three independent processes redecoded/reprocessed all 1,475 units and matched
+every frame/tensor identity. Its dry-run then found a non-safety assertion
+staleness: missing supervisor audit maps to `FULL_GRID_ABORTED_RUNTIME`, not the
+fixture's older exact expectation `INSUFFICIENT_EVIDENCE`. Formal publication
+remained absent and all nine hard injections passed. Seal V2 is preserved and
+invalidated; the assertion is revised and requires a new source commit/seal.
+
+The user has expanded authority to 64 A100 GPU-hours and permits direct formal
+execution after a GO review. Current A100 use in this expanded authorization is
+0.0 hours. Expanded authority does not relax authentication, zero-retry per
+formal execution, label hiding, deadline, or partial-publication gates.
