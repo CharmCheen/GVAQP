@@ -216,3 +216,7 @@
 - Impact: any unbounded or unaccounted interval rejects the package and the
   19.4 A100 GPU-hour claim.
 - Status: `SUPPORTED_BY_UNIT_AND_FAULT_TESTS_AWAITING_COMPLETE_DRY_RUN`.
+  An internal adversarial pass falsified the first revision's immediate
+  post-session exclusion. The repaired prediction additionally requires model
+  and tensor release before close and keeps a closed-but-live PID under the
+  same lease until exit; the new fault test passes.

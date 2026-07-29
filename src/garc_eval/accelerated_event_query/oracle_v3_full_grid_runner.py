@@ -55,6 +55,7 @@ from .oracle_v3_parser import parse_oracle_v3_response
 
 CALL_RESERVATION_WALL_SECONDS = 23.579961206763983
 MODEL_LOAD_RESERVATION_WALL_SECONDS = 30.0
+LOADED_WORKER_IDLE_LEASE_SECONDS = 2.0
 ENVELOPE_A100_GPU_HOURS = 19.4
 EXPECTED_CUBLAS_WORKSPACE_CONFIG = ":4096:8"
 if os.environ.get("CUBLAS_WORKSPACE_CONFIG") not in {
@@ -528,6 +529,15 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
                 "event": "ACCEPTED", **common,
                 "record_payload_sha256": record["record_payload_sha256"],
             })
+        # End GPU residency before declaring the worker session closed.  A
+        # hang anywhere before this point remains covered by the loaded-idle
+        # lease; a live process after closure remains covered until exit.
+        import gc
+
+        del inputs, generated, trimmed, model
+        gc.collect()
+        torch.cuda.empty_cache()
+        torch.cuda.synchronize()
         coordinator.complete_worker_session(worker_id)
         state = coordinator.state()
         if len(state["completed_unit_ids"]) == EXPECTED_UNIT_COUNT:

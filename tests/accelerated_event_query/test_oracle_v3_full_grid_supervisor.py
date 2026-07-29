@@ -94,6 +94,31 @@ def test_loaded_worker_idle_gap_is_cost_shielded(tmp_path):
     assert violation.startswith("loaded_worker_idle:W0")
 
 
+def test_closed_but_live_worker_remains_under_idle_lease(tmp_path):
+    coordinator = GlobalFailStopCoordinator(
+        tmp_path,
+        execution_seal_sha256="s" * 64,
+        worker_bindings=WORKERS,
+        envelope_a100_gpu_hours=19.4,
+        call_reservation_wall_seconds=23.579961206763983,
+        model_load_reservation_wall_seconds=30.0,
+    )
+    coordinator.initialize()
+    coordinator.start_model_load("W0", [1, 2])
+    coordinator.complete_model_load("W0", 0.01)
+    coordinator.reserve_call(
+        worker_id="W0", gpu_pair=[1, 2], unit_id="U0", call_spec_sha256="a"
+    )
+    coordinator.complete_call(worker_id="W0", unit_id="U0", wall_seconds=0.01)
+    coordinator.complete_worker_session("W0")
+    rows = _read_jsonl(tmp_path / "GLOBAL_EXECUTION_LEDGER.jsonl")
+    last = rows[-1]["recorded_at_unix_ns"]
+    violation = _loaded_worker_idle_violation(
+        tmp_path, running_worker_ids={"W0"}, now_ns=last + 3_000_000_000
+    )
+    assert violation.startswith("loaded_worker_idle:W0")
+
+
 def test_worker_is_kernel_killed_when_supervisor_parent_exits(tmp_path):
     pid_file = tmp_path / "worker.pid"
     child_code = (

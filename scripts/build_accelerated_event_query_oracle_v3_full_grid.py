@@ -42,6 +42,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_package import (
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_runner import (
     CALL_RESERVATION_WALL_SECONDS,
     ENVELOPE_A100_GPU_HOURS,
+    LOADED_WORKER_IDLE_LEASE_SECONDS,
     MODEL_LOAD_RESERVATION_WALL_SECONDS,
 )
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_processing import (
@@ -209,7 +210,9 @@ Workers reject direct launch without the supervisor authority and parent PID.
 Before importing the model stack, each worker installs Linux `PDEATHSIG=SIGKILL`
 and rechecks the exact parent, so supervisor death cannot orphan GPU workers.
 Every call is reserved before frame decode/processor work; a two-second loaded
-worker idle lease covers the otherwise unreserved gaps between operations.
+worker idle lease covers the otherwise unreserved gaps between operations and
+remains active after session close until the worker process exits. Model tensors
+and cached allocations are explicitly released before session close.
 
 The execution uses one global fail-stop coordinator. Authentication, frame or
 processed-input mismatch, an unknown runner/parser, wrong GPU, duplicate or
@@ -474,6 +477,7 @@ def main() -> None:
     reserved = 2 * (
         EXPECTED_UNIT_COUNT * CALL_RESERVATION_WALL_SECONDS
         + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
+        + 3 * LOADED_WORKER_IDLE_LEASE_SECONDS
     ) / 3600
     cost = self_hash({
         "status": "FROZEN_FULL_GRID_COST_AND_RESERVATION_PLAN",
@@ -488,10 +492,11 @@ def main() -> None:
         "observed_preflight_load_seconds": observed_loads,
         "per_call_hard_reservation_wall_seconds": CALL_RESERVATION_WALL_SECONDS,
         "per_load_hard_reservation_wall_seconds": MODEL_LOAD_RESERVATION_WALL_SECONDS,
+        "post_session_process_exit_lease_wall_seconds_per_worker": LOADED_WORKER_IDLE_LEASE_SECONDS,
         "aggregate_reserved_a100_gpu_hours": reserved,
         "reservation_fits_envelope": reserved <= ENVELOPE_A100_GPU_HOURS,
         "cost_shield": "hash-chained actual GPU residency plus in-flight reservation accounting; calls reserve before decode/processing; loaded idle gaps are timed and bounded; no start above envelope",
-        "actual_gpu_residency_accounting": "two GPUs times model load, every call, every inter-call output/ledger gap, and final session-close gap",
+        "actual_gpu_residency_accounting": "two GPUs times model load, every call, every inter-call output/ledger gap, and explicit model release through session close; the bounded post-close/process-exit tail is included in the aggregate reservation",
         "unused_envelope_cannot_authorize_extra_calls_reloads_or_retries": True,
     }, "cost_estimate_payload_sha256")
     write_json_once(PACKAGE / "FULL_GRID_COST_ESTIMATE.json", cost)

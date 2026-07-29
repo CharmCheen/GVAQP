@@ -187,3 +187,13 @@ Current decision: rebuild and reseal the exact package, rerun its full mock and
 fault suite, and request a third independent adversarial judgment. Execute the
 1,475 calls directly only if that exact package receives
 `GO_TO_REQUEST_FULL_GRID_APPROVAL` and its approval artifact binds the new seal.
+
+Before completing that rebuild, an internal falsification found one residual
+tail window: a worker was excluded from the idle monitor immediately after
+session close although its process had not yet exited. The incomplete CPU-only
+build was terminated before it wrote a manifest. The runner now deletes the
+model and final GPU tensors, collects garbage, clears the CUDA cache, and
+synchronizes before session close. A closed-but-live worker remains under the
+two-second idle lease until process exit; that worst-case tail is included in
+the aggregate envelope reservation. 124 tests pass, including a direct
+closed-session/live-process fault. A100 use remains 0.0 hours.

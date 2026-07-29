@@ -25,6 +25,7 @@ from .oracle_v3_full_grid_package import (
 )
 from .oracle_v3_full_grid_runner import (
     CALL_RESERVATION_WALL_SECONDS,
+    LOADED_WORKER_IDLE_LEASE_SECONDS,
     MODEL_LOAD_RESERVATION_WALL_SECONDS,
     initialize_execution,
     validate_compute_approval,
@@ -35,7 +36,6 @@ from .oracle_v3_manifest import atomic_text, canonical_hash, load_json, sha256_f
 POLL_SECONDS = 0.20
 STARTUP_LEASE_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 5.0
-LOADED_WORKER_IDLE_LEASE_SECONDS = 2.0
 
 
 @dataclass
@@ -85,10 +85,9 @@ def _loaded_worker_idle_violation(
     """Cover every GPU-loaded gap not represented by an open operation."""
 
     state = load_json(execution_root / "GLOBAL_EXECUTION_STATE.json")
-    loaded = (
-        set(state.get("model_load_completed_workers", []))
-        - set(state.get("worker_sessions_completed", []))
-    ) & running_worker_ids
+    # A closed session must still exit promptly.  Keeping every live loaded
+    # worker here closes the final session-close/process-exit window as well.
+    loaded = set(state.get("model_load_completed_workers", [])) & running_worker_ids
     if not loaded:
         return None
     rows = _read_jsonl(execution_root / "GLOBAL_EXECUTION_LEDGER.jsonl")
