@@ -5,7 +5,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_analyzer import (
     FullGridAnalysisProducts,
 )
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_finalizer import _publish
-from garc_eval.accelerated_event_query.oracle_v3_manifest import load_json
+from garc_eval.accelerated_event_query.oracle_v3_manifest import canonical_hash, load_json
 
 from .v3_helpers import unit
 
@@ -44,7 +44,16 @@ def test_reference_becomes_formal_only_after_atomic_release_pointer(tmp_path):
             "minimum_per_video_determined_fraction": 0.99,
         },
     }
-    release = _publish(execution_root=tmp_path, metrics=metrics, products=products)
+    policy = {
+        "evaluator_uid": os.geteuid(), "runtime_uid": 65534,
+        "evaluator_directory_mode": "0700", "evaluator_file_mode": "0600",
+        "required_runtime_effective_capabilities_hex": "0000000000000000",
+    }
+    policy["label_access_policy_payload_sha256"] = canonical_hash(policy)
+    release = _publish(
+        execution_root=tmp_path, metrics=metrics, products=products,
+        policy_payload=policy,
+    )
     pointer = tmp_path / "FORMAL_REFERENCE_RELEASE.json"
     assert pointer.is_file()
     assert load_json(pointer)["release_id"] == release["release_id"]
@@ -55,3 +64,4 @@ def test_reference_becomes_formal_only_after_atomic_release_pointer(tmp_path):
     }
     for row in release["artifacts"]:
         assert oct(os.stat(tmp_path / row["path"]).st_mode & 0o777) == "0o600"
+    assert oct(os.stat(tmp_path / "evaluator_only_reference_releases").st_mode & 0o777) == "0o700"

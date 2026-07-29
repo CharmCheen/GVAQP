@@ -30,13 +30,26 @@ from .oracle_v3_full_grid_package import (
     EXECUTION,
     FRAMES,
     PACKAGE,
+    PROCESSED_INPUTS,
     ROOT,
     SCHEDULE,
     SEAL,
     UNITS,
     validate_execution_seal,
 )
-from .oracle_v3_manifest import atomic_text, canonical_hash, load_json, sha256_file
+from .oracle_v3_full_grid_processing import (
+    load_frozen_processor,
+    prepare_frozen_model_inputs,
+    runtime_environment_identity,
+    tensor_bundle_sha256,
+)
+from .oracle_v3_manifest import (
+    atomic_text,
+    canonical_hash,
+    load_json,
+    sha256_file,
+    validate_payload_hash,
+)
 from .oracle_v3_parser import parse_oracle_v3_response
 
 
@@ -145,12 +158,35 @@ def _verify_model_files(prereg: dict[str, Any]) -> str:
     return sha256_file(ROOT / binding["path"])
 
 
+def _verify_processor_environment() -> dict[str, Any]:
+    manifest = load_json(PROCESSED_INPUTS)
+    observed = runtime_environment_identity()
+    if observed != manifest.get("processor_environment"):
+        raise RuntimeError("processor runtime environment differs from frozen identity")
+    return manifest
+
+
+def _validate_supervisor_authority(worker_id: str) -> None:
+    authority = load_json(EXECUTION / "SUPERVISOR_LAUNCH_AUTHORITY.json")
+    validate_payload_hash(authority, "supervisor_authority_payload_sha256")
+    declared_parent = os.environ.get("FULL_GRID_SUPERVISOR_PID")
+    if not all((
+        authority.get("status") == "SUPERVISOR_AUTHORIZED_EXACT_WORKER_LAUNCH",
+        authority.get("execution_seal_sha256") == sha256_file(SEAL),
+        authority.get("supervisor_pid") == os.getppid(),
+        declared_parent == str(os.getppid()),
+        worker_id in authority.get("worker_ids", []),
+    )):
+        raise RuntimeError("worker was not launched by the sealed supervisor")
+
+
 def initialize_execution(execution_root: Path = EXECUTION) -> dict[str, Any]:
     """Approval-gated host audit; performs no model load and no inference."""
 
     _, prereg = validate_execution_seal("runner")
     approval = validate_compute_approval()
     schedule = load_json(SCHEDULE)
+    _verify_processor_environment()
     identities = {
         row["worker_id"]: [_gpu_identity(index) for index in row["physical_gpu_ids"]]
         for row in schedule["workers"]
@@ -212,7 +248,9 @@ def _decode_and_validate_unit(
     return frames
 
 
-def validate_worker_inputs(worker_id: str, *, redecode: bool = False) -> dict[str, Any]:
+def validate_worker_inputs(
+    worker_id: str, *, redecode: bool = False, reprocess: bool = False
+) -> dict[str, Any]:
     """No-checkpoint validation path used by preregistration dry-runs."""
 
     _, prereg = validate_execution_seal("runner")
@@ -228,11 +266,41 @@ def validate_worker_inputs(worker_id: str, *, redecode: bool = False) -> dict[st
         row["video_id"]: row
         for row in load_json(ROOT / prereg["bindings"]["video_manifest"]["path"])["videos"]
     }
+    processor = None
+    prompt = None
+    processed_manifest = _verify_processor_environment()
+    expected_processed = {
+        row["unit_id"]: row["processed_input_sha256"]
+        for row in processed_manifest["units"]
+    }
+    if reprocess:
+        processor = load_frozen_processor(ROOT / prereg["model"]["path"])
+        processor_class = f"{processor.__class__.__module__}.{processor.__class__.__qualname__}"
+        if processor_class != processed_manifest["processor_class"]:
+            raise RuntimeError("processor class differs from frozen identity")
+        prompt = (ROOT / prereg["bindings"]["prompt"]["path"]).read_text(
+            encoding="utf-8"
+        )
     checked_frames = 0
     for unit_id in worker["unit_ids"]:
         unit = unit_map[unit_id]
-        if redecode:
-            _decode_and_validate_unit(unit, videos[unit["video_id"]], frame_map[unit_id])
+        decoded = None
+        if redecode or reprocess:
+            decoded = _decode_and_validate_unit(
+                unit, videos[unit["video_id"]], frame_map[unit_id]
+            )
+        if reprocess:
+            inputs = prepare_frozen_model_inputs(
+                processor,
+                prompt=prompt,
+                rgb_frames=[row["rgb"] for row in decoded],
+                sampling_fps=2.0,
+            )
+            observed = tensor_bundle_sha256(inputs)
+            if observed != expected_processed[unit_id] or observed != unit[
+                "expected_processed_input_sha256"
+            ]:
+                raise RuntimeError(f"processed-input identity mismatch: {unit_id}")
         checked_frames += len(frame_map[unit_id])
     return {
         "status": "PASS_NO_MODEL_LOAD_NO_INFERENCE",
@@ -240,23 +308,9 @@ def validate_worker_inputs(worker_id: str, *, redecode: bool = False) -> dict[st
         "exact_call_count": len(worker["unit_ids"]),
         "frame_occurrence_count": checked_frames,
         "redecoded": redecode,
+        "reprocessed": reprocess,
         "checkpoint_loaded": False,
     }
-
-
-def _tensor_bundle_sha256(values: Any) -> str:
-    digest = hashlib.sha256()
-    for key in sorted(values):
-        value = values[key]
-        digest.update(key.encode())
-        if hasattr(value, "detach"):
-            tensor = value.detach().cpu().contiguous()
-            digest.update(str(tensor.dtype).encode())
-            digest.update(json.dumps(list(tensor.shape)).encode())
-            digest.update(tensor.view(dtype=__import__("torch").uint8).numpy().tobytes())
-        else:
-            digest.update(repr(value).encode())
-    return digest.hexdigest()
 
 
 def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
@@ -265,15 +319,15 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
     import numpy as np
     import torch
     import transformers
-    from PIL import Image
-    from qwen_vl_utils import process_vision_info
-    from transformers import AutoProcessor, Qwen3VLForConditionalGeneration
+    from transformers import Qwen3VLForConditionalGeneration
 
     _, prereg = validate_execution_seal("runner")
     validate_compute_approval()
+    _validate_supervisor_authority(worker_id)
     schedule = load_json(SCHEDULE)
     units = load_json(UNITS)
     frame_manifest = load_json(FRAMES)
+    processed_manifest = _verify_processor_environment()
     workers = _worker_map(schedule)
     worker = workers.get(worker_id)
     if worker is None or worker["physical_gpu_ids"] != declared_physical_gpus:
@@ -312,9 +366,13 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
             trust_remote_code=True, local_files_only=True,
         )
         model.to(dtype=torch.bfloat16)
-        processor = AutoProcessor.from_pretrained(
-            model_path, trust_remote_code=True, local_files_only=True
-        )
+        processor = load_frozen_processor(model_path)
+        processor_class = f"{processor.__class__.__module__}.{processor.__class__.__qualname__}"
+        if processor_class != processed_manifest["processor_class"]:
+            coordinator.trigger_stop(
+                "processed_input_identity_mismatch", "processor_class"
+            )
+            raise RuntimeError("processor class differs from frozen identity")
         model.eval()
         torch.use_deterministic_algorithms(True, warn_only=False)
         seed = int(prereg["decoding"]["seed"])
@@ -337,26 +395,20 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
             unit = unit_map[unit_id]
             call_started = time.perf_counter()
             frames = _decode_and_validate_unit(unit, videos[unit["video_id"]], frame_map[unit_id])
-            pil_frames = [Image.fromarray(row["rgb"]) for row in frames]
-            messages = [{"role": "user", "content": [
-                {"type": "video", "video": pil_frames, "fps": 2.0},
-                {"type": "text", "text": prompt},
-            ]}]
-            prompt_text = processor.apply_chat_template(
-                messages, tokenize=False, add_generation_prompt=True
-            )
-            image_inputs, video_inputs, kwargs = process_vision_info(
-                messages, return_video_kwargs=True, return_video_metadata=True
-            )
-            if kwargs != {"do_sample_frames": False}:
-                raise RuntimeError(f"unexpected processor sampling kwargs: {kwargs}")
-            inputs = processor(
-                text=[prompt_text], images=image_inputs,
-                videos=[row[0] for row in video_inputs],
-                video_metadata=[row[1] for row in video_inputs],
-                padding=True, return_tensors="pt", **kwargs,
+            inputs = prepare_frozen_model_inputs(
+                processor,
+                prompt=prompt,
+                rgb_frames=[row["rgb"] for row in frames],
+                sampling_fps=2.0,
             ).to(model.device)
-            processed_hash = _tensor_bundle_sha256(inputs)
+            processed_hash = tensor_bundle_sha256(inputs)
+            if processed_hash != unit["expected_processed_input_sha256"]:
+                coordinator.trigger_stop(
+                    "processed_input_identity_mismatch", unit_id
+                )
+                raise RuntimeError(
+                    f"processed input differs from preregistration: {unit_id}"
+                )
             attempt_id = f"{worker_id}:{unit_id}:{time.time_ns()}"
             common = {
                 "worker_id": worker_id, "unit_id": unit_id,
@@ -383,7 +435,7 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
                 )
             torch.cuda.synchronize()
             inference_seconds = time.perf_counter() - inference_started
-            generated_hash = _tensor_bundle_sha256({"generated": generated})
+            generated_hash = tensor_bundle_sha256({"generated": generated})
             append_hash_chain(ledger, {
                 "event": "INFERENCE_COMPLETED", **common,
                 "generated_token_ids_sha256": generated_hash,

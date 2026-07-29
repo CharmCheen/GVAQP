@@ -261,10 +261,45 @@ def validate_unit_manifest(manifest: dict[str, Any]) -> None:
         )
         if row.get("frame_count") != expected_frames:
             raise RuntimeError(f"unit frame count mismatch: {row.get('unit_id')}")
+        if not isinstance(row.get("expected_processed_input_sha256"), str) or len(
+            row["expected_processed_input_sha256"]
+        ) != 64:
+            raise RuntimeError(f"processed-input identity missing: {row.get('unit_id')}")
         claimed = row.get("call_spec_sha256")
         unsigned = {key: value for key, value in row.items() if key != "call_spec_sha256"}
         if claimed != canonical_hash(unsigned):
             raise RuntimeError(f"unit call self-hash mismatch: {row.get('unit_id')}")
+
+
+def validate_processed_input_manifest(
+    manifest: dict[str, Any], unit_manifest: dict[str, Any]
+) -> None:
+    """Authenticate one preregistered processor tensor identity per unit."""
+
+    validate_payload_hash(manifest, "processed_input_manifest_payload_sha256")
+    rows = manifest.get("units")
+    if not isinstance(rows, list) or len(rows) != EXPECTED_UNIT_COUNT:
+        raise RuntimeError("processed-input manifest count mismatch")
+    expected_units = unit_manifest["units"]
+    if [row.get("unit_id") for row in rows] != [
+        row["unit_id"] for row in expected_units
+    ]:
+        raise RuntimeError("processed-input manifest order/membership mismatch")
+    by_id = {row["unit_id"]: row for row in expected_units}
+    for row in rows:
+        unit = by_id[row["unit_id"]]
+        if row.get("unit_ordinal") != unit["ordinal"]:
+            raise RuntimeError("processed-input unit ordinal mismatch")
+        if row.get("frame_set_sha256") != unit["frame_set_sha256"]:
+            raise RuntimeError("processed-input frame identity mismatch")
+        if row.get("processed_input_sha256") != unit[
+            "expected_processed_input_sha256"
+        ]:
+            raise RuntimeError("processed-input/unit identity mismatch")
+        if not isinstance(row.get("tensor_shapes"), dict) or not row[
+            "tensor_shapes"
+        ].get("input_ids"):
+            raise RuntimeError("processed-input tensor shapes missing")
 
 
 def validate_frame_manifest(

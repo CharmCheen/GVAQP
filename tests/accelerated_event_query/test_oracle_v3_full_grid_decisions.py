@@ -1,5 +1,13 @@
 from copy import deepcopy
 
+import hashlib
+import json
+import pytest
+
+from garc_eval.accelerated_event_query.oracle_v3_full_grid_analyzer import (
+    _validate_record,
+)
+
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_finalizer import (
     FORMAL_DECISIONS,
     decide,
@@ -62,3 +70,37 @@ def test_authentication_and_runtime_abort_precede_incompleteness():
     assert decide(metrics, mapping()) == "FULL_GRID_ABORTED_RUNTIME"
     metrics["global_stop_trigger"] = None
     assert decide(metrics, mapping()) == "INSUFFICIENT_EVIDENCE"
+
+
+def test_raw_record_must_match_preregistered_processed_tensor_identity():
+    raw = json.dumps({
+        "label": "not_relevant", "confidence": "low", "evidence": "mock"
+    }, separators=(",", ":"))
+    unit = {
+        "experiment_id": "E", "unit_id": "U0", "ordinal": 0,
+        "video_id": "V", "worker_id": "W", "call_spec_sha256": "c" * 64,
+        "frame_set_sha256": "f" * 64, "frame_count": 21,
+        "expected_processed_input_sha256": "p" * 64,
+    }
+    record = {
+        "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT", "mock_not_oracle": False,
+        "experiment_id": "E", "execution_seal_sha256": "s" * 64,
+        "unit_id": "U0", "unit_ordinal": 0, "video_id": "V", "worker_id": "W",
+        "physical_gpu_ids": [1, 2], "call_spec_sha256": "c" * 64,
+        "frame_set_sha256": "f" * 64, "frame_count": 21,
+        "execution_session_id": "session", "attempt_id": "attempt",
+        "input_identity_sha256": "i" * 64, "model_input_identity_sha256": "m" * 64,
+        "processed_input_sha256": "x" * 64,
+        "generated_token_ids_sha256": "g" * 64,
+        "raw": raw, "raw_response_sha256": hashlib.sha256(raw.encode()).hexdigest(),
+        "parse_status": "ok", "authoritative_label": "not_relevant",
+        "parsed": {"label": "not_relevant", "confidence": "low", "evidence": "mock"},
+        "runtime": {"model_load_seconds": 1.0, "total_call_seconds": 2.0,
+                    "inference_seconds": 1.0, "worker_id": "W"},
+    }
+    record["record_payload_sha256"] = canonical_hash(record)
+    with pytest.raises(RuntimeError, match="processed_input_sha256"):
+        _validate_record(
+            record, unit, execution_seal_sha256="s" * 64,
+            worker={"physical_gpu_ids": [1, 2]}, allow_mock=False,
+        )

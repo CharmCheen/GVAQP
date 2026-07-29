@@ -1,6 +1,6 @@
 # V3 Run Status
 
-State: `REVISE_FULL_GRID_PREREGISTRATION_INPUT_BOUNDARY_NO_INFERENCE`
+State: `REVISE_FULL_GRID_PREREGISTRATION_ADVERSARIAL_REVIEW_NO_INFERENCE`
 
 Current decision: `V3_SCHEMA_DETERMINISM_PASS_FULL_GRID_APPROVAL_REQUIRED`
 
@@ -107,3 +107,36 @@ explicit ideal-index and finite-video-stream boundary resolution field, reject
 any resolution that would repeat a frame, then rerun all tests and the complete
 decode. The 12/2/6 target counts, prompt, authoritative schema, and K3 contract
 remain unchanged.
+
+## First full-grid seal and adversarial rejection
+
+Observed evidence:
+
+- Seal V1 `ffcfb934…` bound exactly 1,475 unique units, disjoint 567/561/347
+  workers, 30,932 independently redecoded frame occurrences, legal 12/2/6
+  tails, and a processor-only tail PASS. The complete mock analyzer/finalizer
+  and 117 tests passed without model inference.
+- Independent review of bundle `f558e6fd…` returned
+  `REVISE_FULL_GRID_PREREGISTRATION`, not GO.
+- The reviewer reproduced an abrupt W0 death with an in-flight call: the
+  coordinator remained READY and W1 could reserve another call.
+- Processed tensor hashes were runtime-self-consistent only; no expected
+  1,475-unit tensor identity was frozen or enforced.
+- Same-UID mode `0600` did not prevent guessed absolute-path access to evaluator
+  labels; import-root separation was not an access-control boundary.
+
+Revision actions now implemented locally:
+
+- a sealed sole launcher supervises exactly three subprocesses, enforces
+  operation leases, stops on abrupt/nonzero death, and terminates live peers;
+- the builder and runner share one processor implementation, and every unit
+  will carry a frozen expected tensor hash checked before `generate`;
+- formal evaluator directories use UID 0/mode `0700`; later runtime is frozen
+  to UID/GID 65534 with zero capabilities and excluded evaluator mounts; a real
+  setuid guessed-path test passes;
+- 120 focused tests pass. A new complete real decode+processor manifest,
+  second-process revalidation, seal, dry-run, and independent re-review remain
+  required before any approval request.
+
+Current decision: preserve rejected seal V1 and continue revision without any
+Qwen3-VL-32B inference. Do not request compute approval yet.

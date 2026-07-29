@@ -154,3 +154,37 @@
 - Failure condition: downstream-addressable formal release without all gates.
 - Impact: revise finalizer/publication protocol.
 - Status: `SUPPORTED_BY_ATOMIC_PUBLICATION_TEST`; end-to-end mock pending.
+
+## H13 — A sealed supervisor closes abrupt-death global fail-stop
+
+- Prediction: if any worker exits nonzero or by signal, the supervisor writes a
+  terminal global stop and terminates every live peer before another call can
+  be reserved; load/call lease expiry has the same effect.
+- Falsification: reproduce W0 death with an in-flight call and successfully
+  reserve W1 afterward, or directly launch an inference worker without the
+  supervisor parent authority.
+- Competing explanation: final incomplete-run analysis could prevent a false
+  PASS, but would not prevent unauthorized follow-on compute.
+- Status: `SUPPORTED_BY_NEW_FAULT_TEST_AWAITING_PACKAGE_DRY_RUN`.
+
+## H14 — Every runtime processor tensor matches a preregistered identity
+
+- Prediction: all 1,475 exact frame/prompt inputs tensorize twice to the same
+  frozen SHA-256; any runtime difference triggers
+  `processed_input_identity_mismatch` before reservation/generation.
+- Falsification: arbitrary record/ledger tensor hashes pass the analyzer, or a
+  second processor-only traversal differs.
+- Competing explanation: source/code/frame hashes constrain preprocessing but
+  do not prove installed dependency or tensor-byte identity.
+- Status: `IMPLEMENTED_AWAITING_1475_UNIT_PHYSICAL_PROCESSOR_FREEZE`.
+
+## H15 — Runtime cannot path-guess evaluator-only full-grid labels
+
+- Prediction: formal labels are root-owned under `0700/0600`; later runtime is
+  UID/GID 65534 with zero effective capabilities and no evaluator mount, so an
+  absolute guessed path is absent or raises `PermissionError`.
+- Falsification: the frozen runtime identity opens the sentinel or shares the
+  evaluator UID/capabilities/mount.
+- Competing explanation: Python capabilities and import roots are useful API
+  hygiene but are not security boundaries under the same UID.
+- Status: `SUPPORTED_BY_REAL_SETUID_TEST_AWAITING_INDEPENDENT_REVIEW`.

@@ -58,6 +58,9 @@ def synthetic_manifests():
                 "unit_kind": kind,
                 "frame_count": frame_count,
                 "frame_set_sha256": canonical_hash(payload),
+                "expected_processed_input_sha256": hashlib.sha256(
+                    f"processed:{unit_id}".encode()
+                ).hexdigest(),
                 "worker_id": expected_worker(video_id),
             }
             unit["call_spec_sha256"] = canonical_hash(unit)

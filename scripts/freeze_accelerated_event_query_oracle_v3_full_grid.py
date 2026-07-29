@@ -14,6 +14,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_manifest import (
     EXPECTED_UNIT_COUNT,
     canonical_file_bindings,
     validate_frame_manifest,
+    validate_processed_input_manifest,
     validate_unit_manifest,
     validate_worker_schedule,
 )
@@ -21,6 +22,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_package import (
     FRAMES,
     PACKAGE,
     PREREG,
+    PROCESSED_INPUTS,
     ROOT,
     SCHEDULE,
     SEAL,
@@ -54,8 +56,9 @@ def self_hash(value: dict[str, Any], field: str) -> dict[str, Any]:
 
 def seal() -> None:
     prereg = validate_preregistration()
-    units = load_json(UNITS); frames = load_json(FRAMES); schedule = load_json(SCHEDULE)
+    units = load_json(UNITS); frames = load_json(FRAMES); processed = load_json(PROCESSED_INPUTS); schedule = load_json(SCHEDULE)
     validate_unit_manifest(units); validate_frame_manifest(frames, units)
+    validate_processed_input_manifest(processed, units)
     validate_worker_schedule(schedule, units)
     sources = load_json(PACKAGE / "FULL_GRID_SOURCE_BINDINGS.json")
     validate_payload_hash(sources, "source_bindings_payload_sha256")
@@ -69,6 +72,8 @@ def seal() -> None:
             raise RuntimeError(f"source changed after package build: {row['path']}")
     component_paths = {
         "runner": "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_runner.py",
+        "supervisor": "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_supervisor.py",
+        "processing": "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_processing.py",
         "analyzer": "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_analyzer.py",
         "finalizer": "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_finalizer.py",
         "package_validator": "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_package.py",
@@ -78,7 +83,7 @@ def seal() -> None:
         "dry_run": "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_dry_run.py",
         "seal_builder": "scripts/freeze_accelerated_event_query_oracle_v3_full_grid.py",
     }
-    frozen_paths = [PREREG, UNITS, FRAMES, SCHEDULE]
+    frozen_paths = [PREREG, UNITS, FRAMES, PROCESSED_INPUTS, SCHEDULE]
     for value in prereg["bindings"].values():
         path = ROOT / value["path"]
         if path not in frozen_paths:
@@ -91,6 +96,7 @@ def seal() -> None:
         "preregistration_sha256": sha256_file(PREREG),
         "unit_manifest_sha256": sha256_file(UNITS),
         "frame_manifest_sha256": sha256_file(FRAMES),
+        "processed_input_manifest_sha256": sha256_file(PROCESSED_INPUTS),
         "worker_schedule_sha256": sha256_file(SCHEDULE),
         "exact_call_count": EXPECTED_UNIT_COUNT,
         "exact_frame_occurrence_count": EXPECTED_FRAME_OCCURRENCES,

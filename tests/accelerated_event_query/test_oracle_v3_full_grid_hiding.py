@@ -1,3 +1,4 @@
+import os
 from dataclasses import replace
 from pathlib import Path
 
@@ -7,8 +8,11 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_hiding import (
     EvaluatorCapability,
     EvaluatorOnlyLabelStore,
     RuntimeVerifyHistory,
+    RuntimeOSIsolationPolicy,
     VerifyCompletionAuthority,
     assert_runtime_path_isolation,
+    assert_runtime_os_isolation,
+    secure_evaluator_directory,
 )
 
 from .v3_helpers import unit
@@ -72,3 +76,40 @@ def test_runtime_and_evaluator_paths_must_not_overlap(tmp_path):
         assert_runtime_path_isolation(
             runtime_import_roots=[tmp_path], evaluator_output_root=evaluator
         )
+
+
+def test_different_uid_runtime_cannot_open_guessed_evaluator_path(tmp_path):
+    if os.geteuid() != 0 or not hasattr(os, "fork"):
+        pytest.skip("real UID-isolation test requires root and fork")
+    os.chmod(tmp_path, 0o755)
+    evaluator = tmp_path / "evaluator_only"
+    sentinel = evaluator / "unit_labels.parquet"
+    policy = RuntimeOSIsolationPolicy(evaluator_uid=0, runtime_uid=65534)
+    secure_evaluator_directory(evaluator, policy)
+    sentinel.write_bytes(b"hidden-label-sentinel")
+    os.chmod(sentinel, 0o600)
+    read_fd, write_fd = os.pipe()
+    pid = os.fork()
+    if pid == 0:
+        try:
+            os.close(read_fd)
+            os.setgroups([])
+            os.setgid(65534)
+            os.setuid(65534)
+            assert_runtime_os_isolation(
+                evaluator_output_root=evaluator,
+                guessed_evaluator_file=sentinel,
+                policy=policy,
+            )
+            os.write(write_fd, b"PASS")
+        except BaseException as exc:
+            os.write(write_fd, f"FAIL:{type(exc).__name__}:{exc}".encode())
+        finally:
+            os.close(write_fd)
+            os._exit(0)
+    os.close(write_fd)
+    result = os.read(read_fd, 4096).decode()
+    os.close(read_fd)
+    _, status = os.waitpid(pid, 0)
+    assert os.waitstatus_to_exitcode(status) == 0
+    assert result == "PASS"

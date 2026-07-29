@@ -12,7 +12,11 @@ import pyarrow.parquet as pq
 
 from .oracle_v3_full_grid_analyzer import FullGridAnalysisProducts, analyze_execution
 from .oracle_v3_full_grid_manifest import EXPECTED_UNIT_COUNT
-from .oracle_v3_full_grid_package import DECISIONS, EXECUTION
+from .oracle_v3_full_grid_hiding import (
+    RuntimeOSIsolationPolicy,
+    secure_evaluator_directory,
+)
+from .oracle_v3_full_grid_package import DECISIONS, EXECUTION, PACKAGE
 from .oracle_v3_manifest import (
     atomic_text, canonical_hash, load_json, sha256_file, validate_payload_hash,
 )
@@ -95,7 +99,8 @@ def decide(metrics: dict[str, Any], mapping: dict[str, Any]) -> str:
         return "FULL_GRID_ABORTED_AUTHENTICATION"
     if any(error.startswith((
         "invalid_worker_ledger:", "model_load_transition:", "ledger_transition:",
-        "invalid_global_ledger:",
+        "invalid_global_ledger:", "invalid_supervisor_audit:",
+        "missing_supervisor_audit",
     )) for error in errors):
         return "FULL_GRID_ABORTED_RUNTIME"
     if not metrics.get("complete") or metrics.get("authenticated_record_count") != EXPECTED_UNIT_COUNT:
@@ -153,6 +158,7 @@ def _publish(
     execution_root: Path,
     metrics: dict[str, Any],
     products: FullGridAnalysisProducts,
+    policy_payload: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     release_id = canonical_hash({
         "execution_seal_sha256": metrics["execution_seal_sha256"],
@@ -160,6 +166,21 @@ def _publish(
         "primary_relation_sha256": products.primary_relation.relation_sha256,
     })
     release_root = execution_root / "evaluator_only_reference_releases" / release_id
+    policy_payload = policy_payload or load_json(
+        PACKAGE / "FULL_GRID_LABEL_ACCESS_POLICY.json"
+    )
+    validate_payload_hash(policy_payload, "label_access_policy_payload_sha256")
+    policy = RuntimeOSIsolationPolicy(
+        evaluator_uid=policy_payload["evaluator_uid"],
+        runtime_uid=policy_payload["runtime_uid"],
+        evaluator_directory_mode=int(policy_payload["evaluator_directory_mode"], 8),
+        evaluator_file_mode=int(policy_payload["evaluator_file_mode"], 8),
+        required_runtime_effective_capabilities_hex=policy_payload[
+            "required_runtime_effective_capabilities_hex"
+        ],
+    )
+    secure_evaluator_directory(release_root.parent, policy)
+    secure_evaluator_directory(release_root, policy)
     unit_path = release_root / "unit_labels.parquet"
     coverage_path = release_root / "oracle_coverage_report.json"
     event_path = release_root / "k3_model_relative_event_relation.parquet"
@@ -185,7 +206,7 @@ def _publish(
     }
     coverage["coverage_payload_sha256"] = canonical_hash(coverage)
     atomic_text(coverage_path, json.dumps(coverage, indent=2, sort_keys=True) + "\n")
-    os.chmod(coverage_path, 0o600)
+    os.chmod(coverage_path, policy.evaluator_file_mode)
     artifacts = [{
         "path": str(path.relative_to(execution_root)),
         "sha256": sha256_file(path),

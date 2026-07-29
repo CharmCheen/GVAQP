@@ -64,6 +64,7 @@ def _validate_record(
         "worker_id": unit["worker_id"],
         "call_spec_sha256": unit["call_spec_sha256"],
         "frame_set_sha256": unit["frame_set_sha256"],
+        "processed_input_sha256": unit["expected_processed_input_sha256"],
     }
     for key, value in expected.items():
         if record.get(key) != value:
@@ -269,6 +270,35 @@ def analyze_execution(
     except Exception as exc:
         global_events = []
         errors.append(f"invalid_global_ledger:{type(exc).__name__}:{exc}")
+    supervisor_path = execution_root / "SUPERVISOR_AUDIT.json"
+    supervisor_pass = False
+    if supervisor_path.exists():
+        try:
+            supervisor = load_json(supervisor_path)
+            validate_payload_hash(supervisor, "supervisor_audit_payload_sha256")
+            expected_supervisor_status = (
+                "MOCK_SUPERVISOR_COMPLETE_NOT_ORACLE"
+                if allow_mock else "SUPERVISED_PHYSICAL_CALLS_COMPLETE"
+            )
+            supervisor_pass = all((
+                supervisor.get("status") == expected_supervisor_status,
+                supervisor.get("execution_seal_sha256") == seal_sha,
+                set(supervisor.get("worker_returncodes", {})) == set(workers),
+                all(value == 0 for value in supervisor.get(
+                    "worker_returncodes", {}
+                ).values()),
+                supervisor.get("retry_count") == 0,
+                supervisor.get("dynamic_reassignment") is False,
+                allow_mock or supervisor.get("supervisor_source_sha256") == sha256_file(
+                    ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_supervisor.py"
+                ),
+            ))
+            if not supervisor_pass:
+                errors.append("invalid_supervisor_audit:content")
+        except Exception as exc:
+            errors.append(f"invalid_supervisor_audit:{type(exc).__name__}:{exc}")
+    else:
+        errors.append("missing_supervisor_audit")
     global_pass = all((
         global_state.get("status") == "PHYSICAL_CALLS_COMPLETE_AWAITING_ANALYSIS",
         global_state.get("execution_seal_sha256") == seal_sha,
@@ -280,6 +310,7 @@ def analyze_execution(
         global_state.get("stop_trigger") is None,
         float(global_state.get("actual_gpu_seconds", float("inf"))) <= 19.4 * 3600,
         bool(global_events) and global_events[-1].get("event") == "PHYSICAL_CALLS_COMPLETE",
+        supervisor_pass,
     ))
     if not global_pass:
         errors.append("global_execution_state_incomplete_or_stopped")
@@ -334,6 +365,7 @@ def analyze_execution(
         "global_ledger_event_count": len(global_events),
         "authentication_errors": errors,
         "global_execution_state_pass": global_pass,
+        "supervisor_audit_pass": supervisor_pass,
         "global_stop_trigger": global_state.get("stop_trigger"),
         "global_stop_detail": global_state.get("stop_detail"),
         "model_load_count": len(global_state.get("model_load_workers", [])),

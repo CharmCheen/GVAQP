@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import fcntl
 import json
+import time
 from pathlib import Path
 from typing import Any
 
@@ -49,6 +50,7 @@ def append_hash_chain(path: Path, event: dict[str, Any]) -> dict[str, Any]:
     rows = _read_jsonl(path)
     payload = {
         **event,
+        "recorded_at_unix_ns": event.get("recorded_at_unix_ns", time.time_ns()),
         "previous_event_sha256": rows[-1]["event_sha256"] if rows else None,
     }
     payload["event_sha256"] = canonical_hash(payload)

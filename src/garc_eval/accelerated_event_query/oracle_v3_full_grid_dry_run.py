@@ -5,6 +5,11 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
+import signal
+import subprocess
+import sys
+import time
 from pathlib import Path
 from typing import Any
 
@@ -12,6 +17,7 @@ from .oracle_v3_full_grid_analyzer import analyze_execution
 from .oracle_v3_full_grid_control import GlobalFailStopCoordinator, append_hash_chain
 from .oracle_v3_full_grid_finalizer import decide, finalize_execution
 from .oracle_v3_full_grid_manifest import EXPECTED_UNIT_COUNT
+from .oracle_v3_full_grid_supervisor import WorkerProcess, supervise_workers
 from .oracle_v3_full_grid_package import DECISIONS, PACKAGE, SCHEDULE, SEAL, UNITS
 from .oracle_v3_manifest import atomic_text, canonical_hash, load_json, sha256_file
 
@@ -36,7 +42,7 @@ def _mock_raw(unit: dict[str, Any], worker: dict[str, Any], seal_sha: str) -> di
     }
     attempt_id = f"MOCK:{unit['worker_id']}:{unit['unit_id']}"
     session_id = f"MOCK_SESSION:{unit['worker_id']}"
-    processed = hashlib.sha256(f"MOCK_PROCESSED:{unit['unit_id']}".encode()).hexdigest()
+    processed = unit["expected_processed_input_sha256"]
     generated = hashlib.sha256(f"MOCK_TOKENS:{unit['unit_id']}".encode()).hexdigest()
     identity = {
         "experiment_id": unit["experiment_id"],
@@ -148,6 +154,19 @@ def run_complete_mock(execution_root: Path) -> dict[str, Any]:
             worker_id=unit["worker_id"], unit_id=unit["unit_id"], wall_seconds=0.002
         )
     coordinator.mark_complete(EXPECTED_UNIT_COUNT)
+    supervisor = {
+        "status": "MOCK_SUPERVISOR_COMPLETE_NOT_ORACLE",
+        "execution_seal_sha256": seal_sha,
+        "worker_returncodes": {worker_id: 0 for worker_id in workers},
+        "retry_count": 0,
+        "dynamic_reassignment": False,
+        "mock_not_oracle": True,
+    }
+    supervisor["supervisor_audit_payload_sha256"] = canonical_hash(supervisor)
+    atomic_text(
+        execution_root / "SUPERVISOR_AUDIT.json",
+        json.dumps(supervisor, indent=2, sort_keys=True) + "\n",
+    )
     metrics, _ = analyze_execution(execution_root=execution_root, allow_mock=True)
     finalizer = finalize_execution(execution_root=execution_root, allow_mock=True)
     if finalizer["would_emit_formal_decision"] != "FULL_GRID_PASS_REFERENCE_RELEASED":
@@ -230,6 +249,42 @@ def run_fault_injections(root: Path) -> dict[str, Any]:
         c.initialize()
     except RuntimeError:
         results["resume_prohibited"] = True
+
+    c = make("abrupt_death")
+    c.initialize()
+    c.start_model_load(first_worker["worker_id"], first_worker["physical_gpu_ids"])
+    c.complete_model_load(first_worker["worker_id"], 0.01)
+    c.reserve_call(
+        worker_id=first_worker["worker_id"],
+        gpu_pair=first_worker["physical_gpu_ids"],
+        unit_id=first_unit["unit_id"],
+        call_spec_sha256=first_unit["call_spec_sha256"],
+    )
+    processes = [subprocess.Popen(
+        [sys.executable, "-c", "import time; time.sleep(60)"],
+        start_new_session=True,
+    ) for _ in range(3)]
+    supervised = [WorkerProcess(
+        worker_id=row["worker_id"],
+        gpu_pair=row["physical_gpu_ids"],
+        process=process,
+        spawned_at_unix_ns=time.time_ns(),
+    ) for row, process in zip(schedule["workers"], processes)]
+    os.killpg(processes[0].pid, signal.SIGKILL)
+    processes[0].wait(timeout=5)
+    try:
+        supervise_workers(supervised, execution_root=c.root)
+    except RuntimeError:
+        state = c.state()
+        results["abrupt_worker_death_global_stop"] = all((
+            state["status"] == "STOPPED",
+            state["stop_trigger"] == "post_load_process_fault",
+            all(process.poll() is not None for process in processes),
+        ))
+    finally:
+        for process in processes:
+            if process.poll() is None:
+                process.kill()
 
     mapping = load_json(DECISIONS)
     base_metrics = {

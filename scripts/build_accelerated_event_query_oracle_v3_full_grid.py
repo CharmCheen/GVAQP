@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import subprocess
 from collections import Counter
 from pathlib import Path
@@ -28,6 +29,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_manifest import (
     load_frozen_grid,
     public_frame,
     validate_frame_manifest,
+    validate_processed_input_manifest,
     validate_unit_manifest,
     validate_worker_schedule,
     video_map,
@@ -41,7 +43,13 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_runner import (
     CALL_RESERVATION_WALL_SECONDS,
     ENVELOPE_A100_GPU_HOURS,
     MODEL_LOAD_RESERVATION_WALL_SECONDS,
-    _tensor_bundle_sha256,
+)
+from garc_eval.accelerated_event_query.oracle_v3_full_grid_processing import (
+    load_frozen_processor,
+    prepare_frozen_model_inputs,
+    runtime_environment_identity,
+    tensor_bundle_sha256,
+    tensor_shapes,
 )
 from garc_eval.accelerated_event_query.oracle_v3_manifest import (
     canonical_hash,
@@ -110,62 +118,31 @@ def _contact_sheet(frames: list[dict[str, Any]], destination: Path, title: str) 
 
 
 def _processor_tail_audit(
-    tail_frames: dict[str, list[dict[str, Any]]],
+    processed_rows: dict[str, dict[str, Any]],
     unit_rows: dict[str, dict[str, Any]],
+    *,
+    processor_class: str,
 ) -> dict[str, Any]:
-    from PIL import Image
-    from qwen_vl_utils import process_vision_info
-    from transformers import AutoProcessor
-
-    model_path = ROOT / "models/Qwen3-VL-32B-Instruct-FP8"
-    processor = AutoProcessor.from_pretrained(
-        model_path, trust_remote_code=True, local_files_only=True
-    )
-    prompt = PROMPT.read_text(encoding="utf-8")
     rows = []
     for unit_id in EXPECTED_TAILS:
-        frames = tail_frames[unit_id]
-        pil_frames = [Image.fromarray(row["rgb"]) for row in frames]
-        messages = [{"role": "user", "content": [
-            {"type": "video", "video": pil_frames, "fps": 2.0},
-            {"type": "text", "text": prompt},
-        ]}]
-        prompt_text = processor.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True
-        )
-        image_inputs, video_inputs, kwargs = process_vision_info(
-            messages, return_video_kwargs=True, return_video_metadata=True
-        )
-        if kwargs != {"do_sample_frames": False}:
-            raise RuntimeError(f"unexpected processor sampling kwargs: {kwargs}")
-        inputs = processor(
-            text=[prompt_text], images=image_inputs,
-            videos=[row[0] for row in video_inputs],
-            video_metadata=[row[1] for row in video_inputs],
-            padding=True, return_tensors="pt", **kwargs,
-        )
-        shapes = {
-            key: list(value.shape) for key, value in inputs.items()
-            if hasattr(value, "shape")
-        }
-        if not shapes or "input_ids" not in shapes:
-            raise RuntimeError(f"processor produced no tensor bundle: {unit_id}")
+        processed = processed_rows[unit_id]
+        unit = unit_rows[unit_id]
         rows.append({
             "unit_id": unit_id,
             "unit_kind": "truncated_final",
-            "true_duration_seconds": unit_rows[unit_id]["duration_seconds"],
-            "supplied_frame_count": len(frames),
+            "true_duration_seconds": unit["duration_seconds"],
+            "supplied_frame_count": unit["frame_count"],
             "supplied_sampling_fps": 2.0,
-            "model_visible_grid_duration_seconds": (len(frames) - 1) / 2.0,
-            "processor_tensor_shapes": shapes,
-            "processor_tensor_bundle_sha256": _tensor_bundle_sha256(inputs),
+            "model_visible_grid_duration_seconds": (unit["frame_count"] - 1) / 2.0,
+            "processor_tensor_shapes": processed["tensor_shapes"],
+            "processor_tensor_bundle_sha256": processed["processed_input_sha256"],
             "do_sample_frames": False,
             "padding_or_repeated_source_frame_added_by_protocol": False,
         })
     result = {
         "status": "PASS_PROCESSOR_ONLY_NO_CHECKPOINT_WEIGHTS_LOADED_NO_INFERENCE",
-        "processor_class": f"{processor.__class__.__module__}.{processor.__class__.__qualname__}",
-        "model_path_used_for_processor_assets_only": str(model_path.relative_to(ROOT)),
+        "processor_class": processor_class,
+        "model_path_used_for_processor_assets_only": "models/Qwen3-VL-32B-Instruct-FP8",
         "prompt_sha256": sha256_file(PROMPT),
         "tail_units": rows,
         "checkpoint_weights_loaded": False,
@@ -225,6 +202,11 @@ def _failure_policy() -> str:
 
 Status: `FROZEN_BEFORE_FULL_GRID_EXECUTION`
 
+The only production entry point is the sealed three-process supervisor. It
+launches exactly the frozen workers, monitors child exit status and operation
+leases, and terminates all peers after any nonzero/abrupt death or global stop.
+Workers reject direct launch without the supervisor authority and parent PID.
+
 The execution uses one global fail-stop coordinator. Authentication, frame or
 processed-input mismatch, an unknown runner/parser, wrong GPU, duplicate or
 extra call, retry, fourth load/reload, ledger transition failure, path
@@ -266,11 +248,16 @@ Three layers are separate:
    evaluator path, object, event ID, future label, or boundary.
 
 The evaluator reference and runtime K3 use different constructors and process
-entry points. Evaluator releases are permissioned `0600`, stored outside runtime
-import roots, and accessible downstream only through a validated release commit.
-Tests require hidden-label permutation invariance with public observations and
-revealed history fixed, rejection of forged/future results, rejection of direct
-controller lookup, and path-root non-overlap. No replay or controller is run in
+entry points. Formal evaluator directories are owned by frozen evaluator UID 0
+with mode `0700`; files use `0600`. Every later controller/replay process must
+run as UID/GID 65534 with zero effective capabilities and with the evaluator
+execution root absent from its container mount namespace. A real fork/setuid
+test must prove that a guessed absolute evaluator sentinel path raises
+`PermissionError`. Import-root nonoverlap alone is explicitly insufficient.
+
+Tests also require hidden-label permutation invariance, rejection of
+forged/future results, rejection of direct lookup, path-root non-overlap, and
+same-host different-UID guessed-path denial. No replay or controller is run in
 this preregistration stage.
 """
 
@@ -294,9 +281,15 @@ def main() -> None:
         if sha256_file(ROOT / video["path"]) != video["sha256"]:
             raise RuntimeError(f"source video hash mismatch: {video_id}")
     stream_audit = _video_stream_audit(videos)
+    model_path = ROOT / "models/Qwen3-VL-32B-Instruct-FP8"
+    processor = load_frozen_processor(model_path)
+    processor_class = f"{processor.__class__.__module__}.{processor.__class__.__qualname__}"
+    processor_environment = runtime_environment_identity()
+    prompt = PROMPT.read_text(encoding="utf-8")
 
     flat_frames: list[dict[str, Any]] = []
     unit_rows: list[dict[str, Any]] = []
+    processed_input_rows: list[dict[str, Any]] = []
     tail_frames: dict[str, list[dict[str, Any]]] = {}
     global_frame_ordinal = 0
     for ordinal, grid_row in enumerate(grid):
@@ -308,6 +301,18 @@ def main() -> None:
         )
         public = [public_frame(row) for row in decoded]
         frame_set_sha = canonical_hash(public)
+        processed_inputs = prepare_frozen_model_inputs(
+            processor,
+            prompt=prompt,
+            rgb_frames=[row["rgb"] for row in decoded],
+            sampling_fps=2.0,
+        )
+        processed_sha = tensor_bundle_sha256(processed_inputs)
+        shapes = tensor_shapes(processed_inputs)
+        if not shapes.get("input_ids"):
+            raise RuntimeError(
+                f"processor produced no authenticated tensor bundle: {grid_row['unit_id']}"
+            )
         worker_id = expected_worker(grid_row["video_id"])
         ledger = f"attempt_ledgers/{worker_id}.jsonl"
         base = {
@@ -323,6 +328,7 @@ def main() -> None:
             ),
             "frame_count": len(public),
             "frame_set_sha256": frame_set_sha,
+            "expected_processed_input_sha256": processed_sha,
             "source_video_sha256": video["sha256"],
             "worker_id": worker_id,
             "physical_gpu_ids": GPU_PAIRS[grid_row["video_id"]],
@@ -340,6 +346,16 @@ def main() -> None:
         }
         base["call_spec_sha256"] = canonical_hash(base)
         unit_rows.append(base)
+        processed_input_rows.append({
+            "unit_ordinal": ordinal,
+            "unit_id": grid_row["unit_id"],
+            "video_id": grid_row["video_id"],
+            "unit_kind": kind,
+            "frame_count": len(public),
+            "frame_set_sha256": frame_set_sha,
+            "processed_input_sha256": processed_sha,
+            "tensor_shapes": shapes,
+        })
         for frame in public:
             flat_frames.append({
                 "global_ordinal": global_frame_ordinal,
@@ -385,11 +401,30 @@ def main() -> None:
         "finite_video_stream_boundary_rule": "ideal CFR request is retained; a right-boundary request beyond stream support resolves to the unique nearest available final frame; repeated-frame padding is forbidden",
         "frames": flat_frames,
     }, "frame_manifest_payload_sha256")
+    processed_input_manifest = self_hash({
+        "status": "FROZEN_EXPECTED_PROCESSOR_TENSOR_IDENTITY_FOR_ALL_UNITS",
+        "experiment_id": EXPERIMENT_ID,
+        "exact_unit_count": EXPECTED_UNIT_COUNT,
+        "processor_class": processor_class,
+        "processor_environment": processor_environment,
+        "processor_assets_path": str(model_path.relative_to(ROOT)),
+        "processor_assets_manifest": binding(MODEL_MANIFEST),
+        "prompt": binding(PROMPT),
+        "do_sample_frames": False,
+        "sampling_fps": 2.0,
+        "checkpoint_weights_loaded": False,
+        "model_generate_called": False,
+        "units": processed_input_rows,
+    }, "processed_input_manifest_payload_sha256")
     validate_unit_manifest(unit_manifest)
     validate_frame_manifest(frame_manifest, unit_manifest)
+    validate_processed_input_manifest(processed_input_manifest, unit_manifest)
     write_json_once(PACKAGE / "FULL_GRID_VIDEO_STREAM_AUDIT.json", stream_audit)
     write_json_once(PACKAGE / "FULL_GRID_UNIT_MANIFEST.json", unit_manifest)
     write_json_once(PACKAGE / "FULL_GRID_FRAME_MANIFEST.json", frame_manifest)
+    write_json_once(
+        PACKAGE / "FULL_GRID_PROCESSED_INPUT_MANIFEST.json", processed_input_manifest
+    )
 
     workers = []
     for video_id in VIDEO_ORDER:
@@ -409,6 +444,8 @@ def main() -> None:
             "model_load_events": ["MODEL_LOAD_STARTED", "MODEL_LOAD_COMPLETED"],
             "expected_successful_call_events": 4 * len(ids),
             "dynamic_reassignment": False,
+            "direct_launch_allowed": False,
+            "required_parent": "sealed_global_supervisor",
         })
     schedule = self_hash({
         "status": "FROZEN_THREE_STATIC_TWO_GPU_WORKERS",
@@ -419,6 +456,8 @@ def main() -> None:
         "reload_count": 0,
         "retry_count": 0,
         "global_fail_stop": True,
+        "sole_launcher": "scripts/launch_accelerated_event_query_oracle_v3_full_grid.py",
+        "abrupt_worker_death_policy": "supervisor records global stop and terminates every live peer before another reservation",
         "workers": workers,
     }, "worker_schedule_payload_sha256")
     validate_worker_schedule(schedule, unit_manifest)
@@ -494,6 +533,25 @@ def main() -> None:
     }, "output_schemas_payload_sha256")
     write_json_once(PACKAGE / "FULL_GRID_OUTPUT_SCHEMAS.json", schemas)
 
+    if os.geteuid() != 0:
+        raise RuntimeError("evaluator package must be frozen by sealed evaluator UID 0")
+    label_access_policy = self_hash({
+        "status": "FROZEN_OS_ENFORCED_EVALUATOR_RUNTIME_SEPARATION",
+        "evaluator_uid": 0,
+        "evaluator_gid": 0,
+        "runtime_uid": 65534,
+        "runtime_gid": 65534,
+        "evaluator_directory_mode": "0700",
+        "evaluator_file_mode": "0600",
+        "required_runtime_effective_capabilities_hex": "0000000000000000",
+        "evaluator_output_root": str((BASE / "full_grid_execution").relative_to(ROOT)),
+        "runtime_mount_rule": "the evaluator output root must be absent from the runtime controller container mount namespace",
+        "runtime_entry_gate": "assert_runtime_os_isolation must pass under UID/GID 65534 before any later controller/replay episode",
+        "same_uid_runtime_forbidden": True,
+        "absolute_path_guessing_must_raise_permission_error": True,
+    }, "label_access_policy_payload_sha256")
+    write_json_once(PACKAGE / "FULL_GRID_LABEL_ACCESS_POLICY.json", label_access_policy)
+
     (PACKAGE / "FULL_GRID_FAILURE_POLICY.md").write_text(_failure_policy(), encoding="utf-8")
     (PACKAGE / "FULL_GRID_LABEL_HIDING_AUDIT.md").write_text(_hiding_audit(), encoding="utf-8")
 
@@ -521,7 +579,11 @@ def main() -> None:
             "frame_set_sha256": unit_by_id[unit_id]["frame_set_sha256"],
             "contact_sheet": binding(sheet),
         })
-    processor_audit = _processor_tail_audit(tail_frames, unit_by_id)
+    processor_audit = _processor_tail_audit(
+        {row["unit_id"]: row for row in processed_input_rows},
+        unit_by_id,
+        processor_class=processor_class,
+    )
     write_json_once(PACKAGE / "FULL_GRID_TAIL_PROCESSOR_AUDIT.json", processor_audit)
     md = [
         "# Full-Grid Tail Unit Audit", "", "Status: `FROZEN_PASS_NO_MODEL_INFERENCE`", "",
@@ -558,6 +620,8 @@ def main() -> None:
         ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_hiding.py",
         ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_package.py",
         ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_runner.py",
+        ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_processing.py",
+        ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_supervisor.py",
         ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_analyzer.py",
         ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_finalizer.py",
         ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_dry_run.py",
@@ -567,6 +631,7 @@ def main() -> None:
         ROOT / "scripts/build_accelerated_event_query_oracle_v3_full_grid.py",
         ROOT / "scripts/freeze_accelerated_event_query_oracle_v3_full_grid.py",
         ROOT / "scripts/run_accelerated_event_query_oracle_v3_full_grid.py",
+        ROOT / "scripts/launch_accelerated_event_query_oracle_v3_full_grid.py",
         ROOT / "scripts/analyze_accelerated_event_query_oracle_v3_full_grid.py",
         ROOT / "scripts/finalize_accelerated_event_query_oracle_v3_full_grid.py",
         ROOT / "scripts/dry_run_accelerated_event_query_oracle_v3_full_grid.py",
@@ -584,11 +649,12 @@ def main() -> None:
         "cli": binding(ROOT / "scripts/analyze_accelerated_event_query_oracle_v3_full_grid.py"),
         "unit_manifest": binding(PACKAGE / "FULL_GRID_UNIT_MANIFEST.json"),
         "frame_manifest": binding(PACKAGE / "FULL_GRID_FRAME_MANIFEST.json"),
+        "processed_input_manifest": binding(PACKAGE / "FULL_GRID_PROCESSED_INPUT_MANIFEST.json"),
         "worker_schedule": binding(PACKAGE / "FULL_GRID_WORKER_SCHEDULE.json"),
         "decision_mapping": binding(PACKAGE / "FULL_GRID_DECISION_MAPPING.json"),
         "output_schemas": binding(PACKAGE / "FULL_GRID_OUTPUT_SCHEMAS.json"),
         "checks": [
-            "call and ledger accounting", "input/frame/processed hashes", "worker/GPU binding",
+            "call and ledger accounting", "input/frame/frozen-processed hashes", "worker/GPU/supervisor binding",
             "three model loads and zero reload/retry", "strict parse and distribution",
             "unknown/parse_failure coverage", "runtime/cost", "K3 order and diagnostic independence",
             "staged reference identities and hashes",
@@ -601,6 +667,7 @@ def main() -> None:
         "cli": binding(ROOT / "scripts/finalize_accelerated_event_query_oracle_v3_full_grid.py"),
         "analyzer_binding": binding(PACKAGE / "FULL_GRID_ANALYZER_BINDING.json"),
         "decision_mapping": binding(PACKAGE / "FULL_GRID_DECISION_MAPPING.json"),
+        "label_access_policy": binding(PACKAGE / "FULL_GRID_LABEL_ACCESS_POLICY.json"),
         "publication_rule": "versioned evaluator-only release is non-authoritative until the final atomic release pointer; mocks can never publish",
     }, "finalizer_binding_payload_sha256")
     write_json_once(PACKAGE / "FULL_GRID_FINALIZER_BINDING.json", finalizer_binding)
@@ -617,6 +684,7 @@ def main() -> None:
         "model_identity_audit": binding(MODEL_AUDIT),
         "unit_manifest": binding(PACKAGE / "FULL_GRID_UNIT_MANIFEST.json"),
         "frame_manifest": binding(PACKAGE / "FULL_GRID_FRAME_MANIFEST.json"),
+        "processed_input_manifest": binding(PACKAGE / "FULL_GRID_PROCESSED_INPUT_MANIFEST.json"),
         "worker_schedule": binding(PACKAGE / "FULL_GRID_WORKER_SCHEDULE.json"),
         "cost_estimate": binding(PACKAGE / "FULL_GRID_COST_ESTIMATE.json"),
         "decision_mapping": binding(PACKAGE / "FULL_GRID_DECISION_MAPPING.json"),
@@ -626,6 +694,7 @@ def main() -> None:
         "video_stream_audit": binding(PACKAGE / "FULL_GRID_VIDEO_STREAM_AUDIT.json"),
         "failure_policy": binding(PACKAGE / "FULL_GRID_FAILURE_POLICY.md"),
         "label_hiding_audit": binding(PACKAGE / "FULL_GRID_LABEL_HIDING_AUDIT.md"),
+        "label_access_policy": binding(PACKAGE / "FULL_GRID_LABEL_ACCESS_POLICY.json"),
         "source_bindings": binding(PACKAGE / "FULL_GRID_SOURCE_BINDINGS.json"),
         "analyzer_binding": binding(PACKAGE / "FULL_GRID_ANALYZER_BINDING.json"),
         "finalizer_binding": binding(PACKAGE / "FULL_GRID_FINALIZER_BINDING.json"),
@@ -700,6 +769,7 @@ def main() -> None:
         },
         "failure_and_publication": {
             "global_fail_stop": True,
+            "sole_execution_launcher": "sealed three-worker supervisor with abrupt-death and operation-lease enforcement",
             "formal_release_requires": ["1475/1475 authenticated terminal records", "global integrity pass", "frozen finalizer pass"],
             "partial_raw_preserved": True,
             "partial_formal_reference_forbidden": True,

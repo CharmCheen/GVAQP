@@ -8,6 +8,7 @@ from typing import Any
 from .oracle_v3_full_grid_manifest import (
     EXPECTED_UNIT_COUNT,
     validate_frame_manifest,
+    validate_processed_input_manifest,
     validate_unit_manifest,
     validate_worker_schedule,
 )
@@ -22,6 +23,7 @@ PREREG = PACKAGE / "FULL_GRID_PREREGISTRATION.json"
 SEAL = PACKAGE / "FULL_GRID_EXECUTION_SEAL.json"
 UNITS = PACKAGE / "FULL_GRID_UNIT_MANIFEST.json"
 FRAMES = PACKAGE / "FULL_GRID_FRAME_MANIFEST.json"
+PROCESSED_INPUTS = PACKAGE / "FULL_GRID_PROCESSED_INPUT_MANIFEST.json"
 SCHEDULE = PACKAGE / "FULL_GRID_WORKER_SCHEDULE.json"
 DECISIONS = PACKAGE / "FULL_GRID_DECISION_MAPPING.json"
 APPROVAL = PACKAGE / "FULL_GRID_COMPUTE_APPROVAL.json"
@@ -69,14 +71,18 @@ def validate_execution_seal(component: str) -> tuple[dict[str, Any], dict[str, A
         _validate_path_hash(binding)
     units = load_json(UNITS)
     frames = load_json(FRAMES)
+    processed_inputs = load_json(PROCESSED_INPUTS)
     schedule = load_json(SCHEDULE)
     validate_unit_manifest(units)
     validate_frame_manifest(frames, units)
+    validate_processed_input_manifest(processed_inputs, units)
     validate_worker_schedule(schedule, units)
     if seal.get("unit_manifest_sha256") != sha256_file(UNITS):
         raise RuntimeError("execution seal/unit manifest mismatch")
     if seal.get("frame_manifest_sha256") != sha256_file(FRAMES):
         raise RuntimeError("execution seal/frame manifest mismatch")
+    if seal.get("processed_input_manifest_sha256") != sha256_file(PROCESSED_INPUTS):
+        raise RuntimeError("execution seal/processed-input manifest mismatch")
     if seal.get("worker_schedule_sha256") != sha256_file(SCHEDULE):
         raise RuntimeError("execution seal/worker schedule mismatch")
     return seal, prereg

@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import stat
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Iterable, Mapping
@@ -165,3 +167,64 @@ def assert_runtime_path_isolation(
         resolved = root.resolve()
         if resolved == evaluator or resolved.is_relative_to(evaluator) or evaluator.is_relative_to(resolved):
             raise RuntimeError("runtime import root overlaps evaluator-only output root")
+
+
+@dataclass(frozen=True)
+class RuntimeOSIsolationPolicy:
+    """OS identity/mount contract for every later controller process."""
+
+    evaluator_uid: int
+    runtime_uid: int
+    evaluator_directory_mode: int = 0o700
+    evaluator_file_mode: int = 0o600
+    required_runtime_effective_capabilities_hex: str = "0000000000000000"
+
+
+def secure_evaluator_directory(path: Path, policy: RuntimeOSIsolationPolicy) -> None:
+    """Apply and verify evaluator ownership/mode before formal publication."""
+
+    path.mkdir(parents=True, exist_ok=True)
+    os.chmod(path, policy.evaluator_directory_mode)
+    observed = path.stat()
+    if observed.st_uid != policy.evaluator_uid:
+        raise PermissionError("evaluator directory owner differs from frozen policy")
+    if stat.S_IMODE(observed.st_mode) != policy.evaluator_directory_mode:
+        raise PermissionError("evaluator directory mode differs from frozen policy")
+
+
+def _effective_capabilities_hex() -> str:
+    for line in Path("/proc/self/status").read_text(encoding="utf-8").splitlines():
+        if line.startswith("CapEff:"):
+            return line.split(":", 1)[1].strip().lower().zfill(16)
+    raise RuntimeError("cannot authenticate runtime effective capabilities")
+
+
+def assert_runtime_os_isolation(
+    *,
+    evaluator_output_root: Path,
+    guessed_evaluator_file: Path,
+    policy: RuntimeOSIsolationPolicy,
+) -> None:
+    """Fail closed unless this runtime cannot read a guessed evaluator path."""
+
+    if os.geteuid() != policy.runtime_uid:
+        raise PermissionError("runtime effective UID differs from frozen policy")
+    if policy.runtime_uid == policy.evaluator_uid:
+        raise PermissionError("runtime and evaluator UIDs must differ")
+    if _effective_capabilities_hex() != policy.required_runtime_effective_capabilities_hex:
+        raise PermissionError("runtime process has forbidden effective capabilities")
+    try:
+        root_stat = evaluator_output_root.stat()
+    except (PermissionError, FileNotFoundError):
+        # A denied parent traversal or an unmounted evaluator tree is the
+        # strongest admissible runtime state.
+        return
+    if root_stat.st_uid != policy.evaluator_uid:
+        raise PermissionError("evaluator output owner differs from frozen policy")
+    if stat.S_IMODE(root_stat.st_mode) != policy.evaluator_directory_mode:
+        raise PermissionError("evaluator output mode differs from frozen policy")
+    try:
+        guessed_evaluator_file.open("rb").close()
+    except (PermissionError, FileNotFoundError):
+        return
+    raise PermissionError("runtime can open a guessed evaluator-only path")

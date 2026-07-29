@@ -23,9 +23,14 @@ def main() -> None:
     modes.add_argument("--execute-worker")
     parser.add_argument("--declared-physical-gpus")
     parser.add_argument("--redecode", action="store_true")
+    parser.add_argument("--reprocess", action="store_true")
     args = parser.parse_args()
     if args.validate_worker:
-        result = validate_worker_inputs(args.validate_worker, redecode=args.redecode)
+        result = validate_worker_inputs(
+            args.validate_worker,
+            redecode=args.redecode,
+            reprocess=args.reprocess,
+        )
         print(json.dumps(result, indent=2, sort_keys=True))
         return
     if args.initialize_execution:
