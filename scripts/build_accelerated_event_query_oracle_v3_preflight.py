@@ -143,7 +143,10 @@ def build_frames_and_selection() -> dict:
     }
     selection = {
         "status": "FROZEN_WITHOUT_OBSERVING_ANY_V3_OUTPUT",
-        "selection_rule": "smallest 8-12 call design satisfying all requested coverage with reusable V2 frames",
+        "selection_rule": (
+            "11-call high-information design within the allowed 8-12 range; it repeats all three "
+            "V2 contradiction anchors in-process, adds one cross-replica anchor, and reuses V2 frames"
+        ),
         "candidate_count": len(candidates),
         "candidates": [{**row, "sampling_fps": sorted(row["sampling_fps"]),
                         "selection_rationale": rationale[candidate_id]}
@@ -340,6 +343,7 @@ def build_prereg(call_manifest: dict) -> None:
         "event_relation_source": ROOT / "src/garc_eval/accelerated_event_query/model_relative_event_relation.py",
         "label_source": ROOT / "src/garc_eval/accelerated_event_query/model_relative_labels.py",
         "frame_extraction_source": ROOT / "src/garc_eval/accelerated_event_query/oracle_protocol.py",
+        "package_builder_source": ROOT / "scripts/build_accelerated_event_query_oracle_v3_preflight.py",
     }
     for name, path in paths.items():
         bindings[f"{name}_path"] = str(path.relative_to(ROOT))
@@ -364,8 +368,10 @@ def build_prereg(call_manifest: dict) -> None:
         "workload": {
             "total_physical_calls": 11,
             "call_count_basis": (
-                "minimum within 8-12 covering five V2 regressions, one potential unknown, "
-                "2/4 fps, three videos, three same-process pairs, and one cross-replica repeat"
+                "11 calls within the allowed 8-12 range cover five V2 regressions, one additional "
+                "potential unknown, 2/4 fps, all three videos, all three contradiction-anchor "
+                "same-process pairs, and one cross-replica repeat; fewer calls would weaken the "
+                "cross-video determinism test"
             ),
             "seed": 20260729,
             "generation": {"do_sample": False, "max_new_tokens": 192},
