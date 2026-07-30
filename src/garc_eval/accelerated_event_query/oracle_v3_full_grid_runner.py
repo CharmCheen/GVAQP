@@ -284,11 +284,12 @@ def initialize_execution(execution_root: Path = EXECUTION) -> dict[str, Any]:
         row["worker_id"]: [_gpu_identity(index) for index in row["physical_gpu_ids"]]
         for row in schedule["workers"]
     }
-    exclusivity = authenticate_gpu_exclusivity(sorted({
-        index
-        for row in schedule["workers"]
-        for index in row["physical_gpu_ids"]
-    }))
+    initial_worker_id = schedule.get("initial_worker_id")
+    workers = _worker_map(schedule)
+    initial_worker = workers.get(initial_worker_id)
+    if schedule.get("activation_mode") != "staged_pair_authentication" or initial_worker is None:
+        raise RuntimeError("staged schedule lacks an exact initial worker")
+    exclusivity = authenticate_gpu_exclusivity(initial_worker["physical_gpu_ids"])
     model_manifest_sha256 = _verify_model_files(prereg)
     seal_sha = sha256_file(SEAL)
     coordinator = _coordinator(schedule, seal_sha, execution_root)
@@ -300,6 +301,12 @@ def initialize_execution(execution_root: Path = EXECUTION) -> dict[str, Any]:
         "model_file_manifest_sha256": model_manifest_sha256,
         "gpu_identities": identities,
         "gpu_exclusivity": exclusivity,
+        "gpu_exclusivity_scope": "initial_worker_pair_only",
+        "initial_worker_id": initial_worker_id,
+        "pending_worker_ids": [
+            row["worker_id"] for row in schedule["workers"]
+            if row["worker_id"] != initial_worker_id
+        ],
         "exact_worker_count": 3,
         "exact_call_count": EXPECTED_UNIT_COUNT,
         "checkpoint_loaded": False,

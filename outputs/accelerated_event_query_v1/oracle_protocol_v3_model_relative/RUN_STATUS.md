@@ -281,3 +281,17 @@ real frame count, 2-fps grid, and no-padding/no-repeat statement. The V2
 decision and evidence manifest are now prospective bindings. Targeted
 counterexample tests pass 19/19. Expanded-authorization A100 use remains 0.0
 hours, and no formal raw/reference exists.
+
+## Staged execution revision — user-directed resource scheduling
+
+The simultaneous-start package passed its second independent review, but
+foreign work repeatedly left only GPU 2 and 6 fully idle. The user explicitly
+directed the run to start one complete video shard on that pair and leave the
+other two shards marked pending until their frozen pairs authenticate idle.
+This is an execution-scheduling revision, not a change to the 1,475-unit grid,
+model-relative query, schema, decoder, processor tensors, zero-retry rule, or
+complete-only publication boundary. Source now implements fixed staged pairs
+DALI `(2,6)`, HANGZHOU `(3,5)`, WUHAN `(1,7)` with DALI first, append-only
+pending/authenticated/spawned/exited transitions, and global fail-stop across
+all activated and pending workers. Local evidence: 136 tests pass; no model
+load, formal call, or formal output has occurred under the staged protocol.

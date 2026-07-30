@@ -13,8 +13,10 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_control import (
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_supervisor import (
     WorkerProcess,
     _loaded_worker_idle_violation,
+    supervise_staged_workers,
     supervise_workers,
 )
+from garc_eval.accelerated_event_query.oracle_v3_manifest import atomic_text
 
 
 WORKERS = {
@@ -77,6 +79,85 @@ def test_abrupt_worker_death_stops_peers_before_another_reservation(
         coordinator.reserve_call(
             worker_id="W1", gpu_pair=[3, 5], unit_id="U1", call_spec_sha256="b"
         )
+
+
+def test_staged_supervisor_marks_pending_and_activates_only_after_pair_authentication(
+    tmp_path,
+):
+    rows = [
+        {
+            "worker_id": worker_id,
+            "physical_gpu_ids": binding["physical_gpu_ids"],
+        }
+        for worker_id, binding in WORKERS.items()
+    ]
+    schedule = {
+        "activation_mode": "staged_pair_authentication",
+        "initial_worker_id": "W0",
+        "activation_order": ["W0", "W1", "W2"],
+        "workers": rows,
+    }
+    atomic_text(
+        tmp_path / "GLOBAL_EXECUTION_STATE.json",
+        '{"status":"READY","model_load_workers":[],"model_load_completed_workers":[]}\n',
+    )
+    from garc_eval.accelerated_event_query.oracle_v3_full_grid_control import append_hash_chain
+
+    append_hash_chain(
+        tmp_path / "GLOBAL_EXECUTION_LEDGER.jsonl",
+        {"event": "RUN_INITIALIZED"},
+    )
+
+    class Coordinator:
+        def __init__(self):
+            self.exited = []
+
+        def complete_worker_process_exit(self, worker_id):
+            self.exited.append(worker_id)
+
+        def mark_complete(self, count):
+            assert count == 1475
+            atomic_text(
+                tmp_path / "GLOBAL_EXECUTION_STATE.json",
+                '{"status":"PHYSICAL_CALLS_COMPLETE_AWAITING_ANALYSIS",'
+                '"execution_seal_sha256":"' + "s" * 64 + '"}\n',
+            )
+
+    attempts = {"W1": 0}
+    pair_to_worker = {
+        tuple(row["physical_gpu_ids"]): row["worker_id"] for row in rows
+    }
+
+    def authenticate(pair):
+        worker_id = pair_to_worker[tuple(pair)]
+        if worker_id == "W1" and attempts["W1"] == 0:
+            attempts["W1"] += 1
+            raise RuntimeError("GPU exclusivity/idleness authentication failed: busy")
+        return {"authenticated_exclusive_idle": True, "physical_gpu_ids": pair}
+
+    clock = iter(range(0, 100_000_000_000, 11_000_000_000))
+    result = supervise_staged_workers(
+        schedule,
+        execution_root=tmp_path,
+        coordinator=Coordinator(),
+        initial_worker_id="W0",
+        sleep=lambda _value: None,
+        now_ns=lambda: next(clock),
+        authenticate=authenticate,
+        spawn=lambda row: WorkerProcess(
+            worker_id=row["worker_id"],
+            gpu_pair=row["physical_gpu_ids"],
+            process=FakeProcess(0),
+            spawned_at_unix_ns=0,
+        ),
+    )
+    events = _read_jsonl(tmp_path / "STAGED_ACTIVATION_LEDGER.jsonl")
+    assert result["status"] == "SUPERVISED_PHYSICAL_CALLS_COMPLETE"
+    assert [
+        row["worker_id"] for row in events
+        if row["event"] == "WORKER_PAIR_AUTHENTICATED"
+    ] == ["W0", "W2", "W1"]
+    assert sum(row["event"] == "WORKER_PENDING_GPU_AUTHENTICATION" for row in events) == 3
 
 
 def test_loaded_worker_idle_gap_is_cost_shielded(tmp_path):

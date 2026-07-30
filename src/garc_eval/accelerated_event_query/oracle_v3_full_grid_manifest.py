@@ -25,6 +25,7 @@ SAMPLING_FPS = 2.0
 FULL_UNIT_SECONDS = 10.0
 VIDEO_ORDER = ("DALI", "HANGZHOU", "WUHAN")
 EXPECTED_UNITS_BY_VIDEO = {"DALI": 567, "HANGZHOU": 561, "WUHAN": 347}
+EXPECTED_GPU_PAIRS = {"DALI": [2, 6], "HANGZHOU": [3, 5], "WUHAN": [1, 7]}
 EXPECTED_UNIT_COUNT = 1475
 EXPECTED_FRAME_OCCURRENCES = 30932
 EXPECTED_TAILS = {
@@ -221,14 +222,14 @@ def expected_worker(video_id: str) -> str:
 def unit_output_path(video_id: str, unit_id: str) -> str:
     return (
         "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/"
-        f"full_grid_execution/raw/{video_id}/{unit_id}.json"
+        f"full_grid_execution_staged/raw/{video_id}/{unit_id}.json"
     )
 
 
 def unit_parsed_path(video_id: str, unit_id: str) -> str:
     return (
         "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/"
-        f"full_grid_execution/parsed/{video_id}/{unit_id}.json"
+        f"full_grid_execution_staged/parsed/{video_id}/{unit_id}.json"
     )
 
 
@@ -359,8 +360,19 @@ def validate_worker_schedule(
     workers = schedule.get("workers")
     if not isinstance(workers, list) or len(workers) != 3:
         raise RuntimeError("worker schedule must contain three workers")
+    if schedule.get("status") != "FROZEN_STAGED_THREE_STATIC_TWO_GPU_WORKERS":
+        raise RuntimeError("worker schedule is not the frozen staged protocol")
+    if schedule.get("activation_mode") != "staged_pair_authentication":
+        raise RuntimeError("worker activation mode mismatch")
+    if schedule.get("initial_worker_id") != expected_worker("DALI"):
+        raise RuntimeError("initial staged worker mismatch")
+    if schedule.get("activation_order") != [
+        expected_worker(video_id) for video_id in VIDEO_ORDER
+    ]:
+        raise RuntimeError("staged activation order mismatch")
     units = unit_manifest["units"]
     assigned: list[str] = []
+    assigned_gpus: list[int] = []
     for worker in workers:
         expected = expected_worker(worker["video_id"])
         if worker.get("worker_id") != expected:
@@ -370,7 +382,19 @@ def validate_worker_schedule(
             raise RuntimeError(f"worker unit list mismatch: {expected}")
         if worker.get("exact_call_count") != len(expected_ids):
             raise RuntimeError(f"worker call count mismatch: {expected}")
+        if worker.get("physical_gpu_ids") != EXPECTED_GPU_PAIRS[worker["video_id"]]:
+            raise RuntimeError(f"worker GPU pair mismatch: {expected}")
+        expected_state = (
+            "READY_FOR_IMMEDIATE_GPU_AUTHENTICATION"
+            if expected == schedule["initial_worker_id"]
+            else "PENDING_GPU_AUTHENTICATION"
+        )
+        if worker.get("initial_activation_state") != expected_state:
+            raise RuntimeError(f"worker staged state mismatch: {expected}")
+        assigned_gpus.extend(worker["physical_gpu_ids"])
         assigned.extend(expected_ids)
+    if len(assigned_gpus) != 6 or len(set(assigned_gpus)) != 6:
+        raise RuntimeError("staged worker GPU pairs must be disjoint")
     if len(assigned) != EXPECTED_UNIT_COUNT or set(assigned) != {
         row["unit_id"] for row in units
     }:

@@ -284,3 +284,17 @@
 - Falsification: V3 can build while either V2 artifact changes or preregistration
   implies that model-relative V3 repairs/supersedes V2 findings.
 - Status: `IMPLEMENTED_IN_SOURCE; PACKAGE_BINDING_REQUIRED`.
+
+## H23 — Staged activation preserves oracle identity and fail-stop semantics
+
+- Prediction: starting the exact DALI shard on idle GPU `(2,6)` while the
+  other fixed shards remain process-free and explicitly pending yields the
+  same authenticated unit identities as simultaneous activation; no pending
+  worker can load a model or issue a call before pair authentication.
+- Falsification: any pending worker produces a process/load/call transition,
+  any busy pair is activated, an activated-worker failure permits a later
+  activation, or partial outputs become a formal reference.
+- Competing explanation: simultaneous startup is operationally simpler, but
+  is not required for model-relative label validity when every shard has fixed
+  inputs/pair identity and the complete-run gate remains global.
+- Status: `IMPLEMENTED; LOCAL_TESTS_PASS; EXACT_PACKAGE_REVIEW_REQUIRED`.

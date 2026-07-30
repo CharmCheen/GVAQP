@@ -20,6 +20,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_manifest import (
 )
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_package import (
     FRAMES,
+    EXECUTION,
     PACKAGE,
     PREREG,
     PROCESSED_INPUTS,
@@ -168,7 +169,7 @@ def review_bundle() -> None:
     ]
     if any(path.exists() for path in forbidden):
         raise RuntimeError("review bundle must precede approval/review/final package")
-    execution_root = PACKAGE.parent / "full_grid_execution"
+    execution_root = EXECUTION
     if execution_root.exists() and any(execution_root.rglob("*.json")):
         raise RuntimeError("formal full-grid runtime artifacts already exist")
     paths = [path for path in PACKAGE.rglob("*") if path.is_file() and path.name != "FULL_GRID_REVIEW_BUNDLE.json"]

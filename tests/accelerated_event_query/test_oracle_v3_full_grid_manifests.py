@@ -4,6 +4,8 @@ import pytest
 
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_manifest import (
     EXPECTED_TAILS,
+    EXPECTED_GPU_PAIRS,
+    VIDEO_ORDER,
     EXPECTED_UNITS_BY_VIDEO,
     canonical_hash,
     expected_worker,
@@ -86,8 +88,19 @@ def synthetic_manifests():
             "video_id": video_id,
             "unit_ids": ids,
             "exact_call_count": len(ids),
+            "physical_gpu_ids": EXPECTED_GPU_PAIRS[video_id],
+            "initial_activation_state": (
+                "READY_FOR_IMMEDIATE_GPU_AUTHENTICATION"
+                if video_id == "DALI" else "PENDING_GPU_AUTHENTICATION"
+            ),
         })
-    schedule = {"workers": workers}
+    schedule = {
+        "status": "FROZEN_STAGED_THREE_STATIC_TWO_GPU_WORKERS",
+        "activation_mode": "staged_pair_authentication",
+        "initial_worker_id": expected_worker("DALI"),
+        "activation_order": [expected_worker(video_id) for video_id in VIDEO_ORDER],
+        "workers": workers,
+    }
     schedule["worker_schedule_payload_sha256"] = canonical_hash(schedule)
     return unit_manifest, frame_manifest, schedule
 

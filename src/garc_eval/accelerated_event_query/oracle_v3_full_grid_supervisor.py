@@ -14,6 +14,7 @@ from typing import Any, Callable
 
 from .oracle_v3_full_grid_control import (
     _read_jsonl,
+    append_hash_chain,
     emergency_global_stop,
 )
 from .oracle_v3_full_grid_package import (
@@ -28,6 +29,7 @@ from .oracle_v3_full_grid_runner import (
     LOADED_WORKER_IDLE_LEASE_SECONDS,
     MODEL_LOAD_RESERVATION_WALL_SECONDS,
     _coordinator,
+    authenticate_gpu_exclusivity,
     initialize_execution,
     validate_compute_approval,
 )
@@ -37,6 +39,7 @@ from .oracle_v3_manifest import atomic_text, canonical_hash, load_json, sha256_f
 POLL_SECONDS = 0.20
 STARTUP_LEASE_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 5.0
+PAIR_AUTH_POLL_SECONDS = 10.0
 
 
 @dataclass
@@ -234,8 +237,200 @@ def supervise_workers(
         raise
 
 
+def _spawn_worker(row: dict[str, Any]) -> WorkerProcess:
+    pair = row["physical_gpu_ids"]
+    environment = os.environ.copy()
+    environment["CUDA_VISIBLE_DEVICES"] = ",".join(map(str, pair))
+    environment["FULL_GRID_SUPERVISOR_PID"] = str(os.getpid())
+    script = ROOT / "scripts/run_accelerated_event_query_oracle_v3_full_grid.py"
+    process = subprocess.Popen(
+        [
+            sys.executable,
+            str(script),
+            "--execute-worker",
+            row["worker_id"],
+            "--declared-physical-gpus",
+            ",".join(map(str, pair)),
+        ],
+        cwd=ROOT,
+        env=environment,
+        start_new_session=True,
+    )
+    return WorkerProcess(
+        worker_id=row["worker_id"],
+        gpu_pair=pair,
+        process=process,
+        spawned_at_unix_ns=time.time_ns(),
+    )
+
+
+def supervise_staged_workers(
+    schedule: dict[str, Any],
+    *,
+    execution_root: Path,
+    coordinator: Any,
+    initial_worker_id: str,
+    sleep: Callable[[float], None] = time.sleep,
+    now_ns: Callable[[], int] = time.time_ns,
+    authenticate: Callable[[list[int]], dict[str, Any]] = authenticate_gpu_exclusivity,
+    spawn: Callable[[dict[str, Any]], WorkerProcess] = _spawn_worker,
+) -> dict[str, Any]:
+    """Activate frozen workers only when their own exact pair is idle.
+
+    Pending workers have no process and consume no GPU residency.  A failure
+    in any activated worker stops the global execution and prevents every
+    remaining activation.  Completed shards are retained but never published
+    until all three workers exit successfully and the frozen finalizer passes.
+    """
+
+    rows = {row["worker_id"]: row for row in schedule["workers"]}
+    order = schedule.get("activation_order")
+    if (
+        schedule.get("activation_mode") != "staged_pair_authentication"
+        or order != [row["worker_id"] for row in schedule["workers"]]
+        or initial_worker_id != schedule.get("initial_worker_id")
+        or set(order) != set(rows)
+    ):
+        raise ValueError("invalid frozen staged activation schedule")
+    active: dict[str, WorkerProcess] = {}
+    completed: set[str] = set()
+    activation_snapshots: dict[str, dict[str, Any]] = {}
+    activation_ledger = execution_root / "STAGED_ACTIVATION_LEDGER.jsonl"
+    for worker_id in order:
+        append_hash_chain(activation_ledger, {
+            "event": "WORKER_PENDING_GPU_AUTHENTICATION",
+            "worker_id": worker_id,
+            "physical_gpu_ids": rows[worker_id]["physical_gpu_ids"],
+        })
+    try:
+        activation_snapshots[initial_worker_id] = authenticate(
+            rows[initial_worker_id]["physical_gpu_ids"]
+        )
+        append_hash_chain(activation_ledger, {
+            "event": "WORKER_PAIR_AUTHENTICATED",
+            "worker_id": initial_worker_id,
+            "physical_gpu_ids": rows[initial_worker_id]["physical_gpu_ids"],
+            "snapshot": activation_snapshots[initial_worker_id],
+        })
+        active[initial_worker_id] = spawn(rows[initial_worker_id])
+        append_hash_chain(activation_ledger, {
+            "event": "WORKER_PROCESS_SPAWNED",
+            "worker_id": initial_worker_id,
+            "physical_gpu_ids": rows[initial_worker_id]["physical_gpu_ids"],
+            "pid": active[initial_worker_id].process.pid,
+        })
+        next_pair_authentication_ns = now_ns()
+        while len(completed) < 3:
+            state = load_json(execution_root / "GLOBAL_EXECUTION_STATE.json")
+            if state.get("status") == "STOPPED":
+                _terminate_all(list(active.values()))
+                raise RuntimeError(f"global fail-stop active: {state.get('stop_trigger')}")
+            current_ns = now_ns()
+            lease = _lease_violation(execution_root, current_ns)
+            if lease is not None:
+                emergency_global_stop(execution_root, "cost_envelope_exceeded", lease)
+                _terminate_all(list(active.values()))
+                raise RuntimeError(f"worker operation exceeded sealed lease: {lease}")
+            running_ids = {
+                worker_id for worker_id, worker in active.items()
+                if worker.process.poll() is None
+            }
+            idle = _loaded_worker_idle_violation(
+                execution_root, running_worker_ids=running_ids, now_ns=current_ns
+            )
+            if idle is not None:
+                emergency_global_stop(execution_root, "cost_envelope_exceeded", idle)
+                _terminate_all(list(active.values()))
+                raise RuntimeError(f"loaded worker exceeded idle lease: {idle}")
+            started = set(state.get("model_load_workers", []))
+            for worker_id, worker in list(active.items()):
+                returncode = worker.process.poll()
+                if returncode is None:
+                    if (
+                        worker_id not in started
+                        and (current_ns - worker.spawned_at_unix_ns) / 1e9
+                        > STARTUP_LEASE_SECONDS
+                    ):
+                        detail = f"startup_lease:{worker_id}"
+                        emergency_global_stop(
+                            execution_root, "post_load_process_fault", detail
+                        )
+                        _terminate_all(list(active.values()))
+                        raise RuntimeError(detail)
+                    continue
+                if worker_id in completed:
+                    continue
+                if returncode != 0:
+                    detail = f"abrupt_worker_exit:{worker_id}:returncode={returncode}"
+                    emergency_global_stop(
+                        execution_root, "post_load_process_fault", detail
+                    )
+                    _terminate_all(list(active.values()))
+                    raise RuntimeError(detail)
+                coordinator.complete_worker_process_exit(worker_id)
+                completed.add(worker_id)
+                append_hash_chain(activation_ledger, {
+                    "event": "WORKER_PROCESS_EXITED_ZERO",
+                    "worker_id": worker_id,
+                    "physical_gpu_ids": rows[worker_id]["physical_gpu_ids"],
+                })
+            if current_ns >= next_pair_authentication_ns:
+                for worker_id in order:
+                    if worker_id in active:
+                        continue
+                    try:
+                        snapshot = authenticate(rows[worker_id]["physical_gpu_ids"])
+                    except RuntimeError as exc:
+                        if "GPU exclusivity/idleness authentication failed" in str(exc):
+                            continue
+                        detail = f"pending_pair_authentication:{worker_id}:{exc}"
+                        emergency_global_stop(
+                            execution_root, "authentication_mismatch", detail
+                        )
+                        _terminate_all(list(active.values()))
+                        raise RuntimeError(detail) from exc
+                    activation_snapshots[worker_id] = snapshot
+                    append_hash_chain(activation_ledger, {
+                        "event": "WORKER_PAIR_AUTHENTICATED",
+                        "worker_id": worker_id,
+                        "physical_gpu_ids": rows[worker_id]["physical_gpu_ids"],
+                        "snapshot": snapshot,
+                    })
+                    active[worker_id] = spawn(rows[worker_id])
+                    append_hash_chain(activation_ledger, {
+                        "event": "WORKER_PROCESS_SPAWNED",
+                        "worker_id": worker_id,
+                        "physical_gpu_ids": rows[worker_id]["physical_gpu_ids"],
+                        "pid": active[worker_id].process.pid,
+                    })
+                next_pair_authentication_ns = current_ns + int(
+                    PAIR_AUTH_POLL_SECONDS * 1e9
+                )
+            if len(completed) < 3:
+                sleep(POLL_SECONDS)
+        coordinator.mark_complete(1475)
+        state = load_json(execution_root / "GLOBAL_EXECUTION_STATE.json")
+        if state.get("status") != "PHYSICAL_CALLS_COMPLETE_AWAITING_ANALYSIS":
+            emergency_global_stop(
+                execution_root, "integrity_mismatch",
+                "all staged workers exited zero before complete global state",
+            )
+            raise RuntimeError("staged workers exited without complete global state")
+        return {
+            "status": "SUPERVISED_PHYSICAL_CALLS_COMPLETE",
+            "worker_returncodes": {
+                worker_id: active[worker_id].process.poll() for worker_id in order
+            },
+            "activation_snapshots": activation_snapshots,
+            "execution_seal_sha256": state["execution_seal_sha256"],
+        }
+    except BaseException:
+        _terminate_all(list(active.values()))
+        raise
+
+
 def launch_supervised_execution(execution_root: Path = EXECUTION) -> dict[str, Any]:
-    """Approval-gated sole production launcher for the exact three workers."""
+    """Approval-gated staged launcher for the exact three frozen workers."""
 
     validate_execution_seal("supervisor")
     validate_compute_approval()
@@ -248,41 +443,20 @@ def launch_supervised_execution(execution_root: Path = EXECUTION) -> dict[str, A
         "execution_seal_sha256": sha256_file(SEAL),
         "supervisor_pid": os.getpid(),
         "worker_ids": [row["worker_id"] for row in schedule["workers"]],
+        "activation_mode": "staged_pair_authentication",
+        "initial_worker_id": schedule["initial_worker_id"],
     }
     authority["supervisor_authority_payload_sha256"] = canonical_hash(authority)
     atomic_text(
         execution_root / "SUPERVISOR_LAUNCH_AUTHORITY.json",
         json.dumps(authority, indent=2, sort_keys=True) + "\n",
     )
-    script = ROOT / "scripts/run_accelerated_event_query_oracle_v3_full_grid.py"
-    workers: list[WorkerProcess] = []
-    for row in schedule["workers"]:
-        pair = row["physical_gpu_ids"]
-        environment = os.environ.copy()
-        environment["CUDA_VISIBLE_DEVICES"] = ",".join(map(str, pair))
-        environment["FULL_GRID_SUPERVISOR_PID"] = str(os.getpid())
-        process = subprocess.Popen(
-            [
-                sys.executable,
-                str(script),
-                "--execute-worker",
-                row["worker_id"],
-                "--declared-physical-gpus",
-                ",".join(map(str, pair)),
-            ],
-            cwd=ROOT,
-            env=environment,
-            start_new_session=True,
-        )
-        workers.append(WorkerProcess(
-            worker_id=row["worker_id"],
-            gpu_pair=pair,
-            process=process,
-            spawned_at_unix_ns=time.time_ns(),
-        ))
     coordinator = _coordinator(schedule, sha256_file(SEAL), execution_root)
-    result = supervise_workers(
-        workers, execution_root=execution_root, coordinator=coordinator
+    result = supervise_staged_workers(
+        schedule,
+        execution_root=execution_root,
+        coordinator=coordinator,
+        initial_worker_id=schedule["initial_worker_id"],
     )
     audit = {
         **result,
@@ -291,6 +465,7 @@ def launch_supervised_execution(execution_root: Path = EXECUTION) -> dict[str, A
         ],
         "supervisor_source_sha256": sha256_file(Path(__file__)),
         "dynamic_reassignment": False,
+        "activation_mode": "staged_pair_authentication",
         "retry_count": 0,
     }
     audit["supervisor_audit_payload_sha256"] = canonical_hash(audit)

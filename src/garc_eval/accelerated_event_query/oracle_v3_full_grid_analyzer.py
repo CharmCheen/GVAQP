@@ -327,6 +327,32 @@ def analyze_execution(
     except Exception as exc:
         global_events = []
         errors.append(f"invalid_global_ledger:{type(exc).__name__}:{exc}")
+    staged_activation_pass = allow_mock
+    if not allow_mock:
+        try:
+            activation_events = _read_jsonl(
+                execution_root / "STAGED_ACTIVATION_LEDGER.jsonl"
+            )
+            by_event = Counter(row.get("event") for row in activation_events)
+            authenticated = [
+                row["worker_id"] for row in activation_events
+                if row.get("event") == "WORKER_PAIR_AUTHENTICATED"
+            ]
+            staged_activation_pass = all((
+                by_event["WORKER_PENDING_GPU_AUTHENTICATION"] == 3,
+                by_event["WORKER_PAIR_AUTHENTICATED"] == 3,
+                by_event["WORKER_PROCESS_SPAWNED"] == 3,
+                by_event["WORKER_PROCESS_EXITED_ZERO"] == 3,
+                authenticated[0] == schedule["initial_worker_id"],
+                set(authenticated) == set(workers),
+                len(authenticated) == len(set(authenticated)),
+            ))
+            if not staged_activation_pass:
+                errors.append("invalid_staged_activation_ledger:content")
+        except Exception as exc:
+            errors.append(
+                f"invalid_staged_activation_ledger:{type(exc).__name__}:{exc}"
+            )
     supervisor_path = execution_root / "SUPERVISOR_AUDIT.json"
     supervisor_pass = False
     if supervisor_path.exists():
@@ -346,6 +372,10 @@ def analyze_execution(
                 ).values()),
                 supervisor.get("retry_count") == 0,
                 supervisor.get("dynamic_reassignment") is False,
+                allow_mock or supervisor.get("activation_mode") == (
+                    "staged_pair_authentication"
+                ),
+                allow_mock or set(supervisor.get("activation_snapshots", {})) == set(workers),
                 allow_mock or supervisor.get("supervisor_source_sha256") == sha256_file(
                     ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_supervisor.py"
                 ),
@@ -364,11 +394,16 @@ def analyze_execution(
         try:
             initialization = load_json(initialization_path)
             validate_payload_hash(initialization, "initialization_payload_sha256")
-            expected_gpu_ids = sorted({
-                index
-                for worker in schedule["workers"]
-                for index in worker["physical_gpu_ids"]
-            })
+            initial_worker_id = schedule.get("initial_worker_id")
+            initial_worker = workers.get(initial_worker_id, {})
+            expected_gpu_ids = (
+                sorted({
+                    index
+                    for worker in schedule["workers"]
+                    for index in worker["physical_gpu_ids"]
+                })
+                if allow_mock else initial_worker.get("physical_gpu_ids", [])
+            )
             for worker in schedule["workers"]:
                 worker_map = _gpu_uuid_map_from_identity_strings(
                     initialization.get("gpu_identities", {}).get(
@@ -390,6 +425,10 @@ def analyze_execution(
                 initialization.get("exact_worker_count") == 3,
                 initialization.get("exact_call_count") == EXPECTED_UNIT_COUNT,
                 initialization.get("checkpoint_loaded") is False,
+                allow_mock or initialization.get("gpu_exclusivity_scope") == (
+                    "initial_worker_pair_only"
+                ),
+                allow_mock or initialization.get("initial_worker_id") == initial_worker_id,
             ))
             if not initialization_pass:
                 errors.append("invalid_initialization_audit:content")
@@ -422,6 +461,7 @@ def analyze_execution(
         bool(global_events) and global_events[-1].get("event") == "PHYSICAL_CALLS_COMPLETE",
         supervisor_pass,
         initialization_pass,
+        staged_activation_pass,
     ))
     if not global_pass:
         errors.append("global_execution_state_incomplete_or_stopped")
@@ -478,6 +518,7 @@ def analyze_execution(
         "global_execution_state_pass": global_pass,
         "supervisor_audit_pass": supervisor_pass,
         "initialization_audit_pass": initialization_pass,
+        "staged_activation_audit_pass": staged_activation_pass,
         "global_stop_trigger": global_state.get("stop_trigger"),
         "global_stop_detail": global_state.get("stop_detail"),
         "model_load_count": len(global_state.get("model_load_workers", [])),

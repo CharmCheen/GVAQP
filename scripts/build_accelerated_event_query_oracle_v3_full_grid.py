@@ -18,6 +18,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_finalizer import (
 )
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_manifest import (
     EXPECTED_FRAME_OCCURRENCES,
+    EXPECTED_GPU_PAIRS,
     EXPECTED_TAILS,
     EXPECTED_UNIT_COUNT,
     EXPECTED_UNITS_BY_VIDEO,
@@ -76,7 +77,8 @@ V2_DECISION = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/pref
 V2_EVIDENCE = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/PILOT_EVIDENCE_MANIFEST_V2.json"
 
 
-GPU_PAIRS = {"DALI": [1, 2], "HANGZHOU": [3, 5], "WUHAN": [6, 7]}
+GPU_PAIRS = EXPECTED_GPU_PAIRS
+INITIAL_WORKER_ID = expected_worker("DALI")
 
 
 def binding(path: Path) -> dict[str, Any]:
@@ -211,9 +213,12 @@ def _failure_policy() -> str:
 
 Status: `FROZEN_BEFORE_FULL_GRID_EXECUTION`
 
-The only production entry point is the sealed three-process supervisor. It
-launches exactly the frozen workers, monitors child exit status and operation
-leases, and terminates all peers after any nonzero/abrupt death or global stop.
+The only production entry point is the sealed staged three-process supervisor.
+It launches the initial frozen worker only after its pair authenticates idle,
+marks the other workers pending without a process or model load, and activates
+each pending worker only after its own frozen pair independently authenticates.
+It monitors child exit status and operation leases, and terminates all live
+peers after any nonzero/abrupt death or global stop.
 Workers reject direct launch without the supervisor authority and parent PID.
 Before importing the model stack, each worker installs Linux `PDEATHSIG=SIGKILL`
 and rechecks the exact parent, so supervisor death cannot orphan GPU workers.
@@ -229,8 +234,11 @@ supervisor observes process exit. Model tensors and cached allocations
 are explicitly released before session close.
 
 The launcher authenticates zero compute contexts, zero utilization, and at
-most 16 MiB used memory on every sealed GPU before initialization. Each worker
-repeats that exact-pair check immediately before its single model load.
+most 16 MiB used memory on the initial pair before initialization. Every
+activation repeats the rule before process spawn, and each worker repeats its
+exact-pair check immediately before its single model load. A busy pending pair
+does not fail or consume compute; it remains explicitly pending. Malformed
+telemetry or an identity mismatch is a global authentication failure.
 
 The execution uses one global fail-stop coordinator. Authentication, frame or
 processed-input mismatch, an unknown runner/parser, wrong GPU, duplicate or
@@ -502,9 +510,15 @@ def main() -> None:
             "dynamic_reassignment": False,
             "direct_launch_allowed": False,
             "required_parent": "sealed_global_supervisor",
+            "activation_order": VIDEO_ORDER.index(video_id),
+            "initial_activation_state": (
+                "READY_FOR_IMMEDIATE_GPU_AUTHENTICATION"
+                if expected_worker(video_id) == INITIAL_WORKER_ID
+                else "PENDING_GPU_AUTHENTICATION"
+            ),
         })
     schedule = self_hash({
-        "status": "FROZEN_THREE_STATIC_TWO_GPU_WORKERS",
+        "status": "FROZEN_STAGED_THREE_STATIC_TWO_GPU_WORKERS",
         "experiment_id": EXPERIMENT_ID,
         "exact_worker_count": 3,
         "exact_call_count": EXPECTED_UNIT_COUNT,
@@ -512,6 +526,11 @@ def main() -> None:
         "reload_count": 0,
         "retry_count": 0,
         "global_fail_stop": True,
+        "activation_mode": "staged_pair_authentication",
+        "initial_worker_id": INITIAL_WORKER_ID,
+        "pending_worker_policy": "no process, model load, call, or GPU residency before the worker's exact frozen pair independently authenticates idle",
+        "activation_order": [expected_worker(video_id) for video_id in VIDEO_ORDER],
+        "completed_worker_release_policy": "release model and exit before a pending worker needs to activate; completed raw outputs remain nonpublic until 1475/1475",
         "sole_launcher": "scripts/launch_accelerated_event_query_oracle_v3_full_grid.py",
         "abrupt_worker_death_policy": "supervisor records global stop and terminates every live peer before another reservation",
         "workers": workers,
@@ -548,7 +567,7 @@ def main() -> None:
         "reservation_fits_envelope": reserved <= ENVELOPE_A100_GPU_HOURS,
         "cost_shield": "call reservation remains open from pre-decode through durable raw and ACCEPTED persistence; a reusable prospective emergency reservation remains active per loaded worker; a coordinator-side continuous residency clock, not caller timing, accounts lock/hash-chain/persistence gaps; elapsed idle consumes and must refresh the emergency reservation before another call; no start above envelope",
         "actual_gpu_residency_accounting": "continuous coordinator-side two-GPU residency segments from model-load reservation through call/durable acceptance, every coordinator and inter-call gap, explicit model release, and supervisor-observed process-exit tail",
-        "gpu_profile_authentication": "all sealed GPUs must have zero compute contexts, zero utilization, and <=16 MiB used memory before initialization and again on each pair before model load",
+        "gpu_profile_authentication": "the initial pair must have zero compute contexts, zero utilization, and <=16 MiB used memory before initialization; each pending frozen pair must independently satisfy the same rule immediately before process spawn and again before model load",
         "unused_envelope_cannot_authorize_extra_calls_reloads_or_retries": True,
     }, "cost_estimate_payload_sha256")
     write_json_once(PACKAGE / "FULL_GRID_COST_ESTIMATE.json", cost)
@@ -606,7 +625,7 @@ def main() -> None:
         "evaluator_directory_mode": "0700",
         "evaluator_file_mode": "0600",
         "required_runtime_effective_capabilities_hex": "0000000000000000",
-        "evaluator_output_root": str((BASE / "full_grid_execution").relative_to(ROOT)),
+        "evaluator_output_root": str((BASE / "full_grid_execution_staged").relative_to(ROOT)),
         "runtime_mount_rule": "the evaluator output root must be absent from the runtime controller container mount namespace",
         "runtime_entry_gate": "assert_runtime_os_isolation must pass under UID/GID 65534 before any later controller/replay episode",
         "same_uid_runtime_forbidden": True,
@@ -843,7 +862,7 @@ def main() -> None:
         },
         "failure_and_publication": {
             "global_fail_stop": True,
-            "sole_execution_launcher": "sealed three-worker supervisor with abrupt-death and operation-lease enforcement",
+            "sole_execution_launcher": "sealed staged three-worker supervisor with per-pair authentication, explicit pending states, abrupt-death and operation-lease enforcement",
             "formal_release_requires": ["1475/1475 authenticated terminal records", "global integrity pass", "frozen finalizer pass"],
             "partial_raw_preserved": True,
             "partial_formal_reference_forbidden": True,
