@@ -310,3 +310,13 @@ the completion-audit generator. No package artifact had yet been written. The
 generator now loads and validates the sealed worker schedule and derives its
 worker IDs, call counts, GPU pairs, activation mode, and initial worker from
 that artifact instead of duplicating them as prose constants.
+
+Independent review of staged seal V2 (`2bcac478…`) returned
+`REVISE_FULL_GRID_PREREGISTRATION`. A reproduced stale-state interleaving let
+W1 and W2 spawn after W1 authentication had durably changed global state to
+`STOPPED`. The seal and review bundle are rejected with zero formal calls.
+The revised activation path now acquires the coordinator's OS file lock,
+re-reads durable state, and linearizes the authenticated ledger transition and
+process spawn while holding that lock. A regression injection requires that
+only W0 spawns in the reviewer interleaving. Local evidence is 139 tests
+passed, with zero formal model loads or calls.

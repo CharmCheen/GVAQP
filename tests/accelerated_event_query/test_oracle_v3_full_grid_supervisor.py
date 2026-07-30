@@ -241,6 +241,77 @@ def test_staged_initial_worker_spawn_failure_fails_global_state_closed(tmp_path)
     assert state["stop_trigger"] == "post_load_process_fault"
 
 
+def test_staged_pending_worker_cannot_spawn_from_stale_ready_state(tmp_path):
+    rows = [
+        {"worker_id": worker_id, "physical_gpu_ids": binding["physical_gpu_ids"]}
+        for worker_id, binding in WORKERS.items()
+    ]
+    schedule = {
+        "activation_mode": "staged_pair_authentication",
+        "initial_worker_id": "W0",
+        "activation_order": ["W0", "W1", "W2"],
+        "workers": rows,
+    }
+    atomic_text(
+        tmp_path / "GLOBAL_EXECUTION_STATE.json",
+        '{"status":"READY","model_load_workers":[],"model_load_completed_workers":[]}\n',
+    )
+    from garc_eval.accelerated_event_query.oracle_v3_full_grid_control import append_hash_chain
+
+    append_hash_chain(
+        tmp_path / "GLOBAL_EXECUTION_LEDGER.jsonl",
+        {"event": "RUN_INITIALIZED"},
+    )
+
+    class Coordinator:
+        def complete_worker_process_exit(self, _worker_id):
+            pass
+
+    authentication_count = 0
+    spawned = []
+
+    def authenticate(pair):
+        nonlocal authentication_count
+        authentication_count += 1
+        if authentication_count == 2:
+            atomic_text(
+                tmp_path / "GLOBAL_EXECUTION_STATE.json",
+                '{"status":"STOPPED","stop_trigger":"post_load_process_fault",'
+                '"model_load_workers":[],"model_load_completed_workers":[]}\n',
+            )
+        return {"authenticated_exclusive_idle": True, "physical_gpu_ids": pair}
+
+    def spawn(row):
+        state = __import__("json").loads(
+            (tmp_path / "GLOBAL_EXECUTION_STATE.json").read_text()
+        )
+        spawned.append((row["worker_id"], state["status"]))
+        return WorkerProcess(
+            worker_id=row["worker_id"],
+            gpu_pair=row["physical_gpu_ids"],
+            process=FakeProcess(0),
+            spawned_at_unix_ns=0,
+        )
+
+    with pytest.raises(RuntimeError, match="before worker spawn"):
+        supervise_staged_workers(
+            schedule,
+            execution_root=tmp_path,
+            coordinator=Coordinator(),
+            initial_worker_id="W0",
+            sleep=lambda _value: None,
+            now_ns=lambda: 0,
+            authenticate=authenticate,
+            spawn=spawn,
+        )
+    assert spawned == [("W0", "READY")]
+    events = _read_jsonl(tmp_path / "STAGED_ACTIVATION_LEDGER.jsonl")
+    assert [
+        row["worker_id"] for row in events
+        if row["event"] == "WORKER_PROCESS_SPAWNED"
+    ] == ["W0"]
+
+
 def test_loaded_worker_idle_gap_is_cost_shielded(tmp_path):
     coordinator = GlobalFailStopCoordinator(
         tmp_path,

@@ -302,4 +302,10 @@
   pre-spawn authentication. The exact seal is rejected. The repaired path
   atomically fails closed as `authentication_mismatch`; a separate initial
   spawn-failure test fails closed as `post_load_process_fault`.
-- Status: `REVISED; 138_LOCAL_TESTS_PASS; NEW_EXACT_PACKAGE_REVIEW_REQUIRED`.
+- Second counterexample: staged seal V2 authenticated pending W1 from a stale
+  loop-top `READY` snapshot; if authentication concurrently persisted
+  `STOPPED`, W1 and W2 could still be spawned before the next loop.
+- Second revision: every authenticated activation now reacquires the exact
+  global coordinator lock, rechecks durable `READY`, and linearizes the
+  activation-ledger transition and process creation before releasing the lock.
+- Status: `REVISED_AFTER_SECOND_INDEPENDENT_COUNTEREXAMPLE; NEW_EXACT_PACKAGE_REVIEW_REQUIRED`.

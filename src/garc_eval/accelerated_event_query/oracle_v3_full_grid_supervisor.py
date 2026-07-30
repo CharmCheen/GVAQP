@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import fcntl
 import json
 import os
 import signal
@@ -264,6 +265,56 @@ def _spawn_worker(row: dict[str, Any]) -> WorkerProcess:
     )
 
 
+def _activate_worker_if_globally_ready(
+    *,
+    execution_root: Path,
+    activation_ledger: Path,
+    row: dict[str, Any],
+    snapshot: dict[str, Any],
+    spawn: Callable[[dict[str, Any]], WorkerProcess],
+) -> WorkerProcess:
+    """Linearize process creation before any concurrent global fail-stop.
+
+    Authentication is necessarily outside the coordinator lock.  Reacquiring
+    the exact coordinator lock and checking READY immediately before Popen
+    prevents a stale loop-top observation from creating a pending worker after
+    another worker has stopped the run.  A spawned child blocks on this same
+    lock before it can reserve model-load residency.
+    """
+
+    lock_path = execution_root / "GLOBAL_EXECUTION.lock"
+    worker: WorkerProcess | None = None
+    with lock_path.open("a+", encoding="utf-8") as handle:
+        fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+        try:
+            state = load_json(execution_root / "GLOBAL_EXECUTION_STATE.json")
+            if state.get("status") != "READY":
+                raise RuntimeError(
+                    "global fail-stop active before worker spawn: "
+                    f"{row['worker_id']}:{state.get('stop_trigger')}"
+                )
+            append_hash_chain(activation_ledger, {
+                "event": "WORKER_PAIR_AUTHENTICATED",
+                "worker_id": row["worker_id"],
+                "physical_gpu_ids": row["physical_gpu_ids"],
+                "snapshot": snapshot,
+            })
+            worker = spawn(row)
+            append_hash_chain(activation_ledger, {
+                "event": "WORKER_PROCESS_SPAWNED",
+                "worker_id": row["worker_id"],
+                "physical_gpu_ids": row["physical_gpu_ids"],
+                "pid": worker.process.pid,
+            })
+            return worker
+        except BaseException:
+            if worker is not None:
+                _terminate_all([worker])
+            raise
+        finally:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+
+
 def supervise_staged_workers(
     schedule: dict[str, Any],
     *,
@@ -313,19 +364,13 @@ def supervise_staged_workers(
                 execution_root, "authentication_mismatch", detail
             )
             raise RuntimeError(detail) from exc
-        append_hash_chain(activation_ledger, {
-            "event": "WORKER_PAIR_AUTHENTICATED",
-            "worker_id": initial_worker_id,
-            "physical_gpu_ids": rows[initial_worker_id]["physical_gpu_ids"],
-            "snapshot": activation_snapshots[initial_worker_id],
-        })
-        active[initial_worker_id] = spawn(rows[initial_worker_id])
-        append_hash_chain(activation_ledger, {
-            "event": "WORKER_PROCESS_SPAWNED",
-            "worker_id": initial_worker_id,
-            "physical_gpu_ids": rows[initial_worker_id]["physical_gpu_ids"],
-            "pid": active[initial_worker_id].process.pid,
-        })
+        active[initial_worker_id] = _activate_worker_if_globally_ready(
+            execution_root=execution_root,
+            activation_ledger=activation_ledger,
+            row=rows[initial_worker_id],
+            snapshot=activation_snapshots[initial_worker_id],
+            spawn=spawn,
+        )
         next_pair_authentication_ns = now_ns()
         while len(completed) < 3:
             state = load_json(execution_root / "GLOBAL_EXECUTION_STATE.json")
@@ -397,19 +442,13 @@ def supervise_staged_workers(
                         _terminate_all(list(active.values()))
                         raise RuntimeError(detail) from exc
                     activation_snapshots[worker_id] = snapshot
-                    append_hash_chain(activation_ledger, {
-                        "event": "WORKER_PAIR_AUTHENTICATED",
-                        "worker_id": worker_id,
-                        "physical_gpu_ids": rows[worker_id]["physical_gpu_ids"],
-                        "snapshot": snapshot,
-                    })
-                    active[worker_id] = spawn(rows[worker_id])
-                    append_hash_chain(activation_ledger, {
-                        "event": "WORKER_PROCESS_SPAWNED",
-                        "worker_id": worker_id,
-                        "physical_gpu_ids": rows[worker_id]["physical_gpu_ids"],
-                        "pid": active[worker_id].process.pid,
-                    })
+                    active[worker_id] = _activate_worker_if_globally_ready(
+                        execution_root=execution_root,
+                        activation_ledger=activation_ledger,
+                        row=rows[worker_id],
+                        snapshot=snapshot,
+                        spawn=spawn,
+                    )
                 next_pair_authentication_ns = current_ns + int(
                     PAIR_AUTH_POLL_SECONDS * 1e9
                 )
