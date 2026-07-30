@@ -53,11 +53,16 @@ from .oracle_v3_manifest import (
 from .oracle_v3_parser import parse_oracle_v3_response
 
 
-CALL_RESERVATION_WALL_SECONDS = 23.579961206763983
+# The first formal execution falsified the former 23.579961-second bound on
+# DALI_u0136.  This replacement is prospectively frozen from the 192-token
+# generation cap plus the preserved 136-call runtime tail; see the package's
+# FULL_GRID_CALL_RESERVATION_DERIVATION.json.  It remains a hard per-call cost
+# reservation, not a latency target or permission to retry.
+CALL_RESERVATION_WALL_SECONDS = 35.0
 MODEL_LOAD_RESERVATION_WALL_SECONDS = 30.0
 LOADED_WORKER_IDLE_LEASE_SECONDS = 2.0
 LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS = 8.0
-ENVELOPE_A100_GPU_HOURS = 19.4
+ENVELOPE_A100_GPU_HOURS = 29.0
 GPU_IDLE_MAX_MEMORY_MIB = 16
 GPU_IDLE_MAX_UTILIZATION_PERCENT = 0
 EXPECTED_CUBLAS_WORKSPACE_CONFIG = ":4096:8"
@@ -104,10 +109,21 @@ def validate_compute_approval(path: Path = APPROVAL) -> dict[str, Any]:
         "authorization_envelope_a100_gpu_hours", "parallel_wall_hours",
         "worker_gpu_pairs", "model_load_count", "reload_count", "retry_count",
         "partial_results_are_not_formal_reference", "downstream_not_authorized",
+        "fresh_execution_id", "fresh_execution_root",
+        "fresh_execution_starts_from_unit_ordinal",
+        "prior_completed_labels_reused",
+        "project_historical_reexecution_authorized",
+        "retry_semantics",
+        "prior_failed_run_conservative_usage_upper_bound_a100_gpu_hours",
+        "prior_plus_fresh_formal_envelope_a100_gpu_hours",
+        "expanded_authorization_a100_gpu_hours",
         "user_approval_evidence",
     }
     review_bundle = PACKAGE / "FULL_GRID_REVIEW_BUNDLE.json"
     final_package = PACKAGE / "FULL_GRID_PACKAGE_MANIFEST.json"
+    derivation = load_json(
+        PACKAGE / "FULL_GRID_CALL_RESERVATION_DERIVATION.json"
+    )
     schedule = load_json(SCHEDULE)
     if set(approval) != expected or not all((
         approval.get("status") == "APPROVED_BY_USER_FOR_EXACT_FULL_GRID_SEAL",
@@ -127,6 +143,22 @@ def validate_compute_approval(path: Path = APPROVAL) -> dict[str, Any]:
         approval.get("retry_count") == 0,
         approval.get("partial_results_are_not_formal_reference") is True,
         approval.get("downstream_not_authorized") is True,
+        approval.get("fresh_execution_id")
+        == "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_CALL_RESERVATION_V2",
+        approval.get("fresh_execution_root") == str(EXECUTION.relative_to(ROOT)),
+        approval.get("fresh_execution_starts_from_unit_ordinal") == 0,
+        approval.get("prior_completed_labels_reused") is False,
+        approval.get("project_historical_reexecution_authorized") is True,
+        approval.get("retry_semantics")
+        == "zero retries within the fresh execution; prior failed-run units are deliberately re-executed from unit zero under a new seal",
+        approval.get(
+            "prior_failed_run_conservative_usage_upper_bound_a100_gpu_hours"
+        ) == derivation[
+            "prior_failed_run_conservative_usage_upper_bound_a100_gpu_hours"
+        ],
+        approval.get("prior_plus_fresh_formal_envelope_a100_gpu_hours")
+        == derivation["prior_plus_fresh_formal_envelope_a100_gpu_hours"],
+        approval.get("expanded_authorization_a100_gpu_hours") == 64.0,
         isinstance(approval.get("user_approval_evidence"), str),
         bool(approval.get("user_approval_evidence", "").strip()),
         "FILL" not in approval.get("user_approval_evidence", ""),

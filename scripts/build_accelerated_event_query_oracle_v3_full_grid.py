@@ -8,6 +8,7 @@ import json
 import math
 import os
 import subprocess
+import statistics
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -15,6 +16,9 @@ from typing import Any
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_finalizer import (
     EVENT_RELATION_SCHEMA,
     UNIT_LABEL_SCHEMA,
+)
+from garc_eval.accelerated_event_query.oracle_v3_full_grid_control import (
+    _read_jsonl,
 )
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_manifest import (
     EXPECTED_FRAME_OCCURRENCES,
@@ -38,6 +42,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_manifest import (
 )
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_package import (
     BASE,
+    EXECUTION,
     PACKAGE,
     ROOT,
 )
@@ -60,6 +65,7 @@ from garc_eval.accelerated_event_query.oracle_v3_manifest import (
     canonical_hash,
     load_json,
     sha256_file,
+    validate_payload_hash,
     write_json_once,
 )
 from garc_eval.accelerated_event_query.oracle_protocol import rgb_content_hash
@@ -75,6 +81,8 @@ MODEL_MANIFEST = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/M
 MODEL_AUDIT = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/MODEL_IDENTITY_AUDIT_V1.json"
 V2_DECISION = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/TARGETED_PILOT_DECISION_V2.json"
 V2_EVIDENCE = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/PILOT_EVIDENCE_MANIFEST_V2.json"
+PRIOR_FAILED_EXECUTION = BASE / "full_grid_execution_staged"
+PRIOR_FAILED_SEAL_SHA256 = "5136aaddfc5e7daee691c9faaab323f3159db6d52a469fade45fce6719847134"
 
 
 GPU_PAIRS = EXPECTED_GPU_PAIRS
@@ -92,6 +100,298 @@ def binding(path: Path) -> dict[str, Any]:
 def self_hash(value: dict[str, Any], field: str) -> dict[str, Any]:
     value[field] = canonical_hash(value)
     return value
+
+
+def _prior_failure_evidence() -> dict[str, Any]:
+    """Authenticate the failed run that falsified the former call bound.
+
+    These records are revision evidence only.  Their labels are never copied
+    into the new execution and cannot satisfy any complete-run release gate.
+    """
+
+    state_path = PRIOR_FAILED_EXECUTION / "GLOBAL_EXECUTION_STATE.json"
+    intent_path = PRIOR_FAILED_EXECUTION / "GLOBAL_FAIL_STOP_INTENT.json"
+    global_ledger_path = PRIOR_FAILED_EXECUTION / "GLOBAL_EXECUTION_LEDGER.jsonl"
+    activation_path = PRIOR_FAILED_EXECUTION / "STAGED_ACTIVATION_LEDGER.jsonl"
+    attempt_path = (
+        PRIOR_FAILED_EXECUTION
+        / "attempt_ledgers/V3_FULL_GRID_DALI.jsonl"
+    )
+    initialization_path = PRIOR_FAILED_EXECUTION / "INITIALIZATION_AUDIT.json"
+    launch_authority_path = (
+        PRIOR_FAILED_EXECUTION / "SUPERVISOR_LAUNCH_AUTHORITY.json"
+    )
+    prior_package = BASE / "full_grid_preregistration_staged"
+    prior_seal_path = prior_package / "FULL_GRID_EXECUTION_SEAL.json"
+    prior_approval_path = prior_package / "FULL_GRID_COMPUTE_APPROVAL.json"
+    prior_package_manifest_path = prior_package / "FULL_GRID_PACKAGE_MANIFEST.json"
+    prior_review_bundle_path = prior_package / "FULL_GRID_REVIEW_BUNDLE.json"
+    required = [
+        state_path,
+        intent_path,
+        global_ledger_path,
+        activation_path,
+        attempt_path,
+        initialization_path,
+        launch_authority_path,
+        prior_seal_path,
+        prior_approval_path,
+        prior_package_manifest_path,
+        prior_review_bundle_path,
+    ]
+    if any(not path.is_file() for path in required):
+        raise RuntimeError("prior failed execution evidence is incomplete")
+    state = load_json(state_path)
+    intent = load_json(intent_path)
+    ledger = _read_jsonl(global_ledger_path)
+    activation_rows = _read_jsonl(activation_path)
+    attempt_rows = _read_jsonl(attempt_path)
+    completed = [row for row in ledger if row.get("event") == "CALL_COMPLETED"]
+    reserved = [row for row in ledger if row.get("event") == "CALL_RESERVED"]
+    raw_paths = sorted((PRIOR_FAILED_EXECUTION / "raw/DALI").glob("*.json"))
+    formal_forbidden = [
+        PRIOR_FAILED_EXECUTION / "unit_labels.parquet",
+        PRIOR_FAILED_EXECUTION / "k3_model_relative_event_relation.parquet",
+        PRIOR_FAILED_EXECUTION / "FORMAL_REFERENCE_RELEASE.json",
+    ]
+    expected_detail = "call:DALI_u0136:elapsed=23.754265:limit=23.579961"
+    load_start_ns = next(
+        row["residency_clock_started_unix_ns"]
+        for row in ledger if row.get("event") == "MODEL_LOAD_STARTED"
+    )
+    stop_ns = next(
+        row["recorded_at_unix_ns"]
+        for row in ledger if row.get("event") == "GLOBAL_FAIL_STOP"
+    )
+    load_start_through_stop_gpu_seconds = 2.0 * (stop_ns - load_start_ns) / 1e9
+    termination_grace_wall_seconds = 5.0
+    conservative_usage_gpu_seconds = (
+        load_start_through_stop_gpu_seconds + 2.0 * termination_grace_wall_seconds
+    )
+    initialization = load_json(initialization_path)
+    launch_authority = load_json(launch_authority_path)
+    prior_seal = load_json(prior_seal_path)
+    prior_approval = load_json(prior_approval_path)
+    validate_payload_hash(prior_seal, "execution_seal_payload_sha256")
+    validate_payload_hash(
+        load_json(prior_package_manifest_path), "package_manifest_payload_sha256"
+    )
+    validate_payload_hash(
+        load_json(prior_review_bundle_path), "review_bundle_payload_sha256"
+    )
+    validate_payload_hash(initialization, "initialization_payload_sha256")
+    validate_payload_hash(launch_authority, "supervisor_authority_payload_sha256")
+    raw_records = [load_json(path) for path in raw_paths]
+    raw_records_self_hash = all(
+        record.get("record_payload_sha256") == canonical_hash({
+            key: value
+            for key, value in record.items()
+            if key != "record_payload_sha256"
+        })
+        for record in raw_records
+    )
+    if not all((
+        state.get("status") == "STOPPED",
+        state.get("execution_seal_sha256") == PRIOR_FAILED_SEAL_SHA256,
+        state.get("stop_trigger") == "cost_envelope_exceeded",
+        state.get("stop_detail") == f"stop_intent:{expected_detail}",
+        intent.get("trigger") == "cost_envelope_exceeded",
+        intent.get("detail") == expected_detail,
+        len(completed) == 136,
+        len(reserved) == 137,
+        reserved[-1].get("unit_id") == "DALI_u0136",
+        len(raw_paths) == 136,
+        all(record.get("parse_status") == "ok" for record in raw_records),
+        all(
+            record.get("execution_seal_sha256") == PRIOR_FAILED_SEAL_SHA256
+            for record in raw_records
+        ),
+        raw_records_self_hash,
+        len([row for row in attempt_rows if row.get("event") == "INFERENCE_STARTED"]) == 137,
+        len([row for row in attempt_rows if row.get("event") == "INFERENCE_COMPLETED"]) == 136,
+        len([row for row in attempt_rows if row.get("event") == "ACCEPTED"]) == 136,
+        activation_rows[0].get("event") == "WORKER_PENDING_GPU_AUTHENTICATION",
+        initialization.get("execution_seal_sha256") == PRIOR_FAILED_SEAL_SHA256,
+        launch_authority.get("execution_seal_sha256") == PRIOR_FAILED_SEAL_SHA256,
+        prior_seal.get("execution_seal_payload_sha256") is not None,
+        sha256_file(prior_seal_path) == PRIOR_FAILED_SEAL_SHA256,
+        prior_approval.get("execution_seal_sha256") == PRIOR_FAILED_SEAL_SHA256,
+        not any(path.exists() for path in formal_forbidden),
+    )):
+        raise RuntimeError("prior failed execution identity or accounting changed")
+    completed_ids = {row["unit_id"] for row in completed}
+    raw_ids = {load_json(path)["unit_id"] for path in raw_paths}
+    if raw_ids != completed_ids:
+        raise RuntimeError("prior failed execution raw/completed membership mismatch")
+    return self_hash({
+        "status": "AUTHENTICATED_INCOMPLETE_PRIOR_RUN_REVISION_EVIDENCE_ONLY",
+        "prior_execution_root": str(PRIOR_FAILED_EXECUTION.relative_to(ROOT)),
+        "prior_execution_seal_sha256": PRIOR_FAILED_SEAL_SHA256,
+        "stop_trigger": state["stop_trigger"],
+        "stop_detail": state["stop_detail"],
+        "completed_call_count": len(completed),
+        "attempted_call_count": len(reserved),
+        "uncertain_terminal_unit_id": "DALI_u0136",
+        "model_load_count": len(state.get("model_load_workers", [])),
+        "coordinator_accounted_gpu_seconds_lower_bound": state["actual_gpu_seconds"],
+        "coordinator_accounted_a100_gpu_hours_lower_bound": state["actual_gpu_seconds"] / 3600.0,
+        "load_start_through_global_stop_gpu_seconds": load_start_through_stop_gpu_seconds,
+        "load_start_through_global_stop_a100_gpu_hours": load_start_through_stop_gpu_seconds / 3600.0,
+        "termination_grace_wall_seconds": termination_grace_wall_seconds,
+        "conservative_usage_upper_bound_gpu_seconds": conservative_usage_gpu_seconds,
+        "conservative_usage_upper_bound_a100_gpu_hours": conservative_usage_gpu_seconds / 3600.0,
+        "strict_parse_completed_raw_count": sum(
+            record.get("parse_status") == "ok" for record in raw_records
+        ),
+        "formal_reference_artifacts_present": False,
+        "reuse_in_new_execution": "FORBIDDEN; fresh execution starts at unit 0",
+        "bindings": [binding(path) for path in required],
+        "raw_output_bindings": [binding(path) for path in raw_paths],
+    }, "prior_failure_evidence_payload_sha256")
+
+
+def _call_reservation_derivation(
+    processor: Any,
+    prior_failure: dict[str, Any],
+) -> dict[str, Any]:
+    """Derive the prospective hard bound from pre-revision physical evidence."""
+
+    from scipy.stats import t as student_t
+
+    raw_paths = sorted((PRIOR_FAILED_EXECUTION / "raw/DALI").glob("*.json"))
+    global_rows = [
+        json.loads(line)
+        for line in (
+            PRIOR_FAILED_EXECUTION / "GLOBAL_EXECUTION_LEDGER.jsonl"
+        ).read_text(encoding="utf-8").splitlines()
+    ]
+    completed = {
+        row["unit_id"]: row
+        for row in global_rows if row.get("event") == "CALL_COMPLETED"
+    }
+    observations = []
+    for path in raw_paths:
+        record = load_json(path)
+        runtime = record["runtime"]
+        reconstructed_tokens = len(
+            processor.tokenizer.encode(record["raw"], add_special_tokens=False)
+        )
+        accounted = float(completed[record["unit_id"]]["accounted_wall_seconds"])
+        inference = float(runtime["inference_seconds"])
+        pre_persistence = float(runtime["pre_persistence_call_seconds"])
+        observations.append({
+            "unit_id": record["unit_id"],
+            "reconstructed_decoded_response_tokens": reconstructed_tokens,
+            "inference_seconds": inference,
+            "pre_persistence_call_seconds": pre_persistence,
+            "accounted_wall_seconds": accounted,
+            "noninference_pre_persistence_seconds": pre_persistence - inference,
+            "post_persistence_coordinator_seconds": accounted - pre_persistence,
+        })
+    xs = [row["reconstructed_decoded_response_tokens"] for row in observations]
+    ys = [row["inference_seconds"] for row in observations]
+    x_mean = statistics.mean(xs)
+    y_mean = statistics.mean(ys)
+    slope = sum(
+        (x - x_mean) * (y - y_mean) for x, y in zip(xs, ys)
+    ) / sum((x - x_mean) ** 2 for x in xs)
+    intercept = y_mean - slope * x_mean
+    predictions = [intercept + slope * x for x in xs]
+    residuals = [y - predicted for y, predicted in zip(ys, predictions)]
+    r_squared = 1.0 - (
+        sum(value * value for value in residuals)
+        / sum((value - y_mean) ** 2 for value in ys)
+    )
+    token_cap_prediction = intercept + slope * 192
+    max_positive_residual = max(residuals)
+    max_noninference = max(
+        row["noninference_pre_persistence_seconds"] for row in observations
+    )
+    max_post = max(
+        row["post_persistence_coordinator_seconds"] for row in observations
+    )
+    evidence_based_floor = (
+        token_cap_prediction + max_positive_residual + max_noninference + max_post
+    )
+    residual_standard_error = math.sqrt(
+        sum(value * value for value in residuals) / (len(xs) - 2)
+    )
+    sxx = sum((x - x_mean) ** 2 for x in xs)
+    prediction_standard_error = residual_standard_error * math.sqrt(
+        1.0 + 1.0 / len(xs) + (192 - x_mean) ** 2 / sxx
+    )
+    familywise_alpha = 0.01
+    familywise_comparison_count = EXPECTED_UNIT_COUNT
+    bonferroni_t_critical = float(student_t.ppf(
+        1.0 - familywise_alpha / (2.0 * familywise_comparison_count),
+        len(xs) - 2,
+    ))
+    familywise_inference_upper = (
+        token_cap_prediction
+        + bonferroni_t_critical * prediction_standard_error
+    )
+    familywise_total_upper = (
+        familywise_inference_upper + max_noninference + max_post
+    )
+    governing_floor = max(evidence_based_floor, familywise_total_upper)
+    margin = CALL_RESERVATION_WALL_SECONDS - governing_floor
+    aggregate_hard = 2 * (
+        EXPECTED_UNIT_COUNT * CALL_RESERVATION_WALL_SECONDS
+        + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
+        + 3 * LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
+    ) / 3600.0
+    prior_conservative_usage = prior_failure[
+        "conservative_usage_upper_bound_a100_gpu_hours"
+    ]
+    cumulative_authorized_upper = (
+        prior_conservative_usage + ENVELOPE_A100_GPU_HOURS
+    )
+    if not all((
+        len(observations) == 136,
+        margin > 0.0,
+        aggregate_hard <= ENVELOPE_A100_GPU_HOURS,
+        cumulative_authorized_upper < 64.0,
+    )):
+        raise RuntimeError("revised call reservation derivation is not conservative")
+    return self_hash({
+        "status": "FROZEN_PROSPECTIVE_REVISION_BEFORE_FRESH_EXECUTION",
+        "prior_failure_evidence_payload_sha256": prior_failure[
+            "prior_failure_evidence_payload_sha256"
+        ],
+        "completed_observation_count": len(observations),
+        "frozen_generation_max_new_tokens": 192,
+        "decoded_response_token_count_min": min(xs),
+        "decoded_response_token_count_mean": x_mean,
+        "decoded_response_token_count_max": max(xs),
+        "inference_seconds_mean": y_mean,
+        "inference_seconds_max": max(ys),
+        "ols_intercept_seconds": intercept,
+        "ols_seconds_per_reconstructed_token": slope,
+        "ols_r_squared": r_squared,
+        "predicted_inference_seconds_at_192_tokens": token_cap_prediction,
+        "maximum_positive_inference_residual_seconds": max_positive_residual,
+        "maximum_observed_noninference_pre_persistence_seconds": max_noninference,
+        "maximum_observed_post_persistence_coordinator_seconds": max_post,
+        "maximum_residual_empirical_floor_seconds": evidence_based_floor,
+        "prediction_residual_standard_error_seconds": residual_standard_error,
+        "prediction_standard_error_at_192_tokens_seconds": prediction_standard_error,
+        "bonferroni_familywise_alpha": familywise_alpha,
+        "bonferroni_comparison_count": familywise_comparison_count,
+        "bonferroni_t_critical": bonferroni_t_critical,
+        "bonferroni_familywise_inference_upper_seconds": familywise_inference_upper,
+        "bonferroni_familywise_total_upper_seconds": familywise_total_upper,
+        "governing_evidence_based_floor_seconds": governing_floor,
+        "revised_per_call_hard_reservation_wall_seconds": CALL_RESERVATION_WALL_SECONDS,
+        "absolute_safety_margin_seconds": margin,
+        "relative_safety_margin_over_floor": margin / governing_floor,
+        "full_grid_all_operations_hard_bound_a100_gpu_hours": aggregate_hard,
+        "fresh_formal_execution_envelope_a100_gpu_hours": ENVELOPE_A100_GPU_HOURS,
+        "overall_user_authorization_a100_gpu_hours": 64.0,
+        "prior_failed_run_conservative_usage_upper_bound_a100_gpu_hours": prior_conservative_usage,
+        "prior_plus_fresh_formal_envelope_a100_gpu_hours": cumulative_authorized_upper,
+        "interpretation": "runtime extrapolation selects a prospective safety bound only; prior labels are not reused and label/schema/inputs are unchanged",
+        "observations": observations,
+    }, "call_reservation_derivation_payload_sha256")
 
 
 def _contact_sheet(frames: list[dict[str, Any]], destination: Path, title: str) -> None:
@@ -248,11 +548,11 @@ post-load process fault prevents every worker from issuing another
 `INFERENCE_STARTED` event. Already-started calls may terminate and all raw and
 ledger evidence is preserved.
 
-The original approval permits exactly three uninterrupted model loads and no
-post-load restart. A continuation is a new experiment: authenticated completed
-records may be proposed for reuse, but any call with a durable start and no
-terminal record remains uncertain and cannot be retried without explicit new
-retry authority.
+This execution permits exactly three uninterrupted model loads and no post-load
+restart. The earlier failed execution is immutable revision evidence only: none
+of its 136 completed labels may be reused, and this fresh execution starts from
+unit zero. Any call with a durable start and no terminal record remains
+uncertain and cannot be retried within this execution.
 
 Any missing, failed, uncertain, extra, retried, unauthenticated, or cost-invalid
 run is incomplete. It produces `INSUFFICIENT_EVIDENCE` or the higher-priority
@@ -318,6 +618,17 @@ def main() -> None:
     processor = load_frozen_processor(model_path)
     processor_class = f"{processor.__class__.__module__}.{processor.__class__.__qualname__}"
     processor_environment = runtime_environment_identity()
+    prior_failure = _prior_failure_evidence()
+    write_json_once(
+        PACKAGE / "FULL_GRID_PRIOR_FAILURE_EVIDENCE.json", prior_failure
+    )
+    call_reservation_derivation = _call_reservation_derivation(
+        processor, prior_failure
+    )
+    write_json_once(
+        PACKAGE / "FULL_GRID_CALL_RESERVATION_DERIVATION.json",
+        call_reservation_derivation,
+    )
     prompt = PROMPT.read_text(encoding="utf-8")
     v2_decision = load_json(V2_DECISION)
     v2_evidence = load_json(V2_EVIDENCE)
@@ -559,6 +870,12 @@ def main() -> None:
         "mean_2fps_call_wall_seconds": mean_call,
         "observed_preflight_load_seconds": observed_loads,
         "per_call_hard_reservation_wall_seconds": CALL_RESERVATION_WALL_SECONDS,
+        "call_reservation_derivation": binding(
+            PACKAGE / "FULL_GRID_CALL_RESERVATION_DERIVATION.json"
+        ),
+        "prior_failed_execution_evidence": binding(
+            PACKAGE / "FULL_GRID_PRIOR_FAILURE_EVIDENCE.json"
+        ),
         "per_load_hard_reservation_wall_seconds": MODEL_LOAD_RESERVATION_WALL_SECONDS,
         "post_session_process_exit_lease_wall_seconds_per_worker": LOADED_WORKER_IDLE_LEASE_SECONDS,
         "per_loaded_worker_reusable_emergency_reservation_wall_seconds": LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS,
@@ -625,7 +942,7 @@ def main() -> None:
         "evaluator_directory_mode": "0700",
         "evaluator_file_mode": "0600",
         "required_runtime_effective_capabilities_hex": "0000000000000000",
-        "evaluator_output_root": str((BASE / "full_grid_execution_staged").relative_to(ROOT)),
+        "evaluator_output_root": str(EXECUTION.relative_to(ROOT)),
         "runtime_mount_rule": "the evaluator output root must be absent from the runtime controller container mount namespace",
         "runtime_entry_gate": "assert_runtime_os_isolation must pass under UID/GID 65534 before any later controller/replay episode",
         "same_uid_runtime_forbidden": True,
@@ -773,6 +1090,12 @@ def main() -> None:
         "processed_input_manifest": binding(PACKAGE / "FULL_GRID_PROCESSED_INPUT_MANIFEST.json"),
         "worker_schedule": binding(PACKAGE / "FULL_GRID_WORKER_SCHEDULE.json"),
         "cost_estimate": binding(PACKAGE / "FULL_GRID_COST_ESTIMATE.json"),
+        "call_reservation_derivation": binding(
+            PACKAGE / "FULL_GRID_CALL_RESERVATION_DERIVATION.json"
+        ),
+        "prior_failed_execution_evidence": binding(
+            PACKAGE / "FULL_GRID_PRIOR_FAILURE_EVIDENCE.json"
+        ),
         "decision_mapping": binding(PACKAGE / "FULL_GRID_DECISION_MAPPING.json"),
         "output_schemas": binding(PACKAGE / "FULL_GRID_OUTPUT_SCHEMAS.json"),
         "tail_unit_audit": binding(PACKAGE / "FULL_GRID_TAIL_UNIT_AUDIT.md"),
@@ -812,6 +1135,16 @@ def main() -> None:
             "test_count": 94,
             "semantic_disagreement_role": "construct-validity diagnostic only; never a model-relative label gate",
             "nonclaims": ["representative three-video adequacy", "human driving accuracy", "full-grid pass", "controller validation"],
+        },
+        "prior_formal_execution_evidence": {
+            "status": "INCOMPLETE_FAIL_STOP_REVISION_EVIDENCE_ONLY",
+            "binding": bindings["prior_failed_execution_evidence"],
+            "completed_calls": 136,
+            "attempted_calls": 137,
+            "failed_unit": "DALI_u0136",
+            "partial_labels_reused": False,
+            "formal_reference_published": False,
+            "interpretation": "the first run falsified only the 23.579961-second call reservation; it does not alter labels, inputs, schema, checkpoint, or grid",
         },
         "authoritative_schema": {
             "authoritative_fields": ["label"],
@@ -867,6 +1200,8 @@ def main() -> None:
             "partial_raw_preserved": True,
             "partial_formal_reference_forbidden": True,
             "downstream_forbidden_until_release_commit": True,
+            "prior_failed_execution_labels_reused": False,
+            "fresh_execution_starts_from_unit_ordinal": 0,
         },
         "cost": {
             "estimated_a100_gpu_hours": estimated,

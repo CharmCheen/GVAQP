@@ -329,3 +329,37 @@
   every internal locked stop resolve the authoritative trigger/detail from
   the validated first write-once intent before persisting state or ledger.
 - Status: `REVISED_AFTER_FIRST_CAUSE_COUNTEREXAMPLE; 150_LOCAL_TESTS_PASS; NEW_EXACT_PACKAGE_REVIEW_REQUIRED`.
+
+## H24 — The original per-call hard reservation represented the full generation tail
+
+- Prediction: every legal frozen call, including a 192-token response, finishes
+  within `23.579961` wall seconds from reservation through durable acceptance.
+- Observation: falsified on the 137th formal attempt. `DALI_u0136` remained in
+  generation at `23.754265` seconds and triggered the preregistered fail-stop.
+  The preceding 136 calls had already reached `23.304528` seconds.
+- Competing explanation: the unit hung. This is not supported by the available
+  evidence: generation had run for 22.129 seconds versus a completed maximum of
+  21.621 seconds, and response-token count explains most inference-time variance
+  (R² 0.942). The failed call was killed before a terminal model result could
+  distinguish a long response from a hang, so that residual uncertainty remains.
+- Status: `REJECTED_BY_FORMAL_EXECUTION`.
+
+## H25 — A token-cap-aware hard reservation can retain fail-closed cost safety
+
+- Prediction: a preregistered call bound derived from the frozen 192-token cap,
+  observed token/runtime slope, decode/persistence overhead, and explicit safety
+  margin admits ordinary long-tail calls while the sum of all 1,475 hard call
+  reservations, three loads, and emergency tails remains below a newly sealed
+  full-grid envelope and the overall 64 A100-hour authorization.
+- Falsification: the derived hard envelope does not fit the authorization, a
+  no-inference fault test permits physical cost to cross it, independent review
+  finds post-hoc outcome adaptation, or a fresh call exceeds the new limit.
+- Competing explanation: a separate high watchdog with only actual aggregate
+  accounting would consume less prospective budget, but loses the existing
+  deterministic all-calls worst-case proof. Prefer the smallest revision that
+  preserves that proof unless review shows it is unnecessarily coupled.
+- Status: `SUPPORTED_BY_CALIBRATION_AND_153_LOCAL_TESTS; EXACT_PACKAGE_REVIEW_REQUIRED`.
+  The 35.0-second bound exceeds a 99% Bonferroni family-wise total-call upper
+  prediction of 32.263114 seconds by 2.736886 seconds. Its all-operations hard
+  cost is 28.743889 A100 GPU-hours; adding the prior failure's conservative
+  1.444388-hour upper bound remains below the user's 64-hour authorization.

@@ -13,9 +13,13 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_control import (
 )
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_supervisor import (
     WorkerProcess,
+    _lease_violation,
     _loaded_worker_idle_violation,
     supervise_staged_workers,
     supervise_workers,
+)
+from garc_eval.accelerated_event_query.oracle_v3_full_grid_runner import (
+    CALL_RESERVATION_WALL_SECONDS,
 )
 from garc_eval.accelerated_event_query.oracle_v3_manifest import atomic_text
 
@@ -34,6 +38,32 @@ class FakeProcess:
 
     def poll(self):
         return self.returncode
+
+
+def test_production_call_lease_has_exact_35_second_boundary(tmp_path):
+    coordinator = GlobalFailStopCoordinator(
+        tmp_path,
+        execution_seal_sha256="s" * 64,
+        worker_bindings=WORKERS,
+        envelope_a100_gpu_hours=29.0,
+        call_reservation_wall_seconds=CALL_RESERVATION_WALL_SECONDS,
+        model_load_reservation_wall_seconds=30.0,
+    )
+    coordinator.initialize()
+    coordinator.start_model_load("W0", [1, 2])
+    coordinator.complete_model_load("W0", 0.01)
+    coordinator.reserve_call(
+        worker_id="W0", gpu_pair=[1, 2], unit_id="U0", call_spec_sha256="a"
+    )
+    reserved = _read_jsonl(tmp_path / "GLOBAL_EXECUTION_LEDGER.jsonl")[-1][
+        "recorded_at_unix_ns"
+    ]
+    exact = reserved + int(CALL_RESERVATION_WALL_SECONDS * 1e9)
+    assert _lease_violation(tmp_path, exact) is None
+    violation = _lease_violation(tmp_path, exact + 1)
+    assert violation is not None
+    assert violation.startswith("call:U0:")
+    assert "limit=35.000000" in violation
 
 
 def test_abrupt_worker_death_stops_peers_before_another_reservation(

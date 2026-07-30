@@ -13,6 +13,18 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_finalizer import (
     decide,
 )
 from garc_eval.accelerated_event_query.oracle_v3_manifest import canonical_hash
+from garc_eval.accelerated_event_query.oracle_v3_full_grid_manifest import (
+    EXPECTED_UNIT_COUNT,
+    unit_output_path,
+    unit_parsed_path,
+)
+from garc_eval.accelerated_event_query.oracle_v3_full_grid_package import EXECUTION
+from garc_eval.accelerated_event_query.oracle_v3_full_grid_runner import (
+    CALL_RESERVATION_WALL_SECONDS,
+    ENVELOPE_A100_GPU_HOURS,
+    LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS,
+    MODEL_LOAD_RESERVATION_WALL_SECONDS,
+)
 
 
 def mapping():
@@ -44,6 +56,28 @@ def passing_metrics():
 
 def test_formal_pass_requires_every_frozen_gate():
     assert decide(passing_metrics(), mapping()) == "FULL_GRID_PASS_REFERENCE_RELEASED"
+
+
+def test_revised_call_reservation_and_fresh_root_are_internally_bound():
+    aggregate_hard_bound = 2 * (
+        EXPECTED_UNIT_COUNT * CALL_RESERVATION_WALL_SECONDS
+        + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
+        + 3 * LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
+    ) / 3600.0
+    assert CALL_RESERVATION_WALL_SECONDS == 35.0
+    assert aggregate_hard_bound == pytest.approx(28.74388888888889)
+    assert aggregate_hard_bound < ENVELOPE_A100_GPU_HOURS == 29.0
+    assert EXECUTION.name == "full_grid_execution_staged_v2_call_reservation"
+    assert EXECUTION.name in unit_output_path("DALI", "DALI_u0000")
+    assert EXECUTION.name in unit_parsed_path("DALI", "DALI_u0000")
+
+
+def test_finalizer_uses_revised_exact_cost_envelope():
+    metrics = passing_metrics()
+    metrics["actual_a100_gpu_hours"] = ENVELOPE_A100_GPU_HOURS
+    assert decide(metrics, mapping()) == "FULL_GRID_PASS_REFERENCE_RELEASED"
+    metrics["actual_a100_gpu_hours"] = ENVELOPE_A100_GPU_HOURS + 1e-9
+    assert decide(metrics, mapping()) == "FULL_GRID_ABORTED_RUNTIME"
 
 
 def test_parse_failure_has_zero_release_tolerance():

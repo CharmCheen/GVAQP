@@ -355,3 +355,48 @@ state/ledger STOP transition now resolves its authoritative trigger and detail
 from the first valid durable intent; malformed intent resolves fail-closed to
 `integrity_mismatch`. Source-level adversarial replay and 150 local tests pass;
 zero formal calls exist.
+
+## First formal execution — preserved fail-stop evidence
+
+The independently accepted staged seal
+`5136aaddfc5e7daee691c9faaab323f3159db6d52a469fade45fce6719847134`
+started only the authenticated DALI worker on physical GPUs `(2,6)`. It loaded
+the frozen checkpoint exactly once and durably completed 136 calls with 136/136
+strict parses (116 `not_relevant`, 20 `relevant`, no `unknown` or
+`parse_failure`). The 137th and final attempted unit was `DALI_u0136`.
+
+The sealed global supervisor then correctly stopped the entire execution at
+`23.754265` seconds because the call's hard reservation was only `23.579961`
+seconds. The first durable stop intent is
+`cost_envelope_exceeded / call:DALI_u0136`; state and global ledger agree.
+Exactly 136 raw outputs remain physical evidence, but no formal unit-label
+table, K3 reference, release pointer, or downstream result was produced.
+All model processes exited and GPUs 2/6 were released. Coordinator-accounted
+usage was a lower bound of `5142.251542078002` GPU-seconds = `1.4284032061`
+A100 GPU-hours because the in-flight call had no completion boundary. Load
+start through global STOP was `1.4416100988` A100 GPU-hours; adding the sealed
+five-second termination grace yields a conservative project-accounting upper
+bound of `1.4443878766` A100 GPU-hours.
+
+Forensic evidence rejects aggregate budget exhaustion: only 7.36% of the
+19.4-hour envelope had been consumed. Instead, the operation cap had only
+0.275433 seconds of headroom over the maximum of the 136 completed calls
+(23.304528 seconds). `DALI_u0136` had spent 1.629 seconds preparing input and
+22.129 seconds in generation when terminated, which is consistent with an
+ordinary long generation rather than a demonstrated hang. CPU tokenization of
+the 136 preserved responses found 76–143 generated tokens; inference time was
+strongly associated with token count (OLS R² 0.942), and extrapolation to the
+frozen 192-token maximum predicts about 28.257 seconds of inference before
+decode/persistence overhead. The current decision is therefore
+`REVISE_FULL_GRID_PREREGISTRATION`, not resume or partial acceptance.
+
+Next action: preserve this failed execution immutably; revise the per-call hard
+reservation to a conservative token-cap-aware value while retaining continuous
+aggregate cost accounting and global fail-stop; rebuild under a new execution
+ID/seal; rerun all no-inference tests and independent adversarial review; then
+start a fresh 1,475/1,475 execution within the user's 64 A100-hour authorization.
+The selected prospective bound is 35.0 seconds: a 99% Bonferroni family-wise
+linear prediction upper bound is 32.263114 seconds including maximum observed
+non-inference and persistence overhead, leaving 2.736886 seconds (8.48%). The
+all-operations hard bound is 28.743889 A100 GPU-hours under a 29.0-hour fresh
+envelope; prior conservative use plus that envelope is 30.444388 < 64.

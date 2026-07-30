@@ -17,6 +17,7 @@ from .oracle_v3_full_grid_hiding import (
     secure_evaluator_directory,
 )
 from .oracle_v3_full_grid_package import DECISIONS, EXECUTION, PACKAGE
+from .oracle_v3_full_grid_runner import ENVELOPE_A100_GPU_HOURS
 from .oracle_v3_manifest import (
     atomic_text, canonical_hash, load_json, sha256_file, validate_payload_hash,
 )
@@ -108,7 +109,10 @@ def decide(metrics: dict[str, Any], mapping: dict[str, Any]) -> str:
         return "INSUFFICIENT_EVIDENCE"
     if metrics.get("reload_count") != 0 or metrics.get("retry_count") != 0:
         return "FULL_GRID_ABORTED_RUNTIME"
-    if metrics.get("model_load_count") != 3 or metrics.get("actual_a100_gpu_hours", 1e9) > 19.4:
+    if (
+        metrics.get("model_load_count") != 3
+        or metrics.get("actual_a100_gpu_hours", 1e9) > ENVELOPE_A100_GPU_HOURS
+    ):
         return "FULL_GRID_ABORTED_RUNTIME"
     if metrics.get("parse_status_counts", {}).get("parse_failure", 0) != 0:
         return "FULL_GRID_FAILED_PROTOCOL"

@@ -26,6 +26,7 @@ from .oracle_v3_full_grid_package import (
     ROOT,
     validate_execution_seal,
 )
+from .oracle_v3_full_grid_runner import ENVELOPE_A100_GPU_HOURS
 from .oracle_v3_manifest import canonical_hash, load_json, sha256_file, validate_payload_hash
 from .oracle_v3_parser import parse_oracle_v3_response
 
@@ -459,7 +460,8 @@ def analyze_execution(
         not global_state.get("loaded_worker_emergency_reservation_workers", ["missing"]),
         abs(float(global_state.get("reserved_gpu_seconds", float("inf")))) <= 1e-9,
         global_state.get("stop_trigger") is None,
-        float(global_state.get("actual_gpu_seconds", float("inf"))) <= 19.4 * 3600,
+        float(global_state.get("actual_gpu_seconds", float("inf")))
+        <= ENVELOPE_A100_GPU_HOURS * 3600,
         bool(global_events) and global_events[-1].get("event") == "PHYSICAL_CALLS_COMPLETE",
         supervisor_pass,
         initialization_pass,

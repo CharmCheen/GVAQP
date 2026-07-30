@@ -27,6 +27,11 @@ from .oracle_v3_full_grid_supervisor import (
     supervise_workers,
 )
 from .oracle_v3_full_grid_package import DECISIONS, PACKAGE, SCHEDULE, SEAL, UNITS
+from .oracle_v3_full_grid_runner import (
+    CALL_RESERVATION_WALL_SECONDS,
+    ENVELOPE_A100_GPU_HOURS,
+    MODEL_LOAD_RESERVATION_WALL_SECONDS,
+)
 from .oracle_v3_manifest import atomic_text, canonical_hash, load_json, sha256_file
 
 
@@ -123,9 +128,9 @@ def run_complete_mock(execution_root: Path) -> dict[str, Any]:
         worker_bindings={worker_id: {
             "physical_gpu_ids": row["physical_gpu_ids"], "unit_ids": row["unit_ids"]
         } for worker_id, row in workers.items()},
-        envelope_a100_gpu_hours=19.4,
-        call_reservation_wall_seconds=23.579961206763983,
-        model_load_reservation_wall_seconds=30.0,
+        envelope_a100_gpu_hours=ENVELOPE_A100_GPU_HOURS,
+        call_reservation_wall_seconds=CALL_RESERVATION_WALL_SECONDS,
+        model_load_reservation_wall_seconds=MODEL_LOAD_RESERVATION_WALL_SECONDS,
     )
     coordinator.initialize()
     all_gpu_ids = sorted({
@@ -263,7 +268,9 @@ def run_fault_injections(root: Path) -> dict[str, Any]:
     seal_sha = sha256_file(SEAL)
     workers = {row["worker_id"]: row for row in schedule["workers"]}
 
-    def make(name: str, envelope: float = 19.4) -> GlobalFailStopCoordinator:
+    def make(
+        name: str, envelope: float = ENVELOPE_A100_GPU_HOURS
+    ) -> GlobalFailStopCoordinator:
         return GlobalFailStopCoordinator(
             root / name,
             execution_seal_sha256=seal_sha,
@@ -271,8 +278,8 @@ def run_fault_injections(root: Path) -> dict[str, Any]:
                 "physical_gpu_ids": row["physical_gpu_ids"], "unit_ids": row["unit_ids"]
             } for worker_id, row in workers.items()},
             envelope_a100_gpu_hours=envelope,
-            call_reservation_wall_seconds=23.579961206763983,
-            model_load_reservation_wall_seconds=30.0,
+            call_reservation_wall_seconds=CALL_RESERVATION_WALL_SECONDS,
+            model_load_reservation_wall_seconds=MODEL_LOAD_RESERVATION_WALL_SECONDS,
         )
 
     results: dict[str, bool] = {}
