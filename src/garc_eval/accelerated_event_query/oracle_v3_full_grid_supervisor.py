@@ -303,9 +303,16 @@ def supervise_staged_workers(
             "physical_gpu_ids": rows[worker_id]["physical_gpu_ids"],
         })
     try:
-        activation_snapshots[initial_worker_id] = authenticate(
-            rows[initial_worker_id]["physical_gpu_ids"]
-        )
+        try:
+            activation_snapshots[initial_worker_id] = authenticate(
+                rows[initial_worker_id]["physical_gpu_ids"]
+            )
+        except Exception as exc:
+            detail = f"initial_pair_authentication:{initial_worker_id}:{exc}"
+            emergency_global_stop(
+                execution_root, "authentication_mismatch", detail
+            )
+            raise RuntimeError(detail) from exc
         append_hash_chain(activation_ledger, {
             "event": "WORKER_PAIR_AUTHENTICATED",
             "worker_id": initial_worker_id,
@@ -424,8 +431,15 @@ def supervise_staged_workers(
             "activation_snapshots": activation_snapshots,
             "execution_seal_sha256": state["execution_seal_sha256"],
         }
-    except BaseException:
-        _terminate_all(list(active.values()))
+    except BaseException as exc:
+        try:
+            emergency_global_stop(
+                execution_root,
+                "post_load_process_fault",
+                f"staged_supervisor:{type(exc).__name__}:{exc}",
+            )
+        finally:
+            _terminate_all(list(active.values()))
         raise
 
 

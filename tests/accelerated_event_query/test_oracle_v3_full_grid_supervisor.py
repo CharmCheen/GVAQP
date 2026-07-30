@@ -160,6 +160,87 @@ def test_staged_supervisor_marks_pending_and_activates_only_after_pair_authentic
     assert sum(row["event"] == "WORKER_PENDING_GPU_AUTHENTICATION" for row in events) == 3
 
 
+def test_staged_initial_pair_race_fails_global_state_closed(tmp_path):
+    rows = [
+        {"worker_id": worker_id, "physical_gpu_ids": binding["physical_gpu_ids"]}
+        for worker_id, binding in WORKERS.items()
+    ]
+    schedule = {
+        "activation_mode": "staged_pair_authentication",
+        "initial_worker_id": "W0",
+        "activation_order": ["W0", "W1", "W2"],
+        "workers": rows,
+    }
+    atomic_text(
+        tmp_path / "GLOBAL_EXECUTION_STATE.json",
+        '{"status":"READY","model_load_workers":[],"model_load_completed_workers":[]}\n',
+    )
+    from garc_eval.accelerated_event_query.oracle_v3_full_grid_control import append_hash_chain
+
+    append_hash_chain(
+        tmp_path / "GLOBAL_EXECUTION_LEDGER.jsonl",
+        {"event": "RUN_INITIALIZED"},
+    )
+
+    with pytest.raises(RuntimeError, match="authentication failed"):
+        supervise_staged_workers(
+            schedule,
+            execution_root=tmp_path,
+            coordinator=object(),
+            initial_worker_id="W0",
+            authenticate=lambda _pair: (_ for _ in ()).throw(
+                RuntimeError("GPU exclusivity/idleness authentication failed: race")
+            ),
+            spawn=lambda _row: pytest.fail("spawn must not occur"),
+        )
+    state = __import__("json").loads(
+        (tmp_path / "GLOBAL_EXECUTION_STATE.json").read_text()
+    )
+    assert state["status"] == "STOPPED"
+    assert state["stop_trigger"] == "authentication_mismatch"
+
+
+def test_staged_initial_worker_spawn_failure_fails_global_state_closed(tmp_path):
+    rows = [
+        {"worker_id": worker_id, "physical_gpu_ids": binding["physical_gpu_ids"]}
+        for worker_id, binding in WORKERS.items()
+    ]
+    schedule = {
+        "activation_mode": "staged_pair_authentication",
+        "initial_worker_id": "W0",
+        "activation_order": ["W0", "W1", "W2"],
+        "workers": rows,
+    }
+    atomic_text(
+        tmp_path / "GLOBAL_EXECUTION_STATE.json",
+        '{"status":"READY","model_load_workers":[],"model_load_completed_workers":[]}\n',
+    )
+    from garc_eval.accelerated_event_query.oracle_v3_full_grid_control import append_hash_chain
+
+    append_hash_chain(
+        tmp_path / "GLOBAL_EXECUTION_LEDGER.jsonl",
+        {"event": "RUN_INITIALIZED"},
+    )
+
+    with pytest.raises(OSError, match="spawn failed"):
+        supervise_staged_workers(
+            schedule,
+            execution_root=tmp_path,
+            coordinator=object(),
+            initial_worker_id="W0",
+            authenticate=lambda pair: {
+                "authenticated_exclusive_idle": True,
+                "physical_gpu_ids": pair,
+            },
+            spawn=lambda _row: (_ for _ in ()).throw(OSError("spawn failed")),
+        )
+    state = __import__("json").loads(
+        (tmp_path / "GLOBAL_EXECUTION_STATE.json").read_text()
+    )
+    assert state["status"] == "STOPPED"
+    assert state["stop_trigger"] == "post_load_process_fault"
+
+
 def test_loaded_worker_idle_gap_is_cost_shielded(tmp_path):
     coordinator = GlobalFailStopCoordinator(
         tmp_path,

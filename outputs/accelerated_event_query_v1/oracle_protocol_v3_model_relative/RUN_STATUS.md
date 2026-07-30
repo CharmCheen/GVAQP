@@ -295,3 +295,12 @@ DALI `(2,6)`, HANGZHOU `(3,5)`, WUHAN `(1,7)` with DALI first, append-only
 pending/authenticated/spawned/exited transitions, and global fail-stop across
 all activated and pending workers. Local evidence: 136 tests pass; no model
 load, formal call, or formal output has occurred under the staged protocol.
+
+The first staged seal was rejected before approval after a local adversarial
+counterexample showed that an initialization-to-spawn GPU-authentication race
+could raise without changing `READY` to `STOPPED`. The supervisor now maps
+that race to `authentication_mismatch`, maps an initial spawn failure to
+`post_load_process_fault`, and fails closed before any model process exists.
+Local evidence after the repair: 138 tests pass; the rejected seal produced no
+model load, formal call, or formal output. A new exact package, seal, and
+independent review are required before launch.

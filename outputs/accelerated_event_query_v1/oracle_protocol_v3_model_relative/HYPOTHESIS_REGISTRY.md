@@ -297,4 +297,9 @@
 - Competing explanation: simultaneous startup is operationally simpler, but
   is not required for model-relative label validity when every shard has fixed
   inputs/pair identity and the complete-run gate remains global.
-- Status: `IMPLEMENTED; LOCAL_TESTS_PASS; EXACT_PACKAGE_REVIEW_REQUIRED`.
+- Counterexample and revision: staged seal V1 left global state `READY` when
+  the initial pair changed between initialization authentication and the
+  pre-spawn authentication. The exact seal is rejected. The repaired path
+  atomically fails closed as `authentication_mismatch`; a separate initial
+  spawn-failure test fails closed as `post_load_process_fault`.
+- Status: `REVISED; 138_LOCAL_TESTS_PASS; NEW_EXACT_PACKAGE_REVIEW_REQUIRED`.
