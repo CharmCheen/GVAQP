@@ -96,6 +96,7 @@ def _coordinator(schedule: dict[str, Any], seal_sha256: str, execution_root: Pat
         envelope_a100_gpu_hours=ENVELOPE_A100_GPU_HOURS,
         call_reservation_wall_seconds=CALL_RESERVATION_WALL_SECONDS,
         model_load_reservation_wall_seconds=MODEL_LOAD_RESERVATION_WALL_SECONDS,
+        loaded_worker_idle_lease_wall_seconds=LOADED_WORKER_IDLE_LEASE_SECONDS,
         loaded_worker_emergency_reservation_wall_seconds=(
             LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
         ),
@@ -149,7 +150,7 @@ def validate_compute_approval(path: Path = APPROVAL) -> dict[str, Any]:
         approval.get("partial_results_are_not_formal_reference") is True,
         approval.get("downstream_not_authorized") is True,
         approval.get("fresh_execution_id")
-        == "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_EVIDENCE_COMPLETE_RESERVATION_V4",
+        == "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_ATOMIC_IDLE_RESERVATION_V5",
         approval.get("fresh_execution_root") == str(EXECUTION.relative_to(ROOT)),
         approval.get("fresh_execution_starts_from_unit_ordinal") == 0,
         approval.get("prior_completed_labels_reused") is False,

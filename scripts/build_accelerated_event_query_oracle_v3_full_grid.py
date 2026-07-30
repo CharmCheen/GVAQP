@@ -350,6 +350,25 @@ def _call_reservation_derivation(
         row["unit_id"]: row["recorded_at_unix_ns"]
         for row in attempt_rows if row.get("event") == "INFERENCE_STARTED"
     }
+    for observation in observations:
+        unit_id = observation["unit_id"]
+        preinference = (
+            inference_started_at_ns[unit_id] - reserved_at_ns[unit_id]
+        ) / 1e9
+        # The call-wide non-inference duration starts before reserve_call and
+        # ends after generation bookkeeping.  Subtracting the directly
+        # observed reserve-to-inference-start interval leaves a conservative
+        # upper for the otherwise-unallocated post-inference/pre-persistence
+        # stage (and retains any pre-reservation coordinator overhead).
+        post_inference_pre_persistence = (
+            observation["noninference_pre_persistence_seconds"] - preinference
+        )
+        if post_inference_pre_persistence < 0.0:
+            raise RuntimeError("concurrent runtime stage decomposition is negative")
+        observation["call_reserved_to_inference_started_seconds"] = preinference
+        observation[
+            "post_inference_pre_persistence_stage_upper_seconds"
+        ] = post_inference_pre_persistence
     incomplete_preinference_observations = [
         {
             "unit_id": unit_id,
@@ -413,12 +432,28 @@ def _call_reservation_derivation(
         row["noninference_pre_persistence_seconds"]
         for row in concurrent_observations
     )
+    concurrent_max_completed_preinference = max(
+        row["call_reserved_to_inference_started_seconds"]
+        for row in concurrent_observations
+    )
+    concurrent_max_post_inference_pre_persistence = max(
+        row["post_inference_pre_persistence_stage_upper_seconds"]
+        for row in concurrent_observations
+    )
+    maximum_completed_preinference = max(
+        row["call_reserved_to_inference_started_seconds"]
+        for row in observations
+    )
+    maximum_post_inference_pre_persistence = max(
+        row["post_inference_pre_persistence_stage_upper_seconds"]
+        for row in observations
+    )
     incomplete_max_preinference_lower_bound = max(
         row["call_reserved_to_inference_started_seconds"]
         for row in incomplete_preinference_observations
     )
     evidence_complete_concurrent_preinference_upper = max(
-        concurrent_max_noninference,
+        maximum_completed_preinference,
         incomplete_max_preinference_lower_bound,
     )
     concurrent_max_post = max(
@@ -428,7 +463,8 @@ def _call_reservation_derivation(
     concurrent_token_cap_total_upper = (
         concurrent_token_cap_scaled_inference_upper
         + evidence_complete_concurrent_preinference_upper
-        + concurrent_max_post
+        + maximum_post_inference_pre_persistence
+        + max_post
     )
     failed_call_elapsed_lower_bound = 35.048812
     governing_floor = max(
@@ -495,11 +531,17 @@ def _call_reservation_derivation(
         "bonferroni_familywise_total_upper_seconds": familywise_total_upper,
         "concurrent_token_cap_scaled_inference_upper_seconds": concurrent_token_cap_scaled_inference_upper,
         "concurrent_maximum_noninference_pre_persistence_seconds": concurrent_max_noninference,
+        "concurrent_maximum_completed_call_reserved_to_inference_started_seconds": concurrent_max_completed_preinference,
+        "concurrent_maximum_post_inference_pre_persistence_seconds": concurrent_max_post_inference_pre_persistence,
+        "maximum_completed_call_reserved_to_inference_started_seconds": maximum_completed_preinference,
+        "maximum_observed_post_inference_pre_persistence_seconds": maximum_post_inference_pre_persistence,
+        "post_inference_stage_interpretation": "call-wide non-inference minus ledger-observed reserve-to-inference-start; conservatively retains pre-reservation coordinator overhead as an upper for the otherwise-unallocated post-inference/pre-persistence stage",
         "incomplete_concurrent_preinference_observations": incomplete_preinference_observations,
         "incomplete_maximum_call_reserved_to_inference_started_seconds": incomplete_max_preinference_lower_bound,
         "evidence_complete_concurrent_preinference_upper_seconds": evidence_complete_concurrent_preinference_upper,
         "concurrent_maximum_post_persistence_coordinator_seconds": concurrent_max_post,
         "concurrent_token_cap_total_upper_seconds": concurrent_token_cap_total_upper,
+        "cross_regime_stage_maximum_rule": "combine the direct concurrent 192-token-scaled inference maximum with the largest pre-inference, post-inference/pre-persistence, and post-persistence stages found anywhere in all 473 completed records plus the three incomplete pre-inference records; no stage receives a concurrency speedup credit",
         "failed_call_elapsed_lower_bound_seconds": failed_call_elapsed_lower_bound,
         "governing_evidence_based_floor_seconds": governing_floor,
         "revised_per_call_hard_reservation_wall_seconds": CALL_RESERVATION_WALL_SECONDS,
@@ -508,6 +550,8 @@ def _call_reservation_derivation(
         "call_load_plus_simultaneous_emergency_reservation_subtotal_a100_gpu_hours": reservation_admission_subtotal,
         "maximum_idle_residency_gap_count": maximum_idle_residency_gap_count,
         "maximum_idle_wall_seconds_per_gap": LOADED_WORKER_IDLE_LEASE_SECONDS,
+        "atomic_loaded_worker_idle_lease_wall_seconds": LOADED_WORKER_IDLE_LEASE_SECONDS,
+        "atomic_idle_lease_enforcement": "GlobalFailStopCoordinator._account_idle_locked rejects any over-limit gap before reserve_call, worker-session close, or process-exit transition can succeed; supervisor polling remains an early stalled-worker detector only",
         "full_grid_all_operations_hard_bound_a100_gpu_hours": all_operations_hard,
         "fresh_formal_execution_envelope_a100_gpu_hours": ENVELOPE_A100_GPU_HOURS,
         "overall_user_authorization_a100_gpu_hours": 64.0,
@@ -652,10 +696,12 @@ also holds a prospective eight-second emergency reservation throughout model
 residency. An authoritative coordinator-side clock partitions residency
 continuously from load reservation through every call/idle boundary and the
 supervisor-observed process exit; caller-side timers are diagnostic only. The
-two-second idle lease plus polling/termination tail therefore cannot cross the
-envelope before detection. The reservation is consumed only after the
-supervisor observes process exit. Model tensors and cached allocations
-are explicitly released before session close.
+coordinator transaction rejects any idle gap above the frozen two-second lease
+before a next call, session-close, or process-exit transition can succeed;
+supervisor polling is an independent early detector for a stalled worker, not
+the authority for the hard bound. The emergency reservation is consumed only
+after the supervisor observes process exit. Model tensors and cached
+allocations are explicitly released before session close.
 
 The launcher authenticates zero compute contexts, zero utilization, and at
 most 16 MiB used memory on the initial pair before initialization. Every
@@ -1078,7 +1124,7 @@ def main() -> None:
             reservation_subtotal <= ENVELOPE_A100_GPU_HOURS
             and all_operations_hard <= ENVELOPE_A100_GPU_HOURS
         ),
-        "cost_shield": "call reservation remains open from pre-decode through durable raw and ACCEPTED persistence; a reusable prospective emergency reservation remains active per loaded worker; a coordinator-side continuous residency clock, not caller timing, accounts lock/hash-chain/persistence gaps; elapsed idle consumes and must refresh the emergency reservation before another call; no start above envelope",
+        "cost_shield": "call reservation remains open from pre-decode through durable raw and ACCEPTED persistence; a reusable prospective emergency reservation remains active per loaded worker; a coordinator-side continuous residency clock, not caller timing, accounts lock/hash-chain/persistence gaps; the same coordinator transaction rejects an idle gap above two seconds before any next call/session/process-exit transition can succeed; supervisor polling is only an early stalled-worker detector; no start above envelope",
         "actual_gpu_residency_accounting": "continuous coordinator-side two-GPU residency segments from model-load reservation through call/durable acceptance, every coordinator and inter-call gap, explicit model release, and supervisor-observed process-exit tail",
         "gpu_profile_authentication": "the initial pair must have zero compute contexts, zero utilization, and <=16 MiB used memory before initialization; each pending frozen pair must independently satisfy the same rule immediately before process spawn and again before model load",
         "unused_envelope_cannot_authorize_extra_calls_reloads_or_retries": True,

@@ -18,7 +18,7 @@ from .oracle_v3_manifest import load_json, sha256_file, validate_payload_hash
 
 ROOT = Path(__file__).resolve().parents[3]
 BASE = ROOT / "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative"
-PACKAGE = BASE / "full_grid_preregistration_staged_v4_evidence_complete_reservation"
+PACKAGE = BASE / "full_grid_preregistration_staged_v5_atomic_idle_reservation"
 EXECUTION = BASE / EXECUTION_DIRECTORY_NAME
 PREREG = PACKAGE / "FULL_GRID_PREREGISTRATION.json"
 SEAL = PACKAGE / "FULL_GRID_EXECUTION_SEAL.json"
@@ -118,7 +118,20 @@ def _validate_prior_failure_revision_bindings(prereg: dict[str, Any]) -> None:
             "incomplete_maximum_call_reserved_to_inference_started_seconds", 0.0
         ) == 3.567687389,
         derivation.get("concurrent_token_cap_total_upper_seconds", 0.0)
-        >= 62.08846018493341,
+        == 63.160835681429404,
+        derivation.get(
+            "concurrent_maximum_post_inference_pre_persistence_seconds", 0.0
+        ) == 0.12836038128246785,
+        derivation.get(
+            "maximum_observed_post_inference_pre_persistence_seconds", 0.0
+        ) == 0.591471108826295,
+        derivation.get("maximum_observed_post_persistence_coordinator_seconds")
+        == 0.58028415037316,
+        derivation.get("governing_evidence_based_floor_seconds")
+        == 63.160835681429404,
+        derivation.get("absolute_safety_margin_seconds")
+        == 2.839164318570596,
+        derivation.get("atomic_loaded_worker_idle_lease_wall_seconds") == 2.0,
         derivation.get("frozen_generation_max_new_tokens") == 192,
         derivation.get("revised_per_call_hard_reservation_wall_seconds") == 66.0,
         derivation.get("fresh_formal_execution_envelope_a100_gpu_hours") == 56.0,

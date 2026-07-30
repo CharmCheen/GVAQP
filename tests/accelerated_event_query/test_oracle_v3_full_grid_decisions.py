@@ -78,7 +78,7 @@ def test_revised_call_reservation_and_fresh_root_are_internally_bound():
     assert idle_gap_count == 1481
     assert all_operations_hard_bound == pytest.approx(55.778888888888886)
     assert all_operations_hard_bound < ENVELOPE_A100_GPU_HOURS
-    assert EXECUTION.name == "full_grid_execution_staged_v4_evidence_complete_reservation"
+    assert EXECUTION.name == "full_grid_execution_staged_v5_atomic_idle_reservation"
     assert EXECUTION.name in unit_output_path("DALI", "DALI_u0000")
     assert EXECUTION.name in unit_parsed_path("DALI", "DALI_u0000")
 

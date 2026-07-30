@@ -115,7 +115,7 @@ def seal() -> None:
         "reload_count": 0,
         "retry_count": 0,
         "retry_semantics": "zero retries within this fresh execution; every unit starts anew under the new seal",
-        "fresh_execution_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_EVIDENCE_COMPLETE_RESERVATION_V4",
+        "fresh_execution_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_ATOMIC_IDLE_RESERVATION_V5",
         "fresh_execution_root": str(EXECUTION.relative_to(ROOT)),
         "fresh_execution_starts_from_unit_ordinal": 0,
         "prior_completed_labels_reused": False,
@@ -209,7 +209,7 @@ def review_bundle() -> None:
         "review_scope": [
             "1475 call accounting", "three tail units", "three model loads",
             f"{ENVELOPE_A100_GPU_HOURS:.1f} GPU-hour envelope", "global fail-stop", "partial publication",
-            "66-second evidence-complete concurrent-tail call reservation and recursively authenticated prior failures",
+            "66-second stage-complete concurrent-tail call reservation, atomic two-second idle lease, and recursively authenticated prior failures",
             "fresh-from-unit-zero execution with no prior label reuse",
             "unknown threshold", "K3 merge rules", "evaluator leakage",
             "worker overlap", "resume/retry", "analyzer/finalizer bindings",

@@ -212,6 +212,7 @@ def test_idle_cost_is_accounted_before_next_call_reservation(tmp_path, monkeypat
         envelope_a100_gpu_hours=78.0 / 3600.0,
         call_reservation_wall_seconds=23.5,
         model_load_reservation_wall_seconds=30.0,
+        loaded_worker_idle_lease_wall_seconds=8.0,
         loaded_worker_emergency_reservation_wall_seconds=8.0,
     )
     value.initialize()
@@ -227,6 +228,91 @@ def test_idle_cost_is_accounted_before_next_call_reservation(tmp_path, monkeypat
     assert state["status"] == "STOPPED"
     assert state["actual_gpu_seconds"] <= state["envelope_gpu_seconds"]
     assert state["attempted_unit_ids"] == []
+
+
+def test_atomic_idle_lease_rejects_missed_supervisor_poll_before_next_call(
+    tmp_path, monkeypatch
+):
+    """An over-limit closed gap cannot disappear between supervisor polls."""
+
+    value = GlobalFailStopCoordinator(
+        tmp_path,
+        execution_seal_sha256="s" * 64,
+        worker_bindings=WORKERS,
+        envelope_a100_gpu_hours=56.0,
+        call_reservation_wall_seconds=66.0,
+        model_load_reservation_wall_seconds=30.0,
+        loaded_worker_idle_lease_wall_seconds=2.0,
+        loaded_worker_emergency_reservation_wall_seconds=8.0,
+    )
+    value.initialize()
+    value.start_model_load("W0", [1, 2])
+    value.complete_model_load("W0", 0.01)
+    previous = value.state()["last_gpu_accounted_unix_ns_by_worker"]["W0"]
+    monkeypatch.setattr(control.time, "time_ns", lambda: previous + 3_000_000_000)
+    with pytest.raises(RuntimeError, match="idle exceeded sealed lease"):
+        value.reserve_call(
+            worker_id="W0", gpu_pair=[1, 2], unit_id="U0", call_spec_sha256="a"
+        )
+    state = value.state()
+    assert state["status"] == "STOPPED"
+    assert state["stop_trigger"] == "cost_envelope_exceeded"
+    assert state["attempted_unit_ids"] == []
+    assert state["in_flight_unit_ids"] == []
+
+
+@pytest.mark.parametrize("transition", ["session_close", "process_exit"])
+def test_atomic_idle_lease_covers_terminal_gap_transitions(
+    tmp_path, monkeypatch, transition
+):
+    one_worker = {
+        "W0": {"physical_gpu_ids": [1, 2], "unit_ids": ["U0"]}
+    }
+    value = GlobalFailStopCoordinator(
+        tmp_path,
+        execution_seal_sha256="s" * 64,
+        worker_bindings=one_worker,
+        envelope_a100_gpu_hours=56.0,
+        call_reservation_wall_seconds=66.0,
+        model_load_reservation_wall_seconds=30.0,
+        loaded_worker_idle_lease_wall_seconds=2.0,
+        loaded_worker_emergency_reservation_wall_seconds=8.0,
+    )
+    value.initialize()
+    value.start_model_load("W0", [1, 2])
+    value.complete_model_load("W0", 0.01)
+    value.reserve_call(
+        worker_id="W0", gpu_pair=[1, 2], unit_id="U0", call_spec_sha256="a"
+    )
+    value.complete_call(worker_id="W0", unit_id="U0", wall_seconds=0.01)
+    if transition == "process_exit":
+        value.complete_worker_session("W0")
+    previous = value.state()["last_gpu_accounted_unix_ns_by_worker"]["W0"]
+    monkeypatch.setattr(control.time, "time_ns", lambda: previous + 3_000_000_000)
+    with pytest.raises(RuntimeError, match="idle exceeded sealed lease"):
+        if transition == "session_close":
+            value.complete_worker_session("W0")
+        else:
+            value.complete_worker_process_exit("W0")
+    state = value.state()
+    assert state["status"] == "STOPPED"
+    assert state["stop_trigger"] == "cost_envelope_exceeded"
+    if transition == "session_close":
+        assert state["worker_sessions_completed"] == []
+    else:
+        assert state["worker_processes_exited"] == []
+
+
+def test_atomic_idle_lease_accepts_exact_two_second_boundary(tmp_path, monkeypatch):
+    value = loaded(coordinator(tmp_path))
+    previous = value.state()["last_gpu_accounted_unix_ns_by_worker"]["W0"]
+    monkeypatch.setattr(control.time, "time_ns", lambda: previous + 2_000_000_000)
+    value.reserve_call(
+        worker_id="W0", gpu_pair=[1, 2], unit_id="U0", call_spec_sha256="a"
+    )
+    state = value.state()
+    assert state["status"] == "READY"
+    assert state["attempted_unit_ids"] == ["U0"]
 
 
 def test_complete_call_accounts_coordinator_state_read_gap(tmp_path, monkeypatch):

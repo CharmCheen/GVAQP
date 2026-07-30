@@ -10,6 +10,7 @@ import signal
 import subprocess
 import sys
 import time
+from unittest.mock import patch
 from pathlib import Path
 from typing import Any
 
@@ -19,6 +20,7 @@ from .oracle_v3_full_grid_control import (
     _read_jsonl,
     append_hash_chain,
 )
+from . import oracle_v3_full_grid_control as control
 from .oracle_v3_full_grid_finalizer import decide, finalize_execution
 from .oracle_v3_full_grid_manifest import EXPECTED_UNIT_COUNT
 from .oracle_v3_full_grid_supervisor import (
@@ -30,6 +32,8 @@ from .oracle_v3_full_grid_package import DECISIONS, PACKAGE, SCHEDULE, SEAL, UNI
 from .oracle_v3_full_grid_runner import (
     CALL_RESERVATION_WALL_SECONDS,
     ENVELOPE_A100_GPU_HOURS,
+    LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS,
+    LOADED_WORKER_IDLE_LEASE_SECONDS,
     MODEL_LOAD_RESERVATION_WALL_SECONDS,
 )
 from .oracle_v3_manifest import atomic_text, canonical_hash, load_json, sha256_file
@@ -131,6 +135,10 @@ def run_complete_mock(execution_root: Path) -> dict[str, Any]:
         envelope_a100_gpu_hours=ENVELOPE_A100_GPU_HOURS,
         call_reservation_wall_seconds=CALL_RESERVATION_WALL_SECONDS,
         model_load_reservation_wall_seconds=MODEL_LOAD_RESERVATION_WALL_SECONDS,
+        loaded_worker_idle_lease_wall_seconds=LOADED_WORKER_IDLE_LEASE_SECONDS,
+        loaded_worker_emergency_reservation_wall_seconds=(
+            LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
+        ),
     )
     coordinator.initialize()
     all_gpu_ids = sorted({
@@ -280,6 +288,10 @@ def run_fault_injections(root: Path) -> dict[str, Any]:
             envelope_a100_gpu_hours=envelope,
             call_reservation_wall_seconds=CALL_RESERVATION_WALL_SECONDS,
             model_load_reservation_wall_seconds=MODEL_LOAD_RESERVATION_WALL_SECONDS,
+            loaded_worker_idle_lease_wall_seconds=LOADED_WORKER_IDLE_LEASE_SECONDS,
+            loaded_worker_emergency_reservation_wall_seconds=(
+                LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
+            ),
         )
 
     results: dict[str, bool] = {}
@@ -341,6 +353,36 @@ def run_fault_injections(root: Path) -> dict[str, Any]:
         idle is not None,
         c.state()["status"] == "STOPPED",
         c.state()["stop_trigger"] == "cost_envelope_exceeded",
+    ))
+
+    c = make("atomic_idle_missed_poll")
+    c.initialize()
+    c.start_model_load(first_worker["worker_id"], first_worker["physical_gpu_ids"])
+    c.complete_model_load(first_worker["worker_id"], 0.01)
+    previous = c.state()["last_gpu_accounted_unix_ns_by_worker"][
+        first_worker["worker_id"]
+    ]
+    atomic_rejected = False
+    with patch.object(
+        control.time,
+        "time_ns",
+        return_value=previous + 3_000_000_000,
+    ):
+        try:
+            c.reserve_call(
+                worker_id=first_worker["worker_id"],
+                gpu_pair=first_worker["physical_gpu_ids"],
+                unit_id=first_unit["unit_id"],
+                call_spec_sha256=first_unit["call_spec_sha256"],
+            )
+        except RuntimeError:
+            atomic_rejected = True
+    atomic_state = c.state()
+    results["transactional_idle_lease_missed_poll_global_stop"] = all((
+        atomic_rejected,
+        atomic_state["status"] == "STOPPED",
+        atomic_state["stop_trigger"] == "cost_envelope_exceeded",
+        atomic_state["attempted_unit_ids"] == [],
     ))
 
     c = make("abrupt_death")
