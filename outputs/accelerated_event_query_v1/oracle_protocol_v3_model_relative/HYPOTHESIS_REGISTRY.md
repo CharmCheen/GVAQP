@@ -323,4 +323,9 @@
   intent precedes lock contention and is checked by every coordinator
   admission. Activation-ledger creation is inside the protected fail-stop
   block and any pre-existing path is an output collision.
-- Status: `REVISED_AFTER_SOURCE_LEVEL_COUNTEREXAMPLES; 147_LOCAL_TESTS_PASS; NEW_EXACT_PACKAGE_REVIEW_REQUIRED`.
+- Exact-seal falsification: the first intent blocked work but did not govern
+  state/ledger decision identity when a later generic caller committed STOP.
+- Fifth revision: `trigger_stop`, emergency stop, coordinator admission, and
+  every internal locked stop resolve the authoritative trigger/detail from
+  the validated first write-once intent before persisting state or ledger.
+- Status: `REVISED_AFTER_FIRST_CAUSE_COUNTEREXAMPLE; 150_LOCAL_TESTS_PASS; NEW_EXACT_PACKAGE_REVIEW_REQUIRED`.

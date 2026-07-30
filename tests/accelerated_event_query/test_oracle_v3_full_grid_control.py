@@ -121,6 +121,63 @@ def test_redundant_trigger_stop_is_idempotent_and_preserves_first_failure(tmp_pa
     ]
 
 
+def test_first_stop_intent_controls_later_state_and_ledger_commit(tmp_path):
+    value = coordinator(tmp_path)
+    value.initialize()
+    signal_global_stop_intent(tmp_path, "authentication_mismatch", "specific first")
+    value.trigger_stop("post_load_process_fault", "later generic wrapper")
+    state = value.state()
+    assert state["status"] == "STOPPED"
+    assert state["stop_trigger"] == "authentication_mismatch"
+    assert state["stop_detail"] == "stop_intent:specific first"
+    events = [
+        json.loads(line)
+        for line in value.ledger_path.read_text(encoding="utf-8").splitlines()
+    ]
+    stop = [row for row in events if row["event"] == "GLOBAL_FAIL_STOP"]
+    assert len(stop) == 1
+    assert stop[0]["trigger"] == "authentication_mismatch"
+    assert stop[0]["detail"] == "stop_intent:specific first"
+
+
+def test_first_stop_intent_controls_later_emergency_commit(tmp_path):
+    value = coordinator(tmp_path)
+    value.initialize()
+    signal_global_stop_intent(tmp_path, "authentication_mismatch", "specific first")
+    emergency_global_stop(tmp_path, "post_load_process_fault", "later wrapper")
+    state = value.state()
+    assert state["status"] == "STOPPED"
+    assert state["stop_trigger"] == "authentication_mismatch"
+    events = [
+        json.loads(line)
+        for line in value.ledger_path.read_text(encoding="utf-8").splitlines()
+    ]
+    stop = [row for row in events if row["event"] == "GLOBAL_FAIL_STOP"]
+    assert len(stop) == 1
+    assert stop[0]["trigger"] == "authentication_mismatch"
+
+
+def test_malformed_first_stop_intent_commits_integrity_failure(tmp_path):
+    value = coordinator(tmp_path)
+    value.initialize()
+    (tmp_path / "GLOBAL_FAIL_STOP_INTENT.json").write_text(
+        "{malformed\n", encoding="utf-8"
+    )
+    with pytest.raises(RuntimeError, match="stop intent"):
+        value.start_model_load("W2", [6, 7])
+    state = value.state()
+    assert state["status"] == "STOPPED"
+    assert state["stop_trigger"] == "integrity_mismatch"
+    assert state["model_load_workers"] == []
+    events = [
+        json.loads(line)
+        for line in value.ledger_path.read_text(encoding="utf-8").splitlines()
+    ]
+    stop = [row for row in events if row["event"] == "GLOBAL_FAIL_STOP"]
+    assert len(stop) == 1
+    assert stop[0]["trigger"] == "integrity_mismatch"
+
+
 def test_three_closed_worker_sessions_are_required_for_complete_state(tmp_path):
     value = coordinator(tmp_path)
     value.initialize()

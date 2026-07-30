@@ -73,6 +73,28 @@ def signal_global_stop_intent(root: Path, trigger: str, detail: str) -> None:
         temporary.unlink(missing_ok=True)
 
 
+def resolve_global_stop_intent(root: Path) -> tuple[str, str]:
+    """Return the authoritative first stop cause, failing malformed intent closed."""
+
+    try:
+        intent = load_json(root / STOP_INTENT_FILENAME)
+        unsigned = {
+            key: value for key, value in intent.items()
+            if key != "stop_intent_payload_sha256"
+        }
+        if (
+            intent.get("stop_intent_payload_sha256") != canonical_hash(unsigned)
+            or intent.get("trigger") not in FAIL_STOP_TRIGGERS
+        ):
+            raise RuntimeError("invalid stop-intent payload")
+        return intent["trigger"], f"stop_intent:{intent.get('detail')}"
+    except Exception as exc:
+        return (
+            "integrity_mismatch",
+            f"invalid_stop_intent:{type(exc).__name__}:{exc}",
+        )
+
+
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
@@ -111,6 +133,7 @@ def emergency_global_stop(root: Path, trigger: str, detail: str) -> None:
     if trigger not in FAIL_STOP_TRIGGERS:
         raise ValueError("unknown global fail-stop trigger")
     signal_global_stop_intent(root, trigger, detail)
+    authoritative_trigger, authoritative_detail = resolve_global_stop_intent(root)
     state_path = root / "GLOBAL_EXECUTION_STATE.json"
     ledger_path = root / "GLOBAL_EXECUTION_LEDGER.jsonl"
     lock_path = root / "GLOBAL_EXECUTION.lock"
@@ -122,11 +145,13 @@ def emergency_global_stop(root: Path, trigger: str, detail: str) -> None:
         state = load_json(state_path)
         if state.get("status") not in {"STOPPED", "PHYSICAL_CALLS_COMPLETE_AWAITING_ANALYSIS"}:
             state["status"] = "STOPPED"
-            state["stop_trigger"] = trigger
-            state["stop_detail"] = detail
+            state["stop_trigger"] = authoritative_trigger
+            state["stop_detail"] = authoritative_detail
             atomic_text(state_path, json.dumps(state, indent=2, sort_keys=True) + "\n")
             append_hash_chain(ledger_path, {
-                "event": "GLOBAL_FAIL_STOP", "trigger": trigger, "detail": detail,
+                "event": "GLOBAL_FAIL_STOP",
+                "trigger": authoritative_trigger,
+                "detail": authoritative_detail,
             })
         fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
 
@@ -510,23 +535,7 @@ class GlobalFailStopCoordinator:
         if state["status"] != "READY":
             raise RuntimeError(f"global execution is not accepting work: {state['status']}")
         if self.stop_intent_path.exists():
-            try:
-                intent = load_json(self.stop_intent_path)
-                unsigned = {
-                    key: value for key, value in intent.items()
-                    if key != "stop_intent_payload_sha256"
-                }
-                if (
-                    intent.get("stop_intent_payload_sha256")
-                    != canonical_hash(unsigned)
-                    or intent.get("trigger") not in FAIL_STOP_TRIGGERS
-                ):
-                    raise RuntimeError("invalid stop-intent payload")
-                trigger = intent["trigger"]
-                detail = f"stop_intent:{intent.get('detail')}"
-            except Exception as exc:
-                trigger = "integrity_mismatch"
-                detail = f"invalid_stop_intent:{type(exc).__name__}:{exc}"
+            trigger, detail = resolve_global_stop_intent(self.root)
             if state["status"] == "READY":
                 self._stop_locked(state, trigger, detail)
             raise RuntimeError("global fail-stop intent is active")
@@ -540,6 +549,7 @@ class GlobalFailStopCoordinator:
 
     def _stop_locked(self, state: dict[str, Any], trigger: str, detail: str) -> None:
         signal_global_stop_intent(self.root, trigger, detail)
+        trigger, detail = resolve_global_stop_intent(self.root)
         state["status"] = "STOPPED"
         state["stop_trigger"] = trigger
         state["stop_detail"] = detail

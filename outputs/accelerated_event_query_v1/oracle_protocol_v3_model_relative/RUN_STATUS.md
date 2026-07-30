@@ -347,3 +347,11 @@ generic worker-exception `state()==READY` precheck. Every caught worker
 exception now publishes stop intent unconditionally before attempting the
 coordinator lock, eliminating that last caller-side intent-delay window.
 Current local evidence is 147 tests passed and zero formal calls.
+
+Exact review of staged seal V4 (`94e692f…`) rejected first-cause grounding:
+the write-once intent could preserve `authentication_mismatch` while a later
+generic caller committed state/ledger as `post_load_process_fault`. Every
+state/ledger STOP transition now resolves its authoritative trigger and detail
+from the first valid durable intent; malformed intent resolves fail-closed to
+`integrity_mismatch`. Source-level adversarial replay and 150 local tests pass;
+zero formal calls exist.
