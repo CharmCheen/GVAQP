@@ -323,4 +323,4 @@
   intent precedes lock contention and is checked by every coordinator
   admission. Activation-ledger creation is inside the protected fail-stop
   block and any pre-existing path is an output collision.
-- Status: `REVISED_AFTER_SOURCE_LEVEL_COUNTEREXAMPLES; 146_LOCAL_TESTS_PASS; NEW_EXACT_PACKAGE_REVIEW_REQUIRED`.
+- Status: `REVISED_AFTER_SOURCE_LEVEL_COUNTEREXAMPLES; 147_LOCAL_TESTS_PASS; NEW_EXACT_PACKAGE_REVIEW_REQUIRED`.

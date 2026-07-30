@@ -104,6 +104,23 @@ def test_stop_intent_preempts_model_load_before_state_stop_commits(tmp_path):
     ]
 
 
+def test_redundant_trigger_stop_is_idempotent_and_preserves_first_failure(tmp_path):
+    value = coordinator(tmp_path)
+    value.initialize()
+    value.trigger_stop("authentication_mismatch", "first")
+    value.trigger_stop("post_load_process_fault", "later generic exception")
+    state = value.state()
+    assert state["status"] == "STOPPED"
+    assert state["stop_trigger"] == "authentication_mismatch"
+    events = [
+        json.loads(line)
+        for line in value.ledger_path.read_text(encoding="utf-8").splitlines()
+    ]
+    assert [row["event"] for row in events] == [
+        "RUN_INITIALIZED", "GLOBAL_FAIL_STOP"
+    ]
+
+
 def test_three_closed_worker_sessions_are_required_for_complete_state(tmp_path):
     value = coordinator(tmp_path)
     value.initialize()

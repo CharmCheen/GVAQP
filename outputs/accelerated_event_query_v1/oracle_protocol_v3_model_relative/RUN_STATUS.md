@@ -341,3 +341,9 @@ all pre-existing activation ledgers, and publishes a durable write-once stop
 intent before lock contention. Every coordinator admission checks that intent
 under lock, so a candidate cannot emit `MODEL_LOAD_STARTED` first. Local
 evidence is 146 tests passed and zero formal calls.
+
+Before the clean package emitted files, a final source audit removed the
+generic worker-exception `state()==READY` precheck. Every caught worker
+exception now publishes stop intent unconditionally before attempting the
+coordinator lock, eliminating that last caller-side intent-delay window.
+Current local evidence is 147 tests passed and zero formal calls.

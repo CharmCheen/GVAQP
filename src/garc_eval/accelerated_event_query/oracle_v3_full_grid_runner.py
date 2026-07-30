@@ -632,7 +632,9 @@ def run_worker(worker_id: str, declared_physical_gpus: list[int]) -> None:
         coordinator.complete_worker_session(worker_id)
     except Exception as exc:
         try:
-            if coordinator.state()["status"] == "READY":
-                coordinator.trigger_stop("post_load_process_fault", f"{worker_id}:{type(exc).__name__}:{exc}")
+            coordinator.trigger_stop(
+                "post_load_process_fault",
+                f"{worker_id}:{type(exc).__name__}:{exc}",
+            )
         finally:
             raise
