@@ -72,6 +72,7 @@ def seal() -> None:
     derivation = load_json(
         PACKAGE / "FULL_GRID_CALL_RESERVATION_DERIVATION.json"
     )
+    cost = load_json(PACKAGE / "FULL_GRID_COST_ESTIMATE.json")
     if current_head != prereg["source_commit"] or current_head != sources["source_commit"]:
         raise RuntimeError("current source commit differs from preregistration")
     for row in sources["sources"]:
@@ -107,14 +108,14 @@ def seal() -> None:
         "worker_schedule_sha256": sha256_file(SCHEDULE),
         "exact_call_count": EXPECTED_UNIT_COUNT,
         "exact_frame_occurrence_count": EXPECTED_FRAME_OCCURRENCES,
-        "estimated_a100_gpu_hours": 16.09712320568816,
+        "estimated_a100_gpu_hours": cost["estimated_a100_gpu_hours"],
         "authorization_envelope_a100_gpu_hours": ENVELOPE_A100_GPU_HOURS,
-        "estimated_parallel_wall_hours": 3.0931814077885096,
+        "estimated_parallel_wall_hours": cost["estimated_parallel_wall_hours"],
         "model_load_count": 3,
         "reload_count": 0,
         "retry_count": 0,
         "retry_semantics": "zero retries within this fresh execution; every unit starts anew under the new seal",
-        "fresh_execution_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_CONCURRENT_RESERVATION_V3",
+        "fresh_execution_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_EVIDENCE_COMPLETE_RESERVATION_V4",
         "fresh_execution_root": str(EXECUTION.relative_to(ROOT)),
         "fresh_execution_starts_from_unit_ordinal": 0,
         "prior_completed_labels_reused": False,
@@ -142,7 +143,7 @@ Exact execution seal SHA-256:
 `{sha256_file(SEAL)}`
 
 This template does not authorize execution. A valid approval artifact must bind
-the exact seal, review bundle, final package manifest, 1,475 calls, 16.097123
+the exact seal, review bundle, final package manifest, 1,475 calls, {cost['estimated_a100_gpu_hours']:.6f}
 A100 GPU-hour estimate, {ENVELOPE_A100_GPU_HOURS:.1f} A100 GPU-hour envelope, three frozen two-GPU
 workers, exactly three model loads, zero reloads, zero retries, global
 fail-stop, and complete-only reference publication.
@@ -208,7 +209,7 @@ def review_bundle() -> None:
         "review_scope": [
             "1475 call accounting", "three tail units", "three model loads",
             f"{ENVELOPE_A100_GPU_HOURS:.1f} GPU-hour envelope", "global fail-stop", "partial publication",
-            "65-second concurrent-tail-aware call reservation and nested prior failed-run evidence",
+            "66-second evidence-complete concurrent-tail call reservation and recursively authenticated prior failures",
             "fresh-from-unit-zero execution with no prior label reuse",
             "unknown threshold", "K3 merge rules", "evaluator leakage",
             "worker overlap", "resume/retry", "analyzer/finalizer bindings",
@@ -255,7 +256,7 @@ Audit state: `COMPLETE_REVIEWED_AWAITING_EXPLICIT_COMPUTE_APPROVAL`
 - Tail units: DALI 12, HANGZHOU 2, WUHAN 6 frames; real processor-only audit PASS.
 - Workers: {worker_summary}; disjoint union PASS; activation mode
   `{schedule['activation_mode']}` with `{schedule['initial_worker_id']}` first.
-- Cost: 16.097123 A100 GPU-hours expected; {ENVELOPE_A100_GPU_HOURS:.1f} fresh-run envelope; three loads; zero reload/retry within the fresh execution.
+- Cost: {load_json(PACKAGE / 'FULL_GRID_COST_ESTIMATE.json')['estimated_a100_gpu_hours']:.6f} A100 GPU-hours expected; {ENVELOPE_A100_GPU_HOURS:.1f} fresh-run envelope; three loads; zero reload/retry within the fresh execution.
 - Immediate prior failed run: 473 completed/476 attempted, no formal publication or label reuse;
   conservative usage upper bound {derivation['prior_failed_run_conservative_usage_upper_bound_a100_gpu_hours']:.6f} A100 GPU-hours.
 - Prior plus fresh envelope: {derivation['prior_plus_fresh_formal_envelope_a100_gpu_hours']:.6f} < 64 authorized A100 GPU-hours.

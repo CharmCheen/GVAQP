@@ -13,6 +13,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_finalizer import (
     decide,
 )
 from garc_eval.accelerated_event_query.oracle_v3_manifest import canonical_hash
+import garc_eval.accelerated_event_query.oracle_v3_full_grid_package as package
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_manifest import (
     EXPECTED_UNIT_COUNT,
     unit_output_path,
@@ -23,6 +24,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_runner import (
     CALL_RESERVATION_WALL_SECONDS,
     ENVELOPE_A100_GPU_HOURS,
     LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS,
+    LOADED_WORKER_IDLE_LEASE_SECONDS,
     MODEL_LOAD_RESERVATION_WALL_SECONDS,
 )
 
@@ -64,12 +66,39 @@ def test_revised_call_reservation_and_fresh_root_are_internally_bound():
         + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
         + 3 * LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
     ) / 3600.0
-    assert CALL_RESERVATION_WALL_SECONDS == 65.0
-    assert aggregate_hard_bound == pytest.approx(53.327222222222225)
-    assert aggregate_hard_bound < ENVELOPE_A100_GPU_HOURS == 54.0
-    assert EXECUTION.name == "full_grid_execution_staged_v3_concurrent_reservation"
+    assert CALL_RESERVATION_WALL_SECONDS == 66.0
+    assert aggregate_hard_bound == pytest.approx(54.14666666666667)
+    assert aggregate_hard_bound < ENVELOPE_A100_GPU_HOURS == 56.0
+    idle_gap_count = EXPECTED_UNIT_COUNT + 2 * 3
+    all_operations_hard_bound = 2 * (
+        EXPECTED_UNIT_COUNT * CALL_RESERVATION_WALL_SECONDS
+        + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
+        + idle_gap_count * LOADED_WORKER_IDLE_LEASE_SECONDS
+    ) / 3600.0
+    assert idle_gap_count == 1481
+    assert all_operations_hard_bound == pytest.approx(55.778888888888886)
+    assert all_operations_hard_bound < ENVELOPE_A100_GPU_HOURS
+    assert EXECUTION.name == "full_grid_execution_staged_v4_evidence_complete_reservation"
     assert EXECUTION.name in unit_output_path("DALI", "DALI_u0000")
     assert EXECUTION.name in unit_parsed_path("DALI", "DALI_u0000")
+
+
+def test_nested_first_failure_binding_mutation_fails_closed(monkeypatch):
+    prereg = package.load_json(package.PREREG)
+    original = package._validate_path_hash
+    reached_nested_raw = False
+
+    def reject_nested_raw(binding):
+        nonlocal reached_nested_raw
+        if "full_grid_execution_staged/raw/DALI/DALI_u0000.json" in binding["path"]:
+            reached_nested_raw = True
+            raise RuntimeError("simulated nested first-run raw mutation")
+        return original(binding)
+
+    monkeypatch.setattr(package, "_validate_path_hash", reject_nested_raw)
+    with pytest.raises(RuntimeError, match="simulated nested first-run raw mutation"):
+        package._validate_prior_failure_revision_bindings(prereg)
+    assert reached_nested_raw
 
 
 def test_finalizer_uses_revised_exact_cost_envelope():

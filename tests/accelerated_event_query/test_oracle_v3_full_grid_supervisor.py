@@ -40,12 +40,12 @@ class FakeProcess:
         return self.returncode
 
 
-def test_production_call_lease_has_exact_65_second_boundary(tmp_path):
+def test_production_call_lease_has_exact_66_second_boundary(tmp_path):
     coordinator = GlobalFailStopCoordinator(
         tmp_path,
         execution_seal_sha256="s" * 64,
         worker_bindings=WORKERS,
-        envelope_a100_gpu_hours=54.0,
+        envelope_a100_gpu_hours=56.0,
         call_reservation_wall_seconds=CALL_RESERVATION_WALL_SECONDS,
         model_load_reservation_wall_seconds=30.0,
     )
@@ -63,7 +63,7 @@ def test_production_call_lease_has_exact_65_second_boundary(tmp_path):
     violation = _lease_violation(tmp_path, exact + 1)
     assert violation is not None
     assert violation.startswith("call:U0:")
-    assert "limit=65.000000" in violation
+    assert "limit=66.000000" in violation
 
 
 def test_abrupt_worker_death_stops_peers_before_another_reservation(

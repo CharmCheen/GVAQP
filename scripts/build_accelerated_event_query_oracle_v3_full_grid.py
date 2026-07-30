@@ -335,6 +335,30 @@ def _call_reservation_derivation(
     concurrent_observations = [
         row for row in observations if row["unit_id"] in concurrent_unit_ids
     ]
+    reserved_at_ns = {
+        row["unit_id"]: row["recorded_at_unix_ns"]
+        for row in global_rows if row.get("event") == "CALL_RESERVED"
+    }
+    attempt_rows = [
+        row
+        for path in sorted(
+            (PRIOR_FAILED_EXECUTION / "attempt_ledgers").glob("*.jsonl")
+        )
+        for row in _read_jsonl(path)
+    ]
+    inference_started_at_ns = {
+        row["unit_id"]: row["recorded_at_unix_ns"]
+        for row in attempt_rows if row.get("event") == "INFERENCE_STARTED"
+    }
+    incomplete_preinference_observations = [
+        {
+            "unit_id": unit_id,
+            "call_reserved_to_inference_started_seconds": (
+                inference_started_at_ns[unit_id] - reserved_at_ns[unit_id]
+            ) / 1e9,
+        }
+        for unit_id in PRIOR_FAILED_TERMINAL_UNIT_IDS
+    ]
     xs = [row["reconstructed_decoded_response_tokens"] for row in observations]
     ys = [row["inference_seconds"] for row in observations]
     x_mean = statistics.mean(xs)
@@ -389,13 +413,21 @@ def _call_reservation_derivation(
         row["noninference_pre_persistence_seconds"]
         for row in concurrent_observations
     )
+    incomplete_max_preinference_lower_bound = max(
+        row["call_reserved_to_inference_started_seconds"]
+        for row in incomplete_preinference_observations
+    )
+    evidence_complete_concurrent_preinference_upper = max(
+        concurrent_max_noninference,
+        incomplete_max_preinference_lower_bound,
+    )
     concurrent_max_post = max(
         row["post_persistence_coordinator_seconds"]
         for row in concurrent_observations
     )
     concurrent_token_cap_total_upper = (
         concurrent_token_cap_scaled_inference_upper
-        + concurrent_max_noninference
+        + evidence_complete_concurrent_preinference_upper
         + concurrent_max_post
     )
     failed_call_elapsed_lower_bound = 35.048812
@@ -406,10 +438,16 @@ def _call_reservation_derivation(
         failed_call_elapsed_lower_bound,
     )
     margin = CALL_RESERVATION_WALL_SECONDS - governing_floor
-    aggregate_hard = 2 * (
+    reservation_admission_subtotal = 2 * (
         EXPECTED_UNIT_COUNT * CALL_RESERVATION_WALL_SECONDS
         + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
         + 3 * LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
+    ) / 3600.0
+    maximum_idle_residency_gap_count = EXPECTED_UNIT_COUNT + 2 * 3
+    all_operations_hard = 2 * (
+        EXPECTED_UNIT_COUNT * CALL_RESERVATION_WALL_SECONDS
+        + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
+        + maximum_idle_residency_gap_count * LOADED_WORKER_IDLE_LEASE_SECONDS
     ) / 3600.0
     prior_conservative_usage = prior_failure[
         "conservative_usage_upper_bound_a100_gpu_hours"
@@ -421,7 +459,8 @@ def _call_reservation_derivation(
         len(observations) == PRIOR_FAILED_COMPLETED_CALLS,
         len(concurrent_observations) == 7,
         margin > 0.0,
-        aggregate_hard <= ENVELOPE_A100_GPU_HOURS,
+        reservation_admission_subtotal <= ENVELOPE_A100_GPU_HOURS,
+        all_operations_hard <= ENVELOPE_A100_GPU_HOURS,
         cumulative_authorized_upper < 64.0,
     )):
         raise RuntimeError("revised call reservation derivation is not conservative")
@@ -456,6 +495,9 @@ def _call_reservation_derivation(
         "bonferroni_familywise_total_upper_seconds": familywise_total_upper,
         "concurrent_token_cap_scaled_inference_upper_seconds": concurrent_token_cap_scaled_inference_upper,
         "concurrent_maximum_noninference_pre_persistence_seconds": concurrent_max_noninference,
+        "incomplete_concurrent_preinference_observations": incomplete_preinference_observations,
+        "incomplete_maximum_call_reserved_to_inference_started_seconds": incomplete_max_preinference_lower_bound,
+        "evidence_complete_concurrent_preinference_upper_seconds": evidence_complete_concurrent_preinference_upper,
         "concurrent_maximum_post_persistence_coordinator_seconds": concurrent_max_post,
         "concurrent_token_cap_total_upper_seconds": concurrent_token_cap_total_upper,
         "failed_call_elapsed_lower_bound_seconds": failed_call_elapsed_lower_bound,
@@ -463,7 +505,10 @@ def _call_reservation_derivation(
         "revised_per_call_hard_reservation_wall_seconds": CALL_RESERVATION_WALL_SECONDS,
         "absolute_safety_margin_seconds": margin,
         "relative_safety_margin_over_floor": margin / governing_floor,
-        "full_grid_all_operations_hard_bound_a100_gpu_hours": aggregate_hard,
+        "call_load_plus_simultaneous_emergency_reservation_subtotal_a100_gpu_hours": reservation_admission_subtotal,
+        "maximum_idle_residency_gap_count": maximum_idle_residency_gap_count,
+        "maximum_idle_wall_seconds_per_gap": LOADED_WORKER_IDLE_LEASE_SECONDS,
+        "full_grid_all_operations_hard_bound_a100_gpu_hours": all_operations_hard,
         "fresh_formal_execution_envelope_a100_gpu_hours": ENVELOPE_A100_GPU_HOURS,
         "overall_user_authorization_a100_gpu_hours": 64.0,
         "prior_failed_run_conservative_usage_upper_bound_a100_gpu_hours": prior_conservative_usage,
@@ -928,26 +973,93 @@ def main() -> None:
     validate_worker_schedule(schedule, unit_manifest)
     write_json_once(PACKAGE / "FULL_GRID_WORKER_SCHEDULE.json", schedule)
 
-    mean_call = 19.607711827941237
-    observed_loads = {"DALI": 17.88046159595251, "HANGZHOU": 18.119151646271348,
-                      "WUHAN": 17.44721078313887}
-    estimated = 2 * (EXPECTED_UNIT_COUNT * mean_call + sum(observed_loads.values())) / 3600
-    reserved = 2 * (
-        EXPECTED_UNIT_COUNT * CALL_RESERVATION_WALL_SECONDS
-        + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
-        + 3 * LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
-    ) / 3600
+    from scipy.stats import t as student_t
+
+    concurrent_ids = set(
+        call_reservation_derivation["concurrent_activation_unit_ids"]
+    )
+    concurrent_cost_rows = [
+        row for row in call_reservation_derivation["observations"]
+        if row["unit_id"] in concurrent_ids
+    ]
+    concurrent_accounted = [
+        row["accounted_wall_seconds"] for row in concurrent_cost_rows
+    ]
+    concurrent_mean = statistics.fmean(concurrent_accounted)
+    concurrent_sd = statistics.stdev(concurrent_accounted)
+    concurrent_means_by_video = {
+        video_id: statistics.fmean(
+            row["accounted_wall_seconds"]
+            for row in concurrent_cost_rows
+            if row["unit_id"].startswith(video_id + "_")
+        )
+        for video_id in VIDEO_ORDER
+    }
+    historical_completed_mean = statistics.fmean(
+        row["accounted_wall_seconds"]
+        for row in call_reservation_derivation["observations"]
+    )
+    prior_global_rows = _read_jsonl(
+        PRIOR_FAILED_EXECUTION / "GLOBAL_EXECUTION_LEDGER.jsonl"
+    )
+    worker_to_video = {
+        expected_worker(video_id): video_id for video_id in VIDEO_ORDER
+    }
+    observed_loads = {
+        worker_to_video[row["worker_id"]]: row["accounted_wall_seconds"]
+        for row in prior_global_rows
+        if row.get("event") == "MODEL_LOAD_COMPLETED"
+    }
+    point_worker_wall_seconds = {
+        video_id: (
+            EXPECTED_UNITS_BY_VIDEO[video_id]
+            * concurrent_means_by_video[video_id]
+            + observed_loads[video_id]
+        )
+        for video_id in VIDEO_ORDER
+    }
+    estimated = 2.0 * sum(point_worker_wall_seconds.values()) / 3600.0
+    parallel_wall_estimate = max(point_worker_wall_seconds.values()) / 3600.0
+    uncertainty_t_critical = float(student_t.ppf(0.975, len(concurrent_accounted) - 1))
+    concurrent_mean_95_upper = (
+        concurrent_mean
+        + uncertainty_t_critical * concurrent_sd / math.sqrt(len(concurrent_accounted))
+    )
+    estimated_95_upper = 2.0 * (
+        EXPECTED_UNIT_COUNT * concurrent_mean_95_upper
+        + sum(observed_loads.values())
+    ) / 3600.0
+    parallel_wall_95_upper = (
+        max(EXPECTED_UNITS_BY_VIDEO.values()) * concurrent_mean_95_upper
+        + max(observed_loads.values())
+    ) / 3600.0
+    reservation_subtotal = call_reservation_derivation[
+        "call_load_plus_simultaneous_emergency_reservation_subtotal_a100_gpu_hours"
+    ]
+    all_operations_hard = call_reservation_derivation[
+        "full_grid_all_operations_hard_bound_a100_gpu_hours"
+    ]
     cost = self_hash({
         "status": "FROZEN_FULL_GRID_COST_AND_RESERVATION_PLAN",
         "exact_call_count": EXPECTED_UNIT_COUNT,
         "estimated_a100_gpu_hours": estimated,
-        "estimated_parallel_wall_hours": 3.0931814077885096,
+        "estimated_parallel_wall_hours": parallel_wall_estimate,
+        "estimated_a100_gpu_hours_95_percent_mean_uncertainty_upper": estimated_95_upper,
+        "estimated_parallel_wall_hours_95_percent_mean_uncertainty_upper": parallel_wall_95_upper,
         "authorization_envelope_a100_gpu_hours": ENVELOPE_A100_GPU_HOURS,
         "planned_model_load_count": 3,
         "reload_count": 0,
         "retry_count": 0,
-        "mean_2fps_call_wall_seconds": mean_call,
-        "observed_preflight_load_seconds": observed_loads,
+        "estimation_assumption": "all units are conservatively point-estimated in the direct three-worker concurrent regime; exact video call counts use each video's tiny direct concurrent sample mean, while a global seven-call Student-t upper quantifies sampling uncertainty; staged one/two-worker time is not credited as a speedup",
+        "historical_473_call_accounted_mean_seconds": historical_completed_mean,
+        "direct_concurrent_observation_count": len(concurrent_accounted),
+        "direct_concurrent_accounted_mean_seconds": concurrent_mean,
+        "direct_concurrent_accounted_standard_deviation_seconds": concurrent_sd,
+        "direct_concurrent_mean_seconds_by_video": concurrent_means_by_video,
+        "direct_concurrent_mean_95_percent_upper_seconds": concurrent_mean_95_upper,
+        "direct_concurrent_mean_95_percent_t_critical": uncertainty_t_critical,
+        "observed_second_run_load_seconds": observed_loads,
+        "point_estimated_worker_wall_seconds": point_worker_wall_seconds,
         "per_call_hard_reservation_wall_seconds": CALL_RESERVATION_WALL_SECONDS,
         "call_reservation_derivation": binding(
             PACKAGE / "FULL_GRID_CALL_RESERVATION_DERIVATION.json"
@@ -958,9 +1070,14 @@ def main() -> None:
         "per_load_hard_reservation_wall_seconds": MODEL_LOAD_RESERVATION_WALL_SECONDS,
         "post_session_process_exit_lease_wall_seconds_per_worker": LOADED_WORKER_IDLE_LEASE_SECONDS,
         "per_loaded_worker_reusable_emergency_reservation_wall_seconds": LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS,
-        "base_operations_plus_simultaneous_emergency_reservations_a100_gpu_hours": reserved,
-        "aggregate_reserved_a100_gpu_hours": reserved,
-        "reservation_fits_envelope": reserved <= ENVELOPE_A100_GPU_HOURS,
+        "call_load_plus_simultaneous_emergency_reservation_subtotal_a100_gpu_hours": reservation_subtotal,
+        "maximum_idle_residency_gap_count": call_reservation_derivation["maximum_idle_residency_gap_count"],
+        "maximum_idle_wall_seconds_per_gap": call_reservation_derivation["maximum_idle_wall_seconds_per_gap"],
+        "full_grid_all_operations_hard_bound_a100_gpu_hours": all_operations_hard,
+        "reservation_and_all_operations_bounds_fit_envelope": (
+            reservation_subtotal <= ENVELOPE_A100_GPU_HOURS
+            and all_operations_hard <= ENVELOPE_A100_GPU_HOURS
+        ),
         "cost_shield": "call reservation remains open from pre-decode through durable raw and ACCEPTED persistence; a reusable prospective emergency reservation remains active per loaded worker; a coordinator-side continuous residency clock, not caller timing, accounts lock/hash-chain/persistence gaps; elapsed idle consumes and must refresh the emergency reservation before another call; no start above envelope",
         "actual_gpu_residency_accounting": "continuous coordinator-side two-GPU residency segments from model-load reservation through call/durable acceptance, every coordinator and inter-call gap, explicit model release, and supervisor-observed process-exit tail",
         "gpu_profile_authentication": "the initial pair must have zero compute contexts, zero utilization, and <=16 MiB used memory before initialization; each pending frozen pair must independently satisfy the same rule immediately before process spawn and again before model load",
@@ -1285,7 +1402,7 @@ def main() -> None:
         "cost": {
             "estimated_a100_gpu_hours": estimated,
             "authorization_envelope_a100_gpu_hours": ENVELOPE_A100_GPU_HOURS,
-            "estimated_parallel_wall_hours": 3.0931814077885096,
+            "estimated_parallel_wall_hours": parallel_wall_estimate,
         },
         "bindings": bindings,
     }, "preregistration_payload_sha256")

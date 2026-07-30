@@ -60,11 +60,11 @@ from .oracle_v3_parser import parse_oracle_v3_response
 # 473-call runtime sample, and a token-cap scaling of the concurrent tail; see
 # FULL_GRID_CALL_RESERVATION_DERIVATION.json.  It remains a hard per-call cost
 # reservation, not a latency target or permission to retry.
-CALL_RESERVATION_WALL_SECONDS = 65.0
+CALL_RESERVATION_WALL_SECONDS = 66.0
 MODEL_LOAD_RESERVATION_WALL_SECONDS = 30.0
 LOADED_WORKER_IDLE_LEASE_SECONDS = 2.0
 LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS = 8.0
-ENVELOPE_A100_GPU_HOURS = 54.0
+ENVELOPE_A100_GPU_HOURS = 56.0
 GPU_IDLE_MAX_MEMORY_MIB = 16
 GPU_IDLE_MAX_UTILIZATION_PERCENT = 0
 EXPECTED_CUBLAS_WORKSPACE_CONFIG = ":4096:8"
@@ -126,6 +126,7 @@ def validate_compute_approval(path: Path = APPROVAL) -> dict[str, Any]:
     derivation = load_json(
         PACKAGE / "FULL_GRID_CALL_RESERVATION_DERIVATION.json"
     )
+    cost = load_json(PACKAGE / "FULL_GRID_COST_ESTIMATE.json")
     schedule = load_json(SCHEDULE)
     if set(approval) != expected or not all((
         approval.get("status") == "APPROVED_BY_USER_FOR_EXACT_FULL_GRID_SEAL",
@@ -134,9 +135,11 @@ def validate_compute_approval(path: Path = APPROVAL) -> dict[str, Any]:
         approval.get("review_bundle_sha256") == sha256_file(review_bundle),
         approval.get("final_package_manifest_sha256") == sha256_file(final_package),
         approval.get("approved_call_count") == EXPECTED_UNIT_COUNT,
-        approval.get("estimated_a100_gpu_hours") == 16.09712320568816,
+        approval.get("estimated_a100_gpu_hours")
+        == cost["estimated_a100_gpu_hours"],
         approval.get("authorization_envelope_a100_gpu_hours") == ENVELOPE_A100_GPU_HOURS,
-        approval.get("parallel_wall_hours") == 3.0931814077885096,
+        approval.get("parallel_wall_hours")
+        == cost["estimated_parallel_wall_hours"],
         approval.get("worker_gpu_pairs") == {
             row["worker_id"]: row["physical_gpu_ids"] for row in schedule["workers"]
         },
@@ -146,7 +149,7 @@ def validate_compute_approval(path: Path = APPROVAL) -> dict[str, Any]:
         approval.get("partial_results_are_not_formal_reference") is True,
         approval.get("downstream_not_authorized") is True,
         approval.get("fresh_execution_id")
-        == "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_CONCURRENT_RESERVATION_V3",
+        == "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_EVIDENCE_COMPLETE_RESERVATION_V4",
         approval.get("fresh_execution_root") == str(EXECUTION.relative_to(ROOT)),
         approval.get("fresh_execution_starts_from_unit_ordinal") == 0,
         approval.get("prior_completed_labels_reused") is False,
