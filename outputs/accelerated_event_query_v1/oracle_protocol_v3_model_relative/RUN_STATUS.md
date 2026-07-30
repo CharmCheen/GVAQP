@@ -320,3 +320,13 @@ re-reads durable state, and linearizes the authenticated ledger transition and
 process spawn while holding that lock. A regression injection requires that
 only W0 spawns in the reviewer interleaving. Local evidence is 139 tests
 passed, with zero formal model loads or calls.
+
+Independent review of staged seal V3 (`c0094a…`) found a distinct active-peer
+liveness race: W0 could die during W2 GPU authentication after the loop-top
+health poll, leaving durable state temporarily `READY` and allowing W2 to
+spawn. Seal V3 is rejected with zero formal calls. The next revision checks
+every active peer for nonzero exit both immediately before Popen and again
+after Popen while still holding the coordinator lock. A child created in the
+remaining Popen interval cannot reserve model-load residency under that lock;
+if a peer died, the uncommitted child is killed and receives no SPAWNED ledger
+transition. Local evidence is 141 tests passed and zero formal calls.

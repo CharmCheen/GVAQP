@@ -308,4 +308,10 @@
 - Second revision: every authenticated activation now reacquires the exact
   global coordinator lock, rechecks durable `READY`, and linearizes the
   activation-ledger transition and process creation before releasing the lock.
-- Status: `REVISED_AFTER_SECOND_INDEPENDENT_COUNTEREXAMPLE; NEW_EXACT_PACKAGE_REVIEW_REQUIRED`.
+- Third counterexample: staged seal V3 allowed W2 to spawn if W0 died during
+  W2 authentication after the loop-top process-health poll but before the
+  locked global-state recheck; the state remained `READY` until the next poll.
+- Third revision: locked activation checks active-peer return codes before and
+  after Popen. A post-Popen peer failure kills the uncommitted child before
+  lock release/model-load reservation and omits the SPAWNED ledger event.
+- Status: `REVISED_AFTER_THIRD_INDEPENDENT_COUNTEREXAMPLE; NEW_EXACT_PACKAGE_REVIEW_REQUIRED`.

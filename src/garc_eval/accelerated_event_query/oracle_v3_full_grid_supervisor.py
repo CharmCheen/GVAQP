@@ -271,6 +271,7 @@ def _activate_worker_if_globally_ready(
     activation_ledger: Path,
     row: dict[str, Any],
     snapshot: dict[str, Any],
+    active_peers: list[WorkerProcess],
     spawn: Callable[[dict[str, Any]], WorkerProcess],
 ) -> WorkerProcess:
     """Linearize process creation before any concurrent global fail-stop.
@@ -293,6 +294,12 @@ def _activate_worker_if_globally_ready(
                     "global fail-stop active before worker spawn: "
                     f"{row['worker_id']}:{state.get('stop_trigger')}"
                 )
+            failed_peer = _nonzero_peer_exit(active_peers)
+            if failed_peer is not None:
+                raise RuntimeError(
+                    "abrupt_active_worker_exit_before_activation:"
+                    f"{failed_peer[0]}:returncode={failed_peer[1]}"
+                )
             append_hash_chain(activation_ledger, {
                 "event": "WORKER_PAIR_AUTHENTICATED",
                 "worker_id": row["worker_id"],
@@ -300,6 +307,12 @@ def _activate_worker_if_globally_ready(
                 "snapshot": snapshot,
             })
             worker = spawn(row)
+            failed_peer = _nonzero_peer_exit(active_peers)
+            if failed_peer is not None:
+                raise RuntimeError(
+                    "abrupt_active_worker_exit_during_activation:"
+                    f"{failed_peer[0]}:returncode={failed_peer[1]}"
+                )
             append_hash_chain(activation_ledger, {
                 "event": "WORKER_PROCESS_SPAWNED",
                 "worker_id": row["worker_id"],
@@ -313,6 +326,16 @@ def _activate_worker_if_globally_ready(
             raise
         finally:
             fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+
+
+def _nonzero_peer_exit(
+    active_peers: list[WorkerProcess],
+) -> tuple[str, int] | None:
+    for peer in active_peers:
+        returncode = peer.process.poll()
+        if returncode not in (None, 0):
+            return peer.worker_id, returncode
+    return None
 
 
 def supervise_staged_workers(
@@ -369,6 +392,7 @@ def supervise_staged_workers(
             activation_ledger=activation_ledger,
             row=rows[initial_worker_id],
             snapshot=activation_snapshots[initial_worker_id],
+            active_peers=[],
             spawn=spawn,
         )
         next_pair_authentication_ns = now_ns()
@@ -447,6 +471,7 @@ def supervise_staged_workers(
                         activation_ledger=activation_ledger,
                         row=rows[worker_id],
                         snapshot=snapshot,
+                        active_peers=list(active.values()),
                         spawn=spawn,
                     )
                 next_pair_authentication_ns = current_ns + int(
