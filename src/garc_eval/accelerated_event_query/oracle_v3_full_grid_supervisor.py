@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from .oracle_v3_full_grid_control import (
+    STOP_INTENT_FILENAME,
     _read_jsonl,
     append_hash_chain,
     emergency_global_stop,
@@ -294,10 +295,15 @@ def _activate_worker_if_globally_ready(
                     "global fail-stop active before worker spawn: "
                     f"{row['worker_id']}:{state.get('stop_trigger')}"
                 )
-            failed_peer = _nonzero_peer_exit(active_peers)
+            if (execution_root / STOP_INTENT_FILENAME).exists():
+                raise RuntimeError(
+                    "global fail-stop intent active before worker spawn: "
+                    f"{row['worker_id']}"
+                )
+            failed_peer = _terminal_peer_exit(active_peers)
             if failed_peer is not None:
                 raise RuntimeError(
-                    "abrupt_active_worker_exit_before_activation:"
+                    "terminal_active_worker_exit_before_activation:"
                     f"{failed_peer[0]}:returncode={failed_peer[1]}"
                 )
             append_hash_chain(activation_ledger, {
@@ -307,10 +313,15 @@ def _activate_worker_if_globally_ready(
                 "snapshot": snapshot,
             })
             worker = spawn(row)
-            failed_peer = _nonzero_peer_exit(active_peers)
+            if (execution_root / STOP_INTENT_FILENAME).exists():
+                raise RuntimeError(
+                    "global fail-stop intent active during worker spawn: "
+                    f"{row['worker_id']}"
+                )
+            failed_peer = _terminal_peer_exit(active_peers)
             if failed_peer is not None:
                 raise RuntimeError(
-                    "abrupt_active_worker_exit_during_activation:"
+                    "terminal_active_worker_exit_during_activation:"
                     f"{failed_peer[0]}:returncode={failed_peer[1]}"
                 )
             append_hash_chain(activation_ledger, {
@@ -328,12 +339,12 @@ def _activate_worker_if_globally_ready(
             fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
 
 
-def _nonzero_peer_exit(
+def _terminal_peer_exit(
     active_peers: list[WorkerProcess],
 ) -> tuple[str, int] | None:
     for peer in active_peers:
         returncode = peer.process.poll()
-        if returncode not in (None, 0):
+        if returncode is not None:
             return peer.worker_id, returncode
     return None
 
@@ -370,13 +381,17 @@ def supervise_staged_workers(
     completed: set[str] = set()
     activation_snapshots: dict[str, dict[str, Any]] = {}
     activation_ledger = execution_root / "STAGED_ACTIVATION_LEDGER.jsonl"
-    for worker_id in order:
-        append_hash_chain(activation_ledger, {
-            "event": "WORKER_PENDING_GPU_AUTHENTICATION",
-            "worker_id": worker_id,
-            "physical_gpu_ids": rows[worker_id]["physical_gpu_ids"],
-        })
     try:
+        if activation_ledger.exists():
+            detail = "preexisting_staged_activation_ledger"
+            emergency_global_stop(execution_root, "output_path_collision", detail)
+            raise RuntimeError(detail)
+        for worker_id in order:
+            append_hash_chain(activation_ledger, {
+                "event": "WORKER_PENDING_GPU_AUTHENTICATION",
+                "worker_id": worker_id,
+                "physical_gpu_ids": rows[worker_id]["physical_gpu_ids"],
+            })
         try:
             activation_snapshots[initial_worker_id] = authenticate(
                 rows[initial_worker_id]["physical_gpu_ids"]
@@ -471,7 +486,10 @@ def supervise_staged_workers(
                         activation_ledger=activation_ledger,
                         row=rows[worker_id],
                         snapshot=snapshot,
-                        active_peers=list(active.values()),
+                        active_peers=[
+                            peer for peer_id, peer in active.items()
+                            if peer_id not in completed
+                        ],
                         spawn=spawn,
                     )
                 next_pair_authentication_ns = current_ns + int(

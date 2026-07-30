@@ -330,3 +330,14 @@ after Popen while still holding the coordinator lock. A child created in the
 remaining Popen interval cannot reserve model-load residency under that lock;
 if a peer died, the uncommitted child is killed and receives no SPAWNED ledger
 transition. Local evidence is 141 tests passed and zero formal calls.
+
+Pre-build source review then found three further fail-stop gaps before any new
+package artifact was emitted: unresolved zero exit was treated as success;
+pre-existing activation-ledger corruption raised outside the protected block;
+and a child already queued on the global lock could reserve model load before
+a contending fail-stop persisted state. The revision now requires an
+authoritatively processed exit before excluding a peer, protects and rejects
+all pre-existing activation ledgers, and publishes a durable write-once stop
+intent before lock contention. Every coordinator admission checks that intent
+under lock, so a candidate cannot emit `MODEL_LOAD_STARTED` first. Local
+evidence is 146 tests passed and zero formal calls.

@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import fcntl
 import json
+import os
+import tempfile
 import time
 from pathlib import Path
 from typing import Any
@@ -30,6 +32,45 @@ FAIL_STOP_TRIGGERS = {
     "post_load_process_fault",
     "integrity_mismatch",
 }
+STOP_INTENT_FILENAME = "GLOBAL_FAIL_STOP_INTENT.json"
+
+
+def signal_global_stop_intent(root: Path, trigger: str, detail: str) -> None:
+    """Publish a durable write-once stop intent before contending on the lock."""
+
+    if trigger not in FAIL_STOP_TRIGGERS:
+        raise ValueError("unknown global fail-stop trigger")
+    root.mkdir(parents=True, exist_ok=True)
+    intent_path = root / STOP_INTENT_FILENAME
+    payload = {
+        "trigger": trigger,
+        "detail": detail,
+        "requested_at_unix_ns": time.time_ns(),
+        "requesting_pid": os.getpid(),
+    }
+    payload["stop_intent_payload_sha256"] = canonical_hash(payload)
+    descriptor, temporary_name = tempfile.mkstemp(
+        prefix=f".{STOP_INTENT_FILENAME}.{os.getpid()}.",
+        suffix=".tmp",
+        dir=root,
+    )
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
+            handle.write(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        try:
+            os.link(temporary, intent_path)
+        except FileExistsError:
+            pass
+        directory_fd = os.open(root, os.O_DIRECTORY)
+        try:
+            os.fsync(directory_fd)
+        finally:
+            os.close(directory_fd)
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -69,6 +110,7 @@ def emergency_global_stop(root: Path, trigger: str, detail: str) -> None:
     """
     if trigger not in FAIL_STOP_TRIGGERS:
         raise ValueError("unknown global fail-stop trigger")
+    signal_global_stop_intent(root, trigger, detail)
     state_path = root / "GLOBAL_EXECUTION_STATE.json"
     ledger_path = root / "GLOBAL_EXECUTION_LEDGER.jsonl"
     lock_path = root / "GLOBAL_EXECUTION.lock"
@@ -112,6 +154,7 @@ class GlobalFailStopCoordinator:
         self.state_path = root / "GLOBAL_EXECUTION_STATE.json"
         self.ledger_path = root / "GLOBAL_EXECUTION_LEDGER.jsonl"
         self.lock_path = root / "GLOBAL_EXECUTION.lock"
+        self.stop_intent_path = root / STOP_INTENT_FILENAME
         self.execution_seal_sha256 = execution_seal_sha256
         self.worker_bindings = worker_bindings
         self.envelope_gpu_seconds = envelope_a100_gpu_hours * 3600.0
@@ -124,7 +167,11 @@ class GlobalFailStopCoordinator:
     def initialize(self) -> dict[str, Any]:
         self.root.mkdir(parents=True, exist_ok=True)
         with self._locked():
-            if self.state_path.exists() or self.ledger_path.exists():
+            if (
+                self.state_path.exists()
+                or self.ledger_path.exists()
+                or self.stop_intent_path.exists()
+            ):
                 raise RuntimeError("execution state already exists; in-approval resume is forbidden")
             state = {
                 "status": "READY",
@@ -360,6 +407,7 @@ class GlobalFailStopCoordinator:
     def trigger_stop(self, trigger: str, detail: str) -> None:
         if trigger not in FAIL_STOP_TRIGGERS:
             raise ValueError("unknown global fail-stop trigger")
+        signal_global_stop_intent(self.root, trigger, detail)
         with self._locked():
             state = self.state()
             if state["status"] != "STOPPED":
@@ -461,6 +509,27 @@ class GlobalFailStopCoordinator:
     def _require_running(self, state: dict[str, Any]) -> None:
         if state["status"] != "READY":
             raise RuntimeError(f"global execution is not accepting work: {state['status']}")
+        if self.stop_intent_path.exists():
+            try:
+                intent = load_json(self.stop_intent_path)
+                unsigned = {
+                    key: value for key, value in intent.items()
+                    if key != "stop_intent_payload_sha256"
+                }
+                if (
+                    intent.get("stop_intent_payload_sha256")
+                    != canonical_hash(unsigned)
+                    or intent.get("trigger") not in FAIL_STOP_TRIGGERS
+                ):
+                    raise RuntimeError("invalid stop-intent payload")
+                trigger = intent["trigger"]
+                detail = f"stop_intent:{intent.get('detail')}"
+            except Exception as exc:
+                trigger = "integrity_mismatch"
+                detail = f"invalid_stop_intent:{type(exc).__name__}:{exc}"
+            if state["status"] == "READY":
+                self._stop_locked(state, trigger, detail)
+            raise RuntimeError("global fail-stop intent is active")
 
     def _require_worker(self, worker_id: str, gpu_pair: list[int]) -> None:
         binding = self.worker_bindings.get(worker_id)
@@ -470,6 +539,7 @@ class GlobalFailStopCoordinator:
             raise RuntimeError("worker/GPU binding mismatch")
 
     def _stop_locked(self, state: dict[str, Any], trigger: str, detail: str) -> None:
+        signal_global_stop_intent(self.root, trigger, detail)
         state["status"] = "STOPPED"
         state["stop_trigger"] = trigger
         state["stop_detail"] = detail

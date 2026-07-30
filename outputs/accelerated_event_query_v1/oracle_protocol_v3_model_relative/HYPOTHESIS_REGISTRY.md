@@ -314,4 +314,13 @@
 - Third revision: locked activation checks active-peer return codes before and
   after Popen. A post-Popen peer failure kills the uncommitted child before
   lock release/model-load reservation and omits the SPAWNED ledger event.
-- Status: `REVISED_AFTER_THIRD_INDEPENDENT_COUNTEREXAMPLE; NEW_EXACT_PACKAGE_REVIEW_REQUIRED`.
+- Pre-build falsification: zero exit without an authoritative session-close
+  transition is not success; malformed pre-existing activation ledgers must
+  fail closed; and lock serialization alone does not prioritize a fail-stop
+  already contending behind a candidate model-load reservation.
+- Fourth revision: only supervisor-adjudicated completed peers are excluded;
+  every other terminal code blocks activation. A durable write-once stop
+  intent precedes lock contention and is checked by every coordinator
+  admission. Activation-ledger creation is inside the protected fail-stop
+  block and any pre-existing path is an output collision.
+- Status: `REVISED_AFTER_SOURCE_LEVEL_COUNTEREXAMPLES; 146_LOCAL_TESTS_PASS; NEW_EXACT_PACKAGE_REVIEW_REQUIRED`.

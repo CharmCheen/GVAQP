@@ -11,7 +11,7 @@ from typing import Any
 from .k3_unit_event_adapter import K3UnitEventAdapter, K3UnitEventConfig
 from .model_relative_event_relation import ModelRelativeEventRelation
 from .model_relative_labels import ModelRelativeUnitLabel
-from .oracle_v3_full_grid_control import _read_jsonl
+from .oracle_v3_full_grid_control import STOP_INTENT_FILENAME, _read_jsonl
 from .oracle_v3_full_grid_manifest import (
     EXPECTED_UNIT_COUNT,
     QUERY_ID,
@@ -322,6 +322,8 @@ def analyze_execution(
     global_state_path = execution_root / "GLOBAL_EXECUTION_STATE.json"
     global_ledger_path = execution_root / "GLOBAL_EXECUTION_LEDGER.jsonl"
     global_state = load_json(global_state_path) if global_state_path.exists() else {}
+    if (execution_root / STOP_INTENT_FILENAME).exists():
+        errors.append("unexpected_global_fail_stop_intent_in_complete_run")
     try:
         global_events = _read_jsonl(global_ledger_path)
     except Exception as exc:

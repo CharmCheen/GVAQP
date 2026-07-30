@@ -7,6 +7,7 @@ import pytest
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_control import (
     GlobalFailStopCoordinator,
     emergency_global_stop,
+    signal_global_stop_intent,
 )
 import garc_eval.accelerated_event_query.oracle_v3_full_grid_control as control
 
@@ -83,6 +84,24 @@ def test_emergency_stop_covers_post_initialization_validation_failure(tmp_path):
     emergency_global_stop(tmp_path, "authentication_mismatch", "source changed")
     assert value.state()["status"] == "STOPPED"
     assert value.state()["stop_trigger"] == "authentication_mismatch"
+
+
+def test_stop_intent_preempts_model_load_before_state_stop_commits(tmp_path):
+    value = coordinator(tmp_path)
+    value.initialize()
+    signal_global_stop_intent(tmp_path, "post_load_process_fault", "peer failed")
+    with pytest.raises(RuntimeError, match="stop intent"):
+        value.start_model_load("W2", [6, 7])
+    state = value.state()
+    assert state["status"] == "STOPPED"
+    assert state["model_load_workers"] == []
+    events = [
+        json.loads(line)
+        for line in value.ledger_path.read_text(encoding="utf-8").splitlines()
+    ]
+    assert [row["event"] for row in events] == [
+        "RUN_INITIALIZED", "GLOBAL_FAIL_STOP"
+    ]
 
 
 def test_three_closed_worker_sessions_are_required_for_complete_state(tmp_path):
