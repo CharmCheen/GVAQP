@@ -114,7 +114,7 @@ def seal() -> None:
         "reload_count": 0,
         "retry_count": 0,
         "retry_semantics": "zero retries within this fresh execution; every unit starts anew under the new seal",
-        "fresh_execution_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_CALL_RESERVATION_V2",
+        "fresh_execution_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_CONCURRENT_RESERVATION_V3",
         "fresh_execution_root": str(EXECUTION.relative_to(ROOT)),
         "fresh_execution_starts_from_unit_ordinal": 0,
         "prior_completed_labels_reused": False,
@@ -208,7 +208,7 @@ def review_bundle() -> None:
         "review_scope": [
             "1475 call accounting", "three tail units", "three model loads",
             f"{ENVELOPE_A100_GPU_HOURS:.1f} GPU-hour envelope", "global fail-stop", "partial publication",
-            "35-second token-cap-aware call reservation and prior failed-run evidence",
+            "65-second concurrent-tail-aware call reservation and nested prior failed-run evidence",
             "fresh-from-unit-zero execution with no prior label reuse",
             "unknown threshold", "K3 merge rules", "evaluator leakage",
             "worker overlap", "resume/retry", "analyzer/finalizer bindings",
@@ -256,7 +256,7 @@ Audit state: `COMPLETE_REVIEWED_AWAITING_EXPLICIT_COMPUTE_APPROVAL`
 - Workers: {worker_summary}; disjoint union PASS; activation mode
   `{schedule['activation_mode']}` with `{schedule['initial_worker_id']}` first.
 - Cost: 16.097123 A100 GPU-hours expected; {ENVELOPE_A100_GPU_HOURS:.1f} fresh-run envelope; three loads; zero reload/retry within the fresh execution.
-- Prior failed run: 136 completed/137 attempted, no formal publication or label reuse;
+- Immediate prior failed run: 473 completed/476 attempted, no formal publication or label reuse;
   conservative usage upper bound {derivation['prior_failed_run_conservative_usage_upper_bound_a100_gpu_hours']:.6f} A100 GPU-hours.
 - Prior plus fresh envelope: {derivation['prior_plus_fresh_formal_envelope_a100_gpu_hours']:.6f} < 64 authorized A100 GPU-hours.
 - Coverage: global and per-video determined fraction >= 0.99; parse failure release tolerance 0.

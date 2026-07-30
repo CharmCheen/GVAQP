@@ -64,10 +64,10 @@ def test_revised_call_reservation_and_fresh_root_are_internally_bound():
         + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
         + 3 * LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
     ) / 3600.0
-    assert CALL_RESERVATION_WALL_SECONDS == 35.0
-    assert aggregate_hard_bound == pytest.approx(28.74388888888889)
-    assert aggregate_hard_bound < ENVELOPE_A100_GPU_HOURS == 29.0
-    assert EXECUTION.name == "full_grid_execution_staged_v2_call_reservation"
+    assert CALL_RESERVATION_WALL_SECONDS == 65.0
+    assert aggregate_hard_bound == pytest.approx(53.327222222222225)
+    assert aggregate_hard_bound < ENVELOPE_A100_GPU_HOURS == 54.0
+    assert EXECUTION.name == "full_grid_execution_staged_v3_concurrent_reservation"
     assert EXECUTION.name in unit_output_path("DALI", "DALI_u0000")
     assert EXECUTION.name in unit_parsed_path("DALI", "DALI_u0000")
 

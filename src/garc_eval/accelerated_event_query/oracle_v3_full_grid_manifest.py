@@ -28,7 +28,7 @@ EXPECTED_UNITS_BY_VIDEO = {"DALI": 567, "HANGZHOU": 561, "WUHAN": 347}
 EXPECTED_GPU_PAIRS = {"DALI": [2, 6], "HANGZHOU": [3, 5], "WUHAN": [1, 7]}
 EXPECTED_UNIT_COUNT = 1475
 EXPECTED_FRAME_OCCURRENCES = 30932
-EXECUTION_DIRECTORY_NAME = "full_grid_execution_staged_v2_call_reservation"
+EXECUTION_DIRECTORY_NAME = "full_grid_execution_staged_v3_concurrent_reservation"
 EXPECTED_TAILS = {
     "DALI_u0566": {"video_id": "DALI", "frame_count": 12},
     "HANGZHOU_u0560": {"video_id": "HANGZHOU", "frame_count": 2},

@@ -18,7 +18,7 @@ from .oracle_v3_manifest import load_json, sha256_file, validate_payload_hash
 
 ROOT = Path(__file__).resolve().parents[3]
 BASE = ROOT / "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative"
-PACKAGE = BASE / "full_grid_preregistration_staged_v2_call_reservation"
+PACKAGE = BASE / "full_grid_preregistration_staged_v3_concurrent_reservation"
 EXECUTION = BASE / EXECUTION_DIRECTORY_NAME
 PREREG = PACKAGE / "FULL_GRID_PREREGISTRATION.json"
 SEAL = PACKAGE / "FULL_GRID_EXECUTION_SEAL.json"
@@ -49,13 +49,14 @@ def _validate_prior_failure_revision_bindings(prereg: dict[str, Any]) -> None:
     if not all((
         prior.get("status")
         == "AUTHENTICATED_INCOMPLETE_PRIOR_RUN_REVISION_EVIDENCE_ONLY",
-        prior.get("completed_call_count") == 136,
-        prior.get("attempted_call_count") == 137,
-        prior.get("uncertain_terminal_unit_id") == "DALI_u0136",
+        prior.get("completed_call_count") == 473,
+        prior.get("attempted_call_count") == 476,
+        prior.get("uncertain_terminal_unit_ids")
+        == ["DALI_u0468", "HANGZHOU_u0003", "WUHAN_u0002"],
         prior.get("formal_reference_artifacts_present") is False,
         prior.get("reuse_in_new_execution")
         == "FORBIDDEN; fresh execution starts at unit 0",
-        len(prior.get("raw_output_bindings", [])) == 136,
+        len(prior.get("raw_output_bindings", [])) == 473,
     )):
         raise RuntimeError("prior failed execution evidence semantics changed")
     for binding in prior.get("bindings", []) + prior.get(
@@ -69,12 +70,13 @@ def _validate_prior_failure_revision_bindings(prereg: dict[str, Any]) -> None:
     if not all((
         derivation.get("status")
         == "FROZEN_PROSPECTIVE_REVISION_BEFORE_FRESH_EXECUTION",
-        derivation.get("completed_observation_count") == 136,
+        derivation.get("completed_observation_count") == 473,
+        derivation.get("concurrent_activation_observation_count") == 7,
         derivation.get("frozen_generation_max_new_tokens") == 192,
-        derivation.get("revised_per_call_hard_reservation_wall_seconds") == 35.0,
-        derivation.get("fresh_formal_execution_envelope_a100_gpu_hours") == 29.0,
+        derivation.get("revised_per_call_hard_reservation_wall_seconds") == 65.0,
+        derivation.get("fresh_formal_execution_envelope_a100_gpu_hours") == 54.0,
         derivation.get("full_grid_all_operations_hard_bound_a100_gpu_hours", 1e9)
-        <= 29.0,
+        <= 54.0,
         derivation.get("prior_plus_fresh_formal_envelope_a100_gpu_hours", 1e9)
         < 64.0,
         derivation.get("absolute_safety_margin_seconds", -1.0) > 0.0,
