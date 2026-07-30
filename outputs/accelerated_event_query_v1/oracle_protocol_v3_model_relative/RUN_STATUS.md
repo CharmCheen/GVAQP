@@ -304,3 +304,9 @@ that race to `authentication_mismatch`, maps an initial spawn failure to
 Local evidence after the repair: 138 tests pass; the rejected seal produced no
 model load, formal call, or formal output. A new exact package, seal, and
 independent review are required before launch.
+
+A subsequent pre-build source audit caught stale simultaneous-pair prose in
+the completion-audit generator. No package artifact had yet been written. The
+generator now loads and validates the sealed worker schedule and derives its
+worker IDs, call counts, GPU pairs, activation mode, and initial worker from
+that artifact instead of duplicating them as prose constants.

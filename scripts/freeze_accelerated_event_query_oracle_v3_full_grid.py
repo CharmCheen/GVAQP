@@ -201,6 +201,13 @@ def review_bundle() -> None:
 
 def completion_audit() -> None:
     bundle = validate_review_bundle()
+    schedule = load_json(SCHEDULE)
+    validate_worker_schedule(schedule, load_json(UNITS))
+    worker_summary = "; ".join(
+        f"{row['worker_id']}: {row['exact_call_count']} calls on "
+        f"({row['physical_gpu_ids'][0]},{row['physical_gpu_ids'][1]})"
+        for row in schedule["workers"]
+    )
     review_path = PACKAGE / "FULL_GRID_INDEPENDENT_REVIEW.md"
     if not review_path.is_file():
         raise RuntimeError("independent review artifact missing")
@@ -219,7 +226,8 @@ Audit state: `COMPLETE_REVIEWED_AWAITING_EXPLICIT_COMPUTE_APPROVAL`
 
 - Exact units: 1,475; frame occurrences: 30,932; duplicate/missing units: 0/0.
 - Tail units: DALI 12, HANGZHOU 2, WUHAN 6 frames; real processor-only audit PASS.
-- Workers: 567/561/347 on frozen pairs (1,2)/(3,5)/(6,7); disjoint union PASS.
+- Workers: {worker_summary}; disjoint union PASS; activation mode
+  `{schedule['activation_mode']}` with `{schedule['initial_worker_id']}` first.
 - Cost: 16.097123 A100 GPU-hours expected; 19.4 envelope; three loads; zero reload/retry.
 - Coverage: global and per-video determined fraction >= 0.99; parse failure release tolerance 0.
 - Global fail-stop, cost shield, no-resume, partial nonpublication, K3 determinism,
