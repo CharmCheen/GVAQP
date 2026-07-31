@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0279:1785448273585269067",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "7c1a0e3b7aae847aa4345fae110279cfdb76b5c094742b85a573748424e1c61e",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "0d1ffc658aff209af1f7a7e497805c90d9bc8964d88dca54b932d6a85572d2b7",
+  "generated_token_ids_sha256": "bb23bcc6b47e73153aac8e1d9906fff992b05045c3c7975e9a37d95b262616bc",
+  "input_identity_sha256": "f28abbb609319da4404c5cb871b31b8dd46efbb6b12a2766581542251880fa92",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "90423980c0061076e2193c92376fae5af113b8ac455e57c63ebb4a832b749a00",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic lights ahead transition from red to green during the unit, indicating a change in traffic control that requires the ego driver to respond by accelerating or proceeding through the intersection. Additionally, the lead vehicle (white Toyota) remains stationary until the light turns green, suggesting a need for the ego driver to brake or maintain position until the signal permits movement. The presence of a crosswalk and other vehicles in adjacent lanes also necessitates cautious driving and potential braking or slowing to ensure safe passage.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "73c1d9cb6003180e85eea489c095e08f214e267c91d53e5c90fd5ffbf97f1ed1",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic lights ahead transition from red to green during the unit, indicating a change in traffic control that requires the ego driver to respond by accelerating or proceeding through the intersection. Additionally, the lead vehicle (white Toyota) remains stationary until the light turns green, suggesting a need for the ego driver to brake or maintain position until the signal permits movement. The presence of a crosswalk and other vehicles in adjacent lanes also necessitates cautious driving and potential braking or slowing to ensure safe passage.\"\n}",
+  "raw_response_sha256": "6b745438f9eca85ae83c62806a7cd9999e52c581fc6ab0d353ed3f23e98a67e0",
+  "record_payload_sha256": "e21bfe00c10fe05e512114db0d05039f62e6eb41678b4a6be4486de581631ae1",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.449559956789017,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.419229930266738,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0279",
+  "unit_ordinal": 1407,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0342:1785449588959788409",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "d70171bd8cacebd35761e76b70dee32f60ec64f716e7a17fbfe94c20652f17eb",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "b2b3a8dcbd9bb278bbfd62f5e73834ffa19ce7bf4f97e1381126e53d7fb7f413",
+  "generated_token_ids_sha256": "e57dcc52c194572c9b8a326f5b70d63469b8cb127e76a0e872111446212cefaf",
+  "input_identity_sha256": "b4ae4f169f00a37a8018eff08e34c3ef81160511fa7383c282bb1af889c5d132",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "9d70099f4363aa2571bbeea9be3e66fb11c669602f846e1fa86308d1ee211571",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching an intersection under an overpass with a red traffic light visible at the start of the unit. The traffic light changes to green with a countdown timer (e.g., 05 seconds) by frame 0:09, indicating a transition from stop to go. The lead vehicle (red Hyundai) remains stationary until the light turns green, requiring the ego driver to brake or maintain a stop until the signal permits movement. Additionally, the presence of a pedestrian crossing and other vehicles in adjacent lanes suggests the need for cautious maneuvering upon resuming motion. The visible traffic control (red to green transition) directly requires a marked response (braking to stop, then accelerating) within the unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "a73a7a0621c3888a07fd48a98f96a062dde28cd42d4d310e747b92ce30cbc036",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching an intersection under an overpass with a red traffic light visible at the start of the unit. The traffic light changes to green with a countdown timer (e.g., 05 seconds) by frame 0:09, indicating a transition from stop to go. The lead vehicle (red Hyundai) remains stationary until the light turns green, requiring the ego driver to brake or maintain a stop until the signal permits movement. Additionally, the presence of a pedestrian crossing and other vehicles in adjacent lanes suggests the need for cautious maneuvering upon resuming motion. The visible traffic control (red to green transition) directly requires a marked response (braking to stop, then accelerating) within the unit.\"\n}",
+  "raw_response_sha256": "79c26eb471650fb4acdf9f5960dbe0c3d9b4047cdf19c432d08eb194156a26e4",
+  "record_payload_sha256": "a6eb53e63714b549794d18b06d360259fb32de57d9af3580b23745c7b0caab0a",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 25.437744613736868,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 27.30029045045376,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0342",
+  "unit_ordinal": 1470,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

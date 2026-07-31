@@ -1,0 +1,56 @@
+{
+  "arc": {
+    "cluster_algorithm": "historical sequential scipy Jensen-Shannon distance change points",
+    "cluster_input": "[1-p_i(q), p_i(q)]",
+    "cluster_threshold": 0.001,
+    "confidence": 0.9,
+    "exact_fill": false,
+    "iou_threshold": 0.5,
+    "lp_enabled": true,
+    "proxy_threshold": 0.4,
+    "ps_enabled": true,
+    "startup_sampling_rate": 0.002,
+    "tau_units": 1,
+    "tc_enabled": true
+  },
+  "baseline_identity": "ARC-CACHED-REPLAY-v1",
+  "budgets": [
+    5,
+    10,
+    20,
+    50,
+    80,
+    100
+  ],
+  "classification": "algorithmic_cached_replay_not_native_arc_not_physical_deadline",
+  "current_method": {
+    "deterministic_repeated_for_seed_pairing": true,
+    "identity": "PSTR-5:4-FROZEN",
+    "selection_source": "sealed proxy-only PSTR-5:4 selections"
+  },
+  "evaluator": {
+    "matching_rule": "maximize overlap cardinality, then temporal IoU; one prediction and one reference at most once",
+    "path": "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/scripts/benchmark_lib.py",
+    "sha256": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+    "tiou_denominator": "reference event count",
+    "version": "benchmark_lib overlap-any one-to-one Hungarian matching"
+  },
+  "k3_materializer": {
+    "d_core_max": 40.0,
+    "d_seg_max": 60.0,
+    "g_max": 1,
+    "name": "k3_bridge_safe"
+  },
+  "metric_definitions": {
+    "f1_auc": "trapezoidal event F1 AUC normalized by budget span 5..100",
+    "verified_event_count": "number of strict K3 returned oracle-confirmed events",
+    "verified_event_yield": "verified_event_count / logical_oracle_calls (zero if no calls)"
+  },
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ]
+}

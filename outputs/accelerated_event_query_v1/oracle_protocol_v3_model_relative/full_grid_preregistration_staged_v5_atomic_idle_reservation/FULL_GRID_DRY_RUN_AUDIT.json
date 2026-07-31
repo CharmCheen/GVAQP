@@ -1,0 +1,38 @@
+{
+  "complete_mock": {
+    "analyzer_authentication_errors": [],
+    "exact_mock_call_count": 1475,
+    "finalizer_status": "DRY_RUN_FINALIZER_PASS_NOT_ORACLE",
+    "formal_publication_performed": false,
+    "k3_deterministic": true,
+    "mock_global_ledger_event_count": 2964,
+    "mock_label_pattern_sha256": "6e9ec9842f425c7b5509b2b7703b4e8a471fb3bd5941db71197632c15ddac812",
+    "mock_worker_ledger_event_counts": {
+      "ACCEPTED": 1475,
+      "INFERENCE_COMPLETED": 1475,
+      "INFERENCE_STARTED": 1475,
+      "MODEL_LOAD_COMPLETED": 3,
+      "MODEL_LOAD_STARTED": 3,
+      "PREPARED": 1475
+    },
+    "would_emit_formal_decision": "FULL_GRID_PASS_REFERENCE_RELEASED"
+  },
+  "dry_run_audit_payload_sha256": "801ba63c690119b2127025d4631f7e8ae26cf6ded16acca963db02d722bdd642",
+  "fault_injections": {
+    "abrupt_worker_death_global_stop": true,
+    "authentication_priority": true,
+    "cost_envelope_global_stop": true,
+    "duplicate_unit_global_stop": true,
+    "gpu_binding_global_stop": true,
+    "loaded_worker_idle_global_stop": true,
+    "parse_failure_blocks_release": true,
+    "partial_nonpublication": true,
+    "reload_global_stop": true,
+    "resume_prohibited": true,
+    "transactional_idle_lease_missed_poll_global_stop": true,
+    "unknown_threshold_blocks_release": true
+  },
+  "formal_full_grid_raw_output_created": false,
+  "formal_reference_created": false,
+  "status": "PASS_NO_CHECKPOINT_LOAD_NO_MODEL_INFERENCE"
+}

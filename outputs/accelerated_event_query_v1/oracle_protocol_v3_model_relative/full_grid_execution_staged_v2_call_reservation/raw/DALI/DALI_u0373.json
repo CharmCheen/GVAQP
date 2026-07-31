@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0373:1785427404288246336",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "914c05cbbcbaa266e0b4be2259324f7e035d1ce749e102238c13a3dddd44c3b0",
+  "execution_seal_sha256": "2189d821eba4b0e0022da4f0a1113e51ed2128351def12c4e310ffd36569c9ee",
+  "execution_session_id": "b1d874dad9633943da9182baee77bb3366cda2f0d6407e982a26dfc65e45aac8",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "799f3ad018863417a273ecd9f754b8c564eecd99eaccc1e734946623b3659125",
+  "generated_token_ids_sha256": "bd9504dbbbe7bada671886e05a0d4eab1e14eea8b1a5c955601e075d9136a730",
+  "input_identity_sha256": "c7399cee2263de9717a5f72a9fe4e71ff25561b6db3b5b5bfaccc5d830f3db7f",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "60e73473b0d1b59e2390b5038daa5b9115518d938b87a0f3935cb3b472d70840",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a white van in a busy urban street with heavy pedestrian and two-wheeled traffic. Multiple scooters and bicycles are moving closely in the same lane and adjacent areas, some approaching or crossing the path. Pedestrians are also present near the road edge, including near red market tents. The traffic light ahead is red, indicating a stop is required. Additionally, a blue bus is visible on the left, and vehicles are queuing, suggesting a need for braking or slowing. The combination of dense traffic, red light, and close proximity of road users necessitates a noticeable slowdown or braking action.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "238f22426fd4aec434b726e23d80776a788230dd8e874007ede8c5b403ac6615",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a white van in a busy urban street with heavy pedestrian and two-wheeled traffic. Multiple scooters and bicycles are moving closely in the same lane and adjacent areas, some approaching or crossing the path. Pedestrians are also present near the road edge, including near red market tents. The traffic light ahead is red, indicating a stop is required. Additionally, a blue bus is visible on the left, and vehicles are queuing, suggesting a need for braking or slowing. The combination of dense traffic, red light, and close proximity of road users necessitates a noticeable slowdown or braking action.\"\n}",
+  "raw_response_sha256": "f7e54637da3afea210f90a485b0e2bb92dfbb5d513478e0bd0173e08dd885ee6",
+  "record_payload_sha256": "6002ea7d1ac1bd34b4443b1c96e4b25eb4ba04f5deb26c14c31613b27b81b3c2",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 22.438159953802824,
+    "model_load_seconds": 14.661523081362247,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 24.198492100462317,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0373",
+  "unit_ordinal": 373,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0242:1785447014011870486",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "16b3387269505663742227033a44496cca1f495909aeaad2b2cfeaabd7cd98dd",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "184d3e1a031c8d78faa61dfbb2392ecbec4a74622b742b3bf97f2507ad857b43",
+  "generated_token_ids_sha256": "4bf3812bc12cd706b4310cf409221b31d5c6a61fd20c3e444829fac9d5e3e153",
+  "input_identity_sha256": "700f3ac22199a6995e9762526eb68c20629a560a59c18000945768759e914965",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "20d11e0ae520c7bfc2a518cb39bc91ca25b30e331c80ed0cd802a80c913a5088",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with traffic signals that turn red at frame 0:10, requiring a braking action to stop before the crosswalk. Additionally, the speed indicator shows a decrease from 64 km/h to 56 km/h over the unit, indicating a noticeable slowdown in response to the approaching traffic control. The presence of crosswalks and traffic signals directly ahead necessitates a marked response from the driver.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "ac680c480a16f0ce440f0e93397f7a33d80c932bc313902a0dd9f8355b7c747e",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with traffic signals that turn red at frame 0:10, requiring a braking action to stop before the crosswalk. Additionally, the speed indicator shows a decrease from 64 km/h to 56 km/h over the unit, indicating a noticeable slowdown in response to the approaching traffic control. The presence of crosswalks and traffic signals directly ahead necessitates a marked response from the driver.\"\n}",
+  "raw_response_sha256": "8e02ead507f45f398b676d428f5ba73ad2f534edb291df87eedfffb9260207e1",
+  "record_payload_sha256": "c0fdd1a04a058589bf9cebe3e50c1e6cb724a914489eb56690040d8f8e76d4af",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.779630856588483,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.578474797308445,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0242",
+  "unit_ordinal": 809,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

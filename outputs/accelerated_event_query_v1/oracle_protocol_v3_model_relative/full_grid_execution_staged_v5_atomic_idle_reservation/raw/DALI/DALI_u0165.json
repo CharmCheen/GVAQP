@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0165:1785445875950800727",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "04d174a6126f3e783104866e5e70a09096c700fa49947206df9dc0ff261911dc",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "b1bc00b9c4e39cbf75cb329b72f982664a2d6b25e704ee576c2d571ee99047de",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "421131f5f228b61b7c7cc388702989ed221a9ace9daa593a5898c9feb5683d6a",
+  "generated_token_ids_sha256": "95389da6dadc13c45781025056f5f6ac45e90c9ec81c396ad776371102e0838a",
+  "input_identity_sha256": "c1bb8884c3899a984450f2850929fe47d380f1befe3ebb355ded1bf69ed3d1ff",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "d9f2faf1b58b575d76f2ba926c3522d7154ae8bad0aa2f19704418ae023d7e4b",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic lights ahead transition from red to green during the sequence, indicating a change in traffic control that requires the ego driver to respond by accelerating or preparing to proceed. Additionally, the lead vehicles are seen slowing down and stopping in the initial frames, suggesting a need for braking or deceleration to maintain safe following distance. The presence of multiple vehicles in close proximity and the changing traffic signal necessitate an attentive response from the driver.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "0b81a69b49abb5dcfbab0218afae0b2ab2cc5122a3909e475ef201ae0b098e07",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic lights ahead transition from red to green during the sequence, indicating a change in traffic control that requires the ego driver to respond by accelerating or preparing to proceed. Additionally, the lead vehicles are seen slowing down and stopping in the initial frames, suggesting a need for braking or deceleration to maintain safe following distance. The presence of multiple vehicles in close proximity and the changing traffic signal necessitate an attentive response from the driver.\"\n}",
+  "raw_response_sha256": "531334b5eca513057752bb519674ead84b56b4af5088823b5be28b1ec90b5377",
+  "record_payload_sha256": "0a1400f92dd3e380cdbc2c58178ebe9680c53c6601d0b7546d4fdcebed5001d2",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 18.47023062594235,
+    "model_load_seconds": 26.894216861575842,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 20.580476321280003,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0165",
+  "unit_ordinal": 165,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

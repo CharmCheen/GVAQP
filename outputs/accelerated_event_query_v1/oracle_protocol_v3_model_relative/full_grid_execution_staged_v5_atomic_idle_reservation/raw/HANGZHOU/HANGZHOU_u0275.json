@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0275:1785447636373916543",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "4811bcddd46faf94d104417ed79b13891eabd4ba07b6df89867d1d41013bcda0",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "ab1801182db7ac809a45e752fc20056ff15f0647633cd42beb0931928e25b87c",
+  "generated_token_ids_sha256": "2e1bd199cac9f3b00531efd250934748c26f7267aa099f9dc3bee077322df6fc",
+  "input_identity_sha256": "f0cfd45aba14cc57020096921256f7d13edb6f61a72df090ab0a479bfb5fa1c6",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "14da4d2929c8e1e1f8f070e8355884b709260d446f78e458a6e39d599be134e9",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a traffic intersection with visible red traffic signals for the current direction of travel. The countdown timer on the signal decreases from 18 to 16 seconds, indicating an active red light phase requiring a stop. The road markings and lane configuration suggest the vehicle is in a through or turning lane that must yield to the red signal. Additionally, the presence of crosswalks and other vehicles at the intersection further necessitates a noticeable slowdown or braking action to comply with traffic control and ensure safety.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "cb0e05a0aec9ba10e51c5e1ee6fba3b5064397a3cfa03b97b5ce317e80d9d375",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a traffic intersection with visible red traffic signals for the current direction of travel. The countdown timer on the signal decreases from 18 to 16 seconds, indicating an active red light phase requiring a stop. The road markings and lane configuration suggest the vehicle is in a through or turning lane that must yield to the red signal. Additionally, the presence of crosswalks and other vehicles at the intersection further necessitates a noticeable slowdown or braking action to comply with traffic control and ensure safety.\"\n}",
+  "raw_response_sha256": "52047bec83c9ed83c70364b12da5a1ad592915b3c056b17b518e0a9a628a8d41",
+  "record_payload_sha256": "8dd8c9b71cc16dc91bc38fc6377a368be812b8ff3ef9dba320280a82bf943a9d",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 20.638470381498337,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 21.537772154435515,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0275",
+  "unit_ordinal": 842,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

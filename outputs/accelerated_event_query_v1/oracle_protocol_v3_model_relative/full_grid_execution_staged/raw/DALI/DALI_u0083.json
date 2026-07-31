@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0083:1785413749026862800",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "262aad73cb6a7b53369717f6d5ffa1eefa5752f43b4a4ea3d1c158c650fdf152",
+  "execution_seal_sha256": "5136aaddfc5e7daee691c9faaab323f3159db6d52a469fade45fce6719847134",
+  "execution_session_id": "bd307271f8c64332a151a789f6d7f8b777c804e24c3afad8ceba297e6ea2d26f",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "4b691286ab38044c2d42f0a55f271ffbc8e10ab07e851b0727b5ec58932ea677",
+  "generated_token_ids_sha256": "466ea80cf6cde35031b30182e34e17f397416ef9a7983e28531a6d840bf2ea9d",
+  "input_identity_sha256": "1225cf8d5d568e198bc9d01d017c00aeca354d19492a3994199106a84e5dfb1d",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "d1427dbb97d91727c1aa601bbbe43765c9efeca4815168870b6976dafebb1608",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily down a wide, clear urban road with no visible obstacles, sudden changes in traffic, or traffic control requiring a marked response. A blue bus is seen pulling over to the right side of the road, but it is not in the ego vehicle's path and does not require a slowdown or avoidance maneuver. Pedestrians and other vehicles are present but not encroaching on the ego path. The road conditions and traffic flow appear normal and safe for steady driving.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "739fb55e56fe955772b6aa0309fb9462d79740f00ad4f20b9196827f511e8ab6",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily down a wide, clear urban road with no visible obstacles, sudden changes in traffic, or traffic control requiring a marked response. A blue bus is seen pulling over to the right side of the road, but it is not in the ego vehicle's path and does not require a slowdown or avoidance maneuver. Pedestrians and other vehicles are present but not encroaching on the ego path. The road conditions and traffic flow appear normal and safe for steady driving.\"\n}",
+  "raw_response_sha256": "1bab35b6ea4ef702e55d71bba4cb16ece32b6f66e7c56b3f7d8e57ffb4438d91",
+  "record_payload_sha256": "f4e4d0cfa75ae890bd40c55de9fb86ba8b05e35ea6dcd32878d837edb7a69e92",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 18.651370156556368,
+    "model_load_seconds": 15.113239778205752,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 20.28795589879155,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0083",
+  "unit_ordinal": 83,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

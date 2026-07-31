@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0319:1785449101691730359",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "471c3f1d8ef82d7c8fddc63da56609d553d9a9a944044efe2255527da18c70ac",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "da73f9d58d0696ef52b9733991ac208c8a64d65f8be76986d46174314a35a942",
+  "generated_token_ids_sha256": "d98aa270295f32f7b6428d6ab2df207033248c17c7d89bfb09d5979a443e2646",
+  "input_identity_sha256": "864ac1c7a213328ccd5780c163a180b6ca1d9a5f93d83ef5e95fb27df0cf4153",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "a01096e1f1c8ac634b9789309030ccffd368ce19ec7a3662661c2a01f4a05c79",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching a low clearance bridge marked with a 3.9m height restriction and yellow-black striped barriers. The bus ahead is slowing down and aligning to pass under the bridge, indicating a need for the ego driver to reduce speed and navigate carefully. The presence of the height restriction and the visible narrowing of the passage require a noticeable slowdown or braking action to safely proceed.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "8833e94866db34e3b54c80ab856dea55df57d0773bddeb66ad0aac9e0281ec39",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching a low clearance bridge marked with a 3.9m height restriction and yellow-black striped barriers. The bus ahead is slowing down and aligning to pass under the bridge, indicating a need for the ego driver to reduce speed and navigate carefully. The presence of the height restriction and the visible narrowing of the passage require a noticeable slowdown or braking action to safely proceed.\"\n}",
+  "raw_response_sha256": "9ad4499746a71ac091d3292d5c7fbb52470bb0e99deff9bcf0ac8084e8c004d0",
+  "record_payload_sha256": "0926b17083ef35c772dbac460de2e1cc5dc49c2ef9c5fdc5bf5260a8567c6472",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 15.95532538741827,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 18.26962450146675,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0319",
+  "unit_ordinal": 1447,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

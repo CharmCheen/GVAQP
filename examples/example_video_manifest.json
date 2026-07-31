@@ -1,0 +1,14 @@
+{
+  "video_id": "example",
+  "units": [
+    {"unit_id": 0, "start_sec": 0, "end_sec": 10, "scan_cost_sec": 1, "candidates": []},
+    {"unit_id": 1, "start_sec": 10, "end_sec": 20, "scan_cost_sec": 1, "candidates": [{"candidate_id": "c1", "track_id": 4, "score": 0.8}]},
+    {"unit_id": 2, "start_sec": 20, "end_sec": 30, "scan_cost_sec": 1, "candidates": []},
+    {"unit_id": 3, "start_sec": 30, "end_sec": 40, "scan_cost_sec": 1, "candidates": [{"candidate_id": "c3", "track_id": 2, "score": 0.6}]},
+    {"unit_id": 4, "start_sec": 40, "end_sec": 50, "scan_cost_sec": 1, "candidates": []}
+  ],
+  "confirm_outcomes": {
+    "1": {"positive": true, "distinct_utility_ids": ["event-1"], "actual_cost_sec": 2},
+    "3": {"positive": false, "distinct_utility_ids": [], "actual_cost_sec": 2}
+  }
+}

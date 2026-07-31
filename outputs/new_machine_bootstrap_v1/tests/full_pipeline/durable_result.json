@@ -1,0 +1,125 @@
+{
+  "actions": [
+    {
+      "action": "SCAN",
+      "actual_cost_sec": 1.0,
+      "candidate_ids": [],
+      "completed": true,
+      "cumulative_utility": 0,
+      "deadline_overrun": false,
+      "elapsed_sec": 1.0,
+      "estimated_cost_sec": 1.0,
+      "new_candidate_clusters": 0,
+      "new_distinct_utility": 0,
+      "unit_id": 2
+    },
+    {
+      "action": "SCAN",
+      "actual_cost_sec": 1.0,
+      "candidate_ids": [],
+      "completed": true,
+      "cumulative_utility": 0,
+      "deadline_overrun": false,
+      "elapsed_sec": 2.0,
+      "estimated_cost_sec": 1.0,
+      "new_candidate_clusters": 0,
+      "new_distinct_utility": 0,
+      "unit_id": 0
+    },
+    {
+      "action": "SCAN",
+      "actual_cost_sec": 1.0,
+      "candidate_ids": [
+        "integration-c1"
+      ],
+      "completed": true,
+      "cumulative_utility": 0,
+      "deadline_overrun": false,
+      "elapsed_sec": 3.0,
+      "estimated_cost_sec": 1.0,
+      "new_candidate_clusters": 1,
+      "new_distinct_utility": 0,
+      "unit_id": 1
+    },
+    {
+      "action": "CONFIRM",
+      "actual_cost_sec": 2.0,
+      "candidate_id": "integration-c1",
+      "completed": true,
+      "cumulative_utility": 1,
+      "deadline_overrun": false,
+      "distinct_utility_ids": [
+        "integration-event-1"
+      ],
+      "elapsed_sec": 5.0,
+      "estimated_cost_sec": 2.0,
+      "materialized": {
+        "candidate_id": "integration-c1",
+        "payload": {},
+        "track_id": 1,
+        "unit_id": 1
+      },
+      "new_candidate_clusters": 0,
+      "new_distinct_utility": 1,
+      "new_utility_ids": [
+        "integration-event-1"
+      ],
+      "positive": true,
+      "unit_id": 1
+    },
+    {
+      "action": "SCAN",
+      "actual_cost_sec": 1.0,
+      "candidate_ids": [
+        "integration-c1",
+        "integration-c3"
+      ],
+      "completed": true,
+      "cumulative_utility": 1,
+      "deadline_overrun": false,
+      "elapsed_sec": 6.0,
+      "estimated_cost_sec": 1.0,
+      "new_candidate_clusters": 1,
+      "new_distinct_utility": 0,
+      "unit_id": 3
+    },
+    {
+      "action": "CONFIRM",
+      "actual_cost_sec": 2.0,
+      "candidate_id": "integration-c3",
+      "completed": true,
+      "cumulative_utility": 1,
+      "deadline_overrun": false,
+      "distinct_utility_ids": [],
+      "elapsed_sec": 8.0,
+      "estimated_cost_sec": 2.0,
+      "materialized": {
+        "candidate_id": "integration-c3",
+        "payload": {},
+        "track_id": 2,
+        "unit_id": 3
+      },
+      "new_candidate_clusters": 0,
+      "new_distinct_utility": 0,
+      "new_utility_ids": [],
+      "positive": false,
+      "unit_id": 3
+    }
+  ],
+  "distinct_utility_ids": [
+    "integration-event-1"
+  ],
+  "final_result": {
+    "actions_completed": 6,
+    "actions_on_time": 6,
+    "deadline_overrun": false,
+    "distinct_utility_count": 1,
+    "durable_distinct_utility_count": 1,
+    "elapsed_sec": 8.0,
+    "frontier_size": 0,
+    "policy": "R4_FIXED_TIME_RATIO_25_75",
+    "realized_scan_fraction": 0.5
+  },
+  "status": "FINAL",
+  "stop_reason": "no_complete_action_fits"
+}

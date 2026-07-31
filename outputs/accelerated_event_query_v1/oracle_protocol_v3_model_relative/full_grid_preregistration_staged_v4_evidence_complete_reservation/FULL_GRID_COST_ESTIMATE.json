@@ -1,0 +1,58 @@
+{
+  "actual_gpu_residency_accounting": "continuous coordinator-side two-GPU residency segments from model-load reservation through call/durable acceptance, every coordinator and inter-call gap, explicit model release, and supervisor-observed process-exit tail",
+  "authorization_envelope_a100_gpu_hours": 56.0,
+  "call_load_plus_simultaneous_emergency_reservation_subtotal_a100_gpu_hours": 54.14666666666667,
+  "call_reservation_derivation": {
+    "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_preregistration_staged_v4_evidence_complete_reservation/FULL_GRID_CALL_RESERVATION_DERIVATION.json",
+    "sha256": "9bdccba267ba86be1500c4b0562b0611fa8cfad6c16541fdba0269add4a57cb0",
+    "size_bytes": 182514
+  },
+  "cost_estimate_payload_sha256": "2df75dd1d6622bd18e653e544e66e62578bd98f4564f53ba4daaeb4dffb38973",
+  "cost_shield": "call reservation remains open from pre-decode through durable raw and ACCEPTED persistence; a reusable prospective emergency reservation remains active per loaded worker; a coordinator-side continuous residency clock, not caller timing, accounts lock/hash-chain/persistence gaps; elapsed idle consumes and must refresh the emergency reservation before another call; no start above envelope",
+  "direct_concurrent_accounted_mean_seconds": 22.860417757285713,
+  "direct_concurrent_accounted_standard_deviation_seconds": 5.773315731597347,
+  "direct_concurrent_mean_95_percent_t_critical": 2.4469118511449786,
+  "direct_concurrent_mean_95_percent_upper_seconds": 28.1998442653512,
+  "direct_concurrent_mean_seconds_by_video": {
+    "DALI": 23.755435408,
+    "HANGZHOU": 21.336793255,
+    "WUHAN": 24.25083686
+  },
+  "direct_concurrent_observation_count": 7,
+  "estimated_a100_gpu_hours": 18.835258254316113,
+  "estimated_a100_gpu_hours_95_percent_mean_uncertainty_upper": 23.135512147972786,
+  "estimated_parallel_wall_hours": 3.7455554410619447,
+  "estimated_parallel_wall_hours_95_percent_mean_uncertainty_upper": 4.446324530478647,
+  "estimation_assumption": "all units are conservatively point-estimated in the direct three-worker concurrent regime; exact video call counts use each video's tiny direct concurrent sample mean, while a global seven-call Student-t upper quantifies sampling uncertainty; staged one/two-worker time is not credited as a speedup",
+  "exact_call_count": 1475,
+  "full_grid_all_operations_hard_bound_a100_gpu_hours": 55.778888888888886,
+  "gpu_profile_authentication": "the initial pair must have zero compute contexts, zero utilization, and <=16 MiB used memory before initialization; each pending frozen pair must independently satisfy the same rule immediately before process spawn and again before model load",
+  "historical_473_call_accounted_mean_seconds": 19.697589001708245,
+  "maximum_idle_residency_gap_count": 1481,
+  "maximum_idle_wall_seconds_per_gap": 2.0,
+  "observed_second_run_load_seconds": {
+    "DALI": 14.667711487,
+    "HANGZHOU": 17.027252202,
+    "WUHAN": 17.456611269
+  },
+  "per_call_hard_reservation_wall_seconds": 66.0,
+  "per_load_hard_reservation_wall_seconds": 30.0,
+  "per_loaded_worker_reusable_emergency_reservation_wall_seconds": 8.0,
+  "planned_model_load_count": 3,
+  "point_estimated_worker_wall_seconds": {
+    "DALI": 13483.999587823,
+    "HANGZHOU": 11986.968268257,
+    "WUHAN": 8432.497001689
+  },
+  "post_session_process_exit_lease_wall_seconds_per_worker": 2.0,
+  "prior_failed_execution_evidence": {
+    "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_preregistration_staged_v4_evidence_complete_reservation/FULL_GRID_PRIOR_FAILURE_EVIDENCE.json",
+    "sha256": "bb9686dd9295bd4f8f456ae6542510f5a54b093abc5b8bb174005c30617ee6ba",
+    "size_bytes": 138204
+  },
+  "reload_count": 0,
+  "reservation_and_all_operations_bounds_fit_envelope": true,
+  "retry_count": 0,
+  "status": "FROZEN_FULL_GRID_COST_AND_RESERVATION_PLAN",
+  "unused_envelope_cannot_authorize_extra_calls_reloads_or_retries": true
+}

@@ -1,0 +1,53 @@
+{
+  "status": "PASS_THREE_INDEPENDENT_FULL_SHARD_REDECODE_REPROCESS_NO_INFERENCE",
+  "recorded_at_utc": "2026-07-29T22:20:36Z",
+  "execution_seal_sha256": "8160e98be9479813f6deeb0eb5c41bceb03c4db1b7247a07acb321adf398fef6",
+  "unit_manifest_sha256": "48f814a0e43f502439f5ecf9f694016eedf8d5aeacf48a6b5c0c757e634bf506",
+  "frame_manifest_sha256": "438c6de5f13b56dc3b3e2194c6b264a2767c97488a56e69bc10d9a05a06369a6",
+  "processed_input_manifest_sha256": "deaa5d6ecd3d8979b24943595d287827aba343bbf7b004d35587dd083f9beb79",
+  "tail_processor_audit_sha256": "d8a5225899c2813b4ea41dcfd8b0f81fc3183152f0a310762177c7f8ade555bc",
+  "video_stream_audit_sha256": "5830684359107eb3e604e190452ca42221b36c5e26e6bf2bd3fff4c0521d7e48",
+  "exact_call_count": 1475,
+  "exact_frame_occurrence_count": 30932,
+  "checkpoint_loaded": false,
+  "model_inference_calls": 0,
+  "revision_locality_vs_rejected_v6": {
+    "rejected_v6_execution_seal_sha256": "d2f350221b832a0e0f607416f4a155237f194aec8a20ba0b9a6aa5d22eaa6ccf",
+    "frame_manifest_byte_identical": true,
+    "frame_set_change_count": 0,
+    "unchanged_processed_tensor_count": 1472,
+    "changed_processed_tensor_count": 3,
+    "changed_processed_tensor_unit_ids": [
+      "DALI_u0566",
+      "HANGZHOU_u0560",
+      "WUHAN_u0346"
+    ],
+    "change_reason": "The three legal truncated-final units now include their exact explicit tail declaration in the processor text; normal units preserve exact base-prompt tensors."
+  },
+  "workers": [
+    {
+      "worker_id": "V3_FULL_GRID_DALI",
+      "exact_call_count": 567,
+      "frame_occurrence_count": 11898,
+      "redecoded": true,
+      "reprocessed": true,
+      "status": "PASS_NO_MODEL_LOAD_NO_INFERENCE"
+    },
+    {
+      "worker_id": "V3_FULL_GRID_HANGZHOU",
+      "exact_call_count": 561,
+      "frame_occurrence_count": 11762,
+      "redecoded": true,
+      "reprocessed": true,
+      "status": "PASS_NO_MODEL_LOAD_NO_INFERENCE"
+    },
+    {
+      "worker_id": "V3_FULL_GRID_WUHAN",
+      "exact_call_count": 347,
+      "frame_occurrence_count": 7272,
+      "redecoded": true,
+      "reprocessed": true,
+      "status": "PASS_NO_MODEL_LOAD_NO_INFERENCE"
+    }
+  ]
+}

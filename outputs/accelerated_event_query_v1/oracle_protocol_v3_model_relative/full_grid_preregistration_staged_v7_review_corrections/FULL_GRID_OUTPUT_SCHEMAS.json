@@ -1,0 +1,26 @@
+{
+  "canonical_row_order": {
+    "event_relation": "video_id,start_time,end_time,event_id ascending",
+    "unit_labels": "unit ordinal ascending"
+  },
+  "coverage_report_required_fields": [
+    "status",
+    "oracle_coverage",
+    "per_video_oracle_coverage",
+    "label_counts",
+    "parse_status_counts",
+    "coverage_thresholds",
+    "primary_relation_rule",
+    "primary_relation_sha256",
+    "determined_only_lower_bound_relation_sha256",
+    "unknown_sensitive_upper_bound_diagnostic_relation_sha256",
+    "parse_failure_regions_are_unevaluable",
+    "coverage_payload_sha256"
+  ],
+  "event_relation_parquet": "event_id: string\nquery_id: string\nvideo_id: string\nstart_time: double\nend_time: double\nevidence_status: string\nsource_unit_ids: list<item: string>\n  child 0, item: string\nk3_group: string\nk3_config_sha256: string",
+  "formal_primary_relation_filename": "k3_model_relative_event_relation.parquet",
+  "only_release_commit_pointer_confers_formal_status": true,
+  "output_schemas_payload_sha256": "6d0170a6b7c858ea48a0cabba416a45ed31aded2f5f68ea2ea72248443192db8",
+  "status": "FROZEN_OUTPUT_SCHEMAS_BEFORE_EXECUTION",
+  "unit_labels_parquet": "ordinal: int64\nunit_id: string\nvideo_id: string\nstart_time: double\nend_time: double\nunit_kind: string\nparse_status: string\nauthoritative_label: string\ndiagnostic_confidence: string\ndiagnostic_evidence: string\nsource_raw_sha256: string\nrecord_payload_sha256: string"
+}

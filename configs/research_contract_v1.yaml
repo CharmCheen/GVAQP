@@ -1,0 +1,54 @@
+schema_version: RESEARCH_CONTRACT_V1
+status: SNAPSHOT_ONLY_UPSTREAM_FULL_GRID_ABORTED_RUNTIME
+snapshot_utc: 2026-07-30T12:28:10Z
+lineage:
+  main_repository: /root/charm/GVAQP
+  side_repository: /root/charm/GVAQP_side_rcsem
+  frozen_source_commit: 35d4829280166a30fbd130cfb43ab3aae163463d
+  execution_seal_sha256: 5136aaddfc5e7daee691c9faaab323f3159db6d52a469fade45fce6719847134
+query:
+  query_id: Q_DRIVER_RESPONSE_V1
+  semantics_zh: "查找需要驾驶员明显减速、制动或避让的事件。"
+  prompt_sha256: ffab97aeb65b7b8fddf8ce6fa9964319cda8b740aa87f90a3ed1df80c7c5c99e
+  note: "This narrower frozen V3 wording is authoritative; the broader pasted description is not substituted into the active seal."
+videos:
+  manifest_sha256: 2953eba0ca1bffd7bfad0e5681cc6242d01143ac2665820a89c9a203116c0ec9
+  ids: [DALI, HANGZHOU, WUHAN]
+  split: leave_one_video_out_only_after_complete_reference_release
+unit_grid:
+  sha256: 570ba03ce2678ec9168fb213f92d4ef30ec8306369c93159827e33ea3cc5b908
+  count: 1475
+  duration_seconds: 10.0
+  stride_seconds: 10.0
+oracle_v3:
+  model: Qwen3-VL-32B-Instruct-FP8
+  authoritative_labels: [relevant, not_relevant, unknown]
+  diagnostic_fields: [confidence, evidence]
+  parse_failure_is_distinct: true
+  reference_status: ABORTED_RUNTIME_NO_FORMAL_REFERENCE
+  failure_trigger: cost_envelope_exceeded
+  failure_detail: "call DALI_u0136 elapsed 23.754265s > sealed 23.579961s limit"
+k3:
+  file_sha256: ebcc3907a64b463060ce36ec5e4b4c188ecc12c3c1e434e1e8554b22112be200
+  configuration_hash: 7906ab2da20cab7edbe0f379224b60160c7a857cd81ab7f4fec42f54ab9629b9
+  maximum_merge_gap_seconds: 10.0
+  maximum_unknown_gap_units: 1
+  maximum_core_duration_seconds: 40.0
+  maximum_event_duration_seconds: 60.0
+objective:
+  safety_order: [zero_deadline_overrun, zero_post_deadline_commit, event_precision_floor, terminal_event_recall, anytime_event_recall_auc]
+  event_precision_floor: 0.80
+  sensitivity_precision_floors: [0.70, 0.90]
+  primary_output: EventRelation
+  action_space: [SCAN_FIXED, VERIFY_TOP1, STOP]
+cost_regime:
+  primary: measured_complete_path_wall_clock
+  formal_deadline_set: PENDING_COST_CALIBRATION
+  cached_replay_costs_are_not_seconds: true
+arc:
+  implementation_root: /root/charm/GVAQP-arc-phys-baseline
+  implementation_commit: dc5c507605f603f01d2a7f07e5b492ad0ca06280
+  status: DIRTY_USER_WORKTREE_CACHED_AND_PHYSICAL_ADAPTATIONS_NOT_FORMALLY_FROZEN
+publication:
+  partial_v3_labels_forbidden: true
+  downstream_forbidden_until_release_commit: true

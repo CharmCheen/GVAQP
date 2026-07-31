@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0383:1785449634169434163",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "5f892807f5fea1c277028e6cc80879f5653bda9350fdbea54233df505a3785df",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "aa38d46a73dc40bfd5880ae782e6a703c13379b99546c6e30000e0876da53669",
+  "generated_token_ids_sha256": "638f5d13836f9ac12f1fb014d91539610de07040dee8e952d372d78bb6b74484",
+  "input_identity_sha256": "64b90e3056a313f1481580ef69bb177c40d44e0d3feb3c135abc9137e256a231",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "7190751e592bece7ad5702cd283c7ec05a3c7445917a16c052b79fd6e0c77ee9",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily along a clear, straight road with green traffic signals visible throughout the unit. There are no sudden obstacles, road users entering the path, or traffic controls requiring a marked response. Traffic flow is smooth, and no visible hazards or conditions necessitate a slowdown, braking, or avoidance maneuver. The road is lined with trees and parked vehicles, but these do not impede or threaten the ego path.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "ed5a63bf931c944bc37a72f987d472a609347039c78396bb0ea56749188cde7a",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily along a clear, straight road with green traffic signals visible throughout the unit. There are no sudden obstacles, road users entering the path, or traffic controls requiring a marked response. Traffic flow is smooth, and no visible hazards or conditions necessitate a slowdown, braking, or avoidance maneuver. The road is lined with trees and parked vehicles, but these do not impede or threaten the ego path.\"\n}",
+  "raw_response_sha256": "78c1376f1d54f0fa654656c47fcff8a09103b08c0a71cb76ce34582482f1f3f3",
+  "record_payload_sha256": "7fbd48b0daa2423cd8f52762f717958026c99ca2b12d0da151e68284664e33e7",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.63375717960298,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.504311490803957,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0383",
+  "unit_ordinal": 950,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

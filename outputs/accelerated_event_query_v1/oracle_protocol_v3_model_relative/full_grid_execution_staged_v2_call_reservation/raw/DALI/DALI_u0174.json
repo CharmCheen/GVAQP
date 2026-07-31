@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0174:1785423439202955550",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "4e3b95a2bc8eb35419fba4091569e5ee29ba8b91898856999cb91489bbceb163",
+  "execution_seal_sha256": "2189d821eba4b0e0022da4f0a1113e51ed2128351def12c4e310ffd36569c9ee",
+  "execution_session_id": "b1d874dad9633943da9182baee77bb3366cda2f0d6407e982a26dfc65e45aac8",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "7b9ba92b8fe82cda6b4a23dbda764bfd041201b3892a60cfaaaa6b745f89e3e7",
+  "generated_token_ids_sha256": "bc29e9e2771fda7805f8841dac63a3a5d995499eed46c47b7816cd585255d8e1",
+  "input_identity_sha256": "6b659ee5003b71ee1668238833dd6e9558d3960746ba4435ac7bd351dbb5aab2",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "1866d655e8542eb5609c31e481873e4918e3394c5ac34883b47c7737f7593858",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on a clear road with visible traffic signals ahead. The traffic light is red, but the ego vehicle is not approaching the intersection closely enough to require an immediate braking or slowdown action within this 10-second unit. The road ahead is unobstructed except for a small red three-wheeled vehicle ahead, which is moving forward without sudden changes. There are no visible obstacles, sudden stops, or road users entering the ego path that would necessitate a marked response. The scene shows normal driving conditions with no urgent maneuvers required.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "21b4658cf147a9e686a21fd83e41cdcbb636f36196c3594e87bd6935a66ad2ce",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on a clear road with visible traffic signals ahead. The traffic light is red, but the ego vehicle is not approaching the intersection closely enough to require an immediate braking or slowdown action within this 10-second unit. The road ahead is unobstructed except for a small red three-wheeled vehicle ahead, which is moving forward without sudden changes. There are no visible obstacles, sudden stops, or road users entering the ego path that would necessitate a marked response. The scene shows normal driving conditions with no urgent maneuvers required.\"\n}",
+  "raw_response_sha256": "396c968a07d5395a1221e7f7ccd82b1dc7d2d11f0699dbedc154c2a486032270",
+  "record_payload_sha256": "918631cd50c7c9e33cb81f773752752206e9802be1218e86f1dfcdb355b77fbd",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 20.681715039536357,
+    "model_load_seconds": 14.661523081362247,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 22.32989721931517,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0174",
+  "unit_ordinal": 174,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

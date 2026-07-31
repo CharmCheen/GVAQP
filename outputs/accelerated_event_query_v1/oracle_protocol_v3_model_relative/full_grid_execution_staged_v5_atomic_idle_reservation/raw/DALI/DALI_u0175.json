@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0175:1785446088450877804",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "c5dd98beeaa3aeef06370771fc8a2842f12a957652f39e418107cb4ee828d640",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "b1bc00b9c4e39cbf75cb329b72f982664a2d6b25e704ee576c2d571ee99047de",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "f3bc05d93de1349c2288af5a8b0f669cad6ccf84fb189e7fdf1727b45eb4841b",
+  "generated_token_ids_sha256": "cf1e76e986e34c7b7c63be47d985703cbdd8ba04e90c23cf9ac6cf823e2b7df6",
+  "input_identity_sha256": "a7795af7de934e790658fddecc985d4bbcf5ada489987b8b306a4f2a45e91e99",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "058a747d8cb48ea569eac8f3f7a04d3cffb94363065cf5cc7f917ef07472e0fe",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic lights ahead change from red to green during the unit, indicating a transition that requires the ego driver to respond by accelerating or proceeding through the intersection. The lead vehicles, including a white car and a red three-wheeled truck, are stopped initially and then begin to move forward as the light turns green, suggesting the ego driver must also adjust speed accordingly to maintain safe following distance and proceed with the flow of traffic. This constitutes a noticeable response required within the unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "8a32983cae9ef506ae1366816b2c55300e0e4525274f2177d389c94907b97376",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic lights ahead change from red to green during the unit, indicating a transition that requires the ego driver to respond by accelerating or proceeding through the intersection. The lead vehicles, including a white car and a red three-wheeled truck, are stopped initially and then begin to move forward as the light turns green, suggesting the ego driver must also adjust speed accordingly to maintain safe following distance and proceed with the flow of traffic. This constitutes a noticeable response required within the unit.\"\n}",
+  "raw_response_sha256": "e804e0190caf1456989a6941ad2cdf470336631e7eeae4c0d4511fcd17f315a5",
+  "record_payload_sha256": "0d2f76654cc37e30d3cf37c7f06afb4b38bacb3179a9819a26203755dd73dbca",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 18.609266500920057,
+    "model_load_seconds": 26.894216861575842,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 20.560388159006834,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0175",
+  "unit_ordinal": 175,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

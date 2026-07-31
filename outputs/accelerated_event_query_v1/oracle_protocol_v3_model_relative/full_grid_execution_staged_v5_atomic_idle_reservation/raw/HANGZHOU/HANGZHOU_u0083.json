@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0083:1785444000337233740",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "fd2648cfc63fdf0cdc90d836dd783abf9d0d288258935f20ac345b14b4fd3ead",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "8076e70d791064077adaac809ba391ad102ab7d8794a6f4ff75eb74e23a18a65",
+  "generated_token_ids_sha256": "09c592c784d97bc27961d0ed97d0423d60ffb9ab476aa7611d3e657f12939d3b",
+  "input_identity_sha256": "6a869dc2e01eb43a6c80278c13597f676b3510e7ef04a61f163840d658a12d05",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "f07042d252c571f6ced9c1d4fd527d156731265c98af1fd08e227a97b2b94157",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on a wide, multi-lane road with clear lane markings and no immediate obstructions. Traffic is light, with only a few vehicles visible ahead and to the sides, none of which are in the ego lane or approaching closely. The navigation overlay indicates steady progress toward a destination with no sudden changes in speed or direction required. Traffic signals are visible but not indicating any immediate need to stop or slow down. The road conditions appear clear, and there are no visible obstacles, sudden lane changes, or merging vehicles that would require a marked response. The environment is stable, and the driving scenario is routine.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "208171dba0f11e3c7ee881742a26e038a2894e9166629966f3ac3c67dcb24c97",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on a wide, multi-lane road with clear lane markings and no immediate obstructions. Traffic is light, with only a few vehicles visible ahead and to the sides, none of which are in the ego lane or approaching closely. The navigation overlay indicates steady progress toward a destination with no sudden changes in speed or direction required. Traffic signals are visible but not indicating any immediate need to stop or slow down. The road conditions appear clear, and there are no visible obstacles, sudden lane changes, or merging vehicles that would require a marked response. The environment is stable, and the driving scenario is routine.\"\n}",
+  "raw_response_sha256": "c7c87328dc7f67538f0dff91444ad6577e7bfcf140aa1e91f440425c0aab3c27",
+  "record_payload_sha256": "e1a33bb2721bf4a860c11eaf44bab5584fbe74c0699796447df97cf7910fc2ac",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 24.392221484333277,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 25.171442104503512,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0083",
+  "unit_ordinal": 650,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

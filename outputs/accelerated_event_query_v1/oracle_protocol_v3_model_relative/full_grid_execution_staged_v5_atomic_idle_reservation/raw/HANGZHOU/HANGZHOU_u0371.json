@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0371:1785449419990944039",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "9238e003d6ddd9f4c3cbc8e8e2eb4ac4e9d2a105582d0b4fda47de30f385cf29",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "b07086660d11241ff7d531bff1fc867403547058e1dd418451e92d84fb202095",
+  "generated_token_ids_sha256": "8453218903f450175240e8a7265157e999f8691c68ada5858657fe9c3654d416",
+  "input_identity_sha256": "2bc01f561675c8a6cfa78d38c5c3db87e63bbbe3c3a11ed38f5dce9c099322f9",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "4f37b6ca7cf52ed927386c7e8eaf963ea968be8895a5f5f24fa356f0a14c8b19",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "Pedestrians are actively crossing the road directly in front of the ego vehicle, including one crossing from left to right and another from right to left, both within the intersection area. The lead white sedan is slowing down, and the ego vehicle must reduce speed or brake to avoid collision. Additionally, a motorcyclist is also crossing the intersection from the left, further requiring a cautious response. These road users are in the immediate path and require a noticeable slowdown or braking action.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "903f51134a87a2ddbe26e861a814dac7d1afdaa5bfe1ae0b7c4e57fc575f6e24",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"Pedestrians are actively crossing the road directly in front of the ego vehicle, including one crossing from left to right and another from right to left, both within the intersection area. The lead white sedan is slowing down, and the ego vehicle must reduce speed or brake to avoid collision. Additionally, a motorcyclist is also crossing the intersection from the left, further requiring a cautious response. These road users are in the immediate path and require a noticeable slowdown or braking action.\"\n}",
+  "raw_response_sha256": "ea16cb2f82ee06498029a9cc3d549f82fbf67597ecfa366fef7cf65a7254aa93",
+  "record_payload_sha256": "7b0771906e3f6fda732b17d3188f5cce9760221973241a609cc43a96b80c55a9",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.185997745022178,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.08105670288205,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0371",
+  "unit_ordinal": 938,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

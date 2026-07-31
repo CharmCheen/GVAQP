@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0083:1785444171902094671",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "9cbe8ecb23ebe215fcef850a473ff58bd61712495eebddc526bb210f64a60fa3",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "1299aed7011b05b9346770ed92f912e34afb505c7786f4bedfa77973d3c46bbb",
+  "generated_token_ids_sha256": "29cf3e3dae235bcf30a5e3e6da27e78865ca1c5341a36465ea93d4252da69ea7",
+  "input_identity_sha256": "198c772e5df2303af92e0f0a7454b5c631699343909a446d00489f8a15161c35",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "84ed5e5253f0c0b8ba19f82f0066243f0196dcd4c5dcc3bab3d3f177e3d35d59",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection under an overpass where traffic signals are visible. At 0:06, the traffic light for the ego direction turns red, requiring a braking action to stop before the crosswalk. Additionally, a taxi is seen turning left across the ego path at 0:09, which necessitates a noticeable slowdown or avoidance maneuver to ensure safe passage. These visible traffic controls and road user actions require a marked response from the driver within the unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "723ce1b840197020d8b956f7dd7bd7ea88b870ce41cf91b963eb3c88f1ffe8b8",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection under an overpass where traffic signals are visible. At 0:06, the traffic light for the ego direction turns red, requiring a braking action to stop before the crosswalk. Additionally, a taxi is seen turning left across the ego path at 0:09, which necessitates a noticeable slowdown or avoidance maneuver to ensure safe passage. These visible traffic controls and road user actions require a marked response from the driver within the unit.\"\n}",
+  "raw_response_sha256": "e9942f2aad82f45f8789fcef1c45b89cd72ade9f7d43797a74123e8d8718666d",
+  "record_payload_sha256": "4176756b5b65c17a134b0277dcb1f9d6fa48358f00d3bbb633b5d1c1d8daf956",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.800353879109025,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 21.692811047658324,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0083",
+  "unit_ordinal": 1211,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

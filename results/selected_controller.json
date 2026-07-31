@@ -1,0 +1,14 @@
+{
+  "controller": "FixedRatioController",
+  "policy": "R4_FIXED_TIME_RATIO_25_75",
+  "scan_time_target_fraction": 0.25,
+  "confirm_time_target_fraction": 0.75,
+  "ratio_basis": "cumulative_realized_wallclock",
+  "scan_primitive": "ANYTIME_LARGEST_GAP",
+  "confirm_selection": "highest_frozen_visible_score",
+  "frontier_capacity": 10,
+  "deadline_admission_quantile": 0.9,
+  "evidence_scope": "two_video_four_query_development_measured_action_trace_replay",
+  "physical_hard_deadline_safety": "NOT_ESTABLISHED",
+  "generalization": "NOT_ESTABLISHED"
+}

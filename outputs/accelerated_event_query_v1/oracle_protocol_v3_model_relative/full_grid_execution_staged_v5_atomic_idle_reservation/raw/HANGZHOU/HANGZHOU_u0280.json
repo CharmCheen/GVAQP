@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0280:1785447731558214788",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "8d98df8c14276b08ed0f32f71cb8a1cc447d0dd264e39aad7f7f3422c028d184",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "5f7105c38190337d481c78eaf278b801b48985e88dd867646fc81dabe9a336e8",
+  "generated_token_ids_sha256": "7446e5cb36d926a20da54d44643439f4ff3221813f3bf82e6be939624055f7dc",
+  "input_identity_sha256": "2a10953f5363d910bef927840395725dbc3fd3c7cffe3b4b19c905ba3c048543",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "56d3565a7379daf8a5a07a56fd29121f82065c29b85f7b15c788ba36f534d6b2",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching an intersection with visible traffic signals showing red for the current direction, and the countdown timer indicates sufficient time to stop safely. There are no sudden obstacles, vehicles entering the path, or unexpected road conditions requiring a marked slowdown or avoidance maneuver. The traffic flow is orderly, and the ego vehicle appears to be decelerating normally in response to the red light, which is a standard and expected driving behavior. No visible hazards or urgent maneuvers are required within this unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "4749e103dac36123198eb71172eea8d341b4df83564f52638a22c6b9ca4d9dcf",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching an intersection with visible traffic signals showing red for the current direction, and the countdown timer indicates sufficient time to stop safely. There are no sudden obstacles, vehicles entering the path, or unexpected road conditions requiring a marked slowdown or avoidance maneuver. The traffic flow is orderly, and the ego vehicle appears to be decelerating normally in response to the red light, which is a standard and expected driving behavior. No visible hazards or urgent maneuvers are required within this unit.\"\n}",
+  "raw_response_sha256": "4a9541579e851edc2486ba3ded4236a69fe0f329a59d93900dfeb4b9f76d48c5",
+  "record_payload_sha256": "7489b420003e71ab904f5d3b5c0792c88faa19655bafb3f4d10299b81c74b2ea",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.18915705382824,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.09249079786241,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0280",
+  "unit_ordinal": 847,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

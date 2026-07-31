@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0202:1785446284009173025",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "fc9f7f78890edf7de7171cc6de63a3f3edf8a4d5931d5330385b5aa3afaea1e0",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "69ccd4cbb3395064a6edafcb34a7febfa0c26042cb56a9ac5dbd6e462f4c591f",
+  "generated_token_ids_sha256": "6c4b48b43e88471073d409846259d3e2da71cad4ca516d59134c8b3c8d275c9d",
+  "input_identity_sha256": "11965f6e98c38c8b3cd504d0db48220a28447110354be891cc58afd6428b90cc",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "e4e3b70e5ad0af0efc41af7f09c61c677393a9379c511de92336c91dc89f3afd",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with a red traffic light visible at 0:02, requiring a noticeable slowdown or braking action. Additionally, a black SUV is seen crossing the intersection from the left, which necessitates a cautious response to avoid conflict. The traffic light remains red through 0:05, confirming the need for a marked response. The presence of a speed limit sign (40 km/h) and a height restriction barrier ahead also suggests the need for controlled driving, but the primary trigger is the red light and intersecting vehicle.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "daa597874ceccfa96cdd6b2e6e16193befe2e2f8646d3377e8f9eef6c9b890a4",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with a red traffic light visible at 0:02, requiring a noticeable slowdown or braking action. Additionally, a black SUV is seen crossing the intersection from the left, which necessitates a cautious response to avoid conflict. The traffic light remains red through 0:05, confirming the need for a marked response. The presence of a speed limit sign (40 km/h) and a height restriction barrier ahead also suggests the need for controlled driving, but the primary trigger is the red light and intersecting vehicle.\"\n}",
+  "raw_response_sha256": "468863a0a275501c2a30675b80419e22fe7b57778189aabef8c0193c69a13086",
+  "record_payload_sha256": "36011026e3325a46de6f1943a2222cc7e0ebc376df6737c20fa07ad7b78f56e4",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 20.886121125891805,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 21.710103230550885,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0202",
+  "unit_ordinal": 769,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

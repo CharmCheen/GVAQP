@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0158:1785445468802876611",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "5653ab00d66a85622eff7e0646f9425d6f4882da5743706fc9c6c786de630f60",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "ee420865f9cbb06e9b38176d52d923168042af1d3f46701ae2627098249eed61",
+  "generated_token_ids_sha256": "8dce319fcc07fc0a821f690050fe40a9ddeac0ee81d3f1ed4ebf8d5de032ffa5",
+  "input_identity_sha256": "b07e7dbd3ec899c5c181ba81ed79ba66905728d7b8ecf8935b19b566c75bbcdf",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "caeb7211bac58afb8217fa5fa5065e2724515ac97dcc85a3808ee9425ef7c7ea",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane road with clear visibility. There are no sudden changes in traffic, no vehicles entering the ego path, no visible obstacles, and no traffic controls requiring a marked response. The lead vehicle (yellow truck) maintains a consistent distance, and other vehicles are in their respective lanes without encroachment. The road conditions are normal, and no avoidance or braking maneuvers are necessary within this unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "77ba6e1976b57b7cfd35066ad53036aa6026815fcb1ddc4901b1d70595bb70f9",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane road with clear visibility. There are no sudden changes in traffic, no vehicles entering the ego path, no visible obstacles, and no traffic controls requiring a marked response. The lead vehicle (yellow truck) maintains a consistent distance, and other vehicles are in their respective lanes without encroachment. The road conditions are normal, and no avoidance or braking maneuvers are necessary within this unit.\"\n}",
+  "raw_response_sha256": "060eb013c3963220cff24e67c2689e486aaa09f9ca351dd39b43c0106a40cebe",
+  "record_payload_sha256": "b5c582e284795c21334df6c47061858aebcd1d631fe4c2754217fd88c5ae6e76",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.5163736268878,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.474014965817332,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0158",
+  "unit_ordinal": 725,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

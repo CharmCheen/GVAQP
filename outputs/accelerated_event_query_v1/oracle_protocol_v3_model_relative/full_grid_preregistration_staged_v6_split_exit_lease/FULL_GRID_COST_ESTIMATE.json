@@ -1,0 +1,62 @@
+{
+  "actual_gpu_residency_accounting": "continuous coordinator-side two-GPU residency segments from model-load reservation through call/durable acceptance, every coordinator and inter-call gap, explicit model release, and supervisor-observed process-exit tail",
+  "authorization_envelope_a100_gpu_hours": 44.4,
+  "call_load_plus_simultaneous_emergency_reservation_subtotal_a100_gpu_hours": 42.67444444444445,
+  "call_reservation_derivation": {
+    "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_preregistration_staged_v6_split_exit_lease/FULL_GRID_CALL_RESERVATION_DERIVATION.json",
+    "sha256": "28ba7df8c155d4c9a1e5cf93ac03eace45840971cc1f31c62463c0eab2587d67",
+    "size_bytes": 596811
+  },
+  "cost_estimate_payload_sha256": "a3460a83800b8aaa85edefe41c29f0cf77daf48c2eef97bf1694cee60416085e",
+  "cost_shield": "call reservation remains open from pre-decode through durable raw and ACCEPTED persistence; a reusable prospective emergency reservation remains active per loaded worker; a coordinator-side continuous residency clock accounts every gap; the same transaction rejects ordinary gaps above two seconds before next call/session close and the terminal process-exit gap above eight seconds; supervisor polling independently enforces the state-dependent limit; no start above envelope",
+  "direct_concurrent_accounted_mean_seconds": 20.26466942016236,
+  "direct_concurrent_accounted_standard_deviation_seconds": 2.296115154754451,
+  "direct_concurrent_mean_95_percent_t_critical": 1.9621568558197373,
+  "direct_concurrent_mean_95_percent_upper_seconds": 20.401509319507124,
+  "direct_concurrent_mean_seconds_by_video": {
+    "DALI": 20.843545594358975,
+    "HANGZHOU": 18.962237976181346,
+    "WUHAN": 21.127934550518734
+  },
+  "direct_concurrent_observation_count": 1084,
+  "estimated_a100_gpu_hours": 16.59314522789404,
+  "estimated_a100_gpu_hours_95_percent_mean_uncertainty_upper": 16.76243806156278,
+  "estimated_parallel_wall_hours": 3.290330804889316,
+  "estimated_parallel_wall_hours_95_percent_mean_uncertainty_upper": 3.2207893259565386,
+  "estimation_assumption": "all units are point-estimated from 1,084 direct V5 observations in the three-worker concurrent-residency regime; exact video call counts use each video's observed mean and a global Student-t upper quantifies mean uncertainty; no staged one/two-worker speedup credit is used",
+  "exact_call_count": 1475,
+  "full_grid_all_operations_hard_bound_a100_gpu_hours": 44.31666666666667,
+  "gpu_profile_authentication": "the initial pair must have zero compute contexts, zero utilization, and <=16 MiB used memory before initialization; each pending frozen pair must independently satisfy the same rule immediately before process spawn and again before model load",
+  "historical_1084_call_accounted_mean_seconds": 20.26466942016236,
+  "maximum_idle_residency_gap_count": 1481,
+  "maximum_ordinary_idle_residency_gap_count": 1478,
+  "maximum_ordinary_idle_wall_seconds_per_gap": 2.0,
+  "maximum_process_exit_residency_gap_count": 3,
+  "maximum_process_exit_wall_seconds_per_gap": 8.0,
+  "observed_v5_model_load_seconds": {
+    "DALI": 26.9005456,
+    "HANGZHOU": 27.185789283,
+    "WUHAN": 26.075929657
+  },
+  "ordinary_loaded_worker_idle_lease_wall_seconds": 2.0,
+  "per_call_hard_reservation_wall_seconds": 52.0,
+  "per_load_hard_reservation_wall_seconds": 30.0,
+  "per_loaded_worker_reusable_emergency_reservation_wall_seconds": 8.0,
+  "planned_model_load_count": 3,
+  "point_estimated_worker_wall_seconds": {
+    "DALI": 11845.190897601538,
+    "HANGZHOU": 10665.001293920734,
+    "WUHAN": 7357.469218687002
+  },
+  "post_session_process_exit_lease_wall_seconds_per_worker": 8.0,
+  "prior_failed_execution_evidence": {
+    "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_preregistration_staged_v6_split_exit_lease/FULL_GRID_PRIOR_FAILURE_EVIDENCE.json",
+    "sha256": "3cf833e918df6003d8e4b7bdfcf458af928f08b4f44200e64a8dc3edee589a2d",
+    "size_bytes": 321068
+  },
+  "reload_count": 0,
+  "reservation_and_all_operations_bounds_fit_envelope": true,
+  "retry_count": 0,
+  "status": "FROZEN_FULL_GRID_COST_AND_RESERVATION_PLAN",
+  "unused_envelope_cannot_authorize_extra_calls_reloads_or_retries": true
+}

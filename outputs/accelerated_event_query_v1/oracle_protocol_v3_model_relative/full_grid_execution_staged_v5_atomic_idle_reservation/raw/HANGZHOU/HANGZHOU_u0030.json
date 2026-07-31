@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0030:1785442941118160879",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "e06a4e212b7c6b2d2f6d4537e9bba93c848f970eaa564b45ee9c8d0e3b07f560",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "8b0cfed459e9298c62af2b08bbfc341528d4d3e55ae3e5491420136037406b3e",
+  "generated_token_ids_sha256": "9b1c4607a95c66a38088058bd2457779f17675c9b5ddaaf2e4deec10258b2f4b",
+  "input_identity_sha256": "854bdcfd4aca9b3a815a09300c62ad335cdab0026316cf690bb46279323f15e8",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "f046035143719d9e3108d9af495aa33eae99b76474a8bfa2bf9b836d2f11e372",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching a traffic signal that turns red at 0:04, with a countdown timer visible. The vehicle ahead (a white sedan) begins to slow and stop at the intersection by 0:07, indicating a required braking action for the ego driver to comply with the traffic signal. The countdown timer decreases from 26 to 4 seconds within the unit, confirming the need for a noticeable slowdown or braking action to stop before the intersection.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "9cc96639394a3bd05dc275e96e64f89e2274c35a32c5fc93712ecfaa0737b142",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching a traffic signal that turns red at 0:04, with a countdown timer visible. The vehicle ahead (a white sedan) begins to slow and stop at the intersection by 0:07, indicating a required braking action for the ego driver to comply with the traffic signal. The countdown timer decreases from 26 to 4 seconds within the unit, confirming the need for a noticeable slowdown or braking action to stop before the intersection.\"\n}",
+  "raw_response_sha256": "6bc5c77b0d2c599e8fbe44b1416957c921e3023d1366f38bfd21b686c8e66df4",
+  "record_payload_sha256": "f3bd74d5588e30d8d6013e2cbebb4e95f5a61270c8a38bba33c5d9d7e23d2561",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 19.928571794182062,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 20.661910116672516,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0030",
+  "unit_ordinal": 597,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

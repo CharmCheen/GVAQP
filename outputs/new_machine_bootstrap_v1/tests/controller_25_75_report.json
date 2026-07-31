@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "basis": "cumulative realized completed wall-clock, not action count",
+  "edge_cases_covered": [
+    "Frontier empty",
+    "Frontier non-empty",
+    "SCAN share below target",
+    "CONFIRM share below target",
+    "only SCAN fits",
+    "only CONFIRM fits",
+    "neither action fits",
+    "STOP"
+  ],
+  "action_parity": "100% over repository frozen differential tests",
+  "deadline_admission_parity": "100% over repository frozen differential tests",
+  "source_tests": [
+    "tests/test_fixed_ratio_controller.py",
+    "tests/test_deadline_admission.py",
+    "tests/test_post_scan_chain_parity.py"
+  ]
+}

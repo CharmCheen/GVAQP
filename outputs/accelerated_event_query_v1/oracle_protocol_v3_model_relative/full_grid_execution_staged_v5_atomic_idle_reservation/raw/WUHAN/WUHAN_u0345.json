@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0345:1785449654976078165",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "02eb709c9a88e0314d051af0972fd46dd71d51af58210128f056311eed12436b",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "a9ec96d535d05b43db45835d5e4320739a158845df01042735ffcdda71d701a7",
+  "generated_token_ids_sha256": "35767fc0a802163e7370d0764615b1f5ec1e2a3462cef2980f09d80e8aa5fbfb",
+  "input_identity_sha256": "4cd678821d2240c24e7ce2991b04b4b5d00d0a4d358fe9a87f36a18f120d488f",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "d3f2d498b801d654be3c2a597883791c7a42f7380d8e440986b78a30550bd4c9",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light ahead transitions from green to red within the 10-second unit, as seen in frames 0:09 to 0:10. This requires the ego driver to perform a noticeable braking action to stop before the intersection, as the red light is clearly visible and applies to the ego vehicle's lane. The countdown timer on the navigation overlay also decreases from 105 meters to 15 meters, indicating progression toward the intersection, and the red light appears just before the end of the unit, necessitating a response within this time frame.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "d0b308c1399377999fd595c18043876be33f63a72821efc220403aa00433b07e",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light ahead transitions from green to red within the 10-second unit, as seen in frames 0:09 to 0:10. This requires the ego driver to perform a noticeable braking action to stop before the intersection, as the red light is clearly visible and applies to the ego vehicle's lane. The countdown timer on the navigation overlay also decreases from 105 meters to 15 meters, indicating progression toward the intersection, and the red light appears just before the end of the unit, necessitating a response within this time frame.\"\n}",
+  "raw_response_sha256": "5a9d8f44f5b70c6e7598297c5d29519f53d4a082d795136a8b537a4370da9786",
+  "record_payload_sha256": "c4691ad25c482bfe1d3d4f49885fdb43e3d61889d506afcd458aac0cc7a71587",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 21.363171944394708,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 23.34418847411871,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0345",
+  "unit_ordinal": 1473,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

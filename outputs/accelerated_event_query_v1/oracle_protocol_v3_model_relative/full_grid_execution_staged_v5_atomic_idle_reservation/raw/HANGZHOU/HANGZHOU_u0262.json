@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0262:1785447395035779237",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "f02ebdf2ebef635c95a6dd4b204787fa8e1b099eb1894d72a998806f8663e1bf",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "f8a1a41b99049f8e84d4f10d68d78be0eb07eb7c1cb2e87405b093f3e3b19fe4",
+  "generated_token_ids_sha256": "ae9ce84de4feacbe3334b891190c386148d46f3faad3c074acfc27c46ed46a8c",
+  "input_identity_sha256": "02ee3b311e9e5985605b80fd247144189b38bdd02c4d69f64894e52a3e71c090",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "190fd23711c464eeb2f1802bfcde033f4335b0c7abd7f8447c985cfe688255a3",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is stopped at a traffic light, and pedestrians are actively crossing the intersection in front of the vehicle. The traffic light for vehicles is red, requiring a braking action or maintained stop. Additionally, a motorcyclist and cyclists are also crossing the intersection, indicating the need for the ego driver to remain attentive and not proceed until the pedestrian crossing phase is complete. The presence of multiple road users in the crosswalk directly in the path of the ego vehicle necessitates a marked response to ensure safety.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "2b78d70a12a2c6710559a31fa4a2657e45bff2db42c59742db8bf704a8fd42f8",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is stopped at a traffic light, and pedestrians are actively crossing the intersection in front of the vehicle. The traffic light for vehicles is red, requiring a braking action or maintained stop. Additionally, a motorcyclist and cyclists are also crossing the intersection, indicating the need for the ego driver to remain attentive and not proceed until the pedestrian crossing phase is complete. The presence of multiple road users in the crosswalk directly in the path of the ego vehicle necessitates a marked response to ensure safety.\"\n}",
+  "raw_response_sha256": "b884d6ee1054ebbab555666a7d2b46aa6f09a79e3c935a5c173d281692a786f6",
+  "record_payload_sha256": "1e33912440a182e1df73ec2822ca50afe5b6bdee34e96872b01cd40d3b846238",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.85288505628705,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.675816640257835,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0262",
+  "unit_ordinal": 829,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0273:1785448153217585955",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "ad032e09b9bd609319814dc81757aafe5c9cc467b0124b5bc724ce91a1ebb212",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "0eb7b38c99958e3e4347884724190d148f6f25b8e34e21e3539c6412488a4170",
+  "generated_token_ids_sha256": "ec78b688d9edc1900aed36e682492ecc4bb8bd2f47e4bd0dd49b26ac5630d58d",
+  "input_identity_sha256": "4f9f8357f55f69609219f6270aece741b83fbf1197588f2913ce8317366238dd",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "06fce5f89b036f2bc00f18c6c6bcf4b72f36b40a3ed42c012e476f6bedaa8eff",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with traffic signals that change from red to green during the unit. At the beginning of the unit, the traffic light is red, requiring the ego driver to stop or slow down. As the unit progresses, the light turns green, indicating a required braking or slowdown action to stop before the intersection, followed by a potential acceleration. The presence of crosswalks and other vehicles also necessitates attentive driving and possible speed adjustment. The navigation overlay indicates a route change ahead, which may require a lane adjustment or speed reduction.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "59d8c2e5b72247778dbb0994cecb0290f3705cdee99ea99a49a2fde2caff4bb9",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with traffic signals that change from red to green during the unit. At the beginning of the unit, the traffic light is red, requiring the ego driver to stop or slow down. As the unit progresses, the light turns green, indicating a required braking or slowdown action to stop before the intersection, followed by a potential acceleration. The presence of crosswalks and other vehicles also necessitates attentive driving and possible speed adjustment. The navigation overlay indicates a route change ahead, which may require a lane adjustment or speed reduction.\"\n}",
+  "raw_response_sha256": "b3319ed190cf7c56101bc50af2db5dbabfcc20e31edf9e222d6651567d4c6adf",
+  "record_payload_sha256": "e7430caf20e7133b13d954ce665e3a3fb9c754df8cc22a8232c9aedab4745186",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 20.355538519099355,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 22.316941948607564,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0273",
+  "unit_ordinal": 1401,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

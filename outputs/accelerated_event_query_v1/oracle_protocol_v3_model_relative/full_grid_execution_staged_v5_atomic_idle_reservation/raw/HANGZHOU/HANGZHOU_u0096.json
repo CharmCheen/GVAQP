@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0096:1785444252338685730",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "2115f54dd040e424fad26b0ac80ddec6c679565446ab359d3301189260b5c51b",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "e06b1c51ca4ebd68bb166fcf68a1cad0553aea09d96fc755240312b8be657aa6",
+  "generated_token_ids_sha256": "95e9825aab7e462a0e96ccd41d1bb429973b07f9c1960e32d38382c3bba9c734",
+  "input_identity_sha256": "e5fc96f3ca4ea59ad723c48969ef35e131cf9b25daf9ea9ff95c5ce435bfe86c",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "4584df9c0f452082f156961ea1c29a683a4125e3680e5724f2d7af1ca7cd0b7b",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane road with clear visibility. There are no sudden changes in traffic, no vehicles or pedestrians entering the ego path, and no traffic control signals requiring immediate braking or avoidance. The lead vehicle ahead maintains a consistent distance, and the road conditions are normal. The presence of a school zone sign (50m ahead) does not require an immediate response within this unit, as it is a warning for future caution, not an immediate hazard.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "fd8ed30f6b0d5e55621c6a08f2c0e02b3466db7c1ed74aeb51fa3f20a9717976",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane road with clear visibility. There are no sudden changes in traffic, no vehicles or pedestrians entering the ego path, and no traffic control signals requiring immediate braking or avoidance. The lead vehicle ahead maintains a consistent distance, and the road conditions are normal. The presence of a school zone sign (50m ahead) does not require an immediate response within this unit, as it is a warning for future caution, not an immediate hazard.\"\n}",
+  "raw_response_sha256": "48435b6bcbc07f7958e2fb37da83526ba16849b1f917f03ad20c8b7aaa927651",
+  "record_payload_sha256": "67e29f7a28141951bc1da5d71470ca78fce79e5e7a66350a8881b45e65d7af39",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 20.059659335762262,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 20.835659032687545,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0096",
+  "unit_ordinal": 663,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

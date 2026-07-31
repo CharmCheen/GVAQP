@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0051:1785443461564277631",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "5ebef1f7ca9017c9bcad48b74f4db56a891b5064bc04f669d9567e4f605e5839",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "2d3c65c60b8875a113b050294243cd243c0619edf851394ea95754825726a06b",
+  "generated_token_ids_sha256": "1be83f115e662abefb3f339279a8bce28bc6dd0793a42bf92b4bc88a1acdd1f8",
+  "input_identity_sha256": "9b6b8d38831bccc367dbd89bafeb014950385f54a1d847a5e3e09a5a1dd9e037",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "c4c06fbb28755d988bb0f9998f2270bd0b67890a8af7932b9bce5a1199d4b57f",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a white taxi and a bus through a roundabout under an overpass. Traffic signals are visible, but the ego vehicle is not required to brake or slow down significantly as the flow is smooth and no sudden obstacles, stopped vehicles, or traffic control changes requiring a marked response are observed. The vehicles ahead are moving steadily, and the road conditions are clear. No visible hazards or maneuvers requiring a noticeable slowdown or avoidance are present within the unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "c78ac3a078f9a4937dc0f0442a49b8de2958a2d9e13a657d6b50cf2d5eea6366",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a white taxi and a bus through a roundabout under an overpass. Traffic signals are visible, but the ego vehicle is not required to brake or slow down significantly as the flow is smooth and no sudden obstacles, stopped vehicles, or traffic control changes requiring a marked response are observed. The vehicles ahead are moving steadily, and the road conditions are clear. No visible hazards or maneuvers requiring a noticeable slowdown or avoidance are present within the unit.\"\n}",
+  "raw_response_sha256": "7906395b0542e48efe091da381c4fa5c9ba7076ffca6058c73cecc9e5d1ff6c5",
+  "record_payload_sha256": "4e30a7cb57ad049fae395fa1c6664e7bb2b8bee0ea082d9169bd60c17c5ea5aa",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 21.555671215057373,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 23.56213499419391,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0051",
+  "unit_ordinal": 1179,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

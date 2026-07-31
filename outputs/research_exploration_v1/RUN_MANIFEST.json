@@ -1,0 +1,113 @@
+{
+  "schema_version": "RESEARCH_EXPLORATION_RUN_MANIFEST_V1",
+  "status": "EXPLORATION_COMPLETE_TO_AVAILABLE_EVIDENCE_UPSTREAM_V3_FULL_GRID_ABORTED_RUNTIME",
+  "snapshot_utc": "2026-07-30T12:28:10Z",
+  "upstream_failure_observed_utc": "2026-07-30T12:42:44Z",
+  "main_repository": {
+    "path": "/root/charm/GVAQP",
+    "branch": "dspro",
+    "commit": "35d4829280166a30fbd130cfb43ab3aae163463d",
+    "dirty_status": "13 untracked user-owned paths"
+  },
+  "side_package": {
+    "path": "/root/charm/GVAQP_side_rcsem",
+    "git_repository": false,
+    "prechange_manifest_status": "EXPLORATORY_SEQUENTIAL_VALIDATION_COMPLETE_REVISE_STATE"
+  },
+  "upstream_v3_full_grid": {
+    "execution_seal_sha256": "5136aaddfc5e7daee691c9faaab323f3159db6d52a469fade45fce6719847134",
+    "state": "STOPPED",
+    "stop_trigger": "cost_envelope_exceeded",
+    "completed_units": 136,
+    "in_flight_uncertain_unit": "DALI_u0136",
+    "failed_call_elapsed_seconds": 23.754265,
+    "sealed_call_limit_seconds": 23.579961,
+    "mapped_frozen_decision": "FULL_GRID_ABORTED_RUNTIME",
+    "authoritative_finalizer_artifact_present": false,
+    "formal_reference_released": false,
+    "partial_labels_inspected": false,
+    "same_experiment_retry_or_resume_authorized": false
+  },
+  "uncommitted_recovery_draft_audit": {
+    "status": "REVISE_BEFORE_BUILD_OR_RESEAL",
+    "proposed_call_reservation_seconds": 35.0,
+    "proposed_envelope_a100_gpu_hours": 29.0,
+    "all_operations_hard_bound_a100_gpu_hours": 28.743888888889,
+    "focused_main_tests_passed": 150,
+    "focused_main_tests_failed": 0,
+    "tests_cover_new_derivation": false,
+    "blocking_findings": [
+      "dry-run and supervisor tests still exercise old 23.579961s/19.4h contract",
+      "analyzer and finalizer still cap actual cost at 19.4h",
+      "fresh experiment ID is unchanged",
+      "cumulative prior plus new authorization is not asserted",
+      "re-tokenized decoded response length is not validated as actual generated-token count",
+      "same-evaluation-video post-outcome cost calibration requires explicit scientific review"
+    ],
+    "main_worktree_modified_by_this_audit": false
+  },
+  "controller_branch_run": {
+    "command": "PYTHONPATH=src:experiments python experiments/controller_dynamic_headroom.py --arc-root /root/charm/GVAQP-arc-phys-baseline --output outputs/controller_dynamic_headroom_cached_v1",
+    "classification": "cached_abstract_cost_replay_not_physical_or_confirmatory",
+    "records": 108,
+    "scan_better": 25,
+    "verify_better": 26,
+    "effectively_tied": 57,
+    "cached_headroom_gate_pass": true,
+    "deadline_overrun_count": 0,
+    "source_videos_with_both_directions": 2,
+    "deterministic_reproduction_identical": true,
+    "reproduction_state_branches_sha256": "a08527f5da44c82cfdda5e87512afa991719de6842f0f64dffd254e41e42ddb5",
+    "reproduction_summary_sha256": "334ab4df6ce5c596a75e352315c938c5d0c2d7c628b7549c2e3c2102e0967ce3",
+    "code_sha256": "5eb010a3f6cc36978a743bfce2315909e7b47b7380d09ea8da1ef037fc5231b8"
+  },
+  "public_state_predictability": {
+    "command": "PYTHONPATH=src:experiments python experiments/public_state_predictability.py --branches outputs/research_exploration_v1/STATE_ACTION_BRANCHES.jsonl --output outputs/public_state_predictability_cached_v3",
+    "classification": "cached_abstract_cost_leave_one_source_out_not_physical",
+    "source_videos": 2,
+    "states": 108,
+    "cached_public_state_gate_pass": false,
+    "best_fixed_action": "always_verify",
+    "best_fixed_action_decision_regret": 0.0008852163461538481,
+    "best_learned_method": "linear",
+    "best_learned_decision_regret": 0.009693008796197342,
+    "learned_to_fixed_regret_ratio": 10.949875517224944,
+    "code_sha256": "804ab9bbb33578844e9a63cc491d87fcff98ac1711cf5b39b1735bea69ab2c9d"
+  },
+  "validation": {
+    "test_command": "PYTHONPATH=src:experiments pytest -q",
+    "tests_passed": 44,
+    "tests_failed": 0,
+    "compileall_command": "PYTHONPATH=src python -m compileall -q src experiments tests",
+    "compileall_passed": true,
+    "gpu_calls_started_by_exploration": 0,
+    "partial_v3_labels_opened": false
+  },
+  "artifacts": {
+    "ARC_COMPARISON_REPORT.md": "90769dbb0f6c829d52ffeec5ff3f4a4b652d00f6474748f6aabf88eb1e182bea",
+    "CLOSED_LOOP_RESULTS.jsonl": "ff1198c06071f473f3a83506d93ecd5186bbcfd8b33e8f9a6b563b2df067a20c",
+    "CONTROLLER_HEADROOM_REPORT.md": "5826363516fb28a5feb2585f68331e58b6036aef2350e548417aef36f6538aa1",
+    "COST_PROFILE.json": "d28fd43f618a187dd8f622908a3c682fcc3918536084200b0f43664a3cd0f42b",
+    "DATA_AVAILABILITY_AUDIT.md": "c70f747605686d6ea68b4c331a13682a63b36a065c1ec7c4869649139759ea15",
+    "DECISION_MATRIX.md": "fee5c75b5b3644a23a2e525fcaa7c2f8682d33c059c7fa9d1e724da89911b963",
+    "PUBLIC_STATE_PREDICTABILITY_FOLDS.csv": "9e4e2ba951f9877b765618c458d8ae93ab035115c1ab0c204ccd4ae37ed8c5e7",
+    "PUBLIC_STATE_PREDICTABILITY_MACRO.csv": "f581e8aa151af6c297aec2dcbbe68fcdb60acdcea524122db517292e9cf9e54d",
+    "PUBLIC_STATE_PREDICTABILITY_REPORT.md": "b7271504040b44d71aa610ec377dc9ad5ccc227b15d5bac025a8f0e9442ad7bb",
+    "PUBLIC_STATE_PREDICTABILITY_RESULTS.json": "372495be35d31b1324915c27053bf6de32e84c0366ae105fd9c111ae60e23103",
+    "RECOVERY_DRAFT_AUDIT.md": "7b8594c3f810f7959f2c495f820c504fea931a9e5b87bc521e0816c61b312d92",
+    "REPO_AND_WORKTREE_AUDIT.md": "af844194c7879fa19257ebdba10c8a8233b0617a66115a2ce5ca755cee87bf81",
+    "REPRODUCE.md": "29ae12c6b7c48ffaebf753a8727b8b3965f965d8b2126a40c74cd7e220c339c7",
+    "RESEARCH_CONTRACT_SNAPSHOT.yaml": "64ea6f32196b37cbd19e21e1c104c6fcea4b11f636b98ee228d9a9801fcbf458",
+    "SCAN_EXPLORATION_REPORT.md": "5fdb1ec40cf80acb64f7d375a212a8ed5d8b144bb3b3845cb88baada5f73feeb",
+    "STATE_ACTION_BRANCHES.jsonl": "a08527f5da44c82cfdda5e87512afa991719de6842f0f64dffd254e41e42ddb5",
+    "UPSTREAM_V3_FAILURE_AUDIT.md": "6376d237c721644ca4fc31fd5d9fbdd3773b8f2b7b78a4cf458b75c21fcba4e7",
+    "VERIFY_EXPLORATION_REPORT.md": "897dd156ebcf9cf9f494da9b3791bd4e0f7baf90ae7ffed4747be1a62475a176"
+  },
+  "not_run": [
+    "V3 SCAN candidate-universe coverage",
+    "V3 event-value ranking and shuffled/ID controls",
+    "V3 paired 8B/32B escalation policies through K3",
+    "physical closed-loop fixed-ratio comparison",
+    "native or controlled physical V3 ARC comparison"
+  ]
+}

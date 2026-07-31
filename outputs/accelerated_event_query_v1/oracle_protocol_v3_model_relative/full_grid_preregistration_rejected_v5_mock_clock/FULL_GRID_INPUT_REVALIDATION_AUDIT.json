@@ -1,0 +1,20 @@
+{
+  "status": "PASS_BY_BYTE_IDENTITY_TO_THREE_INDEPENDENT_FULL_SHARD_REDECODE_REPROCESS",
+  "execution_seal_sha256": "595a74dc93ce985bceb5b52c0e9f34fc14ea855e55b814d967c5577cea13ede9",
+  "prior_physically_revalidated_seal_sha256": "48c71239bee56b89aa34dfdd0d22e8759e332ba892527135d1b691449698bb24",
+  "identity_argument": "The current unit, frame, processed-input, tail-processor, and video-stream artifacts are byte-identical to the package independently redecoded and reprocessed by all three worker shards. Processing, prompt, schema, model assets, grid, and frame-sampling sources did not change; only execution control, GPU-profile authentication, analyzer, finalizer, dry-run, and package text changed.",
+  "unit_manifest_sha256": "f0da3bf9418b49cdd563150e2f95e476d81782a19d60d90b1880901281991e35",
+  "frame_manifest_sha256": "438c6de5f13b56dc3b3e2194c6b264a2767c97488a56e69bc10d9a05a06369a6",
+  "processed_input_manifest_sha256": "67967ae6fd6e59b1d804f26535bd48c987f276476aaa075799a1d66296ba04c9",
+  "tail_processor_audit_sha256": "b93f65b4594c17304517c46b53d5c26f957af63349149e95ff9621f41f0da6c0",
+  "video_stream_audit_sha256": "5830684359107eb3e604e190452ca42221b36c5e26e6bf2bd3fff4c0521d7e48",
+  "exact_call_count": 1475,
+  "exact_frame_occurrence_count": 30932,
+  "checkpoint_loaded": false,
+  "model_inference_calls": 0,
+  "workers": [
+    {"worker_id": "V3_FULL_GRID_DALI", "exact_call_count": 567, "frame_occurrence_count": 11898, "redecoded": true, "reprocessed": true},
+    {"worker_id": "V3_FULL_GRID_HANGZHOU", "exact_call_count": 561, "frame_occurrence_count": 11762, "redecoded": true, "reprocessed": true},
+    {"worker_id": "V3_FULL_GRID_WUHAN", "exact_call_count": 347, "frame_occurrence_count": 7272, "redecoded": true, "reprocessed": true}
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0203:1785446652500928770",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "d36ef4343309aaa6aff1338b351e18069003866b458e59eef3a55d2946e14995",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "b1bc00b9c4e39cbf75cb329b72f982664a2d6b25e704ee576c2d571ee99047de",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "b0f849ba9f963759eb512766ff32ca4e3f049bab3e94ab634bf57891ce9143d7",
+  "generated_token_ids_sha256": "96aca58fe63fb67e8daaf99662223e34942ab807d9cc7f7c876a85110e602e63",
+  "input_identity_sha256": "603643ac7ad465c49b8edb5f19b28d762d44e9e53a97000b3f251ccd332bca76",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "0b8d50e6abe9bb1d8dd85c005aac6102bf4803d82fa4aa6300f711046d2fd68d",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a white sedan at a steady pace in a multi-lane road with moderate traffic. There are no sudden changes in speed or lane position by the lead vehicle, no visible obstacles in the path, and no traffic control signals requiring immediate action. Pedestrians and other road users are visible but not encroaching on the ego path. The driving conditions remain consistent throughout the unit, indicating normal steady driving without need for a noticeable slowdown, braking, or avoidance maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "e9e850b48e6e5438a1e0c18c50236871b6fd61a8890c88708fd4d2a8587994f2",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a white sedan at a steady pace in a multi-lane road with moderate traffic. There are no sudden changes in speed or lane position by the lead vehicle, no visible obstacles in the path, and no traffic control signals requiring immediate action. Pedestrians and other road users are visible but not encroaching on the ego path. The driving conditions remain consistent throughout the unit, indicating normal steady driving without need for a noticeable slowdown, braking, or avoidance maneuver.\"\n}",
+  "raw_response_sha256": "a94c8a0d71e1bc1a81ef9e1e4436bfc23bb125eeba7a50cabb4bc40cfc122a37",
+  "record_payload_sha256": "2ac347ed1d0f0ee94eedf38f5006fd75aaa0cbfd7460efb7c4e9e74d5026709d",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 19.621175384148955,
+    "model_load_seconds": 26.894216861575842,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 21.5042029786855,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0203",
+  "unit_ordinal": 203,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

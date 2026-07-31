@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0181:1785446208633368935",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "98c68ccd0b804920d3d4da1520e233d0d5ef8ab6bd885b6711c34df38f152f14",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "b1bc00b9c4e39cbf75cb329b72f982664a2d6b25e704ee576c2d571ee99047de",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "037a5d93802aeaf310e3c499a75c7f988812ddd557f1d098a98ae6baa17ad0da",
+  "generated_token_ids_sha256": "978919b64e0be91448111bb2b707a6ad8f8465b943196fafd6d6ecaf16afa9f2",
+  "input_identity_sha256": "2ae3bf98c7f0abcab8bb70d82272f28681141572fcba3133f29fd1e8d77f74c5",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "b80ac5da83be29e227ff0f6e16c1fce03f9c7c461f448d09236163d8e0b597c2",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a wide, multi-lane road with clear visibility. There are no sudden changes in traffic flow, no vehicles abruptly entering the ego path, no visible traffic controls requiring a marked response (such as a red light or stop sign), and no obstacles or road conditions that would necessitate a slowdown, braking, or avoidance maneuver. The lead vehicles maintain consistent speeds, and the road ahead is clear. Pedestrians are visible on sidewalks but not crossing or entering the roadway. The scene depicts normal, steady driving conditions.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "d4cf566bd082ce3f244d9f122bd09022a2daec4573762f333d77b725845c576b",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a wide, multi-lane road with clear visibility. There are no sudden changes in traffic flow, no vehicles abruptly entering the ego path, no visible traffic controls requiring a marked response (such as a red light or stop sign), and no obstacles or road conditions that would necessitate a slowdown, braking, or avoidance maneuver. The lead vehicles maintain consistent speeds, and the road ahead is clear. Pedestrians are visible on sidewalks but not crossing or entering the roadway. The scene depicts normal, steady driving conditions.\"\n}",
+  "raw_response_sha256": "0b44284523f2dcbeb8e87ce1fb94cbbb59a3ad94e5088a2f3c2a3dca442e7d2f",
+  "record_payload_sha256": "1b9ad8463564b030a428f80e5520adc59915df0a998b96f78d49df598a6aa0f8",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 21.36706405878067,
+    "model_load_seconds": 26.894216861575842,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 23.26162688806653,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0181",
+  "unit_ordinal": 181,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

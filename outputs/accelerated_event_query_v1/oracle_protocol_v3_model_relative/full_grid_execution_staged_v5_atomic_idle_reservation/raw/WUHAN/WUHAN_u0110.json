@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0110:1785444775945604499",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "d1ea9e53b0b8c6900f9c53dc1ba5237d68015e1a9ec8aaf32ba8ddc9c3873682",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "c626a22d64ac7b097810af22338c9b0ddacbf2ae739e812e2aefd02bac3a5cd3",
+  "generated_token_ids_sha256": "e2e72826129b05974e9c13379205debf74f4eaa6101d9ff660c4e4d22710ee3e",
+  "input_identity_sha256": "9055d152c0d287d6665667f36ca1cebb0e83803c3c9964c98593bb795b1ef86d",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "335c4396e9768131a0a65e00dca41a20e6403105df37e5dc97d3bc5144e22e3e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on a multi-lane elevated highway with clear visibility. Traffic is flowing steadily ahead, and there are no sudden changes in speed, braking, or obstacles requiring a marked response. Road signs indicate directions and speed limits (e.g., 30 km/h on the rightmost lane), but the ego vehicle is in a lane with no immediate need to slow down or maneuver. The surrounding vehicles maintain consistent spacing, and no road users are entering or threatening the ego path. The conditions are typical for steady highway driving without requiring a noticeable slowdown or avoidance.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "c81decc8bec9ba64972f98ee70b0fffdb14de636a1dcb221522abd426495188d",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on a multi-lane elevated highway with clear visibility. Traffic is flowing steadily ahead, and there are no sudden changes in speed, braking, or obstacles requiring a marked response. Road signs indicate directions and speed limits (e.g., 30 km/h on the rightmost lane), but the ego vehicle is in a lane with no immediate need to slow down or maneuver. The surrounding vehicles maintain consistent spacing, and no road users are entering or threatening the ego path. The conditions are typical for steady highway driving without requiring a noticeable slowdown or avoidance.\"\n}",
+  "raw_response_sha256": "22482c2db25f81e0173acb11f47c107fd10deed68101bc2c11cae699cbd0dfe4",
+  "record_payload_sha256": "661416a7f236aaf02785ebde95bb6da6cba3d8f23b7bcee5213030ad8b6b23c9",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 22.935248950496316,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 25.116131311282516,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0110",
+  "unit_ordinal": 1238,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

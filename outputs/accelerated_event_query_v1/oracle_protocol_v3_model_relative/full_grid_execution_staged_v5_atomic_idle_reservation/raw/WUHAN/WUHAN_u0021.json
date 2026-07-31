@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0021:1785442790899000529",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "61bc58ecb3d49867b0b35a6160288b897c23792e4def31c948665d38d8a52f3b",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "d05212469f38681910682bd694fb935fe8c128e00493586a0085664e14a572f4",
+  "generated_token_ids_sha256": "f60c884abd7379cd95fd57edac0f1a6357b12ee9794af5c8243a842b4514c0d0",
+  "input_identity_sha256": "c01b0662c24eedee4ebe0198ad99d2370c4d1ebcebb0332a7261e33117b30ecc",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "06101ad6b697b4040ef615e399f55ba0650c449eb8afed1078b525b887baa95b",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane urban road with clear visibility. Traffic flow is smooth, with no sudden braking, slowing, or obstacles in the path. Road signs and lane markings are visible and do not indicate any immediate need for a marked response. No vehicles are seen entering the ego path or threatening the trajectory. The environment is consistent with normal urban driving without any visible hazards requiring a noticeable slowdown, braking, or avoidance maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "0b7ed1485faa38842ea6e16863fecc2cb9d49b832ebde8aa5cf301bae75a08ce",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane urban road with clear visibility. Traffic flow is smooth, with no sudden braking, slowing, or obstacles in the path. Road signs and lane markings are visible and do not indicate any immediate need for a marked response. No vehicles are seen entering the ego path or threatening the trajectory. The environment is consistent with normal urban driving without any visible hazards requiring a noticeable slowdown, braking, or avoidance maneuver.\"\n}",
+  "raw_response_sha256": "79cde8c256df0f4762e5480f6679e002d25d4f1fdabcce7318292d9e2fe1da31",
+  "record_payload_sha256": "0db9bd15bf3d8c08821bf7dd933892974f3abf64e92334475856778f3d9001ab",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 21.544351181015372,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 23.565324703231454,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0021",
+  "unit_ordinal": 1149,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

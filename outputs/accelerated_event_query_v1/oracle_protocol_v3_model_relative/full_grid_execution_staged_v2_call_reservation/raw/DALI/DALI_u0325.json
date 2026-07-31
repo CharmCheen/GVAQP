@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0325:1785426424234650303",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "a70272fc9ef29b76428a7c727e910bfbdbeee9f3410c2da7ae65bebfdc328de6",
+  "execution_seal_sha256": "2189d821eba4b0e0022da4f0a1113e51ed2128351def12c4e310ffd36569c9ee",
+  "execution_session_id": "b1d874dad9633943da9182baee77bb3366cda2f0d6407e982a26dfc65e45aac8",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "cf72a92621a2c0edf74bf00e2f14f1675a9b44ad65e20fcbd6e20727f70e0f1c",
+  "generated_token_ids_sha256": "4beb5e999292634916bf4a8b00e6a7d508db2279f86f186cf490464f87df4193",
+  "input_identity_sha256": "71e8001e7719afb29c6bd998d6d391a6f0bdfb654dc48a4d44a9af35dbc288b7",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "e17cb25beefe2e4145046b6f028a99eda9cf97266b8c7c2b4d32a444a702d99d",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a line of traffic in a steady flow, with no sudden braking, slowing, or avoidance maneuvers required. The lead vehicles maintain consistent spacing and speed, and there are no visible obstacles, sudden lane changes, or traffic control signals requiring an immediate response within the unit. The road conditions and surrounding vehicles appear normal for urban driving during this time of day.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "6ac8e6f207b8de0c4c4a20d6311cef38b21a47e36e88bd2c945800922abc5e10",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a line of traffic in a steady flow, with no sudden braking, slowing, or avoidance maneuvers required. The lead vehicles maintain consistent spacing and speed, and there are no visible obstacles, sudden lane changes, or traffic control signals requiring an immediate response within the unit. The road conditions and surrounding vehicles appear normal for urban driving during this time of day.\"\n}",
+  "raw_response_sha256": "0b09e577f12b9496f75c26c9619f915c8a2ddaedc3508aad682290f75a6eedc1",
+  "record_payload_sha256": "83a0a81451f3bc225b279f23aa6112299ad36f85750d85802842d0df8f1ac4a2",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 16.117911625653505,
+    "model_load_seconds": 14.661523081362247,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 17.76984078809619,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0325",
+  "unit_ordinal": 325,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

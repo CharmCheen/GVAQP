@@ -1,0 +1,27 @@
+models:
+  yolo:
+    model_id: yolov8n.pt
+    model_family: YOLOv8n
+    source: ultralytics
+    local_path_env: GARC_YOLO_MODEL
+    input_size: 640
+    conf_threshold: 0.25
+    iou_threshold: 0.45
+    classes: [0, 1, 2, 3, 5, 7]
+    sha256: f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36
+  vlm:
+    model_id: Qwen/Qwen3-VL-32B-Instruct
+    revision: 0cfaf48183f594c314753d30a4c4974bc75f3ccb
+    local_path_env: GARC_VLM_MODEL
+    backend: transformers
+    dtype: bfloat16
+    device_map: auto
+    attention_backend: source_default
+    max_new_tokens: 256
+    generation_mode: greedy
+    pixel_limit: source_default
+    source_manifest_sha256: c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210
+    resolved_snapshot_bytes: 66726517848
+    resolved_file_count: 26
+    prompt_sha256: 12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33
+    parser_source_hash: c02b545c0c5d2969508eea9a5470f0cb67d71282b25059948106504f9f4edd31
