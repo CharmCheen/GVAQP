@@ -86,7 +86,7 @@ def test_revised_call_reservation_and_fresh_root_are_internally_bound():
         63.477998283059435
     )
     assert 19.077998283059436 + ENVELOPE_A100_GPU_HOURS < 64.0
-    assert EXECUTION.name == "full_grid_execution_staged_v6_split_exit_lease"
+    assert EXECUTION.name == "full_grid_execution_staged_v7_review_corrections"
     assert EXECUTION.name in unit_output_path("DALI", "DALI_u0000")
     assert EXECUTION.name in unit_parsed_path("DALI", "DALI_u0000")
 

@@ -1090,13 +1090,17 @@ def main() -> None:
     ]
     concurrent_mean = statistics.fmean(concurrent_accounted)
     concurrent_sd = statistics.stdev(concurrent_accounted)
-    concurrent_means_by_video = {
-        video_id: statistics.fmean(
+    concurrent_rows_by_video = {
+        video_id: [
             row["accounted_wall_seconds"]
             for row in concurrent_cost_rows
             if row["unit_id"].startswith(video_id + "_")
-        )
+        ]
         for video_id in VIDEO_ORDER
+    }
+    concurrent_means_by_video = {
+        video_id: statistics.fmean(rows)
+        for video_id, rows in concurrent_rows_by_video.items()
     }
     historical_completed_mean = statistics.fmean(
         row["accounted_wall_seconds"]
@@ -1128,14 +1132,44 @@ def main() -> None:
         concurrent_mean
         + uncertainty_t_critical * concurrent_sd / math.sqrt(len(concurrent_accounted))
     )
-    estimated_95_upper = 2.0 * (
-        EXPECTED_UNIT_COUNT * concurrent_mean_95_upper
-        + sum(observed_loads.values())
-    ) / 3600.0
+    # A global-mean upper is not necessarily an upper for the slowest video.
+    # Freeze stratified bounds and use a Bonferroni two-sided familywise 95%
+    # critical value across the three video means.  This guarantees that each
+    # projected worker upper exceeds its own point projection.
+    familywise_t_critical_by_video = {
+        video_id: float(student_t.ppf(
+            1.0 - 0.05 / (2.0 * len(VIDEO_ORDER)), len(rows) - 1
+        ))
+        for video_id, rows in concurrent_rows_by_video.items()
+    }
+    concurrent_familywise_95_upper_by_video = {
+        video_id: (
+            concurrent_means_by_video[video_id]
+            + familywise_t_critical_by_video[video_id]
+            * statistics.stdev(rows) / math.sqrt(len(rows))
+        )
+        for video_id, rows in concurrent_rows_by_video.items()
+    }
+    familywise_95_worker_wall_seconds = {
+        video_id: (
+            EXPECTED_UNITS_BY_VIDEO[video_id]
+            * concurrent_familywise_95_upper_by_video[video_id]
+            + observed_loads[video_id]
+        )
+        for video_id in VIDEO_ORDER
+    }
+    if any(
+        familywise_95_worker_wall_seconds[video_id]
+        < point_worker_wall_seconds[video_id]
+        for video_id in VIDEO_ORDER
+    ):
+        raise RuntimeError("stratified uncertainty upper fell below point estimate")
+    estimated_95_upper = (
+        2.0 * sum(familywise_95_worker_wall_seconds.values()) / 3600.0
+    )
     parallel_wall_95_upper = (
-        max(EXPECTED_UNITS_BY_VIDEO.values()) * concurrent_mean_95_upper
-        + max(observed_loads.values())
-    ) / 3600.0
+        max(familywise_95_worker_wall_seconds.values()) / 3600.0
+    )
     reservation_subtotal = call_reservation_derivation[
         "call_load_plus_simultaneous_emergency_reservation_subtotal_a100_gpu_hours"
     ]
@@ -1161,6 +1195,10 @@ def main() -> None:
         "direct_concurrent_mean_seconds_by_video": concurrent_means_by_video,
         "direct_concurrent_mean_95_percent_upper_seconds": concurrent_mean_95_upper,
         "direct_concurrent_mean_95_percent_t_critical": uncertainty_t_critical,
+        "stratified_familywise_95_percent_method": "per-video Student-t mean intervals with Bonferroni two-sided alpha=0.05 across three videos",
+        "direct_concurrent_familywise_95_percent_upper_seconds_by_video": concurrent_familywise_95_upper_by_video,
+        "direct_concurrent_familywise_95_percent_t_critical_by_video": familywise_t_critical_by_video,
+        "familywise_95_percent_worker_wall_seconds": familywise_95_worker_wall_seconds,
         "observed_v5_model_load_seconds": observed_loads,
         "point_estimated_worker_wall_seconds": point_worker_wall_seconds,
         "per_call_hard_reservation_wall_seconds": CALL_RESERVATION_WALL_SECONDS,
@@ -1447,7 +1485,7 @@ def main() -> None:
             "uncertain_terminal_units": PRIOR_FAILED_TERMINAL_UNIT_IDS,
             "partial_labels_reused": False,
             "formal_reference_published": False,
-            "interpretation": "the second run falsified the 35-second call reservation under three-worker concurrent load; the nested first run had already falsified 23.579961 seconds. Neither failure alters labels, inputs, schema, checkpoint, or grid",
+            "interpretation": "the immediate V5 run completed 1,084 calls and stopped because its 2-second loaded-worker process-exit lease was exceeded by the observed 2.073427-second WUHAN terminal tail; nested V2 and V1 evidence had separately falsified the 35-second and 23.579961-second call reservations. None of the failures alters labels, inputs, schema, checkpoint, or grid",
         },
         "authoritative_schema": {
             "authoritative_fields": ["label"],

@@ -433,3 +433,14 @@ stage-complete upper is 42.572848 seconds (9.427152 seconds margin). Its exact
 63.477998 < 64. Source boundary tests pass. No V6 package, seal, approval, or
 formal inference exists yet; full re-decode/reprocess, mock/fault tests, and a
 new exact independent review remain mandatory.
+
+V6 was subsequently built and sealed without inference. Three independent
+full-shard re-decode/reprocess checks covered 1,475 units and 30,932 frames;
+165 tests and the complete mock plus 14/14 fault injections passed. Independent
+review nevertheless returned `REVISE_FULL_GRID_PREREGISTRATION` for three
+frozen-document defects: stale immediate-prior-failure wording, a purported
+parallel-wall 95% upper below its point estimate, and conflation of the exact
+full-grid approval with the separately granted downstream authorization.
+V7 corrects only those evidence/statistical/authorization bindings. Grid,
+prompt, schema, checkpoint, schedule, leases, and inference semantics remain
+unchanged. No V6 formal execution root, approval, model load, or call exists.

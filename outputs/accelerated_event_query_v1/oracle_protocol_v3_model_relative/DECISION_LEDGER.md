@@ -47,6 +47,8 @@
 | 41 V5 FORMAL FAIL-STOP | Independently accepted V5 completed 1,084/1,086 attempts; WUHAN then crossed the uniform 2-second lease only in its post-session process-exit tail at 2.073427 seconds. | Preserve all evidence; do not reuse labels; revise only the state-dependent terminal lease. | 1,084/1,084 raw self-hash and strict parse; max accounted call 27.805666s; three loads; zero retries; no publication; V5 conservative upper 12.380816 A100h. | Split ordinary 2s idle from 8s process exit under a fresh V6 seal. |
 | 42 V6 SOURCE REVISION | All 1,084 V5 calls support a 42.572848s stage-complete 192-token upper; an exact 52s reservation leaves 9.427152s, and split-gap all-operations cost is 44.316667 A100h. | Implement V6 with 52s calls, 2s ordinary idle, 8s process exit/emergency, and 44.4h fresh envelope; no formal launch before exact package review. | CPU-only evidence derivation; cumulative failed-use plus fresh envelope 63.477998 < 64; 37 targeted tests pass. | Commit, rebuild all 1,475 inputs/tensors, run full mock/fault suite, seal, and obtain independent GO. |
 
+| 43 V6 INDEPENDENT REVISE | Exact mechanics, 1,693 historical raw bindings, 165 tests, and 14 injections passed, but frozen failure wording was stale, the parallel 95% upper was below its point, and full-grid approval conflated separate downstream authority. | `REVISE_FULL_GRID_PREREGISTRATION`; do not launch seal `d1d63886…`. | Review bundle `fa558fd1…`; zero V6 execution artifacts, loads, or calls. | Build V7 with accurate failure hierarchy, stratified familywise cost upper, and approval-scope separation; reseal and independently re-review. |
+
 Revision mapping:
 
 - schema/parse/label reproducibility: `REVISE_V3_SCHEMA`;

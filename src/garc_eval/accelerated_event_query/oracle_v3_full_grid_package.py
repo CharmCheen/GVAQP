@@ -18,7 +18,7 @@ from .oracle_v3_manifest import load_json, sha256_file, validate_payload_hash
 
 ROOT = Path(__file__).resolve().parents[3]
 BASE = ROOT / "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative"
-PACKAGE = BASE / "full_grid_preregistration_staged_v6_split_exit_lease"
+PACKAGE = BASE / "full_grid_preregistration_staged_v7_review_corrections"
 EXECUTION = BASE / EXECUTION_DIRECTORY_NAME
 PREREG = PACKAGE / "FULL_GRID_PREREGISTRATION.json"
 SEAL = PACKAGE / "FULL_GRID_EXECUTION_SEAL.json"

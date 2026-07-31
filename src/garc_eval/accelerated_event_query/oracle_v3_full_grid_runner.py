@@ -55,7 +55,7 @@ from .oracle_v3_parser import parse_oracle_v3_response
 
 # Three failed formal executions are preserved.  V5 supplied 1,084 complete
 # concurrent observations and failed only in the terminal process-exit gap,
-# not in a model call.  The V6 per-call bound is prospectively frozen from the
+# not in a model call.  The V7 per-call bound is prospectively frozen from the
 # 192-token generation cap and the evidence-complete V5 runtime components;
 # see FULL_GRID_CALL_RESERVATION_DERIVATION.json.  It is a hard reservation,
 # not a latency target or permission to retry.
@@ -114,7 +114,8 @@ def validate_compute_approval(path: Path = APPROVAL) -> dict[str, Any]:
         "approved_call_count", "estimated_a100_gpu_hours",
         "authorization_envelope_a100_gpu_hours", "parallel_wall_hours",
         "worker_gpu_pairs", "model_load_count", "reload_count", "retry_count",
-        "partial_results_are_not_formal_reference", "downstream_not_authorized",
+        "partial_results_are_not_formal_reference",
+        "full_grid_approval_scope_excludes_downstream",
         "fresh_execution_id", "fresh_execution_root",
         "fresh_execution_starts_from_unit_ordinal",
         "prior_completed_labels_reused",
@@ -151,9 +152,9 @@ def validate_compute_approval(path: Path = APPROVAL) -> dict[str, Any]:
         approval.get("reload_count") == 0,
         approval.get("retry_count") == 0,
         approval.get("partial_results_are_not_formal_reference") is True,
-        approval.get("downstream_not_authorized") is False,
+        approval.get("full_grid_approval_scope_excludes_downstream") is True,
         approval.get("fresh_execution_id")
-        == "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_SPLIT_EXIT_LEASE_V6",
+        == "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_REVIEW_CORRECTIONS_V7",
         approval.get("fresh_execution_root") == str(EXECUTION.relative_to(ROOT)),
         approval.get("fresh_execution_starts_from_unit_ordinal") == 0,
         approval.get("prior_completed_labels_reused") is False,

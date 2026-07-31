@@ -381,3 +381,17 @@
   emergency reservation already prospectively covered this residency. A
   future tail above 8 seconds still falsifies V6 and globally stops.
 - Status: `IMPLEMENTED_IN_SOURCE; 37 TARGETED TESTS PASS; EXACT V6 PACKAGE_AND_INDEPENDENT_REVIEW_REQUIRED`.
+
+## H27 — Correct mechanics are insufficient when frozen evidence semantics are inconsistent
+
+- Prediction: an independently reviewable execution package must describe the
+  immediate failure hierarchy accurately, report a statistical upper no lower
+  than its corresponding point estimate, and keep exact full-grid approval
+  distinct from separately authorized downstream work.
+- Observation: V6 mechanics passed all direct checks, but independent review
+  found all three frozen inconsistencies and returned
+  `REVISE_FULL_GRID_PREREGISTRATION` before inference.
+- Competing explanation: these are cosmetic defects because they do not change
+  tensors or labels. Rejected: each changes how cost risk or authorization
+  scope would be interpreted after sealing.
+- Status: `SUPPORTED; V7_CORRECTION_AND_NEW_REVIEW_REQUIRED`.
