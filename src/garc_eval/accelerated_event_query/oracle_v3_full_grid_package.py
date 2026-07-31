@@ -18,7 +18,7 @@ from .oracle_v3_manifest import load_json, sha256_file, validate_payload_hash
 
 ROOT = Path(__file__).resolve().parents[3]
 BASE = ROOT / "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative"
-PACKAGE = BASE / "full_grid_preregistration_staged_v5_atomic_idle_reservation"
+PACKAGE = BASE / "full_grid_preregistration_staged_v6_split_exit_lease"
 EXECUTION = BASE / EXECUTION_DIRECTORY_NAME
 PREREG = PACKAGE / "FULL_GRID_PREREGISTRATION.json"
 SEAL = PACKAGE / "FULL_GRID_EXECUTION_SEAL.json"
@@ -37,7 +37,7 @@ def _validate_path_hash(binding: dict[str, Any]) -> None:
 
 
 def _validate_prior_failure_revision_bindings(prereg: dict[str, Any]) -> None:
-    """Reauthenticate every nested failed-run binding at launch time."""
+    """Reauthenticate the V5 -> V2 -> V1 failed-run evidence chain."""
 
     bindings = prereg.get("bindings", {})
     prior_binding = bindings.get("prior_failed_execution_evidence")
@@ -46,48 +46,98 @@ def _validate_prior_failure_revision_bindings(prereg: dict[str, Any]) -> None:
         raise RuntimeError("preregistration lacks prior-failure revision bindings")
     prior = load_json(ROOT / prior_binding["path"])
     validate_payload_hash(prior, "prior_failure_evidence_payload_sha256")
+    def validate_failure(
+        evidence: dict[str, Any],
+        *,
+        completed: int,
+        attempted: int,
+        terminal_field: str,
+        terminal_value: Any,
+        binding_count: int,
+        nested_count: int,
+    ) -> dict[str, Any] | None:
+        if not all((
+            evidence.get("status")
+            == "AUTHENTICATED_INCOMPLETE_PRIOR_RUN_REVISION_EVIDENCE_ONLY",
+            evidence.get("completed_call_count") == completed,
+            evidence.get("attempted_call_count") == attempted,
+            evidence.get(terminal_field) == terminal_value,
+            evidence.get("formal_reference_artifacts_present") is False,
+            len(evidence.get("bindings", [])) == binding_count,
+            len(evidence.get("raw_output_bindings", [])) == completed,
+        )):
+            raise RuntimeError("prior failed execution evidence semantics changed")
+        if evidence.get("reuse_in_new_execution") is not None and (
+            evidence.get("reuse_in_new_execution")
+            != "FORBIDDEN; fresh execution starts at unit 0"
+        ):
+            raise RuntimeError("prior failed label-reuse boundary changed")
+        for binding in evidence.get("bindings", []) + evidence.get(
+            "raw_output_bindings", []
+        ):
+            _validate_path_hash(binding)
+        candidates = [
+            binding for binding in evidence.get("bindings", [])
+            if Path(binding.get("path", "")).name
+            == "FULL_GRID_PRIOR_FAILURE_EVIDENCE.json"
+        ]
+        if len(candidates) != nested_count:
+            raise RuntimeError("prior evidence nested-chain cardinality changed")
+        if not candidates:
+            return None
+        nested_evidence = load_json(ROOT / candidates[0]["path"])
+        validate_payload_hash(
+            nested_evidence, "prior_failure_evidence_payload_sha256"
+        )
+        return nested_evidence
+
+    v2 = validate_failure(
+        prior,
+        completed=1084,
+        attempted=1086,
+        terminal_field="uncertain_terminal_unit_ids",
+        terminal_value=["DALI_u0351", "HANGZHOU_u0386"],
+        binding_count=14,
+        nested_count=1,
+    )
     if not all((
-        prior.get("status")
-        == "AUTHENTICATED_INCOMPLETE_PRIOR_RUN_REVISION_EVIDENCE_ONLY",
-        prior.get("completed_call_count") == 473,
-        prior.get("attempted_call_count") == 476,
-        prior.get("uncertain_terminal_unit_ids")
-        == ["DALI_u0468", "HANGZHOU_u0003", "WUHAN_u0002"],
-        prior.get("formal_reference_artifacts_present") is False,
+        prior.get("prior_execution_seal_sha256")
+        == "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+        prior.get("stop_trigger") == "cost_envelope_exceeded",
+        prior.get("stop_detail")
+        == "stop_intent:loaded_worker_idle:V3_FULL_GRID_WUHAN:elapsed=2.073427:limit=2.000000",
+        prior.get("model_load_count") == 3,
+        prior.get("strict_parse_completed_raw_count") == 1084,
+        prior.get("immediate_prior_conservative_usage_upper_bound_a100_gpu_hours")
+        == 12.38081599596055,
+        prior.get("conservative_usage_upper_bound_a100_gpu_hours")
+        == 19.077998283059436,
         prior.get("reuse_in_new_execution")
         == "FORBIDDEN; fresh execution starts at unit 0",
-        len(prior.get("bindings", [])) == 14,
-        len(prior.get("raw_output_bindings", [])) == 473,
     )):
-        raise RuntimeError("prior failed execution evidence semantics changed")
-    for binding in prior.get("bindings", []) + prior.get(
-        "raw_output_bindings", []
-    ):
-        _validate_path_hash(binding)
-    nested_candidates = [
-        binding for binding in prior.get("bindings", [])
-        if Path(binding.get("path", "")).name
-        == "FULL_GRID_PRIOR_FAILURE_EVIDENCE.json"
-    ]
-    if len(nested_candidates) != 1:
-        raise RuntimeError("immediate prior evidence lacks one nested failure record")
-    nested = load_json(ROOT / nested_candidates[0]["path"])
-    validate_payload_hash(nested, "prior_failure_evidence_payload_sha256")
-    if not all((
-        nested.get("status")
-        == "AUTHENTICATED_INCOMPLETE_PRIOR_RUN_REVISION_EVIDENCE_ONLY",
-        nested.get("completed_call_count") == 136,
-        nested.get("attempted_call_count") == 137,
-        nested.get("uncertain_terminal_unit_id") == "DALI_u0136",
-        nested.get("formal_reference_artifacts_present") is False,
-        len(nested.get("bindings", [])) == 11,
-        len(nested.get("raw_output_bindings", [])) == 136,
-    )):
-        raise RuntimeError("nested first-failure evidence semantics changed")
-    for binding in nested.get("bindings", []) + nested.get(
-        "raw_output_bindings", []
-    ):
-        _validate_path_hash(binding)
+        raise RuntimeError("immediate V5 failure identity/accounting changed")
+    if v2 is None:
+        raise RuntimeError("V5 evidence did not bind V2 evidence")
+    v1 = validate_failure(
+        v2,
+        completed=473,
+        attempted=476,
+        terminal_field="uncertain_terminal_unit_ids",
+        terminal_value=["DALI_u0468", "HANGZHOU_u0003", "WUHAN_u0002"],
+        binding_count=14,
+        nested_count=1,
+    )
+    if v1 is None:
+        raise RuntimeError("V2 evidence did not bind V1 evidence")
+    validate_failure(
+        v1,
+        completed=136,
+        attempted=137,
+        terminal_field="uncertain_terminal_unit_id",
+        terminal_value="DALI_u0136",
+        binding_count=11,
+        nested_count=0,
+    )
     derivation = load_json(ROOT / derivation_binding["path"])
     validate_payload_hash(
         derivation, "call_reservation_derivation_payload_sha256"
@@ -95,50 +145,47 @@ def _validate_prior_failure_revision_bindings(prereg: dict[str, Any]) -> None:
     if not all((
         derivation.get("status")
         == "FROZEN_PROSPECTIVE_REVISION_BEFORE_FRESH_EXECUTION",
-        derivation.get("completed_observation_count") == 473,
-        derivation.get("concurrent_activation_observation_count") == 7,
+        derivation.get("completed_observation_count") == 1084,
+        derivation.get("concurrent_activation_observation_count") == 1084,
         len(derivation.get("incomplete_concurrent_preinference_observations", []))
-        == 3,
+        == 2,
         derivation.get("incomplete_concurrent_preinference_observations")
         == [
             {
-                "unit_id": "DALI_u0468",
-                "call_reserved_to_inference_started_seconds": 3.567687389,
+                "unit_id": "DALI_u0351",
+                "call_reserved_to_inference_started_seconds": 1.770811581,
             },
             {
-                "unit_id": "HANGZHOU_u0003",
-                "call_reserved_to_inference_started_seconds": 1.580861416,
-            },
-            {
-                "unit_id": "WUHAN_u0002",
-                "call_reserved_to_inference_started_seconds": 3.48622021,
+                "unit_id": "HANGZHOU_u0386",
+                "call_reserved_to_inference_started_seconds": 0.738602882,
             },
         ],
         derivation.get(
             "incomplete_maximum_call_reserved_to_inference_started_seconds", 0.0
-        ) == 3.567687389,
+        ) == 1.770811581,
         derivation.get("concurrent_token_cap_total_upper_seconds", 0.0)
-        == 63.160835681429404,
-        derivation.get(
-            "concurrent_maximum_post_inference_pre_persistence_seconds", 0.0
-        ) == 0.12836038128246785,
+        == 42.57284809026531,
         derivation.get(
             "maximum_observed_post_inference_pre_persistence_seconds", 0.0
-        ) == 0.591471108826295,
+        ) == 0.17407700266037662,
         derivation.get("maximum_observed_post_persistence_coordinator_seconds")
-        == 0.58028415037316,
+        == 0.09615138588443628,
         derivation.get("governing_evidence_based_floor_seconds")
-        == 63.160835681429404,
+        == 42.57284809026531,
         derivation.get("absolute_safety_margin_seconds")
-        == 2.839164318570596,
+        == 9.42715190973469,
         derivation.get("atomic_loaded_worker_idle_lease_wall_seconds") == 2.0,
+        derivation.get("atomic_loaded_worker_process_exit_lease_wall_seconds")
+        == 8.0,
         derivation.get("frozen_generation_max_new_tokens") == 192,
-        derivation.get("revised_per_call_hard_reservation_wall_seconds") == 66.0,
-        derivation.get("fresh_formal_execution_envelope_a100_gpu_hours") == 56.0,
+        derivation.get("revised_per_call_hard_reservation_wall_seconds") == 52.0,
+        derivation.get("fresh_formal_execution_envelope_a100_gpu_hours") == 44.4,
         derivation.get("full_grid_all_operations_hard_bound_a100_gpu_hours", 1e9)
-        == 55.778888888888886,
-        derivation.get("maximum_idle_residency_gap_count") == 1481,
-        derivation.get("maximum_idle_wall_seconds_per_gap") == 2.0,
+        == 44.31666666666667,
+        derivation.get("maximum_ordinary_idle_residency_gap_count") == 1478,
+        derivation.get("maximum_process_exit_residency_gap_count") == 3,
+        derivation.get("maximum_ordinary_idle_wall_seconds_per_gap") == 2.0,
+        derivation.get("maximum_process_exit_wall_seconds_per_gap") == 8.0,
         derivation.get("prior_plus_fresh_formal_envelope_a100_gpu_hours", 1e9)
         < 64.0,
         derivation.get("absolute_safety_margin_seconds", -1.0) > 0.0,

@@ -53,18 +53,18 @@ from .oracle_v3_manifest import (
 from .oracle_v3_parser import parse_oracle_v3_response
 
 
-# Two formal executions falsified the former 23.579961- and 35-second bounds.
-# The latter failure occurred only after all three frozen workers activated,
-# providing direct concurrent-load evidence.  This replacement is
-# prospectively frozen from the 192-token generation cap, the preserved
-# 473-call runtime sample, and a token-cap scaling of the concurrent tail; see
-# FULL_GRID_CALL_RESERVATION_DERIVATION.json.  It remains a hard per-call cost
-# reservation, not a latency target or permission to retry.
-CALL_RESERVATION_WALL_SECONDS = 66.0
+# Three failed formal executions are preserved.  V5 supplied 1,084 complete
+# concurrent observations and failed only in the terminal process-exit gap,
+# not in a model call.  The V6 per-call bound is prospectively frozen from the
+# 192-token generation cap and the evidence-complete V5 runtime components;
+# see FULL_GRID_CALL_RESERVATION_DERIVATION.json.  It is a hard reservation,
+# not a latency target or permission to retry.
+CALL_RESERVATION_WALL_SECONDS = 52.0
 MODEL_LOAD_RESERVATION_WALL_SECONDS = 30.0
 LOADED_WORKER_IDLE_LEASE_SECONDS = 2.0
+LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS = 8.0
 LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS = 8.0
-ENVELOPE_A100_GPU_HOURS = 56.0
+ENVELOPE_A100_GPU_HOURS = 44.4
 GPU_IDLE_MAX_MEMORY_MIB = 16
 GPU_IDLE_MAX_UTILIZATION_PERCENT = 0
 EXPECTED_CUBLAS_WORKSPACE_CONFIG = ":4096:8"
@@ -97,6 +97,9 @@ def _coordinator(schedule: dict[str, Any], seal_sha256: str, execution_root: Pat
         call_reservation_wall_seconds=CALL_RESERVATION_WALL_SECONDS,
         model_load_reservation_wall_seconds=MODEL_LOAD_RESERVATION_WALL_SECONDS,
         loaded_worker_idle_lease_wall_seconds=LOADED_WORKER_IDLE_LEASE_SECONDS,
+        loaded_worker_process_exit_lease_wall_seconds=(
+            LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS
+        ),
         loaded_worker_emergency_reservation_wall_seconds=(
             LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
         ),
@@ -148,9 +151,9 @@ def validate_compute_approval(path: Path = APPROVAL) -> dict[str, Any]:
         approval.get("reload_count") == 0,
         approval.get("retry_count") == 0,
         approval.get("partial_results_are_not_formal_reference") is True,
-        approval.get("downstream_not_authorized") is True,
+        approval.get("downstream_not_authorized") is False,
         approval.get("fresh_execution_id")
-        == "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_ATOMIC_IDLE_RESERVATION_V5",
+        == "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_SPLIT_EXIT_LEASE_V6",
         approval.get("fresh_execution_root") == str(EXECUTION.relative_to(ROOT)),
         approval.get("fresh_execution_starts_from_unit_ordinal") == 0,
         approval.get("prior_completed_labels_reused") is False,

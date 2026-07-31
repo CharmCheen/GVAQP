@@ -363,3 +363,21 @@
   prediction of 32.263114 seconds by 2.736886 seconds. Its all-operations hard
   cost is 28.743889 A100 GPU-hours; adding the prior failure's conservative
   1.444388-hour upper bound remains below the user's 64-hour authorization.
+
+## H26 — Terminal model unload requires a distinct bounded lease
+
+- Prediction: keeping the ordinary loaded-idle lease at 2 seconds while using
+  an 8-second lease only after durable `WORKER_SESSION_COMPLETED` admits the
+  observed 2.073427-second V5 unload, preserves fail-stop for next-call and
+  session-close stalls, and rejects a process-exit tail above 8 seconds both
+  transactionally and in the supervisor.
+- Observation: V5 completed the entire WUHAN shard before stopping solely in
+  the session-close/process-exit window. Its 1,084 complete calls had maximum
+  accounted time 27.805666 seconds; no call approached the prior 66-second
+  lease. All preserved outputs strict-parse and none were formally published.
+- Competing explanation: the terminal delay could be an abnormal hang rather
+  than unload. The observed 2.073427 seconds is only 73 ms over the ordinary
+  lease and occurred after full shard/session completion; the 8-second
+  emergency reservation already prospectively covered this residency. A
+  future tail above 8 seconds still falsifies V6 and globally stops.
+- Status: `IMPLEMENTED_IN_SOURCE; 37 TARGETED TESTS PASS; EXACT V6 PACKAGE_AND_INDEPENDENT_REVIEW_REQUIRED`.

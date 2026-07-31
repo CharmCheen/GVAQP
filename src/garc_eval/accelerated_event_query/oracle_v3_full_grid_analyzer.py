@@ -29,6 +29,7 @@ from .oracle_v3_full_grid_package import (
 from .oracle_v3_full_grid_runner import (
     ENVELOPE_A100_GPU_HOURS,
     LOADED_WORKER_IDLE_LEASE_SECONDS,
+    LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS,
 )
 from .oracle_v3_manifest import canonical_hash, load_json, sha256_file, validate_payload_hash
 from .oracle_v3_parser import parse_oracle_v3_response
@@ -455,6 +456,8 @@ def analyze_execution(
         global_state.get("execution_seal_sha256") == seal_sha,
         global_state.get("loaded_worker_idle_lease_gpu_seconds")
         == 2.0 * LOADED_WORKER_IDLE_LEASE_SECONDS,
+        global_state.get("loaded_worker_process_exit_lease_gpu_seconds")
+        == 2.0 * LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS,
         len(global_state.get("model_load_workers", [])) == 3,
         len(global_state.get("model_load_completed_workers", [])) == 3,
         len(global_state.get("worker_sessions_completed", [])) == 3,

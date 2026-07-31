@@ -51,6 +51,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_runner import (
     ENVELOPE_A100_GPU_HOURS,
     LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS,
     LOADED_WORKER_IDLE_LEASE_SECONDS,
+    LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS,
     MODEL_LOAD_RESERVATION_WALL_SECONDS,
 )
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_processing import (
@@ -68,6 +69,9 @@ from garc_eval.accelerated_event_query.oracle_v3_manifest import (
     validate_payload_hash,
     write_json_once,
 )
+from garc_eval.accelerated_event_query.oracle_v3_parser import (
+    parse_oracle_v3_response,
+)
 from garc_eval.accelerated_event_query.oracle_protocol import rgb_content_hash
 
 
@@ -81,16 +85,15 @@ MODEL_MANIFEST = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/M
 MODEL_AUDIT = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/MODEL_IDENTITY_AUDIT_V1.json"
 V2_DECISION = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/TARGETED_PILOT_DECISION_V2.json"
 V2_EVIDENCE = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/PILOT_EVIDENCE_MANIFEST_V2.json"
-PRIOR_FAILED_EXECUTION = BASE / "full_grid_execution_staged_v2_call_reservation"
-PRIOR_FAILED_PACKAGE = BASE / "full_grid_preregistration_staged_v2_call_reservation"
-PRIOR_FAILED_SEAL_SHA256 = "2189d821eba4b0e0022da4f0a1113e51ed2128351def12c4e310ffd36569c9ee"
+PRIOR_FAILED_EXECUTION = BASE / "full_grid_execution_staged_v5_atomic_idle_reservation"
+PRIOR_FAILED_PACKAGE = BASE / "full_grid_preregistration_staged_v5_atomic_idle_reservation"
+PRIOR_FAILED_SEAL_SHA256 = "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184"
 PRIOR_FAILED_TERMINAL_UNIT_IDS = [
-    "DALI_u0468",
-    "HANGZHOU_u0003",
-    "WUHAN_u0002",
+    "DALI_u0351",
+    "HANGZHOU_u0386",
 ]
-PRIOR_FAILED_COMPLETED_CALLS = 473
-PRIOR_FAILED_ATTEMPTED_CALLS = 476
+PRIOR_FAILED_COMPLETED_CALLS = 1084
+PRIOR_FAILED_ATTEMPTED_CALLS = 1086
 
 
 GPU_PAIRS = EXPECTED_GPU_PAIRS
@@ -167,7 +170,10 @@ def _prior_failure_evidence() -> dict[str, Any]:
         PRIOR_FAILED_EXECUTION / "k3_model_relative_event_relation.parquet",
         PRIOR_FAILED_EXECUTION / "FORMAL_REFERENCE_RELEASE.json",
     ]
-    expected_detail = "call:DALI_u0468:elapsed=35.048812:limit=35.000000"
+    expected_detail = (
+        "loaded_worker_idle:V3_FULL_GRID_WUHAN:"
+        "elapsed=2.073427:limit=2.000000"
+    )
     load_start_rows = [
         row for row in ledger if row.get("event") == "MODEL_LOAD_STARTED"
     ]
@@ -180,9 +186,18 @@ def _prior_failure_evidence() -> dict[str, Any]:
         for row in load_start_rows
     )
     termination_grace_wall_seconds = 5.0
-    conservative_usage_gpu_seconds = (
+    load_clock_conservative_gpu_seconds = (
         load_start_through_stop_gpu_seconds
         + 2.0 * len(load_start_rows) * termination_grace_wall_seconds
+    )
+    coordinator_conservative_gpu_seconds = (
+        float(state["actual_gpu_seconds"])
+        + float(state["reserved_gpu_seconds"])
+        + 2.0 * len(load_start_rows) * termination_grace_wall_seconds
+    )
+    conservative_usage_gpu_seconds = max(
+        load_clock_conservative_gpu_seconds,
+        coordinator_conservative_gpu_seconds,
     )
     initialization = load_json(initialization_path)
     launch_authority = load_json(launch_authority_path)
@@ -210,6 +225,15 @@ def _prior_failure_evidence() -> dict[str, Any]:
         })
         for record in raw_records
     )
+    raw_records_strict_parse = True
+    for record in raw_records:
+        parsed = parse_oracle_v3_response(record.get("raw", ""))
+        raw_records_strict_parse = raw_records_strict_parse and all((
+            record.get("raw_response_sha256")
+            == hashlib.sha256(record.get("raw", "").encode()).hexdigest(),
+            parsed.parse_status == "ok",
+            parsed.authoritative_label == record.get("authoritative_label"),
+        ))
     if not all((
         state.get("status") == "STOPPED",
         state.get("execution_seal_sha256") == PRIOR_FAILED_SEAL_SHA256,
@@ -228,6 +252,7 @@ def _prior_failure_evidence() -> dict[str, Any]:
             for record in raw_records
         ),
         raw_records_self_hash,
+        raw_records_strict_parse,
         len([row for row in attempt_rows if row.get("event") == "INFERENCE_STARTED"])
         == PRIOR_FAILED_ATTEMPTED_CALLS,
         len([row for row in attempt_rows if row.get("event") == "INFERENCE_COMPLETED"])
@@ -240,8 +265,8 @@ def _prior_failure_evidence() -> dict[str, Any]:
         prior_seal.get("execution_seal_payload_sha256") is not None,
         sha256_file(prior_seal_path) == PRIOR_FAILED_SEAL_SHA256,
         prior_approval.get("execution_seal_sha256") == PRIOR_FAILED_SEAL_SHA256,
-        earlier_failure.get("completed_call_count") == 136,
-        earlier_failure.get("attempted_call_count") == 137,
+        earlier_failure.get("completed_call_count") == 473,
+        earlier_failure.get("attempted_call_count") == 476,
         earlier_failure.get("formal_reference_artifacts_present") is False,
         not any(path.exists() for path in formal_forbidden),
     )):
@@ -274,6 +299,9 @@ def _prior_failure_evidence() -> dict[str, Any]:
         "load_start_through_global_stop_gpu_seconds": load_start_through_stop_gpu_seconds,
         "load_start_through_global_stop_a100_gpu_hours": load_start_through_stop_gpu_seconds / 3600.0,
         "termination_grace_wall_seconds": termination_grace_wall_seconds,
+        "load_clock_plus_termination_grace_gpu_seconds": load_clock_conservative_gpu_seconds,
+        "coordinator_actual_plus_reservations_plus_termination_grace_gpu_seconds": coordinator_conservative_gpu_seconds,
+        "conservative_upper_rule": "maximum of load-clock-through-stop plus termination grace and coordinator actual plus live reservations plus termination grace",
         "immediate_prior_conservative_usage_upper_bound_gpu_seconds": conservative_usage_gpu_seconds,
         "immediate_prior_conservative_usage_upper_bound_a100_gpu_hours": immediate_conservative_a100_hours,
         "earlier_prior_conservative_usage_upper_bound_a100_gpu_hours": earlier_conservative_a100_hours,
@@ -327,14 +355,15 @@ def _call_reservation_derivation(
             "noninference_pre_persistence_seconds": pre_persistence - inference,
             "post_persistence_coordinator_seconds": accounted - pre_persistence,
         })
-    concurrent_unit_ids = {
-        "DALI_u0466", "DALI_u0467",
-        "HANGZHOU_u0000", "HANGZHOU_u0001", "HANGZHOU_u0002",
-        "WUHAN_u0000", "WUHAN_u0001",
-    }
-    concurrent_observations = [
-        row for row in observations if row["unit_id"] in concurrent_unit_ids
+    # Every V5 call started after all three model loads had begun, so every
+    # completed call directly samples the six-GPU concurrent-residency regime.
+    load_started_rows = [
+        row for row in global_rows if row.get("event") == "MODEL_LOAD_STARTED"
     ]
+    latest_load_started_ns = max(
+        row["recorded_at_unix_ns"] for row in load_started_rows
+    )
+    concurrent_observations = observations
     reserved_at_ns = {
         row["unit_id"]: row["recorded_at_unix_ns"]
         for row in global_rows if row.get("event") == "CALL_RESERVED"
@@ -420,9 +449,6 @@ def _call_reservation_derivation(
         token_cap_prediction
         + bonferroni_t_critical * prediction_standard_error
     )
-    familywise_total_upper = (
-        familywise_inference_upper + max_noninference + max_post
-    )
     concurrent_token_cap_scaled_inference_upper = max(
         row["inference_seconds"]
         * 192.0 / row["reconstructed_decoded_response_tokens"]
@@ -466,12 +492,20 @@ def _call_reservation_derivation(
         + maximum_post_inference_pre_persistence
         + max_post
     )
-    failed_call_elapsed_lower_bound = 35.048812
+    familywise_total_upper = (
+        familywise_inference_upper
+        + evidence_complete_concurrent_preinference_upper
+        + maximum_post_inference_pre_persistence
+        + max_post
+    )
+    maximum_accounted_call_seconds = max(
+        row["accounted_wall_seconds"] for row in observations
+    )
     governing_floor = max(
         evidence_based_floor,
         familywise_total_upper,
         concurrent_token_cap_total_upper,
-        failed_call_elapsed_lower_bound,
+        maximum_accounted_call_seconds,
     )
     margin = CALL_RESERVATION_WALL_SECONDS - governing_floor
     reservation_admission_subtotal = 2 * (
@@ -479,11 +513,15 @@ def _call_reservation_derivation(
         + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
         + 3 * LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
     ) / 3600.0
-    maximum_idle_residency_gap_count = EXPECTED_UNIT_COUNT + 2 * 3
+    maximum_ordinary_idle_residency_gap_count = EXPECTED_UNIT_COUNT + 3
+    maximum_process_exit_residency_gap_count = 3
     all_operations_hard = 2 * (
         EXPECTED_UNIT_COUNT * CALL_RESERVATION_WALL_SECONDS
         + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
-        + maximum_idle_residency_gap_count * LOADED_WORKER_IDLE_LEASE_SECONDS
+        + maximum_ordinary_idle_residency_gap_count
+        * LOADED_WORKER_IDLE_LEASE_SECONDS
+        + maximum_process_exit_residency_gap_count
+        * LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS
     ) / 3600.0
     prior_conservative_usage = prior_failure[
         "conservative_usage_upper_bound_a100_gpu_hours"
@@ -493,7 +531,12 @@ def _call_reservation_derivation(
     )
     if not all((
         len(observations) == PRIOR_FAILED_COMPLETED_CALLS,
-        len(concurrent_observations) == 7,
+        len(concurrent_observations) == PRIOR_FAILED_COMPLETED_CALLS,
+        len(load_started_rows) == 3,
+        all(
+            row["recorded_at_unix_ns"] > latest_load_started_ns
+            for row in global_rows if row.get("event") == "CALL_RESERVED"
+        ),
         margin > 0.0,
         reservation_admission_subtotal <= ENVELOPE_A100_GPU_HOURS,
         all_operations_hard <= ENVELOPE_A100_GPU_HOURS,
@@ -507,7 +550,11 @@ def _call_reservation_derivation(
         ],
         "completed_observation_count": len(observations),
         "concurrent_activation_observation_count": len(concurrent_observations),
-        "concurrent_activation_unit_ids": sorted(concurrent_unit_ids),
+        "concurrent_activation_unit_ids": sorted(
+            row["unit_id"] for row in concurrent_observations
+        ),
+        "concurrent_activation_definition": "CALL_RESERVED occurred after all three V5 MODEL_LOAD_STARTED transitions; all six sealed GPUs were in model-load or model-resident service",
+        "latest_model_load_started_unix_ns": latest_load_started_ns,
         "frozen_generation_max_new_tokens": 192,
         "decoded_response_token_count_min": min(xs),
         "decoded_response_token_count_mean": x_mean,
@@ -541,17 +588,25 @@ def _call_reservation_derivation(
         "evidence_complete_concurrent_preinference_upper_seconds": evidence_complete_concurrent_preinference_upper,
         "concurrent_maximum_post_persistence_coordinator_seconds": concurrent_max_post,
         "concurrent_token_cap_total_upper_seconds": concurrent_token_cap_total_upper,
-        "cross_regime_stage_maximum_rule": "combine the direct concurrent 192-token-scaled inference maximum with the largest pre-inference, post-inference/pre-persistence, and post-persistence stages found anywhere in all 473 completed records plus the three incomplete pre-inference records; no stage receives a concurrency speedup credit",
-        "failed_call_elapsed_lower_bound_seconds": failed_call_elapsed_lower_bound,
+        "cross_regime_stage_maximum_rule": "combine the direct six-GPU concurrent 192-token-scaled inference maximum with the largest pre-inference, post-inference/pre-persistence, and post-persistence stages found anywhere in all 1,084 completed V5 records plus the two incomplete pre-inference records; no stage receives a concurrency speedup credit",
+        "maximum_observed_accounted_call_seconds": maximum_accounted_call_seconds,
         "governing_evidence_based_floor_seconds": governing_floor,
         "revised_per_call_hard_reservation_wall_seconds": CALL_RESERVATION_WALL_SECONDS,
         "absolute_safety_margin_seconds": margin,
         "relative_safety_margin_over_floor": margin / governing_floor,
         "call_load_plus_simultaneous_emergency_reservation_subtotal_a100_gpu_hours": reservation_admission_subtotal,
-        "maximum_idle_residency_gap_count": maximum_idle_residency_gap_count,
-        "maximum_idle_wall_seconds_per_gap": LOADED_WORKER_IDLE_LEASE_SECONDS,
+        "maximum_idle_residency_gap_count": (
+            maximum_ordinary_idle_residency_gap_count
+            + maximum_process_exit_residency_gap_count
+        ),
+        "maximum_ordinary_idle_residency_gap_count": maximum_ordinary_idle_residency_gap_count,
+        "maximum_process_exit_residency_gap_count": maximum_process_exit_residency_gap_count,
+        "maximum_ordinary_idle_wall_seconds_per_gap": LOADED_WORKER_IDLE_LEASE_SECONDS,
+        "maximum_process_exit_wall_seconds_per_gap": LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS,
         "atomic_loaded_worker_idle_lease_wall_seconds": LOADED_WORKER_IDLE_LEASE_SECONDS,
-        "atomic_idle_lease_enforcement": "GlobalFailStopCoordinator._account_idle_locked rejects any over-limit gap before reserve_call, worker-session close, or process-exit transition can succeed; supervisor polling remains an early stalled-worker detector only",
+        "atomic_loaded_worker_process_exit_lease_wall_seconds": LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS,
+        "observed_v5_terminal_process_exit_gap_lower_bound_seconds": 2.073427,
+        "atomic_idle_lease_enforcement": "GlobalFailStopCoordinator._account_idle_locked rejects ordinary gaps over 2 seconds before reserve_call or worker-session close and rejects the post-session process-exit gap over 8 seconds before exit can be accepted; supervisor independently selects the same state-dependent limit",
         "full_grid_all_operations_hard_bound_a100_gpu_hours": all_operations_hard,
         "fresh_formal_execution_envelope_a100_gpu_hours": ENVELOPE_A100_GPU_HOURS,
         "overall_user_authorization_a100_gpu_hours": 64.0,
@@ -696,11 +751,13 @@ also holds a prospective eight-second emergency reservation throughout model
 residency. An authoritative coordinator-side clock partitions residency
 continuously from load reservation through every call/idle boundary and the
 supervisor-observed process exit; caller-side timers are diagnostic only. The
-coordinator transaction rejects any idle gap above the frozen two-second lease
-before a next call, session-close, or process-exit transition can succeed;
-supervisor polling is an independent early detector for a stalled worker, not
-the authority for the hard bound. The emergency reservation is consumed only
-after the supervisor observes process exit. Model tensors and cached
+coordinator transaction rejects any ordinary idle gap above the frozen
+two-second lease before a next call or session-close transition can succeed.
+After session close, the only legal transition is process exit, which has a
+separate frozen eight-second lease. The supervisor selects the same limit from
+the durable session state and remains an independent early detector, not the
+authority for the hard bound. The emergency reservation is consumed only after
+the supervisor observes process exit. Model tensors and cached
 allocations are explicitly released before session close.
 
 The launcher authenticates zero compute contexts, zero utilization, and at
@@ -720,7 +777,7 @@ ledger evidence is preserved.
 
 This execution permits exactly three uninterrupted model loads and no post-load
 restart. The earlier failed executions are immutable revision evidence only:
-none of the immediate prior run's 473 completed labels may be reused, and this
+none of the immediate prior run's 1,084 completed labels may be reused, and this
 fresh execution starts from unit zero. Any call with a durable start and no terminal record remains
 uncertain and cannot be retried within this execution.
 
@@ -1096,15 +1153,15 @@ def main() -> None:
         "planned_model_load_count": 3,
         "reload_count": 0,
         "retry_count": 0,
-        "estimation_assumption": "all units are conservatively point-estimated in the direct three-worker concurrent regime; exact video call counts use each video's tiny direct concurrent sample mean, while a global seven-call Student-t upper quantifies sampling uncertainty; staged one/two-worker time is not credited as a speedup",
-        "historical_473_call_accounted_mean_seconds": historical_completed_mean,
+        "estimation_assumption": "all units are point-estimated from 1,084 direct V5 observations in the three-worker concurrent-residency regime; exact video call counts use each video's observed mean and a global Student-t upper quantifies mean uncertainty; no staged one/two-worker speedup credit is used",
+        "historical_1084_call_accounted_mean_seconds": historical_completed_mean,
         "direct_concurrent_observation_count": len(concurrent_accounted),
         "direct_concurrent_accounted_mean_seconds": concurrent_mean,
         "direct_concurrent_accounted_standard_deviation_seconds": concurrent_sd,
         "direct_concurrent_mean_seconds_by_video": concurrent_means_by_video,
         "direct_concurrent_mean_95_percent_upper_seconds": concurrent_mean_95_upper,
         "direct_concurrent_mean_95_percent_t_critical": uncertainty_t_critical,
-        "observed_second_run_load_seconds": observed_loads,
+        "observed_v5_model_load_seconds": observed_loads,
         "point_estimated_worker_wall_seconds": point_worker_wall_seconds,
         "per_call_hard_reservation_wall_seconds": CALL_RESERVATION_WALL_SECONDS,
         "call_reservation_derivation": binding(
@@ -1114,17 +1171,21 @@ def main() -> None:
             PACKAGE / "FULL_GRID_PRIOR_FAILURE_EVIDENCE.json"
         ),
         "per_load_hard_reservation_wall_seconds": MODEL_LOAD_RESERVATION_WALL_SECONDS,
-        "post_session_process_exit_lease_wall_seconds_per_worker": LOADED_WORKER_IDLE_LEASE_SECONDS,
+        "ordinary_loaded_worker_idle_lease_wall_seconds": LOADED_WORKER_IDLE_LEASE_SECONDS,
+        "post_session_process_exit_lease_wall_seconds_per_worker": LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS,
         "per_loaded_worker_reusable_emergency_reservation_wall_seconds": LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS,
         "call_load_plus_simultaneous_emergency_reservation_subtotal_a100_gpu_hours": reservation_subtotal,
         "maximum_idle_residency_gap_count": call_reservation_derivation["maximum_idle_residency_gap_count"],
-        "maximum_idle_wall_seconds_per_gap": call_reservation_derivation["maximum_idle_wall_seconds_per_gap"],
+        "maximum_ordinary_idle_residency_gap_count": call_reservation_derivation["maximum_ordinary_idle_residency_gap_count"],
+        "maximum_process_exit_residency_gap_count": call_reservation_derivation["maximum_process_exit_residency_gap_count"],
+        "maximum_ordinary_idle_wall_seconds_per_gap": call_reservation_derivation["maximum_ordinary_idle_wall_seconds_per_gap"],
+        "maximum_process_exit_wall_seconds_per_gap": call_reservation_derivation["maximum_process_exit_wall_seconds_per_gap"],
         "full_grid_all_operations_hard_bound_a100_gpu_hours": all_operations_hard,
         "reservation_and_all_operations_bounds_fit_envelope": (
             reservation_subtotal <= ENVELOPE_A100_GPU_HOURS
             and all_operations_hard <= ENVELOPE_A100_GPU_HOURS
         ),
-        "cost_shield": "call reservation remains open from pre-decode through durable raw and ACCEPTED persistence; a reusable prospective emergency reservation remains active per loaded worker; a coordinator-side continuous residency clock, not caller timing, accounts lock/hash-chain/persistence gaps; the same coordinator transaction rejects an idle gap above two seconds before any next call/session/process-exit transition can succeed; supervisor polling is only an early stalled-worker detector; no start above envelope",
+        "cost_shield": "call reservation remains open from pre-decode through durable raw and ACCEPTED persistence; a reusable prospective emergency reservation remains active per loaded worker; a coordinator-side continuous residency clock accounts every gap; the same transaction rejects ordinary gaps above two seconds before next call/session close and the terminal process-exit gap above eight seconds; supervisor polling independently enforces the state-dependent limit; no start above envelope",
         "actual_gpu_residency_accounting": "continuous coordinator-side two-GPU residency segments from model-load reservation through call/durable acceptance, every coordinator and inter-call gap, explicit model release, and supervisor-observed process-exit tail",
         "gpu_profile_authentication": "the initial pair must have zero compute contexts, zero utilization, and <=16 MiB used memory before initialization; each pending frozen pair must independently satisfy the same rule immediately before process spawn and again before model load",
         "unused_envelope_cannot_authorize_extra_calls_reloads_or_retries": True,

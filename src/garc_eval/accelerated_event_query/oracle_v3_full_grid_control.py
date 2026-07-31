@@ -174,6 +174,7 @@ class GlobalFailStopCoordinator:
         call_reservation_wall_seconds: float,
         model_load_reservation_wall_seconds: float,
         loaded_worker_idle_lease_wall_seconds: float = 2.0,
+        loaded_worker_process_exit_lease_wall_seconds: float = 8.0,
         loaded_worker_emergency_reservation_wall_seconds: float = 8.0,
     ):
         self.root = root
@@ -189,16 +190,20 @@ class GlobalFailStopCoordinator:
         self.loaded_worker_idle_lease_gpu_seconds = (
             2.0 * loaded_worker_idle_lease_wall_seconds
         )
+        self.loaded_worker_process_exit_lease_gpu_seconds = (
+            2.0 * loaded_worker_process_exit_lease_wall_seconds
+        )
         self.loaded_worker_emergency_reservation_gpu_seconds = (
             2.0 * loaded_worker_emergency_reservation_wall_seconds
         )
         if not (
             0.0 < self.loaded_worker_idle_lease_gpu_seconds
+            <= self.loaded_worker_process_exit_lease_gpu_seconds
             <= self.loaded_worker_emergency_reservation_gpu_seconds
         ):
             raise ValueError(
-                "loaded-worker idle lease must be positive and no larger than "
-                "the emergency reservation"
+                "loaded-worker leases must satisfy 0 < ordinary idle <= "
+                "process exit <= emergency reservation"
             )
 
     def initialize(self) -> dict[str, Any]:
@@ -217,6 +222,9 @@ class GlobalFailStopCoordinator:
                 "envelope_gpu_seconds": self.envelope_gpu_seconds,
                 "loaded_worker_idle_lease_gpu_seconds": (
                     self.loaded_worker_idle_lease_gpu_seconds
+                ),
+                "loaded_worker_process_exit_lease_gpu_seconds": (
+                    self.loaded_worker_process_exit_lease_gpu_seconds
                 ),
                 "actual_gpu_seconds": 0.0,
                 "reserved_gpu_seconds": 0.0,
@@ -504,15 +512,25 @@ class GlobalFailStopCoordinator:
         # worker, but successful accounting cannot depend on poll timing.  A
         # worker that closes an over-limit gap through its next transaction
         # must fail atomically before that call/session transition is accepted.
-        if idle_gpu_seconds > self.loaded_worker_idle_lease_gpu_seconds + 1e-9:
+        lease_gpu_seconds = (
+            self.loaded_worker_process_exit_lease_gpu_seconds
+            if consume_emergency_reservation
+            else self.loaded_worker_idle_lease_gpu_seconds
+        )
+        lease_kind = (
+            "process_exit" if consume_emergency_reservation else "ordinary_idle"
+        )
+        if idle_gpu_seconds > lease_gpu_seconds + 1e-9:
             self._stop_locked(
                 state,
                 "cost_envelope_exceeded",
-                f"loaded_idle_lease:{worker_id}:"
+                f"loaded_{lease_kind}_lease:{worker_id}:"
                 f"elapsed_gpu_seconds={idle_gpu_seconds:.9f}:"
-                f"limit_gpu_seconds={self.loaded_worker_idle_lease_gpu_seconds:.9f}",
+                f"limit_gpu_seconds={lease_gpu_seconds:.9f}",
             )
-            raise RuntimeError("loaded-worker idle exceeded sealed lease")
+            raise RuntimeError(
+                f"loaded-worker {lease_kind.replace('_', ' ')} exceeded sealed lease"
+            )
         if idle_gpu_seconds > self.loaded_worker_emergency_reservation_gpu_seconds + 1e-9:
             self._stop_locked(
                 state, "cost_envelope_exceeded", f"loaded_idle_reservation:{worker_id}"

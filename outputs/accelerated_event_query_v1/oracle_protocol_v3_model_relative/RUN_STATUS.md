@@ -400,3 +400,36 @@ linear prediction upper bound is 32.263114 seconds including maximum observed
 non-inference and persistence overhead, leaving 2.736886 seconds (8.48%). The
 all-operations hard bound is 28.743889 A100 GPU-hours under a 29.0-hour fresh
 envelope; prior conservative use plus that envelope is 30.444388 < 64.
+
+## Later formal evidence and V6 split-exit revision
+
+The next fresh 35-second execution preserved 473 complete outputs and three
+in-flight terminal attempts before `DALI_u0468` crossed its hard call lease at
+35.048812 seconds. It published no formal labels or K3 reference. Together
+with the first failure, its conservative cumulative use is 6.697182 A100
+GPU-hours. A 66-second evidence-complete revision was independently rejected
+twice before execution: first because prior incomplete-stage evidence and
+cost composition were incomplete, then because a supervisor-only two-second
+idle bound and post-inference persistence seam were not closed.
+
+The repaired V5 package passed independent review and completed 1,084 of 1,086
+attempts with three model loads and zero retries. All 1,084 preserved raw
+records reauthenticate and strict-parse (906 `not_relevant`, 178 `relevant`,
+zero `unknown`/parse failure). The run correctly global-fail-stopped after the
+WUHAN shard completed: its session-close-to-process-exit tail reached 2.073427
+seconds against the uniform two-second idle lease. DALI `u0351` and HANGZHOU
+`u0386` remain uncertain; no formal label table, K3 relation, or release
+pointer exists. Conservative V5 use is 12.380816 A100 GPU-hours and cumulative
+failed-run use is 19.077998 A100 GPU-hours.
+
+The decision-critical diagnosis is specific: the ordinary next-call and
+session-close gaps still fit two seconds, while a normal terminal model unload
+needs a distinct lease. V6 therefore retains a two-second ordinary idle lease,
+adds an eight-second post-session process-exit lease, and reduces the call
+reservation to 52 seconds using all 1,084 V5 observations. The 192-token
+stage-complete upper is 42.572848 seconds (9.427152 seconds margin). Its exact
+1,475-call/three-load/all-gap hard bound is 44.316667 A100 GPU-hours under a
+44.4-hour fresh envelope; cumulative failure evidence plus that envelope is
+63.477998 < 64. Source boundary tests pass. No V6 package, seal, approval, or
+formal inference exists yet; full re-decode/reprocess, mock/fault tests, and a
+new exact independent review remain mandatory.

@@ -115,7 +115,7 @@ def seal() -> None:
         "reload_count": 0,
         "retry_count": 0,
         "retry_semantics": "zero retries within this fresh execution; every unit starts anew under the new seal",
-        "fresh_execution_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_ATOMIC_IDLE_RESERVATION_V5",
+        "fresh_execution_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID_FRESH_SPLIT_EXIT_LEASE_V6",
         "fresh_execution_root": str(EXECUTION.relative_to(ROOT)),
         "fresh_execution_starts_from_unit_ordinal": 0,
         "prior_completed_labels_reused": False,
@@ -127,7 +127,7 @@ def seal() -> None:
         ],
         "global_fail_stop": True,
         "partial_reference_publication": "forbidden",
-        "downstream_authorization": "none",
+        "downstream_authorization": "separately authorized by the expanded 64 A100 GPU-hour research authorization; begins only after formal reference release",
         "execution_rule": "all package/source/input/model/GPU/approval bindings must match exactly; otherwise abort without repair or inference",
         "sources": {name: binding(ROOT / path) for name, path in component_paths.items()},
         "frozen_artifacts": [binding(path) for path in sorted(set(frozen_paths))],
@@ -209,7 +209,7 @@ def review_bundle() -> None:
         "review_scope": [
             "1475 call accounting", "three tail units", "three model loads",
             f"{ENVELOPE_A100_GPU_HOURS:.1f} GPU-hour envelope", "global fail-stop", "partial publication",
-            "66-second stage-complete concurrent-tail call reservation, atomic two-second idle lease, and recursively authenticated prior failures",
+            "52-second stage-complete 1,084-observation call reservation, atomic two-second ordinary idle lease, atomic eight-second process-exit lease, and recursively authenticated V5/V2/V1 failures",
             "fresh-from-unit-zero execution with no prior label reuse",
             "unknown threshold", "K3 merge rules", "evaluator leakage",
             "worker overlap", "resume/retry", "analyzer/finalizer bindings",
@@ -257,7 +257,7 @@ Audit state: `COMPLETE_REVIEWED_AWAITING_EXPLICIT_COMPUTE_APPROVAL`
 - Workers: {worker_summary}; disjoint union PASS; activation mode
   `{schedule['activation_mode']}` with `{schedule['initial_worker_id']}` first.
 - Cost: {load_json(PACKAGE / 'FULL_GRID_COST_ESTIMATE.json')['estimated_a100_gpu_hours']:.6f} A100 GPU-hours expected; {ENVELOPE_A100_GPU_HOURS:.1f} fresh-run envelope; three loads; zero reload/retry within the fresh execution.
-- Immediate prior failed run: 473 completed/476 attempted, no formal publication or label reuse;
+- Immediate prior failed run: 1,084 completed/1,086 attempted, no formal publication or label reuse;
   conservative usage upper bound {derivation['prior_failed_run_conservative_usage_upper_bound_a100_gpu_hours']:.6f} A100 GPU-hours.
 - Prior plus fresh envelope: {derivation['prior_plus_fresh_formal_envelope_a100_gpu_hours']:.6f} < 64 authorized A100 GPU-hours.
 - Coverage: global and per-video determined fraction >= 0.99; parse failure release tolerance 0.

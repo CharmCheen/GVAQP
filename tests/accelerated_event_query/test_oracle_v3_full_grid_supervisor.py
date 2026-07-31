@@ -20,6 +20,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_supervisor import (
 )
 from garc_eval.accelerated_event_query.oracle_v3_full_grid_runner import (
     CALL_RESERVATION_WALL_SECONDS,
+    LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS,
 )
 from garc_eval.accelerated_event_query.oracle_v3_manifest import atomic_text
 
@@ -40,12 +41,12 @@ class FakeProcess:
         return self.returncode
 
 
-def test_production_call_lease_has_exact_66_second_boundary(tmp_path):
+def test_production_call_lease_has_exact_52_second_boundary(tmp_path):
     coordinator = GlobalFailStopCoordinator(
         tmp_path,
         execution_seal_sha256="s" * 64,
         worker_bindings=WORKERS,
-        envelope_a100_gpu_hours=56.0,
+        envelope_a100_gpu_hours=44.4,
         call_reservation_wall_seconds=CALL_RESERVATION_WALL_SECONDS,
         model_load_reservation_wall_seconds=30.0,
     )
@@ -63,7 +64,7 @@ def test_production_call_lease_has_exact_66_second_boundary(tmp_path):
     violation = _lease_violation(tmp_path, exact + 1)
     assert violation is not None
     assert violation.startswith("call:U0:")
-    assert "limit=66.000000" in violation
+    assert "limit=52.000000" in violation
 
 
 def test_abrupt_worker_death_stops_peers_before_another_reservation(
@@ -642,7 +643,7 @@ def test_loaded_worker_idle_gap_is_cost_shielded(tmp_path):
     assert violation.startswith("loaded_worker_idle:W0")
 
 
-def test_closed_but_live_worker_remains_under_idle_lease(tmp_path):
+def test_closed_but_live_worker_uses_process_exit_lease(tmp_path):
     coordinator = GlobalFailStopCoordinator(
         tmp_path,
         execution_seal_sha256="s" * 64,
@@ -664,7 +665,14 @@ def test_closed_but_live_worker_remains_under_idle_lease(tmp_path):
     violation = _loaded_worker_idle_violation(
         tmp_path, running_worker_ids={"W0"}, now_ns=last + 3_000_000_000
     )
-    assert violation.startswith("loaded_worker_idle:W0")
+    assert violation is None
+    violation = _loaded_worker_idle_violation(
+        tmp_path,
+        running_worker_ids={"W0"},
+        now_ns=last + int(LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS * 1e9) + 1,
+    )
+    assert violation is not None
+    assert "limit=8.000000" in violation
 
 
 def test_worker_is_kernel_killed_when_supervisor_parent_exits(tmp_path):

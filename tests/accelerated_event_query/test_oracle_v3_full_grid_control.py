@@ -30,6 +30,27 @@ def coordinator(tmp_path: Path, *, envelope: float = 19.4):
     )
 
 
+@pytest.mark.parametrize(
+    "ordinary,process_exit,emergency",
+    [(0.0, 8.0, 8.0), (3.0, 2.0, 8.0), (2.0, 9.0, 8.0)],
+)
+def test_loaded_worker_lease_hierarchy_fails_closed_at_construction(
+    tmp_path, ordinary, process_exit, emergency
+):
+    with pytest.raises(ValueError, match="ordinary idle <= process exit"):
+        GlobalFailStopCoordinator(
+            tmp_path,
+            execution_seal_sha256="s" * 64,
+            worker_bindings=WORKERS,
+            envelope_a100_gpu_hours=44.4,
+            call_reservation_wall_seconds=52.0,
+            model_load_reservation_wall_seconds=30.0,
+            loaded_worker_idle_lease_wall_seconds=ordinary,
+            loaded_worker_process_exit_lease_wall_seconds=process_exit,
+            loaded_worker_emergency_reservation_wall_seconds=emergency,
+        )
+
+
 def loaded(coordinator):
     coordinator.initialize()
     coordinator.start_model_load("W0", [1, 2])
@@ -239,8 +260,8 @@ def test_atomic_idle_lease_rejects_missed_supervisor_poll_before_next_call(
         tmp_path,
         execution_seal_sha256="s" * 64,
         worker_bindings=WORKERS,
-        envelope_a100_gpu_hours=56.0,
-        call_reservation_wall_seconds=66.0,
+        envelope_a100_gpu_hours=44.4,
+        call_reservation_wall_seconds=52.0,
         model_load_reservation_wall_seconds=30.0,
         loaded_worker_idle_lease_wall_seconds=2.0,
         loaded_worker_emergency_reservation_wall_seconds=8.0,
@@ -261,9 +282,8 @@ def test_atomic_idle_lease_rejects_missed_supervisor_poll_before_next_call(
     assert state["in_flight_unit_ids"] == []
 
 
-@pytest.mark.parametrize("transition", ["session_close", "process_exit"])
 def test_atomic_idle_lease_covers_terminal_gap_transitions(
-    tmp_path, monkeypatch, transition
+    tmp_path, monkeypatch
 ):
     one_worker = {
         "W0": {"physical_gpu_ids": [1, 2], "unit_ids": ["U0"]}
@@ -272,8 +292,8 @@ def test_atomic_idle_lease_covers_terminal_gap_transitions(
         tmp_path,
         execution_seal_sha256="s" * 64,
         worker_bindings=one_worker,
-        envelope_a100_gpu_hours=56.0,
-        call_reservation_wall_seconds=66.0,
+        envelope_a100_gpu_hours=44.4,
+        call_reservation_wall_seconds=52.0,
         model_load_reservation_wall_seconds=30.0,
         loaded_worker_idle_lease_wall_seconds=2.0,
         loaded_worker_emergency_reservation_wall_seconds=8.0,
@@ -285,22 +305,78 @@ def test_atomic_idle_lease_covers_terminal_gap_transitions(
         worker_id="W0", gpu_pair=[1, 2], unit_id="U0", call_spec_sha256="a"
     )
     value.complete_call(worker_id="W0", unit_id="U0", wall_seconds=0.01)
-    if transition == "process_exit":
-        value.complete_worker_session("W0")
     previous = value.state()["last_gpu_accounted_unix_ns_by_worker"]["W0"]
     monkeypatch.setattr(control.time, "time_ns", lambda: previous + 3_000_000_000)
     with pytest.raises(RuntimeError, match="idle exceeded sealed lease"):
-        if transition == "session_close":
-            value.complete_worker_session("W0")
-        else:
-            value.complete_worker_process_exit("W0")
+        value.complete_worker_session("W0")
     state = value.state()
     assert state["status"] == "STOPPED"
     assert state["stop_trigger"] == "cost_envelope_exceeded"
-    if transition == "session_close":
-        assert state["worker_sessions_completed"] == []
-    else:
-        assert state["worker_processes_exited"] == []
+    assert state["worker_sessions_completed"] == []
+
+
+@pytest.mark.parametrize("elapsed_ns", [2_073_427_000, 8_000_000_000])
+def test_process_exit_lease_accepts_v5_observation_and_exact_boundary(
+    tmp_path, monkeypatch, elapsed_ns
+):
+    one_worker = {
+        "W0": {"physical_gpu_ids": [1, 2], "unit_ids": ["U0"]}
+    }
+    value = GlobalFailStopCoordinator(
+        tmp_path,
+        execution_seal_sha256="s" * 64,
+        worker_bindings=one_worker,
+        envelope_a100_gpu_hours=44.4,
+        call_reservation_wall_seconds=52.0,
+        model_load_reservation_wall_seconds=30.0,
+        loaded_worker_idle_lease_wall_seconds=2.0,
+        loaded_worker_process_exit_lease_wall_seconds=8.0,
+        loaded_worker_emergency_reservation_wall_seconds=8.0,
+    )
+    value.initialize()
+    value.start_model_load("W0", [1, 2])
+    value.complete_model_load("W0", 0.01)
+    value.reserve_call(
+        worker_id="W0", gpu_pair=[1, 2], unit_id="U0", call_spec_sha256="a"
+    )
+    value.complete_call(worker_id="W0", unit_id="U0", wall_seconds=0.01)
+    value.complete_worker_session("W0")
+    previous = value.state()["last_gpu_accounted_unix_ns_by_worker"]["W0"]
+    monkeypatch.setattr(control.time, "time_ns", lambda: previous + elapsed_ns)
+    value.complete_worker_process_exit("W0")
+    assert value.state()["worker_processes_exited"] == ["W0"]
+
+
+def test_process_exit_lease_rejects_above_eight_seconds(tmp_path, monkeypatch):
+    one_worker = {
+        "W0": {"physical_gpu_ids": [1, 2], "unit_ids": ["U0"]}
+    }
+    value = GlobalFailStopCoordinator(
+        tmp_path,
+        execution_seal_sha256="s" * 64,
+        worker_bindings=one_worker,
+        envelope_a100_gpu_hours=44.4,
+        call_reservation_wall_seconds=52.0,
+        model_load_reservation_wall_seconds=30.0,
+        loaded_worker_idle_lease_wall_seconds=2.0,
+        loaded_worker_process_exit_lease_wall_seconds=8.0,
+        loaded_worker_emergency_reservation_wall_seconds=8.0,
+    )
+    value.initialize()
+    value.start_model_load("W0", [1, 2])
+    value.complete_model_load("W0", 0.01)
+    value.reserve_call(
+        worker_id="W0", gpu_pair=[1, 2], unit_id="U0", call_spec_sha256="a"
+    )
+    value.complete_call(worker_id="W0", unit_id="U0", wall_seconds=0.01)
+    value.complete_worker_session("W0")
+    previous = value.state()["last_gpu_accounted_unix_ns_by_worker"]["W0"]
+    monkeypatch.setattr(control.time, "time_ns", lambda: previous + 8_000_000_001)
+    with pytest.raises(RuntimeError, match="process exit exceeded sealed lease"):
+        value.complete_worker_process_exit("W0")
+    state = value.state()
+    assert state["status"] == "STOPPED"
+    assert state["worker_processes_exited"] == []
 
 
 def test_atomic_idle_lease_accepts_exact_two_second_boundary(tmp_path, monkeypatch):

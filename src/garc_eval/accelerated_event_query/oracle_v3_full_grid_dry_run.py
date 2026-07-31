@@ -34,6 +34,7 @@ from .oracle_v3_full_grid_runner import (
     ENVELOPE_A100_GPU_HOURS,
     LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS,
     LOADED_WORKER_IDLE_LEASE_SECONDS,
+    LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS,
     MODEL_LOAD_RESERVATION_WALL_SECONDS,
 )
 from .oracle_v3_manifest import atomic_text, canonical_hash, load_json, sha256_file
@@ -136,6 +137,9 @@ def run_complete_mock(execution_root: Path) -> dict[str, Any]:
         call_reservation_wall_seconds=CALL_RESERVATION_WALL_SECONDS,
         model_load_reservation_wall_seconds=MODEL_LOAD_RESERVATION_WALL_SECONDS,
         loaded_worker_idle_lease_wall_seconds=LOADED_WORKER_IDLE_LEASE_SECONDS,
+        loaded_worker_process_exit_lease_wall_seconds=(
+            LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS
+        ),
         loaded_worker_emergency_reservation_wall_seconds=(
             LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
         ),
@@ -289,6 +293,9 @@ def run_fault_injections(root: Path) -> dict[str, Any]:
             call_reservation_wall_seconds=CALL_RESERVATION_WALL_SECONDS,
             model_load_reservation_wall_seconds=MODEL_LOAD_RESERVATION_WALL_SECONDS,
             loaded_worker_idle_lease_wall_seconds=LOADED_WORKER_IDLE_LEASE_SECONDS,
+            loaded_worker_process_exit_lease_wall_seconds=(
+                LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS
+            ),
             loaded_worker_emergency_reservation_wall_seconds=(
                 LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
             ),
@@ -383,6 +390,71 @@ def run_fault_injections(root: Path) -> dict[str, Any]:
         atomic_state["status"] == "STOPPED",
         atomic_state["stop_trigger"] == "cost_envelope_exceeded",
         atomic_state["attempted_unit_ids"] == [],
+    ))
+
+    def terminal_exit_coordinator(name: str) -> GlobalFailStopCoordinator:
+        return GlobalFailStopCoordinator(
+            root / name,
+            execution_seal_sha256=seal_sha,
+            worker_bindings={first_worker["worker_id"]: {
+                "physical_gpu_ids": first_worker["physical_gpu_ids"],
+                "unit_ids": [first_unit["unit_id"]],
+            }},
+            envelope_a100_gpu_hours=ENVELOPE_A100_GPU_HOURS,
+            call_reservation_wall_seconds=CALL_RESERVATION_WALL_SECONDS,
+            model_load_reservation_wall_seconds=MODEL_LOAD_RESERVATION_WALL_SECONDS,
+            loaded_worker_idle_lease_wall_seconds=LOADED_WORKER_IDLE_LEASE_SECONDS,
+            loaded_worker_process_exit_lease_wall_seconds=(
+                LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS
+            ),
+            loaded_worker_emergency_reservation_wall_seconds=(
+                LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
+            ),
+        )
+
+    def prepare_terminal_exit(value: GlobalFailStopCoordinator) -> int:
+        worker_id = first_worker["worker_id"]
+        pair = first_worker["physical_gpu_ids"]
+        unit_id = first_unit["unit_id"]
+        value.initialize()
+        value.start_model_load(worker_id, pair)
+        value.complete_model_load(worker_id, 0.01)
+        value.reserve_call(
+            worker_id=worker_id,
+            gpu_pair=pair,
+            unit_id=unit_id,
+            call_spec_sha256=first_unit["call_spec_sha256"],
+        )
+        value.complete_call(worker_id=worker_id, unit_id=unit_id, wall_seconds=0.01)
+        value.complete_worker_session(worker_id)
+        return value.state()["last_gpu_accounted_unix_ns_by_worker"][worker_id]
+
+    c = terminal_exit_coordinator("v5_terminal_exit_observation")
+    previous = prepare_terminal_exit(c)
+    with patch.object(
+        control.time, "time_ns", return_value=previous + 2_073_427_000
+    ):
+        c.complete_worker_process_exit(first_worker["worker_id"])
+    results["v5_observed_terminal_gap_accepted_by_split_exit_lease"] = (
+        c.state()["worker_processes_exited"] == [first_worker["worker_id"]]
+    )
+
+    c = terminal_exit_coordinator("process_exit_above_lease")
+    previous = prepare_terminal_exit(c)
+    exit_rejected = False
+    with patch.object(
+        control.time, "time_ns", return_value=previous + 8_000_000_001
+    ):
+        try:
+            c.complete_worker_process_exit(first_worker["worker_id"])
+        except RuntimeError:
+            exit_rejected = True
+    exit_state = c.state()
+    results["process_exit_above_eight_seconds_global_stop"] = all((
+        exit_rejected,
+        exit_state["status"] == "STOPPED",
+        exit_state["stop_trigger"] == "cost_envelope_exceeded",
+        exit_state["worker_processes_exited"] == [],
     ))
 
     c = make("abrupt_death")

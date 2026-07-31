@@ -29,6 +29,7 @@ from .oracle_v3_full_grid_package import (
 from .oracle_v3_full_grid_runner import (
     CALL_RESERVATION_WALL_SECONDS,
     LOADED_WORKER_IDLE_LEASE_SECONDS,
+    LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS,
     MODEL_LOAD_RESERVATION_WALL_SECONDS,
     _coordinator,
     authenticate_gpu_exclusivity,
@@ -94,6 +95,7 @@ def _loaded_worker_idle_violation(
     # A closed session must still exit promptly.  Keeping every live loaded
     # worker here closes the final session-close/process-exit window as well.
     loaded = set(state.get("model_load_completed_workers", [])) & running_worker_ids
+    closed_sessions = set(state.get("worker_sessions_completed", []))
     if not loaded:
         return None
     rows = _read_jsonl(execution_root / "GLOBAL_EXECUTION_LEDGER.jsonl")
@@ -121,10 +123,15 @@ def _loaded_worker_idle_violation(
         if timestamp is None:
             return f"loaded_worker_without_activity:{worker_id}"
         elapsed = (now_ns - timestamp) / 1e9
-        if elapsed > LOADED_WORKER_IDLE_LEASE_SECONDS:
+        limit = (
+            LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS
+            if worker_id in closed_sessions
+            else LOADED_WORKER_IDLE_LEASE_SECONDS
+        )
+        if elapsed > limit:
             return (
                 f"loaded_worker_idle:{worker_id}:elapsed={elapsed:.6f}:"
-                f"limit={LOADED_WORKER_IDLE_LEASE_SECONDS:.6f}"
+                f"limit={limit:.6f}"
             )
     return None
 

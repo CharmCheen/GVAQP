@@ -25,6 +25,7 @@ from garc_eval.accelerated_event_query.oracle_v3_full_grid_runner import (
     ENVELOPE_A100_GPU_HOURS,
     LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS,
     LOADED_WORKER_IDLE_LEASE_SECONDS,
+    LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS,
     MODEL_LOAD_RESERVATION_WALL_SECONDS,
 )
 
@@ -66,37 +67,54 @@ def test_revised_call_reservation_and_fresh_root_are_internally_bound():
         + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
         + 3 * LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
     ) / 3600.0
-    assert CALL_RESERVATION_WALL_SECONDS == 66.0
-    assert aggregate_hard_bound == pytest.approx(54.14666666666667)
-    assert aggregate_hard_bound < ENVELOPE_A100_GPU_HOURS == 56.0
-    idle_gap_count = EXPECTED_UNIT_COUNT + 2 * 3
+    assert CALL_RESERVATION_WALL_SECONDS == 52.0
+    assert aggregate_hard_bound == pytest.approx(42.67444444444445)
+    assert aggregate_hard_bound < ENVELOPE_A100_GPU_HOURS == 44.4
+    ordinary_idle_gap_count = EXPECTED_UNIT_COUNT + 3
+    process_exit_gap_count = 3
     all_operations_hard_bound = 2 * (
         EXPECTED_UNIT_COUNT * CALL_RESERVATION_WALL_SECONDS
         + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
-        + idle_gap_count * LOADED_WORKER_IDLE_LEASE_SECONDS
+        + ordinary_idle_gap_count * LOADED_WORKER_IDLE_LEASE_SECONDS
+        + process_exit_gap_count * LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS
     ) / 3600.0
-    assert idle_gap_count == 1481
-    assert all_operations_hard_bound == pytest.approx(55.778888888888886)
+    assert ordinary_idle_gap_count == 1478
+    assert process_exit_gap_count == 3
+    assert all_operations_hard_bound == pytest.approx(44.31666666666667)
     assert all_operations_hard_bound < ENVELOPE_A100_GPU_HOURS
-    assert EXECUTION.name == "full_grid_execution_staged_v5_atomic_idle_reservation"
+    assert 19.077998283059436 + ENVELOPE_A100_GPU_HOURS == pytest.approx(
+        63.477998283059435
+    )
+    assert 19.077998283059436 + ENVELOPE_A100_GPU_HOURS < 64.0
+    assert EXECUTION.name == "full_grid_execution_staged_v6_split_exit_lease"
     assert EXECUTION.name in unit_output_path("DALI", "DALI_u0000")
     assert EXECUTION.name in unit_parsed_path("DALI", "DALI_u0000")
 
 
-def test_nested_first_failure_binding_mutation_fails_closed(monkeypatch):
+@pytest.mark.parametrize(
+    "raw_fragment",
+    [
+        "full_grid_execution_staged_v5_atomic_idle_reservation/raw/DALI/DALI_u0000.json",
+        "full_grid_execution_staged_v2_call_reservation/raw/DALI/DALI_u0000.json",
+        "full_grid_execution_staged/raw/DALI/DALI_u0000.json",
+    ],
+)
+def test_every_failed_execution_binding_mutation_fails_closed(
+    monkeypatch, raw_fragment
+):
     prereg = package.load_json(package.PREREG)
     original = package._validate_path_hash
     reached_nested_raw = False
 
     def reject_nested_raw(binding):
         nonlocal reached_nested_raw
-        if "full_grid_execution_staged/raw/DALI/DALI_u0000.json" in binding["path"]:
+        if raw_fragment in binding["path"]:
             reached_nested_raw = True
-            raise RuntimeError("simulated nested first-run raw mutation")
+            raise RuntimeError("simulated failed-run raw mutation")
         return original(binding)
 
     monkeypatch.setattr(package, "_validate_path_hash", reject_nested_raw)
-    with pytest.raises(RuntimeError, match="simulated nested first-run raw mutation"):
+    with pytest.raises(RuntimeError, match="simulated failed-run raw mutation"):
         package._validate_prior_failure_revision_bindings(prereg)
     assert reached_nested_raw
 
