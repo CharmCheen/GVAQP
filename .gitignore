@@ -258,6 +258,19 @@ pnpm-lock.yaml
 # Generated evaluation outputs
 src/garc_eval/outputs/
 
+# =========================
+# Dataset payloads / partial downloads
+# =========================
+# Keep lightweight dataset manifests, mapping docs, and preparation scripts
+# above; do not version the payloads themselves.
+datasets/**/*.part
+datasets/**/*.xlsx
+datasets/**/raw/
+datasets/**/videos/
+datasets/**/frames/
+datasets/**/images/
+datasets/**/clips/
+
 # Large generated baseline candidate scores
 Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v1/baselines/baseline_candidate_scores.csv
 Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2/baselines/baseline_candidate_scores.csv
