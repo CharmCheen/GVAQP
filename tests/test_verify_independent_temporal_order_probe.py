@@ -63,6 +63,22 @@ def test_input_validation_rejects_bound_source() -> None:
         verify.verify_blocked_input_state(protocol, roles)
 
 
+def test_source_a_binding_rejects_hash_mismatch(tmp_path: Path) -> None:
+    manifest, _, _ = contracts()
+    binding = json.loads(verify.BINDING_PATH.read_text(encoding="utf-8")) if verify.BINDING_PATH.exists() else None
+    if binding is None:
+        pytest.skip("Source A has not been bound yet")
+    binding["source_a"]["video_sha256"] = "0" * 64
+    binding["binding_payload_sha256"] = verify.canonical_hash(
+        {key: value for key, value in binding.items() if key != "binding_payload_sha256"}
+    )
+    artifact = tmp_path / "outputs/independent_temporal_order_probe_v1/bindings/source_a_binding.json"
+    artifact.parent.mkdir(parents=True)
+    artifact.write_text(json.dumps(binding), encoding="utf-8")
+    with pytest.raises(RuntimeError, match="video_sha256"):
+        verify.verify_source_a_binding(ROOT, manifest, artifact)
+
+
 def test_scientific_invariants_require_exact_policy_order() -> None:
     _, protocol, _ = contracts()
     protocol = copy.deepcopy(protocol)

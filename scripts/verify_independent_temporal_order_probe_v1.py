@@ -25,8 +25,11 @@ CONTRACTS = ROOT / "outputs/independent_temporal_order_probe_v1/contracts"
 MANIFEST_PATH = CONTRACTS / "freeze_manifest.json"
 PROTOCOL_PATH = CONTRACTS / "protocol_spec.json"
 SOURCE_ROLES_PATH = CONTRACTS / "source_roles.json"
+BINDING_PATH = ROOT / "outputs/independent_temporal_order_probe_v1/bindings/source_a_binding.json"
 FREEZE_BASE = "620378413b1f5f3cd3ed304e701fc480d8d17ba3"
 EXPECTED_STATUS = "PROTOCOL_FROZEN_INPUTS_UNBOUND_EXECUTION_BLOCKED"
+SOURCE_A_PATH = ROOT / "data/realcam/guangzhou.mp4"
+SOURCE_A_SHA256 = "4cef5c884ac879fd00bcc7962707b5f0f5e6dec6ac97e5ec8d247561ce2ec1c6"
 EXPECTED_ASSETS = frozenset(
     {
         "Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v2_strict/scripts/benchmark_lib.py",
@@ -151,6 +154,66 @@ def verify_blocked_input_state(protocol: dict[str, Any], roles: dict[str, Any]) 
                 raise RuntimeError(f"{source_id}.{field} is bound before the binding workflow")
 
 
+def verify_source_a_binding(
+    root: Path, manifest: dict[str, Any], binding_path: Path | None = None
+) -> bool:
+    """Validate the non-frozen researcher-attested Source-A sidecar, if present."""
+
+    path = binding_path or root / BINDING_PATH.relative_to(ROOT)
+    if not path.exists():
+        return False
+    binding = load_json(path)
+    if binding.get("schema_version") != "INDEPENDENT_TEMPORAL_ORDER_PROBE_SOURCE_A_BINDING_V1":
+        raise RuntimeError("unexpected Source-A binding schema")
+    if binding.get("status") != "SOURCE_A_BOUND_EXECUTION_STILL_BLOCKED":
+        raise RuntimeError("Source-A binding must preserve the blocked execution state")
+    if binding.get("execution_authorized") is not False:
+        raise RuntimeError("Source-A binding authorizes execution")
+    if binding.get("new_oracle_calls_authorized") is not False:
+        raise RuntimeError("Source-A binding authorizes new oracle calls")
+    if binding.get("freeze_base_commit") != FREEZE_BASE:
+        raise RuntimeError("Source-A binding has the wrong freeze base")
+    if binding.get("freeze_manifest_sha256") != sha256_file(root / MANIFEST_PATH.relative_to(ROOT)):
+        raise RuntimeError("Source-A binding does not match the freeze manifest")
+    source = binding.get("source_a")
+    if not isinstance(source, dict):
+        raise RuntimeError("Source-A binding is missing source_a")
+    expected = {
+        "source_id": "guangzhou_gate_o_source_a",
+        "source_role": "independent_temporal_order_probe_source_a",
+        "absolute_video_path": str(SOURCE_A_PATH),
+        "video_sha256": SOURCE_A_SHA256,
+        "duration_seconds": 4238.25,
+        "resolution": "1280x720",
+        "codec": "H.264",
+        "container": "MP4",
+        "file_size_bytes": 967490055,
+        "independence_basis": "RESEARCHER_ATTESTATION",
+        "source_url": "NOT_REQUIRED_BY_RESEARCHER_ATTESTATION",
+        "platform_asset_id": "NOT_REQUIRED_BY_RESEARCHER_ATTESTATION",
+        "capture_session_id": "researcher_attested_guangzhou_source_a",
+        "capture_session_id_kind": "RESEARCH_EXPERIMENT_IDENTIFIER_NOT_PLATFORM_CAPTURE_ID",
+    }
+    for key, value in expected.items():
+        if source.get(key) != value:
+            raise RuntimeError(f"Source-A binding mismatch: {key}")
+    video_path = Path(str(source["absolute_video_path"]))
+    if not video_path.is_file() or sha256_file(video_path) != SOURCE_A_SHA256:
+        raise RuntimeError("bound Source-A video is unavailable or hash-mismatched")
+    audit = binding.get("automatic_independence_audit")
+    if not isinstance(audit, dict) or audit.get("status") != "NO_KNOWN_REPOSITORY_LINEAGE_MATCH":
+        raise RuntimeError("Source-A automatic independence audit is missing or changed")
+    if any(audit.get(key) is not True for key in ("no_filename_match", "no_sha256_match", "no_known_development_lineage_match")):
+        raise RuntimeError("Source-A automatic independence audit did not pass")
+    if any(binding.get(key) is not False for key in ("semantic_opened", "proxy_opened", "semantic_oracle_called")):
+        raise RuntimeError("Source-A binding records prohibited semantic/proxy access")
+    payload = dict(binding)
+    recorded = payload.pop("binding_payload_sha256", None)
+    if recorded != canonical_hash(payload):
+        raise RuntimeError("Source-A binding self-integrity hash mismatch")
+    return True
+
+
 def verify_scientific_invariants(protocol: dict[str, Any]) -> None:
     policy_ids = tuple(item.get("policy_id") for item in protocol.get("policies", []))
     if policy_ids != EXPECTED_POLICIES:
@@ -178,6 +241,7 @@ def verify(root: Path = ROOT) -> str:
     head = verify_history(root, manifest)
     verify_frozen_assets(root, manifest)
     verify_blocked_input_state(protocol, roles)
+    verify_source_a_binding(root, manifest)
     verify_scientific_invariants(protocol)
     return head
 
@@ -186,7 +250,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.parse_args()
     head = verify()
-    print(f"PASS: Gate-O post-commit integrity is intact at {head}; execution remains blocked")
+    source_a_state = "Source A bound" if BINDING_PATH.exists() else "Source A unbound"
+    print(f"PASS: Gate-O post-commit integrity is intact at {head}; {source_a_state}; execution remains blocked")
 
 
 if __name__ == "__main__":
