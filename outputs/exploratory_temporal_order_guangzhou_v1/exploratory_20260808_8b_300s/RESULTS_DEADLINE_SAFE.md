@@ -1,0 +1,9 @@
+# Deadline-safe exploratory results
+
+`STRICT_HARD_DEADLINE_COMPLETION`; raw traces reused; no policy or oracle rerun.
+
+| Policy | Recall AUC | Recall@300 | F1 AUC | F1@300 | Events@300 | SCAN<=300 | VERIFY<=300 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| A_CHRONOLOGICAL_FIXED_SCAN1_VERIFY1 | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 | 0 | 19 | 19 |
+| B_TEMPORAL_BISECTION_FIXED_SCAN1_VERIFY1 | 0.013947437 | 0.055555556 | 0.026426722 | 0.105263158 | 1 | 19 | 18 |
+| C_CHRONOLOGICAL_SCAN_THEN_VERIFY | 0.000000000 | 0.000000000 | 0.000000000 | 0.000000000 | 0 | 43 | 1 |
