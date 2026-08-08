@@ -1,0 +1,33 @@
+{
+  "admission_semantics": {
+    "mode": "exploratory_start_before_deadline",
+    "rule": "current exploratory runner accepts an action when its start is before 300 seconds; no estimated cost/bound is persisted or consulted",
+    "source": "scripts/run_exploratory_gate_o_guangzhou.py: run_policy"
+  },
+  "branch_runner_sha256": "df7f1504481cf73444b8b21b35ecd89b4bd3abed21592096affea94d0eb0dcf9",
+  "branch_semantics": "restore immutable logical snapshot, execute exactly one alternative, durably record transition, stop",
+  "completion_timestamp": "timestamp_seconds + physical_cost_seconds; durable visibility surrogate used by the deadline-safe evaluator",
+  "contract_sha256": "e2f897eed36a234706304f75acf8a5166cca7c5ec0cfa17d24c4f76be56d3b90",
+  "evaluator_reference_prohibited_for_selection_and_execution": true,
+  "execution_authorized": false,
+  "gpu_allocation": [
+    1
+  ],
+  "legal_action_generator": "rc_sem.exploratory_h0.legal_actions",
+  "legal_action_generator_sha256": "22c3a3059c91abf05872c716930307edb084c36faa14e0c3c04081687f2808e0",
+  "logical_deadline_seconds": 300.0,
+  "maximum_alternatives_per_state": 2,
+  "maximum_selected_states": 12,
+  "oracle": "Qwen3-VL-8B-Instruct BF16",
+  "parent_policy": "B_TEMPORAL_BISECTION_FIXED_SCAN1_VERIFY1",
+  "parent_trace_sha256": "bbfac511654fd308d5bac9dd6a8b1ce3e3caadc928c602918823e3a1e3fd6993",
+  "physical_runtime_convention": "CAUSALLY_EQUIVALENT_LOGICAL_STATE_WITH_NORMALIZED_PHYSICAL_RUNTIME: one model-resident BF16 GPU-1 session; process/model setup excluded from each isolated action cost; no runtime/policy state crosses branches",
+  "protocol_class": "EXPLORATORY_MINIMAL_COUNTERFACTUAL_BRANCH_PROBE",
+  "result_namespace": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1",
+  "scan": "deterministic OpenCV frame-difference proxy",
+  "schema_version": "COUNTERFACTUAL_BRANCH_PROBE_CONTRACT_V1",
+  "source": "Guangzhou",
+  "source_sha256": "4cef5c884ac879fd00bcc7962707b5f0f5e6dec6ac97e5ec8d247561ce2ec1c6",
+  "state_schema_version": "GUANGZHOU_B_LOGICAL_STATE_V1",
+  "state_selection": "two per (early/middle/late) x (parent SCAN/VERIFY), structural ranking only"
+}

@@ -43,21 +43,33 @@ def legal_actions(
     *,
     scan_estimated_cost_seconds: float | None,
     verify_estimated_cost_seconds: float | None,
+    admission_mode: str = "estimated_complete_cost",
 ) -> tuple[RuntimeAction, ...]:
     """Return executable public actions under the existing admission rule.
 
     Candidate labels, evaluator reference labels, future proxy scores, and
     unscanned cells are intentionally absent from this generator.
     """
+    if admission_mode not in {"estimated_complete_cost", "exploratory_start_before_deadline"}:
+        raise ValueError(f"unknown admission mode: {admission_mode}")
     result: list[RuntimeAction] = []
     remaining = state.remaining_seconds
+    scan_admitted = (
+        remaining > 0.0
+        if admission_mode == "exploratory_start_before_deadline"
+        else scan_estimated_cost_seconds is not None and 0.0 <= scan_estimated_cost_seconds <= remaining
+    )
+    verify_admitted = (
+        remaining > 0.0
+        if admission_mode == "exploratory_start_before_deadline"
+        else verify_estimated_cost_seconds is not None and 0.0 <= verify_estimated_cost_seconds <= remaining
+    )
     if (
         state.next_scan_index < len(state.scan_order)
-        and scan_estimated_cost_seconds is not None
-        and 0.0 <= scan_estimated_cost_seconds <= remaining
+        and scan_admitted
     ):
         result.append(RuntimeAction("SCAN", state.scan_order[state.next_scan_index]))
-    if verify_estimated_cost_seconds is not None and 0.0 <= verify_estimated_cost_seconds <= remaining:
+    if verify_admitted:
         for unit in sorted(state.exposed_units - state.attempted_verify_units):
             result.append(RuntimeAction("VERIFY", unit))
     return tuple(result)
