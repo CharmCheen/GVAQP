@@ -37,8 +37,12 @@ def main() -> None:
             branch = json.loads(path.read_text())
             branch_delta = branch["event_relation_delta"]
             cost_delta = branch["physical_cost_seconds"] - parent_cost
-            if branch_delta > parent_delta and branch["completed_by_logical_deadline"]:
+            parent_by_deadline = parent_completion <= 300.0
+            branch_by_deadline = branch["completed_by_logical_deadline"]
+            if branch_delta > parent_delta and branch_by_deadline:
                 verdict = "STRONG_LOCAL_POSITIVE"
+            elif not branch_by_deadline:
+                verdict = "NEUTRAL" if not parent_by_deadline else "WORSE"
             elif branch_delta == parent_delta and branch["physical_cost_seconds"] < parent_cost:
                 verdict = "POTENTIAL_FUTURE_HEADROOM"
             elif branch_delta < parent_delta or (branch_delta == parent_delta and branch["physical_cost_seconds"] > parent_cost):
