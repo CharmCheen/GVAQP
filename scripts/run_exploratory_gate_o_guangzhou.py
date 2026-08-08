@@ -214,6 +214,20 @@ def evaluate_result(result: dict, reference: dict[int, str]) -> dict:
     return {**result, "event_recall_auc": right_continuous_auc(recall_points, DEADLINE_SECONDS), "event_recall_at_deadline": event_recall(final_groups, reference_events), "event_f1_auc": right_continuous_auc(f1_points, DEADLINE_SECONDS), "event_f1_at_deadline": event_f1(final_groups, reference_events), "reference_event_count": len(reference_events)}
 
 
+def load_complete_reference(run_dir: Path, unit_count: int) -> dict[int, str]:
+    merged: dict[int, dict] = {}
+    for path in sorted(run_dir.glob("reference_labels*.json")):
+        for key, value in json.loads(path.read_text(encoding="utf-8")).items():
+            unit_id = int(key)
+            if unit_id in merged and merged[unit_id]["raw_sha256"] != value["raw_sha256"]:
+                raise RuntimeError(f"inconsistent duplicate evaluator label for unit {unit_id}")
+            merged[unit_id] = value
+    if set(merged) != set(range(unit_count)):
+        raise RuntimeError(f"exploratory evaluator reference incomplete: {len(merged)}/{unit_count}")
+    atomic_json(run_dir / "reference_labels.json", {str(key): merged[key] for key in sorted(merged)})
+    return {key: value["label"] for key, value in merged.items()}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(); parser.add_argument("--mode", choices=("smoke", "reference", "policies", "all"), required=True); parser.add_argument("--gpu-id", type=int, required=True); parser.add_argument("--run-id", required=True); parser.add_argument("--reference-start", type=int, default=0); parser.add_argument("--reference-end", type=int)
     args = parser.parse_args()
@@ -238,7 +252,7 @@ def main() -> None:
         print(json.dumps({"status": "EXPLORATORY_REFERENCE_COMPLETE", "unit_count": len(reference), "run_dir": str(run_dir)})); return
     results = [run_policy(policy, oracle, fps, count, run_dir) for policy in POLICIES]
     if reference is None:
-        reference = {int(k): v["label"] for k, v in json.loads((run_dir / "reference_labels.json").read_text()).items()}
+        reference = load_complete_reference(run_dir, count)
     results = [evaluate_result(result, reference) for result in results]
     atomic_json(run_dir / "RESULTS.json", {"scientific_status": "EXPLORATORY_DEVELOPMENT_PHYSICAL_RESULT", "not_strict_confirmatory": True, "reference_oracle": "same exploratory 8B exhaustive evaluator-only pass", "results": results, "hardware_snapshot_after": gpu_snapshot()})
     print(json.dumps({"status": "EXPLORATORY_POLICIES_COMPLETE", "run_dir": str(run_dir), "results": results}, indent=2))
