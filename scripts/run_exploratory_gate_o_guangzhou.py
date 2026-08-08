@@ -169,7 +169,7 @@ def exhaustive_reference(oracle: Oracle, fps: float, unit_count: int, run_dir: P
     return {int(key): value["label"] for key, value in labels.items()}
 
 
-def run_policy(policy: str, oracle: Oracle, fps: float, unit_count: int, reference: dict[int, str], run_dir: Path) -> dict:
+def run_policy(policy: str, oracle: Oracle, fps: float, unit_count: int, run_dir: Path) -> dict:
     cells = [tuple(range(offset, min(offset + 10, unit_count))) for offset in range(0, unit_count, 10)]
     scan_order = tuple(range(len(cells))) if policy != POLICIES[1] else temporal_bisection_order(len(cells))
     scanned: set[int] = set(); scores: dict[int, float] = {}; labels: dict[int, str] = {}; trace: list[dict] = []
@@ -195,14 +195,23 @@ def run_policy(policy: str, oracle: Oracle, fps: float, unit_count: int, referen
         else:
             target = verify_candidates[0]; outcome = oracle.verify(target, fps); labels[target] = outcome["label"]
         positives = event_groups(unit for unit, label in labels.items() if label == "positive")
-        ref_events = event_groups(unit for unit, label in reference.items() if label == "positive")
-        trace.append({"timestamp_seconds": timestamp, "policy": policy, "action_type": action, "target": target, "legal_state": {"scanned_cells": sorted(scanned), "verifiable_units": verify_candidates}, "admission": "accepted_exploratory_deadline", "physical_cost_seconds": time.perf_counter() - started - timestamp, "outcome": outcome, "current_event_relation": [list(group) for group in positives], "event_recall": event_recall(positives, ref_events), "event_f1": event_f1(positives, ref_events)})
+        trace.append({"timestamp_seconds": timestamp, "policy": policy, "action_type": action, "target": target, "legal_state": {"scanned_cells": sorted(scanned), "verifiable_units": verify_candidates}, "admission": "accepted_exploratory_deadline", "physical_cost_seconds": time.perf_counter() - started - timestamp, "outcome": outcome, "current_event_relation": [list(group) for group in positives]})
         atomic_json(run_dir / f"{policy}.trace.json", trace)
-    ref_events = event_groups(unit for unit, label in reference.items() if label == "positive")
-    points_recall = [(min(row["timestamp_seconds"] + row["physical_cost_seconds"], DEADLINE_SECONDS), row["event_recall"]) for row in trace]
-    points_f1 = [(min(row["timestamp_seconds"] + row["physical_cost_seconds"], DEADLINE_SECONDS), row["event_f1"]) for row in trace]
     positives = event_groups(unit for unit, label in labels.items() if label == "positive")
-    return {"policy": policy, "deadline_seconds": DEADLINE_SECONDS, "wall_clock_seconds": time.perf_counter() - started, "scan_cells_completed": len(scanned), "scan_coverage_fraction": len(scanned) / len(cells), "verify_calls": len(labels), "verified_positive_units": sorted(unit for unit, label in labels.items() if label == "positive"), "distinct_confirmed_events": len(positives), "event_recall_auc": right_continuous_auc(points_recall, DEADLINE_SECONDS), "event_recall_at_deadline": event_recall(positives, ref_events), "event_f1_auc": right_continuous_auc(points_f1, DEADLINE_SECONDS), "event_f1_at_deadline": event_f1(positives, ref_events), "trace_path": str((run_dir / f"{policy}.trace.json").relative_to(ROOT))}
+    return {"policy": policy, "deadline_seconds": DEADLINE_SECONDS, "wall_clock_seconds": time.perf_counter() - started, "scan_cells_completed": len(scanned), "scan_coverage_fraction": len(scanned) / len(cells), "verify_calls": len(labels), "verified_positive_units": sorted(unit for unit, label in labels.items() if label == "positive"), "distinct_confirmed_events": len(positives), "trace_path": str((run_dir / f"{policy}.trace.json").relative_to(ROOT))}
+
+
+def evaluate_result(result: dict, reference: dict[int, str]) -> dict:
+    trace = json.loads((ROOT / result["trace_path"]).read_text(encoding="utf-8"))
+    reference_events = event_groups(unit for unit, label in reference.items() if label == "positive")
+    recall_points, f1_points = [], []
+    for row in trace:
+        groups = tuple(tuple(group) for group in row["current_event_relation"])
+        when = min(row["timestamp_seconds"] + row["physical_cost_seconds"], DEADLINE_SECONDS)
+        recall_points.append((when, event_recall(groups, reference_events)))
+        f1_points.append((when, event_f1(groups, reference_events)))
+    final_groups = tuple(tuple(group) for group in trace[-1]["current_event_relation"]) if trace else ()
+    return {**result, "event_recall_auc": right_continuous_auc(recall_points, DEADLINE_SECONDS), "event_recall_at_deadline": event_recall(final_groups, reference_events), "event_f1_auc": right_continuous_auc(f1_points, DEADLINE_SECONDS), "event_f1_at_deadline": event_f1(final_groups, reference_events), "reference_event_count": len(reference_events)}
 
 
 def main() -> None:
@@ -224,10 +233,13 @@ def main() -> None:
     reference_end = count if args.reference_end is None else args.reference_end
     if args.mode == "all" and (args.reference_start != 0 or reference_end != count):
         raise RuntimeError("all mode requires the complete reference range")
-    reference = exhaustive_reference(oracle, fps, count, run_dir, args.reference_start, reference_end) if args.mode in {"reference", "all"} else {int(k): v["label"] for k, v in json.loads((run_dir / "reference_labels.json").read_text()).items()}
+    reference = exhaustive_reference(oracle, fps, count, run_dir, args.reference_start, reference_end) if args.mode in {"reference", "all"} else None
     if args.mode == "reference":
         print(json.dumps({"status": "EXPLORATORY_REFERENCE_COMPLETE", "unit_count": len(reference), "run_dir": str(run_dir)})); return
-    results = [run_policy(policy, oracle, fps, count, reference, run_dir) for policy in POLICIES]
+    results = [run_policy(policy, oracle, fps, count, run_dir) for policy in POLICIES]
+    if reference is None:
+        reference = {int(k): v["label"] for k, v in json.loads((run_dir / "reference_labels.json").read_text()).items()}
+    results = [evaluate_result(result, reference) for result in results]
     atomic_json(run_dir / "RESULTS.json", {"scientific_status": "EXPLORATORY_DEVELOPMENT_PHYSICAL_RESULT", "not_strict_confirmatory": True, "reference_oracle": "same exploratory 8B exhaustive evaluator-only pass", "results": results, "hardware_snapshot_after": gpu_snapshot()})
     print(json.dumps({"status": "EXPLORATORY_POLICIES_COMPLETE", "run_dir": str(run_dir), "results": results}, indent=2))
 
