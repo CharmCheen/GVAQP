@@ -26,6 +26,7 @@ MANIFEST_PATH = CONTRACTS / "freeze_manifest.json"
 PROTOCOL_PATH = CONTRACTS / "protocol_spec.json"
 SOURCE_ROLES_PATH = CONTRACTS / "source_roles.json"
 BINDING_PATH = ROOT / "outputs/independent_temporal_order_probe_v1/bindings/source_a_binding.json"
+POLICY_BINDING_PATH = ROOT / "outputs/independent_temporal_order_probe_v1/bindings/policy_runner_binding.json"
 FREEZE_BASE = "620378413b1f5f3cd3ed304e701fc480d8d17ba3"
 EXPECTED_STATUS = "PROTOCOL_FROZEN_INPUTS_UNBOUND_EXECUTION_BLOCKED"
 SOURCE_A_PATH = ROOT / "data/realcam/guangzhou.mp4"
@@ -214,6 +215,44 @@ def verify_source_a_binding(
     return True
 
 
+def verify_policy_runner_binding(
+    root: Path, manifest: dict[str, Any], binding_path: Path | None = None
+) -> bool:
+    """Validate the post-freeze hash binding for the exact Gate-O runner."""
+
+    path = binding_path or root / POLICY_BINDING_PATH.relative_to(ROOT)
+    if not path.exists():
+        return False
+    binding = load_json(path)
+    if binding.get("schema_version") != "INDEPENDENT_TEMPORAL_ORDER_PROBE_POLICY_RUNNER_BINDING_V1":
+        raise RuntimeError("unexpected Gate-O policy runner binding schema")
+    if binding.get("status") != "POLICY_RUNNER_BOUND_EXECUTION_STILL_BLOCKED":
+        raise RuntimeError("policy runner binding must preserve blocked execution")
+    if binding.get("execution_authorized") is not False or binding.get("new_oracle_calls_authorized") is not False:
+        raise RuntimeError("policy runner binding authorizes execution or oracle calls")
+    if binding.get("freeze_base_commit") != FREEZE_BASE:
+        raise RuntimeError("policy runner binding has wrong freeze base")
+    if binding.get("freeze_manifest_sha256") != sha256_file(root / MANIFEST_PATH.relative_to(ROOT)):
+        raise RuntimeError("policy runner binding does not match freeze manifest")
+    if tuple(binding.get("policy_ids", ())) != EXPECTED_POLICIES:
+        raise RuntimeError("policy runner binding policy set/order changed")
+    expected_paths = {
+        "src/rc_sem/gate_o_physical.py",
+        "scripts/run_independent_temporal_order_probe_v1.py",
+    }
+    implementation = binding.get("implementation_sha256")
+    if not isinstance(implementation, dict) or set(implementation) != expected_paths:
+        raise RuntimeError("policy runner binding implementation path set changed")
+    for relative, expected in implementation.items():
+        if sha256_file(root / relative) != expected:
+            raise RuntimeError(f"policy runner implementation hash mismatch: {relative}")
+    payload = dict(binding)
+    recorded = payload.pop("binding_payload_sha256", None)
+    if recorded != canonical_hash(payload):
+        raise RuntimeError("policy runner binding self-integrity hash mismatch")
+    return True
+
+
 def verify_scientific_invariants(protocol: dict[str, Any]) -> None:
     policy_ids = tuple(item.get("policy_id") for item in protocol.get("policies", []))
     if policy_ids != EXPECTED_POLICIES:
@@ -242,6 +281,7 @@ def verify(root: Path = ROOT) -> str:
     verify_frozen_assets(root, manifest)
     verify_blocked_input_state(protocol, roles)
     verify_source_a_binding(root, manifest)
+    verify_policy_runner_binding(root, manifest)
     verify_scientific_invariants(protocol)
     return head
 

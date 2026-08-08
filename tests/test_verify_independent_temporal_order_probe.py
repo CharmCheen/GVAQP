@@ -79,6 +79,19 @@ def test_source_a_binding_rejects_hash_mismatch(tmp_path: Path) -> None:
         verify.verify_source_a_binding(ROOT, manifest, artifact)
 
 
+def test_policy_runner_binding_rejects_implementation_tampering(tmp_path: Path) -> None:
+    manifest, _, _ = contracts()
+    binding = json.loads(verify.POLICY_BINDING_PATH.read_text(encoding="utf-8"))
+    binding["implementation_sha256"]["src/rc_sem/gate_o_physical.py"] = "0" * 64
+    binding["binding_payload_sha256"] = verify.canonical_hash(
+        {key: value for key, value in binding.items() if key != "binding_payload_sha256"}
+    )
+    artifact = tmp_path / "policy_runner_binding.json"
+    artifact.write_text(json.dumps(binding), encoding="utf-8")
+    with pytest.raises(RuntimeError, match="implementation hash mismatch"):
+        verify.verify_policy_runner_binding(ROOT, manifest, artifact)
+
+
 def test_scientific_invariants_require_exact_policy_order() -> None:
     _, protocol, _ = contracts()
     protocol = copy.deepcopy(protocol)
