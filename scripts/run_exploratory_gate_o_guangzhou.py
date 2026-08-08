@@ -155,10 +155,12 @@ def build_manifest(run_id: str, gpu_id: int) -> dict:
     }
 
 
-def exhaustive_reference(oracle: Oracle, fps: float, unit_count: int, run_dir: Path) -> dict[int, str]:
-    path = run_dir / "reference_labels.json"
+def exhaustive_reference(oracle: Oracle, fps: float, unit_count: int, run_dir: Path, start: int, end: int) -> dict[int, str]:
+    if not (0 <= start < end <= unit_count):
+        raise ValueError("invalid reference shard")
+    path = run_dir / ("reference_labels.json" if start == 0 and end == unit_count else f"reference_labels_{start}_{end}.json")
     labels = json.loads(path.read_text()) if path.exists() else {}
-    for unit_id in range(unit_count):
+    for unit_id in range(start, end):
         if str(unit_id) in labels:
             continue
         result = oracle.verify(unit_id, fps)
@@ -204,7 +206,7 @@ def run_policy(policy: str, oracle: Oracle, fps: float, unit_count: int, referen
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(); parser.add_argument("--mode", choices=("smoke", "reference", "policies", "all"), required=True); parser.add_argument("--gpu-id", type=int, required=True); parser.add_argument("--run-id", required=True)
+    parser = argparse.ArgumentParser(); parser.add_argument("--mode", choices=("smoke", "reference", "policies", "all"), required=True); parser.add_argument("--gpu-id", type=int, required=True); parser.add_argument("--run-id", required=True); parser.add_argument("--reference-start", type=int, default=0); parser.add_argument("--reference-end", type=int)
     args = parser.parse_args()
     if sha256(VIDEO) != VIDEO_SHA256:
         raise RuntimeError("Guangzhou source hash mismatch")
@@ -219,7 +221,10 @@ def main() -> None:
     atomic_json(run_dir / "runtime_loaded.json", {"loaded_utc": utc_now(), "gpu_snapshot_after_load": gpu_snapshot(), "torch": oracle.torch.__version__, "transformers": oracle.transformers.__version__, "fps": fps, "unit_count": count})
     if args.mode == "smoke":
         print(json.dumps({"status": "MODEL_LOAD_PASS_NO_SOURCE_A_SEMANTIC_CALL", "run_dir": str(run_dir)})); return
-    reference = exhaustive_reference(oracle, fps, count, run_dir) if args.mode in {"reference", "all"} else {int(k): v["label"] for k, v in json.loads((run_dir / "reference_labels.json").read_text()).items()}
+    reference_end = count if args.reference_end is None else args.reference_end
+    if args.mode == "all" and (args.reference_start != 0 or reference_end != count):
+        raise RuntimeError("all mode requires the complete reference range")
+    reference = exhaustive_reference(oracle, fps, count, run_dir, args.reference_start, reference_end) if args.mode in {"reference", "all"} else {int(k): v["label"] for k, v in json.loads((run_dir / "reference_labels.json").read_text()).items()}
     if args.mode == "reference":
         print(json.dumps({"status": "EXPLORATORY_REFERENCE_COMPLETE", "unit_count": len(reference), "run_dir": str(run_dir)})); return
     results = [run_policy(policy, oracle, fps, count, reference, run_dir) for policy in POLICIES]
