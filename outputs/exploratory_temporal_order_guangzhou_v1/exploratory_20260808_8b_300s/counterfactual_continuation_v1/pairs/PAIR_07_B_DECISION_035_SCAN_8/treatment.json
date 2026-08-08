@@ -1,0 +1,837 @@
+{
+  "actions": [
+    {
+      "action_type": "SCAN",
+      "completion_seconds": 285.27425268292427,
+      "event_relation_after": [
+        [
+          346
+        ]
+      ],
+      "logical_start_seconds": 276.4951910804957,
+      "outcome": {
+        "exposed": [
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.14912781692538127,
+            "mean_frame_difference": 0.12666055718197775,
+            "score": 0.12666055718197775,
+            "unit_id": 80
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.17052625442538127,
+            "mean_frame_difference": 0.1334800645084423,
+            "score": 0.1334800645084423,
+            "unit_id": 81
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.1373228911356209,
+            "mean_frame_difference": 0.11580718245052651,
+            "score": 0.11580718245052651,
+            "unit_id": 82
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.12709126923338782,
+            "mean_frame_difference": 0.10283460137527234,
+            "score": 0.10283460137527234,
+            "unit_id": 83
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.14116842830882353,
+            "mean_frame_difference": 0.12605425583620794,
+            "score": 0.12605425583620794,
+            "unit_id": 84
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.21309567333877993,
+            "mean_frame_difference": 0.16788879858463446,
+            "score": 0.16788879858463446,
+            "unit_id": 85
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.17757641441993463,
+            "mean_frame_difference": 0.141548050846496,
+            "score": 0.141548050846496,
+            "unit_id": 86
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.15877302474809368,
+            "mean_frame_difference": 0.13612922066010047,
+            "score": 0.13612922066010047,
+            "unit_id": 87
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.21355868736383443,
+            "mean_frame_difference": 0.1802650798648935,
+            "score": 0.1802650798648935,
+            "unit_id": 88
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.2260028467116013,
+            "mean_frame_difference": 0.19969088239076493,
+            "score": 0.19969088239076493,
+            "unit_id": 89
+          }
+        ]
+      },
+      "physical_cost_seconds": 8.779061602428555,
+      "remaining_deadline_seconds": 14.72574731707573,
+      "target": 8
+    },
+    {
+      "action_type": "VERIFY",
+      "completion_seconds": 294.3965078461915,
+      "event_relation_after": [
+        [
+          346
+        ]
+      ],
+      "logical_start_seconds": 285.27425268292427,
+      "outcome": {
+        "frame_count": 20,
+        "inference_seconds": 7.055198568850756,
+        "label": "negative",
+        "parsed": {
+          "abstain_reason": null,
+          "boundary_status": "not_applicable",
+          "complete_event_visible": true,
+          "confidence": "high",
+          "ego_relevant": false,
+          "event_end": null,
+          "event_start": null,
+          "event_type": "none",
+          "evidence": "The video shows normal traffic flow with no object entering the ego vehicle's path. All vehicles are maintaining their lanes and following traffic rules.",
+          "involved_object": "none",
+          "label": "negative",
+          "negative_reason": "normal_following"
+        },
+        "raw_sha256": "23f9250f2e4b33cec26336d0ad51797ab1cc68fd85e3256607ecb93fbbce77fe",
+        "total_seconds": 7.583469204604626,
+        "unit_id": 232
+      },
+      "physical_cost_seconds": 9.122255163267255,
+      "remaining_deadline_seconds": 5.6034921538084745,
+      "target": 232
+    },
+    {
+      "action_type": "VERIFY",
+      "completion_seconds": 304.1453049760312,
+      "event_relation_after": [
+        [
+          346
+        ]
+      ],
+      "logical_start_seconds": 294.3965078461915,
+      "outcome": {
+        "frame_count": 20,
+        "inference_seconds": 7.244756432250142,
+        "label": "negative",
+        "parsed": {
+          "abstain_reason": null,
+          "boundary_status": "not_applicable",
+          "complete_event_visible": true,
+          "confidence": "high",
+          "ego_relevant": false,
+          "event_end": null,
+          "event_start": null,
+          "event_type": "none",
+          "evidence": "The video shows normal traffic flow with no object entering the ego vehicle's path. All vehicles and pedestrians are maintaining their lanes or paths without crossing into the ego vehicle's trajectory.",
+          "involved_object": "none",
+          "label": "negative",
+          "negative_reason": "normal_following"
+        },
+        "raw_sha256": "bf2706129d8e00db5e1db0d4f7475fbc1d812c32e36632f64826fd20bd783be9",
+        "total_seconds": 7.934393588453531,
+        "unit_id": 235
+      },
+      "physical_cost_seconds": 9.748797129839659,
+      "remaining_deadline_seconds": -4.145304976031184,
+      "target": 235
+    }
+  ],
+  "additional_actions_completed": 2,
+  "arm": "treatment",
+  "continuation_physical_seconds": 18.871052293106914,
+  "full_policy_rerun": false,
+  "initial_elapsed_seconds": 276.4951910804957,
+  "initial_event_relation": [
+    [
+      346
+    ]
+  ],
+  "initial_legal_actions": [
+    {
+      "kind": "SCAN",
+      "target": 8
+    },
+    {
+      "kind": "VERIFY",
+      "target": 0
+    },
+    {
+      "kind": "VERIFY",
+      "target": 1
+    },
+    {
+      "kind": "VERIFY",
+      "target": 2
+    },
+    {
+      "kind": "VERIFY",
+      "target": 3
+    },
+    {
+      "kind": "VERIFY",
+      "target": 4
+    },
+    {
+      "kind": "VERIFY",
+      "target": 5
+    },
+    {
+      "kind": "VERIFY",
+      "target": 6
+    },
+    {
+      "kind": "VERIFY",
+      "target": 7
+    },
+    {
+      "kind": "VERIFY",
+      "target": 8
+    },
+    {
+      "kind": "VERIFY",
+      "target": 9
+    },
+    {
+      "kind": "VERIFY",
+      "target": 10
+    },
+    {
+      "kind": "VERIFY",
+      "target": 11
+    },
+    {
+      "kind": "VERIFY",
+      "target": 12
+    },
+    {
+      "kind": "VERIFY",
+      "target": 13
+    },
+    {
+      "kind": "VERIFY",
+      "target": 14
+    },
+    {
+      "kind": "VERIFY",
+      "target": 15
+    },
+    {
+      "kind": "VERIFY",
+      "target": 16
+    },
+    {
+      "kind": "VERIFY",
+      "target": 17
+    },
+    {
+      "kind": "VERIFY",
+      "target": 18
+    },
+    {
+      "kind": "VERIFY",
+      "target": 19
+    },
+    {
+      "kind": "VERIFY",
+      "target": 20
+    },
+    {
+      "kind": "VERIFY",
+      "target": 21
+    },
+    {
+      "kind": "VERIFY",
+      "target": 22
+    },
+    {
+      "kind": "VERIFY",
+      "target": 23
+    },
+    {
+      "kind": "VERIFY",
+      "target": 24
+    },
+    {
+      "kind": "VERIFY",
+      "target": 25
+    },
+    {
+      "kind": "VERIFY",
+      "target": 27
+    },
+    {
+      "kind": "VERIFY",
+      "target": 28
+    },
+    {
+      "kind": "VERIFY",
+      "target": 29
+    },
+    {
+      "kind": "VERIFY",
+      "target": 40
+    },
+    {
+      "kind": "VERIFY",
+      "target": 41
+    },
+    {
+      "kind": "VERIFY",
+      "target": 42
+    },
+    {
+      "kind": "VERIFY",
+      "target": 43
+    },
+    {
+      "kind": "VERIFY",
+      "target": 44
+    },
+    {
+      "kind": "VERIFY",
+      "target": 45
+    },
+    {
+      "kind": "VERIFY",
+      "target": 46
+    },
+    {
+      "kind": "VERIFY",
+      "target": 47
+    },
+    {
+      "kind": "VERIFY",
+      "target": 48
+    },
+    {
+      "kind": "VERIFY",
+      "target": 49
+    },
+    {
+      "kind": "VERIFY",
+      "target": 50
+    },
+    {
+      "kind": "VERIFY",
+      "target": 51
+    },
+    {
+      "kind": "VERIFY",
+      "target": 52
+    },
+    {
+      "kind": "VERIFY",
+      "target": 53
+    },
+    {
+      "kind": "VERIFY",
+      "target": 54
+    },
+    {
+      "kind": "VERIFY",
+      "target": 55
+    },
+    {
+      "kind": "VERIFY",
+      "target": 56
+    },
+    {
+      "kind": "VERIFY",
+      "target": 57
+    },
+    {
+      "kind": "VERIFY",
+      "target": 58
+    },
+    {
+      "kind": "VERIFY",
+      "target": 59
+    },
+    {
+      "kind": "VERIFY",
+      "target": 70
+    },
+    {
+      "kind": "VERIFY",
+      "target": 71
+    },
+    {
+      "kind": "VERIFY",
+      "target": 72
+    },
+    {
+      "kind": "VERIFY",
+      "target": 73
+    },
+    {
+      "kind": "VERIFY",
+      "target": 74
+    },
+    {
+      "kind": "VERIFY",
+      "target": 75
+    },
+    {
+      "kind": "VERIFY",
+      "target": 76
+    },
+    {
+      "kind": "VERIFY",
+      "target": 77
+    },
+    {
+      "kind": "VERIFY",
+      "target": 78
+    },
+    {
+      "kind": "VERIFY",
+      "target": 79
+    },
+    {
+      "kind": "VERIFY",
+      "target": 100
+    },
+    {
+      "kind": "VERIFY",
+      "target": 101
+    },
+    {
+      "kind": "VERIFY",
+      "target": 102
+    },
+    {
+      "kind": "VERIFY",
+      "target": 103
+    },
+    {
+      "kind": "VERIFY",
+      "target": 104
+    },
+    {
+      "kind": "VERIFY",
+      "target": 105
+    },
+    {
+      "kind": "VERIFY",
+      "target": 106
+    },
+    {
+      "kind": "VERIFY",
+      "target": 107
+    },
+    {
+      "kind": "VERIFY",
+      "target": 108
+    },
+    {
+      "kind": "VERIFY",
+      "target": 120
+    },
+    {
+      "kind": "VERIFY",
+      "target": 121
+    },
+    {
+      "kind": "VERIFY",
+      "target": 122
+    },
+    {
+      "kind": "VERIFY",
+      "target": 123
+    },
+    {
+      "kind": "VERIFY",
+      "target": 125
+    },
+    {
+      "kind": "VERIFY",
+      "target": 126
+    },
+    {
+      "kind": "VERIFY",
+      "target": 127
+    },
+    {
+      "kind": "VERIFY",
+      "target": 128
+    },
+    {
+      "kind": "VERIFY",
+      "target": 129
+    },
+    {
+      "kind": "VERIFY",
+      "target": 150
+    },
+    {
+      "kind": "VERIFY",
+      "target": 151
+    },
+    {
+      "kind": "VERIFY",
+      "target": 152
+    },
+    {
+      "kind": "VERIFY",
+      "target": 153
+    },
+    {
+      "kind": "VERIFY",
+      "target": 154
+    },
+    {
+      "kind": "VERIFY",
+      "target": 155
+    },
+    {
+      "kind": "VERIFY",
+      "target": 156
+    },
+    {
+      "kind": "VERIFY",
+      "target": 157
+    },
+    {
+      "kind": "VERIFY",
+      "target": 158
+    },
+    {
+      "kind": "VERIFY",
+      "target": 180
+    },
+    {
+      "kind": "VERIFY",
+      "target": 181
+    },
+    {
+      "kind": "VERIFY",
+      "target": 182
+    },
+    {
+      "kind": "VERIFY",
+      "target": 183
+    },
+    {
+      "kind": "VERIFY",
+      "target": 184
+    },
+    {
+      "kind": "VERIFY",
+      "target": 185
+    },
+    {
+      "kind": "VERIFY",
+      "target": 186
+    },
+    {
+      "kind": "VERIFY",
+      "target": 187
+    },
+    {
+      "kind": "VERIFY",
+      "target": 188
+    },
+    {
+      "kind": "VERIFY",
+      "target": 210
+    },
+    {
+      "kind": "VERIFY",
+      "target": 211
+    },
+    {
+      "kind": "VERIFY",
+      "target": 212
+    },
+    {
+      "kind": "VERIFY",
+      "target": 214
+    },
+    {
+      "kind": "VERIFY",
+      "target": 215
+    },
+    {
+      "kind": "VERIFY",
+      "target": 216
+    },
+    {
+      "kind": "VERIFY",
+      "target": 217
+    },
+    {
+      "kind": "VERIFY",
+      "target": 218
+    },
+    {
+      "kind": "VERIFY",
+      "target": 219
+    },
+    {
+      "kind": "VERIFY",
+      "target": 230
+    },
+    {
+      "kind": "VERIFY",
+      "target": 231
+    },
+    {
+      "kind": "VERIFY",
+      "target": 232
+    },
+    {
+      "kind": "VERIFY",
+      "target": 233
+    },
+    {
+      "kind": "VERIFY",
+      "target": 234
+    },
+    {
+      "kind": "VERIFY",
+      "target": 235
+    },
+    {
+      "kind": "VERIFY",
+      "target": 236
+    },
+    {
+      "kind": "VERIFY",
+      "target": 237
+    },
+    {
+      "kind": "VERIFY",
+      "target": 238
+    },
+    {
+      "kind": "VERIFY",
+      "target": 239
+    },
+    {
+      "kind": "VERIFY",
+      "target": 260
+    },
+    {
+      "kind": "VERIFY",
+      "target": 261
+    },
+    {
+      "kind": "VERIFY",
+      "target": 262
+    },
+    {
+      "kind": "VERIFY",
+      "target": 263
+    },
+    {
+      "kind": "VERIFY",
+      "target": 290
+    },
+    {
+      "kind": "VERIFY",
+      "target": 291
+    },
+    {
+      "kind": "VERIFY",
+      "target": 292
+    },
+    {
+      "kind": "VERIFY",
+      "target": 293
+    },
+    {
+      "kind": "VERIFY",
+      "target": 294
+    },
+    {
+      "kind": "VERIFY",
+      "target": 295
+    },
+    {
+      "kind": "VERIFY",
+      "target": 296
+    },
+    {
+      "kind": "VERIFY",
+      "target": 297
+    },
+    {
+      "kind": "VERIFY",
+      "target": 298
+    },
+    {
+      "kind": "VERIFY",
+      "target": 320
+    },
+    {
+      "kind": "VERIFY",
+      "target": 322
+    },
+    {
+      "kind": "VERIFY",
+      "target": 323
+    },
+    {
+      "kind": "VERIFY",
+      "target": 324
+    },
+    {
+      "kind": "VERIFY",
+      "target": 325
+    },
+    {
+      "kind": "VERIFY",
+      "target": 326
+    },
+    {
+      "kind": "VERIFY",
+      "target": 327
+    },
+    {
+      "kind": "VERIFY",
+      "target": 340
+    },
+    {
+      "kind": "VERIFY",
+      "target": 341
+    },
+    {
+      "kind": "VERIFY",
+      "target": 342
+    },
+    {
+      "kind": "VERIFY",
+      "target": 343
+    },
+    {
+      "kind": "VERIFY",
+      "target": 344
+    },
+    {
+      "kind": "VERIFY",
+      "target": 345
+    },
+    {
+      "kind": "VERIFY",
+      "target": 347
+    },
+    {
+      "kind": "VERIFY",
+      "target": 348
+    },
+    {
+      "kind": "VERIFY",
+      "target": 349
+    },
+    {
+      "kind": "VERIFY",
+      "target": 370
+    },
+    {
+      "kind": "VERIFY",
+      "target": 371
+    },
+    {
+      "kind": "VERIFY",
+      "target": 372
+    },
+    {
+      "kind": "VERIFY",
+      "target": 373
+    },
+    {
+      "kind": "VERIFY",
+      "target": 374
+    },
+    {
+      "kind": "VERIFY",
+      "target": 375
+    },
+    {
+      "kind": "VERIFY",
+      "target": 376
+    },
+    {
+      "kind": "VERIFY",
+      "target": 377
+    },
+    {
+      "kind": "VERIFY",
+      "target": 378
+    },
+    {
+      "kind": "VERIFY",
+      "target": 379
+    },
+    {
+      "kind": "VERIFY",
+      "target": 400
+    },
+    {
+      "kind": "VERIFY",
+      "target": 401
+    },
+    {
+      "kind": "VERIFY",
+      "target": 402
+    },
+    {
+      "kind": "VERIFY",
+      "target": 403
+    },
+    {
+      "kind": "VERIFY",
+      "target": 404
+    },
+    {
+      "kind": "VERIFY",
+      "target": 405
+    },
+    {
+      "kind": "VERIFY",
+      "target": 406
+    },
+    {
+      "kind": "VERIFY",
+      "target": 407
+    },
+    {
+      "kind": "VERIFY",
+      "target": 408
+    },
+    {
+      "kind": "VERIFY",
+      "target": 409
+    }
+  ],
+  "intervention_action": {
+    "kind": "SCAN",
+    "target": 8
+  },
+  "pair_id": "PAIR_07_B_DECISION_035_SCAN_8",
+  "parent_state_sha256": "7fedfc2fa00baea21c378f9a46e55ab102ff2b5be6b0361f45680131828d7f70",
+  "state_id": "B_DECISION_035",
+  "stop_reason": "DEADLINE_OR_NO_ACTION"
+}
