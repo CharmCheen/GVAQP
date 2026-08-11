@@ -1,0 +1,13 @@
+# Research Hypothesis Ledger
+
+| ID | Hypothesis | Origin before test | Test/evidence | Result | Decision | Status |
+|---|---|---|---|---|---|---|
+| H1 | Sparse semantic verification creates event-level reconstruction error that changes retrieval quality even with a fixed trace. | Historical Stage-0 repair; V3 K3 architecture. | P0 V3 54 exact same-trace K0/K3 pairs. | K3≥K0 in all cells; median ΔF1 +0.1457. | Retain as a conditional model-relative finding. | SUPPORTED |
+| H2 | Verified negatives are structural barriers and account for the K3 advantage. | K3 design and historical repair narrative. | Frozen C2→C3 same-trace ablation. | Median 0; only 5/54 positive cells. | Do not headline negative-barrier semantics. | REJECTED_AS_MAIN_MECHANISM |
+| H3 | Unknown differs from negative in the released workload. | K3 state model. | Reference/P0 state counts and C3→K3. | One full-grid unknown, no selected bridge, no parse failures; C3→K3 is near zero. | Preserve code semantics; no scientific claim. | INCONCLUSIVE |
+| H4 | A local temporal continuity/gap constraint is sufficient for most observed gain. | Stage-0 C1 lineage. | Frozen C0→C1 ablation. | Mean +0.1738, median +0.1377, 40/54 positive and no negative. | Make continuity constraint the empirical mechanism, not full K3 novelty. | SUPPORTED |
+| H5 | Materializer effect is larger than selector effect. | Original P0 question. | P0 K0/K3 and K3 selector pair/spread analyses. | Median |K3−K0| 0.1457 > median pairwise selector diff 0.0982, but < median three-selector spread 0.1596. | Do not state dominance without qualification. | INCONCLUSIVE |
+| H6 | K3 is selector-agnostic. | Desired materializer mainline criterion. | Per-selector P0 effects. | Proxy and uniform have strong effects; TemporalCoverage median is only +0.0182 and 50% strict improvements. | State bounded robustness, not selector agnosticism. | PARTIALLY_SUPPORTED |
+| H7 | Better adaptive action selection is the main route. | Historical MAB/SMDP/controller branches. | 18 one-step and 7 continuation probes; cached predictability/policy analysis. | No stable direct gain/learnable policy; crowded prior art. | Archive MAB/RL/VOI as non-mainline. | REJECTED |
+| H8 | Deterministic temporal bisection produces earlier physical event utility. | Guangzhou physical traces. | Strict 300s run and same-source repeat. | One recovered event near 224s; chronological/scan-then-verify zero. | Keep as exploratory systems evidence only. | PARTIALLY_SUPPORTED |
+| H9 | The current event reference independently validates human event boundaries. | None; this is a reviewer challenge. | V10 circularity audit. | Full-grid event reference uses current-V3 K3 grouping. | Do not make human-boundary/universal superiority claims. | REJECTED |

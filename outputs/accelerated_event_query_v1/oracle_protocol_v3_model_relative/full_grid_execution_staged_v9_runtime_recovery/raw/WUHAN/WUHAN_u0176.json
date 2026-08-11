@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0176:1786374126404370389",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "9feefc92c5905213181ea205466b7905fcbff67b65adb720c7ab58ba3a8d5384",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "3bfce0d4de7ba9e247d7ec953ebfad5cd3a8f4ec3ecc3f376f466b81ecbe618b",
+  "generated_token_ids_sha256": "ed065c5c036c6648e583476f54b50110cbeae1c6284803534d6b9673c450daa4",
+  "input_identity_sha256": "117fbdb8ee72d7f2683a7876959353e7142224635abf4c5c8e3106faa1fb217f",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "907316c1f699a58c4038380d2122b0d8d53f5fb5217096c2173f00df9947fb96",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with a visible red traffic light for the straight-ahead direction, as indicated by the red signal at the crosswalk. Additionally, the navigation overlay shows a countdown to the intersection (decreasing from 65m to 10m), and the presence of a pedestrian crossing with pedestrians visible in the crosswalk at 0:08-0:10. These conditions require a noticeable slowdown or braking action to comply with traffic control and ensure safety.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "209ea2d6cfd21134674e1119b1a3906f5579cf689849dd62611413cbd7a67de0",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with a visible red traffic light for the straight-ahead direction, as indicated by the red signal at the crosswalk. Additionally, the navigation overlay shows a countdown to the intersection (decreasing from 65m to 10m), and the presence of a pedestrian crossing with pedestrians visible in the crosswalk at 0:08-0:10. These conditions require a noticeable slowdown or braking action to comply with traffic control and ensure safety.\"\n}",
+  "raw_response_sha256": "77b2b123e56db7ca608b3f13f7b8f9c7ace596f9c80f03e47b83e2b1b5485da6",
+  "record_payload_sha256": "a9c16c33521db3b6aac7b7495f3c88086e58f6279e5832471062533c2b03c0f2",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.738707315991633,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.366781425997033,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0176",
+  "unit_ordinal": 1304,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0163:1786373545981264512",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "cb96873a732ce04063945ec54ec460b0eb5eb9a03479dbae79dc3a86fde048d2",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "2c71491802d162c3f41be516c53634b50d122f82e0f228bc342562f4d80cc1b9",
+  "generated_token_ids_sha256": "cbd7549a5de0bb28dca302792266d2203b2b1a499886d54696825b91c704e464",
+  "input_identity_sha256": "114b7c65c9ed2d75a772ef21a62cac235cd1808483d1460c55a22122f4165af0",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "b5232447f8c5d815227cd18c059af40e944e0e69d88399394f44362f22105659",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "A white van is seen making a right turn across the ego vehicle's path at an intersection, requiring the ego driver to slow down or brake to avoid a collision. The van is positioned directly in the ego vehicle's lane of travel as it turns, creating an immediate and visible hazard that necessitates a marked response within the unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "ed6798a1fc5cd227422171bedf3c9cace42dee62b2100562ea5ef9b0e19bff8a",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"A white van is seen making a right turn across the ego vehicle's path at an intersection, requiring the ego driver to slow down or brake to avoid a collision. The van is positioned directly in the ego vehicle's lane of travel as it turns, creating an immediate and visible hazard that necessitates a marked response within the unit.\"\n}",
+  "raw_response_sha256": "b40ac1a08b2c06f27c71c6a4d1f47ffae12e930ce74da7ad2a0c40f5d0b73c98",
+  "record_payload_sha256": "bab91ffb7a1aff00fc68b71084b2728274128397cb3f64522920fe10b301e260",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 13.322212539002066,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 14.031142902000283,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0163",
+  "unit_ordinal": 730,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

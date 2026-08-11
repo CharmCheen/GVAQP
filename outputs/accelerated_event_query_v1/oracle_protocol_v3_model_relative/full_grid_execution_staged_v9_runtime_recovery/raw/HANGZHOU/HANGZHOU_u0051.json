@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0051:1786371626732427116",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "057873b3850d50cb17ddee06c3103941ec534825aae7102f279e7568147b053b",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "2494cee0cf5dc51c5ad78ea183d91a86e601966a053951f208aab607579450f0",
+  "generated_token_ids_sha256": "603dbdb54ba02a46986d372d5b6815505b9283c9a76b24bd331ef6d12c59e1ef",
+  "input_identity_sha256": "2877f8e780977db3b7d0d0c473cace57e71368b3412f79a04208157a355e6ccc",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "e4cada8f8d8cbf35ad34a84dac1f137ee804562758156e7577376da31938f886",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following traffic in a multi-lane urban road with no sudden changes in speed or path. The lead vehicle remains steady, and no road users are entering or threatening the ego path. Traffic signals are visible but not indicating an immediate need for braking or slowdown within this unit. The environment includes construction cranes and buildings, but no visible obstacles or hazards require a marked response. The ego vehicle's behavior is consistent with normal steady driving in traffic.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "32e1094690a88c3b334e0162bfe869dbcf324667347558730859b223c96e48e4",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following traffic in a multi-lane urban road with no sudden changes in speed or path. The lead vehicle remains steady, and no road users are entering or threatening the ego path. Traffic signals are visible but not indicating an immediate need for braking or slowdown within this unit. The environment includes construction cranes and buildings, but no visible obstacles or hazards require a marked response. The ego vehicle's behavior is consistent with normal steady driving in traffic.\"\n}",
+  "raw_response_sha256": "99249ca257d92a6c79d6ca07d477f0b8a23881e2bff5a27172e998e2429c6e80",
+  "record_payload_sha256": "dce8e6239607c3aaf5b56aaa805011e2da4a5d02681ca165e31c2e2896bd78d3",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.58565109600022,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.245286060999206,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0051",
+  "unit_ordinal": 618,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

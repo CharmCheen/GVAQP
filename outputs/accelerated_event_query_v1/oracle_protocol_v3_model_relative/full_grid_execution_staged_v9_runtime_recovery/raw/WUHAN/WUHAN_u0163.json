@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0163:1786373873776511327",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "a081c03a29fbbba38af1e2c47bae55da51423d0e2011662dbba71800d0c1754a",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "33d0d506c3aceff9c06509c2d90bfc278add110675b731d9117e694bdbef292b",
+  "generated_token_ids_sha256": "595daf05e961af5a5c5242a54611ec384d4e6928e1dfa860c31bab115622a4d1",
+  "input_identity_sha256": "52286eb8bac51e467b2c9ed4946db4633d7c388eaeb69788c47f5c7377a6aa72",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "d664ad62430b8a8c812a41e624e390d7e72f57abc10a6eaf00877a701c9492a8",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on a wide, clear urban road with no visible obstacles, sudden traffic changes, or road users threatening the path. Traffic signals ahead are visible but not indicating a need for immediate braking or slowdown within this unit. The road markings and signs are clear, and the vehicle is maintaining steady forward motion without any visible need for a marked response such as braking, slowing, or avoidance. The environment is stable and predictable for normal driving.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "c6fdff1745b2364b7d30f87147f3b77871e23eb9bda91d9b0e3a0a4739bcc420",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on a wide, clear urban road with no visible obstacles, sudden traffic changes, or road users threatening the path. Traffic signals ahead are visible but not indicating a need for immediate braking or slowdown within this unit. The road markings and signs are clear, and the vehicle is maintaining steady forward motion without any visible need for a marked response such as braking, slowing, or avoidance. The environment is stable and predictable for normal driving.\"\n}",
+  "raw_response_sha256": "7411fb97dae696fcdd9c1145c0239ee5cef041d27ef5e8a1abed7088f1ee1b80",
+  "record_payload_sha256": "a10741d7f1efe9f4b59583589bfdc4131869e678fe35da7b4ef670036ead5206",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.107755931996508,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 19.77803957099968,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0163",
+  "unit_ordinal": 1291,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

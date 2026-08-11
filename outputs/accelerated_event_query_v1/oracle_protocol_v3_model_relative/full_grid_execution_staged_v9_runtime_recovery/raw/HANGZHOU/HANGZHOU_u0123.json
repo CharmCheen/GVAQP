@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0123:1786372840121381059",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "fb2ce7d3b55fa861a90e83decba4197f9432db8434ff7f7ffcd9f14f9b07a088",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "f61f82a99c02fe3a70980cb830376563630af3344f60c0f7c3433ef830975a33",
+  "generated_token_ids_sha256": "92d08e415103848b2057c5eaaf55d7a9fdb58d270259d13832245a27d974136a",
+  "input_identity_sha256": "c7d0222c91e4181f17cfae5925c7a16cce4b81d110364ba204eee99204773efb",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "f1f9b064c835ac4c8a88d48f7016fbffe05f95dbf31e68d036f472cfeb1cf0a3",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on a multi-lane road with clear visibility of traffic signals, road signs, and surrounding vehicles. The traffic light is green and counting down, indicating continued forward movement is permitted. There are no sudden changes in traffic flow, no vehicles cutting into the ego lane, no visible obstacles, and no traffic control requiring a marked response such as braking or avoidance. The road conditions are normal, and the ego vehicle appears to be maintaining steady speed without needing to slow down or maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "2e044e60b487e6ac1b30fa293d9e15985c4da2bccde01a04c88d9e192a41032a",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on a multi-lane road with clear visibility of traffic signals, road signs, and surrounding vehicles. The traffic light is green and counting down, indicating continued forward movement is permitted. There are no sudden changes in traffic flow, no vehicles cutting into the ego lane, no visible obstacles, and no traffic control requiring a marked response such as braking or avoidance. The road conditions are normal, and the ego vehicle appears to be maintaining steady speed without needing to slow down or maneuver.\"\n}",
+  "raw_response_sha256": "12e78308980bfa4ebf8e9eef87bb2a15dcbc7a03533862c76781d22953e877ee",
+  "record_payload_sha256": "377730a0e582006bb1b38f4780588b9d076a2fcbf34862ebc98b974b59eb72fa",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.391276606002066,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.073092148995784,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0123",
+  "unit_ordinal": 690,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

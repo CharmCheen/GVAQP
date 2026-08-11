@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0281:1786375581854028193",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "afb800a7cac1d1e890748e4ed64ca947bcc1930909794b7f5d98144fac49b3af",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "d7c072218f575b15b96320cb6c40c9a86f1d309c0cb9c350101476355cca110e",
+  "generated_token_ids_sha256": "912d0b2e6d8a270b2c27e7855595f1905a53a019753dee55998a39ab39db2fac",
+  "input_identity_sha256": "a7bc0e6b3080643a9333b1f4b91d9a6788b5522694aca89f1f0a81adcb61e999",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "dee9844d4f45810fef2f911ac046f9753773f927a9d3491b439f1950e86cc760",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving through an intersection with traffic signals that transition from red to green, allowing for normal progression. There are no sudden obstacles, stopped vehicles, or road users entering the ego path that would require a noticeable slowdown, braking, or avoidance maneuver. Pedestrians are visible but are crossing at a distance and not in the immediate path of the ego vehicle. The road conditions and traffic flow appear normal and predictable throughout the unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "2259cd3abe7006248f82a725d1d30771d441487e339a9aeec4c57a0882bac63e",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving through an intersection with traffic signals that transition from red to green, allowing for normal progression. There are no sudden obstacles, stopped vehicles, or road users entering the ego path that would require a noticeable slowdown, braking, or avoidance maneuver. Pedestrians are visible but are crossing at a distance and not in the immediate path of the ego vehicle. The road conditions and traffic flow appear normal and predictable throughout the unit.\"\n}",
+  "raw_response_sha256": "bb7f2d5b69150b7451d5f5a14f620950798c785311a958e23ecbf4cd88fdae9c",
+  "record_payload_sha256": "d6c9f6c4b35344bd1079c2989e8ed51cda4f27450c2cca3e427d6e64b53f243d",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.915884383008233,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.855036604989436,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0281",
+  "unit_ordinal": 848,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0327:1786354304819551153",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "e8a3cebde94fcb9d17d9915858feb84fb8759b020a77e36366eb438938aa5c31",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "867f1e68529ced24447ef351f137e58ad01e4e62feae0765731d4f2c781f2103",
+  "generated_token_ids_sha256": "d39353961c8d3d22170db620ec45e03fc3c99b5db0b556975dae2caf23daf21b",
+  "input_identity_sha256": "716f75cb3925378857b061bdd0495dc83505e870715d776dd58fdfa439d5277e",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "db0ac26d386a373292c4174603bd777ddcd75d94aa670f22e30b4b4f0847c650",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching a traffic signal under an overpass, and the traffic light changes from red to green during the sequence. The lead vehicle (a red BMW) remains stationary for the first few frames, indicating a stop at the red light, and then begins to move forward as the light turns green. This requires the ego driver to observe the signal change and respond with a noticeable acceleration or resumption of motion, which constitutes a marked response to the traffic control. Additionally, the presence of a U-turn sign and height restriction sign (4.5m) indicates a need for attention to lane and vehicle suitability, further supporting the relevance of the driver's response to visible conditions.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "cb955ffe23d54d9c9b90e28c348a06a522bfa2b45519fa71331d591ddc14e179",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching a traffic signal under an overpass, and the traffic light changes from red to green during the sequence. The lead vehicle (a red BMW) remains stationary for the first few frames, indicating a stop at the red light, and then begins to move forward as the light turns green. This requires the ego driver to observe the signal change and respond with a noticeable acceleration or resumption of motion, which constitutes a marked response to the traffic control. Additionally, the presence of a U-turn sign and height restriction sign (4.5m) indicates a need for attention to lane and vehicle suitability, further supporting the relevance of the driver's response to visible conditions.\"\n}",
+  "raw_response_sha256": "5ac11bd8d8fc867a371489a5a224bcc176a5f35805652c918e46d575e195411d",
+  "record_payload_sha256": "ed29fc7540c741b41315c9af18e10c29a0cd9ec8f07f0c8ef2941e52be8bf9a4",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 23.395749792995048,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 25.080112960000406,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0327",
+  "unit_ordinal": 1455,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

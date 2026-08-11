@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0118:1786373002240877192",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "022cdc6fce40e06715c8be96515c2bd6c700c5d086b722c122a7ad0b6787d340",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "bb1fbac614ecdd028eb705c88838fa21736dc83c89fe181e137176743248fdf1",
+  "generated_token_ids_sha256": "62a6cc75c495d93d47e594e2fc47a679086c45e1bc16efd0fbfc8034d057ff52",
+  "input_identity_sha256": "367ca0aeda0528ff621612dcf3e5c3b2ea920c9a4f1eef89ec6c3461b0d24d48",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "8dd4d9efdd6660b69cf40237d28788601a505cf978d60c4f1de2c494d56295f0",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on an elevated highway with clear visibility of road signs, lane markings, and surrounding traffic. The lead vehicle is maintaining a steady distance, and there are no sudden changes in speed, braking, or obstacles requiring a marked response. Traffic signs indicate upcoming exits and speed limits, but the current speed appears consistent with the 60 km/h limit shown, and no immediate maneuver is required. The road conditions are normal, and no visible hazards or sudden changes in traffic flow are present within the unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "6fba7a648ae4f89fdb49bb47edb04d3582056c72d6f0bd9dfee52cf6993ad7fb",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on an elevated highway with clear visibility of road signs, lane markings, and surrounding traffic. The lead vehicle is maintaining a steady distance, and there are no sudden changes in speed, braking, or obstacles requiring a marked response. Traffic signs indicate upcoming exits and speed limits, but the current speed appears consistent with the 60 km/h limit shown, and no immediate maneuver is required. The road conditions are normal, and no visible hazards or sudden changes in traffic flow are present within the unit.\"\n}",
+  "raw_response_sha256": "3d4d5d2521247c73bd9cf861e83aaaa629d05f0e7789e947efc68b08fbd81da4",
+  "record_payload_sha256": "9ba9dc94415c93bb01c9ee69d6df383a05214513d8602314fcc9850a0287f73c",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.231474160995276,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.82042901200475,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0118",
+  "unit_ordinal": 1246,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0146:1786373543033564570",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "70b3707027cf2fdf8b1c7877dfec636457aeee1ecf85b0dfb77ed1ac07a80ce9",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "8b9a18fa78079c78c8ddc2e8a45de6394592f2a532f2eefedf0de33eb7581dc6",
+  "generated_token_ids_sha256": "a0db251cc473fc3a248794ad6cee8d6b4886f1bd1713e1fdf9150228fdcfdb4b",
+  "input_identity_sha256": "d8eced612f3d1a504235fa550a98029999a9c0ebdfe7147dd06e34fce8dedef8",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "5cdb51a26d518ca293665a83097b406168d49ad4795b7a53204d2bca487473e6",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a traffic signal intersection where the traffic lights are red, as seen in the later frames (e.g., frame 0:10). The lead vehicles are slowing down and stopping, indicating that the ego driver must also brake and come to a stop. This requires a noticeable slowdown and braking action within the unit, as the traffic control (red light) visibly demands a marked response. The distance to the intersection decreases from 515 meters to 410 meters, and the red light becomes visible just before the end of the unit, confirming the need for braking.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "ad108167509a398fdadf2b6ed5cc3d2a4d57b2bbe08b3403f8174bc95997a013",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a traffic signal intersection where the traffic lights are red, as seen in the later frames (e.g., frame 0:10). The lead vehicles are slowing down and stopping, indicating that the ego driver must also brake and come to a stop. This requires a noticeable slowdown and braking action within the unit, as the traffic control (red light) visibly demands a marked response. The distance to the intersection decreases from 515 meters to 410 meters, and the red light becomes visible just before the end of the unit, confirming the need for braking.\"\n}",
+  "raw_response_sha256": "065f44befdbe3bc0425545db1b5a9d9862b282d47140e3f19d2cf61e81c6af38",
+  "record_payload_sha256": "eb89cd323807bd87c394a7cb9f87ef0f50e969b228e1fa8d7e984890ec0550a0",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 20.95427919999929,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 22.639925440998923,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0146",
+  "unit_ordinal": 1274,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0080:1786349550741509271",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "0c828d5f776306d58cc6dcdff03ad648fd8e9955a50bff3a2966fee190eed11f",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "68e56f83555da4180a55e77d94b53866bd5d314992012c951e1e9c69c71e545c",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "81aba6304e7200459073db7dac2a522b5f17787f5d23869f8839bbe945faf1e7",
+  "generated_token_ids_sha256": "1a677388b8bcde12cb58e287218c308fbf42ea30e49515a6b98ef17b8daed241",
+  "input_identity_sha256": "afe67380de473ce3b3f40d0b21165341270d93ab09a1fa8a7d2a5fc7d5cce36f",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "0a0fc9c69109fca5ce5dbc125dd5a7187e7668cc3b7c1301ff9520af1be5076d",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching an intersection where traffic signals are visible and changing from red to green. A traffic officer is present in the intersection, directing traffic, and vehicles ahead are beginning to move. The ego driver must respond to the traffic signal change and the officer's direction, which requires a noticeable slowdown or braking action to safely navigate the intersection. Additionally, the presence of pedestrians and other vehicles crossing or entering the intersection further necessitates a cautious and controlled response.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "114dcccc1e0dea8d30a94422180644c4cff8564dc678b289cc882f888005fb5d",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching an intersection where traffic signals are visible and changing from red to green. A traffic officer is present in the intersection, directing traffic, and vehicles ahead are beginning to move. The ego driver must respond to the traffic signal change and the officer's direction, which requires a noticeable slowdown or braking action to safely navigate the intersection. Additionally, the presence of pedestrians and other vehicles crossing or entering the intersection further necessitates a cautious and controlled response.\"\n}",
+  "raw_response_sha256": "7f255e6557c23174a6abe51775caba2170b96094ae60810245006cbf14b0fd4f",
+  "record_payload_sha256": "733889ba016066093ac14d32cd2e38d634c3eed9b9225d70d53efdc1cb387ceb",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 17.98396972900082,
+    "model_load_seconds": 20.342561935998674,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 19.658683143003145,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0080",
+  "unit_ordinal": 80,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

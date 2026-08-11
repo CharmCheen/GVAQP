@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0094:1786349793660591022",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "c7b917b42707697d350d3e1b87ecf35cc862b9296331c7a2eef07175abb71b19",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "273284391db14f41977b8cbd694d6d8197e6ba986518b5aaa640805d3366076f",
+  "generated_token_ids_sha256": "685f0bd89bb831ac2ecf6f00395fc2aadd2e70ba19285edc067388904d616536",
+  "input_identity_sha256": "f5bba626ed3630a38a8c6287e5a67d72561914b9174141af6e1765efcbc657a5",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "bff47d151ba0e4d2d3173410e4ff4b45756d132a03432b800b73df72ba9a6655",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on a multi-lane elevated road with clear visibility. Traffic is flowing steadily, and there are no sudden changes in speed, braking, or maneuvers required. The lead vehicles maintain consistent spacing, and no obstacles, sudden lane changes, or traffic control signals requiring immediate action are visible. The speed limit sign (60 km/h) is visible but does not indicate a need for a marked response as the traffic is already moving at a steady pace within the limit. No visible hazards or conditions necessitate a noticeable slowdown or avoidance maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "5eef210054964cb1b798d43fabe1e68baab5696646dcd91470f48bd86fcaa00f",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on a multi-lane elevated road with clear visibility. Traffic is flowing steadily, and there are no sudden changes in speed, braking, or maneuvers required. The lead vehicles maintain consistent spacing, and no obstacles, sudden lane changes, or traffic control signals requiring immediate action are visible. The speed limit sign (60 km/h) is visible but does not indicate a need for a marked response as the traffic is already moving at a steady pace within the limit. No visible hazards or conditions necessitate a noticeable slowdown or avoidance maneuver.\"\n}",
+  "raw_response_sha256": "c9856685a783ca477b83f47033ec86d1324df747381d39cf243038e1dcb00e35",
+  "record_payload_sha256": "6bd660c39e7007b32a1c95b97d559c4d3812042cf9cfd620045d1e10aefa0b3c",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.927053949002584,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 21.56969499099796,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0094",
+  "unit_ordinal": 1222,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

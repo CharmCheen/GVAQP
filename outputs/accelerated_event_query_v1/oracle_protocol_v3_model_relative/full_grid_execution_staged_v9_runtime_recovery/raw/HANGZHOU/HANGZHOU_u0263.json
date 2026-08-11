@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0263:1786375261358105897",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "4a4c935824aa4a8c0ad57e37dc5d22bdea3a50c7894369d976cf6c757601d86f",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "d507a8b55533969b2c1c6c0ee1b4de0a525afe3fa606d2f7bf519dae886b17cd",
+  "generated_token_ids_sha256": "6583711c55b957cf8db4299f41f4ecad71b108355283fc86cc131c9fa057d3b1",
+  "input_identity_sha256": "29c2ddd5f6f15ed587405dba6a24c37a2188f4309f15995e86f7f632555ae7d7",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "d778d8030dc6feb6630e0a030c4b86e313c03fc5b8af0f067ac1b0aeed6e9e9f",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "At the beginning of the unit, pedestrians are crossing the intersection ahead, and the ego vehicle is approaching the crosswalk. The traffic light for vehicles is red, indicating a stop is required. The ego vehicle must slow down and stop to yield to pedestrians, which constitutes a noticeable braking action. The lead white SUV also stops, confirming the need for a marked response. The traffic signal change to red is visible and directly requires a response within this unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "1f02701b3dc32ea23987ad4ea8e6b937beeaaff417d860d6efdee2ff49665694",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"At the beginning of the unit, pedestrians are crossing the intersection ahead, and the ego vehicle is approaching the crosswalk. The traffic light for vehicles is red, indicating a stop is required. The ego vehicle must slow down and stop to yield to pedestrians, which constitutes a noticeable braking action. The lead white SUV also stops, confirming the need for a marked response. The traffic signal change to red is visible and directly requires a response within this unit.\"\n}",
+  "raw_response_sha256": "702218fd7dba3c67de97a83bc8b782058ac840af13d0ff7396b027995705ac71",
+  "record_payload_sha256": "bdcab6f5a67f61db8fb99a88a1b1c4652d933dc4ec5299568303d7792e1a9621",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.57710868299182,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.329436289001023,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0263",
+  "unit_ordinal": 830,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0521:1786381055999538104",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "4af971de1ab58b6e544ab57f0532b3d0cabff5df878be3fc51c352f4eb6793d8",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "7b7c1403535c21410f1188fdda895c3f563cf04292c3a198f5467c516b177bf8",
+  "generated_token_ids_sha256": "532b4daa56cc68e0556570ba147fe701636c256a79e2ad1d48299eeff60eace2",
+  "input_identity_sha256": "90902a0b8d6e55ee8da589b5ea14ed39c0ce7196a03421e2e355e939089aa965",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "965b328e734d0f17a96c58179cb1afe4f550af60970e3626808fd922866e408e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is moving through an intersection at night with traffic signals visible. The traffic lights are red for the ego direction, but the vehicle appears to be proceeding through the intersection after the signal change or during a permitted movement (e.g., turning). There are no sudden obstacles, stopped vehicles, or road users entering the path that would require a noticeable slowdown, braking, or avoidance maneuver. Pedestrians are visible on the sidewalks and crosswalks, but they are not in the immediate path of the ego vehicle. The road is clear ahead, and the vehicle continues forward without any visible need for a marked response.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "37ffc9eacd2d0673630e866bbdc067cecfb1f9e764ec84ad165e309e1711487f",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is moving through an intersection at night with traffic signals visible. The traffic lights are red for the ego direction, but the vehicle appears to be proceeding through the intersection after the signal change or during a permitted movement (e.g., turning). There are no sudden obstacles, stopped vehicles, or road users entering the path that would require a noticeable slowdown, braking, or avoidance maneuver. Pedestrians are visible on the sidewalks and crosswalks, but they are not in the immediate path of the ego vehicle. The road is clear ahead, and the vehicle continues forward without any visible need for a marked response.\"\n}",
+  "raw_response_sha256": "43e794375b304b60bd08b34a903ec8cf2b89a1d3872e081cea40bf98f495f197",
+  "record_payload_sha256": "090c3d148940767690e339d543f1ffe03eba8eba497184a62888e801f6ffd244",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 22.032929076987784,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 23.871624805004103,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0521",
+  "unit_ordinal": 521,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

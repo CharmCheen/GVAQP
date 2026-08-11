@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0178:1786374167259256094",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "8070c4fa428fe725a9cf2a2ff33c50d26dc2de6cf1116fd6da491f7da23454ff",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "fa96c502f8164c3ac7c9e8a828116e47a3ef47331633d0e1a5136dccab83e11f",
+  "generated_token_ids_sha256": "ca9767633f4513796b246ae19645e38149467276216b2aa1ad771ad744ba97f3",
+  "input_identity_sha256": "471cc51e86e0c8650d331933064d5835d0cfe9fd80da424780e93be93dda0de5",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "e528d7221bac0b2447dd4e0c608e455563e59466bbc2398629cabf5c940ec9f8",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "Pedestrians are actively crossing the road at a marked crosswalk in the final frames (around 0:08-0:10), directly entering the ego vehicle's path. This requires an attentive driver to slow down or brake to safely yield to the pedestrians, as they are in the roadway and within the vehicle's immediate path of travel. The presence of multiple pedestrians and the proximity to the crosswalk make this a clear and immediate need for a marked response.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "2b2e03f3a1e0a0f5315bbdb19528bb0002ca3c26ce4f994ccb92f34b0197012d",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"Pedestrians are actively crossing the road at a marked crosswalk in the final frames (around 0:08-0:10), directly entering the ego vehicle's path. This requires an attentive driver to slow down or brake to safely yield to the pedestrians, as they are in the roadway and within the vehicle's immediate path of travel. The presence of multiple pedestrians and the proximity to the crosswalk make this a clear and immediate need for a marked response.\"\n}",
+  "raw_response_sha256": "e5623b70bf36bb1e287db8d1f7c212b6823ce23efe7ae4f4a1cedb9668a1efb4",
+  "record_payload_sha256": "36b29493c9ad295bbca77a73f5f4c3eb9652118668561244ea9fa8be745b3201",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.439396747009596,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.086223448000965,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0178",
+  "unit_ordinal": 1306,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

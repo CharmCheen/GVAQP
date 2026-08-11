@@ -1,0 +1,35 @@
+{
+  "analysis_kind": "POST_P0_EXPLANATORY_CACHED_REPLAY",
+  "created_at_utc": "2026-08-11T06:03:03.002115+00:00",
+  "input_files": {
+    "outputs/p0_materializer_validation_v3/controlled_pairs.csv": "7d3b87f6a48629328136fcdd0e9f888dd0600da8607cfb4ec0fc3fb5ef1a7631",
+    "outputs/p0_materializer_validation_v3/event_metrics.csv": "42270ba4ae061aefd056ef25158295103a1c5c8d3170e6b96654863e12e85a8b",
+    "outputs/v10_multiseal_reference_v1/FINAL_UNIT_REFERENCE.parquet": "4f732859e7aaca6a4d8098b3da653620c777e85b5fcc31dae5c2b91fb2260fcf",
+    "outputs/v10_multiseal_reference_v1/K3_MODEL_RELATIVE_EVENT_RELATION.parquet": "f16e24103921ada7f82360864211372d68a06ca2f18be5f7319dc6e7e4d94409",
+    "scripts/run_p0_v3_materializer_validation.py": "090537f0972a61b967b9424770b2b2ae243d92e4897d732c20bfcc1564d9146d",
+    "scripts/stage0_6_materializer_ablation.py": "948ca4925e64e3644b4297da516e3b352adaa55ae7eebff7ee7c1be299ccd849"
+  },
+  "input_p0_protocol_hash": "ad619c84aaa396c727982fa554232c54243bc78008048c174eff6202c68c59f2",
+  "matching": {
+    "boundary_tolerance_sec": 0.0,
+    "duplicate_rule": "unmatched_overlapping_prediction_is_false_positive",
+    "eligibility": "strict_positive_temporal_overlap",
+    "minimum_tiou": 0.0,
+    "name": "v3_one_to_one_max_cardinality_then_tiou",
+    "source": "K3_UNIT_EVENT_CONFIG_V3.json and accelerated_event_query.matching.MatchConfig"
+  },
+  "model_relative_circularity": "QUALIFIED_BUT_VALID; this decomposition cannot independently validate human event boundaries.",
+  "not_a_new_algorithm": true,
+  "protocol_hash": "bde64b325942b66575595d5213fb0436caa01cffb245bd412969153f84611cb9",
+  "protocol_id": "P0_V3_MECHANISM_DECOMPOSITION_V1",
+  "reason": "The long-horizon research objective pre-specified tests of negative evidence and allowed C0/gap/duration/negative-barrier lineage ablations. No thresholds or source semantics are tuned here.",
+  "same_trace_rule": "Each C0/C1/C2/C3/K3 row consumes the exact P0 queried unit ids, query order and terminal outcomes for that video/selector/budget trace.",
+  "status": "FROZEN_BEFORE_MECHANISM_REPLAY",
+  "variants": {
+    "C0_naive_all_positive_span": "Historical Stage-0 C0: all queried relevant anchors become one min-to-max span.",
+    "C1_gap_limited": "Historical Stage-0 C1 natural lineage: merge consecutive queried relevant anchors only when temporal gap <= 10 seconds; no duration cap or negative barrier.",
+    "C2_gap_duration": "Historical Stage-0 C2 natural lineage: C1 plus 40-second maximum core span.",
+    "C3_gap_duration_negative_barrier": "Historical Stage-0 C3 natural lineage: C2 plus any queried not_relevant unit fully between adjacent anchors blocks their merge.",
+    "K3_current_v3": "Frozen current V3 K3 adapter, including unknown/parse semantics and exact configuration."
+  }
+}

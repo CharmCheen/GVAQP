@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0070:1786349230964478249",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "9b732bc750b0e0bebf6b0d25a8cbea8d91c8e97cc5afd5e9339e4e5e074f6c12",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "7e8ff9377764fdb7638e9e1938f9d618ad63b1946feda4205dd899c0f683ab75",
+  "generated_token_ids_sha256": "ce5fe9902a32ad4a50d71f759bb874ee3643bb56eff3af1a0f909ae5e3461096",
+  "input_identity_sha256": "07e1342230f8d6bf41168ed9ec511ed3ae06ce0e13d7731a53d59a1b40f02e22",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "5bb854d0be5910857e541db04899bcd19b02ecc08244dc8979f4475038d3be8c",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a clear, multi-lane road with visible traffic flow. There are no sudden obstructions, stopped vehicles, or traffic signals requiring immediate braking or avoidance. The lead vehicle (a black SUV) maintains a consistent distance and speed, and other road users (motorcycles, scooters, and a white car) are either in separate lanes or moving predictably without encroaching on the ego path. The road conditions and traffic signals (visible green light) support continued steady driving without a marked response.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "7f3309f23cc6e80bfe25188b7f18353ed59eb4654e0935b3e7510b5daadaa54a",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a clear, multi-lane road with visible traffic flow. There are no sudden obstructions, stopped vehicles, or traffic signals requiring immediate braking or avoidance. The lead vehicle (a black SUV) maintains a consistent distance and speed, and other road users (motorcycles, scooters, and a white car) are either in separate lanes or moving predictably without encroaching on the ego path. The road conditions and traffic signals (visible green light) support continued steady driving without a marked response.\"\n}",
+  "raw_response_sha256": "5d0486d72d3be65b8005b97f649048a83bd74db8a6e0b8b72a3d584df4adf037",
+  "record_payload_sha256": "89aeb3afe8b27f736d891418b2854bbd6e8d59aed281a92d9295ab9be30fb420",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 19.510553085994616,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 20.172255978002795,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0070",
+  "unit_ordinal": 637,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

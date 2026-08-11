@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0276:1786352795512142761",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "ff7debfb276082d8b4064a4a5ac98b77bb064ac92fd47920931d87dc1bd61bd7",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "5b1c08d6aa6b9dc144031ee4de4bcb1e066d8b6e7cad4abe70b22016ded82412",
+  "generated_token_ids_sha256": "bf28e57b4f81f42930f3ea7f4378f0ff8fb4a915f8ddfbb25106479af0792bac",
+  "input_identity_sha256": "f4b41df523198b5cdf53c500f2b61abb97b44851c6b5a66d058c499dc84bf307",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "db1ccde675a69b0e27f7a49511932d396586e508fdeff62da1ee35fcf76db640",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching an intersection with traffic signals. The traffic light for the ego direction turns green at frame 0:03, and the vehicle proceeds through the intersection without any visible need for braking, slowing, or avoidance. Other vehicles are present but are either moving normally or positioned in non-conflicting lanes. There are no sudden obstacles, road users entering the path, or traffic control changes requiring a marked response within this unit. The driving behavior remains steady and consistent with the traffic flow.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "183e8a6bae2d9a0407c061aedcdd399af76c5966e52d7978f3ad1c873608e2cc",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching an intersection with traffic signals. The traffic light for the ego direction turns green at frame 0:03, and the vehicle proceeds through the intersection without any visible need for braking, slowing, or avoidance. Other vehicles are present but are either moving normally or positioned in non-conflicting lanes. There are no sudden obstacles, road users entering the path, or traffic control changes requiring a marked response within this unit. The driving behavior remains steady and consistent with the traffic flow.\"\n}",
+  "raw_response_sha256": "a0ef7311351f68b11916576191441779b804f382bd58f7a5534d1404e96d3b99",
+  "record_payload_sha256": "74ce92d69604d831267d8c51b46503e965c59b9f05648e6f60fae4901ed27b41",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.236382064998907,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.983691137000278,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0276",
+  "unit_ordinal": 843,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

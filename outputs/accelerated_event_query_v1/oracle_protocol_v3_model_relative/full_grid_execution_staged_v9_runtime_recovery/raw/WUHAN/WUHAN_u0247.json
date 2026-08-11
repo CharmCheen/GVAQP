@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0247:1786375504530378172",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "c0fcdcc363707ca85c41a9cd226f9fecbff084f2316f3f71abcd9420de7a3ea0",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "e14306f488a20e693ff22a0911140e833211196a08a68e1f991eb5a5a991aa04",
+  "generated_token_ids_sha256": "2a3d94b5ba16ff09f443809d27beecc7ec0cade0347ca61b865b88b3e282e970",
+  "input_identity_sha256": "02d4cbaf91f2a0aa9a087e462d2d623643f5d6bc231f31717e249946c13e7add",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "6207e742977e31752a8df0d29b188660252a3c352b7d1f3296d5e82bde7f3c6f",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily along a multi-lane urban road with clear visibility. Pedestrians are crossing the street at a marked crosswalk in the initial frames, but they are not in the path of the ego vehicle after the first second. Traffic flow is smooth, with no sudden stops, obstructions, or traffic control signals requiring a marked response. Vehicles ahead are moving normally, and no sudden maneuvers or hazards are visible that would require a slowdown, braking, or avoidance action within this unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "f7b41509de5cc63fcdc6a9786afda641d95ebb0f087c8d1d5a64006265b9a268",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily along a multi-lane urban road with clear visibility. Pedestrians are crossing the street at a marked crosswalk in the initial frames, but they are not in the path of the ego vehicle after the first second. Traffic flow is smooth, with no sudden stops, obstructions, or traffic control signals requiring a marked response. Vehicles ahead are moving normally, and no sudden maneuvers or hazards are visible that would require a slowdown, braking, or avoidance action within this unit.\"\n}",
+  "raw_response_sha256": "6b5411e2ce8cf96220dd2e47c4c6e7b745a260143c8f542fb3819125d2f9149d",
+  "record_payload_sha256": "aa9c5e2100bd4d07cba54128260e2438784c2fb6ecf1a1b28209d3ac7ef0e6b8",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.079107808007393,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.82409318999271,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0247",
+  "unit_ordinal": 1375,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

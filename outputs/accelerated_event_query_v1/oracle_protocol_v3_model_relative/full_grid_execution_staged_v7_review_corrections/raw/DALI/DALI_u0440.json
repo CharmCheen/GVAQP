@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0440:1786356680476474334",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "80a1a85fcae3529c2d3f4413860147974661346833cf0abae23c32fab0ae4e11",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "68e56f83555da4180a55e77d94b53866bd5d314992012c951e1e9c69c71e545c",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "a8e2bdbe46882befb73ad2dee8fe0e4552c3bf31f3b8e7c90f3c9879b5e2b95a",
+  "generated_token_ids_sha256": "cb1f9ab58626207b6a786913deb9a3f5281bc591c3b71eaf659030484c23c97d",
+  "input_identity_sha256": "f75e37861fd4578574ae0a9eed32be882ab2c6e0c4369f0b8f868786f949794a",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "fa41f9e5acfe1aae23c770483fab40b18000046edae7a3876287733193476ead",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane road during twilight with clear visibility. Traffic ahead is flowing normally, with no sudden braking, stopped vehicles, or obstacles in the path. Road signs and signals are visible and indicate no immediate need for a marked response. The countdown timer in the top-left corner appears to be part of a navigation system and does not indicate an imminent traffic control requiring action. No road users are entering or threatening the ego path, and there are no visible road conditions requiring a marked speed or path change.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "8cb3bb0e531e950384dc97f537ce9cce6d435abb0538a52d7f5756439d7b96b1",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane road during twilight with clear visibility. Traffic ahead is flowing normally, with no sudden braking, stopped vehicles, or obstacles in the path. Road signs and signals are visible and indicate no immediate need for a marked response. The countdown timer in the top-left corner appears to be part of a navigation system and does not indicate an imminent traffic control requiring action. No road users are entering or threatening the ego path, and there are no visible road conditions requiring a marked speed or path change.\"\n}",
+  "raw_response_sha256": "7f2e424feacdab9bc28a0f229be40766fa5d5073c9eac0b83608d8562f2ad467",
+  "record_payload_sha256": "a322503d0550de17816ba7b401ee03ce97aa624ab0267ddb6dbcd9633ee5bdd2",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 20.843682494996756,
+    "model_load_seconds": 20.342561935998674,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 22.598617636002018,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0440",
+  "unit_ordinal": 440,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

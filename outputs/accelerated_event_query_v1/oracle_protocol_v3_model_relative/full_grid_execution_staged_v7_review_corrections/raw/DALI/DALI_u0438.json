@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0438:1786356637382119548",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "6114295392b3281b4a22cab4ff638d302c1451ed26a38cb6e3a4c10ee8d16c96",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "68e56f83555da4180a55e77d94b53866bd5d314992012c951e1e9c69c71e545c",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "0bdd9f726aeca428a7658f63b2acf138447053d2736ff27071fc3a47b15fd9a8",
+  "generated_token_ids_sha256": "9275adc4c43dc2d83bccbf65a5045d5a607a4d999804c4a2f7c2eb9cc8fd26f5",
+  "input_identity_sha256": "46ae6564bb608746071d442c210b582cd703784d6f839ad829338c7137c5e616",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "1bdd23d55b33af34b9325fad4d6245fd23bfba00d4a22a763d06149e6979d8bf",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane road during sunset, following other vehicles at a consistent distance. There are no sudden changes in traffic flow, no visible obstacles in the path, no traffic signals requiring immediate action, and no road users entering or threatening the ego path. The environment includes a pedestrian overpass, which is safely navigated without requiring any braking or avoidance maneuver. All visible conditions support normal, steady driving without the need for a marked response.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "fcdd1325c7eef3b1df6333e91abcf1f6c2ec271e319b8ab1bf09e48a7e1cb8ba",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane road during sunset, following other vehicles at a consistent distance. There are no sudden changes in traffic flow, no visible obstacles in the path, no traffic signals requiring immediate action, and no road users entering or threatening the ego path. The environment includes a pedestrian overpass, which is safely navigated without requiring any braking or avoidance maneuver. All visible conditions support normal, steady driving without the need for a marked response.\"\n}",
+  "raw_response_sha256": "60e4b6c105d67e4a69851c736c6d75ff4d89b07243c372d13d153817a6ddcc01",
+  "record_payload_sha256": "3680c65eb54d2ad4e2999dcbf8bec117fdbe2151759c8e55ae8e5613d1b07ea7",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 18.680243814997084,
+    "model_load_seconds": 20.342561935998674,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 20.4561433340059,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0438",
+  "unit_ordinal": 438,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0516:1786380949494070743",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "b3f80167d248fefdf4443443d0ed28941954e765bc0814e4dd0cbe35192d0bff",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "e5fb59d17255cbcaa614bc28a683d2f749a786eee59069f5e7801853836f5347",
+  "generated_token_ids_sha256": "7d624d25af980f0296236d11d9d6c8fd02ad2ada01fa0e4acbb76aa48cd47c81",
+  "input_identity_sha256": "35d02d67d9b9ae6ea9345610a66f50da9741f484603a4c0a1e183819dcf9ec4b",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "b490112796138b450127bd24d4f9f94c30b44930372129a119ce82fbf537f415",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a delivery scooter at a steady pace on a relatively clear road. There are no sudden changes in traffic, no visible obstacles in the path, no traffic signals requiring a response, and no road users entering or threatening the ego path. The road ahead is illuminated and clear, with vehicles maintaining consistent speeds. The navigation overlay indicates a smooth route without imminent turns or stops. All conditions suggest normal steady driving without the need for a noticeable slowdown, braking, or avoidance maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "a044d8e89fc59a2df6f2d9d1a0fd2621d4461362c9b6aa88447cf696b4be051b",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a delivery scooter at a steady pace on a relatively clear road. There are no sudden changes in traffic, no visible obstacles in the path, no traffic signals requiring a response, and no road users entering or threatening the ego path. The road ahead is illuminated and clear, with vehicles maintaining consistent speeds. The navigation overlay indicates a smooth route without imminent turns or stops. All conditions suggest normal steady driving without the need for a noticeable slowdown, braking, or avoidance maneuver.\"\n}",
+  "raw_response_sha256": "1c2c405a58c694292dc42a729a17e323d9a1a0c14f5256671c2a5cac45260374",
+  "record_payload_sha256": "09c4f7a4e75a4c3dc0ea22fdd9e5372e567c7aa81d12e572f24b43bb76a26d70",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 19.470156759998645,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 21.37631566300115,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0516",
+  "unit_ordinal": 516,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

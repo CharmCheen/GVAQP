@@ -1,0 +1,20 @@
+# Evidence-derived V7 processor identity; not a complete dependency lock.
+name: gvaqp-v7-processor
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - pip
+dependencies:
+  - python=3.13.2
+  - pip
+  - pip:
+      - torch==2.10.0+cu129
+      - transformers==5.9.0
+      - qwen-vl-utils==0.0.14
+      - numpy==2.4.6
+      - pillow==12.1.1
+      - opencv-python==4.13.0
+# Exact pins above are V7 runtime_environment_identity fields.  No evidence
+# pins torchvision/tokenizers/accelerate/safetensors/decoder stack, so this
+# file must not be represented as a complete historical environment lock.

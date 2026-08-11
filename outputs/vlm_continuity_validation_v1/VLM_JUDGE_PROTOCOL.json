@@ -1,0 +1,83 @@
+{
+  "analysis_contract": {
+    "decision_rules": {
+      "inconclusive_if_any": [
+        "eligible_cases < 28",
+        "paired_bootstrap_95pct_CI_width_C1_minus_C0 > 0.40"
+      ],
+      "otherwise": "NO_VLM_SUPPORT",
+      "supports_full_K3_if_all": [
+        "not inconclusive",
+        "K3_minus_C1 >= 0.10",
+        "positive direction in at least two videos with at least five eligible cases"
+      ],
+      "supports_gap_only_if_all": [
+        "not inconclusive",
+        "C1_minus_C0 >= 0.10",
+        "positive direction in at least two videos with at least five eligible cases",
+        "K3_minus_C1 < 0.10"
+      ]
+    },
+    "primary": "accuracy C1-C0 on SAME/DIFFERENT eligible labels",
+    "read_hidden_predictions_only_after": "JUDGE_A_LABELS.csv hash freeze at 40/40",
+    "secondary": "K3-C1, boundary metrics, population weighted descriptive results, paired bootstrap 10000 resamples seed 20260811"
+  },
+  "code": {
+    "prepare_path": "scripts/prepare_vlm_continuity_study.py",
+    "prepare_sha256": "56b80216f0cafcd2cf20d502b0ff1317bd4f7abc3a34724243d550a09fa7df12",
+    "runner_path": "scripts/run_vlm_continuity_judge.py",
+    "runner_sha256": "0fd5203ea79c60eb3e4fc15ed1b4a5f3a9e7daacd07a47d71fbbfda7a2539065"
+  },
+  "created_at_utc": "2026-08-11T07:22:24.283170+00:00",
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 180,
+    "repeat_semantic_query": false,
+    "schema_labels": [
+      "SAME_EVENT",
+      "DIFFERENT_EVENTS",
+      "ANCHOR_INVALID",
+      "UNCERTAIN"
+    ],
+    "temperature": 0
+  },
+  "input_contract": {
+    "annotation_package_root": "/root/charm/GVAQP/outputs/human_continuity_validation_v1/annotation_package",
+    "case_count": 40,
+    "case_hash": "f72608faa1529eabb3fbae28827a1b37c2834589eb8d7552e8922bf54c438de2",
+    "frame_construction": "For each full-context MP4: 8 uniform frames plus one midpoint frame for each detected neutral A/B marker; for any long-context A/B detail MP4: 4 uniform frames. At most 18 images, ordered only by public clip order. No hidden timestamps/method fields are read.",
+    "hidden_method_metadata_visible_to_judge": false,
+    "same_blinded_clips": true
+  },
+  "judge_a": {
+    "architecture": "SmolVLMForConditionalGeneration",
+    "limitations": "500M local video VLM: independent family but weaker than a large external judge; evidence is a blinded VLM sanity check, not human ground truth.",
+    "local_snapshot": "/root/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+    "model_family": "HuggingFace SmolVLM (Idefics/Llama-derived; non-Qwen)",
+    "model_id": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+    "model_weight_sha256": "b9bfd456c9472c0acd5719d6e514c4b859891af205ee1a736552fd3497b8b0c3",
+    "revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467"
+  },
+  "judge_independence_level": "CROSS_FAMILY",
+  "judge_prompt": "You are an independent video-continuity judge. You will receive a driving-video context containing neutral markers A and B, plus a semantic query. Judge the visible driving semantics, not merely temporal distance. Return exactly one JSON object with no markdown or extra text:\n{\"label\":\"SAME_EVENT\"|\"DIFFERENT_EVENTS\"|\"ANCHOR_INVALID\"|\"UNCERTAIN\",\"confidence\":0.0,\"brief_rationale\":\"one short sentence\"}\n\nDefinitions:\n- SAME_EVENT: both A and B satisfy the query and belong to one continuing semantic episode; a short occlusion, observation gap, or intensity change can still be continuous.\n- DIFFERENT_EVENTS: both satisfy the query, but the earlier episode has ended and B is another independent episode.\n- ANCHOR_INVALID: at least one marked anchor itself does not satisfy the query.\n- UNCERTAIN: visible evidence is insufficient for a reliable judgment.\n\nFrozen semantic query:\n{QUERY}\n",
+  "judge_prompt_hash": "44f0be5480e3abfcf20e7ae463e4ccce9f2d9edf1390aa2851dadcb36d1d57e5",
+  "protocol_frozen": true,
+  "protocol_hash": "b3f0d5c32a415132a3e41438fd735c9a3ea2954636659a2ff720f769e3279645",
+  "protocol_id": "INDEPENDENT_VLM_EVENT_CONTINUITY_SANITY_V1",
+  "protocol_type": "POST_P0_BLINDED_VLM_SEMANTIC_SANITY_STUDY",
+  "runtime": {
+    "cuda_visible_devices": "0",
+    "dtype": "bfloat16",
+    "local_files_only": true,
+    "single_gpu_serial": true
+  },
+  "source_commit": "2c0d35c888f9711cacab964672c6094fc98e5c49",
+  "source_human_benchmark": {
+    "human_labels_observed_at_freeze": 0,
+    "human_protocol_modified": false,
+    "human_state_sha256": "522ae5389c4794a6ff2387b24e8dabe7e37953cf3afe59e59db76d403dc79bb6",
+    "primary_cases_path": "outputs/human_continuity_validation_v1/annotation_package/PRIMARY_BLINDED_CASES.json",
+    "primary_cases_sha256": "676cf919ede6f67fe94039f8c7cb6a9877173d7a55f57a8e46742273dd6405fc"
+  },
+  "study_design": "SINGLE_JUDGE"
+}

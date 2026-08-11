@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0150:1786373320637470327",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "512302fd3e4a6e9399891093be79d7e5e83d2dddd2c7e1a546698e2dcf0bfe88",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "52c0c8b6a4154567ade4798ba1cb6f10161c751a78914df798083891fc0945f0",
+  "generated_token_ids_sha256": "b0f21f708a0697270671027bb10f488dcf9cc9359d4ef00d198c4afa29018221",
+  "input_identity_sha256": "d8415fbaa0d6577c3a8bdee97d53f9e9a557d2590fcae79a23cd9dd009ceedb5",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "ae31891914c65cc653f3a5348e23bd9c8674398457c4a6e3a28ebaaa7841127c",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a yellow pickup truck steadily along a multi-lane road with clear traffic signals showing green. There are no sudden changes in traffic flow, no vehicles or pedestrians entering the ego path, and no visible obstacles or road conditions requiring a marked speed or path change. The traffic light countdown is visible and indicates sufficient time to proceed without braking or slowing. All observed conditions support normal, steady driving.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "b2ffc9d57986a455889bf441fbb44b3ccaaeecd3aa0a42d6a3618f6105aa71e8",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a yellow pickup truck steadily along a multi-lane road with clear traffic signals showing green. There are no sudden changes in traffic flow, no vehicles or pedestrians entering the ego path, and no visible obstacles or road conditions requiring a marked speed or path change. The traffic light countdown is visible and indicates sufficient time to proceed without braking or slowing. All observed conditions support normal, steady driving.\"\n}",
+  "raw_response_sha256": "7616d48b0b5082b990ea671d5709b9789f2e0ca55413b3bbc70ae9494ca3037f",
+  "record_payload_sha256": "d0dc3659e2b12fb8e6cb7a15508f9f4d17af35d43ea968695a7aae3118b146ec",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.543563699000515,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.244850085997314,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0150",
+  "unit_ordinal": 717,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0006:1786348161209257673",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "ce51b893c636d1df3bdd5f3ecc11cf9ec3c465218e9180799e413b39296ffb09",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "68e56f83555da4180a55e77d94b53866bd5d314992012c951e1e9c69c71e545c",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "90644d3f5bce5327227972f1d0f6dfe2221bfa5c94f728b4280ffa37fc3f7db4",
+  "generated_token_ids_sha256": "c35b974a1c0257d97b0fea72b83c66bfb6c050a246b74ce3982798c3ad4f4aee",
+  "input_identity_sha256": "e2d5c9f5263fb08d38ac912851255dcd78d367b4c1f83e8d5159a48a4c309920",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "15245d81eadb6fa71de06a6d9911d008a3b04009572a2754c58e443c69ff6c96",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light ahead transitions from red to green during the unit, indicating a change in traffic control that requires the ego driver to respond by accelerating or proceeding through the intersection. Additionally, the lead white BMW X3 is stationary at the start of the unit and begins to move forward as the light turns green, requiring the ego driver to adjust speed accordingly to maintain safe following distance. The presence of other vehicles and motorcyclists crossing the intersection also necessitates attentive driving and potential speed adjustment.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "1ce308f04cc4b2fc05b691778e32163073e1113e2385f2d6ba3fc6326e95473c",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light ahead transitions from red to green during the unit, indicating a change in traffic control that requires the ego driver to respond by accelerating or proceeding through the intersection. Additionally, the lead white BMW X3 is stationary at the start of the unit and begins to move forward as the light turns green, requiring the ego driver to adjust speed accordingly to maintain safe following distance. The presence of other vehicles and motorcyclists crossing the intersection also necessitates attentive driving and potential speed adjustment.\"\n}",
+  "raw_response_sha256": "355ac20c9d26c7d6f12e1baf92cb0a34c6bb97777d671730e9cedf99b426d465",
+  "record_payload_sha256": "6342d9dc5120d66487456a8156e6381529e0cb039d1f0081b1142c777b431865",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 18.537717344006523,
+    "model_load_seconds": 20.342561935998674,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 20.153121347997512,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0006",
+  "unit_ordinal": 6,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

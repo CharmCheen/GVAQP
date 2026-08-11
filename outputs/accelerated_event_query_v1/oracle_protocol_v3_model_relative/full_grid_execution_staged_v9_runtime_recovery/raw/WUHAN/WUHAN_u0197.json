@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0197:1786374528143472274",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "47d5f2af044ecf69df2ae8d405a5e14faf81dc2709f4610ec2b5045680808715",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "0188d17e9f970409a30e4c6f6ad5fe03fb97d6d0492755db86189cc5dc7ea762",
+  "generated_token_ids_sha256": "73d5903924c01f09b5eaaaf06277c595c0f959518e55722689ab105ee1315324",
+  "input_identity_sha256": "7d08f6f8d3617c848dfa1a1c5f4239a0a98495b37633e9cadec3c464381ff61e",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "b1bea5500e1e2cd9c0fb17666bca9f23a9d29adb5725fc5e573834dcfe54788d",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a clear, multi-lane urban road with visible traffic signs and signals. There are no sudden obstructions, stopped vehicles, or road users entering the ego path. The traffic flow appears smooth, with buses and motorcycles ahead maintaining consistent speeds. The traffic lights ahead are red, but the ego vehicle is not yet at the intersection and has sufficient distance to approach without requiring a noticeable slowdown or braking action within this unit. No visible obstacles or road conditions necessitate a marked speed or path change.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "5d0a9b13efa6e0d36ae8164fdd9db4da4e7322bb5ddbb2808eadccaac976ef21",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a clear, multi-lane urban road with visible traffic signs and signals. There are no sudden obstructions, stopped vehicles, or road users entering the ego path. The traffic flow appears smooth, with buses and motorcycles ahead maintaining consistent speeds. The traffic lights ahead are red, but the ego vehicle is not yet at the intersection and has sufficient distance to approach without requiring a noticeable slowdown or braking action within this unit. No visible obstacles or road conditions necessitate a marked speed or path change.\"\n}",
+  "raw_response_sha256": "55846358d94198ba21f9aa1bee6a9df4ca4ed1c83dd07764fea6a1f916815207",
+  "record_payload_sha256": "d12b0e0ac857f4f8667c9cbbeceddf886edbfccf8fec5dc193875b63dbec1c27",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.485368031004327,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 21.190034786006436,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0197",
+  "unit_ordinal": 1325,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

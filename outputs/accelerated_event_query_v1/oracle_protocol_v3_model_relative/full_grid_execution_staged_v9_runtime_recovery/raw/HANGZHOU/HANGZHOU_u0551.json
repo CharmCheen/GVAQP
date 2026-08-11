@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0551:1786380275411537195",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "b9946bf1d77ed764242a95d7932c76df488776ec158cf27c6434e7176bd8ea46",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "fb7b224d6343809205b8f61919fbbee566f5bc6bad0d3d033b39b222c975e7aa",
+  "generated_token_ids_sha256": "aeb2dd3b366e245871c32b76b6695bb8ab0ba34aef1eee73e3dc84a86c49ddfb",
+  "input_identity_sha256": "0089c8785c4d0637690cef9a418d32b9637a6dd41df5c155db59e44e83bbec0b",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "09a3a6fab26474e6af58ac99c0e7454141e86e2854af2b985c413f01ea874b2e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily along a multi-lane road with clear lane markings and traffic signs. There are no sudden changes in traffic flow, no vehicles abruptly entering the path, and no visible obstacles or traffic controls requiring a marked response such as braking or avoidance. The traffic ahead is flowing normally, and the ego vehicle maintains a consistent speed without any indication of needing to slow down or maneuver. The road conditions and surrounding environment are typical for urban driving without any immediate hazards.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "15388e945526aea623157d01c3245f75fdc22ff46ea4b09a8312fb328d7ec140",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily along a multi-lane road with clear lane markings and traffic signs. There are no sudden changes in traffic flow, no vehicles abruptly entering the path, and no visible obstacles or traffic controls requiring a marked response such as braking or avoidance. The traffic ahead is flowing normally, and the ego vehicle maintains a consistent speed without any indication of needing to slow down or maneuver. The road conditions and surrounding environment are typical for urban driving without any immediate hazards.\"\n}",
+  "raw_response_sha256": "453903b810e07a17b4bcd9b7a5919ab53a5f6ca4132d67fdde735b12c984786a",
+  "record_payload_sha256": "bd9e6fa9d809ae6e6dbeb108708a6de5b984f853b546023e5dd800d602f8940c",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.64329044999613,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.514516401002766,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0551",
+  "unit_ordinal": 1118,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

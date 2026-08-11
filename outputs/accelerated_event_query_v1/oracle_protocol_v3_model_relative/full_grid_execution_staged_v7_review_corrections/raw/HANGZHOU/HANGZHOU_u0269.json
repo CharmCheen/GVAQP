@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0269:1786352666817165031",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "9c86da13a9a76829dd8651061a88ddf660d690a9d160c802012106a91dff819a",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "4b00778bd8936e92463cd34b952e1457551dc9fa8d02c19f6bb936bb8dec1457",
+  "generated_token_ids_sha256": "5f1589bf97bcaf06d590c6923d23a123401841a09f31003b0f9621566fefc59f",
+  "input_identity_sha256": "2f482364692b9dbb53837b4e0834fd8e95fa27a5c69579a3083af132856f6df3",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "e3f831e081752f8048619dcb51887e376e86270b96a63375a07e0795569db323",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with visible traffic signals that turn red in the final frames (e.g., at 0:09-0:10), indicating a required braking action to stop. Additionally, the road markings and overhead signs show lane-specific directions, and the vehicle is in a lane designated for straight or right turns, requiring attention to the signal change. The presence of other vehicles stopped or slowing ahead further supports the need for a noticeable slowdown or braking action.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "4590b98427a0d99784a5ba608e9d0d5b865353c821c49f1ca22b348d557e435c",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with visible traffic signals that turn red in the final frames (e.g., at 0:09-0:10), indicating a required braking action to stop. Additionally, the road markings and overhead signs show lane-specific directions, and the vehicle is in a lane designated for straight or right turns, requiring attention to the signal change. The presence of other vehicles stopped or slowing ahead further supports the need for a noticeable slowdown or braking action.\"\n}",
+  "raw_response_sha256": "5ee4149a0cf715c1a83a22ffb43bdf7fa94e3e3afd7560a009bfe03853f29531",
+  "record_payload_sha256": "46e5000f00f5829c97e00d45669727c2bcde079e969e23a264a7291a292f5c43",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.924202059999516,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.67979682400619,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0269",
+  "unit_ordinal": 836,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

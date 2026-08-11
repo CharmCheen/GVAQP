@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0086:1786349642560075209",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "33d83fb1123e026dd18f713cdb93dfa2a18a4a1845a4db6d74da7d63003a284f",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "f0612532f9716e66ac511cb0e4b8d585a768d0c709f884cc87237269d30fabaf",
+  "generated_token_ids_sha256": "1b3aad67f2758db1f47f7927ba81fb5ca60ec44a1f029e770a6e87b4eb481e78",
+  "input_identity_sha256": "00ff95a259f4f698441280c701c9ff2944b7e6525029f615f4aacefd6a3fff3f",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "5e756f2547b3e42c4f17e983dadb38e9789a5c614de8eb1132708d301021f92e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on a multi-lane urban road with clear lane markings and visible traffic signs. The traffic flow is steady, with no sudden braking, slowing, or lane changes observed. The lead vehicles maintain consistent speeds, and there are no visible obstacles, sudden road conditions, or traffic control signals requiring a marked response. The navigation overlay indicates a continuous route with no imminent turns or stops. All conditions suggest normal, steady driving without the need for a noticeable slowdown, braking, or avoidance maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "bed1a3a84c705c713ac5f9f23ceb88c9ef0110eaf5001b83908fa280a2355737",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on a multi-lane urban road with clear lane markings and visible traffic signs. The traffic flow is steady, with no sudden braking, slowing, or lane changes observed. The lead vehicles maintain consistent speeds, and there are no visible obstacles, sudden road conditions, or traffic control signals requiring a marked response. The navigation overlay indicates a continuous route with no imminent turns or stops. All conditions suggest normal, steady driving without the need for a noticeable slowdown, braking, or avoidance maneuver.\"\n}",
+  "raw_response_sha256": "b586bf3b78d409fa621e6d7f80984dc70ad927f4f3192401965185b3c89a91d3",
+  "record_payload_sha256": "f24ceaac966fb41fdd1451739200be45b944060f10a05911f7e44df56b1caea4",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.557471255000564,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.091475649998756,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0086",
+  "unit_ordinal": 1214,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

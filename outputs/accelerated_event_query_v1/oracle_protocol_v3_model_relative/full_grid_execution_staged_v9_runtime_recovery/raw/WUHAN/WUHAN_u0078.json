@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0078:1786372226968207755",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "d6a7e692d06e4b19f622a2f381bd04160c0a71509429e1d8008f69ec871292b6",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "e46a67d5d13a970c7328974c02909fb9de3ae88b97e4b3076725db0a9a4d0686",
+  "generated_token_ids_sha256": "9346e9669cb59b28c2cb24a9ebc8e13eb7a84b25040ff4dabf3bf033dae67e1a",
+  "input_identity_sha256": "3e5501805b1b589bf2a1d1a0849956932c638b91f42aa08e97a3c898cb09d99c",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "9adcd3a79ebc1205fed54926b7ff460179c1ff26fdd5d1e239c02689d4ad087e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane road with clear visibility. There are no sudden changes in traffic, no vehicles entering the ego path, no visible traffic controls requiring a marked response, and no obstacles or road conditions that necessitate a slowdown, braking, or avoidance maneuver. The bus ahead is moving normally and does not appear to be slowing or stopping abruptly. The environment remains consistent throughout the unit, indicating normal driving conditions.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "e339d7ecb85a5e4b7662518d8db800b794fd05bd42b6a2adc4de0d9cb01b779e",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane road with clear visibility. There are no sudden changes in traffic, no vehicles entering the ego path, no visible traffic controls requiring a marked response, and no obstacles or road conditions that necessitate a slowdown, braking, or avoidance maneuver. The bus ahead is moving normally and does not appear to be slowing or stopping abruptly. The environment remains consistent throughout the unit, indicating normal driving conditions.\"\n}",
+  "raw_response_sha256": "e222faef415db2147603fd3bcd1b2af1e81854f17feb18ee5913cb5ce8d58b69",
+  "record_payload_sha256": "c9d74bf7c396021dbbadc77b972db1eb3eb06cecfbf80c831ff4603f4a0a810d",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 16.947316193000006,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 18.629360254999483,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0078",
+  "unit_ordinal": 1206,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

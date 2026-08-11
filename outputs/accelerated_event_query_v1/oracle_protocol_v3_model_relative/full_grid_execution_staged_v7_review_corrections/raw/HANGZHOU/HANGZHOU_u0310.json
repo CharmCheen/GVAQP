@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0310:1786353393560333557",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "2c5d20ff1b6a255186aa3df7f7af4c9bd844e6ffcc4ce725d6c17ef0b652fdef",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "046b3819d18c358d4f1bf21c585f91f7b717c8fa00ca6ee03a6dae97eb999e6c",
+  "generated_token_ids_sha256": "bad4dc420322177c3a2ca49aa7e0c2f6173220892732fec47638929c221ad9b3",
+  "input_identity_sha256": "3800b1a0d893e489c8301c437ff9754eb4f4908b3c5f1c1d882aaa83dbd92abc",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "20c5cd6b6a3a9417973baf35ccd50cf1c964b0f15bc6541d5c253a7c03ee4b93",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a white SUV in a steady manner through an intersection. Traffic signals are green for straight movement, and there are no sudden stops, obstacles, or road users entering the ego path that would require a noticeable slowdown, braking, or avoidance maneuver. The flow of traffic is smooth, and all vehicles and cyclists are proceeding in an orderly fashion without any visible threat to the ego vehicle's path.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "90e82b4befcd5e04a0287757b3b6ba74df78af3b99649a55ea7cd589ab30e3b6",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a white SUV in a steady manner through an intersection. Traffic signals are green for straight movement, and there are no sudden stops, obstacles, or road users entering the ego path that would require a noticeable slowdown, braking, or avoidance maneuver. The flow of traffic is smooth, and all vehicles and cyclists are proceeding in an orderly fashion without any visible threat to the ego vehicle's path.\"\n}",
+  "raw_response_sha256": "09d9d5c0a5f39c0bd98abab565321f51cea2ecb88d83cd448bdf1a56340367d1",
+  "record_payload_sha256": "97f4c7747516e0be010d963b4806e459d5908fc805d35fcc506975caa5613e03",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 15.471554550997098,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 16.230283902004885,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0310",
+  "unit_ordinal": 877,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

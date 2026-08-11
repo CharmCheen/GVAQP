@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0088:1786349541766299494",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "2afcb8c558834b92be1b9e00f979b8971a3765068a3ec921ee92573a7d0ba913",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "acb8c8d3db84ee8304a8ad756516c3559a903fdd4edab9559043595ece75beb7",
+  "generated_token_ids_sha256": "6f93333028302cbe1fb4ba9d53b4b19e44fe306749b1411a9ce5d09a49d88362",
+  "input_identity_sha256": "038540b6c3c6eec538f1b47d75b258de87f901b85d3df12797c6841e924bef62",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "01a38fe4e3296df9ed0c403de23930314ede6fba52c2191e98615f01e67a7298",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on a wide, multi-lane road with clear visibility and no immediate obstacles or traffic control requiring a marked response. The road is mostly empty, with only a few distant vehicles. Traffic signals and signs are visible but do not indicate any immediate need for braking or slowing. The digital display overhead shows a message about drunk driving checks, which does not require an immediate driving response. The ego vehicle maintains steady forward motion without any visible need for a slowdown, braking, or avoidance maneuver within this unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "26791b4b029d59f10acb9838537e1177f0894bfd76851f021c55ea480b450a14",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on a wide, multi-lane road with clear visibility and no immediate obstacles or traffic control requiring a marked response. The road is mostly empty, with only a few distant vehicles. Traffic signals and signs are visible but do not indicate any immediate need for braking or slowing. The digital display overhead shows a message about drunk driving checks, which does not require an immediate driving response. The ego vehicle maintains steady forward motion without any visible need for a slowdown, braking, or avoidance maneuver within this unit.\"\n}",
+  "raw_response_sha256": "6850c635591bf2fe5f162defac1eed1c50f52a3cf2b56c8c4b70b523d83aef12",
+  "record_payload_sha256": "3297adfe7353695103bf7373961f52aacd84c99712ca1e89c4cb9f773b39a34a",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.69200627099781,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.34177482400264,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0088",
+  "unit_ordinal": 655,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

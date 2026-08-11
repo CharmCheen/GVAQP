@@ -1,0 +1,131 @@
+{
+  "analysis_contract": {
+    "eligible_labels": [
+      "SAME_EVENT",
+      "DIFFERENT_EVENTS"
+    ],
+    "primary": "paired human continuity accuracy C1-C0",
+    "reserve_unlock": "only if predefined primary result is INCONCLUSIVE_PRIMARY",
+    "secondary": "K3-C1; boundary precision/recall/F1; raw and population-weighted descriptive estimates; paired bootstrap CI"
+  },
+  "builder": {
+    "path": "scripts/build_human_continuity_benchmark.py",
+    "sha256": "1fd4a8ea2b9b274d9503c5d554f69badac5689edd6d98493f5a3baea2a97c548"
+  },
+  "clip_contract": {
+    "context_post_sec": 4.0,
+    "context_pre_sec": 4.0,
+    "long_context_fps": 1,
+    "long_pair_strategy": "full intervening interval retained at low fps plus normal-fps A/B detail clips",
+    "max_normal_context_sec": 75.0,
+    "normal_fps": 5,
+    "source_video_manifest": {
+      "path": "outputs/accelerated_event_query_v1/video_manifests/frozen_videos_v1.json",
+      "sha256": "2953eba0ca1bffd7bfad0e5681cc6242d01143ac2665820a89c9a203116c0ec9"
+    }
+  },
+  "created_at_utc": "2026-08-11T07:00:46.690698+00:00",
+  "dirty_worktree": [
+    "?? MAB_RESEARCH_DIRECTION_DECISION.md",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_execution_staged_v7_review_corrections/",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_execution_staged_v8_runtime_recovery/",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_execution_staged_v9_runtime_recovery/",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_preregistration_staged_v8_runtime_recovery/",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_preregistration_staged_v9_runtime_recovery/",
+    "?? outputs/long_horizon_evidence_convergence_v1/",
+    "?? outputs/p0_materializer_mechanism_ablation_v1/",
+    "?? outputs/p0_materializer_validation_v1/",
+    "?? outputs/p0_materializer_validation_v2/",
+    "?? outputs/p0_materializer_validation_v3/",
+    "?? outputs/research_contribution_convergence_v1/",
+    "?? outputs/v10_multiseal_reference_v1/",
+    "?? outputs/v3_reference_release_v1/",
+    "?? outputs/v3_runtime_recovery_v1/",
+    "?? outputs/v3_scan_proxy_preregistration_v1/",
+    "?? scripts/analyze_p0_v3_materializer_mechanisms.py",
+    "?? scripts/build_human_continuity_benchmark.py",
+    "?? scripts/complete_v3_scan_proxy_release.py",
+    "?? scripts/create_v10_multiseal_protocol.py",
+    "?? scripts/finalize_v10_multiseal_reference.py",
+    "?? scripts/finalize_v3_prospective_scan_proxy.py",
+    "?? scripts/monitor_v9_full_grid_completion.py",
+    "?? scripts/prepare_p0_materializer_validation_pause.py",
+    "?? scripts/prepare_v3_reference_release_pause.py",
+    "?? scripts/prepare_v3_runtime_recovery.py",
+    "?? scripts/preregister_v3_scan_proxy.py",
+    "?? scripts/run_p0_v3_materializer_validation.py",
+    "?? scripts/run_v10_multiseal_oracle.py",
+    "?? scripts/run_v10ms_recovery_pipeline.sh",
+    "?? scripts/run_v3_prospective_scan_proxy.py",
+    "?? scripts/serve_human_continuity_annotation.py",
+    "?? scripts/v8_full_grid_runtime_recovery.py",
+    "?? scripts/verify_v3_scan_proxy_release.py",
+    "?? scripts/wait_and_launch_v10ms_shadow.sh",
+    "?? scripts/wait_and_run_v10ms_any_two_a100.sh"
+  ],
+  "existing_model_relative_P0_results_observed": true,
+  "human_benchmark_tuned_using_labels": false,
+  "human_continuity_labels_observed": false,
+  "methods": {
+    "C0": "P0 V3 naive global-positive baseline; same for every pair in one video",
+    "C1": "existing frozen Stage-0 C1 gap-limited rule: merge only if gap <= 10 seconds",
+    "K3": "current frozen V3 K3; no parameters changed"
+  },
+  "population": {
+    "definition": "all consecutive full-grid verified-positive anchor pairs within video/query",
+    "hash": "8104493d6fa79d0d78609b0ad1edfd9c25e205d543993c929611c80956396da4",
+    "size": 248
+  },
+  "protocol_hash": "06deda4503981179bdd2bc9157f94f80c104dcc7fffb5e866da4fd10325716ac",
+  "protocol_id": "HUMAN_CONTINUITY_VALIDATION_V1",
+  "protocol_type": "POST_P0_INDEPENDENT_HUMAN_VALIDATION",
+  "query_id": "Q_DRIVER_RESPONSE_V1",
+  "query_text_source": {
+    "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/configs/query_prompt_v3_model_relative.txt",
+    "sha256": "ffab97aeb65b7b8fddf8ce6fa9964319cda8b740aa87f90a3ed1df80c7c5c99e"
+  },
+  "responses": [
+    "SAME_EVENT",
+    "DIFFERENT_EVENTS",
+    "ANCHOR_INVALID",
+    "UNCERTAIN"
+  ],
+  "sampling": {
+    "category_order": [
+      "C1_K3_DISAGREE",
+      "C0_C1_DISAGREE",
+      "AGREEMENT_CONTROL"
+    ],
+    "primary_sample_hash": "3d5d0f34ed0ffbdfb72c5bae93ef5f6592a759adcff4f1a0a2bdcf7c14f2ecf5",
+    "primary_size": 40,
+    "reserve_sample_hash": "291b07950d02a420bf8e9f85a68c072eb05c7c51618b7c73518262c1ba04831d",
+    "reserve_size": 20,
+    "seed": 20260811,
+    "temporal_diversity_seconds": 120.0,
+    "type": "FROZEN_STRATIFIED_DIAGNOSTIC_SAMPLING",
+    "video_quota_primary": {
+      "DALI": 13,
+      "HANGZHOU": 13,
+      "WUHAN": 14
+    }
+  },
+  "source_artifacts": {
+    "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/configs/query_prompt_v3_model_relative.txt": "ffab97aeb65b7b8fddf8ce6fa9964319cda8b740aa87f90a3ed1df80c7c5c99e",
+    "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_preregistration_staged_v7_review_corrections/FULL_GRID_UNIT_MANIFEST.json": "c336445da89401fdbae6174785c0cf4cac32416d4c881f1b5d2102b3ba3e7179",
+    "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/k3_eventization/K3_UNIT_EVENT_CONFIG_V3.json": "ebcc3907a64b463060ce36ec5e4b4c188ecc12c3c1e434e1e8554b22112be200",
+    "outputs/accelerated_event_query_v1/video_manifests/frozen_videos_v1.json": "2953eba0ca1bffd7bfad0e5681cc6242d01143ac2665820a89c9a203116c0ec9",
+    "outputs/p0_materializer_mechanism_ablation_v1/MECHANISM_PROTOCOL.json": "7ecba0bb151d5325980f645d12ee9601c9c7eea42fa25b46434426dfb5305622",
+    "outputs/p0_materializer_validation_v3/EXPERIMENT_PROTOCOL.json": "a396b61edb1773dc7222b8abbb81aed9d9d9ecd7f19d5fd284a8db87b202773a",
+    "outputs/v10_multiseal_reference_v1/FINAL_UNIT_REFERENCE.parquet": "4f732859e7aaca6a4d8098b3da653620c777e85b5fcc31dae5c2b91fb2260fcf",
+    "outputs/v10_multiseal_reference_v1/K3_MODEL_RELATIVE_EVENT_RELATION.parquet": "f16e24103921ada7f82360864211372d68a06ca2f18be5f7319dc6e7e4d94409",
+    "outputs/v10_multiseal_reference_v1/REFERENCE_MANIFEST.json": "53bceb8be451e8ac853810bdde75ad25f6e0f89477621260d178d2dfbbef6ed2",
+    "scripts/analyze_p0_v3_materializer_mechanisms.py": "0be43de422cb3dcae8c5bc3627816398a480fa3c10df2633650b080ca2d2230c",
+    "scripts/build_human_continuity_benchmark.py": "1fd4a8ea2b9b274d9503c5d554f69badac5689edd6d98493f5a3baea2a97c548"
+  },
+  "source_commit": "2c0d35c888f9711cacab964672c6094fc98e5c49",
+  "video_ids": [
+    "DALI",
+    "HANGZHOU",
+    "WUHAN"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "decision": "NO_REPO_EVIDENCE_OF_A_FROZEN_V3_SCAN_PROXY_EXECUTION_CONTRACT",
+  "evidence": {
+    "historical_nontransferable_configs": [
+      "configs/runtime_models.yaml (general YOLOv8n model config)",
+      "scripts/run_partial_scan_pilot.py (different cut-in query/reference/protocol)",
+      "scripts/run_mfrp_previews.py (different historical preview experiment)"
+    ],
+    "only_v3_status": "outputs/accelerated_event_query_v1/scan_candidates/STATUS.md = NOT_RUN \u2014 FROZEN_SCAN_EXECUTION_PENDING",
+    "prohibited_promotion": "Historical YOLO artifacts are explicitly not promoted as new-query scan candidates."
+  },
+  "missing_frozen_fields": [
+    "scan sampling rate/temporal stride",
+    "input resolution/batch size",
+    "candidate construction/coverage rule",
+    "proxy feature schema and normalization",
+    "tracking applicability/configuration",
+    "output schema/finalizer",
+    "randomness/seeds",
+    "source commit and V3 scan manifest"
+  ],
+  "required_fields": {},
+  "status": "FROZEN_V3_SCAN_PROXY_PROTOCOL_NOT_RECOVERED",
+  "videos": [
+    "DALI",
+    "HANGZHOU",
+    "WUHAN"
+  ]
+}

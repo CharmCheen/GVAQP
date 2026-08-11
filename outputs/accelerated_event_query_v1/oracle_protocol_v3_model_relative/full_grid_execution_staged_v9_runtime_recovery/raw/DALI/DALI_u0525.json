@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0525:1786381142876249379",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "3960f7342a0ee9e9fd9710920c7d1fcb8b72813593da555fb17d65957b1b3d48",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "8502c8c7bbfc4379a5453bfa4f98c8c5343ca30fdb908449a2bb966cf9c770a8",
+  "generated_token_ids_sha256": "be2e7e53ad53edb844b8d6dcb629e4e02e90cb9a379f7cfb6b0e5a5f0c83ab99",
+  "input_identity_sha256": "f806d340806bb7279e730447a6f7916c5adbbc62ec45b1a56d03bf23c1fa48e6",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "cb221f0dfd5fe75ed4051f9d59d89b2ac0d4755f852a4d2b21fd3331aeabe70e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily along a well-lit urban street at night. There are no sudden obstacles, stopped vehicles, or road users entering the path. Traffic flows smoothly, and while there are parked cars and pedestrians on the sidewalk, none pose an immediate threat requiring a slowdown, braking, or avoidance maneuver. The speed limit sign (40 km/h) is visible but does not indicate a need for a marked response within this unit as the vehicle appears to be already compliant. No visible hazards or sudden changes in road conditions require an attentive driver to alter course or speed.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "a7a9a8457560b58bf7994b429b323764b0d3a71a05291031f1c09d2ca9d4d795",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily along a well-lit urban street at night. There are no sudden obstacles, stopped vehicles, or road users entering the path. Traffic flows smoothly, and while there are parked cars and pedestrians on the sidewalk, none pose an immediate threat requiring a slowdown, braking, or avoidance maneuver. The speed limit sign (40 km/h) is visible but does not indicate a need for a marked response within this unit as the vehicle appears to be already compliant. No visible hazards or sudden changes in road conditions require an attentive driver to alter course or speed.\"\n}",
+  "raw_response_sha256": "139db1a2ffd470450716d00287df997ad918593e14a2244c851dd0edfe286d3d",
+  "record_payload_sha256": "abc1a856d455f9a99bd12cfce1e2c1e71e65af2a0f14f59d4b730e87bebd999f",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 21.394418615003815,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 23.313198778007063,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0525",
+  "unit_ordinal": 525,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

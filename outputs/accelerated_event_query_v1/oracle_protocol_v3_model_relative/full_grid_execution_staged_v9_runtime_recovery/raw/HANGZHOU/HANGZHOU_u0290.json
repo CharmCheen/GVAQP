@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0290:1786375738815047515",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "3dcc62c39348ace7db148bf265c85a73822fa1fd16de2daa46e9e72b576a9e58",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "464aa6da19228eee58cbd7d17e64044b0e225dc104ff315a58870380ef941d28",
+  "generated_token_ids_sha256": "85b2fbbd96fa151258956f8cbecfeefb74a23c665e5f01b301d8afbd1b50d862",
+  "input_identity_sha256": "e9387acc1765a861ecc03ca2ababaf8f6b2fd35a17651556330bd07570b4cd53",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "5657636a2aca1701ac698c0993ba846a3c16d8d74dd30ce7c35490ca6840540f",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a white delivery tricycle at a steady pace on a clear, multi-lane urban road. Traffic signals are green for the direction of travel, and there are no sudden changes in traffic flow, obstacles, or road users entering the path. The road is well-marked, and the surrounding vehicles are moving normally without any indication of a need for braking, slowing, or avoidance. The environment is stable and predictable throughout the 10-second unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "5af7856cc7a14e0103ff370261c30ccb013e7386362b2304af3e9bcb3c965813",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a white delivery tricycle at a steady pace on a clear, multi-lane urban road. Traffic signals are green for the direction of travel, and there are no sudden changes in traffic flow, obstacles, or road users entering the path. The road is well-marked, and the surrounding vehicles are moving normally without any indication of a need for braking, slowing, or avoidance. The environment is stable and predictable throughout the 10-second unit.\"\n}",
+  "raw_response_sha256": "9cb9e70426bfd009b6cf0f175d5cfe34632a0c1e1fd7c47297be1367c662f019",
+  "record_payload_sha256": "17d0921801eac20506a58aa9918e28ef81a515bd6d0f2c8b183bb90ada5c335b",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.25499177200254,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.027240392999374,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0290",
+  "unit_ordinal": 857,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

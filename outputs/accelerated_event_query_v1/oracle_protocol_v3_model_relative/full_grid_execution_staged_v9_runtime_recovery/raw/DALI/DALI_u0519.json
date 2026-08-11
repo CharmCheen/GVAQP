@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0519:1786381018146996742",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "241b36c8ba9c058949319fa2c090ff26b7a572f9f9f706f7f2d102d045c6759d",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "fd679a80d7a85598534c75fc91316fd738eefa6b6e937df947095b402f9950e2",
+  "generated_token_ids_sha256": "af97b75550222a46b5d867f33e497a18695b2522d6b45e4547fdf0e2094ee8ab",
+  "input_identity_sha256": "4378c460adde4861fa0ddcd77d70aa17e0b5bf7ebcba9ed228efc1b27ce9aa74",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "f957645d5376749b858b0c53d717f7f26b9349b2a84e7c892d0c1cb07f696b0a",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "At 0:03-0:05, a dark sedan makes a left turn directly into the ego vehicle's path, requiring an immediate avoidance maneuver or braking to prevent collision. The vehicle is in close proximity and crosses the ego path, constituting a sudden and direct threat. The ego vehicle must respond with a marked speed or path change to avoid impact.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "37a34cc828f990516513cc872e35e3aeefb320cfbe2ccb084be15238ded0d2e4",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"At 0:03-0:05, a dark sedan makes a left turn directly into the ego vehicle's path, requiring an immediate avoidance maneuver or braking to prevent collision. The vehicle is in close proximity and crosses the ego path, constituting a sudden and direct threat. The ego vehicle must respond with a marked speed or path change to avoid impact.\"\n}",
+  "raw_response_sha256": "5a8c1afda716b72abdc0346b5f3368c64e4cfd45d0ad99dd8a79f42e054c69b6",
+  "record_payload_sha256": "5ee04932fae7932f291b3a8d34f257a167f31fbac38078cfa31591c17c46cdb6",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 15.512236823007697,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 17.317730647991993,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0519",
+  "unit_ordinal": 519,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

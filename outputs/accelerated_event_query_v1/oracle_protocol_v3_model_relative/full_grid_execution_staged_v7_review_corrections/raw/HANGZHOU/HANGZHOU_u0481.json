@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0481:1786356363488211774",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "4fa0ba9b0e2f4c9b505aa3780cf98324070021a036b1a482ecc37654ffadc8e3",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "afa3a2e8a59dfd8b2cb6e471eadfdea984a3c2602d509c0309cbd174a1f34d39",
+  "generated_token_ids_sha256": "c3086947065d3387447a9a9f27c9b2c4bc59ba539ad4286f64da14e41d522f13",
+  "input_identity_sha256": "7b7d25924982a4eeab34b4b140616f860965ddb72b134893481028b375407345",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "3f3bfe5d6262a72699c9c1d02f398578310375fd0c56c587a0d42c736c4c4d19",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a pedestrian crosswalk with visible pedestrian crossing signs on both sides. A pedestrian is seen crossing the road ahead in frame 0:09, and the lead blue vehicle begins to slow down in response. The presence of a pedestrian actively crossing the road requires the ego driver to slow down or brake to ensure safe passage, making this a relevant event requiring a marked response.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "32233883e968b36dabe9ed59c08892e905a2640ebbea69292fdcf8096714f332",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a pedestrian crosswalk with visible pedestrian crossing signs on both sides. A pedestrian is seen crossing the road ahead in frame 0:09, and the lead blue vehicle begins to slow down in response. The presence of a pedestrian actively crossing the road requires the ego driver to slow down or brake to ensure safe passage, making this a relevant event requiring a marked response.\"\n}",
+  "raw_response_sha256": "4ab83bcd7c106934badc6aeb8e8b8951c7d8f913361ca34f9560eaf2d9715b32",
+  "record_payload_sha256": "e1942db1d21fee977ef7342d2af1e919c37e1fa93d4ae86ca83c853df2c93c6b",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 14.79275241400319,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 15.641056708998804,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0481",
+  "unit_ordinal": 1048,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

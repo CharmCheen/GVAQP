@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0244:1786375448809969312",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "c34af98b67be57a0c71d0530700fb5faa8868c2a6b88d7a18ba505fadda56b0c",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "9e4dd476779ec3f9d6e2ecb6bb7af4eaf9f64499018aa10a3c8e02d130fca94a",
+  "generated_token_ids_sha256": "9c348709812f21469484013b0baa161847084be2ceba96f4f032706aab7cf3d6",
+  "input_identity_sha256": "48ac0c1de7c240b7386dcea64099f3a6e9655228e2c291ddd0cdd14d0d515e3b",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "e2e97b0af89b73b791452c58c3a2b87798f7e5759f7bcec927a2c6b4a2fe6cb5",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a white sedan and a blue bus under a pedestrian overpass. Traffic signals are green throughout the sequence, and the lead vehicles maintain steady forward motion without sudden braking or slowing. There are no visible obstacles, road users entering the path, or traffic controls requiring a marked response. The driving conditions appear normal and consistent with steady urban traffic flow.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "bcb62cfcf3eceb56b702f83c69ec40365768fd13ed4980840c58b4eb6cdb4c5b",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a white sedan and a blue bus under a pedestrian overpass. Traffic signals are green throughout the sequence, and the lead vehicles maintain steady forward motion without sudden braking or slowing. There are no visible obstacles, road users entering the path, or traffic controls requiring a marked response. The driving conditions appear normal and consistent with steady urban traffic flow.\"\n}",
+  "raw_response_sha256": "1ac4ae40814a4d1a64c8f59b2922de74bf3fc5a1ff5cde1f3a2c6460ff7d5e5e",
+  "record_payload_sha256": "01dc15a64ff059aecf66251e28ae8db24ab69b8e6e7139bd118226568d61195e",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 15.31322425500548,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 16.97826927099959,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0244",
+  "unit_ordinal": 1372,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0472:1786378905831371589",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "1ac403dd3e5196f145d56c363f6b55c041b2655a2c4bf3dc9bc350d25bc25f8b",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "7753684b40a09495948e499c5dd6a10ae1f7857b383561aa3f7de7d48c2b5945",
+  "generated_token_ids_sha256": "334828a26296fe9a10f49b2da4ea7319c584b39d82556fba39e4a13a977d2658",
+  "input_identity_sha256": "7c80e964a9d5e0a325af1e768bb84c99c975d61bf871d647967c19734359bbb4",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "c36a1cb699cece330c3dad7c7207eefa08969d51edbc41089499c33b1ea0a340",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily behind a blue SUV, with no sudden changes in speed or path required. Traffic flow is smooth, and there are no visible obstacles, sudden stops, or road users entering the path. Pedestrians and cyclists are on the sidewalk or bike lane, not interfering with the driving lane. The road conditions and traffic signals (visible green light) do not require a marked response. All vehicles are moving in an orderly manner without any need for braking or avoidance maneuvers.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "f2683acd94bb588398423dda88105d9e39c80c31919a5e82b876598775aee55d",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily behind a blue SUV, with no sudden changes in speed or path required. Traffic flow is smooth, and there are no visible obstacles, sudden stops, or road users entering the path. Pedestrians and cyclists are on the sidewalk or bike lane, not interfering with the driving lane. The road conditions and traffic signals (visible green light) do not require a marked response. All vehicles are moving in an orderly manner without any need for braking or avoidance maneuvers.\"\n}",
+  "raw_response_sha256": "75ba23e936308f60c835425f33c86b5ce23d72b96783f8a84a6f9611bbf709b9",
+  "record_payload_sha256": "d0ec750457c007bc2b1e5cabe95ccbf5c4a2cdd842d2282ecae13e10e15bf6b9",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.120027978002327,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.980870612009312,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0472",
+  "unit_ordinal": 1039,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

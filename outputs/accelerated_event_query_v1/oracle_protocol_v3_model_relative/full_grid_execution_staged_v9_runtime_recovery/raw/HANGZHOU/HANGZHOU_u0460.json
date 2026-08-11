@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0460:1786378689138825181",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "a2e5f1559811e32395f77eeeed92583a2e2072f8e371eb050440a397621c5cbe",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "7a36d2905269747120bc97adcae5baa6677582a7d3e99c0f41fff18aaaea4922",
+  "generated_token_ids_sha256": "9e0784d17aa2c49c527a9fc42ad6549e697872ee81fa80dcb03b7d92308b06cb",
+  "input_identity_sha256": "5273d4c9f218660ba42b974cdccc16271c87fb2e913931d08d66454167be8e8c",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "910e7f5072fd152f45c1228ed8df6aac60bbf85daad60d3d3f8b2dda45fc34cb",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily behind a blue SUV, with no sudden changes in speed or path required. Traffic flow appears smooth, and there are no visible obstacles, sudden stops, or road users entering the path. Pedestrians are on the sidewalk, and vehicles ahead are moving normally. No traffic control signs require an immediate response within this unit. The scene depicts routine urban driving without any need for a noticeable slowdown, braking, or avoidance maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "cc02a292b091d5effed267e54f9e0563c9d43cfe0f04c02060eaa126f789ab68",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily behind a blue SUV, with no sudden changes in speed or path required. Traffic flow appears smooth, and there are no visible obstacles, sudden stops, or road users entering the path. Pedestrians are on the sidewalk, and vehicles ahead are moving normally. No traffic control signs require an immediate response within this unit. The scene depicts routine urban driving without any need for a noticeable slowdown, braking, or avoidance maneuver.\"\n}",
+  "raw_response_sha256": "d8c9f6386638485c03b7cd0dafa681225dde41b1d7c70d0ff438179e82f2705c",
+  "record_payload_sha256": "6a95f52745081fb40ca78e21b3e522c395e20d90d957537bf639d42e4bed93ea",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.627047740010312,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.48702678499103,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0460",
+  "unit_ordinal": 1027,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

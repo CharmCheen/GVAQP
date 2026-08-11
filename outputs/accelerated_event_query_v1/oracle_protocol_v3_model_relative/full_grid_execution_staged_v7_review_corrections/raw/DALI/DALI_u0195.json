@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0195:1786351791850977927",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "d7088bb0746d9f4a25460a5b98171a146e09499fd0a000e219bb98ca7039f443",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "68e56f83555da4180a55e77d94b53866bd5d314992012c951e1e9c69c71e545c",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "04aa2320b826f9c55910aa7452ac9887e36c53674e5332aa181b6a6fde38e780",
+  "generated_token_ids_sha256": "a48708a39a3db2769d45bbe4bd71ad14342fd81588bbda2ccfd069760c168544",
+  "input_identity_sha256": "78725d9b0d59c9f497b18dc5443de177f3e64bfc3c9a3966e113dc372e89a47f",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "5db183f7ec70819c2a79591543c9f60d7b6603402029ac27a1c9daa8417c3fb8",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a wide, multi-lane bridge with clear visibility. Traffic ahead is flowing smoothly, with no sudden braking, lane changes, or obstacles in the path. The lead vehicles maintain consistent speeds, and there are no visible traffic controls or hazards requiring a marked response. Motorcycles and scooters are present but not encroaching on the ego path. The environment is stable and predictable, indicating no need for a noticeable slowdown, braking, or avoidance maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "9776acbfc18a47d1467c2cb708f3b482e6281fda10ec84d9e93f099c358d2e05",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a wide, multi-lane bridge with clear visibility. Traffic ahead is flowing smoothly, with no sudden braking, lane changes, or obstacles in the path. The lead vehicles maintain consistent speeds, and there are no visible traffic controls or hazards requiring a marked response. Motorcycles and scooters are present but not encroaching on the ego path. The environment is stable and predictable, indicating no need for a noticeable slowdown, braking, or avoidance maneuver.\"\n}",
+  "raw_response_sha256": "c5998d9069f6ea1ad4fb41d20fd8a4ef7ca16947f961cf162643d449c5b45dee",
+  "record_payload_sha256": "d3dcb0b3402371e75872a05dbf6155d89a34ad2b89e832166361a86a5f8fc6ae",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 20.001263673999347,
+    "model_load_seconds": 20.342561935998674,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 21.68606883400207,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0195",
+  "unit_ordinal": 195,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

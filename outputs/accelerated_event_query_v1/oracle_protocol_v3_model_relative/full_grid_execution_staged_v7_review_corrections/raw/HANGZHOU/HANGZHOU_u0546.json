@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0546:1786357514041205415",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "fecb9c178b895d6cafcfa5f0fa96d75f28f27901ce0d3421029886d6603bfc91",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "70f6f397e0bbeffcab7cbdd427955101c621206e73bcd3db3ff2477df259b2a5",
+  "generated_token_ids_sha256": "757fbb9c9cf2bf97529f82474c25b43f59a155832a1a6141c49177d512cb2eba",
+  "input_identity_sha256": "d426983326d69e7a76b4be8b0f175afb518e06a2ed9ed8cc11f8879481952ce0",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "0fc135071fc198185c3791743f59073acc962936097cc0f23019166f76ef4077",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane urban road with clear visibility. There are no sudden changes in traffic flow, no vehicles abruptly entering the ego path, and no visible traffic controls requiring a marked response. The lead vehicles maintain consistent speed, and the road ahead is clear. The orange construction barriers are static and do not impede the ego vehicle's path. Pedestrians and other road users are at a safe distance and not interacting with the ego vehicle's trajectory. No braking, slowdown, or avoidance maneuver is required within this unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "0ce141f2a8a1b4107d683bcdd37171cce9d1ee5386c9352e5a324f837a856a0e",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane urban road with clear visibility. There are no sudden changes in traffic flow, no vehicles abruptly entering the ego path, and no visible traffic controls requiring a marked response. The lead vehicles maintain consistent speed, and the road ahead is clear. The orange construction barriers are static and do not impede the ego vehicle's path. Pedestrians and other road users are at a safe distance and not interacting with the ego vehicle's trajectory. No braking, slowdown, or avoidance maneuver is required within this unit.\"\n}",
+  "raw_response_sha256": "8ed70c0314cf5a57d6f5d534fb5a34837112c738ac9480e54d821f3e53248fae",
+  "record_payload_sha256": "169e0ea810973915383bc3c4b27aedc1f2c15fb93271793a155b12ac584769bb",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 20.563487396997516,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 21.455556932000036,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0546",
+  "unit_ordinal": 1113,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

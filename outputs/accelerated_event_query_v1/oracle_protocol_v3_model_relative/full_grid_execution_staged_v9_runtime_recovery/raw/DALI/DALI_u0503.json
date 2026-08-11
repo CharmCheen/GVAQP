@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0503:1786380685412130522",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "6f36e68d55ebd8ff361f93227f3f89a9ff354f2bc7e9af908be2a2730973cbda",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "5ed65e49f797336878fa61b0145cf3fa33eef1299d5603bedd0243110e9fab78",
+  "generated_token_ids_sha256": "4df8833abde171084b341b5be1300da3608c858b815a5a212195c08970d511b1",
+  "input_identity_sha256": "5a62fcc74f04e292936f4ddb93650ee72698027ff76f0aa780fa3d7801979be1",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "1680d255dbaaa7e02c081df6e032c466f5bc7906f9a55b7f238bf2f463010680",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a red car at a steady pace through an intersection and onto a multi-lane road. There are no sudden changes in speed or direction by the lead vehicle, no visible obstacles in the path, and no traffic signals requiring a marked response (e.g., red light) within the unit. The surrounding vehicles maintain consistent spacing and flow, and the road conditions appear clear. The navigation overlay indicates a smooth route ahead without imminent turns or stops. Therefore, no noticeable slowdown, braking, or avoidance maneuver is required.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "7f3c889fb446349ce654b0f2bb1c76ecf27917faddae4413f9a604371264e92c",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a red car at a steady pace through an intersection and onto a multi-lane road. There are no sudden changes in speed or direction by the lead vehicle, no visible obstacles in the path, and no traffic signals requiring a marked response (e.g., red light) within the unit. The surrounding vehicles maintain consistent spacing and flow, and the road conditions appear clear. The navigation overlay indicates a smooth route ahead without imminent turns or stops. Therefore, no noticeable slowdown, braking, or avoidance maneuver is required.\"\n}",
+  "raw_response_sha256": "53eb4b006081c08323e13e7e1593a5d174df476ff70fbb920f2c4fb80ed838e1",
+  "record_payload_sha256": "036125d92495290827b1914746c553332e36c3ba1e0c68d0f082057f055e4b49",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 19.75683725300769,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 21.595422396989306,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0503",
+  "unit_ordinal": 503,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0379:1786378154394078810",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "a172b25f4d434afd8f2c5e882c094446bc499fd561ea77fe34007ce546eb03e1",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "fd77d399758a7b61b9c38df2e41e13748413e27ea736e3401f08436ada6e9df6",
+  "generated_token_ids_sha256": "533671656c2a8c07f62bfb80ab2b6e032a105f194c28ae4dd7e29f54bfa52238",
+  "input_identity_sha256": "ffaf3bd17940b7ca5147b2ab32f5d2ea05eaf241ff1ecc9c06dd1eca8609f423",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "addcc179511dbf1de4118b8081a4a1a98937f96095511733b523ecab9e9c5e6d",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light is green throughout the unit, and vehicles are moving steadily through the intersection. There are no sudden stops, slowing vehicles, or road users entering the ego path in a threatening manner. Pedestrians and cyclists are visible but are not in immediate conflict with the ego vehicle's path. The scene depicts normal urban traffic flow without any visible conditions requiring a marked response such as braking or avoidance.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "7cb3aeea486a13e121901800b87b41099d0cd491c70de12577d08d2ec274464e",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light is green throughout the unit, and vehicles are moving steadily through the intersection. There are no sudden stops, slowing vehicles, or road users entering the ego path in a threatening manner. Pedestrians and cyclists are visible but are not in immediate conflict with the ego vehicle's path. The scene depicts normal urban traffic flow without any visible conditions requiring a marked response such as braking or avoidance.\"\n}",
+  "raw_response_sha256": "ee843686e2896cc05f9a1c32183e121803fd75e8def75fdb174a2d7aca5d75a7",
+  "record_payload_sha256": "45b966b9f6115ca6960106bca47a51ae3d15c68ed6cd5b082d39828e5aaa426f",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 16.28786191000836,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 18.205234535998898,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0379",
+  "unit_ordinal": 379,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

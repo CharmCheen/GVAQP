@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0060:1786349141328912566",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "c704d70fac730093c8db87a83f43f9c27535e13eae9237b0fc2a6769843d78a4",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "46bc7466581ecb6726dd304b6b64098fbc4b1e11499a9f09077a315ea8cbd272",
+  "generated_token_ids_sha256": "0e311355d3a27cd45f803320ddf1c2664d9493b08941bf2f5209dfd1b9e3ed2f",
+  "input_identity_sha256": "5dba609b673d3cca72755f773d87e9be43d5950d34b343ee95d2eb8ed86052e5",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "0826f8262fc690a2d98b1ea3595f3a9fca4f7ff9e7085346bb921e95b66122ed",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "A pedestrian with a stroller is seen crossing the road directly in front of the ego vehicle between 0:02 and 0:05, occupying the lane and requiring a noticeable slowdown or braking action to avoid collision. The pedestrian is in the path of the ego vehicle and is not yet clear of the roadway by the end of the unit. Additionally, the traffic light ahead turns green at 0:05, indicating the ego vehicle is expected to proceed, which increases the urgency to respond to the pedestrian crossing.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "a83a01d6867023c89d64572b0e22a3e846f216ac885ea3966b93ec233dc7d8ad",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"A pedestrian with a stroller is seen crossing the road directly in front of the ego vehicle between 0:02 and 0:05, occupying the lane and requiring a noticeable slowdown or braking action to avoid collision. The pedestrian is in the path of the ego vehicle and is not yet clear of the roadway by the end of the unit. Additionally, the traffic light ahead turns green at 0:05, indicating the ego vehicle is expected to proceed, which increases the urgency to respond to the pedestrian crossing.\"\n}",
+  "raw_response_sha256": "b470eedfc801dbf23c017fd343206f22cd904aa2a374a3aa526299be1455bf3c",
+  "record_payload_sha256": "d70acae134e112580702d246a280a0d04be1faefede135817cb2158d4722f6d7",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.42549587100075,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 21.060745004993805,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0060",
+  "unit_ordinal": 1188,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

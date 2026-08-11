@@ -1,0 +1,358 @@
+{
+  "budget_semantics": "QUERY_BUDGET / cached semantic-oracle invocation count; not seconds and not a physical deadline",
+  "budgets": [
+    5,
+    10,
+    20,
+    50,
+    80,
+    100
+  ],
+  "created_at_utc": "2026-08-11T07:57:04.999646+00:00",
+  "decision_thresholds_frozen_before_results": {
+    "gap_compression_partial": 0.0,
+    "gap_compression_yes": 0.5,
+    "historical_materializer_effect_F1": 0.1457,
+    "mainline_rules": {
+      "MATERIALIZATION_MAINLINE": "proxy bottleneck NO; policy effect below 0.10; historical materializer effect remains larger",
+      "PIVOT_REQUIRED": "proxy bottleneck NO; materialization independent support weak; action opportunity ABSENT/WEAK and neither stage has substantial current effect",
+      "QUERY_POLICY_MAINLINE": "proxy bottleneck YES/PARTIAL; policy effect substantial or poor-proxy robustness unresolved; no systematic two-stage interaction required",
+      "TWO_STAGE_UNIFIED": "proxy bottleneck YES/PARTIAL; policy effect >=0.10; historical C1 effect >=0.10; interaction systematic"
+    },
+    "policy_effect_substantial_median_spread_F1": 0.1,
+    "policy_matters_more_poor_margin_F1": 0.02,
+    "proxy_bottleneck_cross_video_requirement": 2,
+    "proxy_bottleneck_partial_gap_F1": 0.03,
+    "proxy_bottleneck_yes_gap_F1": 0.1,
+    "resource_monotonicity_partial_max_violation_rate": 0.25,
+    "resource_monotonicity_yes_max_violation_rate": 0.05
+  },
+  "degradation_integrity": {
+    "exposure_axis": "deterministic SHA256 thinning; original scores retained",
+    "hash_inputs": [
+      "degradation_seed",
+      "regime_id",
+      "channel",
+      "candidate_id"
+    ],
+    "not_tuned_on_event_F1": true,
+    "ranking_axis": "convex mixing with deterministic SHA256-uniform score; candidate universe unchanged",
+    "reads_reference_events": false,
+    "reads_semantic_labels": false
+  },
+  "dirty_worktree": [
+    "?? MAB_RESEARCH_DIRECTION_DECISION.md",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_execution_staged_v7_review_corrections/",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_execution_staged_v8_runtime_recovery/",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_execution_staged_v9_runtime_recovery/",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_preregistration_staged_v8_runtime_recovery/",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_preregistration_staged_v9_runtime_recovery/",
+    "?? outputs/human_continuity_validation_v1/",
+    "?? outputs/long_horizon_evidence_convergence_v1/",
+    "?? outputs/p0_materializer_mechanism_ablation_v1/",
+    "?? outputs/p0_materializer_validation_v1/",
+    "?? outputs/p0_materializer_validation_v2/",
+    "?? outputs/p0_materializer_validation_v3/",
+    "?? outputs/research_contribution_convergence_v1/",
+    "?? outputs/v10_multiseal_reference_v1/",
+    "?? outputs/v3_reference_release_v1/",
+    "?? outputs/v3_runtime_recovery_v1/",
+    "?? outputs/v3_scan_proxy_preregistration_v1/",
+    "?? outputs/vlm_continuity_validation_v1/",
+    "?? scripts/analyze_human_continuity_validation.py",
+    "?? scripts/analyze_p0_v3_materializer_mechanisms.py",
+    "?? scripts/analyze_vlm_continuity_study.py",
+    "?? scripts/build_human_continuity_benchmark.py",
+    "?? scripts/complete_v3_scan_proxy_release.py",
+    "?? scripts/create_v10_multiseal_protocol.py",
+    "?? scripts/finalize_v10_multiseal_reference.py",
+    "?? scripts/finalize_v3_prospective_scan_proxy.py",
+    "?? scripts/monitor_v9_full_grid_completion.py",
+    "?? scripts/prepare_p0_materializer_validation_pause.py",
+    "?? scripts/prepare_v3_reference_release_pause.py",
+    "?? scripts/prepare_v3_runtime_recovery.py",
+    "?? scripts/prepare_vlm_continuity_study.py",
+    "?? scripts/preregister_v3_scan_proxy.py",
+    "?? scripts/run_main_thesis_alignment_audit.py",
+    "?? scripts/run_p0_v3_materializer_validation.py",
+    "?? scripts/run_v10_multiseal_oracle.py",
+    "?? scripts/run_v10ms_recovery_pipeline.sh",
+    "?? scripts/run_v3_prospective_scan_proxy.py",
+    "?? scripts/run_vlm_continuity_judge.py",
+    "?? scripts/serve_human_continuity_annotation.py",
+    "?? scripts/v8_full_grid_runtime_recovery.py",
+    "?? scripts/verify_v3_scan_proxy_release.py",
+    "?? scripts/wait_and_launch_v10ms_shadow.sh",
+    "?? scripts/wait_and_run_v10ms_any_two_a100.sh"
+  ],
+  "evaluation_kind": "MODEL_RELATIVE_EVALUATION_AGAINST_FROZEN_FULL_GRID_K3_EVENT_RELATION",
+  "excluded_primary_policies": {
+    "FixedRatio_scan_confirm": "Historical physical controller has progressive SCAN exposure and seconds-based costs, not the current precomputed candidate/query-count replay interface.",
+    "MAB_or_learned_controller": "Explicitly excluded; this audit first tests whether an adaptive opportunity exists.",
+    "Ours": "Ambiguous historical name, not a single deterministic versioned policy."
+  },
+  "input_artifacts": {
+    "MAB_RESEARCH_DIRECTION_DECISION.md": {
+      "sha256": "57e774c89904e602a390cb4fa3b3fe0d09e6a5b3f9a6387cd284ef5f1cabf75a"
+    },
+    "configs/fixed_ratio_25_75.yaml": {
+      "sha256": "e664dddc04eb6bbbeaa278e65dd0c1ceaf00aad226e81ef71c88271b0f2598af"
+    },
+    "configs/research_contract_v1.yaml": {
+      "sha256": "fb1ed77451557322e5f519bd6f4fbf8ba669087e9943102868a145b756e2a24e"
+    },
+    "configs/scan_confirm_myopic_vps.yaml": {
+      "sha256": "dce86e7e2b31ffdddd2fe72c79962fdaa71728903532e77ef9af89aaaaa49613"
+    },
+    "docs/PSVR_P0_P1_P2_EXPERIMENT_CONTRACT.md": {
+      "sha256": "d66e843a5079cf88d9652f05eef9f2e839b89ad56d40b792c96d53c949cd0fb9"
+    },
+    "outputs/controller_dynamic_headroom_cached_v1/SUMMARY.json": {
+      "sha256": "334ab4df6ce5c596a75e352315c938c5d0c2d7c628b7549c2e3c2102e0967ce3"
+    },
+    "outputs/p0_materializer_mechanism_ablation_v1/MECHANISM_PROTOCOL.json": {
+      "sha256": "7ecba0bb151d5325980f645d12ee9601c9c7eea42fa25b46434426dfb5305622"
+    },
+    "outputs/p0_materializer_mechanism_ablation_v1/mechanism_summary.csv": {
+      "sha256": "9367c69dcca683652bc10f003af4d97df04fc1e24fcb461c5c42b1f059bdb98f"
+    },
+    "outputs/p0_materializer_validation_v3/EXPERIMENT_PROTOCOL.json": {
+      "sha256": "a396b61edb1773dc7222b8abbb81aed9d9d9ecd7f19d5fd284a8db87b202773a"
+    },
+    "outputs/p0_materializer_validation_v3/pooled_summary.json": {
+      "sha256": "2c2f2dd9046212c5488b75c3a9525e16f6bce62969969c23a853d9eb609e368e"
+    },
+    "outputs/psvr_bottleneck_research/AUDITED_DECISION.json": {
+      "sha256": "a14bc04baf8d9ddf5ed7bb1d75458515a31990ae105307cebf5e5b41efa7ad37"
+    },
+    "outputs/public_state_predictability_cached_v3/SUMMARY.json": {
+      "sha256": "372495be35d31b1324915c27053bf6de32e84c0366ae105fd9c111ae60e23103"
+    },
+    "outputs/v10_multiseal_reference_v1/FINAL_UNIT_REFERENCE.parquet": {
+      "sha256": "4f732859e7aaca6a4d8098b3da653620c777e85b5fcc31dae5c2b91fb2260fcf"
+    },
+    "outputs/v10_multiseal_reference_v1/K3_MODEL_RELATIVE_EVENT_RELATION.parquet": {
+      "sha256": "f16e24103921ada7f82360864211372d68a06ca2f18be5f7319dc6e7e4d94409"
+    },
+    "outputs/v10_multiseal_reference_v1/REFERENCE_MANIFEST.json": {
+      "sha256": "53bceb8be451e8ac853810bdde75ad25f6e0f89477621260d178d2dfbbef6ed2"
+    },
+    "outputs/v3_scan_proxy_preregistration_v1/FROZEN_V3_SCAN_PROXY_PROTOCOL.json": {
+      "sha256": "089f44f5e27dc398f2b10018b39ddb00eff1c7f277ad023af7015d4fac5e34f1"
+    },
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/DALI/candidate_table.parquet": {
+      "sha256": "2d9feaf0cf87e51198aa2d2ee3d3d3150b53f77aecec208b49640743c89651a1"
+    },
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/DALI/proxy_table.parquet": {
+      "sha256": "ed1121c7bef775370b5cef541b0781d2287b70781a7b0d0900bfbb10e72bc21e"
+    },
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/HANGZHOU/candidate_table.parquet": {
+      "sha256": "9e3da3ae245bdbcc2bd53ba24cc9d72dcf5e23525336294703fc5d3a6d22f1d1"
+    },
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/HANGZHOU/proxy_table.parquet": {
+      "sha256": "d5fffe45ebe1816d22cc94080f978d0d8deb9fb96ed557ecd898316243db0ec5"
+    },
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/WUHAN/candidate_table.parquet": {
+      "sha256": "ca5d6348bf19fc1d4be7dbfeaa6de272c532b3486ece1233cfdf86c49a1cf952"
+    },
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/WUHAN/proxy_table.parquet": {
+      "sha256": "0e762cc07c49c6c4786812492bb376f105172e2c97e441e9705cf5b14f6cac16"
+    },
+    "scripts/analyze_p0_v3_materializer_mechanisms.py": {
+      "sha256": "0be43de422cb3dcae8c5bc3627816398a480fa3c10df2633650b080ca2d2230c"
+    },
+    "scripts/run_p0_v3_materializer_validation.py": {
+      "sha256": "090537f0972a61b967b9424770b2b2ae243d92e4897d732c20bfcc1564d9146d"
+    }
+  },
+  "interaction_subset": {
+    "budgets": [
+      10,
+      50,
+      100
+    ],
+    "materializers": [
+      "C0_naive_all_positive_span",
+      "C1_gap_limited"
+    ],
+    "policies": [
+      "StaticProxyRank",
+      "TemporalCoverage"
+    ],
+    "regimes": [
+      "R0_ORIGINAL",
+      "R3_RANK_SEVERE_HASH",
+      "E3_EXPOSURE_SEVERE_KEEP040"
+    ],
+    "systematic_interaction_threshold_F1": 0.05,
+    "systematic_rule": "range of regime-policy median C1-C0 effects >=0.05 and the ordering direction recurs on at least two videos",
+    "videos": [
+      "DALI",
+      "HANGZHOU",
+      "WUHAN"
+    ]
+  },
+  "known_prior_evidence": {
+    "P0_materializer_results_already_observed": true,
+    "median_C1_minus_C0_F1": 0.1377,
+    "median_K3_minus_K0_F1": 0.1457,
+    "new_proxy_stress_results_observed_before_freeze": false
+  },
+  "materializer": {
+    "definition": "Merge consecutive queried relevant 10-second units iff gap <= 10.0 seconds; no duration cap, negative barrier, or K3 extras.",
+    "frozen_from_P0_mechanism_ablation": true,
+    "gap_sec": 10.0,
+    "name": "C1_gap_limited",
+    "source": "scripts/analyze_p0_v3_materializer_mechanisms.py:generic_events"
+  },
+  "natural_variant_audit": {
+    "compatible_current_variants_found": 1,
+    "excluded_historical_assets": "Other YOLO/PSVR/RC-SEM proxy artifacts use different source videos, units, candidate semantics, or schemas; they are not promoted into this common-universe matrix.",
+    "included_natural_variant": "R0_ORIGINAL prospective YOLOv8n V3 contract",
+    "synthetic_degradation_reason": "No reproducible GOOD/MEDIUM/POOR natural variants share the released DALI/HANGZHOU/WUHAN V3 interface."
+  },
+  "policies": [
+    {
+      "name": "UniformTemporal",
+      "nested_across_budget": false,
+      "note": "P0 exact evenly spaced subset; budget curves replace positions and are not strict anytime prefixes.",
+      "uses_proxy": false
+    },
+    {
+      "name": "StaticProxyRank",
+      "nested_across_budget": true,
+      "note": "Descending regime proxy score with candidate-order/id tie break.",
+      "uses_proxy": true
+    },
+    {
+      "name": "TemporalCoverage",
+      "nested_across_budget": true,
+      "note": "P0 recursive temporal bisection over the regime candidate universe.",
+      "uses_proxy": false
+    }
+  ],
+  "primary_metric": "Event F1 using frozen P0 overlap-any one-to-one matcher",
+  "protocol_hash": "14e0b391a87d1a5546df49dc74374fc598e673269c8e843e6b3e3313825fc72c",
+  "protocol_id": "GVAQP_MAIN_THESIS_PROXY_ROBUSTNESS_CACHED_REPLAY_V1",
+  "proxy_gap_axes": {
+    "exposure": {
+      "good": "R0_ORIGINAL",
+      "poor": "E3_EXPOSURE_SEVERE_KEEP040"
+    },
+    "ranking": {
+      "good": "R0_ORIGINAL",
+      "poor": "R3_RANK_SEVERE_HASH"
+    }
+  },
+  "query_id": "Q_DRIVER_RESPONSE_V1",
+  "reference_circularity": "QUALIFIED_BUT_VALID; this audit does not independently establish human event continuity",
+  "regime_definitions": [
+    {
+      "axis": "none",
+      "construction": "Frozen prospective YOLO proxy and complete one-candidate-per-unit universe.",
+      "keep_rate": 1.0,
+      "level": "original",
+      "rank_mix_alpha": 0.0,
+      "regime": "R0_ORIGINAL"
+    },
+    {
+      "axis": "ranking",
+      "construction": "score=(1-0.25)*original+0.25*SHA256-uniform(candidate_id,seed); full exposure.",
+      "keep_rate": 1.0,
+      "level": "mild",
+      "rank_mix_alpha": 0.25,
+      "regime": "R1_RANK_MILD_A025"
+    },
+    {
+      "axis": "ranking",
+      "construction": "score=(1-0.50)*original+0.50*SHA256-uniform(candidate_id,seed); full exposure.",
+      "keep_rate": 1.0,
+      "level": "medium",
+      "rank_mix_alpha": 0.5,
+      "regime": "R2_RANK_MEDIUM_A050"
+    },
+    {
+      "axis": "ranking",
+      "construction": "score=SHA256-uniform(candidate_id,seed); full exposure and no semantic-label input.",
+      "keep_rate": 1.0,
+      "level": "severe",
+      "rank_mix_alpha": 1.0,
+      "regime": "R3_RANK_SEVERE_HASH"
+    },
+    {
+      "axis": "exposure",
+      "construction": "Keep candidate iff SHA256-uniform(candidate_id,seed,exposure)<0.80; retain original score.",
+      "keep_rate": 0.8,
+      "level": "mild",
+      "rank_mix_alpha": 0.0,
+      "regime": "E1_EXPOSURE_MILD_KEEP080"
+    },
+    {
+      "axis": "exposure",
+      "construction": "Keep candidate iff SHA256-uniform(candidate_id,seed,exposure)<0.60; retain original score.",
+      "keep_rate": 0.6,
+      "level": "medium",
+      "rank_mix_alpha": 0.0,
+      "regime": "E2_EXPOSURE_MEDIUM_KEEP060"
+    },
+    {
+      "axis": "exposure",
+      "construction": "Keep candidate iff SHA256-uniform(candidate_id,seed,exposure)<0.40; retain original score.",
+      "keep_rate": 0.4,
+      "level": "severe",
+      "rank_mix_alpha": 0.0,
+      "regime": "E3_EXPOSURE_SEVERE_KEEP040"
+    }
+  ],
+  "repo_branch": "dspro",
+  "repo_commit": "2c0d35c888f9711cacab964672c6094fc98e5c49",
+  "resource_analysis": {
+    "anytime_auc_origin": [
+      0.0,
+      0.0
+    ],
+    "gap_summary_budgets": {
+      "high": 100,
+      "low": 5,
+      "medium": 20
+    },
+    "monotonicity_epsilon": 1e-12,
+    "normalized_budget_axis": [
+      0.05,
+      0.1,
+      0.2,
+      0.5,
+      0.8,
+      1.0
+    ],
+    "primary_monotonicity_policies": [
+      "StaticProxyRank",
+      "TemporalCoverage"
+    ],
+    "uniform_curve_qualification": "UniformTemporal exact subsets are non-nested and diagnostic, not a strict anytime execution trace."
+  },
+  "robust_policy_selection": "Lexicographically maximize worst of mean rank-poor and exposure-poor F1, then poor-regime mean Anytime AUC, then minimize nested-policy monotonicity violation rate.",
+  "runner": {
+    "path": "scripts/run_main_thesis_alignment_audit.py",
+    "sha256": "27b1a69f33ccdb3fa774728916372f50f005ca2442faeb7d3ab93fb2a50b16a7"
+  },
+  "secondary_metrics": [
+    "Event precision",
+    "Event recall",
+    "TP/FP/FN",
+    "unique events recovered",
+    "oracle calls",
+    "candidate coverage"
+  ],
+  "semantic_inference": "NONE; deterministic cached replay only",
+  "statistics": {
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20260811
+  },
+  "status": "FROZEN_BEFORE_PROXY_STRESS_EVENT_RESULTS",
+  "videos": [
+    "DALI",
+    "HANGZHOU",
+    "WUHAN"
+  ]
+}

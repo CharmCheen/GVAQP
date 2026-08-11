@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0300:1786376529680310706",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "dbe81a9c8a03744cdebc61c0a7c265f1907444892908c773d775e63f0cfaf8a4",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "fb210fc855a1f9222e92ddb8e413304a30fbe462f2f6c3f9452bc99165d844d8",
+  "generated_token_ids_sha256": "033f1b4f3304bd0dbba86c09d86e00523202aaf5d36de5cfb351bcecd319f38e",
+  "input_identity_sha256": "568785be9ce79c9cfb8774132e6a80e2319aeb0521f6e2f22aea6eabad30b860",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "cc961325243d812e82719e2892c100ab761a1370d90e5ec03710fbb1f7fab342",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "At 0:07-0:08, a pedestrian is seen crossing the road directly in front of the ego vehicle's path, requiring an attentive driver to slow down or brake to avoid collision. The pedestrian is in the middle of the road and clearly within the vehicle's trajectory, making this a visible and immediate hazard requiring a marked response within the unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "8e19f8af94951e1be2779533b52c04f86029270e5da3cbf295a0f80ba489cb82",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"At 0:07-0:08, a pedestrian is seen crossing the road directly in front of the ego vehicle's path, requiring an attentive driver to slow down or brake to avoid collision. The pedestrian is in the middle of the road and clearly within the vehicle's trajectory, making this a visible and immediate hazard requiring a marked response within the unit.\"\n}",
+  "raw_response_sha256": "5cde23b3da0ce8dc34aca40bc1e123962f0f2e61c9aa741c41dde958d32bbf79",
+  "record_payload_sha256": "29efcfd7bd8060882afd6d019a458778ef5f17f78727fd8bb5f8ecca11a46797",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 15.093665651002084,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 16.762319550995016,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0300",
+  "unit_ordinal": 1428,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0059:1786349044582891042",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "ff7faea8bfea575ab3f5b0bb389e713be2e084eb4b3d3861b1a85d2e8b7675d3",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "70dff4325cb2d8f2448dcb7f703464c8560b1acbac8b2428063a239bb9294a20",
+  "generated_token_ids_sha256": "0fc95bfb19cbfaa46d2971415b0e2ef855f4263681f0dc7b4314dcdf55f18563",
+  "input_identity_sha256": "c745c72a7fa29086f8f4f02db22efe7b04f36a6e397ba208f342ec483f8b9440",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "12648cee6f987320411e1bfa52432c103c030903ad2eb1fe2f8af693dca28e4e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a traffic signal showing red lights, and the road ahead has vehicles stopped or slowing down in response to the signal. Additionally, the road signs indicate an upcoming tunnel and speed restrictions, requiring the driver to slow down and prepare for a change in driving conditions. The presence of red traffic lights and the need to comply with speed limits and tunnel entry rules necessitate a noticeable slowdown or braking action.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "a392baaa87c9cc1be77f3488a68c2049accd365e0616c21cd7b4d2a61afc60c6",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a traffic signal showing red lights, and the road ahead has vehicles stopped or slowing down in response to the signal. Additionally, the road signs indicate an upcoming tunnel and speed restrictions, requiring the driver to slow down and prepare for a change in driving conditions. The presence of red traffic lights and the need to comply with speed limits and tunnel entry rules necessitate a noticeable slowdown or braking action.\"\n}",
+  "raw_response_sha256": "2d812907609f87634a343dad3adbe5787f57e144e58410959789fe74134259e8",
+  "record_payload_sha256": "e591ac92d6cff2b374563e63c57e64f5c502bbd70d7e137a547367c776e80df0",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 15.916994660001365,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 16.580711091999547,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0059",
+  "unit_ordinal": 626,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

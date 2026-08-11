@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0504:1786356773911684566",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "48653d1173f49da8887e8e9eb71cc8c23db40c64c751e5d2e373eaba03a2c229",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "8784f939438198b4fda964f1afd70d575b9b8f255ba5bdfb1d8218a040f4d57f",
+  "generated_token_ids_sha256": "d4ffd75954141e620f227f93bb1a26616799838082b5c53ece7b0f2be6d31d9d",
+  "input_identity_sha256": "bf43ac9db3d1bb1861f5ff7912e7a35a5de8418228cea52522505f89c2765a6b",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "555868a8e887b23c9ba95f9b3da552b1d05a9ba15ae8c0f3cf8455c8af8ccc0d",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a school zone marked by a '30 km/h' speed limit sign and a 'school' warning sign, both of which require a noticeable slowdown. Additionally, a traffic officer is visible on the right side of the road, standing near the curb, which may indicate active traffic control or a potential need for caution. The presence of these signs and the officer necessitates a marked response in speed or attention from the driver within this unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "3397dd05f443083dd5aba9e7a056c3dd582d3465837b8741e716224df98cdbab",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a school zone marked by a '30 km/h' speed limit sign and a 'school' warning sign, both of which require a noticeable slowdown. Additionally, a traffic officer is visible on the right side of the road, standing near the curb, which may indicate active traffic control or a potential need for caution. The presence of these signs and the officer necessitates a marked response in speed or attention from the driver within this unit.\"\n}",
+  "raw_response_sha256": "f468c7a68f0bf4a979b83be9428b8bae00de46673144f873e07e592f11dd41d2",
+  "record_payload_sha256": "eab2f2753e62e6f822f3b0ae3ba52e92bd3d96d87f09ce7022d7db2f5b9bf83c",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.430406535000657,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.311735474999296,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0504",
+  "unit_ordinal": 1071,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

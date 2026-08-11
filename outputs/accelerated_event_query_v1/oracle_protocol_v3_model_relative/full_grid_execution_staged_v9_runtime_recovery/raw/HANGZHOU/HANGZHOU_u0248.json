@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0248:1786374978250950518",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "f3135959cb239d5d609e09d9f8751ddda593de199e8ee8b438d197b159d130a0",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "239fc323a5865173b45e2f49b8ddfdaba4f4ab2b652afa46fd6a9dcad72dc7f3",
+  "generated_token_ids_sha256": "4581edc36c16dccb055283c17823d04d5cb20df37b27c654c29cdabede207ef1",
+  "input_identity_sha256": "3fa6acbcc32d3dec3c4be33891a621c774ba827ad52ff6de22f3b9409ce19d64",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "c3a0398c62db0726e0c377b4d2a0eb3cab70b7b0f3bd490bf5bf6178708181b9",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a traffic signal under an overpass, and the traffic light ahead turns red at frame 0:08. The lead vehicle (a pink SUV) begins to slow down and stop at the intersection, indicating a required braking action for the ego driver to comply with the traffic signal. The presence of a red light and the need to stop at the crosswalk constitute a visible condition requiring a noticeable slowdown or braking action within this unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "a43b334193c40ecd158dfb44ec95ddc2576a865ce6c4d0e0ebeb6425e6c6d063",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a traffic signal under an overpass, and the traffic light ahead turns red at frame 0:08. The lead vehicle (a pink SUV) begins to slow down and stop at the intersection, indicating a required braking action for the ego driver to comply with the traffic signal. The presence of a red light and the need to stop at the crosswalk constitute a visible condition requiring a noticeable slowdown or braking action within this unit.\"\n}",
+  "raw_response_sha256": "c6d3d15d77c1a1177031ab9a255a4ae000a4c16c2bc5372761a69581c389c98c",
+  "record_payload_sha256": "320b086948b55a1f12a4537f229ba4f3194f230e39605363cae286555fc862c4",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.926204492003308,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.6727503509901,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0248",
+  "unit_ordinal": 815,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

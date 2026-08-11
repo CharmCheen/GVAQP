@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0211:1786374813757146757",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "68f61edf93e7d61f449f7450f3ae09213931c66fdb322f5025912b4231af9d34",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "fc815c47e7b9aa828e049edbbae8d48138eb9705733be7734da8b8c9c6428b66",
+  "generated_token_ids_sha256": "ee8b89942af49bd47991bcb67abb595a8443298a108547f0c0408a32952ef105",
+  "input_identity_sha256": "771d548e0bb6c2c95dd456273996911b46960b4a9f687518e7a360ae0badb374",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "a3abf2e56f654d25dc204585f13950b5d85f57c8be5d88debede9e27d7020d24",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily in traffic with no sudden changes in speed or path. The lead vehicles maintain consistent spacing, and there are no visible obstacles, traffic control signals requiring immediate action, or road users entering the ego path. Pedestrians are visible on sidewalks but not encroaching on the roadway. The traffic flow appears normal and continuous throughout the unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "46609f287fe1e9e58b267ac537fbf79247ac0f46457a5905bcd14d7bfbba3da4",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily in traffic with no sudden changes in speed or path. The lead vehicles maintain consistent spacing, and there are no visible obstacles, traffic control signals requiring immediate action, or road users entering the ego path. Pedestrians are visible on sidewalks but not encroaching on the roadway. The traffic flow appears normal and continuous throughout the unit.\"\n}",
+  "raw_response_sha256": "d4a144b1e9b4776f9bead8c63e75e7995164da30fdc967e00228df7ebdbd8f41",
+  "record_payload_sha256": "b2c694311a0bd52af9fb34cdbc8f9911356f470c9b57a593b539ddb0d9b591e1",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 15.402201046992559,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 17.153142586001195,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0211",
+  "unit_ordinal": 211,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0153:1786373369195241550",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "f73e020ee010436d721b5ade31214cb649d9043d9b09050f52998a6ab00ef830",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "ce543adeef49ee5540c1c4f8b82e213078e50bc12da559308a49a3bb49e9eef8",
+  "generated_token_ids_sha256": "85db03257bd046f04351d386b5ddd69410042748f664d69cb21be53490f00eba",
+  "input_identity_sha256": "b66eccff6584e4498df37b1f5ac1a3c6997a37d6aef9f53e649b5b2890397543",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "b84688320f74edde78032a653860d18c5395ad7780865f2ba574b66632f23bd0",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily along a clear road with visible lane markings and no immediate obstacles. A yellow truck is ahead and maintaining a consistent distance, and there are no sudden changes in traffic conditions, road signs requiring immediate action, or visible hazards that would necessitate a noticeable slowdown, braking, or avoidance maneuver. Pedestrian crossings and traffic signs are visible but do not require an urgent response within this unit. The road ahead is unobstructed, and the vehicle is following normal traffic flow.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "924df5fa9992f10f2a3bbe68fa9d011e40c26e21a2e12828d082d64fd870fd86",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily along a clear road with visible lane markings and no immediate obstacles. A yellow truck is ahead and maintaining a consistent distance, and there are no sudden changes in traffic conditions, road signs requiring immediate action, or visible hazards that would necessitate a noticeable slowdown, braking, or avoidance maneuver. Pedestrian crossings and traffic signs are visible but do not require an urgent response within this unit. The road ahead is unobstructed, and the vehicle is following normal traffic flow.\"\n}",
+  "raw_response_sha256": "17f1c2acca5fc39aa9775f079354120590bfc89f8fbf4bdd72f1bf4d4e67faf3",
+  "record_payload_sha256": "36d7985df13bb119974e3e8de3327a647b6e64d17cbdba7b85988ba70a1bc490",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.180976700998144,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.880397365996032,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0153",
+  "unit_ordinal": 720,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

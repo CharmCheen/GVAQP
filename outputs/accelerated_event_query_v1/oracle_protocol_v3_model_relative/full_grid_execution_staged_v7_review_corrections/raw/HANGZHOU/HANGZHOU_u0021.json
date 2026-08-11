@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0021:1786348395701269020",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "d344f901ce0eb50b322bc2a6ddbde8b320b406bead3e64a7d99facbce5b0811d",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "f2a80a4084f8a1ce204fb8a24e7e8309e37ae0d53a9a04be00ff206456cc4659",
+  "generated_token_ids_sha256": "24145b4996ce929061956c6727a71bfb6f10a52e7440b82081fbeef8c2b83f84",
+  "input_identity_sha256": "d29c13486cb7aed6cc377fcca21061fdcd824dc3ea607f08aeca9d47d47ceef7",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "432bb05d6984ff0a7b5ca7d9c24b90e8072549045e302a3b4b6fd7c2e27d9294",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light for the ego vehicle's direction changes from red to green, indicating a transition from stopping to proceeding. The countdown timer decreases from 32 to 26 seconds, confirming the signal change. The ego vehicle is at a stop line, and the lead white van remains stationary until the signal turns green, after which it begins to move forward. This requires the ego driver to observe the signal change and initiate a noticeable acceleration or forward movement, which constitutes a marked response to the traffic control.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "c9aeb983f9e5836d4849b757934a4a305a83a11d754a134a08bbfade0662c127",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light for the ego vehicle's direction changes from red to green, indicating a transition from stopping to proceeding. The countdown timer decreases from 32 to 26 seconds, confirming the signal change. The ego vehicle is at a stop line, and the lead white van remains stationary until the signal turns green, after which it begins to move forward. This requires the ego driver to observe the signal change and initiate a noticeable acceleration or forward movement, which constitutes a marked response to the traffic control.\"\n}",
+  "raw_response_sha256": "5a4775543cb91981c4563ce41b76e8fc94888e982ee01bb4cdbee1acf10c7eb2",
+  "record_payload_sha256": "45a6badb00942050abf7047152cda2704ac6ea3b77a9095474e93833d4b1f168",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.086809403997904,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.718583573005162,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0021",
+  "unit_ordinal": 588,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

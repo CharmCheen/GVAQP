@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0319:1786376251167875315",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "4c4a59c582509a3c509f6a74f4c293eed566f84c03783495ded9714b81cb64f8",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "86e6acc62b412fc050d9ad8e607373dcf0a9d9027d8601f5761b8d665615b525",
+  "generated_token_ids_sha256": "e9935180e9976e76d9e7db2cc71a8a1f9564baaf085c5a5ff7fcb6c19400ff9e",
+  "input_identity_sha256": "a800543e55a346255cad8c9dc5e66e74a8d67b791324f474f27aca95c3c8257c",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "6aa97408cdc8c54ea4f84bc3077f3afbd3fee260a7f3be87e50bb6105da16b91",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with multiple lanes and traffic signals. As the vehicle moves forward, it passes under an overpass and approaches a busy intersection with visible traffic lights changing to red. Numerous vehicles, including motorcycles and a bus, are present in the intersection, and the traffic light for the ego lane turns red, requiring a noticeable slowdown or braking action to stop safely. The presence of multiple road users and the changing traffic signal necessitate an attentive response from the driver.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "0d81c4b6b332ccac463087bd32868aab715d0cdd2b204e659f6af40d4ba84fba",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with multiple lanes and traffic signals. As the vehicle moves forward, it passes under an overpass and approaches a busy intersection with visible traffic lights changing to red. Numerous vehicles, including motorcycles and a bus, are present in the intersection, and the traffic light for the ego lane turns red, requiring a noticeable slowdown or braking action to stop safely. The presence of multiple road users and the changing traffic signal necessitate an attentive response from the driver.\"\n}",
+  "raw_response_sha256": "2e63b7558ea2d76fa6aaeed7b49a92d29193c96bc2b6098a15f3e31e46ea5142",
+  "record_payload_sha256": "6619d56a6d50d3e90b86d4bf307c125ca466d4407d1340edd556c5f74fb08a28",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.327652944994043,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.11100883501058,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0319",
+  "unit_ordinal": 886,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

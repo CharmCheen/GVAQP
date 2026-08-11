@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0056:1786349069076575938",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "2ebc8e75f9a6ad8ba4023c236ac5652bd8a017792d8d59ae7b1328afd772a302",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "7b865bdcadcc1e2dbe194c01c3a5efdd420c5a46dbe30d6ba2ca6579b91cdeac",
+  "generated_token_ids_sha256": "9302b3424023012901683a1e5fa25ed47d3329ee71c23f97918475a95dc5f64e",
+  "input_identity_sha256": "f27a2ab291ece3ed4d9daa436563790f736f865796b31ccd16fe091df7e13c38",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "3730461d23d4947b064236bb5b0ca06e4673d5aa2a3aa10de4567f1b2b2dca5e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on a wide, multi-lane urban road with clear lane markings and no immediate obstructions. Traffic is light, with vehicles and a cyclist visible at a safe distance. Traffic signals are visible but not indicating a need for immediate braking or slowing (e.g., red light not present for the ego direction). The road surface is clear, and no sudden changes in road conditions, obstacles, or conflicting road users are present within the unit. The driver can maintain steady forward motion without requiring a noticeable slowdown, braking, or avoidance maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "db4b101a3b204aafea18cac9e35fcb6e8e75c3c348daea3cd5bca078d1f35a5f",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on a wide, multi-lane urban road with clear lane markings and no immediate obstructions. Traffic is light, with vehicles and a cyclist visible at a safe distance. Traffic signals are visible but not indicating a need for immediate braking or slowing (e.g., red light not present for the ego direction). The road surface is clear, and no sudden changes in road conditions, obstacles, or conflicting road users are present within the unit. The driver can maintain steady forward motion without requiring a noticeable slowdown, braking, or avoidance maneuver.\"\n}",
+  "raw_response_sha256": "21c063e1fc5418508d85fbb57e4c70a42a988bdbddb931455afe3d135f4bab4e",
+  "record_payload_sha256": "aaef881f138a4af2c308f2157918a49190a886ec2ee446e6af285fd61823a273",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.929161870997632,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 21.5882837379977,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0056",
+  "unit_ordinal": 1184,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

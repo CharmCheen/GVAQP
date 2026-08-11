@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0304:1786376609542990348",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "f17002c9812f085268457be74c0b9c0953bff81f5ffa62b70a8e297368309842",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "847d00618ebed223fa43ff7802f68136aab3571c5d99827b57bb343a47bb3b72",
+  "generated_token_ids_sha256": "83297031ba1de69627c292dda515c221c1c94cb3e67175febd42b0037b8d745d",
+  "input_identity_sha256": "a8cb6e8eaabdd717d4c5b68ab3ad9a17ad900defaa126e8245fb3c98454b1b22",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "036ddda2d502a54f2924944633edf200c54b55d478c3b70b06708720bf0baa15",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily in a multi-lane urban road with clear traffic signals showing green for straight movement. The lead vehicle maintains a consistent speed, and there are no sudden changes in traffic flow, obstacles, or road conditions requiring a noticeable slowdown, braking, or avoidance maneuver. The traffic signs indicate a pedestrian crossing ahead, but the vehicle is not approaching it closely enough to require an immediate response within this unit. All visible conditions support normal, steady driving.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "0e75556ac2c01306f09a144a87d325d15fe37eec0f9d7c337d72d883296c3951",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily in a multi-lane urban road with clear traffic signals showing green for straight movement. The lead vehicle maintains a consistent speed, and there are no sudden changes in traffic flow, obstacles, or road conditions requiring a noticeable slowdown, braking, or avoidance maneuver. The traffic signs indicate a pedestrian crossing ahead, but the vehicle is not approaching it closely enough to require an immediate response within this unit. All visible conditions support normal, steady driving.\"\n}",
+  "raw_response_sha256": "4851cdd42dcbf6a2b23329523819ba675b9878218fa137502b14a3de8417aa33",
+  "record_payload_sha256": "1a4c6e31aa5408dcfc262945ea0a5cfcb89bee1d1634440c80c47dd80227d2f0",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.246907923006802,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.12969191800221,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0304",
+  "unit_ordinal": 1432,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0555:1786380342645119286",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "9e9fbbb35226baca2f04947ac9a732952fda4502696e53b68d0a434d61bd428d",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "2e0f8719ba4ab72d83425e115a58bba21301256378ea18e5de66322881c69719",
+  "generated_token_ids_sha256": "e84f782671bf90e5975ad424f88cf8ebf2f77f674f4d4fb471850ae31d839d93",
+  "input_identity_sha256": "6a3114666f86389d4535651cc46ef35dd907611627d0978cd3530bbd4bc5761f",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "65fb20bbe566a17a7c4f6eb55083f40b86217f564d96c7ab06446eff0a1e6a98",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily in a multi-lane urban road with clear traffic signals showing green. There are no sudden changes in traffic flow, no vehicles abruptly entering the ego path, and no visible obstacles or road conditions requiring a marked speed or path change. The lead vehicles maintain consistent spacing, and traffic control signs (e.g., speed limit 30 km/h) are visible but do not require an immediate response within this unit. The scene depicts normal urban driving without any urgent maneuvers needed.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "2d8af53d7058a887bf6e4da3970967bdd5ee4e6cae1793b2fff7663fcaac65f4",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily in a multi-lane urban road with clear traffic signals showing green. There are no sudden changes in traffic flow, no vehicles abruptly entering the ego path, and no visible obstacles or road conditions requiring a marked speed or path change. The lead vehicles maintain consistent spacing, and traffic control signs (e.g., speed limit 30 km/h) are visible but do not require an immediate response within this unit. The scene depicts normal urban driving without any urgent maneuvers needed.\"\n}",
+  "raw_response_sha256": "b8eb50a7a7c807bad1929d6aaa24f3b2896b238927d86d74e61b9630824268ea",
+  "record_payload_sha256": "7060053b2ab10671d1b806316ac81c5d929991365b4b093e39193175eeca6c5a",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.06302443500317,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.96431277699594,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0555",
+  "unit_ordinal": 1122,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

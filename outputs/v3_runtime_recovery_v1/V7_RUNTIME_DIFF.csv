@@ -1,0 +1,18 @@
+component,frozen_value,current_value,status,material_to_output?,evidence
+python,3.13.2,3.13.2,EXACT_MATCH,OUTPUT_CRITICAL,V7 FULL_GRID_PROCESSED_INPUT_MANIFEST.json; runner runtime_environment_identity(); processor-only tensor-hash replay
+torch,2.10.0+cu129,2.10.0+cu129,EXACT_MATCH,OUTPUT_CRITICAL,V7 FULL_GRID_PROCESSED_INPUT_MANIFEST.json; runner runtime_environment_identity(); processor-only tensor-hash replay
+transformers,5.9.0,5.5.4,VERSION_MISMATCH_PROCESSOR_HASH_COMPATIBLE_ON_3_UNITS,OUTPUT_CRITICAL,V7 FULL_GRID_PROCESSED_INPUT_MANIFEST.json; runner runtime_environment_identity(); processor-only tensor-hash replay
+qwen_vl_utils,0.0.14,0.0.14,EXACT_MATCH,OUTPUT_CRITICAL,V7 FULL_GRID_PROCESSED_INPUT_MANIFEST.json; runner runtime_environment_identity(); processor-only tensor-hash replay
+numpy,2.4.6,2.2.6,VERSION_MISMATCH_PROCESSOR_HASH_COMPATIBLE_ON_3_UNITS,OUTPUT_CRITICAL,V7 FULL_GRID_PROCESSED_INPUT_MANIFEST.json; runner runtime_environment_identity(); processor-only tensor-hash replay
+pillow,12.1.1,12.1.1,EXACT_MATCH,OUTPUT_CRITICAL,V7 FULL_GRID_PROCESSED_INPUT_MANIFEST.json; runner runtime_environment_identity(); processor-only tensor-hash replay
+opencv,4.13.0,5.0.0,VERSION_MISMATCH_PROCESSOR_HASH_COMPATIBLE_ON_3_UNITS,OUTPUT_CRITICAL,V7 FULL_GRID_PROCESSED_INPUT_MANIFEST.json; runner runtime_environment_identity(); processor-only tensor-hash replay
+torchvision,UNKNOWN_FROM_REPOSITORY,0.25.0+cu129,UNKNOWN,UNKNOWN_IMPACT,not included in V7 runtime_environment_identity() and no V7 package lock/pip-freeze was found
+tokenizers,UNKNOWN_FROM_REPOSITORY,0.22.2,UNKNOWN,UNKNOWN_IMPACT,not included in V7 runtime_environment_identity() and no V7 package lock/pip-freeze was found
+accelerate,UNKNOWN_FROM_REPOSITORY,1.14.0,UNKNOWN,UNKNOWN_IMPACT,not included in V7 runtime_environment_identity() and no V7 package lock/pip-freeze was found
+safetensors,UNKNOWN_FROM_REPOSITORY,0.7.0,UNKNOWN,UNKNOWN_IMPACT,not included in V7 runtime_environment_identity() and no V7 package lock/pip-freeze was found
+flash-attn,UNKNOWN_FROM_REPOSITORY,NOT_INSTALLED,UNKNOWN,UNKNOWN_IMPACT,not included in V7 runtime_environment_identity() and no V7 package lock/pip-freeze was found
+decord,UNKNOWN_FROM_REPOSITORY,NOT_INSTALLED,UNKNOWN,UNKNOWN_IMPACT,not included in V7 runtime_environment_identity() and no V7 package lock/pip-freeze was found
+av,UNKNOWN_FROM_REPOSITORY,18.0.0,UNKNOWN,UNKNOWN_IMPACT,not included in V7 runtime_environment_identity() and no V7 package lock/pip-freeze was found
+cuda_runtime,INFERRED_FROM_ARTIFACT: cu129 from torch 2.10.0+cu129,12.9,INFERRED_MATCH,UNKNOWN_IMPACT,V7 processor manifest + nvidia-smi
+cuda_driver,UNKNOWN_FROM_REPOSITORY,535.129.03,UNKNOWN,UNKNOWN_IMPACT,no V7 driver snapshot found
+ffmpeg,UNKNOWN_FROM_REPOSITORY,UNKNOWN_NOT_CAPTURED,UNKNOWN,UNKNOWN_IMPACT,V7 uses OpenCV decode and stores frame hashes; no ffmpeg identity is bound

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0167:1786351196870116694",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "28cd48e33c7eab7181d7b8656d92c538723bb31000e1291f1e664c9c96633c84",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "1a8bc6c2a00f8e08e091e6c8407183bbf415bbe07ad11c0553995caf204919e9",
+  "generated_token_ids_sha256": "3fc217adf32c47520304b93a1b2547bf62a1a3979baabb8106f067f1b10ac195",
+  "input_identity_sha256": "ec2be7f3b5fd1d135c16829a9237c171fd821c47c7b546061f0b20a61cbab40a",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "1266c59e2df5b122a79f48e6c6f5c0da61c9ea8560ebb185297b4b9b7d85188b",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light changes from red to green during the unit, indicating a transition from stopping to proceeding. Additionally, a white car is seen entering the intersection from the left side of the frame, requiring the ego driver to be attentive and potentially adjust speed or path to avoid conflict. The presence of cyclists and pedestrians crossing the intersection also necessitates caution and possible slowing or braking to ensure safe passage.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "f78a4d6bd8616f52aff083267e518e79c348f40b1d101bd64ba456f6650b0af9",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light changes from red to green during the unit, indicating a transition from stopping to proceeding. Additionally, a white car is seen entering the intersection from the left side of the frame, requiring the ego driver to be attentive and potentially adjust speed or path to avoid conflict. The presence of cyclists and pedestrians crossing the intersection also necessitates caution and possible slowing or braking to ensure safe passage.\"\n}",
+  "raw_response_sha256": "558630b072222e21c401bff9bf214c3d503472a70c239a2e05980fb46889287d",
+  "record_payload_sha256": "f07a05b279240232ea5acedb9b033fe9d3e437493535e35a0d9075383093e264",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 15.69096828000329,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 17.34935823300475,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0167",
+  "unit_ordinal": 1295,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

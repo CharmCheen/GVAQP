@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0263:1786375803528846844",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "1e6fee0f3f9b22a2e62590ac2444b9f0679556c4387a83153b62c1643f9997fa",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "509b0f586d34fe42a9e3d6e09bd88f29d126f81350190dc44901718899f2c34d",
+  "generated_token_ids_sha256": "6f41de45829b520ac514d9ab4743b1d94ca538c8754545296f48437ca1271585",
+  "input_identity_sha256": "988c196fa382c1bceab7b662b15c9f27c06357303d7780ca570966c580c4b868",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "013e4881759cba046eb1595706b9d153dc61802f8a49b9ecb32509a833819b80",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light changes from red to green during the unit, and the lead white vehicle begins to accelerate forward. The ego vehicle must respond by initiating a noticeable slowdown or braking action if it was previously stopped or decelerating, and then proceed with acceleration. Additionally, pedestrians are visible crossing the road ahead, requiring the ego driver to be attentive and potentially adjust speed or path to avoid collision. The presence of a sudden change in traffic signal and pedestrian activity in the crosswalk necessitates a marked response.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "f34bc20009baee6fac8208536153ad0cf35e2c3d2f5f9601c27525d6c4f62f07",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light changes from red to green during the unit, and the lead white vehicle begins to accelerate forward. The ego vehicle must respond by initiating a noticeable slowdown or braking action if it was previously stopped or decelerating, and then proceed with acceleration. Additionally, pedestrians are visible crossing the road ahead, requiring the ego driver to be attentive and potentially adjust speed or path to avoid collision. The presence of a sudden change in traffic signal and pedestrian activity in the crosswalk necessitates a marked response.\"\n}",
+  "raw_response_sha256": "ed4d2849245fbcdd4539ac50928eeb6183805f23c2d567393386450fab84c80f",
+  "record_payload_sha256": "492cd18948de87b6cf30ed7d9bdd00f8bc4e541f5a3a5da853ac16b9020c4689",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.868321511996328,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.54836506600259,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0263",
+  "unit_ordinal": 1391,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

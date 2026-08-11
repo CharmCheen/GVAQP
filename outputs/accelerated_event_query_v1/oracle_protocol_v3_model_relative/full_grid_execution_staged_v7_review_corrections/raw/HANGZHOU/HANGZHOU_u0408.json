@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0408:1786355086311472789",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "35c865cfc77f669d308a13331b0bdb3e026b88fe628cc4f6548785e41a614414",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "db1b2c6b30f08927e151f984cd25e53855a48591d55129e55a01c43e0ba9baa4",
+  "generated_token_ids_sha256": "6055da2aa5109c04880c3a9f7312fb828341dc8e6005d6fefc6312bb7081b31e",
+  "input_identity_sha256": "447c81f2562f6fc0a6058d090b81cf16db71f4492deb32151267ace0dfadf405",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "861f0f033dbf31a2c319d10710503e01b46e2c012650a35da5ad59edea16fda4",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with visible traffic signals and multiple vehicles ahead, including a bus and several cars. Around frame 0:07, the traffic light turns red, and the lead vehicles begin to slow down and stop. The ego vehicle must respond with a noticeable slowdown or braking action to comply with the traffic signal and avoid collision with the stopped vehicles ahead. This requires an attentive driver to take immediate action within the unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "0ac2e8e5e1f2d9918d105081c93f50ae6bf0b55be1f9a1a3f1547b5382de5c2b",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with visible traffic signals and multiple vehicles ahead, including a bus and several cars. Around frame 0:07, the traffic light turns red, and the lead vehicles begin to slow down and stop. The ego vehicle must respond with a noticeable slowdown or braking action to comply with the traffic signal and avoid collision with the stopped vehicles ahead. This requires an attentive driver to take immediate action within the unit.\"\n}",
+  "raw_response_sha256": "c4d2ef3957df2f8e2977b89d111d6301ac31ec120b751283fc84116ea9ef8383",
+  "record_payload_sha256": "9c81dd1e097c1c4ea09d98da10cd97d416416937dd95fb88de17aa3197e3ca78",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.229654055998253,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.063210436004738,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0408",
+  "unit_ordinal": 975,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

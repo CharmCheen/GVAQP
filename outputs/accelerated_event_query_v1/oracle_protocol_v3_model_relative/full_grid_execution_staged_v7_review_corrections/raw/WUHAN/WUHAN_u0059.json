@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0059:1786349124258572325",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "e1b2fb604f2596196bba5c99f6554203f22a37e92a2c289eda43d92b130de4a9",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "d50a289879755cae1d6e852f83efada57664d12e4b314c67fd4e42a77ad950c0",
+  "generated_token_ids_sha256": "8e1424781820d0e815f8e71a430dd23f8015aa3cd00bb052f524fd90d1006615",
+  "input_identity_sha256": "4c7845bc728f3571fce4aa6047f68afc8ef5ed594d790a9fc41c9b0deda27af5",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "bad5392ba5b097cc731ea5f0b831f93cc3efa7fa51d7d0a10a942d94671dba7b",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "A cyclist is seen entering the ego vehicle's lane between two buses, directly in the path of the ego vehicle, requiring an immediate avoidance maneuver or braking action to prevent a collision. The cyclist is visible from frame 0:07 to 0:10, and the proximity increases as the ego vehicle approaches, making this a clear and urgent hazard requiring a marked response.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "d2b1cef18705584f50b74067bfe32c44cacf18cfb38a912f0d179d4a7c8b2188",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"A cyclist is seen entering the ego vehicle's lane between two buses, directly in the path of the ego vehicle, requiring an immediate avoidance maneuver or braking action to prevent a collision. The cyclist is visible from frame 0:07 to 0:10, and the proximity increases as the ego vehicle approaches, making this a clear and urgent hazard requiring a marked response.\"\n}",
+  "raw_response_sha256": "25e9a4f4352eeca0d13e494df62b590de251543f34eb516ef8069e0042186942",
+  "record_payload_sha256": "ebb2449e41707470d8c4a2abb077b2db11eb9811591da2ee8c6c88a24469f681",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 15.349173342998256,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 17.038264889997663,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0059",
+  "unit_ordinal": 1187,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0109:1786349902539817015",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "302d1eb2abcaa00e62e74d99bfa0404bbc241669d1817bd1256cf73de8cf67bf",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "7cc03f974793fe536505fa41ec2514078256863574782453766617dd6bb96275",
+  "generated_token_ids_sha256": "fa0682b83dce2201f5c5757b7ca2b3e468f0c055a975e4f62f7b25f38a7db195",
+  "input_identity_sha256": "3f215ff1b9524b4271b117ccf18b8b867653094db32207a1a4043ed51bed5f48",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "7e432edc013e51bedf1c0b10ba04435f1b6df20138f9de917d9fac3f5024402c",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily in a multi-lane urban road with clear traffic signals showing green for straight movement. The lead vehicles (white SUV and yellow pickup) maintain consistent speed and distance, and no sudden braking, slowing, or path obstruction is observed. Traffic flow is smooth, and no visible obstacles or road users threaten the ego path. The traffic light countdown indicates sufficient time to proceed without needing a marked response. All conditions suggest normal, steady driving without requiring a noticeable slowdown, braking, or avoidance maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "0779f055674ffec02774585b121e77a068caafa55ec85274611c63613c74ccae",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily in a multi-lane urban road with clear traffic signals showing green for straight movement. The lead vehicles (white SUV and yellow pickup) maintain consistent speed and distance, and no sudden braking, slowing, or path obstruction is observed. Traffic flow is smooth, and no visible obstacles or road users threaten the ego path. The traffic light countdown indicates sufficient time to proceed without needing a marked response. All conditions suggest normal, steady driving without requiring a noticeable slowdown, braking, or avoidance maneuver.\"\n}",
+  "raw_response_sha256": "fb2716815c63a63b999ffb280ba79755e8b801a7ebba0c843bb50706088349d3",
+  "record_payload_sha256": "60c00923197481e46887e6acf7445f1ca76c9af775b43887ff4a7aa3838489b5",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.589272828001413,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.26393749199633,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0109",
+  "unit_ordinal": 676,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0171:1786351271113843332",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "5b1b298c4aa823efa6551702d864c039c3fa0beef791d305bc1da489505b47b3",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "53c75991623d86ee4d47aedf2856b718965d9e9257878342f163926da17f74f8",
+  "generated_token_ids_sha256": "ece44a02147871e49a10c0e678e8973ef7bd60bf0d98f8175d50e639968a9c35",
+  "input_identity_sha256": "26e056ca89d5f10c89f4352a730d0a0cb743ef39b761bab8a026325e016499c9",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "11ef9c9cd05ecc08e9b10987cb8ea18a710e5092ddee60ec8b42a8ce8bd18355",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a crosswalk where multiple pedestrians are actively crossing the road. Additionally, the traffic light for the ego direction turns red at approximately 0:07, requiring a braking action to stop before the crosswalk. The presence of cyclists and pedestrians in the path, combined with the red traffic signal, necessitates a noticeable slowdown and braking maneuver to ensure safety and compliance with traffic rules.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "4c824ed0231f122a31eb4c17d5af3587c5d9ff2b3552e05fece69ecdec80a94f",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a crosswalk where multiple pedestrians are actively crossing the road. Additionally, the traffic light for the ego direction turns red at approximately 0:07, requiring a braking action to stop before the crosswalk. The presence of cyclists and pedestrians in the path, combined with the red traffic signal, necessitates a noticeable slowdown and braking maneuver to ensure safety and compliance with traffic rules.\"\n}",
+  "raw_response_sha256": "83aa3b7c579e7c862fe32ba9a5f0da35bae425be841f0e99c0f6ac65f3f735bc",
+  "record_payload_sha256": "9d6108ac977757a94a76a6447a64a9c157685ae475ddb9e4e255bc6583a339bd",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 16.113196667996817,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 17.79283893899992,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0171",
+  "unit_ordinal": 1299,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0192:1786351678192024461",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "f9c597d754764c5137e9a4be0d21ef50f413a099334376fcf28dedbd9a3e525a",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "8b8dbdab02756bafe38e982a0ab049c0f227a18bfdfb9752cd6ff6facf73c8c9",
+  "generated_token_ids_sha256": "ce56097b01c0bcf13637f6ccaf4bf98d5daba6144a5d25a2b4c6d0cd2877d7ad",
+  "input_identity_sha256": "f440e845efdbe53edba852f9b515f16a03b47a49f388bf4fcfb40b37fd6f3a3b",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "870d30598a74c001417dfde28f2875601d7d77d3cf087515a46893d624e77db3",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light ahead transitions from green to red between 0:05 and 0:07, requiring the ego vehicle to slow down and stop before the intersection. The red light is clearly visible and active by 0:07, indicating a mandatory braking action for compliance with traffic control. The ego vehicle is approaching the intersection within the unit, and the signal change occurs within the 10-second window, necessitating a noticeable slowdown or braking maneuver.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "13f7758487c38882dad3d57355767897b5cc58eade2792dd0e98a75c204f7c05",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light ahead transitions from green to red between 0:05 and 0:07, requiring the ego vehicle to slow down and stop before the intersection. The red light is clearly visible and active by 0:07, indicating a mandatory braking action for compliance with traffic control. The ego vehicle is approaching the intersection within the unit, and the signal change occurs within the 10-second window, necessitating a noticeable slowdown or braking maneuver.\"\n}",
+  "raw_response_sha256": "7c65836bb050cd12bf207c6e282898c57b4203e72711d3aa103f8a08891ba14e",
+  "record_payload_sha256": "f94f0e80d90c209b58649944f62718e8b4bc7af47f5ac48482e8a5d34b21b120",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.623539037995215,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.245540312003868,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0192",
+  "unit_ordinal": 1320,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

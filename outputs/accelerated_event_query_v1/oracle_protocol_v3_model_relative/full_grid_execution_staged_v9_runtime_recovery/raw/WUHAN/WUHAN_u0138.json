@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0138:1786373383781148640",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "a4f018f09a591b090afaa10f3a4e58c50ebfb04a84d83512d9cd29196f872cf0",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "f1fbab02214d564416959c0ba0524f16616acd0e73288085f2e78dde067fb1f3",
+  "generated_token_ids_sha256": "0a8322ea9d41eb10761b564a74e39036b070fe69b11d6abbd0be1c27aa641b69",
+  "input_identity_sha256": "4738935a4cfd44053614ecb1c744c78f68bc4f523cda4b87df7168f141f3da23",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "fec1d0fc587a58f06a48509bcc8aa4b35ccbe678d9038e0d31528d152535cd83",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with visible traffic signals that transition from green to red for the straight-ahead direction by frame 0:10. The traffic light change requires a noticeable slowdown or braking action to stop before the crosswalk, as the signal is red for the ego vehicle's intended path. Additionally, the presence of a pedestrian crosswalk and other vehicles stopping ahead further supports the need for a marked response.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "fcf2a71503af70a5e5268ee658e27c891752c060bfcddd12c736b1f250f2f631",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with visible traffic signals that transition from green to red for the straight-ahead direction by frame 0:10. The traffic light change requires a noticeable slowdown or braking action to stop before the crosswalk, as the signal is red for the ego vehicle's intended path. Additionally, the presence of a pedestrian crosswalk and other vehicles stopping ahead further supports the need for a marked response.\"\n}",
+  "raw_response_sha256": "8aa0dfe5d95be70f7dfce611837130499bcbae8901daedc1df0d6b44a6148252",
+  "record_payload_sha256": "e3e4503729c54552de21a7dc3884e21bedab630bec095bba64b9ccc22aaa6d0d",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 16.362220658003935,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 18.008460324002954,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0138",
+  "unit_ordinal": 1266,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

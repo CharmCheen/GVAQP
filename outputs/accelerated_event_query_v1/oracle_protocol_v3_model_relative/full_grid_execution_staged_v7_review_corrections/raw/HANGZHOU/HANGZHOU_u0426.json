@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0426:1786355405627067959",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "3ac483bdeda938c2c09ba8e8e9ba41dbe517769a1262f35ef166f10cb0bf76db",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "c551b5b6cf4cec7063a4be73f3f1554714140a290899d08a1c53ddfb5c8f3ccc",
+  "generated_token_ids_sha256": "a2f70277ade806e8ee4e0fb40b046ebfaaa8e1336e99dd39b749824f1cffc110",
+  "input_identity_sha256": "576de851ab1f8fd23cc88a262e8ab49511ce7e4671b0fc90ba89c4ba3de9baeb",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "ae1749420ecb489a2fa87311482c575167910a5c4a63610c154e7c86f41d6135",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily in a multi-lane urban road with clear visibility. Traffic signals ahead are green, and there are no sudden changes in speed or path required. The lead vehicle (a white Mini Cooper) maintains a consistent distance, and no obstacles, sudden stops, or road users are entering the ego path. The surrounding vehicles are moving normally, and no traffic control requires a marked response within this unit. The driving conditions are typical for urban traffic without any visible need for braking, slowing, or avoidance.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "f99a62a39b4b965a273446d1133bbad5fb2b8355dda07932ca38d954df7c8de6",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily in a multi-lane urban road with clear visibility. Traffic signals ahead are green, and there are no sudden changes in speed or path required. The lead vehicle (a white Mini Cooper) maintains a consistent distance, and no obstacles, sudden stops, or road users are entering the ego path. The surrounding vehicles are moving normally, and no traffic control requires a marked response within this unit. The driving conditions are typical for urban traffic without any visible need for braking, slowing, or avoidance.\"\n}",
+  "raw_response_sha256": "6f9162bf7541397cce306cc94d5acf3562344618e8c36860e67648e8ebae4908",
+  "record_payload_sha256": "f4f1b42520c28404079fbc64cc348fea0e12fa61b6ae567ef805e804bf01a472",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.616444695995597,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.4355782729981,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0426",
+  "unit_ordinal": 993,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

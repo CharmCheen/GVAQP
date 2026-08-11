@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0375:1786378079443912247",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "a6e78f4829d8ff07fad83cbf959f37787294e499a322a8d017f64230f39b9354",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "52ef03b1a0db1a73baab84d3dfbc3554d27019123d391630be2d96f619264190",
+  "generated_token_ids_sha256": "734ffc3af9f9ba5ab3c64d1e5483148ad85ec89c61a218639766040330a8c1e3",
+  "input_identity_sha256": "04adb96f437653acabfb6a3fe4ab2ed3a1e112c4cbd9b859de057b95bd4b794d",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "efe86fe334744ffbce247cd072e09ec1181db4e7b76aea1fa523357f57752eae",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light changes from red to green at approximately 0:07, indicating that vehicles are permitted to proceed. However, the ego vehicle is in a busy intersection with multiple vehicles and motorbikes ahead and to the sides, including a white van directly in front and several scooters and pedestrians crossing or entering the intersection. The sudden change in traffic signal combined with the dense traffic and active pedestrian/motorbike movement requires an attentive driver to slow down or brake to safely navigate the intersection, especially as the lead vehicles may not accelerate immediately and pedestrians are actively crossing. This constitutes a visible condition requiring a marked response within the unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "41a3022cef8c2abe4948084a5198bad3bd36236ec3fc3622a1da8b112f93adc8",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light changes from red to green at approximately 0:07, indicating that vehicles are permitted to proceed. However, the ego vehicle is in a busy intersection with multiple vehicles and motorbikes ahead and to the sides, including a white van directly in front and several scooters and pedestrians crossing or entering the intersection. The sudden change in traffic signal combined with the dense traffic and active pedestrian/motorbike movement requires an attentive driver to slow down or brake to safely navigate the intersection, especially as the lead vehicles may not accelerate immediately and pedestrians are actively crossing. This constitutes a visible condition requiring a marked response within the unit.\"\n}",
+  "raw_response_sha256": "6283b509d3005800970ca1ec9a88687d1e06f14ba73fc8ba0e6e7b5dce8e8f5e",
+  "record_payload_sha256": "87c7b0be020bb40a395db5c7fbe10f5c807e232426f5bb5a90a8d6fa33efa2f7",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 22.03626081600669,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 23.85786633999669,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0375",
+  "unit_ordinal": 375,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

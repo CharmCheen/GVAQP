@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0301:1786376546563964218",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "f4b87650fa1b8ac331675a32b1125412b451c6bb54f669b5604daf5a92440c7a",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "8aaaeca932b29380fdec24cae3fb3255aaeeafbdd90096020eb1abe18b581889",
+  "generated_token_ids_sha256": "91c2a1e2da69e5fbc8ebc68152e9356182cd065c43dadf441977c99a096032bc",
+  "input_identity_sha256": "cb76cf798121141ab68a802884e7d714a23e13933aec3abe765b6b9cbf27a18c",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "f748d17b433aaf11efdc7a78c8af2f6e628296efedb19c7c6d133d39803ef26f",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a clear, multi-lane road with visible traffic signals and no immediate obstacles. Traffic lights ahead are green for straight movement, and there are no sudden stops, slowing vehicles, or road users entering the path. The road is well-marked, and the surrounding environment (trees, barriers, buildings) does not present any visible hazards requiring a marked response. Pedestrians are present at the crosswalk but are not in the path of the ego vehicle. The driving conditions remain normal and consistent throughout the unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "b26bc16e9ef752e1f8a52900948a6581cdd8f3f5dc7052634fe694dd571362f8",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a clear, multi-lane road with visible traffic signals and no immediate obstacles. Traffic lights ahead are green for straight movement, and there are no sudden stops, slowing vehicles, or road users entering the path. The road is well-marked, and the surrounding environment (trees, barriers, buildings) does not present any visible hazards requiring a marked response. Pedestrians are present at the crosswalk but are not in the path of the ego vehicle. The driving conditions remain normal and consistent throughout the unit.\"\n}",
+  "raw_response_sha256": "5b7c75a98246beb50dbc673cf8e14b1cdc77d075ffd973f6803e0833652d6ec2",
+  "record_payload_sha256": "a9daa75b01a340c005c30b66bb84b431a84991fed6787c33f90c26dafdbd3cec",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.80190728198795,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 21.511146826000186,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0301",
+  "unit_ordinal": 1429,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

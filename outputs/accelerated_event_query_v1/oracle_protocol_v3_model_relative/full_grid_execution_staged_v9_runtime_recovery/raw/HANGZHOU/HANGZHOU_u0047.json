@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0047:1786371552923476196",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "62eaf81bc857f14a8466109e07d24135c7e3d832810a367d4ddfde3f50fff5af",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "852d997033f33697150b6b90ca3c8a3df45dbc4670e4dd6f24bbe18e06b14e6d",
+  "generated_token_ids_sha256": "3cc1eccaf6977ea0b717ff46b60d9c4664fa60c84608c1e144abfde58b9bcc1d",
+  "input_identity_sha256": "8c28d668cfe818331d1e3f3057f301faa5d81d1749aba4bf60d709505d7dc01e",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "9c084a8da81d23e3e063a53f1d6831b5bf9fe6345c49af5d9e7efaf4cc73c25a",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with traffic signals that change from green to red during the unit. At 0:03, the traffic light for the ego lane turns red, requiring a noticeable slowdown or braking action to stop before the crosswalk. The countdown timer on the signal also indicates a transition to red, reinforcing the need for a marked response. Additionally, the ego vehicle is in a lane with a straight-ahead arrow, and the signal change directly impacts the driving path, necessitating a response within this unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "d710ae293ddfba010947e58eac60490d69abd48090b9b14f7f6f3cf0efd1749d",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with traffic signals that change from green to red during the unit. At 0:03, the traffic light for the ego lane turns red, requiring a noticeable slowdown or braking action to stop before the crosswalk. The countdown timer on the signal also indicates a transition to red, reinforcing the need for a marked response. Additionally, the ego vehicle is in a lane with a straight-ahead arrow, and the signal change directly impacts the driving path, necessitating a response within this unit.\"\n}",
+  "raw_response_sha256": "d1a31060566196acc0e5ebbc1b44455e20d4329e9e1a7ceb31ecb8ddd94d5935",
+  "record_payload_sha256": "e7292231d4b97c825b95785a2392dbdea18eea44706d323ff0c791eff84d7133",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.610671629001445,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.282314320000296,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0047",
+  "unit_ordinal": 614,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

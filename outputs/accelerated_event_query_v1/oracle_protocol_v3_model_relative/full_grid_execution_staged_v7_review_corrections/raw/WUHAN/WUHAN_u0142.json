@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0142:1786350712447458101",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "7a19474ceaa001036eec6668a0a7eb51ba35f25574cb7fc84bce4c106c0668db",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "e40e0f1816a23c55be3c9ca0674050adb9065bef312bda1d41c6f2bdd914ff73",
+  "generated_token_ids_sha256": "bf8009aba6200352e4cae39b2f9312833f3085d08d00362d609abf3e5e14133e",
+  "input_identity_sha256": "8483ca1cc6ef4959fc951653cb5dbd9a34bc6dfaedc7380c695b2f3daed0c815",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "6844846ad6cb32432cf0e0b4240e6320fc23cc79a90aa27db782541fa9be66d5",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic lights change from red to green during the unit, indicating that vehicles are permitted to proceed. However, the ego vehicle and surrounding vehicles are initially stopped at a red light and then begin to move forward as the light turns green. This requires a noticeable acceleration or response from the driver to resume motion, which constitutes a marked response to the traffic control. Additionally, the presence of multiple vehicles in close proximity and the need to merge or adjust speed as traffic resumes adds to the need for attentive driving.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "65400052ed11bc2d3065fb6e7df643d8955210af17462b2c69438df679fa881e",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic lights change from red to green during the unit, indicating that vehicles are permitted to proceed. However, the ego vehicle and surrounding vehicles are initially stopped at a red light and then begin to move forward as the light turns green. This requires a noticeable acceleration or response from the driver to resume motion, which constitutes a marked response to the traffic control. Additionally, the presence of multiple vehicles in close proximity and the need to merge or adjust speed as traffic resumes adds to the need for attentive driving.\"\n}",
+  "raw_response_sha256": "df6994727054800d56dcbdbf9bef20dd1a41bcd79f6683f74da6208267400971",
+  "record_payload_sha256": "c4d9b6175226f83245369de5e447c01dc6cefafbc9817ffb486ed0e7175ff21e",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.257699030997173,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 19.897477323000203,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0142",
+  "unit_ordinal": 1270,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0378:1786355457626532970",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "fe2b79e7b585511886fb406eb448dd6721be75441efe436162c8910ba343ced7",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "68e56f83555da4180a55e77d94b53866bd5d314992012c951e1e9c69c71e545c",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "449d2d7abced1993a11766ded5444dafee22739c2b80235cee1cb677f61cd740",
+  "generated_token_ids_sha256": "6f3f16add80081f3bc9016123d75e754b94168d5094c2a9a54ffef78e82df353",
+  "input_identity_sha256": "65c583d2051e2509ff99703388304b62cb0a2ada776f6e8a8dfecafc0a5c90af",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "17deafc62b79e19c801e9c3eafe31bddb5dd0ec9fe9f8fe01ce526a81babd0b2",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light for the ego direction changes from green to yellow and then to red within the 10-second unit, indicating that the ego driver must prepare to stop. Additionally, vehicles ahead begin to slow down and come to a stop, requiring a noticeable braking action to avoid collision. The presence of motorcycles and pedestrians near the intersection also increases the need for caution and controlled deceleration.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "b48ae048fe04a4998408407d7a0a6936962fabf6e5ffcd93d0178b1e07366214",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light for the ego direction changes from green to yellow and then to red within the 10-second unit, indicating that the ego driver must prepare to stop. Additionally, vehicles ahead begin to slow down and come to a stop, requiring a noticeable braking action to avoid collision. The presence of motorcycles and pedestrians near the intersection also increases the need for caution and controlled deceleration.\"\n}",
+  "raw_response_sha256": "17ae77a48a90c74b3071e77543f55f3fc5f5b00cee4dde155b554f34ab037b72",
+  "record_payload_sha256": "dab3078cce11c38c889c1dcf0940637233a2195512a76dffda136dfd06ac8868",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 15.690468485001475,
+    "model_load_seconds": 20.342561935998674,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 17.482738908998726,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0378",
+  "unit_ordinal": 378,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

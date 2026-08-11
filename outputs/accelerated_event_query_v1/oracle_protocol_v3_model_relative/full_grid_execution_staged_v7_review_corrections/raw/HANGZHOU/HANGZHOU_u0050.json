@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0050:1786348887922713020",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "73cce4327ef1649a8782cce0dd11bf5e2d62d72c4df9c9ed12de3534b723bf00",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "197a81158cee15e472bfa29eab7a4b8b827179e144ea45721d30b9c60d054ac7",
+  "generated_token_ids_sha256": "5f309a66d57a9fce87fc93e46e9cc2890fc7801ad241ea34f411ba508afc2c8a",
+  "input_identity_sha256": "77e85032c7601dfbbbe550f16ba2498731d491861e4cdad53e81ad24657d12c4",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "6aa0b2cd7d201aa7b65ccd2c1f533e3437e77ce7a5cdd8f41e7dd9369a82cb2e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light for the ego vehicle's lane changes from red to green during the unit, indicating a transition from stopping to proceeding. Additionally, the ego vehicle is approaching a stop line with other vehicles ahead, and the countdown timer on the traffic light decreases from 40 to 32 seconds, suggesting a need for braking or slowing down to stop before the light turns red. The presence of multiple vehicles in close proximity and the need to respond to the traffic signal require an attentive driver to perform a noticeable slowdown or braking action.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "6c3bb777709ff388b54a538e47644843b0f5f276b23a694a97e169cb80ec1ffb",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light for the ego vehicle's lane changes from red to green during the unit, indicating a transition from stopping to proceeding. Additionally, the ego vehicle is approaching a stop line with other vehicles ahead, and the countdown timer on the traffic light decreases from 40 to 32 seconds, suggesting a need for braking or slowing down to stop before the light turns red. The presence of multiple vehicles in close proximity and the need to respond to the traffic signal require an attentive driver to perform a noticeable slowdown or braking action.\"\n}",
+  "raw_response_sha256": "29f87902f21a4097ac8f0ccb9f69d4a7c7c5fbbb8e24c0c78de3ca52023bf375",
+  "record_payload_sha256": "c11cb0bc304f8852fc9d8bf26d6c2f6fd99ffce458b55774fe89f8d225ba4bf0",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.65153551500407,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.3091444160018,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0050",
+  "unit_ordinal": 617,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

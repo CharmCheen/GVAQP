@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0241:1786375390337119174",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "fe0905c6edde43f84031235448df30b2b39f6db55f9d516ebbeb5578fee05f8b",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "9f1c3893499464335f8ed62ff5a581ac0c9fdd886050ac20ec01767d4ca7b6f0",
+  "generated_token_ids_sha256": "0b000602136540945db8796e2f081a37fb7488e3a5ad46f7ac2eeb3059da6bb0",
+  "input_identity_sha256": "96d95c176b8a3b9e09820d6b42e9b19077b5ef346833641e830722eecca7c036",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "44d06cedf51ec1380be2cad6a014da74a35952cc4c6a7e662cada96d2d8d083f",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane urban road with clear visibility. The lead vehicle (a blue SUV) maintains a consistent speed and distance, and there are no sudden changes in traffic flow, road obstructions, or traffic control signals requiring a marked response. A cyclist is visible on the right sidewalk, but not entering the roadway or threatening the ego path. The navigation overlay indicates a straight path ahead with no immediate turns or stops required. All conditions suggest normal, steady driving without the need for braking, slowing, or avoidance maneuvers.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "b9741e3e8bb03008e5b2386ba647cff8b5b2f0ee10d7fb0c40484fc07686f0db",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane urban road with clear visibility. The lead vehicle (a blue SUV) maintains a consistent speed and distance, and there are no sudden changes in traffic flow, road obstructions, or traffic control signals requiring a marked response. A cyclist is visible on the right sidewalk, but not entering the roadway or threatening the ego path. The navigation overlay indicates a straight path ahead with no immediate turns or stops required. All conditions suggest normal, steady driving without the need for braking, slowing, or avoidance maneuvers.\"\n}",
+  "raw_response_sha256": "fec85c4ee92b9cf5a6a750bb872f23fd13b574889a17b242ea106cbdf79c4621",
+  "record_payload_sha256": "b3b38aef7d77cdd9c39ee0e07ac124cd48abb619f72d8782b34dc74916326047",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 20.084447367989924,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 21.748383092999575,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0241",
+  "unit_ordinal": 1369,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

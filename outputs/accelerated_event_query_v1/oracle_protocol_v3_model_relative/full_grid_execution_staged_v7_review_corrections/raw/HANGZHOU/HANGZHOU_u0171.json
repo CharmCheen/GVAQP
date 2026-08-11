@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0171:1786350974488242178",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "ce95dd0ed5a5e38d5deab7e7409e0a697181dd79c13317692aab114b75df32a8",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "bdd160e5cabf1cf4e35247c2e10e5a0662bc922fd83c046721fba43e27fe90bb",
+  "generated_token_ids_sha256": "1050f6ad3881efe15b0a6bee62d89729ac8e8173af96fffa97871c88eba0d978",
+  "input_identity_sha256": "804cf3f99f7f26e12ed05a5276e97c230f12605bb2e32d85d6c29ac1ed15840f",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "254323e6e3f2b79fc50a3f872d2e99712cba02f27faaccbfe657a5257b2532fa",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a bridge with clear visibility. Other vehicles are present but maintain safe distances and are not exhibiting sudden slowing, stopping, or path intrusion. There are no visible obstacles, traffic controls requiring immediate response, or road conditions that would necessitate a noticeable slowdown, braking, or avoidance maneuver. Pedestrians and motorcyclists are on the side of the bridge, not in the driving lane. The scene remains consistent with normal driving conditions throughout the unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "0b22b262a949ffb51ed944e37e0e9a028c21ad7d463a9f4c8c325035ac1f62e2",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a bridge with clear visibility. Other vehicles are present but maintain safe distances and are not exhibiting sudden slowing, stopping, or path intrusion. There are no visible obstacles, traffic controls requiring immediate response, or road conditions that would necessitate a noticeable slowdown, braking, or avoidance maneuver. Pedestrians and motorcyclists are on the side of the bridge, not in the driving lane. The scene remains consistent with normal driving conditions throughout the unit.\"\n}",
+  "raw_response_sha256": "01b933942578d710159e3fb8eb7c743c4df1504dff48722f076ee7bd1822d269",
+  "record_payload_sha256": "ca9c379f7321aa7e848b69100f6b8af27402d0589e961206f253791547ab9d92",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.320631855996908,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.00039088199992,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0171",
+  "unit_ordinal": 738,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

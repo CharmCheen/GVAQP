@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0397:1786378500231758348",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "873ce3d982f0a469300cf9c6e1c8471165a6ef24469c3dda3257a3ba93cc9250",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "c29a407768fa5b4a4a30a1fad3addb2c712bf1be7b3e9f6be4f0a217ed2087ed",
+  "generated_token_ids_sha256": "100c0e11dcf327edc70d4acf88e3fbe2dcfea4a1d684c58c52e4169663668c77",
+  "input_identity_sha256": "ff0307932c5dae9b81504c19f48de7901e010b3d05ef746c32955410ed9493c8",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "cb90ba9ae582b5f695b33b8e9faa738f89ea08f6fc2d373f240ff29c718e3791",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on a multi-lane road during sunset with clear visibility. Traffic flow is steady, and there are no sudden changes in speed, braking, or maneuvers required. Road signs indicate speed limits (e.g., 40 km/h) and directions, but the ego vehicle appears to be following normal traffic patterns without any visible need for a marked response such as braking or avoidance. Pedestrians are visible on the sidewalk, but they are not entering the roadway or posing a threat to the ego path. No lead vehicle is suddenly slowing or stopped, and no obstacles or road conditions require a marked speed or path change.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "dd12d9a6db20fe24bbe1226caf007341cc06aa1441b3b44b56847af79c5b1f1f",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on a multi-lane road during sunset with clear visibility. Traffic flow is steady, and there are no sudden changes in speed, braking, or maneuvers required. Road signs indicate speed limits (e.g., 40 km/h) and directions, but the ego vehicle appears to be following normal traffic patterns without any visible need for a marked response such as braking or avoidance. Pedestrians are visible on the sidewalk, but they are not entering the roadway or posing a threat to the ego path. No lead vehicle is suddenly slowing or stopped, and no obstacles or road conditions require a marked speed or path change.\"\n}",
+  "raw_response_sha256": "b94c43ccd6696b16b119676d2c292fc7117d57d57c49bd624511777c99514972",
+  "record_payload_sha256": "6a843eb44100980bd4f72903a2dc5b670a493d1d558d47e57b8d4f0a11bd2507",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 23.471705158008263,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 25.28581518800638,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0397",
+  "unit_ordinal": 397,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

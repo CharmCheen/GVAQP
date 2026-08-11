@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0527:1786379871606203105",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "1cd6db9499e1f847f87b63a5c5ca48bd1230232fe6c64baedfa46a8a5239ca43",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "71902a36ed0c412718b68fa5b24bfb8fad744cd920af9a8bbdf8e66fc82bcf52",
+  "generated_token_ids_sha256": "1257ff7f786a19e1627de367ecdb6afdf25da769fabcf0d0ea1c2d0ceacff73e",
+  "input_identity_sha256": "b034ca1e5e75bf40830812f23d86d62e953041894c3fc59f403bc36d4359d2fa",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "45a2deebf14f2fb5caf17b978ff9410c3aa5de85084f503cd1e99c8bb1180794",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching a traffic signal that turns red during the unit, as indicated by the countdown timer decreasing from 28 to 19 seconds and the red light becoming visible at the intersection. The lead vehicles are slowing down and stopping, indicating a required braking action for the ego driver to comply with the traffic signal. This constitutes a noticeable slowdown or braking action required due to a visible traffic control.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "a3110ec0ac515fdf45f78ad6327c86266e7db62add8961d9faebc8ddd87bc2e1",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching a traffic signal that turns red during the unit, as indicated by the countdown timer decreasing from 28 to 19 seconds and the red light becoming visible at the intersection. The lead vehicles are slowing down and stopping, indicating a required braking action for the ego driver to comply with the traffic signal. This constitutes a noticeable slowdown or braking action required due to a visible traffic control.\"\n}",
+  "raw_response_sha256": "d1674b77d2a40450d7cc7440e770c73c910ab0eef411d0e306000476473ead6e",
+  "record_payload_sha256": "0103c1a7946280a5990cb82149ae53505049999d9aba28a2dec464546b6604de",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 15.381962786006625,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 16.245343564994982,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0527",
+  "unit_ordinal": 1094,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}
