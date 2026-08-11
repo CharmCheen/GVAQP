@@ -1,0 +1,13 @@
+# Material commands executed for ARC-CACHED-REPLAY-v1
+git status --short --branch
+git show --stat --oneline --decorate 97d3412a9
+git show --format=fuller --find-renames 97d3412a9
+sha256sum try_or_no/arc_source/arc/arc.py try_or_no/arc_source/arc/pruning_phase.py try_or_no/arc_source/arc/refinement_phase.py try_or_no/arc_source/arc/tools.py
+pytest -q tests/arc_cached_replay/test_arc_cached_replay.py  # failed collection: PYTHONPATH absent
+PYTHONPATH=src pytest -q tests/arc_cached_replay/test_arc_cached_replay.py  # intermediate failures exposed NumPy-2/unit-grid issues
+PYTHONPATH=src pytest -q tests/arc_cached_replay/test_arc_cached_replay.py  # 15 passed
+PYTHONPATH=src python scripts/run_arc_cached_replay.py
+PYTHONPATH=src pytest -q tests/arc_cached_replay/test_arc_cached_replay.py tests/test_smdp_action_legality.py tests/test_smdp_budget_accounting.py tests/test_smdp_controller_fallback.py tests/test_smdp_determinism.py tests/test_smdp_oracle.py tests/test_smdp_state_causality.py tests/psvr_runtime/test_deadline_guard.py tests/psvr_runtime/test_runner_boundaries.py tests/accelerated_event_query/test_post_deadline_event_immutability.py tests/partial_scan_v2/test_run_recovery.py tests/partial_scan_v2/test_runtime_accounting.py  # 74 passed
+PYTHONPATH=src python -m compileall -q src/garc_eval/arc_cached_replay scripts/run_arc_cached_replay.py  # passed
+git diff --check  # passed
+PYTHONPATH=src python scripts/validate_arc_cached_replay_outputs.py  # repaired rerun recomputed 180 rows and checked 640 artifact hashes with zero failures

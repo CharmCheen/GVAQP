@@ -1,0 +1,92 @@
+{
+  "decoding": {
+    "cublas_workspace_config": ":4096:8",
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "seed": 20260729,
+    "torch_deterministic_algorithms": true
+  },
+  "expected_processor_environment": {
+    "numpy": "2.4.6",
+    "opencv": "4.13.0",
+    "pillow": "12.1.1",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0"
+  },
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "failure_semantics": {
+    "authoritative_fields": [
+      "label"
+    ],
+    "diagnostic_fields": [
+      "confidence",
+      "evidence"
+    ],
+    "event_time_fields_forbidden": true,
+    "labels": [
+      "relevant",
+      "not_relevant",
+      "unknown"
+    ],
+    "parse_failure_is_distinct": true
+  },
+  "fresh_execution_root": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_execution_staged_v7_review_corrections",
+  "model": {
+    "content_hash": "3febe26ff0cee468bf48dc733e4bca559c8f13f8fe09f931a1e0808ba7c58873",
+    "host_execution": "FP8 checkpoint dequantized to BF16 on exactly two A100-80GB GPUs",
+    "path": "models/Qwen3-VL-32B-Instruct-FP8",
+    "processor": {
+      "class": "transformers.AutoProcessor resolved from the frozen local checkpoint",
+      "do_sample_frames": false,
+      "pre_sampled_video_frames": true,
+      "sampling_semantics": "nearest source frame to endpoint-inclusive exact-rate temporal targets"
+    }
+  },
+  "observed_processor_environment": {
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "pillow": "12.1.1",
+    "python": "3.13.2",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.5.4"
+  },
+  "prior_labels_reuse": "FORBIDDEN_BY_V7",
+  "processor_environment_match": false,
+  "protocol_bindings": {
+    "execution_config_hash": "07f186338d3daace6f56dd023b730811e9cc8aeb9818c20b9a312d740d59e81c",
+    "execution_seal_hash": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+    "k3_config_hash": "ebcc3907a64b463060ce36ec5e4b4c188ecc12c3c1e434e1e8554b22112be200",
+    "parser_hash": "4820b25ba2652dd3fb9fb734aadb5e6f0e06c513539b2b568d4e889cfbe11390",
+    "preregistration_hash": "284cfa253e037418d7902bed8e95483a739895c89243c01650363460f43ecf5b",
+    "prompt_hash": "ffab97aeb65b7b8fddf8ce6fa9964319cda8b740aa87f90a3ed1df80c7c5c99e",
+    "query_definition_hash": "ffab97aeb65b7b8fddf8ce6fa9964319cda8b740aa87f90a3ed1df80c7c5c99e",
+    "source_bindings_hash": "1fd0fa7f6e5901d001e1f35228b991fd912bfcef4bd59b842c12e4f7d3c6097e",
+    "unitization_hash": "570ba03ce2678ec9168fb213f92d4ef30ec8306369c93159827e33ea3cc5b908"
+  },
+  "query_id": "Q_DRIVER_RESPONSE_V1",
+  "query_semantics_zh": "\u67e5\u627e\u9700\u8981\u9a7e\u9a76\u5458\u660e\u663e\u51cf\u901f\u3001\u5236\u52a8\u6216\u907f\u8ba9\u7684\u4e8b\u4ef6\u3002",
+  "reference_relation_semantics": "frozen K3 four-state relation with at most one short unknown bridge and parse_failure hard barrier",
+  "status": "RECOVERED_BUT_NOT_EXECUTABLE_IN_CURRENT_RUNTIME",
+  "unitization": {
+    "calls_by_video": {
+      "DALI": 567,
+      "HANGZHOU": 561,
+      "WUHAN": 347
+    },
+    "exact_call_count": 1475,
+    "exact_frame_occurrence_count": 30932,
+    "finite_stream_boundary_rule": "preserve temporal target and ideal CFR index; resolve an out-of-stream right-boundary request to the unique last available source frame; reject any repeated-frame result",
+    "model_load_count": 3,
+    "normal_unit_seconds": 10.0,
+    "reload_count": 0,
+    "retry_count": 0,
+    "sampling_fps": 2.0,
+    "tail_frame_counts": {
+      "DALI_u0566": 12,
+      "HANGZHOU_u0560": 2,
+      "WUHAN_u0346": 6
+    }
+  }
+}

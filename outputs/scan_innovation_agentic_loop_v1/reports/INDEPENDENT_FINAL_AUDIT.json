@@ -1,0 +1,69 @@
+{
+  "adversarial_conclusion": "The negative Gate decision is supported. Any combined-table lineage would favor, not weaken, the rejected method; the shipped fallback has no such dependency.",
+  "audit_script_hash": "59e4d5fa9728ebacd1e0f4cb861c9d1942de4afbdb8a32443e3a71e050471721",
+  "checks": [
+    {
+      "check": "legal_final_state",
+      "details": "",
+      "pass": true
+    },
+    {
+      "check": "h002_gate_rejected",
+      "details": "",
+      "pass": true
+    },
+    {
+      "check": "h003_gate_rejected",
+      "details": "",
+      "pass": true
+    },
+    {
+      "check": "preview_cost_caps",
+      "details": "H002=0.052925; H003=0.070582",
+      "pass": true
+    },
+    {
+      "check": "scheduler_not_run_after_gate_failure",
+      "details": "",
+      "pass": true
+    },
+    {
+      "check": "new_physical_not_run_after_gate_failure",
+      "details": "",
+      "pass": true
+    },
+    {
+      "check": "fallback_policy_forbidden_inputs_absent",
+      "details": "{\"src/garc_eval/scan_scheduler/config.py\": [], \"src/garc_eval/scan_scheduler/coverage.py\": [], \"src/garc_eval/scan_scheduler/policy.py\": []}",
+      "pass": true
+    },
+    {
+      "check": "fallback_yolo_disabled",
+      "details": "",
+      "pass": true
+    },
+    {
+      "check": "required_fallback_artifacts_exist",
+      "details": "",
+      "pass": true
+    },
+    {
+      "check": "relevant_tests_pass",
+      "details": "..............                                                           [100%]\n14 passed in 0.03s\n",
+      "pass": true
+    },
+    {
+      "check": "fallback_cli_deterministic",
+      "details": "",
+      "pass": true
+    },
+    {
+      "check": "selection_label_columns_explicitly_dropped",
+      "details": "builder reads combined table for public geometry/cost; no label column reaches selection",
+      "pass": true
+    }
+  ],
+  "checks_passed": 12,
+  "checks_total": 12,
+  "status": "PASS"
+}

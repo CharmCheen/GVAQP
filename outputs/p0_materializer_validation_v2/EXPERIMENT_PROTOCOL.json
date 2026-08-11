@@ -1,0 +1,177 @@
+{
+  "budget_semantics": "QUERY_BUDGET: cached semantic/oracle invocation count; not wall-clock and not a hard deadline",
+  "budgets": [
+    5,
+    10,
+    20,
+    50,
+    80,
+    100
+  ],
+  "candidate_universe": "one frozen prospective V3 candidate per V3 unit; same candidate table for all selectors/materializers",
+  "controlled_pair_invariant": [
+    "same candidate universe",
+    "same selected unit ids",
+    "same query order",
+    "same oracle outcomes",
+    "same oracle call count",
+    "same evaluator",
+    "only materialization policy differs"
+  ],
+  "created_at_utc": "2026-08-11T05:59:33.288277+00:00",
+  "dirty_worktree": [
+    "?? MAB_RESEARCH_DIRECTION_DECISION.md",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_execution_staged_v7_review_corrections/",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_execution_staged_v8_runtime_recovery/",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_execution_staged_v9_runtime_recovery/",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_preregistration_staged_v8_runtime_recovery/",
+    "?? outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_preregistration_staged_v9_runtime_recovery/",
+    "?? outputs/long_horizon_evidence_convergence_v1/",
+    "?? outputs/p0_materializer_validation_v1/",
+    "?? outputs/v10_multiseal_reference_v1/",
+    "?? outputs/v3_reference_release_v1/",
+    "?? outputs/v3_runtime_recovery_v1/",
+    "?? outputs/v3_scan_proxy_preregistration_v1/",
+    "?? scripts/complete_v3_scan_proxy_release.py",
+    "?? scripts/create_v10_multiseal_protocol.py",
+    "?? scripts/finalize_v10_multiseal_reference.py",
+    "?? scripts/finalize_v3_prospective_scan_proxy.py",
+    "?? scripts/monitor_v9_full_grid_completion.py",
+    "?? scripts/prepare_p0_materializer_validation_pause.py",
+    "?? scripts/prepare_v3_reference_release_pause.py",
+    "?? scripts/prepare_v3_runtime_recovery.py",
+    "?? scripts/preregister_v3_scan_proxy.py",
+    "?? scripts/run_p0_v3_materializer_validation.py",
+    "?? scripts/run_v10_multiseal_oracle.py",
+    "?? scripts/run_v10ms_recovery_pipeline.sh",
+    "?? scripts/run_v3_prospective_scan_proxy.py",
+    "?? scripts/v8_full_grid_runtime_recovery.py",
+    "?? scripts/verify_v3_scan_proxy_release.py",
+    "?? scripts/wait_and_launch_v10ms_shadow.sh",
+    "?? scripts/wait_and_run_v10ms_any_two_a100.sh"
+  ],
+  "downstream_result_inputs_used_to_design_protocol": false,
+  "evaluation_kind": "MODEL_RELATIVE_EVALUATION",
+  "input_artifacts": {
+    "DALI_candidate_table": {
+      "path": "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/DALI/candidate_table.parquet",
+      "sha256": "2d9feaf0cf87e51198aa2d2ee3d3d3150b53f77aecec208b49640743c89651a1"
+    },
+    "DALI_proxy_table": {
+      "path": "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/DALI/proxy_table.parquet",
+      "sha256": "ed1121c7bef775370b5cef541b0781d2287b70781a7b0d0900bfbb10e72bc21e"
+    },
+    "HANGZHOU_candidate_table": {
+      "path": "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/HANGZHOU/candidate_table.parquet",
+      "sha256": "9e3da3ae245bdbcc2bd53ba24cc9d72dcf5e23525336294703fc5d3a6d22f1d1"
+    },
+    "HANGZHOU_proxy_table": {
+      "path": "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/HANGZHOU/proxy_table.parquet",
+      "sha256": "d5fffe45ebe1816d22cc94080f978d0d8deb9fb96ed557ecd898316243db0ec5"
+    },
+    "WUHAN_candidate_table": {
+      "path": "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/WUHAN/candidate_table.parquet",
+      "sha256": "ca5d6348bf19fc1d4be7dbfeaa6de272c532b3486ece1233cfdf86c49a1cf952"
+    },
+    "WUHAN_proxy_table": {
+      "path": "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/WUHAN/proxy_table.parquet",
+      "sha256": "0e762cc07c49c6c4786812492bb376f105172e2c97e441e9705cf5b14f6cac16"
+    },
+    "final_unit_reference": {
+      "path": "outputs/v10_multiseal_reference_v1/FINAL_UNIT_REFERENCE.parquet",
+      "sha256": "4f732859e7aaca6a4d8098b3da653620c777e85b5fcc31dae5c2b91fb2260fcf"
+    },
+    "frozen_k3_config": {
+      "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/k3_eventization/K3_UNIT_EVENT_CONFIG_V3.json",
+      "sha256": "ebcc3907a64b463060ce36ec5e4b4c188ecc12c3c1e434e1e8554b22112be200"
+    },
+    "reference_circularity_audit": {
+      "path": "outputs/v10_multiseal_reference_v1/REFERENCE_CIRCULARITY_AUDIT.md",
+      "sha256": "bb3b8a99d5fdc73ffa2045e4aec304dda8d2997e2c9f3f15faff9b259bc407b2"
+    },
+    "reference_event_relation": {
+      "path": "outputs/v10_multiseal_reference_v1/K3_MODEL_RELATIVE_EVENT_RELATION.parquet",
+      "sha256": "f16e24103921ada7f82360864211372d68a06ca2f18be5f7319dc6e7e4d94409"
+    },
+    "scan_proxy_protocol": {
+      "path": "outputs/v3_scan_proxy_preregistration_v1/FROZEN_V3_SCAN_PROXY_PROTOCOL.json",
+      "sha256": "089f44f5e27dc398f2b10018b39ddb00eff1c7f277ad023af7015d4fac5e34f1"
+    },
+    "v10_reference_manifest": {
+      "path": "outputs/v10_multiseal_reference_v1/REFERENCE_MANIFEST.json",
+      "sha256": "53bceb8be451e8ac853810bdde75ad25f6e0f89477621260d178d2dfbbef6ed2"
+    }
+  },
+  "materializers": {
+    "K0": {
+      "definition": "For one video/query trace, emit exactly one VERIFIED_EVENT spanning min(start) to max(end) of every queried relevant unit; emit no event with no queried relevant units.  It deliberately does not inspect queried negatives, unknowns, parse failures, gaps, or duration caps.  This is the V3-compatible expression of historical Stage-0 C0 common_naive_merge / merge_all_anchors.",
+      "experiment_only": true,
+      "historical_lineage": "scripts/stage0_6_materializer_ablation.py:C0_common_naive_merge",
+      "name": "NaiveAllPositiveSpan"
+    },
+    "K3": {
+      "config_sha256": "7906ab2da20cab7edbe0f379224b60160c7a857cd81ab7f4fec42f54ab9629b9",
+      "name": "CurrentV3K3UnitEventAdapter",
+      "source": "src/garc_eval/accelerated_event_query/k3_unit_event_adapter.py"
+    }
+  },
+  "primary_matcher": {
+    "boundary_tolerance_sec": 0.0,
+    "duplicate_rule": "unmatched_overlapping_prediction_is_false_positive",
+    "eligibility": "strict_positive_temporal_overlap",
+    "minimum_tiou": 0.0,
+    "name": "v3_one_to_one_max_cardinality_then_tiou",
+    "source": "K3_UNIT_EVENT_CONFIG_V3.json and accelerated_event_query.matching.MatchConfig"
+  },
+  "protocol_hash": "be1c8e1b4e1121ec67b00f5bbc5deff6d5a18dbda94622c834d975ad29e50a8f",
+  "protocol_id": "P0_V3_SELECTOR_X_MATERIALIZER_CONTROLLED_REPLAY_V2",
+  "query_id": "Q_DRIVER_RESPONSE_V1",
+  "reference_circularity": "QUALIFIED_BUT_VALID; disclose that reference events use full-grid K3 grouping",
+  "runner": {
+    "path": "scripts/run_p0_v3_materializer_validation.py",
+    "sha256": "a6c5015feb596c398aecb9188053acf11a7c69835ff5a18c18de8d2740dc1be5"
+  },
+  "seeds": [
+    0
+  ],
+  "selectors": [
+    {
+      "description": "Fixed evenly spaced temporal ordering over the frozen candidate universe.",
+      "kind": "uniform_temporal",
+      "name": "UniformTemporal",
+      "uses_proxy": false
+    },
+    {
+      "description": "Descending frozen cheap proxy_score; deterministic candidate-order/id ties.",
+      "kind": "static_proxy_rank",
+      "name": "StaticProxyRank",
+      "uses_proxy": true
+    },
+    {
+      "description": "Static recursive temporal bisection order; no oracle feedback or proxy labels.",
+      "kind": "temporal_coverage",
+      "name": "TemporalCoverage",
+      "uses_proxy": false
+    }
+  ],
+  "semantic_oracle_invocations": 0,
+  "sensitivity_matcher": {
+    "boundary_tolerance_sec": 0.0,
+    "minimum_tiou": 0.3,
+    "name": "one_to_one_tiou_at_least_0_30"
+  },
+  "source_commit": "2c0d35c888f9711cacab964672c6094fc98e5c49",
+  "statistics": {
+    "accept_direction_threshold": 0.75,
+    "analysis_unit": "selector x video x budget deterministic paired cell",
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20260811,
+    "material_effect_threshold_f1": 0.02
+  },
+  "status": "FROZEN_BEFORE_P0_RESULT_REPLAY",
+  "videos": [
+    "DALI",
+    "HANGZHOU",
+    "WUHAN"
+  ]
+}

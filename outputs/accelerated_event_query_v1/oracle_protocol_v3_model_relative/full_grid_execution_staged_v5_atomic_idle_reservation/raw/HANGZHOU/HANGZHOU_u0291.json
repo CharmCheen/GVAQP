@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0291:1785447932342475261",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "e15b9a1a9be96400f9cf1a8af0fd9549e002e793c2a404a2a06d55a6620889be",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "b4625e43511377b3268393dfc1900e092b8d4a7785fa3c8dd8eb51ee20c6ae36",
+  "generated_token_ids_sha256": "71a7e673e9a7c78394c88e45df642e336e41ca6a4bece1697601545f80e81849",
+  "input_identity_sha256": "20d0221f62ebbf218a526aca32c20f5379684f668c88c11a9bb368a90f24d134",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "7498baf4d7074261056c0e394782ad42372604c3366a22ebb2bce457dca0f2ba",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily through a city street with clear lane markings and traffic signals. There are no sudden obstacles, stopped vehicles, or road users entering the path that would require a noticeable slowdown, braking, or avoidance maneuver. The traffic light is green, and the road ahead is clear. A motorcyclist appears at the intersection but is not in the ego vehicle's immediate path and does not pose a threat requiring a marked response within this unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "c543da76d28d6d543d732d406af97549da4832991a51ede5ca212ddaaa63f8b5",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily through a city street with clear lane markings and traffic signals. There are no sudden obstacles, stopped vehicles, or road users entering the path that would require a noticeable slowdown, braking, or avoidance maneuver. The traffic light is green, and the road ahead is clear. A motorcyclist appears at the intersection but is not in the ego vehicle's immediate path and does not pose a threat requiring a marked response within this unit.\"\n}",
+  "raw_response_sha256": "8e34ce18e28fcff45e6a9410675c972e033aa27da438a0f671ff3e949b67ee49",
+  "record_payload_sha256": "609874e64d06b7f88fea15cee6da951a4ae93b85ba7bffea0fdeee6351bc3b0f",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.935543971136212,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.807796565815806,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0291",
+  "unit_ordinal": 858,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

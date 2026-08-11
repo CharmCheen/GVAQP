@@ -1,0 +1,93 @@
+{
+  "current_processor_environment": {
+    "numpy": "2.2.6",
+    "opencv": "5.0.0",
+    "pillow": "12.1.1",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.5.4"
+  },
+  "frozen_processor_environment": {
+    "numpy": "2.4.6",
+    "opencv": "4.13.0",
+    "pillow": "12.1.1",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0"
+  },
+  "full_lock_available": false,
+  "model": {
+    "content_hash": "3febe26ff0cee468bf48dc733e4bca559c8f13f8fe09f931a1e0808ba7c58873",
+    "generation_override": {
+      "cublas_workspace_config": ":4096:8",
+      "do_sample": false,
+      "max_new_tokens": 192,
+      "seed": 20260729,
+      "torch_deterministic_algorithms": true
+    },
+    "local_path": "models/Qwen3-VL-32B-Instruct-FP8",
+    "model_files": {
+      "chat_template.json": "2c1437f11fc16ab501b984c000f6e291c599f0d28d2c9c6bf2c4533e65429b42",
+      "config.json": "2329a2c9022d94906d5af9bafe93ca97cba0eedb5426fc42ca64f2bfcd65e949",
+      "generation_config.json": "400950911065ff26a690fdd65c7fc4dbd2f9015acc6e098d1a097b2491b0b847",
+      "preprocessor_config.json": "6a970fd06f30e6943b3e2c14d5d3b42d49b06cf99b99103d56689bef462d90f8",
+      "tokenizer.json": "ba85e4e5222d9f53d4bd00b303ef7e9743c8ac3d07e3c23f8498dbe17baa9a2d",
+      "tokenizer_config.json": "c2da771801886ad9ae98181793ffd3dfb7f1af30f6f7c6a4e15d7dbba52e2399",
+      "video_preprocessor_config.json": "e203bc065dfcd75226838b8e937d624bec8f0eb6ef6630a397e9a675f2873ea6"
+    },
+    "model_repo_revision": "UNKNOWN_FROM_REPOSITORY"
+  },
+  "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+  "processor_loading": {
+    "class": "transformers.AutoProcessor",
+    "local_files_only": true,
+    "trust_remote_code": true
+  },
+  "prompt": {
+    "path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/configs/query_prompt_v3_model_relative.txt",
+    "sha256": "ffab97aeb65b7b8fddf8ce6fa9964319cda8b740aa87f90a3ed1df80c7c5c99e"
+  },
+  "replay": {
+    "all_tensor_hashes_match": true,
+    "cells": [
+      {
+        "expected_tensor_hash": "9d46f7b1553945c07d67deb4ceaa0191b4f84915120b6ac6b668a3b8bde97b24",
+        "match": true,
+        "observed_tensor_hash": "9d46f7b1553945c07d67deb4ceaa0191b4f84915120b6ac6b668a3b8bde97b24",
+        "unit_id": "DALI_u0000",
+        "video_id": "DALI"
+      },
+      {
+        "expected_tensor_hash": "72352c99cd34526da9d909fb0bc80713aa17ca818d6788945a93f0f8db5a6a94",
+        "match": true,
+        "observed_tensor_hash": "72352c99cd34526da9d909fb0bc80713aa17ca818d6788945a93f0f8db5a6a94",
+        "unit_id": "HANGZHOU_u0000",
+        "video_id": "HANGZHOU"
+      },
+      {
+        "expected_tensor_hash": "9798aea1efd745540f9856298119881cad4b1c775dfdbc212f5089759bb2abd6",
+        "match": true,
+        "observed_tensor_hash": "9798aea1efd745540f9856298119881cad4b1c775dfdbc212f5089759bb2abd6",
+        "unit_id": "WUHAN_u0000",
+        "video_id": "WUHAN"
+      }
+    ],
+    "conclusion": "CURRENT_RUNTIME_OUTPUT_COMPATIBLE_FOR_FROZEN_PROCESSOR_INPUTS_ON_THREE_CHECKED_UNITS; semantic generation compatibility remains UNVERIFIED",
+    "kind": "processor_only_no_checkpoint_no_generation"
+  },
+  "runner_gate": "CURRENT_V7_RUNNER_REJECTS_VERSION_MISMATCH_BEFORE_MODEL_LOAD",
+  "status": "RECOVERED_SEMANTIC_PROCESSOR_IDENTITY_BUT_NOT_FULL_PACKAGE_LOCK",
+  "unknown_packages": [
+    "torchvision",
+    "tokenizers",
+    "accelerate",
+    "safetensors",
+    "flash-attn",
+    "decord",
+    "av",
+    "cuda_driver",
+    "ffmpeg"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "comparison_version": "SINGLE_VS_TWO_STAGE_DRAFT_V1",
+  "status": "WORKING_COMPARISON_NOT_PREREGISTERED",
+  "arms": {
+    "single_stage": "single_stage_control_v1",
+    "two_stage": "stage_a_discovery_v1_then_stage_b_adjudication_v1"
+  },
+  "paired_design": "Both arms receive the same frozen blinded windows and decoded frame sequence.",
+  "primary_decomposition": {
+    "discovery": "human-event recall before hazard adjudication",
+    "adjudication": "hazard precision over the union proposal set",
+    "end_to_end": "human-matched event recall and hazard precision"
+  },
+  "union_proposal_sources": [
+    "single_stage_events",
+    "two_stage_stage_a_proposals",
+    "legacy_cut_in_reference_events",
+    "human_discovered_events"
+  ],
+  "selection_rule": [
+    "Reject an arm that fails the common reference gate.",
+    "If only one arm passes, retain that arm for the next pilot version.",
+    "If both pass without a material calibrated quality difference, retain the lower-cost single-stage arm.",
+    "Retain two-stage only if its independent discovery or adjudication benefit is demonstrated rather than assumed."
+  ],
+  "required_reporting": [
+    "physical_call_count",
+    "gpu_seconds",
+    "parser_failure_rate",
+    "proposal_recall",
+    "adjudication_precision",
+    "end_to_end_event_f1",
+    "high_confidence_error_rate",
+    "repeat_consistency"
+  ]
+}

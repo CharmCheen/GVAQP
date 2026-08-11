@@ -1,0 +1,45 @@
+{
+  "allowed_decisions": [
+    "FULL_GRID_PASS_REFERENCE_RELEASED",
+    "FULL_GRID_INSUFFICIENT_ORACLE_COVERAGE",
+    "FULL_GRID_ABORTED_AUTHENTICATION",
+    "FULL_GRID_ABORTED_RUNTIME",
+    "FULL_GRID_FAILED_PROTOCOL",
+    "INSUFFICIENT_EVIDENCE"
+  ],
+  "construct_validity_diagnostics_are_non_gating": true,
+  "decision_mapping_payload_sha256": "54b3b3f069cfedb0e654505d31082502b2e629b0536332ec0bff03accda548ae",
+  "priority": [
+    {
+      "condition": "authentication or bound identity failure",
+      "decision": "FULL_GRID_ABORTED_AUTHENTICATION",
+      "rank": 1
+    },
+    {
+      "condition": "reload/retry/duplicate/ledger/GPU/cost/generation/runtime failure",
+      "decision": "FULL_GRID_ABORTED_RUNTIME",
+      "rank": 2
+    },
+    {
+      "condition": "fewer than 1475 authenticated terminal records or incomplete global state",
+      "decision": "INSUFFICIENT_EVIDENCE",
+      "rank": 3
+    },
+    {
+      "condition": "any parse_failure, schema violation, or K3 nondeterminism",
+      "decision": "FULL_GRID_FAILED_PROTOCOL",
+      "rank": 4
+    },
+    {
+      "condition": "global or per-video determined coverage below 0.99",
+      "decision": "FULL_GRID_INSUFFICIENT_ORACLE_COVERAGE",
+      "rank": 5
+    },
+    {
+      "condition": "all preceding gates pass",
+      "decision": "FULL_GRID_PASS_REFERENCE_RELEASED",
+      "rank": 6
+    }
+  ],
+  "status": "FROZEN_BEFORE_FULL_GRID_EXECUTION"
+}

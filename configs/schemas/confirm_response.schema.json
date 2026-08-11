@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["label", "confidence"],
+  "properties": {
+    "label": {"enum": ["positive", "negative", "abstain"]},
+    "confidence": {"enum": ["high", "medium", "low"]},
+    "event_start": {"type": ["number", "string", "null"]},
+    "event_end": {"type": ["number", "string", "null"]},
+    "event_type": {"type": ["string", "null"]},
+    "involved_object": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}

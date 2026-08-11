@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0090:1785444328696780873",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "8ddacd7418a0a68e52f536d90bcfb7174b6148ffa3503d4f9773b9e428a8e359",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "d474557d23d1a7db57113b29275040a3baf087bd80f6e7499485bbe1241d8fa5",
+  "generated_token_ids_sha256": "de3b236c17419e1ad89602a37be3863a582f349d7ecf41838f6624104f6b11a6",
+  "input_identity_sha256": "c712cd1ce364b10e95dccf13849ba0071c93c7fbdfcc6a5bd9924f48aba075a4",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "875aadcb2983f1fe47653cd6402ee161f38e2efdf152fdb4e2429055a0672bc5",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane bridge with clear visibility of the road ahead. Traffic is flowing smoothly, and there are no sudden changes in speed, braking, or obstacles requiring a marked response. The inset navigation display shows a green route with no warnings or alerts, and the road markings and lane discipline appear normal. No visible traffic control or hazard requires a noticeable slowdown or avoidance maneuver within this unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "4715943ba603a8e42f013eda4cb28b6455d494b995fb1ee1719ed81eeb2ddf1b",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane bridge with clear visibility of the road ahead. Traffic is flowing smoothly, and there are no sudden changes in speed, braking, or obstacles requiring a marked response. The inset navigation display shows a green route with no warnings or alerts, and the road markings and lane discipline appear normal. No visible traffic control or hazard requires a noticeable slowdown or avoidance maneuver within this unit.\"\n}",
+  "raw_response_sha256": "44706bb3956116d42ebc7056ccc0507d5fcad902955f37db09284281a8e6db13",
+  "record_payload_sha256": "afcfe5d96553b09f920ffdb03b68b935ac2e53b24418d2f70bb38498e486a26e",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.537700563669205,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 21.530956208705902,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0090",
+  "unit_ordinal": 1218,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

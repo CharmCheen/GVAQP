@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0081:1785443960952463773",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "cb2f0ea3cc2430ea54805308d427ba58e48bc4d973227aa2e93d71f6cbca37dc",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "630e83006c3614fe8b4379426967296adcd8d07d66e25368ba9002e7e4c4dcc0",
+  "generated_token_ids_sha256": "ab7e39ed4206953d5de93624f87b58f2d5b1cfc7fd837ed710203f400ae97d66",
+  "input_identity_sha256": "2fc74821c9737f712c8c650788b41ecae02e1e9fe16ceef5b34afc8f1ca51c09",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "2215ddf72d645139ed27005aefac1566dd0f36f833602f4786a2c5dae763ab4f",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a traffic signal that transitions from red to green during the unit. The countdown timer on the signal decreases from 41 to 13 seconds, indicating a change in signal state. Additionally, a white sedan is seen slowing down and stopping at the intersection ahead, suggesting a need for the ego driver to brake or slow down to comply with traffic control and maintain safe following distance. The presence of a pedestrian crossing and the signal change require a noticeable response from the driver.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "e12e87afbf57d470c4308c4f4749734647dceadbc0ff28f419432a295d3052a1",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a traffic signal that transitions from red to green during the unit. The countdown timer on the signal decreases from 41 to 13 seconds, indicating a change in signal state. Additionally, a white sedan is seen slowing down and stopping at the intersection ahead, suggesting a need for the ego driver to brake or slow down to comply with traffic control and maintain safe following distance. The presence of a pedestrian crossing and the signal change require a noticeable response from the driver.\"\n}",
+  "raw_response_sha256": "a28e379bb1aa204497c6d407ce58403b301d4b020432cdb0e201b860f7cc2dce",
+  "record_payload_sha256": "1709b410df3153142a6a923271b3ac6874a6629d0eb4dc8d9ab4b65f626ea5cb",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 20.188584972172976,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 20.953733284026384,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0081",
+  "unit_ordinal": 648,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

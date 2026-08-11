@@ -1,0 +1,92 @@
+{
+  "actual_a100_gpu_hours_including_load_and_call_overhead": 0.15172439083974396,
+  "attempt_event_counts": {
+    "ACCEPTED": 11,
+    "INFERENCE_COMPLETED": 11,
+    "INFERENCE_STARTED": 11,
+    "PREPARED": 11
+  },
+  "attempt_ledgers": {
+    "DALI": {
+      "event_count": 20,
+      "sha256": "d3229d894b01d8ff2b5a18b563b18ffbb50c3fa4768c1cddc432d65ab55f056c"
+    },
+    "HANGZHOU": {
+      "event_count": 12,
+      "sha256": "6892da9fb0e06da3bee8edcffb8f7068114a530031f51b5b5d26d24dcc573c0f"
+    },
+    "WUHAN": {
+      "event_count": 12,
+      "sha256": "c0f19ad6cd0d7f00dfa6a05d726d28fae3d64e0627a7ace31d602764f2d011b1"
+    }
+  },
+  "authentication_errors": [],
+  "compute_approval_sha256": "f41aa83625eafa9cf9817ef80dfb8f5cb314206078db6908461b69949dc81907",
+  "decision": "V3_SCHEMA_DETERMINISM_PASS_FULL_GRID_APPROVAL_REQUIRED",
+  "decision_file_sha256": "be04bc401d65835f32709f88a7ed492dac8ddf9136cecd14939e20a3ba59eb90",
+  "diagnostics_file_sha256": "75631abf284beb097b6a1ddc88f92685ebf4b8be5d9bbe27940d45fed5006bef",
+  "estimated_a100_gpu_hours_before_execution": 0.1856586522581185,
+  "evidence_manifest_sha256": "c034309844cca41e6bc85491ff5997423c2b517bb0b33568750032a7df91d836",
+  "execution_seal_sha256": "bf35f7f3c9f897f337a838f36991ab502cf538fd602b779ab8afd245b0b9ce61",
+  "failure_counts": {
+    "FAILED_POST_INFERENCE": 0,
+    "GENERATION_FAILED": 0,
+    "PRE_INFERENCE_ABORTED": 0,
+    "UNCERTAIN_INTERRUPTION": 0
+  },
+  "label_counts": {
+    "not_relevant": 10,
+    "relevant": 1,
+    "unknown": 0
+  },
+  "metrics_file_sha256": "2003e29a3d427a892c16c68925db3f0712d15ce73e37eca1a4c06461778d4df4",
+  "parse_status_counts": {
+    "ok": 11,
+    "parse_failure": 0
+  },
+  "physical_call_count": 11,
+  "raw_output_bytes": 167394,
+  "retry_count": 0,
+  "shards": {
+    "DALI": {
+      "a100_gpu_hours": 0.06619634549754361,
+      "call_count": 5,
+      "call_seconds_excluding_load": 101.27296029962599,
+      "execution_session_id": "20b23ed3378fb30a3377c04f84a4937c53de5a5fbf66677467bc3889043ffaa0",
+      "inference_seconds": 92.03886665217578,
+      "model_load_seconds": 17.88046159595251,
+      "physical_gpu_ids": [
+        1,
+        2
+      ]
+    },
+    "HANGZHOU": {
+      "a100_gpu_hours": 0.04104564764019516,
+      "call_count": 3,
+      "call_seconds_excluding_load": 55.763014106079936,
+      "execution_session_id": "dd87f3245aaf10e5b1bc0fdd8af6635d50b1faa9dec8a4d6e650caf01af70657",
+      "inference_seconds": 52.54227723181248,
+      "model_load_seconds": 18.119151646271348,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    },
+    "WUHAN": {
+      "a100_gpu_hours": 0.044482397702005176,
+      "call_count": 3,
+      "call_seconds_excluding_load": 62.62110508047044,
+      "execution_session_id": "bcb15682b23891caf8e9accfe6ef43dc599ae854eef37d8f5fe6d9d7c15f1cfe",
+      "inference_seconds": 57.11301844380796,
+      "model_load_seconds": 17.44721078313887,
+      "physical_gpu_ids": [
+        6,
+        7
+      ]
+    }
+  },
+  "status": "COMPLETED_AUTHENTICATED_ZERO_RETRY_RUN",
+  "submitted_frame_occurrences": 251,
+  "total_call_seconds_excluding_load": 219.65707948617637,
+  "total_inference_seconds": 201.69416232779622
+}

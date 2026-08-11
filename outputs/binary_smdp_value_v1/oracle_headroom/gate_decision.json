@@ -1,0 +1,63 @@
+{
+  "decision": "INSUFFICIENT_EVIDENCE",
+  "evidence_files": [
+    "dataset/pilot/dataset_manifest.json",
+    "oracle_headroom/informative_state_pilot.json",
+    "outputs/scan_confirm_decision_v1/reports/FINAL_DECISION.md",
+    "outputs/scan_confirm_common_utility_v1/reports/FINAL_DECISION.md",
+    "outputs/psvr_stage0b_physical_profile/operator_latency_summary.csv"
+  ],
+  "gates": {
+    "both_actions_informative": {
+      "passed": null,
+      "status": "NOT_ESTABLISHED"
+    },
+    "leave_best_video_out_positive": {
+      "passed": null,
+      "status": "NOT_EVALUABLE"
+    },
+    "multiple_video_contribution": {
+      "passed": null,
+      "status": "NOT_EVALUABLE"
+    },
+    "nonnegative_low_budget": {
+      "passed": null,
+      "status": "NOT_EVALUABLE"
+    },
+    "stable_oracle_headroom_over_r4": {
+      "passed": null,
+      "status": "NOT_ESTABLISHED"
+    },
+    "top_candidate_pathology_excluded": {
+      "passed": false,
+      "status": "NOT_EXCLUDED"
+    },
+    "zero_deadline_overrun": {
+      "passed": false,
+      "status": "FAILED"
+    }
+  },
+  "historical_context": {
+    "common_utility_static_gate": "FAIL",
+    "old_oracle_comparable": false,
+    "old_width16_multi_step_oracle_auc": 281.25,
+    "r4_macro_auc": 187.5,
+    "strongest_fixed": "R4_RATIO_25_75"
+  },
+  "learning_mainline_authorized": false,
+  "observed": {
+    "behavior_deadline_overruns": 9,
+    "conditioned_scan_better_states": 1,
+    "conditioned_tied_states": 4,
+    "conditioned_verify_better_states": 0,
+    "evaluated_v1_confirm_max_sec": 44.19692327167054,
+    "independent_physical_verify_max_sec": 16.062518546,
+    "independent_physical_verify_n": 20,
+    "informative_state_delta_anytime": 0.14455228821249974,
+    "informative_state_exact": false,
+    "v0_imputed_confirm_cost_units": {
+      "V0_Q1": 345,
+      "V0_Q2": 346
+    }
+  }
+}

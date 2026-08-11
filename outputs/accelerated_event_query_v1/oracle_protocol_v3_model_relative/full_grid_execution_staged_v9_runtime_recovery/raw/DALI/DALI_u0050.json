@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0050:1786371689816641317",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "cc0b695f10059b2b5cb9ba95a87c8238b77c8901a54d55b6155843e4ee787853",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "857b33d2cb5ecb06f6c656614fad352645fb35cf20ff8d60fa0d2afdf90f6469",
+  "generated_token_ids_sha256": "ae56483aa6c5175c43d68738fb46e079be823bb6a1b94560eda75333fa48620c",
+  "input_identity_sha256": "aa8b20fca3f8ff3071811b8bb9a96120eeefbecf4c4146393519439edb86c555",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "f7797c036568c715b21bf323f964d010205776a4521c3468595f303949f07d1a",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a clear, multi-lane urban road with visible lane markings and no immediate obstructions. The lead white vehicle maintains a consistent distance and speed, and there are no sudden changes in traffic flow, road conditions, or traffic signals requiring a marked response. Pedestrians and other road users are present but not encroaching on the ego path. The environment is well-lit with clear visibility, and no visible hazards or traffic controls necessitate a slowdown, braking, or avoidance maneuver within this unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "f1adb97d87d6725d98ce04c8871254a2ba4a98d2931aecacbcd3ed0263ab5f31",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a clear, multi-lane urban road with visible lane markings and no immediate obstructions. The lead white vehicle maintains a consistent distance and speed, and there are no sudden changes in traffic flow, road conditions, or traffic signals requiring a marked response. Pedestrians and other road users are present but not encroaching on the ego path. The environment is well-lit with clear visibility, and no visible hazards or traffic controls necessitate a slowdown, braking, or avoidance maneuver within this unit.\"\n}",
+  "raw_response_sha256": "4a60ad46a69599fb306cc389df8a29a9b695d064db49455f5c318318d5af1aac",
+  "record_payload_sha256": "1bb55488136ca64d0c01d7da68dd82480750db3a4330835130d2e94c642d09a5",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 20.459265849996882,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 22.100694509004825,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0050",
+  "unit_ordinal": 50,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

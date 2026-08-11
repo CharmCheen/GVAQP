@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0020:1786348377263081238",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "c5f68cdaadc36b475225071e9c0403acb1ff9add0196e357312d5df90cc54ed3",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "3fac8b15f22e0d6a6d410e644b341d5d12e6d7745b06322c5efc8416fcded126",
+  "generated_token_ids_sha256": "0f8106350219d1bdecf7adb4e3e174cab1eb36f8c8eb7968539350c67a75078a",
+  "input_identity_sha256": "f4de23c5e6407859d075c08d405e45b2935f43af1ecc8d41eefeacd84c1702d1",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "3984384896763db7b573b9da9aea98c39e87cf4e87f85e1aeea1ca4fa6baf87b",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with a red traffic light, as indicated by the countdown timer decreasing from 18 to 13 seconds and the red signal visible. The lead vehicles, including a white van and a black SUV, are slowing and stopping at the intersection. The ego driver must perform a noticeable slowdown or braking action to comply with the traffic signal and safely stop before the crosswalk. This is a clear and visible traffic control requiring a marked response within the unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "9be3ed38f16f497b1a506624e03aa383fcb74a0a2968d79bf82ed971fad0f19c",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with a red traffic light, as indicated by the countdown timer decreasing from 18 to 13 seconds and the red signal visible. The lead vehicles, including a white van and a black SUV, are slowing and stopping at the intersection. The ego driver must perform a noticeable slowdown or braking action to comply with the traffic signal and safely stop before the crosswalk. This is a clear and visible traffic control requiring a marked response within the unit.\"\n}",
+  "raw_response_sha256": "0884f183fdd58045fcff4260231532c50ae761058b09f23af6321878870f07a2",
+  "record_payload_sha256": "0010f274f5817034b6d786bceabbb293e63a53a71188cf2dc396f4b56190507b",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.802771296002902,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.42117507299554,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0020",
+  "unit_ordinal": 587,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

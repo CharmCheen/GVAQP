@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0531:1786357259040569734",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "25bb9bae8462127a96e5ffe2ec69c7db3cfd2b8a467fd3f0c23c270b48dd0903",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "0d6ae4e23fee37444af3450457c1afdc5c1200420488bdad879df358de479252",
+  "generated_token_ids_sha256": "ec87005cf309550b9bd5c064e1c367bef26413cfa84a93a20d8885ff256307d5",
+  "input_identity_sha256": "54b0ee9ce3c6e634a66f089f027252feda67102f0cacd88f7beada1e3e13fa02",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "7416dd0ca93ae75463c24c27e2c0678363aaf24e9fed5ce8dc4074fd22a49ea2",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily behind a black car on a clear, multi-lane road with no sudden changes in traffic flow, no visible obstacles, and no traffic control requiring immediate action within the unit. The speed limit sign (30 km/h) is visible but does not indicate a need for immediate braking or slowdown as the vehicle appears to be already compliant. No road users are entering the ego path, and the lead vehicle maintains a consistent speed. The environment is stable with no visible hazards requiring a marked response.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "c41eaaa5ec40188f32d973600545f0e32c23cb31ce6dcd5dad71b93509f73a0a",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily behind a black car on a clear, multi-lane road with no sudden changes in traffic flow, no visible obstacles, and no traffic control requiring immediate action within the unit. The speed limit sign (30 km/h) is visible but does not indicate a need for immediate braking or slowdown as the vehicle appears to be already compliant. No road users are entering the ego path, and the lead vehicle maintains a consistent speed. The environment is stable with no visible hazards requiring a marked response.\"\n}",
+  "raw_response_sha256": "00d94d3702c99e261320535b9ca1e5f35a55c59fb4fb0e3cdda3c39d08faa0df",
+  "record_payload_sha256": "7c657f1388d4ca21109e1edd9109548b48fdb13350eb2173e8526787364ce8f9",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 19.275539137001033,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 20.171818891998555,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0531",
+  "unit_ordinal": 1098,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

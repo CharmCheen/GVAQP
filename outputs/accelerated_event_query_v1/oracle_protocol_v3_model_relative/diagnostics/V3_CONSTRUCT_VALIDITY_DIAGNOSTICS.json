@@ -1,0 +1,156 @@
+{
+  "aggregate": {
+    "agent_model_polarity_disagreement_count": 3,
+    "authoritative_label_changes_from_diagnostics": 0,
+    "case_count": 5,
+    "explanation_grounding_indeterminate_count": 1,
+    "explanation_grounding_plausible_count": 2,
+    "explanation_grounding_unsupported_count": 2
+  },
+  "authoritative_label_rule": "The strictly parsed V3 Qwen3-VL-32B label remains unchanged by every diagnostic verdict in this artifact.",
+  "decision_effect": "none",
+  "execution_seal_sha256": "bf35f7f3c9f897f337a838f36991ab502cf538fd602b779ab8afd245b0b9ce61",
+  "method": {
+    "contact_sheet_manifest_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/CONTACT_SHEET_MANIFEST_V2.json",
+    "contact_sheet_manifest_sha256": "c8ebf5eddeb00de2b1b8cb74eae16db16bad1df7e79e2fd640816231384c1b67",
+    "inspection": "The primary research agent visually inspected all 21 exact 2-fps frozen frames for each of the five cases in timestamped contact sheets after V3 output generation.",
+    "limitations": [
+      "Sparse RGB frames do not directly measure ego speed, braking force, steering, right-of-way, or lateral clearance.",
+      "This is a construct-validity diagnostic, not human driving ground truth and not an accuracy adjudication.",
+      "The authoritative V3 label is model-relative and cannot be relabelled by this review."
+    ],
+    "protocol_path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/diagnostics/V3_CONSTRUCT_VALIDITY_DIAGNOSTIC_PROTOCOL.json",
+    "protocol_sha256": "b6735fb37b7f8f97c3b10117f0190e47ffea73936960f645ecd364cd677c6d45",
+    "v2_grounding_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/GROUNDING_REVIEW_V2.json",
+    "v2_grounding_sha256": "a2a3ced204a3a596f342668bac973cbf5eebbf1bc599d61aa4247246c1ab87e9"
+  },
+  "reviews": [
+    {
+      "agent_consensus_label": "relevant",
+      "authoritative_label": "not_relevant",
+      "authoritative_time_field_absent": true,
+      "candidate_id": "DALI_u0548",
+      "competing_explanation": "The trigger occurs only at the unit endpoint and may not establish a marked ego response inside this unit, which can support the model-relative not_relevant label even though a human reviewer sees an emerging hazard.",
+      "contact_sheet_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/contact_sheets/DALI_u0548.png",
+      "contact_sheet_sha256": "13f717cf4ff41f011e6ce35a0800e58c9b9eb0f3bdbd9dcfba2b05ef41228553",
+      "decision_effect": "none",
+      "diagnostic_verdicts": [
+        "AGENT_MODEL_DISAGREEMENT",
+        "UNSUPPORTED"
+      ],
+      "evidence_plausibility": "The V3 explanation says pedestrians are not in the roadway or an immediate threat. Exact 9.5- and 10.0-second frames show pedestrians entering/occupying the roadway ahead, so that categorical explanation is visually unsupported.",
+      "explanation_grounding_verdict": "UNSUPPORTED",
+      "frame_count": 21,
+      "frame_set_sha256": "44479e6553275bd5bb2faee2a8f3ace4dc37997f48aabd4f245fe2be43c4660b",
+      "human_semantic_construct_concern": "Late vulnerable-road-user entry may require braking just beyond or at the unit boundary; the 2-fps frames cannot measure the actual ego response.",
+      "parse_status": "ok",
+      "polarity_disagreement": true,
+      "raw_response_sha256": "32637d58644a1d8f8340b37f11f01abb7471c2ba6f33c8efba645d5e3e143e01",
+      "signal_lane_interpretation": "No decision-critical traffic-signal attribution is visible in this case.",
+      "uncertainty": "High about endpoint roadway occupancy; substantial about whether a noticeable response belongs inside this 10-second unit.",
+      "v3_raw_path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/raw/DALI/DALI_u0548_fps2_r0.json"
+    },
+    {
+      "agent_consensus_label": "relevant",
+      "authoritative_label": "not_relevant",
+      "authoritative_time_field_absent": true,
+      "candidate_id": "DALI_u0555",
+      "competing_explanation": "The scooter and pedestrian may remain sufficiently offset from the ego trajectory that no marked response is required, but exact clearance and ego motion are unavailable.",
+      "contact_sheet_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/contact_sheets/DALI_u0555.png",
+      "contact_sheet_sha256": "5974a4bba25f5585f25a7fe69fc84be0a5ebbea02a88b654527aed009472c329",
+      "decision_effect": "none",
+      "diagnostic_verdicts": [
+        "AGENT_MODEL_DISAGREEMENT",
+        "UNSUPPORTED"
+      ],
+      "evidence_plausibility": "The explanation's claim that no road user enters the ego path is too categorical: a yellow-clad pedestrian is in the roadway during roughly 2-4.5 seconds and a scooter remains directly ahead. Whether this demands a marked response remains uncertain.",
+      "explanation_grounding_verdict": "UNSUPPORTED",
+      "frame_count": 21,
+      "frame_set_sha256": "28f5519b97ec3aeb96019bab199dc0d8bd8b237e348acfeed7eb0491911c613e",
+      "human_semantic_construct_concern": "Pedestrian and scooter contributions cannot be separated from sparse frames, and their lateral clearance is not measured.",
+      "parse_status": "ok",
+      "polarity_disagreement": true,
+      "raw_response_sha256": "2a5bc4de3694a48be5a51ed3ab01b8315e7eef3fd11cd04687a77bac308f2e4c",
+      "signal_lane_interpretation": "No decision-critical traffic-signal attribution is visible in this case.",
+      "uncertainty": "Moderate: road users are visible in/near the forward travel area, but the required magnitude of ego response is not observable.",
+      "v3_raw_path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/raw/DALI/DALI_u0555_fps2_r0.json"
+    },
+    {
+      "agent_consensus_label": "not_relevant",
+      "authoritative_label": "not_relevant",
+      "authoritative_time_field_absent": true,
+      "candidate_id": "HANGZHOU_u0234",
+      "competing_explanation": "A distant signal or vehicle trajectory could require a mild adjustment not visible at 2 fps, but no marked response trigger is established.",
+      "contact_sheet_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/contact_sheets/HANGZHOU_u0234.png",
+      "contact_sheet_sha256": "d88ce664fed2f4c6a26eed41aec0dfb7026663031cac7a673e463636e2b431ae",
+      "decision_effect": "none",
+      "diagnostic_verdicts": [
+        "PLAUSIBLE",
+        "NO_CONCERN"
+      ],
+      "evidence_plausibility": "The exact frames show stable multi-lane following under a green straight-ahead indication with no occupied ego-path crosswalk or sudden intrusion. The V3 explanation is visually plausible.",
+      "explanation_grounding_verdict": "PLAUSIBLE",
+      "frame_count": 21,
+      "frame_set_sha256": "f6e90a5b9be73793b6f063f87314326317c88f1e012e9ab1265fa0b1722098bd",
+      "human_semantic_construct_concern": "The V2 oracle had attributed a red transition and pedestrians to this unit; independent V2 grounding rejected that claim. V3 no longer makes it.",
+      "parse_status": "ok",
+      "polarity_disagreement": false,
+      "raw_response_sha256": "f3968c1daac7c9e2aa4d0c846946752bd355e962cce2c9ed5a91123a83e1fe4b",
+      "signal_lane_interpretation": "The visible green indication applies to the straight approach; red indications concern another movement. No crosswalk conflict is visible.",
+      "uncertainty": "Low for the sampled signal/lane interpretation; sparse frames still cannot exclude mild speed adjustment.",
+      "v3_raw_path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/raw/HANGZHOU/HANGZHOU_u0234_fps2_r0.json"
+    },
+    {
+      "agent_consensus_label": "relevant",
+      "authoritative_label": "not_relevant",
+      "authoritative_time_field_absent": true,
+      "candidate_id": "WUHAN_u0217",
+      "competing_explanation": "The red-clad rider remains outside the immediate ego trajectory while the lead car defines a stable path, so a marked maneuver may be unnecessary despite apparent proximity.",
+      "contact_sheet_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/contact_sheets/WUHAN_u0217.png",
+      "contact_sheet_sha256": "00122d04ffa19752f85f591094e5084f311e1f21a63cafec132056e56e1d2a3e",
+      "decision_effect": "none",
+      "diagnostic_verdicts": [
+        "AGENT_MODEL_DISAGREEMENT",
+        "INDETERMINATE"
+      ],
+      "evidence_plausibility": "A red-clad rider grows in scale near the constrained forward roadway during the last frames. The images do not establish exact lane membership, clearance, or ego response, so the V3 no-threat explanation is indeterminate rather than clearly supported.",
+      "explanation_grounding_verdict": "INDETERMINATE",
+      "frame_count": 21,
+      "frame_set_sha256": "7b5597f1c5af58ea900600ceaa1284a9e55cb7e3270743053e414f9017940212",
+      "human_semantic_construct_concern": "Potential ego-path proximity on a constrained street is not represented by the model-relative negative label, but sparse frames cannot adjudicate it.",
+      "parse_status": "ok",
+      "polarity_disagreement": true,
+      "raw_response_sha256": "3278c42f2f66970985a221330dde3aea8c3a901100b74ea5c358d20b2e96c8c2",
+      "signal_lane_interpretation": "A green signal is visible earlier; the concern is rider clearance rather than signal phase.",
+      "uncertainty": "High for exact ego-path attribution and response magnitude; the rider's visual approach is clear.",
+      "v3_raw_path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/raw/WUHAN/WUHAN_u0217_fps2_r0.json"
+    },
+    {
+      "agent_consensus_label": "relevant",
+      "authoritative_label": "relevant",
+      "authoritative_time_field_absent": true,
+      "candidate_id": "WUHAN_u0171",
+      "competing_explanation": "Crossing users plausibly support the relevant label even though the exact signal-transition timing in the explanation is wrong.",
+      "contact_sheet_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/contact_sheets/WUHAN_u0171.png",
+      "contact_sheet_sha256": "a6ddd3a51ac811e0796bcb57de63d3fc114185755f8490c39b8be0d5da32d70e",
+      "decision_effect": "none",
+      "diagnostic_verdicts": [
+        "PLAUSIBLE",
+        "UNSUPPORTED"
+      ],
+      "evidence_plausibility": "Cyclists and pedestrians occupy the crossing path from the middle/later frames, supporting a braking concern. The specific statement that the ego-direction light turns red at approximately 0:07 is unsupported because the relevant red indication is already visible earlier.",
+      "explanation_grounding_verdict": "PLAUSIBLE",
+      "frame_count": 21,
+      "frame_set_sha256": "2cb03e9c6408f4fe4cf8ab8f1b2a2703e05e67a10144d863364cfb6ac45c0310",
+      "human_semantic_construct_concern": "The label can be model-relatively valid while a diagnostic temporal explanation remains wrong; V3 correctly prevents that text from controlling event boundaries.",
+      "parse_status": "ok",
+      "polarity_disagreement": false,
+      "raw_response_sha256": "83aa3b7c579e7c862fe32ba9a5f0da35bae425be841f0e99c0f6ac65f3f735bc",
+      "signal_lane_interpretation": "The precise signal phase/transition time is ambiguous at contact-sheet resolution; crossing-user occupancy provides independent visible support for a stop response.",
+      "uncertainty": "Low that crossing users are present; high for the claimed 0:07 signal transition and exact braking onset.",
+      "v3_raw_path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/raw/WUHAN/WUHAN_u0171_fps2_r0.json"
+    }
+  ],
+  "scope": "Non-gating limitation and case-analysis evidence only; not human ground truth and not a model-relative label adjudication.",
+  "status": "COMPLETED_POST_OUTPUT_NON_GATING_DIAGNOSTICS"
+}

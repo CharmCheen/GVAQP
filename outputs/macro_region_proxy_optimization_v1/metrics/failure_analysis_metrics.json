@@ -1,0 +1,104 @@
+{
+  "candidate_hypothesis_only": "P1_LOW_RATE_DETECTION_OR_P2_SPARSE_MOTION_MAY_CLOSE_OBSERVABILITY_GAP",
+  "nested_lovo": [
+    {
+      "direction_vs_random": "POSITIVE",
+      "test_delta_vs_random": 0.02185714285714288,
+      "test_random_mean_recall_at_20": 0.1924285714285714,
+      "test_ranking_auc": 0.49228571428571427,
+      "test_recall_at_20": 0.21428571428571427,
+      "test_spearman": 0.10852487689530528,
+      "test_video_id": "PSP_V0_SHORT",
+      "train_recall_at_20": 0.27461139896373055,
+      "train_selected_feature": "histogram_l1_change__mean",
+      "train_selected_orientation": -1,
+      "train_video_id": "PSP_V1_LONG"
+    },
+    {
+      "direction_vs_random": "POSITIVE",
+      "test_delta_vs_random": 0.0018652849740933286,
+      "test_random_mean_recall_at_20": 0.19502590673575124,
+      "test_ranking_auc": 0.49194300518134715,
+      "test_recall_at_20": 0.19689119170984457,
+      "test_spearman": 0.027583210402123748,
+      "test_video_id": "PSP_V1_LONG",
+      "train_recall_at_20": 0.32857142857142857,
+      "train_selected_feature": "saturation_mean__mean",
+      "train_selected_orientation": 1,
+      "train_video_id": "PSP_V0_SHORT"
+    }
+  ],
+  "per_video": [
+    {
+      "best_region_contribution_ratio": 0.21052631578947367,
+      "best_time_index_control": "B3_TIME_INDEX_ONLY_EARLY_FIRST",
+      "candidate_minus_best_time_recall20": 0.05714285714285722,
+      "model_heuristic_selected_region_jaccard": 0.3333333333333333,
+      "model_heuristic_selected_region_symmetric_difference": 18,
+      "oracle_missed_headroom_recall20": 0.3428571428571429,
+      "video_id": "PSP_V0_SHORT"
+    },
+    {
+      "best_region_contribution_ratio": 0.09803921568627451,
+      "best_time_index_control": "B3_TIME_INDEX_ONLY_LATE_FIRST",
+      "candidate_minus_best_time_recall20": 0.062176165803108835,
+      "model_heuristic_selected_region_jaccard": 0.07407407407407407,
+      "model_heuristic_selected_region_symmetric_difference": 50,
+      "oracle_missed_headroom_recall20": 0.24870466321243528,
+      "video_id": "PSP_V1_LONG"
+    }
+  ],
+  "preview_cost_decomposition": {
+    "P0_KEYFRAME_10S_160X90": {
+      "cost_measurement_scope": "FULL_TWO_VIDEO_OPERATOR_RUN",
+      "run1_decode_and_pipe_wait_sec": 54.659252140671015,
+      "run1_feature_compute_sec": 0.6546910274773836,
+      "run1_model_inference_sec": 0.0,
+      "run1_peak_memory_kib_process_lifetime": 145316,
+      "run1_seconds_per_video_hour": 21.830907316524478,
+      "run1_total_wallclock_sec": 55.356303200125694,
+      "run2_total_wallclock_sec": 58.95233801007271
+    },
+    "P0_KEYFRAME_5S_160X90": {
+      "cost_measurement_scope": "FULL_TWO_VIDEO_OPERATOR_RUN",
+      "run1_decode_and_pipe_wait_sec": 54.151880556717515,
+      "run1_feature_compute_sec": 1.2137824427336454,
+      "run1_model_inference_sec": 0.0,
+      "run1_peak_memory_kib_process_lifetime": 145316,
+      "run1_seconds_per_video_hour": 21.866253609361067,
+      "run1_total_wallclock_sec": 55.44593026302755,
+      "run2_total_wallclock_sec": 55.34554214030504
+    }
+  },
+  "proxy_feature_missingness": {
+    "per_feature": {
+      "center_border_contrast__max": 0,
+      "center_border_contrast__mean": 0,
+      "center_border_contrast__std": 0,
+      "edge_density__max": 0,
+      "edge_density__mean": 0,
+      "edge_density__std": 0,
+      "entropy__max": 0,
+      "entropy__mean": 0,
+      "entropy__std": 0,
+      "frame_diff_mean__max": 0,
+      "frame_diff_mean__mean": 0,
+      "frame_diff_mean__std": 0,
+      "histogram_l1_change__max": 0,
+      "histogram_l1_change__mean": 0,
+      "histogram_l1_change__std": 0,
+      "luma_mean__max": 0,
+      "luma_mean__mean": 0,
+      "luma_mean__std": 0,
+      "luma_std__max": 0,
+      "luma_std__mean": 0,
+      "luma_std__std": 0,
+      "preview_sample_count": 0,
+      "preview_support_fraction": 0,
+      "saturation_mean__max": 0,
+      "saturation_mean__mean": 0,
+      "saturation_mean__std": 0
+    },
+    "total_missing_feature_cells": 0
+  }
+}

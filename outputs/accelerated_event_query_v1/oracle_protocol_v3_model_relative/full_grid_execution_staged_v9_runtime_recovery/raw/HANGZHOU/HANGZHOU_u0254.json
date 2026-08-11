@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0254:1786375094512467214",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "7d10bc0961c9a59b22e94e5be5b336e0ebc562b5eb4a242eef54837867782796",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "c24e49aa4c6c9070bf540e295aa830b88a7509edd93ba295eb8f708adea81766",
+  "generated_token_ids_sha256": "ffe48a67284954335381bd95edc598e0a2c0ea5ab308b82285235df53b5f079f",
+  "input_identity_sha256": "9166b2c642e0ec09a21dc173618733a1554f85238bfeff1c926eb92000075cc4",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "448d7aadb921c7857fd97c627dff7a2ec263159a4463d0267cdd68d7967f027e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a traffic signal that turns from red to green during the unit, and the lead vehicle (a pink SUV) comes to a complete stop at the intersection, indicating a required braking action. Additionally, pedestrians and a scooter cross the intersection as the light changes, requiring the ego driver to slow down or stop to yield, which constitutes a noticeable braking or slowdown maneuver.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "deb4f170982c3ad186120b02152e2c6f1045d08bc7a022122640a5d31345b5e9",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a traffic signal that turns from red to green during the unit, and the lead vehicle (a pink SUV) comes to a complete stop at the intersection, indicating a required braking action. Additionally, pedestrians and a scooter cross the intersection as the light changes, requiring the ego driver to slow down or stop to yield, which constitutes a noticeable braking or slowdown maneuver.\"\n}",
+  "raw_response_sha256": "14981623cf08fd0885d869e58a4f3fc4df90b5f4e843c11132a2e0a01b95cc2e",
+  "record_payload_sha256": "986998c1e1e62546e5184c20e079222bfc2dfedb623d4ee4e86ccc0fe298aaa9",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 15.069134432997089,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 15.833487463998608,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0254",
+  "unit_ordinal": 821,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

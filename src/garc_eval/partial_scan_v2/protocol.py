@@ -1,0 +1,42 @@
+from __future__ import annotations
+
+
+POLICY_PROTOCOL_VERSION = "partial-scan-policy-jsonl-v2"
+MAX_MESSAGE_BYTES = 2 * 1024 * 1024
+DEFAULT_POLICY_TIMEOUT_SEC = 5.0
+
+INITIALIZE = "initialize"
+INITIALIZED = "initialized"
+CHOOSE_ACTION = "choose_action"
+TERMINATE = "terminate"
+
+PUBLIC_TERMINATION_REASONS = frozenset(
+    {
+        "NO_COMPLETE_ACTION_FITS",
+        "ALL_UNITS_SCANNED",
+        "INVALID_ACTION",
+        "ACTION_ALREADY_SCANNED",
+        "ACTION_OUTSIDE_UNIVERSE",
+        "ACTION_ESTIMATED_COST_EXCEEDS_BUDGET",
+        "POLICY_TIMEOUT",
+        "POLICY_PROTOCOL_ERROR",
+        "RUN_COMPLETE",
+    }
+)
+
+PUBLIC_ERROR_CODES = frozenset(
+    {
+        "INVALID_ACTION",
+        "ACTION_ALREADY_SCANNED",
+        "ACTION_OUTSIDE_UNIVERSE",
+        "ACTION_ESTIMATED_COST_EXCEEDS_BUDGET",
+        "POLICY_TIMEOUT",
+        "POLICY_PROTOCOL_ERROR",
+    }
+)
+
+SANITIZED_ENVIRONMENT_KEYS = (
+    "PYTHONUNBUFFERED",
+    "POLICY_RUN_ID",
+    "POLICY_PROTOCOL_VERSION",
+)

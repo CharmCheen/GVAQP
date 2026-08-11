@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0254:1786352883532738453",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "d0ea90997296f6267f481ec165620eaef2631c118807eef63005eaef55d02497",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "3379888ad1f27e98100a581cb209d8a4203fd3f2c09cc297cb59959f5b68f46f",
+  "generated_token_ids_sha256": "900f6e87951def4081611ef1be4e1cc2241d3c41aaaea2c55d7890c8965a04c8",
+  "input_identity_sha256": "1782944f8266e047bc14533082a1ad5c91108bec58ddf95c57c2454be142bf96",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "e5614354c63662e9b12c7183e00e2c3f7a1deeb5e0817496ce0940f8303397c2",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching an intersection where pedestrians are actively crossing the street in the crosswalk. The lead vehicle (a white taxi) is slowing down and stopping to allow pedestrians to pass, which requires the ego driver to also slow down or stop to comply with traffic rules and ensure safety. Additionally, the traffic light for the ego direction turns green during the sequence, but the presence of pedestrians in the crosswalk necessitates a noticeable slowdown or braking action to avoid collision, even if the light is green.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "0e413e2e372bf7b3a91659d028346a9a59e63d174b679d1d27131a64cd0bf420",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching an intersection where pedestrians are actively crossing the street in the crosswalk. The lead vehicle (a white taxi) is slowing down and stopping to allow pedestrians to pass, which requires the ego driver to also slow down or stop to comply with traffic rules and ensure safety. Additionally, the traffic light for the ego direction turns green during the sequence, but the presence of pedestrians in the crosswalk necessitates a noticeable slowdown or braking action to avoid collision, even if the light is green.\"\n}",
+  "raw_response_sha256": "6ff23324850ef535e0783d9ee176aac055b49501cbe77a9972f603e7743f8b2c",
+  "record_payload_sha256": "1e013ea1e9cfffe0a30f2a438175f129e391e4548350839a8f69cd1c35cedb30",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.74102760000096,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.44242535900412,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0254",
+  "unit_ordinal": 1382,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

@@ -1,0 +1,29 @@
+{
+  "adversarial_findings": [
+    "Main benchmark composes measured physical action traces; it is not a newly executed combined wall-clock run.",
+    "Frozen Q90 admission produced deadline overruns; post-deadline utility is correctly excluded but hard-deadline safety is not established.",
+    "Only four development groups exist; inferential power and generalization are limited.",
+    "Approximate multi-step beam is not an exact upper bound.",
+    "Myopic failure is structurally consistent with incomparable SCAN-cluster and CONFIRM-event numerators; it does not justify RL."
+  ],
+  "bad_traces": [],
+  "checks": {
+    "ablation_rows": true,
+    "fixed_policy_rows": true,
+    "forbidden_policy_fields_absent": true,
+    "myopic_rows": true,
+    "myopic_zero_confirm_reproduced": true,
+    "new_oracle_calls_zero": true,
+    "oracle_rows": true,
+    "required_artifacts_present": true,
+    "test_sealed": true,
+    "trace_count": true,
+    "transition_schema_complete": true
+  },
+  "conclusion": "The NOT_ESTABLISHED decision and R4 fixed-allocation handoff are supported under trace-replay development scope; broader physical/generalization claims are rejected.",
+  "created_utc": "2026-07-26T11:52:59.002066+00:00",
+  "forbidden_fields_in_decision_code": [],
+  "missing": [],
+  "review_role": "INDEPENDENT_ADVERSARIAL_COMPLETION_AUDIT",
+  "status": "PASS_WITH_SCOPE_LIMITATIONS"
+}

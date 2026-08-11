@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0479:1786356329744469619",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "9ec4280d068184f019948c61e7e657d712eb4205a596125a51e45ddacb04c95b",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "847a5f429f87eb42232d3aa821d4fdb0e9ef65ff23550ade7daf45f38a8952e1",
+  "generated_token_ids_sha256": "6e4bddb43ea237894e8d74c6dd6b8e71b699128b2a3b6ca69397905705365c68",
+  "input_identity_sha256": "0559c8d1c57d9629a8722847cf1de8b5ab2872f197eae3f932ce64cfcf760099",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "59161a679d60aff50ab1f02d5410465fee456abf7bfc945d931147518afe9f84",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily along a clear road with visible lane markings and no sudden obstacles or traffic control changes requiring a marked response. The lead vehicle maintains a consistent speed, and there are no road users entering the path or sudden braking events. Pedestrians and cyclists are on the sidewalks or designated paths, not interfering with the driving lane. The environment is stable with no visible hazards requiring a slowdown, braking, or avoidance maneuver within this unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "1502d1f18a72020bf6e6b502c9f984c76d013e84280c318fcc097f731ac28477",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily along a clear road with visible lane markings and no sudden obstacles or traffic control changes requiring a marked response. The lead vehicle maintains a consistent speed, and there are no road users entering the path or sudden braking events. Pedestrians and cyclists are on the sidewalks or designated paths, not interfering with the driving lane. The environment is stable with no visible hazards requiring a slowdown, braking, or avoidance maneuver within this unit.\"\n}",
+  "raw_response_sha256": "aa588d969401999967a1721711ae673324ac66954c24d8a05995aa91d47d8e82",
+  "record_payload_sha256": "2d21df1c00678bbe801e508226f68b89bced2f6a394ae40f00716562a689e386",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.562103906995617,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.45132278499659,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0479",
+  "unit_ordinal": 1046,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

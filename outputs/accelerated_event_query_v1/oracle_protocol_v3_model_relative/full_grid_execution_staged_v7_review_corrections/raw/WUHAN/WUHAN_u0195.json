@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0195:1786351736083851129",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "501e74356029bc5635ec001ed875e1f603bae403cbf40046602409d1f914a023",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "63eace7109b4e13e2635223a6b88b13a280e7ce2f3d5841ccea877f92eb70eba",
+  "generated_token_ids_sha256": "c2eca894b8a871a916951be29f7fa43f05fc5a17748f62a6e6e2030d5da5944f",
+  "input_identity_sha256": "d77492bdd9825338716460dcecee4a7cfb8386783a1f43eafdf974f00364ac62",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "533347393a5f82317f70ffd275579cd09860072088eebe2bdf628e68ea071b66",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "A pedestrian is seen crossing the road directly in front of the ego vehicle at the crosswalk from 0:00 to 0:04. The pedestrian is in the path of the ego vehicle, requiring a noticeable slowdown or braking action to safely yield. Although the traffic light is green, the presence of a pedestrian in the crosswalk necessitates a marked response to avoid collision. The pedestrian clears the path by 0:05, but the action required during the unit is clear.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "bc3ccd3327a8424b5bd5dbafd89ec13a5f4cf992c252686500cb3445b86ef6ca",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"A pedestrian is seen crossing the road directly in front of the ego vehicle at the crosswalk from 0:00 to 0:04. The pedestrian is in the path of the ego vehicle, requiring a noticeable slowdown or braking action to safely yield. Although the traffic light is green, the presence of a pedestrian in the crosswalk necessitates a marked response to avoid collision. The pedestrian clears the path by 0:05, but the action required during the unit is clear.\"\n}",
+  "raw_response_sha256": "69e225be171051c12e9dafbf934371f65e4e27d1bfb8d20994c69d441fd50b19",
+  "record_payload_sha256": "aad6961fa0062ad37872cea90a67323e7093ed436456a63490e6c3c287d98b3a",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.83166784799687,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.50947609799914,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0195",
+  "unit_ordinal": 1323,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

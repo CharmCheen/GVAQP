@@ -1,0 +1,64 @@
+{
+  "artifact_hash_mismatch": 0,
+  "artifact_hash_missing": 0,
+  "artifact_hash_unsupported": 265,
+  "artifact_hash_verified": 462,
+  "artifact_manifests_checked": 6,
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "scripts"
+      ],
+      "name": "compileall",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": ""
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "pytest",
+        "-q",
+        "tests/scan_scheduler",
+        "tests/partial_scan_v2",
+        "tests/scan_headroom",
+        "tests/scan_confirm_controller"
+      ],
+      "name": "related_pytest",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": "...........................................                              [100%]\n43 passed in 27.18s\n"
+    }
+  ],
+  "created_utc": "2026-07-27T03:43:50.209146+00:00",
+  "csv_checked": 108,
+  "csv_failed": 0,
+  "json_checked": 9684,
+  "json_failed": 0,
+  "repair_history": [
+    {
+      "attempt_status": "FAIL",
+      "reason": "pytest collection lacked PYTHONPATH=src",
+      "tests_failed": 1
+    }
+  ],
+  "skipped": [
+    {
+      "name": "full_pytest",
+      "reason": "Repository-wide suite includes unrelated GPU/external-data/oracle experiments; all relevant CPU regression directories were run."
+    }
+  ],
+  "status": "PASS",
+  "tests_failed": 0,
+  "tests_passed": 2,
+  "tests_run": 2,
+  "tests_skipped": 1
+}

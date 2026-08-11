@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0259:1785447339113903302",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "cfc5a0cf70d7c78215a058fa1bea21742d9af210b657f4664fb4cfe90d996832",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "f632dcbcc8ed7e24968dd5d1a4a2b04f0738a5227f5f97659cb8b172e99a1a22",
+  "generated_token_ids_sha256": "d94d8ff75942e87a0f4aee02674f07c0a99c896566dae4b7d46621595f4b4187",
+  "input_identity_sha256": "9d2967a5502014d1cba32b831f153ce7a4c08a1a73ca60d4ba239d47d2ba74c7",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "8cb1db6b0cb7a5a8bd3db890d4b73d61e5246735d108b2fd906756ce02621654",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is stopped at a red traffic light, as indicated by the countdown timer starting at 9 seconds and decreasing. Pedestrians are crossing the intersection during the red light phase, which requires the ego driver to remain stopped. When the light turns green, the vehicle proceeds cautiously, indicating a necessary response to the traffic signal change. The traffic signal transition from red to green necessitates a marked response (braking to stop, then accelerating to proceed) within the unit, making this relevant.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "7100dbf5f9ff6ad2ee9dbb4750f2fdc36898eb3ce34420bc345b322af62ae8c2",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is stopped at a red traffic light, as indicated by the countdown timer starting at 9 seconds and decreasing. Pedestrians are crossing the intersection during the red light phase, which requires the ego driver to remain stopped. When the light turns green, the vehicle proceeds cautiously, indicating a necessary response to the traffic signal change. The traffic signal transition from red to green necessitates a marked response (braking to stop, then accelerating to proceed) within the unit, making this relevant.\"\n}",
+  "raw_response_sha256": "c975ac4382e51e578f113dd8dd723788a5bfcb16e19cddb5abe6ebae5c0f2eea",
+  "record_payload_sha256": "51a3aa15c8ac39bba7e7fafdec67f1943bed6125b782e262ce2554f8070cc850",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.959112506359816,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.87274989299476,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0259",
+  "unit_ordinal": 826,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

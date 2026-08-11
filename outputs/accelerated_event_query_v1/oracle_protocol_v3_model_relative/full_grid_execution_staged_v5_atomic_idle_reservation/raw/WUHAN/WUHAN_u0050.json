@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0050:1785443441603085079",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "9a004e16ffe19d87a3cdc3e09302ad6db7b107ca59328109d87d21e3d213d247",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "1190980825ec19d1d1cf91b0716824e474f5f16a5abccafd211cb8150295739f",
+  "generated_token_ids_sha256": "5501033c98d2a716be4aa2d40754aa14b031d115ffa2339ef4bf1993ab19f0a4",
+  "input_identity_sha256": "cda0b41fc8dfe89ae42444fd085a8b406a41c5b925739aa33e5b854a50356731",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "46bf322913a98a23431dedf209e73ae2901cd5bdc843f3c6339cfaa30282e184",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with a traffic light that turns yellow and then red, requiring a braking action to stop before the crosswalk. Additionally, a bus and other vehicles are present in the intersection, and the ego vehicle must slow down and stop to comply with the traffic signal. The presence of a motorcycle crossing the intersection also necessitates caution and a reduction in speed.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "fe9c5ab77b90d5ad253892f996c4eb1259dc2f7451fd63704c84c1813925883a",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with a traffic light that turns yellow and then red, requiring a braking action to stop before the crosswalk. Additionally, a bus and other vehicles are present in the intersection, and the ego vehicle must slow down and stop to comply with the traffic signal. The presence of a motorcycle crossing the intersection also necessitates caution and a reduction in speed.\"\n}",
+  "raw_response_sha256": "8346bdc0bf1fd34d1ed4d64386bb15919c5fac6cb66fac8668ef819367751abf",
+  "record_payload_sha256": "4b6f564588484838cd4186dc4aaadef518c4a0903955399a0aacceb4b5fe5a0b",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 17.841870494186878,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 19.927633496001363,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0050",
+  "unit_ordinal": 1178,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

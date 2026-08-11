@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0346:1786376711503844862",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "c1bd75f1c0cf34e8354ca6f1d3a50557feee55f79521fbbd04c71c53c304e33a",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "7f968fa06e4a278b99dd5d77cbece3ef842a8319631feca8ffe8684fd1c806d6",
+  "generated_token_ids_sha256": "b3b0ebc9e1a92fdde9e4783fe7d1c734e5f8c46f5d7b600d666f102ae47a946e",
+  "input_identity_sha256": "d59c1f90caca5d5c145124d7d91b8f72dd0a93fd2c01a1b28fcbf89a628385e8",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "1c5712842f2226c92083b1f92c609a400941a955a4e01a05dd25a8f4ed550c7e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light ahead transitions from red to green during the unit, indicating a change in traffic control that requires the ego driver to respond by accelerating or proceeding through the intersection. Additionally, the lead white van maintains a steady position, and the ego vehicle appears to be in a lane that requires a response to the signal change, making a noticeable slowdown or braking action unnecessary but a marked response (acceleration) is required as the signal turns green.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "3c2071ed0e1f90a882a02e31cc0c1e06c8ecdaa090c422a28e09d7f43e1de187",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light ahead transitions from red to green during the unit, indicating a change in traffic control that requires the ego driver to respond by accelerating or proceeding through the intersection. Additionally, the lead white van maintains a steady position, and the ego vehicle appears to be in a lane that requires a response to the signal change, making a noticeable slowdown or braking action unnecessary but a marked response (acceleration) is required as the signal turns green.\"\n}",
+  "raw_response_sha256": "e972c32264cbb47d0cccf1e11788c1490b21b0e73d282ba8e3d0493d4d78bbbb",
+  "record_payload_sha256": "5dd59f73811d539a65fd49acaf2f47ea50912c34f4f6a6982aca55361fdbc26f",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.230779264005832,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.033198304998223,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0346",
+  "unit_ordinal": 913,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

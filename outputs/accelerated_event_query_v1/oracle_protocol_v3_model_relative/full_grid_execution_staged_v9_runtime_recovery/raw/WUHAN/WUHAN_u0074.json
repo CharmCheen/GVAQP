@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0074:1786372151458082600",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "13c2bff70aa197a6e2663fdf2b2eea975991d1ce0741db3913ddf91dc4c0260f",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "94b61559de2dc9291976605134965f74f8a90fea64fd33ea3ac23b7ac334887e",
+  "generated_token_ids_sha256": "655289bdc04f60df4ddbac69ba6e48b2fc875dc9f9f7c632e0dca93721f3751a",
+  "input_identity_sha256": "bd026ca30e5489a399d209b2f4b23e49912befeeeef329070fb61f560894f1fd",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "7fdee582738af42f7b1e567ebeb46b4e2650b25a67e678f985f163a563cac2fa",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching an intersection with a red traffic light visible at 0:08, which requires a noticeable slowdown or braking action. The lead vehicle (black SUV) is also slowing down in response to the red light, indicating a required deceleration for the ego driver to safely stop. Additionally, the navigation overlay shows the distance to the intersection decreasing from 85m to 5m, confirming the approach to a controlled intersection requiring a marked response.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "72696ac172a81e72a62833ea7f8df24340bc7f09286d3263fd68f9356cff0909",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching an intersection with a red traffic light visible at 0:08, which requires a noticeable slowdown or braking action. The lead vehicle (black SUV) is also slowing down in response to the red light, indicating a required deceleration for the ego driver to safely stop. Additionally, the navigation overlay shows the distance to the intersection decreasing from 85m to 5m, confirming the approach to a controlled intersection requiring a marked response.\"\n}",
+  "raw_response_sha256": "e71b82e09e0131143a808387f94154babc86b186b05e45c7dfab8b93b7e21976",
+  "record_payload_sha256": "a82fc11bb854c98a119627ff165b488d7f63ddfc00035e271e34eafcba71b765",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.429818562995933,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 19.98104240700195,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0074",
+  "unit_ordinal": 1202,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

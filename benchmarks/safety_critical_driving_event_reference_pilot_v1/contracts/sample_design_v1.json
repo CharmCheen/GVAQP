@@ -1,0 +1,25 @@
+{
+  "sample_design_version": "BLINDED_STRATIFIED_REFERENCE_SAMPLE_V1",
+  "target_total_min": 45,
+  "target_total_max": 55,
+  "rng_seed": 20260729,
+  "window_duration_sec": 30.0,
+  "available_provenance_strata": {
+    "legacy_cut_in_positive": 10,
+    "legacy_cut_in_hard_negative": 5,
+    "legacy_boundary_disagreement": 5,
+    "normal_traffic_control": 10
+  },
+  "required_independent_pools": {
+    "longitudinal_conflict_candidate": 5,
+    "vulnerable_road_user_crossing_candidate": 5,
+    "road_hazard_candidate": 5,
+    "intersection_conflict_candidate": 5
+  },
+  "selection_policy": "Deterministic seeded selection before new prompt outputs exist. Existing pseudo-label provenance may define legacy strata but is hidden from annotators.",
+  "blinding": {
+    "private_manifest_contains": ["sample_id", "video_id", "start_sec", "end_sec", "selection_stratum", "selection_reason", "source_window_id"],
+    "annotation_manifest_contains": ["sample_id", "video_id", "video_path", "start_sec", "end_sec", "expected_sample_fps"]
+  },
+  "launch_block": "Do not run Stage A until all required independent pools exist and the final sample manifest is frozen."
+}

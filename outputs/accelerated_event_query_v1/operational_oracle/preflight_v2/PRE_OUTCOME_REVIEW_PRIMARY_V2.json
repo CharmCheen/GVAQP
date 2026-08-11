@@ -1,0 +1,151 @@
+{
+  "status": "FROZEN_BEFORE_NEW_QUERY_ORACLE_EXECUTION",
+  "review_type": "targeted pre-outcome adversarial screen; not blinded accuracy review and not ground truth",
+  "reviewer": "primary research agent",
+  "new_query_32b_outputs_observed": 0,
+  "query_id": "Q_DRIVER_RESPONSE_V1",
+  "prompt_path": "outputs/accelerated_event_query_v1/configs/query_prompt_v2.txt",
+  "exact_frame_manifest": {
+    "path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/ORACLE_INPUT_FRAME_MANIFEST_V2.json",
+    "sha256": "321e7e54edfab31fa31cee90606b4d0e66d168bd189bbf0bfbe0499a31ffa0ea"
+  },
+  "contact_sheet_manifest": {
+    "path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/CONTACT_SHEET_MANIFEST_V2.json",
+    "sha256": "c8ebf5eddeb00de2b1b8cb74eae16db16bad1df7e79e2fd640816231384c1b67"
+  },
+  "limitations": [
+    "The reviewer knew legacy sampling strata and selected the sample, so this is pre-outcome but not fully blinded.",
+    "Exact RGB frames are sparse visual evidence and do not directly measure ego braking, speed, or steering.",
+    "A label disagreement is an adjudication trigger, not proof that the operational oracle is wrong.",
+    "Some clips may contain multiple visible triggers that a one-record-per-unit oracle cannot represent separately."
+  ],
+  "aggregate": {
+    "clip_count": 12,
+    "relevant": 5,
+    "not_relevant": 5,
+    "unknown": 2,
+    "multiple_trigger_ambiguity_count": 1
+  },
+  "reviews": [
+    {
+      "candidate_id": "DALI_u0437",
+      "label": "not_relevant",
+      "confidence": "medium",
+      "required_response": [],
+      "cause": null,
+      "evidence": "Green-light urban travel continues with a van offset left and no sampled marked-response trigger.",
+      "cause_grounding_warning": null,
+      "multiple_trigger_ambiguity": false
+    },
+    {
+      "candidate_id": "DALI_u0501",
+      "label": "relevant",
+      "confidence": "medium",
+      "required_response": ["slowdown", "avoid"],
+      "cause": "A scooter moves from the right edge into the forward travel area while ego follows a car.",
+      "evidence": "The scooter shifts from the curb side toward the lane at about 6.5–7.5 seconds and becomes close to the ego path.",
+      "cause_grounding_warning": "Exact lateral clearance and ego response are not measured.",
+      "multiple_trigger_ambiguity": false
+    },
+    {
+      "candidate_id": "DALI_u0548",
+      "label": "relevant",
+      "confidence": "high",
+      "required_response": ["slowdown", "avoid"],
+      "cause": "Scooters and pedestrians enter or approach the night roadway near the ego path.",
+      "evidence": "A scooter is close early in the clip and pedestrians occupy/cross the roadway near 9.5–10 seconds.",
+      "cause_grounding_warning": "The clip appears to contain separated vulnerable-road-user triggers.",
+      "multiple_trigger_ambiguity": true
+    },
+    {
+      "candidate_id": "DALI_u0555",
+      "label": "relevant",
+      "confidence": "high",
+      "required_response": ["slowdown", "brake", "avoid"],
+      "cause": "A pedestrian occupies the roadway while a scooter remains directly ahead.",
+      "evidence": "The pedestrian and scooter are visibly close to the forward path during the first half of the clip.",
+      "cause_grounding_warning": "Pedestrian and scooter contributions cannot be separated from frames alone.",
+      "multiple_trigger_ambiguity": false
+    },
+    {
+      "candidate_id": "HANGZHOU_u0140",
+      "label": "not_relevant",
+      "confidence": "high",
+      "required_response": [],
+      "cause": null,
+      "evidence": "Steady divided-road travel behind a distant yellow vehicle with no visible conflict.",
+      "cause_grounding_warning": null,
+      "multiple_trigger_ambiguity": false
+    },
+    {
+      "candidate_id": "HANGZHOU_u0234",
+      "label": "not_relevant",
+      "confidence": "high",
+      "required_response": [],
+      "cause": null,
+      "evidence": "Ordinary multi-lane travel behind a white lead vehicle under green control.",
+      "cause_grounding_warning": null,
+      "multiple_trigger_ambiguity": false
+    },
+    {
+      "candidate_id": "HANGZHOU_u0280",
+      "label": "unknown",
+      "confidence": "medium",
+      "required_response": [],
+      "cause": "Cross traffic is visible while ego traverses a broad intersection.",
+      "evidence": "Other vehicles cross the field of view, but the exact frames do not establish an immediate ego-path conflict or marked response.",
+      "cause_grounding_warning": "Traffic phase and relative trajectories are ambiguous.",
+      "multiple_trigger_ambiguity": false
+    },
+    {
+      "candidate_id": "HANGZHOU_u0420",
+      "label": "not_relevant",
+      "confidence": "medium",
+      "required_response": [],
+      "cause": null,
+      "evidence": "Boulevard travel continues behind traffic; a black sedan changes relative position but no marked-response trigger is established.",
+      "cause_grounding_warning": "A mild speed adjustment cannot be excluded.",
+      "multiple_trigger_ambiguity": false
+    },
+    {
+      "candidate_id": "WUHAN_u0134",
+      "label": "unknown",
+      "confidence": "medium",
+      "required_response": [],
+      "cause": "A downstream traffic queue and signal become close near the unit endpoint.",
+      "evidence": "Frames do not establish whether a noticeable slowdown begins before the 10-second boundary.",
+      "cause_grounding_warning": "The response may straddle the unit boundary.",
+      "multiple_trigger_ambiguity": false
+    },
+    {
+      "candidate_id": "WUHAN_u0171",
+      "label": "relevant",
+      "confidence": "high",
+      "required_response": ["slowdown", "brake"],
+      "cause": "A red signal requires stopping while a cyclist and pedestrians cross the ego path.",
+      "evidence": "The red signal and multiple crossing road users are visible as ego approaches the crosswalk.",
+      "cause_grounding_warning": null,
+      "multiple_trigger_ambiguity": false
+    },
+    {
+      "candidate_id": "WUHAN_u0217",
+      "label": "relevant",
+      "confidence": "medium",
+      "required_response": ["slowdown", "avoid"],
+      "cause": "An oncoming cyclist approaches along a constrained narrow street.",
+      "evidence": "The cyclist grows markedly in scale near the left side of the available lane while lead and parked vehicles constrain clearance.",
+      "cause_grounding_warning": "Exact lane geometry is not measured.",
+      "multiple_trigger_ambiguity": false
+    },
+    {
+      "candidate_id": "WUHAN_u0298",
+      "label": "not_relevant",
+      "confidence": "high",
+      "required_response": [],
+      "cause": null,
+      "evidence": "Ego proceeds after a controlled intersection changes phase; no new marked-response trigger appears within the clip.",
+      "cause_grounding_warning": "Any stopping response began before this unit.",
+      "multiple_trigger_ambiguity": false
+    }
+  ]
+}

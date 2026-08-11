@@ -1,0 +1,48 @@
+{
+  "additionalProperties": false,
+  "forbidden": [
+    "video_id",
+    "group_id",
+    "filename",
+    "reference_events",
+    "future_candidates",
+    "future_outcomes",
+    "future_costs",
+    "offline_oracle_order",
+    "held_out_result"
+  ],
+  "new_aggregate_field": {
+    "frontier_score_bucket_counts": {
+      "HIGH": "integer",
+      "LOW": "integer",
+      "MEDIUM": "integer"
+    }
+  },
+  "required": [
+    "remaining_budget_sec",
+    "coverage_fraction",
+    "maximum_unobserved_gap_sec",
+    "scan_actions_completed",
+    "scan_time_spent_sec",
+    "frontier_size",
+    "frontier_score_min",
+    "frontier_score_median",
+    "frontier_score_max",
+    "frontier_score_quantiles",
+    "frontier_score_bucket_counts",
+    "oldest_candidate_age_sec",
+    "newest_candidate_age_sec",
+    "novel_candidate_clusters_observed",
+    "confirmed_distinct_utility_count",
+    "recent_scan_novel_yield",
+    "recent_scan_zero_yield_streak",
+    "recent_confirm_success_rate",
+    "recent_confirm_new_utility_rate",
+    "recent_confirm_zero_yield_streak",
+    "estimated_scan_cost_sec",
+    "estimated_confirm_cost_sec",
+    "actions_completed",
+    "unused_budget_sec"
+  ],
+  "title": "COMMON_UTILITY_PUBLIC_STATE_V1"
+}

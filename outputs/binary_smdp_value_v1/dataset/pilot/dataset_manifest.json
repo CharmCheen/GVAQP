@@ -1,0 +1,194 @@
+{
+  "artifact_status": "PILOT",
+  "beam_widths": [
+    128,
+    512,
+    2048
+  ],
+  "behavior_policies": [
+    {
+      "name": "SCAN_FIRST",
+      "seed": 0
+    },
+    {
+      "name": "VERIFY_FIRST",
+      "seed": 0
+    },
+    {
+      "name": "RATIO_75_25",
+      "seed": 0
+    },
+    {
+      "name": "RATIO_50_50",
+      "seed": 0
+    },
+    {
+      "name": "R4_RATIO_25_75",
+      "seed": 0
+    },
+    {
+      "name": "ALTERNATING",
+      "seed": 0
+    },
+    {
+      "name": "FRONTIER_RULE",
+      "seed": 0
+    },
+    {
+      "name": "RANDOM_LEGAL",
+      "seed": 0
+    },
+    {
+      "name": "RANDOM_LEGAL",
+      "seed": 1
+    },
+    {
+      "name": "RANDOM_LEGAL",
+      "seed": 2
+    },
+    {
+      "name": "MYOPIC_VPS",
+      "seed": 0
+    }
+  ],
+  "behavior_safety_failure_count": 9,
+  "behavior_safety_failures": [
+    {
+      "action": "CONFIRM",
+      "behavior_policy": "VERIFY_FIRST",
+      "behavior_seed": 0,
+      "budget_sec": 60.0,
+      "completed": true,
+      "deadline_overrun": true,
+      "elapsed_sec": 80.03292661067053,
+      "task_id": "V1_Q1"
+    },
+    {
+      "action": "CONFIRM",
+      "behavior_policy": "RATIO_75_25",
+      "behavior_seed": 0,
+      "budget_sec": 60.0,
+      "completed": true,
+      "deadline_overrun": true,
+      "elapsed_sec": 80.03292661067053,
+      "task_id": "V1_Q1"
+    },
+    {
+      "action": "CONFIRM",
+      "behavior_policy": "RATIO_50_50",
+      "behavior_seed": 0,
+      "budget_sec": 60.0,
+      "completed": true,
+      "deadline_overrun": true,
+      "elapsed_sec": 80.03292661067053,
+      "task_id": "V1_Q1"
+    },
+    {
+      "action": "CONFIRM",
+      "behavior_policy": "R4_RATIO_25_75",
+      "behavior_seed": 0,
+      "budget_sec": 60.0,
+      "completed": true,
+      "deadline_overrun": true,
+      "elapsed_sec": 80.03292661067053,
+      "task_id": "V1_Q1"
+    },
+    {
+      "action": "CONFIRM",
+      "behavior_policy": "ALTERNATING",
+      "behavior_seed": 0,
+      "budget_sec": 60.0,
+      "completed": true,
+      "deadline_overrun": true,
+      "elapsed_sec": 80.03292661067053,
+      "task_id": "V1_Q1"
+    },
+    {
+      "action": "CONFIRM",
+      "behavior_policy": "FRONTIER_RULE",
+      "behavior_seed": 0,
+      "budget_sec": 60.0,
+      "completed": true,
+      "deadline_overrun": true,
+      "elapsed_sec": 80.03292661067053,
+      "task_id": "V1_Q1"
+    },
+    {
+      "action": "CONFIRM",
+      "behavior_policy": "RANDOM_LEGAL",
+      "behavior_seed": 0,
+      "budget_sec": 60.0,
+      "completed": true,
+      "deadline_overrun": true,
+      "elapsed_sec": 80.03292661067053,
+      "task_id": "V1_Q1"
+    },
+    {
+      "action": "CONFIRM",
+      "behavior_policy": "RANDOM_LEGAL",
+      "behavior_seed": 1,
+      "budget_sec": 60.0,
+      "completed": true,
+      "deadline_overrun": true,
+      "elapsed_sec": 80.03292661067053,
+      "task_id": "V1_Q1"
+    },
+    {
+      "action": "CONFIRM",
+      "behavior_policy": "RANDOM_LEGAL",
+      "behavior_seed": 2,
+      "budget_sec": 60.0,
+      "completed": true,
+      "deadline_overrun": true,
+      "elapsed_sec": 80.64353582267054,
+      "task_id": "V1_Q1"
+    }
+  ],
+  "budgets_sec": [
+    60.0
+  ],
+  "command": "scripts/build_binary_smdp_oracle_dataset_v1.py --pilot --tasks V1_Q1 --budgets 60 --max-states 4 --beam-widths 128,512,2048",
+  "exact_labels": 3,
+  "failures": [],
+  "git": {
+    "commit": "31592ba0ac5855eb768be82399eb25ea5daefa4d",
+    "dirty": true,
+    "status": [
+      " M outputs/binary_smdp_value_v1/reports/CURRENT_IMPLEMENTATION_AUDIT.md",
+      " M src/garc_eval/scan_confirm_controller/common_utility.py",
+      " M src/garc_eval/scan_confirm_controller/runner.py",
+      "?? benchmarks/safety_critical_driving_event_reference_pilot_v1/",
+      "?? datasets/DADA-2000/",
+      "?? outputs/binary_smdp_value_v1/dataset/",
+      "?? outputs/binary_smdp_value_v1/oracle_headroom/",
+      "?? scripts/build_binary_smdp_oracle_dataset_v1.py",
+      "?? src/garc_eval/safety_reference_pilot/",
+      "?? src/garc_eval/scan_confirm_controller/smdp_dataset.py",
+      "?? src/garc_eval/scan_confirm_controller/smdp_oracle.py",
+      "?? src/garc_eval/scan_confirm_controller/smdp_return.py",
+      "?? tests/safety_reference_pilot/",
+      "?? tests/test_smdp_action_legality.py",
+      "?? tests/test_smdp_budget_accounting.py",
+      "?? tests/test_smdp_determinism.py",
+      "?? tests/test_smdp_oracle.py",
+      "?? tests/test_smdp_state_causality.py"
+    ]
+  },
+  "imputed_cost_rows": 0,
+  "label_counts": {
+    "EFFECTIVELY_TIED": 4
+  },
+  "random_seeds": [
+    0,
+    1,
+    2
+  ],
+  "runtime_sec": 102.89066576957703,
+  "stable_labels": 4,
+  "states_collected_total": 11,
+  "states_labeled": 4,
+  "states_selected": 4,
+  "tasks": [
+    "V1_Q1"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0068:1786372026078803562",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "7adc2d741f3eeca90dcd6789d3cb5208df34c09fc34eb7f93b0c5f0d4cba6179",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "7b78e11735071cd2d51edf505a150e183c7c3427724fa8b54dbb2ce350650c1f",
+  "generated_token_ids_sha256": "55d3eeb62c94b3afd8767cdcaefaf6df8489c326633544af9679d11f3a36698c",
+  "input_identity_sha256": "50333720af5c526c3f30e1e890f3b4cf012b2d99cd9920423c68c5d19ea04e1f",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "cf83556e80394801064abbb8c282ef0e2541b2cd8045743651868e34d9649132",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a traffic intersection with a red light visible at 0:06, requiring a braking action to stop. Additionally, pedestrians are seen crossing the road in the crosswalk starting at 0:07, and a cyclist enters the intersection from the left at 0:08, both of which necessitate a noticeable slowdown or braking to ensure safety. The lead vehicle (black SUV) also begins to brake and stops at the intersection, indicating a required response from the ego driver.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "3176cbecf39525e177ea37370c73f417c6e2f87a93b2f2333ad8db97491d34a1",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a traffic intersection with a red light visible at 0:06, requiring a braking action to stop. Additionally, pedestrians are seen crossing the road in the crosswalk starting at 0:07, and a cyclist enters the intersection from the left at 0:08, both of which necessitate a noticeable slowdown or braking to ensure safety. The lead vehicle (black SUV) also begins to brake and stops at the intersection, indicating a required response from the ego driver.\"\n}",
+  "raw_response_sha256": "2936a54e2d71c76b9bc8962dc9dc1eb3ace3a215cbac8d754496e372b0e0101a",
+  "record_payload_sha256": "89b68b253d2a5b1d2e70bc5c023d807b3cae78613e46765a0ef76103ee1a539f",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.32788930999959,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.878459462001047,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0068",
+  "unit_ordinal": 1196,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

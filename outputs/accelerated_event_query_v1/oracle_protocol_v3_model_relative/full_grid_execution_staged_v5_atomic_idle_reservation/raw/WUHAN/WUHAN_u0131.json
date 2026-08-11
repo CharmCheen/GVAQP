@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0131:1785445225994148883",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "2c661e65237646f62ea7330f3ad50102d4cc0fc4bc1b6530c6bff03c7879ecfe",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "2db2fc17cb27269d7343c04c25511feb17fcf60ee3812ef9086aa9186a26b486",
+  "generated_token_ids_sha256": "1c3ddedfd3830a4b350ff1742cb6ac45a6298e29138df97301c83cdfc3598a1f",
+  "input_identity_sha256": "642b6975a498b65688f142e146b4964cabfbb1df58e5e61934519e81b3d5d27a",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "6f186d6764cfb24417223f02522f474d0038a9b52fd34897605505e96254d004",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily behind a black SUV on a multi-lane urban road. Traffic signals ahead are red, but the ego vehicle is not yet at the intersection and has sufficient distance to decelerate gradually. There are no sudden obstacles, road users entering the path, or visible hazards requiring an immediate slowdown, braking, or avoidance maneuver within this 10-second unit. The road conditions are clear, and the lead vehicle maintains a steady pace without abrupt changes. The pedestrian on the sidewalk is not in the path of the ego vehicle and does not pose a threat.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "645b36a5a8b29fdab966c3bb6d45dbf4c1d003a74a218c65a2b8c171b12f680d",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily behind a black SUV on a multi-lane urban road. Traffic signals ahead are red, but the ego vehicle is not yet at the intersection and has sufficient distance to decelerate gradually. There are no sudden obstacles, road users entering the path, or visible hazards requiring an immediate slowdown, braking, or avoidance maneuver within this 10-second unit. The road conditions are clear, and the lead vehicle maintains a steady pace without abrupt changes. The pedestrian on the sidewalk is not in the path of the ego vehicle and does not pose a threat.\"\n}",
+  "raw_response_sha256": "d6db4af0487a2029d416896877bdff7eb6557df46076597375e3a2744a3116e0",
+  "record_payload_sha256": "912a0ad8aaf72bf487b59ee3152a1a5e0004f54cb16ee5fd37d049a1be94e049",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 22.867314234375954,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 24.913471469655633,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0131",
+  "unit_ordinal": 1259,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

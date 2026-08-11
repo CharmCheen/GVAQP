@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0149:1786373302188166813",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "1ac464918a4cebf15a0da876b95003d376ca4ca05b6dfc14bb882bfd0ebaf482",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "0a1b9550d9e649eaa0058c8829f6b70f9359f1916a344d8d54792ac35c9d98eb",
+  "generated_token_ids_sha256": "0f6d218d19890afd1a976761f39c378c7feab336a100ca7d81db7412316e16d2",
+  "input_identity_sha256": "baa44477482f783ce4c727ea6819cc3830bb86cefbebc49ff3aa2fa937f394ae",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "e26dd65a77ef61e8545d495d968c9239d24ff99477999cf2c7563788e08de03d",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily behind a yellow truck on a clear, multi-lane road with no sudden changes in traffic flow, road conditions, or obstacles. Pedestrians are visible on the sidewalk, but they are not entering the roadway or posing a threat to the ego path. Traffic signs and signals are visible and do not indicate an immediate need for braking or slowing. The lead vehicle maintains a consistent speed, and no abrupt maneuvers or hazards are present within the unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "5a4002e20b22d92b68912d60834000e08ae356330130afdcf24d2c581439a6cb",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily behind a yellow truck on a clear, multi-lane road with no sudden changes in traffic flow, road conditions, or obstacles. Pedestrians are visible on the sidewalk, but they are not entering the roadway or posing a threat to the ego path. Traffic signs and signals are visible and do not indicate an immediate need for braking or slowing. The lead vehicle maintains a consistent speed, and no abrupt maneuvers or hazards are present within the unit.\"\n}",
+  "raw_response_sha256": "8f3a1e6b153af8df5efc6df739b6d84a2cb2601f7b1279804c932425542af120",
+  "record_payload_sha256": "0efe75532c466dd7c1d1a089e818ea6df59f3e514c6440c471af1bd1d9417075",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.676210194993473,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.38851568699465,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0149",
+  "unit_ordinal": 716,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

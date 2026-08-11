@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0038:1786371399230401045",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "0619bb72efc3f620a9f7ecf92e8eabf26e017f8e1393eab23d76a7ac7371ce2a",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "96bef24d0d44f25845fc490856f7946f0cf3a09a2d5d0628ce1dd19464bc981f",
+  "generated_token_ids_sha256": "493e306504faf79e9ac562188f016f7f840120ec598f3e571e07c7eade19fc78",
+  "input_identity_sha256": "e7d9f3b1811b9b6359ead4f55a66ff9af9a32b10a30e1fc2d69d01851a766575",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "a0fccbfc161772f744d595fbc42b93e27aaaef7aa59b7f3ad87780f6c207b94f",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is navigating a curved road approaching an intersection with visible traffic signals. The traffic light for the ego direction is red, indicating a stop is required, but the vehicle is still approaching the intersection and has not yet reached the stop line. There are no sudden obstacles, road users entering the path, or other hazards requiring an emergency maneuver. The braking or slowdown would be a normal response to the red light, which is expected and not an unexpected or urgent condition within this unit. The scene shows steady progression with no visible need for an abrupt or marked response beyond routine traffic compliance.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "14e57d8284e69d30a41a92df86c3c2b9011b7e14156d1b73c5e694b17c0ae152",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is navigating a curved road approaching an intersection with visible traffic signals. The traffic light for the ego direction is red, indicating a stop is required, but the vehicle is still approaching the intersection and has not yet reached the stop line. There are no sudden obstacles, road users entering the path, or other hazards requiring an emergency maneuver. The braking or slowdown would be a normal response to the red light, which is expected and not an unexpected or urgent condition within this unit. The scene shows steady progression with no visible need for an abrupt or marked response beyond routine traffic compliance.\"\n}",
+  "raw_response_sha256": "bee88e1d63c7cd225ad53ccd37bc5176e39cca244bee195b9c1e932ae0dd7068",
+  "record_payload_sha256": "220e1dfacfd9fde02477f2c206be907ad6e6d164e40287e0d3629a73c932518e",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 20.002096303003782,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 20.667455234004592,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0038",
+  "unit_ordinal": 605,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0161:1786350812124418058",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "bf2aef3a26e8232edd28c57074f138d5ee71b82bfbc9c6ea3752035ed4560955",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "c0b1f54c8761b36fbae2b0c888be872c1a5795dd66966c36e56fb7e5e86a9dab",
+  "generated_token_ids_sha256": "a2a1e280e8f780f83c7c6381905f1ff00ca9d34b329f05ab7799a5be25239cac",
+  "input_identity_sha256": "2e12da960bbb197881a8900b23e94c84a120a7afb8aa2fc834ab513911f834d9",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "8dfa4c35b48cb009de92513c0c85c2a2cff23df1c1b021bc6805214eaf6662a6",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light ahead transitions from red to green during the unit, and the lead yellow pickup truck begins to accelerate through the intersection. The ego vehicle must respond to the changing signal and adjust speed accordingly, indicating a noticeable slowdown or acceleration maneuver is required. Additionally, pedestrians are crossing the road at the intersection, requiring attention and potential braking or speed adjustment to ensure safety.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "22e8048baa5d1f0b6c6235c656e6a03f7028985ab41e01d4c7fb6d10f5e85cb8",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light ahead transitions from red to green during the unit, and the lead yellow pickup truck begins to accelerate through the intersection. The ego vehicle must respond to the changing signal and adjust speed accordingly, indicating a noticeable slowdown or acceleration maneuver is required. Additionally, pedestrians are crossing the road at the intersection, requiring attention and potential braking or speed adjustment to ensure safety.\"\n}",
+  "raw_response_sha256": "a7adcc8de370ea846c274b04e1e31c7ae3b5036ca000d9cb0d65d10edfc49a1d",
+  "record_payload_sha256": "8753b302fa88b7298369ad1cc47d6eabc1c90e22092b24408e37aaaff6b79df0",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 14.325843671002076,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 15.028030948000378,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0161",
+  "unit_ordinal": 728,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

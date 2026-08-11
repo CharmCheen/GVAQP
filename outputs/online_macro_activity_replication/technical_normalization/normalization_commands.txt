@@ -1,0 +1,9 @@
+# Original asset retained unchanged: 杭州YouTube.mp4
+# Attempt 1 — container-level remux; exit 0 but output remained undecodable.
+ffmpeg -hide_banner -nostdin -n -v warning -fflags +discardcorrupt -err_detect ignore_err -i 杭州YouTube.mp4 -map 0 -c copy -copyts -vsync 0 -avoid_negative_ts disabled 杭州YouTube.normalized.mp4
+
+# Attempt 2 — single controlled full-timeline technical transcode.
+# Initial libx264 configuration failed because this runtime has no libx264 encoder.
+# The recorded available encoder libopenh264 was used instead; no clipping, selection,
+# concatenation, or manual frame deletion was requested.
+ffmpeg -hide_banner -nostdin -n -v warning -fflags +discardcorrupt -err_detect ignore_err -copyts -i 杭州YouTube.mp4 -map 0:v:0 -map 0:a? -c:v libopenh264 -b:v 8M -pix_fmt yuv420p -fps_mode passthrough -c:a aac -movflags +faststart 杭州YouTube.normalized.transcoded.mp4

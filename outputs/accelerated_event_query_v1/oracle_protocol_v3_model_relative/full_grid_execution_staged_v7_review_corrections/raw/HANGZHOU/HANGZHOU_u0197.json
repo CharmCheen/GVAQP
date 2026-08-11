@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0197:1786351415266856390",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "5e16c5e5a89027022fa84ddd0f41617bb7b96e31712bedc744d021758d86bbdb",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "24e4cfece37a0ac2a2142a2b9d8f7081276ac72954a8337a5e960580f8e9031a",
+  "generated_token_ids_sha256": "52a18cf66af420e05c09e5cc3631cae63849b9537695752f308c71bc04534a0d",
+  "input_identity_sha256": "70609c4b951fc988bd18016911f3448c07578a2afe60f63ff2c873ec9db7c0b4",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "a4767b494e3c7d360c40eac0ede69212ead5bb5c7f7862f22819ecafbb3aee01",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "A pedestrian is seen crossing the road at a marked crosswalk in the middle of the video segment (around 0:08-0:10), directly in the path of the ego vehicle. The pedestrian is walking from right to left across the lanes, and the ego vehicle is approaching the crosswalk. This requires an attentive driver to slow down or brake to yield to the pedestrian, as per traffic rules and safety protocols. The pedestrian's presence in the crosswalk is a clear and immediate hazard requiring a marked response.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "0a3ebd1d1517ae0f1cef58f025043c28a919b101d627744b7bfdc237914a04cd",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"A pedestrian is seen crossing the road at a marked crosswalk in the middle of the video segment (around 0:08-0:10), directly in the path of the ego vehicle. The pedestrian is walking from right to left across the lanes, and the ego vehicle is approaching the crosswalk. This requires an attentive driver to slow down or brake to yield to the pedestrian, as per traffic rules and safety protocols. The pedestrian's presence in the crosswalk is a clear and immediate hazard requiring a marked response.\"\n}",
+  "raw_response_sha256": "bd85b17c5bdda7c922f8d5a3d5c3ce9a0038f101e51e5182374f7909bc63ddab",
+  "record_payload_sha256": "871c6f1ccc7e458bbd4564757e5b307f181f4e3f98b2846e456b7aaa117b1d17",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 19.375458731003164,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 20.12232392399892,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0197",
+  "unit_ordinal": 764,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

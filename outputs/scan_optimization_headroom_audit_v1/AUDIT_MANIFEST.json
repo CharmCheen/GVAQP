@@ -1,0 +1,46 @@
+{
+  "critical_output_hashes": {
+    "outputs/scan_optimization_headroom_audit_v1/ADVERSARIAL_INTERPRETATION_AUDIT.md": "ded74fab2ce938136f9b797de07ab5441d37a73ab1fd5a567da497cc96227d1a",
+    "outputs/scan_optimization_headroom_audit_v1/FINAL_RESEARCH_SYNTHESIS_ZH.md": "e6df8090cf86b9a103fc856d50504cc3f7514e1b02ecbb8b02e466f0fe0683e8",
+    "outputs/scan_optimization_headroom_audit_v1/fixed_refinement_baselines/refinement_decision.json": "bc08f98847296139d4530e0a631e337ea967344ec65d74363c8c09a85d2b743d",
+    "outputs/scan_optimization_headroom_audit_v1/headroom_decision.json": "2270c302dac981e4f7dcbc31c37bae0ec01dbc57dbb50f24de341285d6e37930",
+    "outputs/scan_optimization_headroom_audit_v1/physical_evidence_manifest.json": "bb2549bb378d61741740f769b96ea8417633720f02b8e8af66f9d439f9edcca2",
+    "outputs/scan_optimization_headroom_audit_v1/physical_policy_lineage_audit.json": "1f65dd09bf822ee8699e92966984457347e54d55623611688978ed4b28a9ed17",
+    "outputs/scan_optimization_headroom_audit_v1/temporal_correlation_audit/temporal_refinement_decision.json": "8ee5b8d77b6ddcba91025e1d2bbfa81d8babcb873018da88dfde6eefa396687a"
+  },
+  "formal_generalization_claim": false,
+  "input_hashes": {
+    "benchmarks/partial_scan_pilot_v1/derived/candidate_event_map.parquet": "c9873ea879f7501a535b0b48259fac85870ff67d82ebacca33ff3a7adaa66285",
+    "benchmarks/partial_scan_pilot_v1/derived/cost_calibration/conservative_cost_model.json": "13031e623d6494cdd3eecca6c164b67d66522a422cad6c7afd0e9c4ccf115b1f",
+    "benchmarks/partial_scan_pilot_v1/immutable/reference_events.csv": "ca25d34744cb231dbc7dc48811fe56e7e42ecc59f2aa1b2b98c4949f11f55642",
+    "benchmarks/partial_scan_pilot_v1/immutable/timeline_units.csv": "d8329cb5490f9eaf9d414b714b668ab21716dce974e34389b26f3d66aa6ac21a"
+  },
+  "requirements": {
+    "adversarial_review_present": true,
+    "all_reference_denominator_268": true,
+    "eight_budget_checkpoints": true,
+    "final_synthesis_present": true,
+    "fixed_refinement_gate_executed": true,
+    "guarded_marginal_gate_respected": true,
+    "offset0_exposure_denominator_263": true,
+    "physical_completed_prefix_count_1478": true,
+    "physical_policy_lineage_pass": true,
+    "physical_run_count_32": true,
+    "physical_visible_subset_equivalence": true,
+    "random_50_seeds_per_video": true,
+    "replay_run_count_110": true,
+    "temporal_audit_complete": true,
+    "trusted_policy_protocol_frozen": true,
+    "trusted_policy_static_audit_pass": true,
+    "visible_subset_checkpoint_equivalence": true
+  },
+  "scope": "TWO_VIDEO_TRUSTED_POLICY_MECHANISM_AUDIT",
+  "source_hashes": {
+    "scripts/audit_scan_physical_policy_lineage.py": "57fb5b109d54a23d62103a85e9073bf9a80429145967cf727eb15e1501595824",
+    "scripts/run_scan_fixed_refinement_baselines.py": "ce06961027b785f20eab5379f51858c7485d6e6306e9c519476ae9fe95df2d0c",
+    "scripts/run_scan_optimization_headroom_audit.py": "ef50b0d7985c792bfad87a181183d46a4c13b3d4a1e230aa0454728792ae2167",
+    "scripts/run_scan_temporal_refinement_audit.py": "23a889960904cb09e1c6c7a6282b5e2f71ad82d2dbaf7114550e37276c04febc",
+    "src/garc_eval/scan_headroom/trusted_policies.py": "ee6c7827664da64cbcee9f3dc5a7c83bc2954c99795e23ee7068edf0e0dc2084"
+  },
+  "status": "PASS"
+}

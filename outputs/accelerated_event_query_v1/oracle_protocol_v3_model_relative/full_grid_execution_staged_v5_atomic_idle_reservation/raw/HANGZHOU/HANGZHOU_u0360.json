@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0360:1785449211687707772",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "6304ff9ef459244dd2a5413725ffa1105ba34b004deb9c3acee42ad414df9e57",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "6f24d658e4a32063466df1990d4a4cd5be66ec1ccc09f52e7628696897ce0b77",
+  "generated_token_ids_sha256": "7baf51a9d0370b185e5abf57aa990dc28ca036007d872e07669d3e2db22fcd02",
+  "input_identity_sha256": "bdbc9633792ba4426a5165034fb358a2dff7bc7ea85369a515f95bd33924ceff",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "1888ca078c50f62946d8bfcf8d9d9fdf876c3c2cd626048495a0b81cf5b3a119",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily under an overpass and continues along a multi-lane urban road with visible traffic flow. There are no sudden changes in speed or path, no visible obstacles in the immediate path, no traffic signals requiring immediate response (e.g., red light), and no road users entering or threatening the ego path. The lead vehicles maintain consistent spacing, and the road conditions appear normal. The presence of traffic signs and cones on the right side does not require a marked response within this unit as they are static and not impeding the ego vehicle's path.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "c2a3b0eb0a6547e8737fdd4162d2ef05f22e95524bc86d8f444052493a4afe82",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily under an overpass and continues along a multi-lane urban road with visible traffic flow. There are no sudden changes in speed or path, no visible obstacles in the immediate path, no traffic signals requiring immediate response (e.g., red light), and no road users entering or threatening the ego path. The lead vehicles maintain consistent spacing, and the road conditions appear normal. The presence of traffic signs and cones on the right side does not require a marked response within this unit as they are static and not impeding the ego vehicle's path.\"\n}",
+  "raw_response_sha256": "9508e15bcee580fbc4b4160e37b41d18f8164ab6aa0ca87e4e70a90dc73313cc",
+  "record_payload_sha256": "90b6fa63f4d77bb8ad5a9b833cc3fa8c89b9444e57405bb636597cfdf8d59113",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 21.450454603880644,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 22.31829988397658,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0360",
+  "unit_ordinal": 927,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

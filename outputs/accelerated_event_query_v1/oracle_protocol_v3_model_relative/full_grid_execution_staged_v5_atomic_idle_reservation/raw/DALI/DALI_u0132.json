@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0132:1785445187127088912",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "4490aada01056a49575590a1e0d1df3b208e4907bf6805d14f2a74af32d23a19",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "b1bc00b9c4e39cbf75cb329b72f982664a2d6b25e704ee576c2d571ee99047de",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "97fcfe6b39bb619cf7382a6d0c795d1f2209b392a8137b46da281c9419543923",
+  "generated_token_ids_sha256": "5143bb50822ba0e2641c942ff85c25db2475cc7ccbaea3a05e554d35f5ff4d83",
+  "input_identity_sha256": "42a76e37a0dc4de0eecab5fba40971ab5430568e970eb1a0ecf484a05ecf701f",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "afee8128661e421dcc3f7dbb6714689b6dcd86d0b6c82087cde0fbc29e89ca2b",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "Pedestrians are seen crossing the road directly in front of the ego vehicle at the crosswalk, requiring a noticeable slowdown or braking action to safely yield. The lead vehicle (a silver pickup truck) also appears to be slowing down in response to the pedestrians, indicating a necessary deceleration for the ego driver to follow traffic rules and ensure safety.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "5e1676dbb589775dd1f229992368b8b9bc6b22f0f078c26b0fb1e3e19bad7790",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"Pedestrians are seen crossing the road directly in front of the ego vehicle at the crosswalk, requiring a noticeable slowdown or braking action to safely yield. The lead vehicle (a silver pickup truck) also appears to be slowing down in response to the pedestrians, indicating a necessary deceleration for the ego driver to follow traffic rules and ensure safety.\"\n}",
+  "raw_response_sha256": "282937e4ecd6927d2d6d608a693e39f1a30ec4428833a6b087e42a08f8410a40",
+  "record_payload_sha256": "bfdd199f2d9a2734b6bf77cdff2a5d7cd54073cf1e7715026efbaf4fdb2d1bbf",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 16.344600100070238,
+    "model_load_seconds": 26.894216861575842,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 18.294676061719656,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0132",
+  "unit_ordinal": 132,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

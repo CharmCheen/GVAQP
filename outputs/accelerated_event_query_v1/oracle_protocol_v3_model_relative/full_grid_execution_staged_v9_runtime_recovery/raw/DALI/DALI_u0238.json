@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0238:1786375341260164275",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "2e89ca600e20ecaaf14f9f0bc3a207db8c25b0db343d980a56b6343e605bfa87",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "5c71a8565301339756291251b7e4eef9d319e3ec5a028cbeb9d5a806383734c7",
+  "generated_token_ids_sha256": "e713926c3fa06b67922bfbea1456529fb5c3238149da0ff60252e8f8c771afa7",
+  "input_identity_sha256": "a69950f7485bc961ff9f81e58232ec3ea91f1daab4c7a6cb43fa6a14c2dbea2b",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "61c9ccbe7bbe046a0c5b67f9e1fb38994e5fd8ca5d20f03beb1553a09f5c8ffc",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily in a multi-lane urban road with clear visibility. Traffic flow is smooth, and there are no sudden changes in speed or path from lead vehicles. No road users are entering or threatening the ego path, and no traffic controls (like stop signs or red lights) require a marked response. The speed limit sign (40 km/h) is visible but does not necessitate a noticeable slowdown or braking action within this unit as the traffic is already moving at a consistent, appropriate pace. All conditions indicate normal, steady driving without requiring a marked response.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "c2e16f18cb5a799b15ea452755167b64f6cdf967e11755477972b18b26080b4f",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily in a multi-lane urban road with clear visibility. Traffic flow is smooth, and there are no sudden changes in speed or path from lead vehicles. No road users are entering or threatening the ego path, and no traffic controls (like stop signs or red lights) require a marked response. The speed limit sign (40 km/h) is visible but does not necessitate a noticeable slowdown or braking action within this unit as the traffic is already moving at a consistent, appropriate pace. All conditions indicate normal, steady driving without requiring a marked response.\"\n}",
+  "raw_response_sha256": "5af057da642ff3f4133213d8ebaea7b3dc28c4cfd0b164a9b7ed033209801b39",
+  "record_payload_sha256": "1426c046eb4e0c49cf49d7ccf949922c05ba46abd4c93a8252c949009aa4f59d",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 21.530955976995756,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 23.2263135730027,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0238",
+  "unit_ordinal": 238,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

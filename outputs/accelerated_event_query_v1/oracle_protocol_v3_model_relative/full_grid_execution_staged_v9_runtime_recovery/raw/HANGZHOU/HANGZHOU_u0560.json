@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0560:1786380430287641164",
+  "authoritative_label": "unknown",
+  "call_spec_sha256": "749dd28cf6e24e88dfa5e36a411694fc5ca2a2991f275c08cc98bf14a0f7b14d",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 2,
+  "frame_set_sha256": "a56e1f752fc6b7774d1394008c0ad635ed2af7ed383720f0fe72d3314581b8a5",
+  "generated_token_ids_sha256": "170d98037e667ef90b2c509b751954c044265142ca7e753cac52715a6a62af51",
+  "input_identity_sha256": "5a129b8230d1c96d9084e13e025c4b21c04df4c5932c854a900378e3f75dc1b1",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "d2bee8bb2f5ddb739cbac00e323741dced96d2483242b8b15481793d13282cab",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "low",
+    "evidence": "The provided frames are dark and low-resolution, making it difficult to clearly discern road conditions, vehicle positions, or any immediate hazards. The ego vehicle appears to be following other vehicles, but there is insufficient visual clarity to determine if any sudden slowing, braking, or avoidance maneuver is required within this short unit. No clear traffic control or obstacle is visible that would necessitate a marked response. The unit is too short and visually ambiguous to confidently assess the need for an attentive driver response.",
+    "label": "unknown"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "5f272c04485bcee1f6517c1aa45e875f72148531f1e0bd40286c6b15aba6b831",
+  "raw": "{\n  \"label\": \"unknown\",\n  \"confidence\": \"low\",\n  \"evidence\": \"The provided frames are dark and low-resolution, making it difficult to clearly discern road conditions, vehicle positions, or any immediate hazards. The ego vehicle appears to be following other vehicles, but there is insufficient visual clarity to determine if any sudden slowing, braking, or avoidance maneuver is required within this short unit. No clear traffic control or obstacle is visible that would necessitate a marked response. The unit is too short and visually ambiguous to confidently assess the need for an attentive driver response.\"\n}",
+  "raw_response_sha256": "031b5c5e96b1f0b36d2c5728b96d58925a0f7516f978948aa326daf2cc670db0",
+  "record_payload_sha256": "223484fab80e6cf7fd600f1cf94a644c5bb1ccdf9c2dd61dea630f72f21eb9e9",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 15.660011073006899,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 16.04496893999749,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0560",
+  "unit_ordinal": 1127,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0316:1786376841629292523",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "33121d9f55e949335e0e21d8a4e594fa869c17a9ccfd4b278857bdde28ac18d9",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "59c91beb4604d1953fc9733da04681dfe025b84423562ffc3f0f55045bcd6fd1",
+  "generated_token_ids_sha256": "8354880534fee8732e3132a5eda8dccd420d2214088c53899c8510a5015d1ee2",
+  "input_identity_sha256": "e7e458722ce39535ef60f395671e2c67b6034aa585db2aa98d2f8733bea2a6ad",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "2468aa212e4c89728eeb59e130337f7f316ba73eff6f1e35797330b575b58d5a",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching a traffic signal that transitions from red to green during the unit. At the beginning of the unit, the traffic light is red, requiring the vehicle to stop or slow down. As the unit progresses, the light turns green, indicating a required braking action to stop and then a subsequent acceleration. The presence of multiple vehicles ahead in close proximity also necessitates a noticeable slowdown or braking to maintain safe following distance, especially as the lead vehicle (white hatchback) appears to be slowing or stopping in response to the red light. This constitutes a marked response required by the traffic control and surrounding traffic conditions.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "328685913b3cf1162f8a7d15ade86f91287bb045c3c35ec22f39948fc253fb7c",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching a traffic signal that transitions from red to green during the unit. At the beginning of the unit, the traffic light is red, requiring the vehicle to stop or slow down. As the unit progresses, the light turns green, indicating a required braking action to stop and then a subsequent acceleration. The presence of multiple vehicles ahead in close proximity also necessitates a noticeable slowdown or braking to maintain safe following distance, especially as the lead vehicle (white hatchback) appears to be slowing or stopping in response to the red light. This constitutes a marked response required by the traffic control and surrounding traffic conditions.\"\n}",
+  "raw_response_sha256": "6c524ede541768c5b2d33314e529f8a577d46844776c735fb0a8e6a8eaf1d435",
+  "record_payload_sha256": "0b53f51ed2ccc03cdecc9f079e96f5d78bc78ace87d2da64b4b53e98e2110d9f",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 22.21768457601138,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 23.885198360003415,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0316",
+  "unit_ordinal": 1444,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

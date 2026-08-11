@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0052:1785421086017979115",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "51633f0c6fe0b583576c82b625a8dc9d0cc1920157f27f05229f7abb87e793f7",
+  "execution_seal_sha256": "2189d821eba4b0e0022da4f0a1113e51ed2128351def12c4e310ffd36569c9ee",
+  "execution_session_id": "b1d874dad9633943da9182baee77bb3366cda2f0d6407e982a26dfc65e45aac8",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "c91116214e2a4f642c056ed2c5e84210f1f57d3c5ef073f8cf577acb9bfebcca",
+  "generated_token_ids_sha256": "6276f25c05d64acc5a1efc2ad6a736aaa653db1295dc624a7d44d52298295071",
+  "input_identity_sha256": "0d4dbb9459c57109a2c3ad8a0ff369f4e4d453042e5561cb283ed2a23cae5aff",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "bcdd0d2132fa4996e410e23b682ab820e37576124b39313490b1bd437c4d69d2",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection where the traffic signal for the straight-ahead lane turns red at frame 0:06, requiring a braking action to stop before the crosswalk. Additionally, multiple motorcyclists and scooters are seen stopping at the intersection in frame 0:09, indicating a need for the ego driver to slow down and come to a complete stop as per traffic control. The presence of a pedestrian crossing the street in frame 0:07 also necessitates caution and a marked response.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "2a640715074d461438f613702624868444ff79988a93c2dd33d2781ac2e40229",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection where the traffic signal for the straight-ahead lane turns red at frame 0:06, requiring a braking action to stop before the crosswalk. Additionally, multiple motorcyclists and scooters are seen stopping at the intersection in frame 0:09, indicating a need for the ego driver to slow down and come to a complete stop as per traffic control. The presence of a pedestrian crossing the street in frame 0:07 also necessitates caution and a marked response.\"\n}",
+  "raw_response_sha256": "c1c04086e5e6fb638a12ea52b5b74acea60857a07b0637b304be6bd1d8ddc3fa",
+  "record_payload_sha256": "29aa91cf2db7c47d8653b6e092a635d9466151f0a0c3143bfec2c5c851600f31",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 19.617337815463543,
+    "model_load_seconds": 14.661523081362247,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 21.2109939083457,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0052",
+  "unit_ordinal": 52,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

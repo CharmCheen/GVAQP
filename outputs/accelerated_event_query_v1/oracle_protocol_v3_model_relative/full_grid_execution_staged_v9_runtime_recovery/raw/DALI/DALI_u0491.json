@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0491:1786380443685095045",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "965867f79bc899d5ffb7dbfcc7dc1a5e30f84386ea4b4cd81c010b0dcaa41143",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "d34044b523fd367194880762f6b5b0380d10ee09c6112670d16ac2d36ac0c373",
+  "generated_token_ids_sha256": "95ba489f9ad15c015197c915304d3846fe4577e2c8effdeb04e1b710586800bd",
+  "input_identity_sha256": "5f813b5b25c17f167f93e07cc205ed1990659cb57a22f0ce685be689bbbaed42",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "dde5f26cecd36a63c105eccc6d5999a9fbc58e7136388bd79e89890b6b24a82d",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a white car with visible brake lights illuminated throughout the sequence, indicating a slowing or stopped lead vehicle. Additionally, traffic lights ahead transition from red to green, but the lead vehicle remains stationary, suggesting a need for braking or cautious slowing. The presence of a construction barrier on the right and a motorcyclist closely following on the right side also necessitates an attentive response to avoid collision or maintain safe distance. These conditions require a noticeable slowdown or braking action by the ego driver.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "4c64c56d6e93e1fcf5e5b6206accb9b3406aa3c8dfb9d87d52df75f784a4495c",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a white car with visible brake lights illuminated throughout the sequence, indicating a slowing or stopped lead vehicle. Additionally, traffic lights ahead transition from red to green, but the lead vehicle remains stationary, suggesting a need for braking or cautious slowing. The presence of a construction barrier on the right and a motorcyclist closely following on the right side also necessitates an attentive response to avoid collision or maintain safe distance. These conditions require a noticeable slowdown or braking action by the ego driver.\"\n}",
+  "raw_response_sha256": "86ef694ba1d57e578e03c8ab73ebe20c3ac9c530be03157bcfe8a54fd65e6e6f",
+  "record_payload_sha256": "06f3ea6d819627f93714629250af392afa609cf3f1d5c16181c21f361cbb7c35",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 19.076403091996326,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 20.983521386995562,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0491",
+  "unit_ordinal": 491,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

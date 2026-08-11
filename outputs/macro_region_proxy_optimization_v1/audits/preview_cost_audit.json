@@ -1,0 +1,57 @@
+{
+  "all_candidate_operator_determinism_pass": true,
+  "all_candidate_operator_observability_complete": true,
+  "deployed_preview_wallclock_sec": 55.44593026302755,
+  "determinism_repeat_cost_sec": 55.34554214030504,
+  "determinism_repeat_hash_match": true,
+  "exploration_wallclock_sec": 110.80223346315324,
+  "measured_full_scan_wallclock_sec": 1917.4287208132446,
+  "memory_metric_note": "ru_maxrss is process-lifetime high-water mark, not isolated operator peak",
+  "per_operator": [
+    {
+      "eligible_under_cost_ceiling": true,
+      "family": "P0_METADATA_FRAMESTAT",
+      "mean_region_support_fraction": 0.9985443959243085,
+      "operator_id": "P0_KEYFRAME_10S_160X90",
+      "period_sec": 10.0,
+      "preview_to_full_scan_cost_ratio": 0.028870070944096042,
+      "sample_count": 913,
+      "total_wallclock_sec": 55.356303200125694
+    },
+    {
+      "eligible_under_cost_ceiling": true,
+      "family": "P0_METADATA_FRAMESTAT",
+      "mean_region_support_fraction": 0.9983988355167395,
+      "operator_id": "P0_KEYFRAME_5S_160X90",
+      "period_sec": 5.0,
+      "preview_to_full_scan_cost_ratio": 0.02891681430510288,
+      "sample_count": 1825,
+      "total_wallclock_sec": 55.44593026302755
+    }
+  ],
+  "per_operator_cost_decomposition": {
+    "P0_KEYFRAME_10S_160X90": {
+      "cost_measurement_scope": "FULL_TWO_VIDEO_OPERATOR_RUN",
+      "run1_decode_and_pipe_wait_sec": 54.659252140671015,
+      "run1_feature_compute_sec": 0.6546910274773836,
+      "run1_model_inference_sec": 0.0,
+      "run1_peak_memory_kib_process_lifetime": 145316,
+      "run1_seconds_per_video_hour": 21.830907316524478,
+      "run1_total_wallclock_sec": 55.356303200125694,
+      "run2_total_wallclock_sec": 58.95233801007271
+    },
+    "P0_KEYFRAME_5S_160X90": {
+      "cost_measurement_scope": "FULL_TWO_VIDEO_OPERATOR_RUN",
+      "run1_decode_and_pipe_wait_sec": 54.151880556717515,
+      "run1_feature_compute_sec": 1.2137824427336454,
+      "run1_model_inference_sec": 0.0,
+      "run1_peak_memory_kib_process_lifetime": 145316,
+      "run1_seconds_per_video_hour": 21.866253609361067,
+      "run1_total_wallclock_sec": 55.44593026302755,
+      "run2_total_wallclock_sec": 55.34554214030504
+    }
+  },
+  "preview_to_full_scan_cost_ratio": 0.02891681430510288,
+  "selected_operator_id": "P0_KEYFRAME_5S_160X90",
+  "status": "PASS"
+}

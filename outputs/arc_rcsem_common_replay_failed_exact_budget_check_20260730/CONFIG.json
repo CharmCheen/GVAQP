@@ -1,0 +1,40 @@
+{
+  "budgets": [
+    5,
+    10,
+    20,
+    50,
+    80,
+    100
+  ],
+  "config_hash": "947ac3c4038dbaf6548820059e47ac88a6e6ac9173f4e3e28e8cb227095f602a",
+  "evaluator_hash": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+  "k3": {
+    "d_core_max": 40.0,
+    "d_seg_max": 60.0,
+    "g_max": 1,
+    "name": "k3_bridge_safe"
+  },
+  "method": "RC-SEM-CACHED-COMMON-v1",
+  "method_variant": "cross_source_posterior_ranking_risk_gate_strict_shared_k3",
+  "posterior": {
+    "C": 0.5,
+    "family": "single-feature class-balanced logistic regression",
+    "feature": "proxy_score",
+    "training_split": "exclude every domain from heldout source video"
+  },
+  "risk_gate": {
+    "confidence": "Wilson 95% lower bound",
+    "failure_semantics": "publish zero probable events",
+    "minimum_event_admissions": 10,
+    "precision_floor": 0.8,
+    "unit": "strict-K3 predicted event"
+  },
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ]
+}

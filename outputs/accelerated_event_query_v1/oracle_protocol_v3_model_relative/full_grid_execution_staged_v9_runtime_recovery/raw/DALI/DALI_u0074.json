@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0074:1786372148000468369",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "dc0cd0426b6f31e8909f73bc791458d6417f01a810bd3f158cb3d9aa1be4a2ca",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "deb01c13812d92e26eaf1e49aad69cf55beb7ba825acb859ed8af5ba985181ae",
+  "generated_token_ids_sha256": "b1257b76e13efdf877b8d2cd44f34c0a5da6ccb217d844e698940e060599caca",
+  "input_identity_sha256": "2c24628633ddf85a2ba06c337e910af06e7ede381dd749852125473deb85c37d",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "6758d2279bc4dd4625b54c30842dda7aeb1648a73510bd068b8ecf93e619c7ca",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving in a steady traffic flow with no sudden changes in speed or path required. The lead vehicle (a black Audi) maintains a consistent distance, and there are no visible obstacles, sudden stops, or traffic control signals requiring a marked response. Pedestrians and other road users are visible but not entering or threatening the ego path. The traffic light ahead is green, indicating continued forward movement is permitted. No avoidance maneuver or braking is necessary within this unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "302894d5edfb34eb01eb375eaff850858af3e2d473f215cbdfcc504cca513986",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving in a steady traffic flow with no sudden changes in speed or path required. The lead vehicle (a black Audi) maintains a consistent distance, and there are no visible obstacles, sudden stops, or traffic control signals requiring a marked response. Pedestrians and other road users are visible but not entering or threatening the ego path. The traffic light ahead is green, indicating continued forward movement is permitted. No avoidance maneuver or braking is necessary within this unit.\"\n}",
+  "raw_response_sha256": "0fe3333c2bdf88e33c98492eda514611d4abb2fdd13ab01730212f0cad138178",
+  "record_payload_sha256": "d84a511a5a3b9c4f3771630235b2c9f313daf7f337d70b6b509fdb20cc9f3dc9",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 18.236848861000908,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 19.93649459399603,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0074",
+  "unit_ordinal": 74,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

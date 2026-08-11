@@ -1,0 +1,57 @@
+{
+  "DOWNSTREAM_P0_OBSERVED": false,
+  "NO_K0_K3_RESULTS_OBSERVED_BEFORE_AMENDMENT": true,
+  "NO_P0_METRICS_OBSERVED_BEFORE_AMENDMENT": true,
+  "NO_SELECTOR_RANKINGS_OBSERVED_BEFORE_AMENDMENT": true,
+  "PROTOCOL_FROZEN": true,
+  "PROTOCOL_TYPE": "POST-RUNTIME-FAILURE_PROSPECTIVE_EXECUTION_AMENDMENT",
+  "admissibility_rule": "expected unit + unique terminal raw record + exact V9 seal/config + exact ledger sequence + durable pre-fail-stop completion + no retry + parser revalidation",
+  "cross_seal_validation_rule": "outcome-blind nine-unit shadow set; identical semantic bindings and deterministic input hashes required; raw variation is qualified only if frozen parser terminal state agrees",
+  "execution_topology": {
+    "mode": "single_gpu",
+    "physical_gpu_id": 7
+  },
+  "failure_rule": "a failed Seal B/C may create a later seal only for units not yet authoritative; no semantic-result-driven selection or overwrite",
+  "finalizer_rule": "release only when the cross-seal union covers exactly the 1,475-unit frozen universe with identical semantic contract hashes",
+  "implementation_bindings": {
+    "admissibility_builder": {
+      "path": "scripts/create_v10_multiseal_protocol.py",
+      "sha256": "f2db8038b5632a790044346c9549d84140e6781e17bdcbc98a2bd1cd6aa514a5"
+    },
+    "multi_seal_finalizer": {
+      "path": "scripts/finalize_v10_multiseal_reference.py",
+      "sha256": "0ebbe63d13d3e8c59daf2aa22b7de39cd95d2a19819bac09a820871242431dc1"
+    },
+    "multi_seal_runner": {
+      "path": "scripts/run_v10_multiseal_oracle.py",
+      "sha256": "de2d89bb28e3e3e37afcb6180d34ee3b2eb445ec66bd95f12fd63aeb1b7b79e8"
+    }
+  },
+  "merge_rule": "one authoritative terminal record per frozen unit: Seal A only for ADMISSIBLE_V9; Seal B/C only for frozen missing-set units; duplicate/conflict rejects release",
+  "missing_set_hash": "566d27190e3d724febd4ec70aadf55f40b4d960962136a245a00b5545c19e024",
+  "protocol_hash": "3e421ab0221ca8c3fc840899ad0bf9fa756bde4ced4bf6f0ea33d880cd4c70df",
+  "protocol_id": "V10_MULTI_SEAL_REFERENCE_PROTOCOL",
+  "reason_for_amendment": "single-seal V9 execution exhausted frozen runtime cost envelope before complete reference release",
+  "seal_a": {
+    "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+    "kind": "V9_ADMISSIBLE_CHECKPOINTS",
+    "unit_ids_hash": "aea033061e7a9c7642a45fdb29d14c7998ef4e3cbd1b1bafdeb2d6e552ac5945"
+  },
+  "seal_b": {
+    "kind": "EXACT_FROZEN_MISSING_SET_COMPLETION",
+    "unit_ids_hash": "1069aece0170626adafd7da4024c3f88317cae53de1115ad7fafdc8d247d456f"
+  },
+  "semantic_contract": {
+    "candidate_proxy_protocol_hash": "83642c42ed0ab578cdf5db81ccbf29fbcfbd3458b98909c92190fb88920dceab",
+    "generation_config_hash": "9779c9b3831f53684916e5ab825125e08c7f889f2f1c76f7032c25bf7922f386",
+    "k3_config_hash": "ebcc3907a64b463060ce36ec5e4b4c188ecc12c3c1e434e1e8554b22112be200",
+    "model_hash": "3febe26ff0cee468bf48dc733e4bca559c8f13f8fe09f931a1e0808ba7c58873",
+    "parser_hash": "4820b25ba2652dd3fb9fb734aadb5e6f0e06c513539b2b568d4e889cfbe11390",
+    "processor_hash": "deaa5d6ecd3d8979b24943595d287827aba343bbf7b004d35587dd083f9beb79",
+    "prompt_hash": "ffab97aeb65b7b8fddf8ce6fa9964319cda8b740aa87f90a3ed1df80c7c5c99e",
+    "source_bindings_hash": "1fd0fa7f6e5901d001e1f35228b991fd912bfcef4bd59b842c12e4f7d3c6097e",
+    "unitization_hash": "570ba03ce2678ec9168fb213f92d4ef30ec8306369c93159827e33ea3cc5b908"
+  },
+  "shadow_set_hash": "7551367a58ef0864237554209ad2e1702ea056e999761b7ec9f0c9c4fab76d5e",
+  "source_commit": "2c0d35c888f9711cacab964672c6094fc98e5c49"
+}

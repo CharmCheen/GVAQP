@@ -1,0 +1,66 @@
+{
+  "cases": [
+    {
+      "agent_consensus_is_non_authoritative_in_v3": true,
+      "candidate_id": "DALI_u0548",
+      "v2_effective_label": "parse_failure",
+      "v2_parse_status": "invalid_relevant_boundary",
+      "v2_pre_outcome_agent_consensus": "relevant",
+      "v2_raw_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/DALI/DALI_u0548_fps4_sensitivity.json",
+      "v2_raw_sha256": "279a448c79185d057197a591f3a129989f3976af1c7fac1fe476347cac36d912",
+      "v3_regression_purpose": "hard_schema_no_authoritative_time_field"
+    },
+    {
+      "agent_consensus_is_non_authoritative_in_v3": true,
+      "candidate_id": "DALI_u0555",
+      "v2_effective_label": "not_relevant",
+      "v2_parse_status": "ok",
+      "v2_pre_outcome_agent_consensus": "relevant",
+      "v2_raw_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/DALI/DALI_u0555_fps2_r0.json",
+      "v2_raw_sha256": "800f481a61cbeeaa91fc67ed394d57e0bc95f9709af6b76ab4c8069f2740e789",
+      "v3_regression_purpose": "authoritative_label_determinism_and_non_gating_polarity_diagnostic"
+    },
+    {
+      "agent_consensus_is_non_authoritative_in_v3": true,
+      "candidate_id": "HANGZHOU_u0234",
+      "v2_effective_label": "relevant",
+      "v2_parse_status": "ok",
+      "v2_pre_outcome_agent_consensus": "not_relevant",
+      "v2_raw_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/HANGZHOU/HANGZHOU_u0234_fps2_r0.json",
+      "v2_raw_sha256": "a54dcdd191c9a66c8a11ef06f887f31342a677edefd69107d3a18c7a10a7845c",
+      "v3_regression_purpose": "authoritative_label_determinism_and_signal_lane_diagnostic"
+    },
+    {
+      "agent_consensus_is_non_authoritative_in_v3": true,
+      "candidate_id": "WUHAN_u0217",
+      "v2_effective_label": "not_relevant",
+      "v2_parse_status": "ok",
+      "v2_pre_outcome_agent_consensus": "relevant",
+      "v2_raw_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/WUHAN/WUHAN_u0217_fps2_r0.json",
+      "v2_raw_sha256": "6540613a42a15c9c9a7b816ed1be7ed03d0978f242502d31928a38883d5ad971",
+      "v3_regression_purpose": "authoritative_label_determinism_and_ego_path_diagnostic"
+    },
+    {
+      "agent_consensus_is_non_authoritative_in_v3": true,
+      "candidate_id": "WUHAN_u0171",
+      "v2_effective_label": "relevant",
+      "v2_parse_status": "ok",
+      "v2_pre_outcome_agent_consensus": "relevant",
+      "v2_raw_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/WUHAN/WUHAN_u0171_fps2_r0.json",
+      "v2_raw_sha256": "27040c5b0d4a30baa01854b519e9e5f88a03ad78e3194cba1cfae65856bcd87f",
+      "v3_regression_purpose": "authoritative_label_determinism_and_unsupported_explanation_diagnostic"
+    }
+  ],
+  "gate_rule": "all agent semantic and explanation diagnostics are non-gating for V3 model-relative adequacy",
+  "status": "FROZEN_DIAGNOSTIC_REGRESSION_SET",
+  "v2_decision_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/TARGETED_PILOT_DECISION_V2.json",
+  "v2_decision_remains": "REVISE_ORACLE_PROTOCOL",
+  "v2_decision_sha256": "f5ae72e3da5e2aac44a44e9fd604673894add71cbad666d25d0ec554435f3cc0",
+  "v2_grounding_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/GROUNDING_REVIEW_V2.json",
+  "v2_grounding_sha256": "a2a3ced204a3a596f342668bac973cbf5eebbf1bc599d61aa4247246c1ab87e9",
+  "v2_grounding_verdict_counts": {
+    "INDETERMINATE": 0,
+    "SUPPORTED": 2,
+    "UNSUPPORTED": 2
+  }
+}

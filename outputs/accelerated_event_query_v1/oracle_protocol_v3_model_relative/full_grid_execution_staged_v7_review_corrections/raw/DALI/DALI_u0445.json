@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0445:1786356790583007932",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "da72b63fe824ebd41be17c4a25c3fc268eb084286a64bf8a9f867520fb9b67cd",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "68e56f83555da4180a55e77d94b53866bd5d314992012c951e1e9c69c71e545c",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "ba427dbc19a1c27d4151191ef62c1583df770d8491750759442212c16553de5b",
+  "generated_token_ids_sha256": "ff6bd2c6190326f54c838f9418a69532870b4e357d3e41605ebf039996de23df",
+  "input_identity_sha256": "7b5a0e680275e6a4274ca474b1bd2415833c73809a47e8db65e126b857281aaa",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "e78e5b919445b185e0f6962616ff5b88e3afd26dfdf863facf1d9d83b9c2ab4b",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily in a multi-lane urban road during twilight. Traffic flow is smooth with no sudden braking, slowing, or obstacles in the immediate path. Lead vehicles maintain consistent speed, and no road users are entering or threatening the ego path. Pedestrians and cyclists are visible on sidewalks and shoulders, but not encroaching into the roadway. Traffic signals are not visible or do not require a marked response within the unit. The environment is clear, and no visible road conditions necessitate a marked speed or path change.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "1d28b8798509422d1b3d9ef934a7e10da30e6a1cb5eaf722cb892aa7b5fc7ec9",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily in a multi-lane urban road during twilight. Traffic flow is smooth with no sudden braking, slowing, or obstacles in the immediate path. Lead vehicles maintain consistent speed, and no road users are entering or threatening the ego path. Pedestrians and cyclists are visible on sidewalks and shoulders, but not encroaching into the roadway. Traffic signals are not visible or do not require a marked response within the unit. The environment is clear, and no visible road conditions necessitate a marked speed or path change.\"\n}",
+  "raw_response_sha256": "91c8cdb1631af1bb372a0ae538d8ff1de788697405a4ad38b248b4b54e3bf706",
+  "record_payload_sha256": "898b44546a9375ec3765891c29f30e04af2c1f511feee9b767cae94ee8d6d0c9",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 20.494553144999372,
+    "model_load_seconds": 20.342561935998674,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 22.27610928699869,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0445",
+  "unit_ordinal": 445,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0221:1785446632987639177",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "8e1c401af8c7072633f97b3fc3f3f4a90e7de3ca3d742a038ad56ef5ebccf165",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "2152c63749e38c5c40a5178d929cc64c4dac90877f6a83de22f8ecd7ce679818",
+  "generated_token_ids_sha256": "b2ba40bf102564d3823488f9b627599b6fbadc25bc0ed1abfebecd00032e55ff",
+  "input_identity_sha256": "42f6ef2617fda98f13c5bc8e726fe314ecfa1840702248317829856f464c03a7",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "1fe3532b94a4a3670f28402302664077f0b64fa059220db714fe4d88176d93c6",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane road with clear visibility. The lead vehicle is maintaining a consistent distance and speed, and there are no sudden changes in traffic conditions, road obstructions, or traffic signals requiring a marked response. The navigation overlay indicates a smooth route ahead with no immediate stops or turns. All visible conditions support normal, steady driving without the need for braking, slowing, or avoidance maneuvers.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "95b9268c89e4f378bd4643ffea0e845e7464a2fc7db932cb06c55ab326f90916",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane road with clear visibility. The lead vehicle is maintaining a consistent distance and speed, and there are no sudden changes in traffic conditions, road obstructions, or traffic signals requiring a marked response. The navigation overlay indicates a smooth route ahead with no immediate stops or turns. All visible conditions support normal, steady driving without the need for braking, slowing, or avoidance maneuvers.\"\n}",
+  "raw_response_sha256": "4eb7bf51d522cc2fd5ce0049133d43712036191a23fff1700aa62643eafaedb4",
+  "record_payload_sha256": "deeea184e576a0b8ee128dd6b86a27f968c6aa3117cbbd175be0f41ebac01a32",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.987748250365257,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.779041547328234,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0221",
+  "unit_ordinal": 788,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

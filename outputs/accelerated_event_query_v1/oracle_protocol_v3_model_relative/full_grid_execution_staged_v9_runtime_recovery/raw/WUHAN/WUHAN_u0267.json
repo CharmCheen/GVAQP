@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0267:1786375884330132776",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "e100c29fc06cdc76bca7545c18bd4d123d28a8e57a1df2d036b0a5ca55c9d114",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "3412bfc40d3088ecf00e7559bd0acde8e43413d9a1f004d6acdffe6274ebd9f8",
+  "generated_token_ids_sha256": "3ebac95c04b733e666d9228802534608867139bf75a58137aefa74925f598ad6",
+  "input_identity_sha256": "be5e7afbe56b6b569a3f187a8a7474ae3cdca1d204510907540e7d50e30989de",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "49d2e45af13793483b2e47eb93aece018c1b10c06bd136649c7679f83bfb103c",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic lights ahead transition from red to green during the sequence, indicating a change in traffic control that requires the ego driver to respond by accelerating or proceeding through the intersection. Additionally, the ego vehicle approaches a crosswalk and intersection with multiple vehicles in adjacent lanes, requiring attention and potential adjustment in speed or lane position to safely navigate the intersection. The presence of traffic signals and the need to respond to their change constitutes a noticeable driving response required within this unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "fe831f80cdeac9407d8d8f3c71a0e9490cb3981a41d35b356dd050fe0a57e3f4",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic lights ahead transition from red to green during the sequence, indicating a change in traffic control that requires the ego driver to respond by accelerating or proceeding through the intersection. Additionally, the ego vehicle approaches a crosswalk and intersection with multiple vehicles in adjacent lanes, requiring attention and potential adjustment in speed or lane position to safely navigate the intersection. The presence of traffic signals and the need to respond to their change constitutes a noticeable driving response required within this unit.\"\n}",
+  "raw_response_sha256": "aee2478e9637c2e36bc70cefe31dcd418b63ef35ad1b6c0cf92e78d727ae5a11",
+  "record_payload_sha256": "ed0dc1005388248bfaeb8573a94509969b4558022b56ff3740737508afeb9ba7",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 17.577677501001745,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 19.236485214991262,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0267",
+  "unit_ordinal": 1395,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

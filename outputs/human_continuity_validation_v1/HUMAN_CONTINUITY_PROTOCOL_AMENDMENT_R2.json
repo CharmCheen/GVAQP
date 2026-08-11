@@ -1,0 +1,42 @@
+{
+  "amendment_hash": "7eb23201edd5d72d2fc040e9150098df3df015b82fc5372a3a6f09e999e8bdd1",
+  "amendment_id": "HUMAN_CONTINUITY_ANALYSIS_R2_PRELABEL_CLARIFICATION",
+  "amends_protocol_hash": "06deda4503981179bdd2bc9157f94f80c104dcc7fffb5e866da4fd10325716ac",
+  "analysis_contract": {
+    "analysis_seed": 20260811,
+    "continuity_eligible_labels": [
+      "SAME_EVENT",
+      "DIFFERENT_EVENTS"
+    ],
+    "human_supports_full_K3_if_all": [
+      "not INCONCLUSIVE_PRIMARY",
+      "K3_minus_C1_raw_accuracy >= 0.10",
+      "K3_minus_C1_direction_is_positive_in_at_least_two_videos_with_at_least_five_eligible_cases"
+    ],
+    "human_supports_gap_only_if_all": [
+      "not INCONCLUSIVE_PRIMARY",
+      "C1_minus_C0_raw_accuracy >= 0.10",
+      "C1_minus_C0_direction_is_positive_in_at_least_two_videos_with_at_least_five_eligible_cases",
+      "K3_minus_C1_raw_accuracy < 0.10"
+    ],
+    "inconclusive_primary_if_any": [
+      "eligible_primary_cases < 28",
+      "eligible_C0_C1_disagreement_cases < 8",
+      "paired_bootstrap_95pct_CI_width_for_C1_minus_C0_accuracy > 0.40"
+    ],
+    "no_human_support_if": "not INCONCLUSIVE_PRIMARY and C1_minus_C0_raw_accuracy < 0.10 and K3_minus_C1_raw_accuracy < 0.10",
+    "paired_bootstrap_resamples": 10000,
+    "reserve_unlock": "only if INCONCLUSIVE_PRIMARY under these frozen rules; reserve sample is already locked"
+  },
+  "clip_contract_changed": false,
+  "created_at_utc": "2026-08-11T07:07:42.616613+00:00",
+  "human_labels_observed_before_amendment": 0,
+  "population_changed": false,
+  "primary_manifest_sha256": "190be9d537650c45484fcf9e32cd3b9c0c27e9add2d7beddf1d0c011a1edf5cf",
+  "primary_sample_changed": false,
+  "protocol_type": "POST_P0_INDEPENDENT_HUMAN_VALIDATION_PRELABEL_AMENDMENT",
+  "reason": "Clarify reserve-unlock and decision rules before the first human label; no semantic, sampling, video, query, or clip-contract change.",
+  "reserve_manifest_sha256": "e1a32294676b3187b06d392e1177262df6490800e13a1759fe01d044e2d9eb88",
+  "reserve_sample_changed": false,
+  "semantic_contract_changed": false
+}

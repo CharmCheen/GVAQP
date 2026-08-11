@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0137:1786373088395536716",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "71f50164498e30e1ec35909ce56a92d35c16f87c2448029df67dcf06b3d69651",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "407626e1aa54730d3cbd64df79d4734ae5dc6a5e1caaaa5573230e8f536934ff",
+  "generated_token_ids_sha256": "4bac03cbcbbaf990a47af97dd72aec20ae8fdcf96068c2fe6bea3c06cd847b70",
+  "input_identity_sha256": "3b5fa075eee0ea952409bd1f091faa45c351e38eb814843bb5ce9b8b9c1ff7e0",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "37a6ae8b800aa8ad84559eadde74eba20f9154bde737ad929ac7ac99f5e78e6c",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The lead yellow pickup truck is approaching a traffic signal that turns from red to green during the unit. The countdown timer on the traffic light decreases from 6 to 0, indicating a transition that requires the driver to prepare for a potential stop or start. Additionally, the ego vehicle is following closely behind the lead vehicle, and the lead vehicle's braking or acceleration behavior in response to the signal change would necessitate a corresponding response from the ego driver. The presence of the traffic signal and the countdown timer directly impacts driving behavior, requiring attention and potential braking or acceleration.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "1184d1af0e903970931cd91b33ee41bb41303a99984bc53d8aff8f47fc2894a4",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The lead yellow pickup truck is approaching a traffic signal that turns from red to green during the unit. The countdown timer on the traffic light decreases from 6 to 0, indicating a transition that requires the driver to prepare for a potential stop or start. Additionally, the ego vehicle is following closely behind the lead vehicle, and the lead vehicle's braking or acceleration behavior in response to the signal change would necessitate a corresponding response from the ego driver. The presence of the traffic signal and the countdown timer directly impacts driving behavior, requiring attention and potential braking or acceleration.\"\n}",
+  "raw_response_sha256": "78c719c29492deac2642aed9d3528736744ac71a49476c79a0f8a86fa8fc8140",
+  "record_payload_sha256": "2ce372e1f14c9fa9aa53eeb7080656a6bc5f8ff28e8c7b0fd9937eda3a4a8a7b",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 19.23353506300191,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.94906303800235,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0137",
+  "unit_ordinal": 704,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

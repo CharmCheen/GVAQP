@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0077:1786372065717293849",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "9f1bcaed9358e9538e1fe893845c874effcd5e5c18aa4243cdf59df6468bed48",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "c86a9f581ea6a901280a66913e895e67f8ab94127b3ae621e2da3af87a317705",
+  "generated_token_ids_sha256": "114c9a56a19a3d3652d0539d5d0b88699e5f913c4ef9d1b6f50c64bd4e540f0b",
+  "input_identity_sha256": "12de96a4411544f61e6e80d7b1e40df566f28c4a7ed3f647196d3f6b366bfd62",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "01cd3aecc5439c4116070b2ab2cbee0dfbbf05fc4a75fcfc25c8fb967be17878",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching a traffic signal that is red, as indicated by the countdown timer (starting from 41 and decreasing) and the red light icon in the navigation overlay. The vehicle is on a multi-lane road with clear lane markings and is approaching an intersection with crosswalks. A pedestrian is visible crossing the road ahead, and the traffic signal requires a stop. Therefore, an attentive driver must perform a noticeable slowdown or braking action to comply with the traffic control and ensure safety.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "b2ced369d03ec27b0b556c34faed389554b23a693a054409a0cbe81a004b56a0",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching a traffic signal that is red, as indicated by the countdown timer (starting from 41 and decreasing) and the red light icon in the navigation overlay. The vehicle is on a multi-lane road with clear lane markings and is approaching an intersection with crosswalks. A pedestrian is visible crossing the road ahead, and the traffic signal requires a stop. Therefore, an attentive driver must perform a noticeable slowdown or braking action to comply with the traffic control and ensure safety.\"\n}",
+  "raw_response_sha256": "de15eeeca8be5ba83fc1411d983ef7bc07dffd0a07545ed076fd67c14888b8d9",
+  "record_payload_sha256": "c8a00fd1ba761b2e0a2afb97b5ef1ea6c9bd20abdf0e0405c19a2947200ab8db",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.807963165003457,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.468813532999775,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0077",
+  "unit_ordinal": 644,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0485:1786380312562903690",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "61253a453629297c394a98c073f55df659f0a6f7a0a614ac432b4eed16b609c6",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "5114d19e97cfe85196b8c406114b5f71f57703c8831addd237e2592e5dda020b",
+  "generated_token_ids_sha256": "140d371879d6e2f5edd4f66830083310f09d62e0cd7f8648114c0e1ed464adfe",
+  "input_identity_sha256": "8eb38a7dc8005cb9f178d7875a1d373c03688b0c119c19eb9fa94402814ef548",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "d84910562fd0d9ef2f89484a7c2c7c2c0fbdfbedb95f41786d4ceba3b11c0725",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light changes from red to green at the beginning of the unit, indicating that vehicles are permitted to proceed. However, the ego vehicle is in a dense traffic environment with multiple vehicles ahead, including a white SUV directly in front. As the green light is activated, the lead vehicles begin to move forward, but the ego vehicle must respond to this change by initiating acceleration or maintaining a safe following distance. The presence of multiple vehicles, including taxis and a bus, in close proximity requires attentive driving and a noticeable response to the traffic signal change to avoid collision or maintain safe spacing. The traffic flow is not yet fully established, and the ego driver must actively manage speed and position in response to the signal change and surrounding traffic.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "5ebaca1cd7f43301555245d084b7630a98fe116b43cf8894d5227a2b63c853f4",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light changes from red to green at the beginning of the unit, indicating that vehicles are permitted to proceed. However, the ego vehicle is in a dense traffic environment with multiple vehicles ahead, including a white SUV directly in front. As the green light is activated, the lead vehicles begin to move forward, but the ego vehicle must respond to this change by initiating acceleration or maintaining a safe following distance. The presence of multiple vehicles, including taxis and a bus, in close proximity requires attentive driving and a noticeable response to the traffic signal change to avoid collision or maintain safe spacing. The traffic flow is not yet fully established, and the ego driver must actively manage speed and position in response to the signal change and surrounding traffic.\"\n}",
+  "raw_response_sha256": "061dc026a5f6ba4407930c14d31607800c92547b7598159bbb3444bb04bce236",
+  "record_payload_sha256": "f62319e2adbadfb6b07119f850054fc5a130e45bdb1d6fd6bbae78e6844060c3",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 24.813301564005087,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 26.63843241900031,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0485",
+  "unit_ordinal": 485,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0490:1786356522796880467",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "5ca4189596b57e3930ff2c0ef3189338771e23cceb929ac1f8bbe4b45ee8cffe",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "c3746975bbc393caecc007a336ebe8e7afec4c87b69758c486b6d64a1189e1d6",
+  "generated_token_ids_sha256": "aba2d0365db5ef996729aae2c683e658e857635b05f52dba7218eb33f33195ad",
+  "input_identity_sha256": "7c543762f13fa11ddcacc8486c0469af980cf7986d44255219b4885cda154fc0",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "aa485f2fc92b7bdd301dbad75f44f41583635f608549cfd9bd975140dddbc3a1",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "A blue and white electric bus is seen approaching from the front and begins to turn left across the ego vehicle's path, requiring a noticeable slowdown or avoidance maneuver. Additionally, a cyclist on a yellow bike is riding in the same lane and is positioned directly in front of the ego vehicle, further necessitating a response to avoid collision. The bus's movement and the cyclist's presence create an immediate need for the ego driver to adjust speed or path.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "d06760b47661aab857d3ddb128f3b9167531f652327a57d25461853a5c3e2df5",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"A blue and white electric bus is seen approaching from the front and begins to turn left across the ego vehicle's path, requiring a noticeable slowdown or avoidance maneuver. Additionally, a cyclist on a yellow bike is riding in the same lane and is positioned directly in front of the ego vehicle, further necessitating a response to avoid collision. The bus's movement and the cyclist's presence create an immediate need for the ego driver to adjust speed or path.\"\n}",
+  "raw_response_sha256": "6222ff9454baf45c29b6f6bfccbf137fff32e69f3e724fb11049523161575c2c",
+  "record_payload_sha256": "2ae455913425cc3f3b735bd2b47102c10114bb3f3b82e30196429212930f326f",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.65038047899725,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.512509478998254,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0490",
+  "unit_ordinal": 1057,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

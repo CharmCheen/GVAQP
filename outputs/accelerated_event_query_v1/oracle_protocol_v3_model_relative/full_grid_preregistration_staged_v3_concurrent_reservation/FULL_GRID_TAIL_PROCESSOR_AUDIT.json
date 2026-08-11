@@ -1,0 +1,119 @@
+{
+  "checkpoint_weights_loaded": false,
+  "model_generate_called": false,
+  "model_path_used_for_processor_assets_only": "models/Qwen3-VL-32B-Instruct-FP8",
+  "processor_audit_payload_sha256": "df6b733d5a8c4743e6184c1cb7fcd91d55bf67413b9424c50cbf6b1f74e0661b",
+  "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+  "prompt_sha256": "ffab97aeb65b7b8fddf8ce6fa9964319cda8b740aa87f90a3ed1df80c7c5c99e",
+  "status": "PASS_PROCESSOR_ONLY_NO_CHECKPOINT_WEIGHTS_LOADED_NO_INFERENCE",
+  "tail_units": [
+    {
+      "do_sample_frames": false,
+      "explicit_model_visible_tail_declaration": true,
+      "model_visible_grid_duration_seconds": 5.5,
+      "model_visible_text": "You are the frozen Qwen3-VL-32B model-relative unit labeler for an event-query benchmark.\n\nThis is a legal shorter truncated-final ego-driving unit, not a nominal 10-second unit. Its frozen source interval duration is 5.535333 seconds, and the model input contains 12 distinct real source frames on the frozen 2.000000-fps grid. No padding, repeated frame, or invented off-grid endpoint was added. Inspect this truncated-final ego-driving unit and decide whether an attentive ego driver needs a noticeable slowdown, braking action, or avoidance maneuver because of visible conditions within this unit.\n\nRelevant causes may include a road user entering or threatening the ego path, a suddenly slowing or stopped lead vehicle, a traffic control that visibly requires a marked response within this unit, or a visible obstacle or road condition requiring a marked speed or path change. Normal steady driving, ordinary following with no marked response, distant hazards, merely seeing pedestrians or vehicles, and a response completed before the unit are not relevant. Do not infer hidden motion or a future event outside the supplied frames.\n\nReturn unknown rather than guessing when sampling, occlusion, unit boundaries, lane or signal attribution, or temporal context are insufficient. Unknown is not a negative.\n\nOnly the label is authoritative for the model-relative query predicate. Confidence and evidence are diagnostic text. K3, not this model response, constructs events and event boundaries from the ordered unit-label sequence. Do not output event times, onset, offset, event identity, merge, or deduplication fields.\n\nReturn exactly one JSON object, with no markdown fence, prefix, suffix, duplicate key, or extra key:\n{\n  \"label\": \"relevant\" | \"not_relevant\" | \"unknown\",\n  \"confidence\": \"high\" | \"medium\" | \"low\",\n  \"evidence\": \"nonempty string\"\n}\n",
+      "model_visible_text_sha256": "2bf7bfd8ab92ed956245ca27fb3cc32d53c242dff4337a9f4cfb146f6afabb8c",
+      "padding_or_repeated_source_frame_added_by_protocol": false,
+      "processor_tensor_bundle_sha256": "303d58d099874a1cccc113fe67e7d7f1d673ad30425ea801c694685be8788182",
+      "processor_tensor_shapes": {
+        "attention_mask": [
+          1,
+          3902
+        ],
+        "input_ids": [
+          1,
+          3902
+        ],
+        "mm_token_type_ids": [
+          1,
+          3902
+        ],
+        "pixel_values_videos": [
+          13824,
+          1536
+        ],
+        "video_grid_thw": [
+          1,
+          3
+        ]
+      },
+      "supplied_frame_count": 12,
+      "supplied_sampling_fps": 2.0,
+      "true_duration_seconds": 5.535333,
+      "unit_id": "DALI_u0566",
+      "unit_kind": "truncated_final"
+    },
+    {
+      "do_sample_frames": false,
+      "explicit_model_visible_tail_declaration": true,
+      "model_visible_grid_duration_seconds": 0.5,
+      "model_visible_text": "You are the frozen Qwen3-VL-32B model-relative unit labeler for an event-query benchmark.\n\nThis is a legal shorter truncated-final ego-driving unit, not a nominal 10-second unit. Its frozen source interval duration is 0.566000 seconds, and the model input contains 2 distinct real source frames on the frozen 2.000000-fps grid. No padding, repeated frame, or invented off-grid endpoint was added. Inspect this truncated-final ego-driving unit and decide whether an attentive ego driver needs a noticeable slowdown, braking action, or avoidance maneuver because of visible conditions within this unit.\n\nRelevant causes may include a road user entering or threatening the ego path, a suddenly slowing or stopped lead vehicle, a traffic control that visibly requires a marked response within this unit, or a visible obstacle or road condition requiring a marked speed or path change. Normal steady driving, ordinary following with no marked response, distant hazards, merely seeing pedestrians or vehicles, and a response completed before the unit are not relevant. Do not infer hidden motion or a future event outside the supplied frames.\n\nReturn unknown rather than guessing when sampling, occlusion, unit boundaries, lane or signal attribution, or temporal context are insufficient. Unknown is not a negative.\n\nOnly the label is authoritative for the model-relative query predicate. Confidence and evidence are diagnostic text. K3, not this model response, constructs events and event boundaries from the ordered unit-label sequence. Do not output event times, onset, offset, event identity, merge, or deduplication fields.\n\nReturn exactly one JSON object, with no markdown fence, prefix, suffix, duplicate key, or extra key:\n{\n  \"label\": \"relevant\" | \"not_relevant\" | \"unknown\",\n  \"confidence\": \"high\" | \"medium\" | \"low\",\n  \"evidence\": \"nonempty string\"\n}\n",
+      "model_visible_text_sha256": "50481e4bbc28945edd013f139317d4cad42e4071d74ff36f4aab44429c59c644",
+      "padding_or_repeated_source_frame_added_by_protocol": false,
+      "processor_tensor_bundle_sha256": "5f272c04485bcee1f6517c1aa45e875f72148531f1e0bd40286c6b15aba6b831",
+      "processor_tensor_shapes": {
+        "attention_mask": [
+          1,
+          821
+        ],
+        "input_ids": [
+          1,
+          821
+        ],
+        "mm_token_type_ids": [
+          1,
+          821
+        ],
+        "pixel_values_videos": [
+          1664,
+          1536
+        ],
+        "video_grid_thw": [
+          1,
+          3
+        ]
+      },
+      "supplied_frame_count": 2,
+      "supplied_sampling_fps": 2.0,
+      "true_duration_seconds": 0.566,
+      "unit_id": "HANGZHOU_u0560",
+      "unit_kind": "truncated_final"
+    },
+    {
+      "do_sample_frames": false,
+      "explicit_model_visible_tail_declaration": true,
+      "model_visible_grid_duration_seconds": 2.5,
+      "model_visible_text": "You are the frozen Qwen3-VL-32B model-relative unit labeler for an event-query benchmark.\n\nThis is a legal shorter truncated-final ego-driving unit, not a nominal 10-second unit. Its frozen source interval duration is 2.930499 seconds, and the model input contains 6 distinct real source frames on the frozen 2.000000-fps grid. No padding, repeated frame, or invented off-grid endpoint was added. Inspect this truncated-final ego-driving unit and decide whether an attentive ego driver needs a noticeable slowdown, braking action, or avoidance maneuver because of visible conditions within this unit.\n\nRelevant causes may include a road user entering or threatening the ego path, a suddenly slowing or stopped lead vehicle, a traffic control that visibly requires a marked response within this unit, or a visible obstacle or road condition requiring a marked speed or path change. Normal steady driving, ordinary following with no marked response, distant hazards, merely seeing pedestrians or vehicles, and a response completed before the unit are not relevant. Do not infer hidden motion or a future event outside the supplied frames.\n\nReturn unknown rather than guessing when sampling, occlusion, unit boundaries, lane or signal attribution, or temporal context are insufficient. Unknown is not a negative.\n\nOnly the label is authoritative for the model-relative query predicate. Confidence and evidence are diagnostic text. K3, not this model response, constructs events and event boundaries from the ordered unit-label sequence. Do not output event times, onset, offset, event identity, merge, or deduplication fields.\n\nReturn exactly one JSON object, with no markdown fence, prefix, suffix, duplicate key, or extra key:\n{\n  \"label\": \"relevant\" | \"not_relevant\" | \"unknown\",\n  \"confidence\": \"high\" | \"medium\" | \"low\",\n  \"evidence\": \"nonempty string\"\n}\n",
+      "model_visible_text_sha256": "18a1c6c6a4ff23b4a297041e976d9bd89bad6a61a23fd18d46ac5d2f4ce6fd90",
+      "padding_or_repeated_source_frame_added_by_protocol": false,
+      "processor_tensor_bundle_sha256": "321b9f0e35f22f5eaa665b15f4645d580e47c4c226b63f8ede0a51b42e9fbe3f",
+      "processor_tensor_shapes": {
+        "attention_mask": [
+          1,
+          2149
+        ],
+        "input_ids": [
+          1,
+          2149
+        ],
+        "mm_token_type_ids": [
+          1,
+          2149
+        ],
+        "pixel_values_videos": [
+          6912,
+          1536
+        ],
+        "video_grid_thw": [
+          1,
+          3
+        ]
+      },
+      "supplied_frame_count": 6,
+      "supplied_sampling_fps": 2.0,
+      "true_duration_seconds": 2.930499,
+      "unit_id": "WUHAN_u0346",
+      "unit_kind": "truncated_final"
+    }
+  ]
+}

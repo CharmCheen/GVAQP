@@ -1,0 +1,23 @@
+{
+  "actor_definition": "motor vehicle only",
+  "benchmark_name": "PARTIAL_SCAN_BENCHMARK_PILOT_V1",
+  "contract_hash": "4b3324256a0b854174c904c5e21a6d0749fed745fca93f70cdd37138f5e4e9ae",
+  "exclusion_rules": [
+    "cyclist",
+    "pedestrian",
+    "ego_lane_change",
+    "parallel_driving",
+    "overtake_without_path_entry",
+    "ambiguous_path_entry",
+    "non_event"
+  ],
+  "inclusion_rules": [
+    "lateral_or_adjacent_origin",
+    "enters_expected_ego_path"
+  ],
+  "parser_version": "partial_scan_reference_events_json_v1",
+  "query_id": "TARGET_VEHICLE_CUT_IN",
+  "query_prompt": "You are constructing an evaluator-only reference for TARGET_VEHICLE_CUT_IN.\nIdentify every event in the supplied full-context video window where another MOTOR VEHICLE\nenters the ego vehicle's expected driving path from an adjacent or lateral direction.\nExclude cyclists, pedestrians, ego lane changes, ordinary parallel driving, overtakes\nwithout path entry, ambiguous path entry, and non-events. Return strict JSON:\n{\"events\":[{\"start_sec\":number,\"end_sec\":number,\"actor_type\":\"motor_vehicle\",\n\"confidence\":\"high|medium|low\",\"description\":string}],\"ambiguous\":[string]}.\nTimes are seconds relative to this window. Empty events is valid.",
+  "query_prompt_hash": "19dc06ecb77c03d19320ed20a9c2281cbaa676b5a7f8112cf8eca2361311d370",
+  "query_text": "Another motor vehicle enters the ego vehicle's expected driving path from an adjacent or lateral direction."
+}

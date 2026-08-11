@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0520:1786381035654457068",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "c8bf8063b7b34b4f0b2a76e9e350e3226000787b9d7632026926a10f732a8236",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "02be6c16c41c5b499653daba7b943ae5e818908963ebb7836fa49879c0f55449",
+  "generated_token_ids_sha256": "c7dc182f4fe8ddb7b7e77162f2a0f289ea9e57280d7d11b36c4d76a92aa92fee",
+  "input_identity_sha256": "a04d01ef8393225602c8c68d8a6deb7ada6d26d56de221f0f4276c02b5491bc6",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "07892220a562b6358fc70ddae0e441cc8043d57bcdc58304c15d90611ee31594",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a traffic intersection with red traffic signals visible for the current direction of travel. The lead vehicles, including a car and a motorcycle, are slowing down and stopping at the intersection. The traffic control (red lights) visibly requires a marked response (slowing and stopping) from the ego driver within this unit. Additionally, pedestrians and cyclists are present at the crosswalk, further necessitating a slowdown or stop to comply with traffic rules and ensure safety.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "6e907c1f2c01cf661e60d57cccb43f5150d4d7dcf1e74beb3edf1c173a968f52",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a traffic intersection with red traffic signals visible for the current direction of travel. The lead vehicles, including a car and a motorcycle, are slowing down and stopping at the intersection. The traffic control (red lights) visibly requires a marked response (slowing and stopping) from the ego driver within this unit. Additionally, pedestrians and cyclists are present at the crosswalk, further necessitating a slowdown or stop to comply with traffic rules and ensure safety.\"\n}",
+  "raw_response_sha256": "77b3469b4a9ea65b334f1256436c5298fafa250ce6aed213626a9513c207d7f3",
+  "record_payload_sha256": "d95a25a6e76be672aba1ad3d51469aa5ad7d6836be8dfca14d4f97bd1d5e5287",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 18.314069256011862,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 20.15408799299621,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0520",
+  "unit_ordinal": 520,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

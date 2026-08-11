@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0129:1786350459000656932",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "cf50ba5c0278ada307f11c58d4fb5e1b0ab98da91bb5a0611df4134ec6963e71",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "909d88b3fb1ff10025bf290faf8e9f1e83f8fe15b7fd80786a649cf3acd565c5",
+  "generated_token_ids_sha256": "6778af93aefb2c0d7d371dbec8ad5b7c7a9880006cf7895ce0675e081715a3d9",
+  "input_identity_sha256": "6f5ebb979f37780098a6cefc2afcff7666cccecd4b6790dcbebf77afb511cb85",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "3794077be04a7009e9793c9f84c16d7ae9a7ed68dae3cd26a9c65ac9b5e47c99",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on a wide, clear urban road with no immediate obstacles or hazards in its path. Pedestrians and a scooter are crossing the intersection ahead, but they are already in the crosswalk and moving away from the ego path. The traffic light is green for the ego direction, and there are no sudden stops, slowing vehicles, or traffic controls requiring a marked response. The road ahead is open, and the ego vehicle can continue at a steady pace without needing to slow down, brake, or maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "664edee50b79df6302344b4d4fca9834bd7f465bd84f292aafc4e5313847f451",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on a wide, clear urban road with no immediate obstacles or hazards in its path. Pedestrians and a scooter are crossing the intersection ahead, but they are already in the crosswalk and moving away from the ego path. The traffic light is green for the ego direction, and there are no sudden stops, slowing vehicles, or traffic controls requiring a marked response. The road ahead is open, and the ego vehicle can continue at a steady pace without needing to slow down, brake, or maneuver.\"\n}",
+  "raw_response_sha256": "aeb3bd34cb375f4218f85fec66f1dd1fcb05ea6d08b08468df376001b253aff9",
+  "record_payload_sha256": "5d9c7426a104afec95bf1e73e9cd28c19ab7aea94cbb5aa3b5ab5791a8f425e7",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.310698312998284,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.915371237999352,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0129",
+  "unit_ordinal": 1257,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

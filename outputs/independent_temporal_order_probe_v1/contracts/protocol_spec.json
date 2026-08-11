@@ -1,0 +1,179 @@
+{
+  "schema_version": "INDEPENDENT_TEMPORAL_ORDER_PROBE_PROTOCOL_V1",
+  "experiment_id": "INDEPENDENT_TEMPORAL_ORDER_PROBE_V1",
+  "status": "PROTOCOL_FROZEN_INPUTS_UNBOUND",
+  "created_utc": "2026-08-07T04:47:18Z",
+  "git_commit_at_protocol_freeze": "620378413b1f5f3cd3ed304e701fc480d8d17ba3",
+  "execution_authorized": false,
+  "new_oracle_calls_authorized": false,
+  "research_gate": "O_FIXED_TEMPORAL_ORDER_OPPORTUNITY",
+  "query": {
+    "query_id": "Q1",
+    "query_name": "OTHER_VEHICLE_ENTERS_EGO_PATH",
+    "prompt_id": "DENSE_PRESENCE_STRICT_V13_6",
+    "prompt_path": "configs/prompts/confirm_visual.yaml",
+    "prompt_sha256": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+    "query_protocol_sha256": "5705a1365e6033445932c06f4aa2432ff6bdcdfcb813ee822dfad39da3ae25c0",
+    "claim_scope": "frozen_oracle_relative_not_human_truth"
+  },
+  "oracle": {
+    "model": "Qwen/Qwen3-VL-32B-Instruct",
+    "revision": "0cfaf48183f594c314753d30a4c4974bc75f3ccb",
+    "model_manifest_sha256": "c8104bb1b008e0ad876e4fd6c63bc44ab1a3631e04cb13220b9f9d736f1aa210",
+    "backend": "transformers",
+    "dtype": "bfloat16",
+    "device_map": "auto",
+    "video_sample_fps": 2.0,
+    "decoded_end_inclusive": true,
+    "generation": {
+      "do_sample": false,
+      "temperature": null,
+      "max_new_tokens": 256,
+      "mode": "greedy"
+    },
+    "parser_source_sha256": "c02b545c0c5d2969508eea9a5470f0cb67d71282b25059948106504f9f4edd31",
+    "labels": ["positive", "negative", "abstain"],
+    "unknown_policy": "never_coerce_to_negative"
+  },
+  "unit_grid": {
+    "unit_seconds": 10.0,
+    "origin_seconds": 0.0,
+    "overlap_seconds": 0.0,
+    "final_unit_may_be_truncated": true,
+    "units_per_scan_cell": 10,
+    "unit_ids": "contiguous_chronological_from_zero"
+  },
+  "scan": {
+    "operator": "frozen_psvr_q1_yolov8_proxy",
+    "config_path": "outputs/psvr_two_video_loop/final_proxy/FINAL_PROXY_CONFIG.json",
+    "config_sha256_declared": "2c3026fcffcab75fa7a1024e8a929b6eec339b7cbeec4ece9827bcb7e811035d",
+    "model_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "resolution": 640,
+    "sample_fps": 5,
+    "confidence_threshold": 0.25,
+    "nms_iou": 0.45,
+    "action_granularity": "one_complete_scan_cell"
+  },
+  "verify": {
+    "target_rule": "highest_proxy_exposed_unverified_unit",
+    "tie_break": "ascending_unit_id",
+    "legal_if": [
+      "containing_scan_cell_durably_committed",
+      "candidate_present_in_public_frontier",
+      "candidate_not_previously_verified",
+      "complete_verify_plus_commit_tail_admitted"
+    ]
+  },
+  "materialization": {
+    "publication": "verified_only",
+    "probable_event_enabled": false,
+    "refine_enabled": false,
+    "name": "k3_bridge_safe",
+    "g_max": 1,
+    "d_core_max_seconds": 40.0,
+    "d_seg_max_seconds": 60.0,
+    "evaluator_sha256": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+    "reference": "exhaustive_frozen_oracle_evaluator_only"
+  },
+  "workload": {
+    "primary_view": "warm_oracle_cold_per_run_proxy_and_query_state",
+    "cold_load_reported_separately": true,
+    "fresh_state_per_run": true,
+    "oracle_cache_may_bypass_physical_inference": false,
+    "target_hardware": "TBD_NOT_BOUND"
+  },
+  "timing": {
+    "cycle_start": "immediately_before_deterministic_policy_selection",
+    "cycle_end": "after_action_state_k3_snapshot_fsync_atomic_commit",
+    "scan_includes": ["scheduler", "validation", "seek_decode", "detector_tracker_proxy", "frontier", "k3", "snapshot", "fsync_atomic_commit"],
+    "verify_includes": ["scheduler", "validation", "clip_decode_sampling", "vlm_preprocess_generate_parse", "frontier", "k3_eventrelation", "snapshot", "fsync_atomic_commit"],
+    "post_deadline_result_utility": false,
+    "overrun_retained_in_ledger": true
+  },
+  "deadline": {
+    "numeric_seconds": "TBD_DERIVE_BEFORE_PRIMARY_RUNS",
+    "d_min_rule": "SCAN_q95 + VERIFY_q95 + COMMIT_q95 + 1.0",
+    "d_transition_rule": "0.9765756132103428 * FULL_PROXY_PASS_p50",
+    "primary_rule": "max(D_min,D_transition)",
+    "full_proxy_p50_repetitions": 3,
+    "source_a_proxy_outputs_sealed_before_policy_execution": true,
+    "source_a_semantic_outcomes_forbidden_in_calibration": true
+  },
+  "snapshot_schedule": [
+    "t0_empty_relation",
+    "after_every_durable_scan",
+    "after_every_durable_verify",
+    "stop_or_deadline_last_durable_state"
+  ],
+  "policies": [
+    {
+      "policy_id": "A_CHRONOLOGICAL_FIXED_SCAN1_VERIFY1",
+      "scan_order": "ascending_cell_id",
+      "initial_action": "SCAN",
+      "cycle": "one_SCAN_then_one_highest_proxy_VERIFY",
+      "adaptive": false
+    },
+    {
+      "policy_id": "B_TEMPORAL_BISECTION_FIXED_SCAN1_VERIFY1",
+      "scan_order": "breadth_first_interval_midpoint_floor",
+      "scan_order_pseudocode": "queue=[(0,m-1)]; while queue: l,r=pop_front(); if l<=r: mid=floor((l+r)/2); emit(mid); push_back((l,mid-1)); push_back((mid+1,r))",
+      "initial_action": "SCAN",
+      "cycle": "one_SCAN_then_one_highest_proxy_VERIFY",
+      "adaptive": false,
+      "content_blind": true
+    },
+    {
+      "policy_id": "C_CHRONOLOGICAL_SCAN_THEN_VERIFY",
+      "scan_order": "ascending_cell_id",
+      "stage_rule": "complete_all_admissible_scan_cells_before_any_verify",
+      "verify_order": "highest_proxy_exposed_unverified_unit",
+      "adaptive": false
+    }
+  ],
+  "physical_repetitions": 3,
+  "run_order": [
+    ["A_CHRONOLOGICAL_FIXED_SCAN1_VERIFY1", "B_TEMPORAL_BISECTION_FIXED_SCAN1_VERIFY1", "C_CHRONOLOGICAL_SCAN_THEN_VERIFY"],
+    ["B_TEMPORAL_BISECTION_FIXED_SCAN1_VERIFY1", "C_CHRONOLOGICAL_SCAN_THEN_VERIFY", "A_CHRONOLOGICAL_FIXED_SCAN1_VERIFY1"],
+    ["C_CHRONOLOGICAL_SCAN_THEN_VERIFY", "A_CHRONOLOGICAL_FIXED_SCAN1_VERIFY1", "B_TEMPORAL_BISECTION_FIXED_SCAN1_VERIFY1"]
+  ],
+  "metrics": {
+    "primary_view": "equal_wall_clock",
+    "primary": "anytime_event_recall_auc",
+    "auc_definition": "right_continuous_normalized_integral_over_0_to_D_using_commit_times",
+    "required": [
+      "anytime_event_recall_auc",
+      "anytime_event_f1_auc",
+      "terminal_distinct_event_recall",
+      "terminal_event_f1",
+      "confirmed_distinct_events",
+      "scan_cell_coverage",
+      "scan_unit_coverage",
+      "verify_calls",
+      "first_discovery_time_per_event",
+      "time_to_first_confirmed_event",
+      "wall_clock_breakdown",
+      "deadline_rejections",
+      "deadline_overruns",
+      "deadline_misses",
+      "post_deadline_commits"
+    ],
+    "equal_call_role": "diagnostic_only"
+  },
+  "decision": {
+    "stronger_comparator": "max_mean_primary_auc_of_A_and_C",
+    "epsilon_auc_absolute": 0.01,
+    "epsilon_confirmed_events": 1,
+    "paired_direction_min_repetitions": 2,
+    "positive": "B_minus_stronger_comparator_mean_auc_at_least_0.01_AND_at_least_one_more_terminal_confirmed_event_AND_positive_in_at_least_2_of_3_paired_repetitions_AND_no_additional_deadline_miss_or_post_deadline_commit",
+    "algorithm_signal_physical_no_go": "equal_call_positive_but_equal_time_not_positive",
+    "negative": "B_minus_stronger_comparator_mean_auc_at_most_0_OR_B_has_fewer_terminal_confirmed_events",
+    "inconclusive": "all_remaining_cases",
+    "interpretation_guard": "O_failure_rejects_fixed_bisection_mechanism_not_all_adaptive_headroom"
+  },
+  "forbidden_until_o_closed": [
+    "MAB", "epsilon_greedy", "UCB", "Thompson_sampling", "learned_predictor",
+    "action_value_model", "RL", "SMDP", "dynamic_controller", "REFINE",
+    "probable_event", "proxy_retuning", "K3_retuning", "policy_threshold_search",
+    "expanded_action_space", "broad_physical_matrix"
+  ]
+}

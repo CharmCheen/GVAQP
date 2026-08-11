@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0161:1786373841662105546",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "1af3eb13dba98c32bb1e4475cbfa52142bc2996ae71f37643153b36d8de58c72",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "abefd621471ff3e81cc2048bc109e93d77d09d2c26366b4ba0e68b890bc482ed",
+  "generated_token_ids_sha256": "3b396b2bd4cab487a972151ac92482958d934277c1fbf2b935b39ec82034d3d2",
+  "input_identity_sha256": "2cbacd4e7c7f04b9db0b730dee9bcde74c6190cb7f531afc673592937362ac59",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "8c47a0271b07d187708d9a930408887ff6a7d739ccce3d016d9a47ed7160f24a",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily through an intersection with clear visibility of traffic signals and surrounding vehicles. The traffic light is green, and there are no sudden changes in speed or path required. The lead vehicle (a brown minivan) maintains a consistent speed, and no obstacles, sudden stops, or road users are entering the ego path. The environment is typical urban driving with no visible hazards requiring a marked response.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "5708c0408ead00aa85ac02c6df025a9422269145dae12ac8a816b676749a5016",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily through an intersection with clear visibility of traffic signals and surrounding vehicles. The traffic light is green, and there are no sudden changes in speed or path required. The lead vehicle (a brown minivan) maintains a consistent speed, and no obstacles, sudden stops, or road users are entering the ego path. The environment is typical urban driving with no visible hazards requiring a marked response.\"\n}",
+  "raw_response_sha256": "0270fcc99ad5efe5d4d73c6e54b39a8286ea54d948a1bccb84b1d57bb0b2c556",
+  "record_payload_sha256": "0ce4bfce797d809f4fd6c86033dedfd6d27a25d1313f98347bf38c8c7c35d240",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 16.747779999997874,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 18.44396924299508,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0161",
+  "unit_ordinal": 161,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

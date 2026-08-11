@@ -1,0 +1,44 @@
+{
+  "accepted_label_counts": {
+    "abstain": 0,
+    "negative": 403,
+    "positive": 21
+  },
+  "evaluator": {
+    "implementation": "src/rc_sem/exploratory_gate_o.py:event_recall,event_f1,right_continuous_auc",
+    "sha256": "0c065fe9a2c683f5cc406bc91b0833dd2252db13ed0310a2a6692938c1ddcc41"
+  },
+  "event_materializer": {
+    "implementation": "src/rc_sem/exploratory_gate_o.py:event_groups",
+    "max_gap_units": 1,
+    "sha256": "0c065fe9a2c683f5cc406bc91b0833dd2252db13ed0310a2a6692938c1ddcc41"
+  },
+  "failures_or_retries": [],
+  "oracle": {
+    "dtype": "bfloat16",
+    "model_path": "models/Qwen3-VL-8B-Instruct",
+    "model_tree_sha256": "24201806d5a4a75cd789b5094b1c19d1d756e2b951d5f26639f9779641e9d355"
+  },
+  "prompt": {
+    "path": "configs/prompts/confirm_visual.yaml",
+    "sha256": "0d9e3bfb22b482499392ab65c0e912befa385d8692c0e91bcc1f4e781e24b511"
+  },
+  "reference_labels_canonical_sha256": "32474c7e42fa63cad86cc7777a7cec2234d73986f4669c41246fc56f6ed6242c",
+  "reference_labels_file_sha256": "de6754e420246199387b1a162f3167ae8b9a902532f7d3ff19a9cd8decf83d53",
+  "reference_shards_sha256": {
+    "reference_labels.json": "fa0303dc4b761eb362a549f4b9699f811c37bb6dd11cd699cef1cf811370984c",
+    "reference_labels_144_238.json": "6cd9805a4f16de6ceb936f84247fdfda0572bcdea16c3174ccf2e1ce02a3c72e",
+    "reference_labels_238_331.json": "1c9fc35d0e5d19115b01d8f9ec06a532be7bdcc4ef8f248d45a2a0680fa39dfa",
+    "reference_labels_331_424.json": "9051468147070a3a0974142f1bb5f939179351f9b63f3d1b327d4a42c0545141",
+    "reference_labels_50_144.json": "6510dcf6320e21d63008069cd14149635e93921a9fb08912044d44bc7b2fa6ef"
+  },
+  "reference_status": "COMPLETE_ACCEPTED_424_OF_424",
+  "schema_version": "EXPLORATORY_GUANGZHOU_EVALUATOR_REFERENCE_FREEZE_V1",
+  "scientific_status": "EXPLORATORY_DEVELOPMENT_PHYSICAL_RESULT",
+  "unit_definition": {
+    "final_unit_may_be_truncated": true,
+    "origin_seconds": 0.0,
+    "unit_count": 424,
+    "unit_seconds": 10.0
+  }
+}

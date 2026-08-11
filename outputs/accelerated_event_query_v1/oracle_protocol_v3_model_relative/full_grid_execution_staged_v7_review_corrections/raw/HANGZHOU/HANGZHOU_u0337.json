@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0337:1786353859425790789",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "77f85baa6f7cbc521057eacc11aa851840f121a595fd890543164ab3b96a9603",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "257bcafbba974af3127a1de1d979969cea87c28066f5e0a5366b834c619bcfa1",
+  "generated_token_ids_sha256": "d3a3f9ca050c34ee0253f8b8f7d10f5ef7a8dfdee5759e7a53fd39c4925f1020",
+  "input_identity_sha256": "d10caf7d65dd152e0bc634fbc7bdffe512a2bc03de6b67330ea4f309484968a6",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "5f86dcd59998247a35638b09e02fccacd71f66de598f4a047e69b2a72a625f24",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily in a multi-lane urban road with clear visibility. Traffic flow is smooth, lead vehicles are maintaining consistent speeds, and no sudden braking, slowing, or obstacles requiring a marked response are visible. Traffic signals ahead are green, and no road users are entering or threatening the ego path. The environment includes typical city elements like buildings, trees, and signage, but none require an immediate driver response within this unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "248f58053915fbdcb495270d484fa5f6a145f31a5c4ede7d10975f7e779cf97a",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily in a multi-lane urban road with clear visibility. Traffic flow is smooth, lead vehicles are maintaining consistent speeds, and no sudden braking, slowing, or obstacles requiring a marked response are visible. Traffic signals ahead are green, and no road users are entering or threatening the ego path. The environment includes typical city elements like buildings, trees, and signage, but none require an immediate driver response within this unit.\"\n}",
+  "raw_response_sha256": "9a813610b82c9a2c348685764eed84e7f2492d5f702b495c7292dbd8c91624eb",
+  "record_payload_sha256": "f2b0ca3b64dea7bfa8452fcd8a5aae6962befb3957369599ec0e7f7548f65a21",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.67406217599637,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.46189603899984,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0337",
+  "unit_ordinal": 904,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0004:1785420211395402168",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "f1227170142ec89b3111721f9abb946f2dbfac9771835afbb1f112823b60b989",
+  "execution_seal_sha256": "2189d821eba4b0e0022da4f0a1113e51ed2128351def12c4e310ffd36569c9ee",
+  "execution_session_id": "b1d874dad9633943da9182baee77bb3366cda2f0d6407e982a26dfc65e45aac8",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "006658393a2d023d0b6880eb0114604cffd42b17cd8f8427448ed55b35919e0f",
+  "generated_token_ids_sha256": "c0ec92fb76986b096d61f906fad68f151aa5a832b95210c44e19c00239a08e14",
+  "input_identity_sha256": "66cfa2a27e7be30acad8d08420587d92bf0c07f83df0b1a82a266ff238d6968a",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "edc02a0aab365d82ec11e7b56def82121772b30dd25dcac1e0d0c15d42a3eb5e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane road with clear visibility of traffic ahead. There are no sudden changes in speed or path by the lead vehicles, no obstacles in the ego path, and no traffic controls requiring a marked response within this unit. The scene transitions from dusk to night, but the road conditions and traffic flow remain consistent and predictable. Pedestrians and other road users are visible but not encroaching on the ego path or requiring a maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "cdeec895c4eb08f92ba36ff66899cf9ec61fc5fa17e7dd258c5f28716b870404",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane road with clear visibility of traffic ahead. There are no sudden changes in speed or path by the lead vehicles, no obstacles in the ego path, and no traffic controls requiring a marked response within this unit. The scene transitions from dusk to night, but the road conditions and traffic flow remain consistent and predictable. Pedestrians and other road users are visible but not encroaching on the ego path or requiring a maneuver.\"\n}",
+  "raw_response_sha256": "cec8151b4f9e04b9490593144afbb3312dddbb4c430938b3aaf1aed612a77da1",
+  "record_payload_sha256": "016b135d36788170954b6ae38cc17caad3b2553c85d9400b2a7aabff7188abb6",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 18.808886040002108,
+    "model_load_seconds": 14.661523081362247,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 20.488808795809746,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0004",
+  "unit_ordinal": 4,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

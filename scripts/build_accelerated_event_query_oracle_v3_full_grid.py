@@ -1,0 +1,1565 @@
+#!/usr/bin/env python3
+"""Decode and freeze the exact V3 full-grid inputs without model inference."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import math
+import os
+import subprocess
+import statistics
+from collections import Counter
+from pathlib import Path
+from typing import Any
+
+from garc_eval.accelerated_event_query.oracle_v3_full_grid_finalizer import (
+    EVENT_RELATION_SCHEMA,
+    UNIT_LABEL_SCHEMA,
+)
+from garc_eval.accelerated_event_query.oracle_v3_full_grid_control import (
+    _read_jsonl,
+)
+from garc_eval.accelerated_event_query.oracle_v3_full_grid_manifest import (
+    EXPECTED_FRAME_OCCURRENCES,
+    EXPECTED_GPU_PAIRS,
+    EXPECTED_TAILS,
+    EXPECTED_UNIT_COUNT,
+    EXPECTED_UNITS_BY_VIDEO,
+    EXPERIMENT_ID,
+    QUERY_ID,
+    VIDEO_ORDER,
+    decode_full_grid_unit,
+    expected_worker,
+    fraction_fps,
+    load_frozen_grid,
+    public_frame,
+    validate_frame_manifest,
+    validate_processed_input_manifest,
+    validate_unit_manifest,
+    validate_worker_schedule,
+    video_map,
+)
+from garc_eval.accelerated_event_query.oracle_v3_full_grid_package import (
+    BASE,
+    EXECUTION,
+    PACKAGE,
+    ROOT,
+)
+from garc_eval.accelerated_event_query.oracle_v3_full_grid_runner import (
+    CALL_RESERVATION_WALL_SECONDS,
+    ENVELOPE_A100_GPU_HOURS,
+    LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS,
+    LOADED_WORKER_IDLE_LEASE_SECONDS,
+    LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS,
+    MODEL_LOAD_RESERVATION_WALL_SECONDS,
+)
+from garc_eval.accelerated_event_query.oracle_v3_full_grid_processing import (
+    load_frozen_processor,
+    model_visible_query_text,
+    prepare_frozen_model_inputs,
+    runtime_environment_identity,
+    tensor_bundle_sha256,
+    tensor_shapes,
+)
+from garc_eval.accelerated_event_query.oracle_v3_manifest import (
+    canonical_hash,
+    load_json,
+    sha256_file,
+    validate_payload_hash,
+    write_json_once,
+)
+from garc_eval.accelerated_event_query.oracle_v3_parser import (
+    parse_oracle_v3_response,
+)
+from garc_eval.accelerated_event_query.oracle_protocol import rgb_content_hash
+
+
+UNIT_GRID = ROOT / "outputs/accelerated_event_query_v1/video_manifests/frozen_unit_grid_v1.csv"
+VIDEO_MANIFEST = ROOT / "outputs/accelerated_event_query_v1/video_manifests/frozen_videos_v1.json"
+PROMPT = BASE / "configs/query_prompt_v3_model_relative.txt"
+SCHEMA = BASE / "schemas/oracle_v3_output_schema.json"
+CONFIG = BASE / "configs/oracle_v3_execution_config.json"
+K3 = BASE / "k3_eventization/K3_UNIT_EVENT_CONFIG_V3.json"
+MODEL_MANIFEST = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/MODEL_FILE_MANIFEST_V2.json"
+MODEL_AUDIT = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/MODEL_IDENTITY_AUDIT_V1.json"
+V2_DECISION = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/TARGETED_PILOT_DECISION_V2.json"
+V2_EVIDENCE = ROOT / "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/PILOT_EVIDENCE_MANIFEST_V2.json"
+PRIOR_FAILED_EXECUTION = BASE / "full_grid_execution_staged_v5_atomic_idle_reservation"
+PRIOR_FAILED_PACKAGE = BASE / "full_grid_preregistration_staged_v5_atomic_idle_reservation"
+PRIOR_FAILED_SEAL_SHA256 = "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184"
+PRIOR_FAILED_TERMINAL_UNIT_IDS = [
+    "DALI_u0351",
+    "HANGZHOU_u0386",
+]
+PRIOR_FAILED_COMPLETED_CALLS = 1084
+PRIOR_FAILED_ATTEMPTED_CALLS = 1086
+
+
+GPU_PAIRS = EXPECTED_GPU_PAIRS
+INITIAL_WORKER_ID = expected_worker("DALI")
+
+
+def binding(path: Path) -> dict[str, Any]:
+    return {
+        "path": str(path.relative_to(ROOT)),
+        "sha256": sha256_file(path),
+        "size_bytes": path.stat().st_size,
+    }
+
+
+def self_hash(value: dict[str, Any], field: str) -> dict[str, Any]:
+    value[field] = canonical_hash(value)
+    return value
+
+
+def _prior_failure_evidence() -> dict[str, Any]:
+    """Authenticate the failed run that falsified the former call bound.
+
+    These records are revision evidence only.  Their labels are never copied
+    into the new execution and cannot satisfy any complete-run release gate.
+    """
+
+    state_path = PRIOR_FAILED_EXECUTION / "GLOBAL_EXECUTION_STATE.json"
+    intent_path = PRIOR_FAILED_EXECUTION / "GLOBAL_FAIL_STOP_INTENT.json"
+    global_ledger_path = PRIOR_FAILED_EXECUTION / "GLOBAL_EXECUTION_LEDGER.jsonl"
+    activation_path = PRIOR_FAILED_EXECUTION / "STAGED_ACTIVATION_LEDGER.jsonl"
+    attempt_paths = sorted(
+        (PRIOR_FAILED_EXECUTION / "attempt_ledgers").glob("*.jsonl")
+    )
+    initialization_path = PRIOR_FAILED_EXECUTION / "INITIALIZATION_AUDIT.json"
+    launch_authority_path = (
+        PRIOR_FAILED_EXECUTION / "SUPERVISOR_LAUNCH_AUTHORITY.json"
+    )
+    prior_package = PRIOR_FAILED_PACKAGE
+    prior_seal_path = prior_package / "FULL_GRID_EXECUTION_SEAL.json"
+    prior_approval_path = prior_package / "FULL_GRID_COMPUTE_APPROVAL.json"
+    prior_package_manifest_path = prior_package / "FULL_GRID_PACKAGE_MANIFEST.json"
+    prior_review_bundle_path = prior_package / "FULL_GRID_REVIEW_BUNDLE.json"
+    earlier_failure_evidence_path = (
+        prior_package / "FULL_GRID_PRIOR_FAILURE_EVIDENCE.json"
+    )
+    required = [
+        state_path,
+        intent_path,
+        global_ledger_path,
+        activation_path,
+        *attempt_paths,
+        initialization_path,
+        launch_authority_path,
+        prior_seal_path,
+        prior_approval_path,
+        prior_package_manifest_path,
+        prior_review_bundle_path,
+        earlier_failure_evidence_path,
+    ]
+    if any(not path.is_file() for path in required):
+        raise RuntimeError("prior failed execution evidence is incomplete")
+    state = load_json(state_path)
+    intent = load_json(intent_path)
+    ledger = _read_jsonl(global_ledger_path)
+    activation_rows = _read_jsonl(activation_path)
+    attempt_rows = [
+        row for path in attempt_paths for row in _read_jsonl(path)
+    ]
+    completed = [row for row in ledger if row.get("event") == "CALL_COMPLETED"]
+    reserved = [row for row in ledger if row.get("event") == "CALL_RESERVED"]
+    raw_paths = sorted((PRIOR_FAILED_EXECUTION / "raw").glob("*/*.json"))
+    formal_forbidden = [
+        PRIOR_FAILED_EXECUTION / "unit_labels.parquet",
+        PRIOR_FAILED_EXECUTION / "k3_model_relative_event_relation.parquet",
+        PRIOR_FAILED_EXECUTION / "FORMAL_REFERENCE_RELEASE.json",
+    ]
+    expected_detail = (
+        "loaded_worker_idle:V3_FULL_GRID_WUHAN:"
+        "elapsed=2.073427:limit=2.000000"
+    )
+    load_start_rows = [
+        row for row in ledger if row.get("event") == "MODEL_LOAD_STARTED"
+    ]
+    stop_ns = next(
+        row["recorded_at_unix_ns"]
+        for row in ledger if row.get("event") == "GLOBAL_FAIL_STOP"
+    )
+    load_start_through_stop_gpu_seconds = sum(
+        2.0 * (stop_ns - row["residency_clock_started_unix_ns"]) / 1e9
+        for row in load_start_rows
+    )
+    termination_grace_wall_seconds = 5.0
+    load_clock_conservative_gpu_seconds = (
+        load_start_through_stop_gpu_seconds
+        + 2.0 * len(load_start_rows) * termination_grace_wall_seconds
+    )
+    coordinator_conservative_gpu_seconds = (
+        float(state["actual_gpu_seconds"])
+        + float(state["reserved_gpu_seconds"])
+        + 2.0 * len(load_start_rows) * termination_grace_wall_seconds
+    )
+    conservative_usage_gpu_seconds = max(
+        load_clock_conservative_gpu_seconds,
+        coordinator_conservative_gpu_seconds,
+    )
+    initialization = load_json(initialization_path)
+    launch_authority = load_json(launch_authority_path)
+    prior_seal = load_json(prior_seal_path)
+    prior_approval = load_json(prior_approval_path)
+    validate_payload_hash(prior_seal, "execution_seal_payload_sha256")
+    validate_payload_hash(
+        load_json(prior_package_manifest_path), "package_manifest_payload_sha256"
+    )
+    validate_payload_hash(
+        load_json(prior_review_bundle_path), "review_bundle_payload_sha256"
+    )
+    validate_payload_hash(initialization, "initialization_payload_sha256")
+    validate_payload_hash(launch_authority, "supervisor_authority_payload_sha256")
+    earlier_failure = load_json(earlier_failure_evidence_path)
+    validate_payload_hash(
+        earlier_failure, "prior_failure_evidence_payload_sha256"
+    )
+    raw_records = [load_json(path) for path in raw_paths]
+    raw_records_self_hash = all(
+        record.get("record_payload_sha256") == canonical_hash({
+            key: value
+            for key, value in record.items()
+            if key != "record_payload_sha256"
+        })
+        for record in raw_records
+    )
+    raw_records_strict_parse = True
+    for record in raw_records:
+        parsed = parse_oracle_v3_response(record.get("raw", ""))
+        raw_records_strict_parse = raw_records_strict_parse and all((
+            record.get("raw_response_sha256")
+            == hashlib.sha256(record.get("raw", "").encode()).hexdigest(),
+            parsed.parse_status == "ok",
+            parsed.authoritative_label == record.get("authoritative_label"),
+        ))
+    if not all((
+        state.get("status") == "STOPPED",
+        state.get("execution_seal_sha256") == PRIOR_FAILED_SEAL_SHA256,
+        state.get("stop_trigger") == "cost_envelope_exceeded",
+        state.get("stop_detail") == f"stop_intent:{expected_detail}",
+        intent.get("trigger") == "cost_envelope_exceeded",
+        intent.get("detail") == expected_detail,
+        len(completed) == PRIOR_FAILED_COMPLETED_CALLS,
+        len(reserved) == PRIOR_FAILED_ATTEMPTED_CALLS,
+        set(state.get("in_flight_unit_ids", []))
+        == set(PRIOR_FAILED_TERMINAL_UNIT_IDS),
+        len(raw_paths) == PRIOR_FAILED_COMPLETED_CALLS,
+        all(record.get("parse_status") == "ok" for record in raw_records),
+        all(
+            record.get("execution_seal_sha256") == PRIOR_FAILED_SEAL_SHA256
+            for record in raw_records
+        ),
+        raw_records_self_hash,
+        raw_records_strict_parse,
+        len([row for row in attempt_rows if row.get("event") == "INFERENCE_STARTED"])
+        == PRIOR_FAILED_ATTEMPTED_CALLS,
+        len([row for row in attempt_rows if row.get("event") == "INFERENCE_COMPLETED"])
+        == PRIOR_FAILED_COMPLETED_CALLS,
+        len([row for row in attempt_rows if row.get("event") == "ACCEPTED"])
+        == PRIOR_FAILED_COMPLETED_CALLS,
+        activation_rows[0].get("event") == "WORKER_PENDING_GPU_AUTHENTICATION",
+        initialization.get("execution_seal_sha256") == PRIOR_FAILED_SEAL_SHA256,
+        launch_authority.get("execution_seal_sha256") == PRIOR_FAILED_SEAL_SHA256,
+        prior_seal.get("execution_seal_payload_sha256") is not None,
+        sha256_file(prior_seal_path) == PRIOR_FAILED_SEAL_SHA256,
+        prior_approval.get("execution_seal_sha256") == PRIOR_FAILED_SEAL_SHA256,
+        earlier_failure.get("completed_call_count") == 473,
+        earlier_failure.get("attempted_call_count") == 476,
+        earlier_failure.get("formal_reference_artifacts_present") is False,
+        not any(path.exists() for path in formal_forbidden),
+    )):
+        raise RuntimeError("prior failed execution identity or accounting changed")
+    completed_ids = {row["unit_id"] for row in completed}
+    raw_ids = {load_json(path)["unit_id"] for path in raw_paths}
+    if raw_ids != completed_ids:
+        raise RuntimeError("prior failed execution raw/completed membership mismatch")
+    earlier_conservative_a100_hours = earlier_failure[
+        "conservative_usage_upper_bound_a100_gpu_hours"
+    ]
+    immediate_conservative_a100_hours = (
+        conservative_usage_gpu_seconds / 3600.0
+    )
+    historical_conservative_a100_hours = (
+        earlier_conservative_a100_hours + immediate_conservative_a100_hours
+    )
+    return self_hash({
+        "status": "AUTHENTICATED_INCOMPLETE_PRIOR_RUN_REVISION_EVIDENCE_ONLY",
+        "prior_execution_root": str(PRIOR_FAILED_EXECUTION.relative_to(ROOT)),
+        "prior_execution_seal_sha256": PRIOR_FAILED_SEAL_SHA256,
+        "stop_trigger": state["stop_trigger"],
+        "stop_detail": state["stop_detail"],
+        "completed_call_count": len(completed),
+        "attempted_call_count": len(reserved),
+        "uncertain_terminal_unit_ids": PRIOR_FAILED_TERMINAL_UNIT_IDS,
+        "model_load_count": len(state.get("model_load_workers", [])),
+        "coordinator_accounted_gpu_seconds_lower_bound": state["actual_gpu_seconds"],
+        "coordinator_accounted_a100_gpu_hours_lower_bound": state["actual_gpu_seconds"] / 3600.0,
+        "load_start_through_global_stop_gpu_seconds": load_start_through_stop_gpu_seconds,
+        "load_start_through_global_stop_a100_gpu_hours": load_start_through_stop_gpu_seconds / 3600.0,
+        "termination_grace_wall_seconds": termination_grace_wall_seconds,
+        "load_clock_plus_termination_grace_gpu_seconds": load_clock_conservative_gpu_seconds,
+        "coordinator_actual_plus_reservations_plus_termination_grace_gpu_seconds": coordinator_conservative_gpu_seconds,
+        "conservative_upper_rule": "maximum of load-clock-through-stop plus termination grace and coordinator actual plus live reservations plus termination grace",
+        "immediate_prior_conservative_usage_upper_bound_gpu_seconds": conservative_usage_gpu_seconds,
+        "immediate_prior_conservative_usage_upper_bound_a100_gpu_hours": immediate_conservative_a100_hours,
+        "earlier_prior_conservative_usage_upper_bound_a100_gpu_hours": earlier_conservative_a100_hours,
+        "conservative_usage_upper_bound_gpu_seconds": historical_conservative_a100_hours * 3600.0,
+        "conservative_usage_upper_bound_a100_gpu_hours": historical_conservative_a100_hours,
+        "strict_parse_completed_raw_count": sum(
+            record.get("parse_status") == "ok" for record in raw_records
+        ),
+        "formal_reference_artifacts_present": False,
+        "reuse_in_new_execution": "FORBIDDEN; fresh execution starts at unit 0",
+        "bindings": [binding(path) for path in required],
+        "raw_output_bindings": [binding(path) for path in raw_paths],
+    }, "prior_failure_evidence_payload_sha256")
+
+
+def _call_reservation_derivation(
+    processor: Any,
+    prior_failure: dict[str, Any],
+) -> dict[str, Any]:
+    """Derive the prospective hard bound from pre-revision physical evidence."""
+
+    from scipy.stats import t as student_t
+
+    raw_paths = sorted((PRIOR_FAILED_EXECUTION / "raw").glob("*/*.json"))
+    global_rows = [
+        json.loads(line)
+        for line in (
+            PRIOR_FAILED_EXECUTION / "GLOBAL_EXECUTION_LEDGER.jsonl"
+        ).read_text(encoding="utf-8").splitlines()
+    ]
+    completed = {
+        row["unit_id"]: row
+        for row in global_rows if row.get("event") == "CALL_COMPLETED"
+    }
+    observations = []
+    for path in raw_paths:
+        record = load_json(path)
+        runtime = record["runtime"]
+        reconstructed_tokens = len(
+            processor.tokenizer.encode(record["raw"], add_special_tokens=False)
+        )
+        accounted = float(completed[record["unit_id"]]["accounted_wall_seconds"])
+        inference = float(runtime["inference_seconds"])
+        pre_persistence = float(runtime["pre_persistence_call_seconds"])
+        observations.append({
+            "unit_id": record["unit_id"],
+            "reconstructed_decoded_response_tokens": reconstructed_tokens,
+            "inference_seconds": inference,
+            "pre_persistence_call_seconds": pre_persistence,
+            "accounted_wall_seconds": accounted,
+            "noninference_pre_persistence_seconds": pre_persistence - inference,
+            "post_persistence_coordinator_seconds": accounted - pre_persistence,
+        })
+    # Every V5 call started after all three model loads had begun, so every
+    # completed call directly samples the six-GPU concurrent-residency regime.
+    load_started_rows = [
+        row for row in global_rows if row.get("event") == "MODEL_LOAD_STARTED"
+    ]
+    latest_load_started_ns = max(
+        row["recorded_at_unix_ns"] for row in load_started_rows
+    )
+    concurrent_observations = observations
+    reserved_at_ns = {
+        row["unit_id"]: row["recorded_at_unix_ns"]
+        for row in global_rows if row.get("event") == "CALL_RESERVED"
+    }
+    attempt_rows = [
+        row
+        for path in sorted(
+            (PRIOR_FAILED_EXECUTION / "attempt_ledgers").glob("*.jsonl")
+        )
+        for row in _read_jsonl(path)
+    ]
+    inference_started_at_ns = {
+        row["unit_id"]: row["recorded_at_unix_ns"]
+        for row in attempt_rows if row.get("event") == "INFERENCE_STARTED"
+    }
+    for observation in observations:
+        unit_id = observation["unit_id"]
+        preinference = (
+            inference_started_at_ns[unit_id] - reserved_at_ns[unit_id]
+        ) / 1e9
+        # The call-wide non-inference duration starts before reserve_call and
+        # ends after generation bookkeeping.  Subtracting the directly
+        # observed reserve-to-inference-start interval leaves a conservative
+        # upper for the otherwise-unallocated post-inference/pre-persistence
+        # stage (and retains any pre-reservation coordinator overhead).
+        post_inference_pre_persistence = (
+            observation["noninference_pre_persistence_seconds"] - preinference
+        )
+        if post_inference_pre_persistence < 0.0:
+            raise RuntimeError("concurrent runtime stage decomposition is negative")
+        observation["call_reserved_to_inference_started_seconds"] = preinference
+        observation[
+            "post_inference_pre_persistence_stage_upper_seconds"
+        ] = post_inference_pre_persistence
+    incomplete_preinference_observations = [
+        {
+            "unit_id": unit_id,
+            "call_reserved_to_inference_started_seconds": (
+                inference_started_at_ns[unit_id] - reserved_at_ns[unit_id]
+            ) / 1e9,
+        }
+        for unit_id in PRIOR_FAILED_TERMINAL_UNIT_IDS
+    ]
+    xs = [row["reconstructed_decoded_response_tokens"] for row in observations]
+    ys = [row["inference_seconds"] for row in observations]
+    x_mean = statistics.mean(xs)
+    y_mean = statistics.mean(ys)
+    slope = sum(
+        (x - x_mean) * (y - y_mean) for x, y in zip(xs, ys)
+    ) / sum((x - x_mean) ** 2 for x in xs)
+    intercept = y_mean - slope * x_mean
+    predictions = [intercept + slope * x for x in xs]
+    residuals = [y - predicted for y, predicted in zip(ys, predictions)]
+    r_squared = 1.0 - (
+        sum(value * value for value in residuals)
+        / sum((value - y_mean) ** 2 for value in ys)
+    )
+    token_cap_prediction = intercept + slope * 192
+    max_positive_residual = max(residuals)
+    max_noninference = max(
+        row["noninference_pre_persistence_seconds"] for row in observations
+    )
+    max_post = max(
+        row["post_persistence_coordinator_seconds"] for row in observations
+    )
+    evidence_based_floor = (
+        token_cap_prediction + max_positive_residual + max_noninference + max_post
+    )
+    residual_standard_error = math.sqrt(
+        sum(value * value for value in residuals) / (len(xs) - 2)
+    )
+    sxx = sum((x - x_mean) ** 2 for x in xs)
+    prediction_standard_error = residual_standard_error * math.sqrt(
+        1.0 + 1.0 / len(xs) + (192 - x_mean) ** 2 / sxx
+    )
+    familywise_alpha = 0.01
+    familywise_comparison_count = EXPECTED_UNIT_COUNT
+    bonferroni_t_critical = float(student_t.ppf(
+        1.0 - familywise_alpha / (2.0 * familywise_comparison_count),
+        len(xs) - 2,
+    ))
+    familywise_inference_upper = (
+        token_cap_prediction
+        + bonferroni_t_critical * prediction_standard_error
+    )
+    concurrent_token_cap_scaled_inference_upper = max(
+        row["inference_seconds"]
+        * 192.0 / row["reconstructed_decoded_response_tokens"]
+        for row in concurrent_observations
+    )
+    concurrent_max_noninference = max(
+        row["noninference_pre_persistence_seconds"]
+        for row in concurrent_observations
+    )
+    concurrent_max_completed_preinference = max(
+        row["call_reserved_to_inference_started_seconds"]
+        for row in concurrent_observations
+    )
+    concurrent_max_post_inference_pre_persistence = max(
+        row["post_inference_pre_persistence_stage_upper_seconds"]
+        for row in concurrent_observations
+    )
+    maximum_completed_preinference = max(
+        row["call_reserved_to_inference_started_seconds"]
+        for row in observations
+    )
+    maximum_post_inference_pre_persistence = max(
+        row["post_inference_pre_persistence_stage_upper_seconds"]
+        for row in observations
+    )
+    incomplete_max_preinference_lower_bound = max(
+        row["call_reserved_to_inference_started_seconds"]
+        for row in incomplete_preinference_observations
+    )
+    evidence_complete_concurrent_preinference_upper = max(
+        maximum_completed_preinference,
+        incomplete_max_preinference_lower_bound,
+    )
+    concurrent_max_post = max(
+        row["post_persistence_coordinator_seconds"]
+        for row in concurrent_observations
+    )
+    concurrent_token_cap_total_upper = (
+        concurrent_token_cap_scaled_inference_upper
+        + evidence_complete_concurrent_preinference_upper
+        + maximum_post_inference_pre_persistence
+        + max_post
+    )
+    familywise_total_upper = (
+        familywise_inference_upper
+        + evidence_complete_concurrent_preinference_upper
+        + maximum_post_inference_pre_persistence
+        + max_post
+    )
+    maximum_accounted_call_seconds = max(
+        row["accounted_wall_seconds"] for row in observations
+    )
+    governing_floor = max(
+        evidence_based_floor,
+        familywise_total_upper,
+        concurrent_token_cap_total_upper,
+        maximum_accounted_call_seconds,
+    )
+    margin = CALL_RESERVATION_WALL_SECONDS - governing_floor
+    reservation_admission_subtotal = 2 * (
+        EXPECTED_UNIT_COUNT * CALL_RESERVATION_WALL_SECONDS
+        + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
+        + 3 * LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS
+    ) / 3600.0
+    maximum_ordinary_idle_residency_gap_count = EXPECTED_UNIT_COUNT + 3
+    maximum_process_exit_residency_gap_count = 3
+    all_operations_hard = 2 * (
+        EXPECTED_UNIT_COUNT * CALL_RESERVATION_WALL_SECONDS
+        + 3 * MODEL_LOAD_RESERVATION_WALL_SECONDS
+        + maximum_ordinary_idle_residency_gap_count
+        * LOADED_WORKER_IDLE_LEASE_SECONDS
+        + maximum_process_exit_residency_gap_count
+        * LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS
+    ) / 3600.0
+    prior_conservative_usage = prior_failure[
+        "conservative_usage_upper_bound_a100_gpu_hours"
+    ]
+    cumulative_authorized_upper = (
+        prior_conservative_usage + ENVELOPE_A100_GPU_HOURS
+    )
+    if not all((
+        len(observations) == PRIOR_FAILED_COMPLETED_CALLS,
+        len(concurrent_observations) == PRIOR_FAILED_COMPLETED_CALLS,
+        len(load_started_rows) == 3,
+        all(
+            row["recorded_at_unix_ns"] > latest_load_started_ns
+            for row in global_rows if row.get("event") == "CALL_RESERVED"
+        ),
+        margin > 0.0,
+        reservation_admission_subtotal <= ENVELOPE_A100_GPU_HOURS,
+        all_operations_hard <= ENVELOPE_A100_GPU_HOURS,
+        cumulative_authorized_upper < 64.0,
+    )):
+        raise RuntimeError("revised call reservation derivation is not conservative")
+    return self_hash({
+        "status": "FROZEN_PROSPECTIVE_REVISION_BEFORE_FRESH_EXECUTION",
+        "prior_failure_evidence_payload_sha256": prior_failure[
+            "prior_failure_evidence_payload_sha256"
+        ],
+        "completed_observation_count": len(observations),
+        "concurrent_activation_observation_count": len(concurrent_observations),
+        "concurrent_activation_unit_ids": sorted(
+            row["unit_id"] for row in concurrent_observations
+        ),
+        "concurrent_activation_definition": "CALL_RESERVED occurred after all three V5 MODEL_LOAD_STARTED transitions; all six sealed GPUs were in model-load or model-resident service",
+        "latest_model_load_started_unix_ns": latest_load_started_ns,
+        "frozen_generation_max_new_tokens": 192,
+        "decoded_response_token_count_min": min(xs),
+        "decoded_response_token_count_mean": x_mean,
+        "decoded_response_token_count_max": max(xs),
+        "inference_seconds_mean": y_mean,
+        "inference_seconds_max": max(ys),
+        "ols_intercept_seconds": intercept,
+        "ols_seconds_per_reconstructed_token": slope,
+        "ols_r_squared": r_squared,
+        "predicted_inference_seconds_at_192_tokens": token_cap_prediction,
+        "maximum_positive_inference_residual_seconds": max_positive_residual,
+        "maximum_observed_noninference_pre_persistence_seconds": max_noninference,
+        "maximum_observed_post_persistence_coordinator_seconds": max_post,
+        "maximum_residual_empirical_floor_seconds": evidence_based_floor,
+        "prediction_residual_standard_error_seconds": residual_standard_error,
+        "prediction_standard_error_at_192_tokens_seconds": prediction_standard_error,
+        "bonferroni_familywise_alpha": familywise_alpha,
+        "bonferroni_comparison_count": familywise_comparison_count,
+        "bonferroni_t_critical": bonferroni_t_critical,
+        "bonferroni_familywise_inference_upper_seconds": familywise_inference_upper,
+        "bonferroni_familywise_total_upper_seconds": familywise_total_upper,
+        "concurrent_token_cap_scaled_inference_upper_seconds": concurrent_token_cap_scaled_inference_upper,
+        "concurrent_maximum_noninference_pre_persistence_seconds": concurrent_max_noninference,
+        "concurrent_maximum_completed_call_reserved_to_inference_started_seconds": concurrent_max_completed_preinference,
+        "concurrent_maximum_post_inference_pre_persistence_seconds": concurrent_max_post_inference_pre_persistence,
+        "maximum_completed_call_reserved_to_inference_started_seconds": maximum_completed_preinference,
+        "maximum_observed_post_inference_pre_persistence_seconds": maximum_post_inference_pre_persistence,
+        "post_inference_stage_interpretation": "call-wide non-inference minus ledger-observed reserve-to-inference-start; conservatively retains pre-reservation coordinator overhead as an upper for the otherwise-unallocated post-inference/pre-persistence stage",
+        "incomplete_concurrent_preinference_observations": incomplete_preinference_observations,
+        "incomplete_maximum_call_reserved_to_inference_started_seconds": incomplete_max_preinference_lower_bound,
+        "evidence_complete_concurrent_preinference_upper_seconds": evidence_complete_concurrent_preinference_upper,
+        "concurrent_maximum_post_persistence_coordinator_seconds": concurrent_max_post,
+        "concurrent_token_cap_total_upper_seconds": concurrent_token_cap_total_upper,
+        "cross_regime_stage_maximum_rule": "combine the direct six-GPU concurrent 192-token-scaled inference maximum with the largest pre-inference, post-inference/pre-persistence, and post-persistence stages found anywhere in all 1,084 completed V5 records plus the two incomplete pre-inference records; no stage receives a concurrency speedup credit",
+        "maximum_observed_accounted_call_seconds": maximum_accounted_call_seconds,
+        "governing_evidence_based_floor_seconds": governing_floor,
+        "revised_per_call_hard_reservation_wall_seconds": CALL_RESERVATION_WALL_SECONDS,
+        "absolute_safety_margin_seconds": margin,
+        "relative_safety_margin_over_floor": margin / governing_floor,
+        "call_load_plus_simultaneous_emergency_reservation_subtotal_a100_gpu_hours": reservation_admission_subtotal,
+        "maximum_idle_residency_gap_count": (
+            maximum_ordinary_idle_residency_gap_count
+            + maximum_process_exit_residency_gap_count
+        ),
+        "maximum_ordinary_idle_residency_gap_count": maximum_ordinary_idle_residency_gap_count,
+        "maximum_process_exit_residency_gap_count": maximum_process_exit_residency_gap_count,
+        "maximum_ordinary_idle_wall_seconds_per_gap": LOADED_WORKER_IDLE_LEASE_SECONDS,
+        "maximum_process_exit_wall_seconds_per_gap": LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS,
+        "atomic_loaded_worker_idle_lease_wall_seconds": LOADED_WORKER_IDLE_LEASE_SECONDS,
+        "atomic_loaded_worker_process_exit_lease_wall_seconds": LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS,
+        "observed_v5_terminal_process_exit_gap_lower_bound_seconds": 2.073427,
+        "atomic_idle_lease_enforcement": "GlobalFailStopCoordinator._account_idle_locked rejects ordinary gaps over 2 seconds before reserve_call or worker-session close and rejects the post-session process-exit gap over 8 seconds before exit can be accepted; supervisor independently selects the same state-dependent limit",
+        "full_grid_all_operations_hard_bound_a100_gpu_hours": all_operations_hard,
+        "fresh_formal_execution_envelope_a100_gpu_hours": ENVELOPE_A100_GPU_HOURS,
+        "overall_user_authorization_a100_gpu_hours": 64.0,
+        "prior_failed_run_conservative_usage_upper_bound_a100_gpu_hours": prior_conservative_usage,
+        "prior_plus_fresh_formal_envelope_a100_gpu_hours": cumulative_authorized_upper,
+        "interpretation": "runtime extrapolation selects a prospective safety bound only; prior labels are not reused and label/schema/inputs are unchanged",
+        "observations": observations,
+    }, "call_reservation_derivation_payload_sha256")
+
+
+def _contact_sheet(frames: list[dict[str, Any]], destination: Path, title: str) -> None:
+    from PIL import Image, ImageDraw
+
+    columns = min(4, len(frames))
+    thumb_w, thumb_h, label_h, margin = 320, 180, 24, 12
+    rows = math.ceil(len(frames) / columns)
+    canvas = Image.new(
+        "RGB",
+        (columns * thumb_w + (columns + 1) * margin,
+         44 + rows * (thumb_h + label_h) + (rows + 1) * margin),
+        "white",
+    )
+    draw = ImageDraw.Draw(canvas)
+    draw.text((margin, 12), title, fill="black")
+    for index, frame in enumerate(frames):
+        row, column = divmod(index, columns)
+        x = margin + column * (thumb_w + margin)
+        y = 44 + margin + row * (thumb_h + label_h + margin)
+        image = Image.fromarray(frame["rgb"])
+        image.thumbnail((thumb_w, thumb_h))
+        canvas.paste(image, (x, y))
+        draw.text(
+            (x, y + thumb_h + 2),
+            f"#{frame['ordinal']} target={frame['target_absolute_seconds']:.3f}s "
+            f"src={frame['decoded_index']}",
+            fill="black",
+        )
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    canvas.save(destination, format="PNG", optimize=False)
+
+
+def _processor_tail_audit(
+    processed_rows: dict[str, dict[str, Any]],
+    unit_rows: dict[str, dict[str, Any]],
+    *,
+    processor_class: str,
+) -> dict[str, Any]:
+    rows = []
+    for unit_id in EXPECTED_TAILS:
+        processed = processed_rows[unit_id]
+        unit = unit_rows[unit_id]
+        rows.append({
+            "unit_id": unit_id,
+            "unit_kind": "truncated_final",
+            "true_duration_seconds": unit["duration_seconds"],
+            "supplied_frame_count": unit["frame_count"],
+            "supplied_sampling_fps": 2.0,
+            "model_visible_grid_duration_seconds": (unit["frame_count"] - 1) / 2.0,
+            "processor_tensor_shapes": processed["tensor_shapes"],
+            "processor_tensor_bundle_sha256": processed["processed_input_sha256"],
+            "explicit_model_visible_tail_declaration": True,
+            "model_visible_text_sha256": processed["model_visible_text_sha256"],
+            "model_visible_text": processed["model_visible_text"],
+            "do_sample_frames": False,
+            "padding_or_repeated_source_frame_added_by_protocol": False,
+        })
+    result = {
+        "status": "PASS_PROCESSOR_ONLY_NO_CHECKPOINT_WEIGHTS_LOADED_NO_INFERENCE",
+        "processor_class": processor_class,
+        "model_path_used_for_processor_assets_only": "models/Qwen3-VL-32B-Instruct-FP8",
+        "prompt_sha256": sha256_file(PROMPT),
+        "tail_units": rows,
+        "checkpoint_weights_loaded": False,
+        "model_generate_called": False,
+    }
+    return self_hash(result, "processor_audit_payload_sha256")
+
+
+def _video_stream_audit(videos: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    import cv2
+
+    rows = []
+    for video_id in VIDEO_ORDER:
+        video = videos[video_id]
+        path = ROOT / video["path"]
+        cap = cv2.VideoCapture(str(path))
+        if not cap.isOpened():
+            raise RuntimeError(f"cannot open video for stream audit: {video_id}")
+        frame_count = int(round(cap.get(cv2.CAP_PROP_FRAME_COUNT)))
+        decoder_fps = float(cap.get(cv2.CAP_PROP_FPS))
+        last_index = frame_count - 1
+        cap.set(cv2.CAP_PROP_POS_FRAMES, last_index)
+        ok, frame = cap.read()
+        if not ok:
+            cap.release()
+            raise RuntimeError(f"cannot decode final video-stream frame: {video_id}")
+        decoded_index = int(round(cap.get(cv2.CAP_PROP_POS_FRAMES))) - 1
+        timestamp = float(cap.get(cv2.CAP_PROP_POS_MSEC)) / 1000.0
+        rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        cap.release()
+        if decoded_index != last_index:
+            raise RuntimeError(f"final stream index mismatch: {video_id}")
+        rows.append({
+            "video_id": video_id,
+            "path": video["path"],
+            "video_sha256": video["sha256"],
+            "container_duration_seconds": video["duration_seconds"],
+            "nominal_fps": video["nominal_fps"],
+            "decoder_reported_fps": decoder_fps,
+            "decoded_frame_count": frame_count,
+            "last_available_decoded_index": last_index,
+            "last_available_decoded_timestamp_seconds": timestamp,
+            "last_available_rgb_sha256": rgb_content_hash(rgb),
+            "container_duration_may_exceed_video_stream_support": (
+                timestamp < float(video["duration_seconds"])
+            ),
+        })
+    return self_hash({
+        "status": "FROZEN_VIDEO_STREAM_BOUNDARY_AUDIT",
+        "source": "OpenCV decoder frame-count and exact final-frame decode",
+        "videos": rows,
+    }, "video_stream_audit_payload_sha256")
+
+
+def _failure_policy() -> str:
+    return """# Full-Grid Failure Policy
+
+Status: `FROZEN_BEFORE_FULL_GRID_EXECUTION`
+
+The only production entry point is the sealed staged three-process supervisor.
+It launches the initial frozen worker only after its pair authenticates idle,
+marks the other workers pending without a process or model load, and activates
+each pending worker only after its own frozen pair independently authenticates.
+It monitors child exit status and operation leases, and terminates all live
+peers after any nonzero/abrupt death or global stop.
+Workers reject direct launch without the supervisor authority and parent PID.
+Before importing the model stack, each worker installs Linux `PDEATHSIG=SIGKILL`
+and rechecks the exact parent, so supervisor death cannot orphan GPU workers.
+Every call is reserved before frame decode/processor work and remains open
+through durable raw-output and ACCEPTED-ledger persistence. Each loaded worker
+also holds a prospective eight-second emergency reservation throughout model
+residency. An authoritative coordinator-side clock partitions residency
+continuously from load reservation through every call/idle boundary and the
+supervisor-observed process exit; caller-side timers are diagnostic only. The
+coordinator transaction rejects any ordinary idle gap above the frozen
+two-second lease before a next call or session-close transition can succeed.
+After session close, the only legal transition is process exit, which has a
+separate frozen eight-second lease. The supervisor selects the same limit from
+the durable session state and remains an independent early detector, not the
+authority for the hard bound. The emergency reservation is consumed only after
+the supervisor observes process exit. Model tensors and cached
+allocations are explicitly released before session close.
+
+The launcher authenticates zero compute contexts, zero utilization, and at
+most 16 MiB used memory on the initial pair before initialization. Every
+activation repeats the rule before process spawn, and each worker repeats its
+exact-pair check immediately before its single model load. A busy pending pair
+does not fail or consume compute; it remains explicitly pending. Malformed
+telemetry or an identity mismatch is a global authentication failure.
+
+The execution uses one global fail-stop coordinator. Authentication, frame or
+processed-input mismatch, an unknown runner/parser, wrong GPU, duplicate or
+extra call, retry, fourth load/reload, ledger transition failure, path
+collision, cost-shield breach, generation failure, uncertain interruption, or
+post-load process fault prevents every worker from issuing another
+`INFERENCE_STARTED` event. Already-started calls may terminate and all raw and
+ledger evidence is preserved.
+
+This execution permits exactly three uninterrupted model loads and no post-load
+restart. The earlier failed executions are immutable revision evidence only:
+none of the immediate prior run's 1,084 completed labels may be reused, and this
+fresh execution starts from unit zero. Any call with a durable start and no terminal record remains
+uncertain and cannot be retried within this execution.
+
+Any missing, failed, uncertain, extra, retried, unauthenticated, or cost-invalid
+run is incomplete. It produces `INSUFFICIENT_EVIDENCE` or the higher-priority
+frozen abort decision, no formal unit-label table, no formal K3 relation, and no
+downstream access. Formal artifacts live in a versioned evaluator-only release;
+only the final atomic `FORMAL_REFERENCE_RELEASE.json` pointer makes the release
+authoritative.
+"""
+
+
+def _hiding_audit() -> str:
+    return """# Full-Grid Label-Hiding Audit
+
+Status: `FROZEN_INTERFACE_IMPLEMENTED_TEST_REQUIRED`
+
+Three layers are separate:
+
+1. `EvaluatorOnlyLabelStore` owns exhaustive full-grid labels and requires an
+   opaque evaluator capability. Its controller lookup method fails closed.
+2. Runtime VERIFY results are produced causally by the selected runtime action
+   and signed with Ed25519. The public runtime history receives only the public
+   verification key and completed signed results; it cannot mint results or
+   request arbitrary full-grid unit IDs.
+3. Public controller state contains public observations plus already completed
+   signed VERIFY history only. SCAN, runtime K3, and action selection receive no
+   evaluator path, object, event ID, future label, or boundary.
+
+The evaluator reference and runtime K3 use different constructors and process
+entry points. Formal evaluator directories are owned by frozen evaluator UID 0
+with mode `0700`; files use `0600`. Every later controller/replay process must
+run as UID/GID 65534 with zero effective capabilities and with the evaluator
+execution root absent from its container mount namespace. A real fork/setuid
+test must prove that a guessed absolute evaluator sentinel path raises
+`PermissionError`. Import-root nonoverlap alone is explicitly insufficient.
+
+Tests also require hidden-label permutation invariance, rejection of
+forged/future results, rejection of direct lookup, path-root non-overlap, and
+same-host different-UID guessed-path denial. No replay or controller is run in
+this preregistration stage.
+"""
+
+
+def main() -> None:
+    if PACKAGE.exists() and any(PACKAGE.iterdir()):
+        raise RuntimeError(f"refusing to overwrite existing package: {PACKAGE}")
+    PACKAGE.mkdir(parents=True, exist_ok=True)
+    git_head = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
+    ).strip()
+    grid = load_frozen_grid(UNIT_GRID)
+    videos = video_map(VIDEO_MANIFEST)
+    if len(grid) != EXPECTED_UNIT_COUNT:
+        raise RuntimeError("frozen grid no longer contains 1475 units")
+    if Counter(row["video_id"] for row in grid) != Counter(EXPECTED_UNITS_BY_VIDEO):
+        raise RuntimeError("frozen grid video counts changed")
+    if list(dict.fromkeys(row["video_id"] for row in grid)) != list(VIDEO_ORDER):
+        raise RuntimeError("frozen grid video order changed")
+    for video_id, video in videos.items():
+        if sha256_file(ROOT / video["path"]) != video["sha256"]:
+            raise RuntimeError(f"source video hash mismatch: {video_id}")
+    stream_audit = _video_stream_audit(videos)
+    model_path = ROOT / "models/Qwen3-VL-32B-Instruct-FP8"
+    processor = load_frozen_processor(model_path)
+    processor_class = f"{processor.__class__.__module__}.{processor.__class__.__qualname__}"
+    processor_environment = runtime_environment_identity()
+    prior_failure = _prior_failure_evidence()
+    write_json_once(
+        PACKAGE / "FULL_GRID_PRIOR_FAILURE_EVIDENCE.json", prior_failure
+    )
+    call_reservation_derivation = _call_reservation_derivation(
+        processor, prior_failure
+    )
+    write_json_once(
+        PACKAGE / "FULL_GRID_CALL_RESERVATION_DERIVATION.json",
+        call_reservation_derivation,
+    )
+    prompt = PROMPT.read_text(encoding="utf-8")
+    v2_decision = load_json(V2_DECISION)
+    v2_evidence = load_json(V2_EVIDENCE)
+    if not (
+        v2_decision.get("experiment_id") == "AEQ_ORACLE_PREFLIGHT_V2"
+        and v2_decision.get("decision") == "REVISE_ORACLE_PROTOCOL"
+        and v2_evidence.get("status") == "PASS_COMPLETE_INTEGRITY_INVENTORY"
+        and v2_evidence.get("decision") == "REVISE_ORACLE_PROTOCOL"
+        and int(v2_evidence.get("observed_raw_records", -1)) == 32
+    ):
+        raise RuntimeError("V2 historical evidence no longer matches its frozen decision")
+
+    flat_frames: list[dict[str, Any]] = []
+    unit_rows: list[dict[str, Any]] = []
+    processed_input_rows: list[dict[str, Any]] = []
+    tail_frames: dict[str, list[dict[str, Any]]] = {}
+    global_frame_ordinal = 0
+    for ordinal, grid_row in enumerate(grid):
+        video = videos[grid_row["video_id"]]
+        kind, decoded = decode_full_grid_unit(
+            ROOT / video["path"],
+            grid_row["start_time"], grid_row["end_time"],
+            fraction_fps(video["nominal_fps"]), include_rgb=True,
+        )
+        public = [public_frame(row) for row in decoded]
+        frame_set_sha = canonical_hash(public)
+        model_visible_text = model_visible_query_text(
+            prompt=prompt,
+            unit_kind=kind,
+            true_duration_seconds=grid_row["duration_seconds"],
+            supplied_frame_count=len(public),
+            sampling_fps=2.0,
+        )
+        model_visible_text_sha = hashlib.sha256(model_visible_text.encode("utf-8")).hexdigest()
+        processed_inputs = prepare_frozen_model_inputs(
+            processor,
+            prompt=prompt,
+            rgb_frames=[row["rgb"] for row in decoded],
+            unit_kind=kind,
+            true_duration_seconds=grid_row["duration_seconds"],
+            sampling_fps=2.0,
+        )
+        processed_sha = tensor_bundle_sha256(processed_inputs)
+        shapes = tensor_shapes(processed_inputs)
+        if not shapes.get("input_ids"):
+            raise RuntimeError(
+                f"processor produced no authenticated tensor bundle: {grid_row['unit_id']}"
+            )
+        worker_id = expected_worker(grid_row["video_id"])
+        ledger = f"attempt_ledgers/{worker_id}.jsonl"
+        base = {
+            "experiment_id": EXPERIMENT_ID,
+            "ordinal": ordinal,
+            **grid_row,
+            "unit_kind": kind,
+            "sampling_fps": 2.0,
+            "sampling_semantics": (
+                "endpoint-inclusive source-anchored exact 2-fps grid"
+                if kind == "normal" else
+                "truncated-final source-anchored k/2 targets not exceeding true endpoint"
+            ),
+            "frame_count": len(public),
+            "frame_set_sha256": frame_set_sha,
+            "expected_processed_input_sha256": processed_sha,
+            "source_video_sha256": video["sha256"],
+            "worker_id": worker_id,
+            "physical_gpu_ids": GPU_PAIRS[grid_row["video_id"]],
+            "raw_output_relative_path": f"raw/{grid_row['video_id']}/{grid_row['unit_id']}.json",
+            "parsed_output_relative_path": f"parsed/{grid_row['video_id']}/{grid_row['unit_id']}.json",
+            "attempt_ledger_relative_path": ledger,
+            "model_input_tail_representation": {
+                "explicit_tail_declaration_applied": kind == "truncated_final",
+                "true_duration_seconds": grid_row["duration_seconds"],
+                "supplied_frame_count": len(public),
+                "supplied_sampling_fps": 2.0,
+                "grid_duration_seconds": (len(public) - 1) / 2.0,
+                "base_prompt_file_bytes_unchanged": True,
+                "model_visible_text_sha256": model_visible_text_sha,
+                "tail_prompt_policy": (
+                    "replace the unique nominal 10-second instruction with a deterministic explicit legal truncated-final declaration"
+                    if kind == "truncated_final" else
+                    "exact base prompt bytes"
+                ),
+                "finite_stream_boundary_resolution": "retain ideal request and use unique nearest available final video frame only when ideal index exceeds stream support",
+            },
+        }
+        base["call_spec_sha256"] = canonical_hash(base)
+        unit_rows.append(base)
+        processed_input_rows.append({
+            "unit_ordinal": ordinal,
+            "unit_id": grid_row["unit_id"],
+            "video_id": grid_row["video_id"],
+            "unit_kind": kind,
+            "frame_count": len(public),
+            "frame_set_sha256": frame_set_sha,
+            "model_visible_text_sha256": model_visible_text_sha,
+            "model_visible_text": (
+                model_visible_text if kind == "truncated_final" else None
+            ),
+            "processed_input_sha256": processed_sha,
+            "tensor_shapes": shapes,
+        })
+        for frame in public:
+            flat_frames.append({
+                "global_ordinal": global_frame_ordinal,
+                "unit_ordinal": ordinal,
+                "unit_id": grid_row["unit_id"],
+                "video_id": grid_row["video_id"],
+                "unit_kind": kind,
+                "unit_frame_ordinal": frame["ordinal"],
+                **{key: value for key, value in frame.items() if key != "ordinal"},
+            })
+            global_frame_ordinal += 1
+        if kind == "truncated_final":
+            tail_frames[grid_row["unit_id"]] = decoded
+
+    if len(flat_frames) != EXPECTED_FRAME_OCCURRENCES:
+        raise RuntimeError(f"unexpected frame occurrence count: {len(flat_frames)}")
+    if set(tail_frames) != set(EXPECTED_TAILS):
+        raise RuntimeError(f"tail membership mismatch: {sorted(tail_frames)}")
+    for unit_id, expected in EXPECTED_TAILS.items():
+        if len(tail_frames[unit_id]) != expected["frame_count"]:
+            raise RuntimeError(f"tail frame count mismatch: {unit_id}")
+
+    unit_manifest = self_hash({
+        "status": "FROZEN_EXACT_1475_UNIT_CALL_MANIFEST",
+        "experiment_id": EXPERIMENT_ID,
+        "query_id": QUERY_ID,
+        "exact_unit_count": EXPECTED_UNIT_COUNT,
+        "canonical_order": "frozen video-manifest order DALI,HANGZHOU,WUHAN then ascending unit index",
+        "unit_grid": binding(UNIT_GRID),
+        "video_manifest": binding(VIDEO_MANIFEST),
+        "units": unit_rows,
+    }, "unit_manifest_payload_sha256")
+    frame_manifest = self_hash({
+        "status": "FROZEN_EXACT_DECODED_FULL_GRID_FRAMES",
+        "experiment_id": EXPERIMENT_ID,
+        "exact_unit_count": EXPECTED_UNIT_COUNT,
+        "exact_frame_occurrence_count": len(flat_frames),
+        "unique_video_frame_identity_count": len({
+            (row["video_id"], row["decoded_index"], row["content_sha256"])
+            for row in flat_frames
+        }),
+        "duplicate_occurrences_are_only_explicit_shared_unit_endpoints": True,
+        "finite_video_stream_boundary_rule": "ideal CFR request is retained; a right-boundary request beyond stream support resolves to the unique nearest available final frame; repeated-frame padding is forbidden",
+        "frames": flat_frames,
+    }, "frame_manifest_payload_sha256")
+    processed_input_manifest = self_hash({
+        "status": "FROZEN_EXPECTED_PROCESSOR_TENSOR_IDENTITY_FOR_ALL_UNITS",
+        "experiment_id": EXPERIMENT_ID,
+        "exact_unit_count": EXPECTED_UNIT_COUNT,
+        "processor_class": processor_class,
+        "processor_environment": processor_environment,
+        "processor_assets_path": str(model_path.relative_to(ROOT)),
+        "processor_assets_manifest": binding(MODEL_MANIFEST),
+        "prompt": binding(PROMPT),
+        "do_sample_frames": False,
+        "sampling_fps": 2.0,
+        "checkpoint_weights_loaded": False,
+        "model_generate_called": False,
+        "units": processed_input_rows,
+    }, "processed_input_manifest_payload_sha256")
+    validate_unit_manifest(unit_manifest)
+    validate_frame_manifest(frame_manifest, unit_manifest)
+    validate_processed_input_manifest(processed_input_manifest, unit_manifest)
+    write_json_once(PACKAGE / "FULL_GRID_VIDEO_STREAM_AUDIT.json", stream_audit)
+    write_json_once(PACKAGE / "FULL_GRID_UNIT_MANIFEST.json", unit_manifest)
+    write_json_once(PACKAGE / "FULL_GRID_FRAME_MANIFEST.json", frame_manifest)
+    write_json_once(
+        PACKAGE / "FULL_GRID_PROCESSED_INPUT_MANIFEST.json", processed_input_manifest
+    )
+
+    workers = []
+    for video_id in VIDEO_ORDER:
+        ids = [row["unit_id"] for row in unit_rows if row["video_id"] == video_id]
+        ordinals = [row["ordinal"] for row in unit_rows if row["video_id"] == video_id]
+        workers.append({
+            "worker_id": expected_worker(video_id),
+            "video_id": video_id,
+            "physical_gpu_ids": GPU_PAIRS[video_id],
+            "unit_ordinal_start": min(ordinals),
+            "unit_ordinal_end_inclusive": max(ordinals),
+            "unit_ids": ids,
+            "exact_call_count": len(ids),
+            "raw_output_shard_relative_path": f"raw/{video_id}",
+            "parsed_output_shard_relative_path": f"parsed/{video_id}",
+            "attempt_ledger_relative_path": f"attempt_ledgers/{expected_worker(video_id)}.jsonl",
+            "model_load_events": ["MODEL_LOAD_STARTED", "MODEL_LOAD_COMPLETED"],
+            "expected_successful_call_events": 4 * len(ids),
+            "dynamic_reassignment": False,
+            "direct_launch_allowed": False,
+            "required_parent": "sealed_global_supervisor",
+            "activation_order": VIDEO_ORDER.index(video_id),
+            "initial_activation_state": (
+                "READY_FOR_IMMEDIATE_GPU_AUTHENTICATION"
+                if expected_worker(video_id) == INITIAL_WORKER_ID
+                else "PENDING_GPU_AUTHENTICATION"
+            ),
+        })
+    schedule = self_hash({
+        "status": "FROZEN_STAGED_THREE_STATIC_TWO_GPU_WORKERS",
+        "experiment_id": EXPERIMENT_ID,
+        "exact_worker_count": 3,
+        "exact_call_count": EXPECTED_UNIT_COUNT,
+        "model_load_count": 3,
+        "reload_count": 0,
+        "retry_count": 0,
+        "global_fail_stop": True,
+        "activation_mode": "staged_pair_authentication",
+        "initial_worker_id": INITIAL_WORKER_ID,
+        "pending_worker_policy": "no process, model load, call, or GPU residency before the worker's exact frozen pair independently authenticates idle",
+        "activation_order": [expected_worker(video_id) for video_id in VIDEO_ORDER],
+        "completed_worker_release_policy": "release model and exit before a pending worker needs to activate; completed raw outputs remain nonpublic until 1475/1475",
+        "sole_launcher": "scripts/launch_accelerated_event_query_oracle_v3_full_grid.py",
+        "abrupt_worker_death_policy": "supervisor records global stop and terminates every live peer before another reservation",
+        "workers": workers,
+    }, "worker_schedule_payload_sha256")
+    validate_worker_schedule(schedule, unit_manifest)
+    write_json_once(PACKAGE / "FULL_GRID_WORKER_SCHEDULE.json", schedule)
+
+    from scipy.stats import t as student_t
+
+    concurrent_ids = set(
+        call_reservation_derivation["concurrent_activation_unit_ids"]
+    )
+    concurrent_cost_rows = [
+        row for row in call_reservation_derivation["observations"]
+        if row["unit_id"] in concurrent_ids
+    ]
+    concurrent_accounted = [
+        row["accounted_wall_seconds"] for row in concurrent_cost_rows
+    ]
+    concurrent_mean = statistics.fmean(concurrent_accounted)
+    concurrent_sd = statistics.stdev(concurrent_accounted)
+    concurrent_rows_by_video = {
+        video_id: [
+            row["accounted_wall_seconds"]
+            for row in concurrent_cost_rows
+            if row["unit_id"].startswith(video_id + "_")
+        ]
+        for video_id in VIDEO_ORDER
+    }
+    concurrent_means_by_video = {
+        video_id: statistics.fmean(rows)
+        for video_id, rows in concurrent_rows_by_video.items()
+    }
+    historical_completed_mean = statistics.fmean(
+        row["accounted_wall_seconds"]
+        for row in call_reservation_derivation["observations"]
+    )
+    prior_global_rows = _read_jsonl(
+        PRIOR_FAILED_EXECUTION / "GLOBAL_EXECUTION_LEDGER.jsonl"
+    )
+    worker_to_video = {
+        expected_worker(video_id): video_id for video_id in VIDEO_ORDER
+    }
+    observed_loads = {
+        worker_to_video[row["worker_id"]]: row["accounted_wall_seconds"]
+        for row in prior_global_rows
+        if row.get("event") == "MODEL_LOAD_COMPLETED"
+    }
+    point_worker_wall_seconds = {
+        video_id: (
+            EXPECTED_UNITS_BY_VIDEO[video_id]
+            * concurrent_means_by_video[video_id]
+            + observed_loads[video_id]
+        )
+        for video_id in VIDEO_ORDER
+    }
+    estimated = 2.0 * sum(point_worker_wall_seconds.values()) / 3600.0
+    parallel_wall_estimate = max(point_worker_wall_seconds.values()) / 3600.0
+    uncertainty_t_critical = float(student_t.ppf(0.975, len(concurrent_accounted) - 1))
+    concurrent_mean_95_upper = (
+        concurrent_mean
+        + uncertainty_t_critical * concurrent_sd / math.sqrt(len(concurrent_accounted))
+    )
+    # A global-mean upper is not necessarily an upper for the slowest video.
+    # Freeze stratified bounds and use a Bonferroni two-sided familywise 95%
+    # critical value across the three video means.  This guarantees that each
+    # projected worker upper exceeds its own point projection.
+    familywise_t_critical_by_video = {
+        video_id: float(student_t.ppf(
+            1.0 - 0.05 / (2.0 * len(VIDEO_ORDER)), len(rows) - 1
+        ))
+        for video_id, rows in concurrent_rows_by_video.items()
+    }
+    concurrent_familywise_95_upper_by_video = {
+        video_id: (
+            concurrent_means_by_video[video_id]
+            + familywise_t_critical_by_video[video_id]
+            * statistics.stdev(rows) / math.sqrt(len(rows))
+        )
+        for video_id, rows in concurrent_rows_by_video.items()
+    }
+    familywise_95_worker_wall_seconds = {
+        video_id: (
+            EXPECTED_UNITS_BY_VIDEO[video_id]
+            * concurrent_familywise_95_upper_by_video[video_id]
+            + observed_loads[video_id]
+        )
+        for video_id in VIDEO_ORDER
+    }
+    if any(
+        familywise_95_worker_wall_seconds[video_id]
+        < point_worker_wall_seconds[video_id]
+        for video_id in VIDEO_ORDER
+    ):
+        raise RuntimeError("stratified uncertainty upper fell below point estimate")
+    estimated_95_upper = (
+        2.0 * sum(familywise_95_worker_wall_seconds.values()) / 3600.0
+    )
+    parallel_wall_95_upper = (
+        max(familywise_95_worker_wall_seconds.values()) / 3600.0
+    )
+    reservation_subtotal = call_reservation_derivation[
+        "call_load_plus_simultaneous_emergency_reservation_subtotal_a100_gpu_hours"
+    ]
+    all_operations_hard = call_reservation_derivation[
+        "full_grid_all_operations_hard_bound_a100_gpu_hours"
+    ]
+    cost = self_hash({
+        "status": "FROZEN_FULL_GRID_COST_AND_RESERVATION_PLAN",
+        "exact_call_count": EXPECTED_UNIT_COUNT,
+        "estimated_a100_gpu_hours": estimated,
+        "estimated_parallel_wall_hours": parallel_wall_estimate,
+        "estimated_a100_gpu_hours_95_percent_mean_uncertainty_upper": estimated_95_upper,
+        "estimated_parallel_wall_hours_95_percent_mean_uncertainty_upper": parallel_wall_95_upper,
+        "authorization_envelope_a100_gpu_hours": ENVELOPE_A100_GPU_HOURS,
+        "planned_model_load_count": 3,
+        "reload_count": 0,
+        "retry_count": 0,
+        "estimation_assumption": "all units are point-estimated from 1,084 direct V5 observations in the three-worker concurrent-residency regime; exact video call counts use each video's observed mean and a global Student-t upper quantifies mean uncertainty; no staged one/two-worker speedup credit is used",
+        "historical_1084_call_accounted_mean_seconds": historical_completed_mean,
+        "direct_concurrent_observation_count": len(concurrent_accounted),
+        "direct_concurrent_accounted_mean_seconds": concurrent_mean,
+        "direct_concurrent_accounted_standard_deviation_seconds": concurrent_sd,
+        "direct_concurrent_mean_seconds_by_video": concurrent_means_by_video,
+        "direct_concurrent_mean_95_percent_upper_seconds": concurrent_mean_95_upper,
+        "direct_concurrent_mean_95_percent_t_critical": uncertainty_t_critical,
+        "stratified_familywise_95_percent_method": "per-video Student-t mean intervals with Bonferroni two-sided alpha=0.05 across three videos",
+        "direct_concurrent_familywise_95_percent_upper_seconds_by_video": concurrent_familywise_95_upper_by_video,
+        "direct_concurrent_familywise_95_percent_t_critical_by_video": familywise_t_critical_by_video,
+        "familywise_95_percent_worker_wall_seconds": familywise_95_worker_wall_seconds,
+        "observed_v5_model_load_seconds": observed_loads,
+        "point_estimated_worker_wall_seconds": point_worker_wall_seconds,
+        "per_call_hard_reservation_wall_seconds": CALL_RESERVATION_WALL_SECONDS,
+        "call_reservation_derivation": binding(
+            PACKAGE / "FULL_GRID_CALL_RESERVATION_DERIVATION.json"
+        ),
+        "prior_failed_execution_evidence": binding(
+            PACKAGE / "FULL_GRID_PRIOR_FAILURE_EVIDENCE.json"
+        ),
+        "per_load_hard_reservation_wall_seconds": MODEL_LOAD_RESERVATION_WALL_SECONDS,
+        "ordinary_loaded_worker_idle_lease_wall_seconds": LOADED_WORKER_IDLE_LEASE_SECONDS,
+        "post_session_process_exit_lease_wall_seconds_per_worker": LOADED_WORKER_PROCESS_EXIT_LEASE_SECONDS,
+        "per_loaded_worker_reusable_emergency_reservation_wall_seconds": LOADED_WORKER_EMERGENCY_RESERVATION_WALL_SECONDS,
+        "call_load_plus_simultaneous_emergency_reservation_subtotal_a100_gpu_hours": reservation_subtotal,
+        "maximum_idle_residency_gap_count": call_reservation_derivation["maximum_idle_residency_gap_count"],
+        "maximum_ordinary_idle_residency_gap_count": call_reservation_derivation["maximum_ordinary_idle_residency_gap_count"],
+        "maximum_process_exit_residency_gap_count": call_reservation_derivation["maximum_process_exit_residency_gap_count"],
+        "maximum_ordinary_idle_wall_seconds_per_gap": call_reservation_derivation["maximum_ordinary_idle_wall_seconds_per_gap"],
+        "maximum_process_exit_wall_seconds_per_gap": call_reservation_derivation["maximum_process_exit_wall_seconds_per_gap"],
+        "full_grid_all_operations_hard_bound_a100_gpu_hours": all_operations_hard,
+        "reservation_and_all_operations_bounds_fit_envelope": (
+            reservation_subtotal <= ENVELOPE_A100_GPU_HOURS
+            and all_operations_hard <= ENVELOPE_A100_GPU_HOURS
+        ),
+        "cost_shield": "call reservation remains open from pre-decode through durable raw and ACCEPTED persistence; a reusable prospective emergency reservation remains active per loaded worker; a coordinator-side continuous residency clock accounts every gap; the same transaction rejects ordinary gaps above two seconds before next call/session close and the terminal process-exit gap above eight seconds; supervisor polling independently enforces the state-dependent limit; no start above envelope",
+        "actual_gpu_residency_accounting": "continuous coordinator-side two-GPU residency segments from model-load reservation through call/durable acceptance, every coordinator and inter-call gap, explicit model release, and supervisor-observed process-exit tail",
+        "gpu_profile_authentication": "the initial pair must have zero compute contexts, zero utilization, and <=16 MiB used memory before initialization; each pending frozen pair must independently satisfy the same rule immediately before process spawn and again before model load",
+        "unused_envelope_cannot_authorize_extra_calls_reloads_or_retries": True,
+    }, "cost_estimate_payload_sha256")
+    write_json_once(PACKAGE / "FULL_GRID_COST_ESTIMATE.json", cost)
+
+    decision_mapping = self_hash({
+        "status": "FROZEN_BEFORE_FULL_GRID_EXECUTION",
+        "allowed_decisions": [
+            "FULL_GRID_PASS_REFERENCE_RELEASED",
+            "FULL_GRID_INSUFFICIENT_ORACLE_COVERAGE",
+            "FULL_GRID_ABORTED_AUTHENTICATION",
+            "FULL_GRID_ABORTED_RUNTIME",
+            "FULL_GRID_FAILED_PROTOCOL",
+            "INSUFFICIENT_EVIDENCE",
+        ],
+        "priority": [
+            {"rank": 1, "condition": "authentication or bound identity failure", "decision": "FULL_GRID_ABORTED_AUTHENTICATION"},
+            {"rank": 2, "condition": "reload/retry/duplicate/ledger/GPU/cost/generation/runtime failure", "decision": "FULL_GRID_ABORTED_RUNTIME"},
+            {"rank": 3, "condition": "fewer than 1475 authenticated terminal records or incomplete global state", "decision": "INSUFFICIENT_EVIDENCE"},
+            {"rank": 4, "condition": "any parse_failure, schema violation, or K3 nondeterminism", "decision": "FULL_GRID_FAILED_PROTOCOL"},
+            {"rank": 5, "condition": "global or per-video determined coverage below 0.99", "decision": "FULL_GRID_INSUFFICIENT_ORACLE_COVERAGE"},
+            {"rank": 6, "condition": "all preceding gates pass", "decision": "FULL_GRID_PASS_REFERENCE_RELEASED"},
+        ],
+        "construct_validity_diagnostics_are_non_gating": True,
+    }, "decision_mapping_payload_sha256")
+    write_json_once(PACKAGE / "FULL_GRID_DECISION_MAPPING.json", decision_mapping)
+
+    schemas = self_hash({
+        "status": "FROZEN_OUTPUT_SCHEMAS_BEFORE_EXECUTION",
+        "unit_labels_parquet": str(UNIT_LABEL_SCHEMA),
+        "event_relation_parquet": str(EVENT_RELATION_SCHEMA),
+        "coverage_report_required_fields": [
+            "status", "oracle_coverage", "per_video_oracle_coverage", "label_counts",
+            "parse_status_counts", "coverage_thresholds", "primary_relation_rule",
+            "primary_relation_sha256", "determined_only_lower_bound_relation_sha256",
+            "unknown_sensitive_upper_bound_diagnostic_relation_sha256",
+            "parse_failure_regions_are_unevaluable", "coverage_payload_sha256",
+        ],
+        "canonical_row_order": {
+            "unit_labels": "unit ordinal ascending",
+            "event_relation": "video_id,start_time,end_time,event_id ascending",
+        },
+        "formal_primary_relation_filename": "k3_model_relative_event_relation.parquet",
+        "only_release_commit_pointer_confers_formal_status": True,
+    }, "output_schemas_payload_sha256")
+    write_json_once(PACKAGE / "FULL_GRID_OUTPUT_SCHEMAS.json", schemas)
+
+    if os.geteuid() != 0:
+        raise RuntimeError("evaluator package must be frozen by sealed evaluator UID 0")
+    label_access_policy = self_hash({
+        "status": "FROZEN_OS_ENFORCED_EVALUATOR_RUNTIME_SEPARATION",
+        "evaluator_uid": 0,
+        "evaluator_gid": 0,
+        "runtime_uid": 65534,
+        "runtime_gid": 65534,
+        "evaluator_directory_mode": "0700",
+        "evaluator_file_mode": "0600",
+        "required_runtime_effective_capabilities_hex": "0000000000000000",
+        "evaluator_output_root": str(EXECUTION.relative_to(ROOT)),
+        "runtime_mount_rule": "the evaluator output root must be absent from the runtime controller container mount namespace",
+        "runtime_entry_gate": "assert_runtime_os_isolation must pass under UID/GID 65534 before any later controller/replay episode",
+        "same_uid_runtime_forbidden": True,
+        "absolute_path_guessing_must_raise_permission_error": True,
+    }, "label_access_policy_payload_sha256")
+    write_json_once(PACKAGE / "FULL_GRID_LABEL_ACCESS_POLICY.json", label_access_policy)
+
+    (PACKAGE / "FULL_GRID_FAILURE_POLICY.md").write_text(_failure_policy(), encoding="utf-8")
+    (PACKAGE / "FULL_GRID_LABEL_HIDING_AUDIT.md").write_text(_hiding_audit(), encoding="utf-8")
+
+    unit_by_id = {row["unit_id"]: row for row in unit_rows}
+    tail_audit_rows = []
+    for unit_id, frames in tail_frames.items():
+        sheet = PACKAGE / "tail_unit_audits" / f"{unit_id}.png"
+        _contact_sheet(frames, sheet, f"{unit_id}: legal truncated final unit, all frozen frames")
+        tail_audit_rows.append({
+            "unit_id": unit_id,
+            "video_id": unit_by_id[unit_id]["video_id"],
+            "start_time": unit_by_id[unit_id]["start_time"],
+            "end_time": unit_by_id[unit_id]["end_time"],
+            "duration_seconds": unit_by_id[unit_id]["duration_seconds"],
+            "frame_count": len(frames),
+            "first_target_absolute_seconds": frames[0]["target_absolute_seconds"],
+            "last_target_absolute_seconds": frames[-1]["target_absolute_seconds"],
+            "first_decoded_index": frames[0]["decoded_index"],
+            "last_decoded_index": frames[-1]["decoded_index"],
+            "last_ideal_requested_index": frames[-1]["ideal_requested_index"],
+            "last_requested_index": frames[-1]["requested_index"],
+            "last_source_boundary_resolution": frames[-1]["source_boundary_resolution"],
+            "first_decoded_timestamp_seconds": frames[0]["decoded_timestamp_seconds"],
+            "last_decoded_timestamp_seconds": frames[-1]["decoded_timestamp_seconds"],
+            "frame_set_sha256": unit_by_id[unit_id]["frame_set_sha256"],
+            "contact_sheet": binding(sheet),
+        })
+    processor_audit = _processor_tail_audit(
+        {row["unit_id"]: row for row in processed_input_rows},
+        unit_by_id,
+        processor_class=processor_class,
+    )
+    write_json_once(PACKAGE / "FULL_GRID_TAIL_PROCESSOR_AUDIT.json", processor_audit)
+    md = [
+        "# Full-Grid Tail Unit Audit", "", "Status: `FROZEN_PASS_NO_MODEL_INFERENCE`", "",
+        "The three legal final units use only exact source-anchored `k/2` targets not",
+        "exceeding the true endpoint. No target, padding frame, repeated final frame,",
+        "or invented off-grid endpoint was added. The base query file remains unchanged;",
+        "for each tail, its exact model-visible text deterministically replaces the false",
+        "nominal 10-second sentence with the legal truncated-final identity, true source",
+        "duration, real frame count, 2-fps grid, and no-padding/no-repeat declaration.", "",
+        "| Unit | Video | Absolute interval | Frames | Last target | Ideal/resolved/decoded last index | Resolution | Contact SHA |",
+        "|---|---|---:|---:|---:|---:|---|---|",
+    ]
+    for row in tail_audit_rows:
+        md.append(
+            f"| {row['unit_id']} | {row['video_id']} | {row['start_time']:.6f}–{row['end_time']:.6f} | "
+            f"{row['frame_count']} | {row['last_target_absolute_seconds']:.6f} | "
+            f"{row['last_ideal_requested_index']}/{row['last_requested_index']}/{row['last_decoded_index']} | "
+            f"{row['last_source_boundary_resolution']} | "
+            f"`{row['contact_sheet']['sha256']}` |"
+        )
+    md.extend([
+        "", "Processor-only audit:", "",
+        f"- Status: `{processor_audit['status']}`.",
+        f"- Processor: `{processor_audit['processor_class']}`.",
+        "- Checkpoint weights loaded: `false`; `model.generate` called: `false`.",
+        "- All 12/2/6-frame inputs produced deterministic tensor bundles without protocol padding.",
+        "- Exact tensor shapes and hashes are in `FULL_GRID_TAIL_PROCESSOR_AUDIT.json`.", "",
+        "Independent reviewers must inspect each PNG and the corresponding exact frame rows",
+        "in `FULL_GRID_FRAME_MANIFEST.json` before returning GO.", "",
+    ])
+    (PACKAGE / "FULL_GRID_TAIL_UNIT_AUDIT.md").write_text("\n".join(md), encoding="utf-8")
+
+    source_paths = [
+        ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_manifest.py",
+        ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_control.py",
+        ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_hiding.py",
+        ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_package.py",
+        ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_runner.py",
+        ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_processing.py",
+        ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_supervisor.py",
+        ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_analyzer.py",
+        ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_finalizer.py",
+        ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_dry_run.py",
+        ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_parser.py",
+        ROOT / "src/garc_eval/accelerated_event_query/k3_unit_event_adapter.py",
+        ROOT / "src/garc_eval/accelerated_event_query/model_relative_event_relation.py",
+        ROOT / "scripts/build_accelerated_event_query_oracle_v3_full_grid.py",
+        ROOT / "scripts/freeze_accelerated_event_query_oracle_v3_full_grid.py",
+        ROOT / "scripts/run_accelerated_event_query_oracle_v3_full_grid.py",
+        ROOT / "scripts/launch_accelerated_event_query_oracle_v3_full_grid.py",
+        ROOT / "scripts/analyze_accelerated_event_query_oracle_v3_full_grid.py",
+        ROOT / "scripts/finalize_accelerated_event_query_oracle_v3_full_grid.py",
+        ROOT / "scripts/dry_run_accelerated_event_query_oracle_v3_full_grid.py",
+    ]
+    source_bindings = self_hash({
+        "status": "FROZEN_SOURCE_BINDINGS",
+        "source_commit": git_head,
+        "sources": [binding(path) for path in source_paths],
+    }, "source_bindings_payload_sha256")
+    write_json_once(PACKAGE / "FULL_GRID_SOURCE_BINDINGS.json", source_bindings)
+
+    analyzer_binding = self_hash({
+        "status": "FROZEN_BEFORE_FULL_GRID_EXECUTION",
+        "source": binding(ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_analyzer.py"),
+        "cli": binding(ROOT / "scripts/analyze_accelerated_event_query_oracle_v3_full_grid.py"),
+        "unit_manifest": binding(PACKAGE / "FULL_GRID_UNIT_MANIFEST.json"),
+        "frame_manifest": binding(PACKAGE / "FULL_GRID_FRAME_MANIFEST.json"),
+        "processed_input_manifest": binding(PACKAGE / "FULL_GRID_PROCESSED_INPUT_MANIFEST.json"),
+        "worker_schedule": binding(PACKAGE / "FULL_GRID_WORKER_SCHEDULE.json"),
+        "decision_mapping": binding(PACKAGE / "FULL_GRID_DECISION_MAPPING.json"),
+        "output_schemas": binding(PACKAGE / "FULL_GRID_OUTPUT_SCHEMAS.json"),
+        "checks": [
+            "call and ledger accounting", "input/frame/frozen-processed hashes", "worker/GPU/supervisor binding",
+            "launcher and per-worker GPU exclusivity snapshots with unchanged UUIDs",
+            "three model loads and zero reload/retry", "strict parse and distribution",
+            "unknown/parse_failure coverage", "runtime/cost", "K3 order and diagnostic independence",
+            "staged reference identities and hashes",
+        ],
+    }, "analyzer_binding_payload_sha256")
+    write_json_once(PACKAGE / "FULL_GRID_ANALYZER_BINDING.json", analyzer_binding)
+    finalizer_binding = self_hash({
+        "status": "FROZEN_BEFORE_FULL_GRID_EXECUTION",
+        "source": binding(ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_full_grid_finalizer.py"),
+        "cli": binding(ROOT / "scripts/finalize_accelerated_event_query_oracle_v3_full_grid.py"),
+        "analyzer_binding": binding(PACKAGE / "FULL_GRID_ANALYZER_BINDING.json"),
+        "decision_mapping": binding(PACKAGE / "FULL_GRID_DECISION_MAPPING.json"),
+        "label_access_policy": binding(PACKAGE / "FULL_GRID_LABEL_ACCESS_POLICY.json"),
+        "publication_rule": "versioned evaluator-only release is non-authoritative until the final atomic release pointer; mocks can never publish",
+    }, "finalizer_binding_payload_sha256")
+    write_json_once(PACKAGE / "FULL_GRID_FINALIZER_BINDING.json", finalizer_binding)
+
+    bindings = {
+        "unit_grid": binding(UNIT_GRID),
+        "video_manifest": binding(VIDEO_MANIFEST),
+        "prompt": binding(PROMPT),
+        "schema": binding(SCHEMA),
+        "parser": binding(ROOT / "src/garc_eval/accelerated_event_query/oracle_v3_parser.py"),
+        "execution_config": binding(CONFIG),
+        "k3_config": binding(K3),
+        "model_file_manifest": binding(MODEL_MANIFEST),
+        "model_identity_audit": binding(MODEL_AUDIT),
+        "v2_targeted_pilot_decision": binding(V2_DECISION),
+        "v2_pilot_evidence_manifest": binding(V2_EVIDENCE),
+        "unit_manifest": binding(PACKAGE / "FULL_GRID_UNIT_MANIFEST.json"),
+        "frame_manifest": binding(PACKAGE / "FULL_GRID_FRAME_MANIFEST.json"),
+        "processed_input_manifest": binding(PACKAGE / "FULL_GRID_PROCESSED_INPUT_MANIFEST.json"),
+        "worker_schedule": binding(PACKAGE / "FULL_GRID_WORKER_SCHEDULE.json"),
+        "cost_estimate": binding(PACKAGE / "FULL_GRID_COST_ESTIMATE.json"),
+        "call_reservation_derivation": binding(
+            PACKAGE / "FULL_GRID_CALL_RESERVATION_DERIVATION.json"
+        ),
+        "prior_failed_execution_evidence": binding(
+            PACKAGE / "FULL_GRID_PRIOR_FAILURE_EVIDENCE.json"
+        ),
+        "decision_mapping": binding(PACKAGE / "FULL_GRID_DECISION_MAPPING.json"),
+        "output_schemas": binding(PACKAGE / "FULL_GRID_OUTPUT_SCHEMAS.json"),
+        "tail_unit_audit": binding(PACKAGE / "FULL_GRID_TAIL_UNIT_AUDIT.md"),
+        "tail_processor_audit": binding(PACKAGE / "FULL_GRID_TAIL_PROCESSOR_AUDIT.json"),
+        "video_stream_audit": binding(PACKAGE / "FULL_GRID_VIDEO_STREAM_AUDIT.json"),
+        "failure_policy": binding(PACKAGE / "FULL_GRID_FAILURE_POLICY.md"),
+        "label_hiding_audit": binding(PACKAGE / "FULL_GRID_LABEL_HIDING_AUDIT.md"),
+        "label_access_policy": binding(PACKAGE / "FULL_GRID_LABEL_ACCESS_POLICY.json"),
+        "source_bindings": binding(PACKAGE / "FULL_GRID_SOURCE_BINDINGS.json"),
+        "analyzer_binding": binding(PACKAGE / "FULL_GRID_ANALYZER_BINDING.json"),
+        "finalizer_binding": binding(PACKAGE / "FULL_GRID_FINALIZER_BINDING.json"),
+    }
+    prereg = self_hash({
+        "status": "FROZEN_BEFORE_FULL_GRID_EXECUTION",
+        "experiment_id": EXPERIMENT_ID,
+        "query_id": QUERY_ID,
+        "source_commit": git_head,
+        "scope": "exact 1475-unit model-relative full grid only; no downstream work",
+        "ground_truth_definition": "authoritative label emitted for each exact frozen unit by the bound Qwen3-VL-32B checkpoint, frozen base query plus deterministic explicit tail-unit composition, exact processor inputs, 2-fps sampling, and deterministic decoding",
+        "v2_historical_evidence": {
+            "status": "UNCHANGED_AND_NOT_OVERRIDDEN_BY_V3",
+            "decision": "REVISE_ORACLE_PROTOCOL",
+            "targeted_pilot_decision_binding": bindings["v2_targeted_pilot_decision"],
+            "evidence_manifest_binding": bindings["v2_pilot_evidence_manifest"],
+            "interpretation": "V3 changes the prospective model-relative authority boundary; it does not relabel, repair, or supersede any V2 raw output, analyzer result, grounding finding, or final decision.",
+        },
+        "inherited_preflight_evidence": {
+            "decision": "V3_SCHEMA_DETERMINISM_PASS_FULL_GRID_APPROVAL_REQUIRED",
+            "execution_seal_sha256": "bf35f7f3c9f897f337a838f36991ab502cf538fd602b779ab8afd245b0b9ce61",
+            "exact_calls": 11, "strict_parse": "11/11",
+            "labels": {"not_relevant": 10, "relevant": 1, "unknown": 0, "parse_failure": 0},
+            "failures": 0, "retries": 0,
+            "same_process_and_cross_gpu_labels_match": True,
+            "processed_input_identity_matches": True,
+            "k3_forward_reverse_diagnostic_variant_match": True,
+            "actual_a100_gpu_hours": 0.1517243908,
+            "test_count": 94,
+            "semantic_disagreement_role": "construct-validity diagnostic only; never a model-relative label gate",
+            "nonclaims": ["representative three-video adequacy", "human driving accuracy", "full-grid pass", "controller validation"],
+        },
+        "prior_formal_execution_evidence": {
+            "status": "INCOMPLETE_FAIL_STOP_REVISION_EVIDENCE_ONLY",
+            "binding": bindings["prior_failed_execution_evidence"],
+            "completed_calls": PRIOR_FAILED_COMPLETED_CALLS,
+            "attempted_calls": PRIOR_FAILED_ATTEMPTED_CALLS,
+            "uncertain_terminal_units": PRIOR_FAILED_TERMINAL_UNIT_IDS,
+            "partial_labels_reused": False,
+            "formal_reference_published": False,
+            "interpretation": "the immediate V5 run completed 1,084 calls and stopped because its 2-second loaded-worker process-exit lease was exceeded by the observed 2.073427-second WUHAN terminal tail; nested V2 and V1 evidence had separately falsified the 35-second and 23.579961-second call reservations. None of the failures alters labels, inputs, schema, checkpoint, or grid",
+        },
+        "authoritative_schema": {
+            "authoritative_fields": ["label"],
+            "diagnostic_fields": ["confidence", "evidence"],
+            "labels": ["relevant", "not_relevant", "unknown"],
+            "parse_failure_is_distinct": True,
+            "event_time_fields_forbidden": True,
+        },
+        "workload": {
+            "exact_call_count": EXPECTED_UNIT_COUNT,
+            "exact_frame_occurrence_count": EXPECTED_FRAME_OCCURRENCES,
+            "calls_by_video": EXPECTED_UNITS_BY_VIDEO,
+            "sampling_fps": 2.0,
+            "normal_unit_seconds": 10.0,
+            "tail_frame_counts": {key: value["frame_count"] for key, value in EXPECTED_TAILS.items()},
+            "finite_stream_boundary_rule": "preserve temporal target and ideal CFR index; resolve an out-of-stream right-boundary request to the unique last available source frame; reject any repeated-frame result",
+            "model_load_count": 3, "reload_count": 0, "retry_count": 0,
+        },
+        "model": {
+            "path": "models/Qwen3-VL-32B-Instruct-FP8",
+            "content_hash": "3febe26ff0cee468bf48dc733e4bca559c8f13f8fe09f931a1e0808ba7c58873",
+            "gpus_per_worker": 2,
+            "runtime_dtype": "torch.bfloat16",
+        },
+        "decoding": {
+            "do_sample": False, "max_new_tokens": 192, "seed": 20260729,
+            "torch_deterministic_algorithms": True,
+            "cublas_workspace_config": ":4096:8",
+        },
+        "coverage_policy": {
+            "formula": "(N_relevant + N_not_relevant) / 1475",
+            "minimum_global_determined_fraction": 0.99,
+            "minimum_global_determined_count": 1461,
+            "minimum_per_video_determined_fraction": 0.99,
+            "minimum_determined_count_by_video": {"DALI": 562, "HANGZHOU": 556, "WUHAN": 344},
+            "maximum_parse_failure_count_for_release": 0,
+            "unknown_reporting": "count and fraction globally and per video; preserve IDs",
+            "parse_failure_reporting": "count and fraction globally and per video; preserve IDs and mark regions unevaluable",
+            "primary_relation": "frozen K3 four-state relation with at most one short unknown bridge and parse_failure hard barrier",
+            "lower_bound_diagnostic": "unknown is a nonnegative barrier by setting maximum_unknown_gap_units=0; labels remain recorded as unknown",
+            "upper_bound_diagnostic": "sensitivity-only materialization treating unknown as possible positive; never authoritative",
+        },
+        "k3": {
+            "configuration_hash": load_json(K3)["k3_config_sha256"],
+            "reads_only": ["unit_id", "video_id", "start_time", "end_time", "authoritative_label"],
+            "formal_output": "k3_model_relative_event_relation.parquet",
+            "controller_output_cannot_change_parameters": True,
+        },
+        "failure_and_publication": {
+            "global_fail_stop": True,
+            "sole_execution_launcher": "sealed staged three-worker supervisor with per-pair authentication, explicit pending states, abrupt-death and operation-lease enforcement",
+            "formal_release_requires": ["1475/1475 authenticated terminal records", "global integrity pass", "frozen finalizer pass"],
+            "partial_raw_preserved": True,
+            "partial_formal_reference_forbidden": True,
+            "downstream_forbidden_until_release_commit": True,
+            "prior_failed_execution_labels_reused": False,
+            "fresh_execution_starts_from_unit_ordinal": 0,
+        },
+        "cost": {
+            "estimated_a100_gpu_hours": estimated,
+            "authorization_envelope_a100_gpu_hours": ENVELOPE_A100_GPU_HOURS,
+            "estimated_parallel_wall_hours": parallel_wall_estimate,
+        },
+        "bindings": bindings,
+    }, "preregistration_payload_sha256")
+    write_json_once(PACKAGE / "FULL_GRID_PREREGISTRATION.json", prereg)
+    print(json.dumps({
+        "status": "BUILT_NO_MODEL_INFERENCE",
+        "units": len(unit_rows), "frames": len(flat_frames),
+        "tails": {key: len(value) for key, value in tail_frames.items()},
+        "processor_audit": processor_audit["status"],
+        "source_commit": git_head,
+    }, indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

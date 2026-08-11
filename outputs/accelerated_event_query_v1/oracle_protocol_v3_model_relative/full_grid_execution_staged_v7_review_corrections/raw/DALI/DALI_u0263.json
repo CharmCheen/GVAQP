@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0263:1786353148965809718",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "f6e82d02b5d49692a9345b287b355ae338f24cf00034aab1e18a3f5f011070d1",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "68e56f83555da4180a55e77d94b53866bd5d314992012c951e1e9c69c71e545c",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "6c0901ea99bd154cdd80a0078d27ca50d5338a4f9af15f7935a69d46c83f02d9",
+  "generated_token_ids_sha256": "f2eda6f33c9e6da1b2a3267207d985c0d86374aac2a0679817fe16c7ac57f3ee",
+  "input_identity_sha256": "ac3f4727577d036573d349ec8da2ecac4cc07fbe831a1ed9aa203c5f5fad92b0",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "47a56735e9c2a308a2758d82b2f52fb41cd05d516aa21e0e4ff3f2c79f654e15",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily through a tunnel with painted sky and landscape murals on the walls and ceiling. The lead vehicle is maintaining a consistent distance ahead, and there are no sudden changes in speed, braking, or visible obstacles requiring a marked response. A pedestrian is visible on the right side, but they are outside the roadway and not threatening the ego path. The road conditions and traffic flow appear normal, with no traffic controls or hazards requiring a slowdown or avoidance maneuver within this unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "c8d7616eb50033c366c2f3179914b87a59a67c3cbbee0dda29064c2cd19681e9",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily through a tunnel with painted sky and landscape murals on the walls and ceiling. The lead vehicle is maintaining a consistent distance ahead, and there are no sudden changes in speed, braking, or visible obstacles requiring a marked response. A pedestrian is visible on the right side, but they are outside the roadway and not threatening the ego path. The road conditions and traffic flow appear normal, with no traffic controls or hazards requiring a slowdown or avoidance maneuver within this unit.\"\n}",
+  "raw_response_sha256": "a0d6520aeb9eb6ee710a3fe22aea832894469f170ae711c8848d5e4956974dbb",
+  "record_payload_sha256": "58d3bac514403b2e855b91b8e6595de53c8830c47ab192d707c0d39c04699bb8",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 19.37079144299787,
+    "model_load_seconds": 20.342561935998674,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 21.05214313000033,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0263",
+  "unit_ordinal": 263,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

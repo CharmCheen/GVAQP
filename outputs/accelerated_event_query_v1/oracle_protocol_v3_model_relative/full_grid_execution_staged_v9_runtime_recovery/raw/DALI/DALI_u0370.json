@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0370:1786377965324571765",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "8d440212d1d1490b0a7aa32a88ed28c2e0f14ded8a6574c27668ca6614688bbd",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "db33a3aa45e207c5d8c910f59b8d58bcfe9022b96044cbbcb2fb201f25892d3e",
+  "generated_token_ids_sha256": "2d25219b8af33878647a6baf658572dd87c238de245c7c67c91afdb74979317c",
+  "input_identity_sha256": "53d01cc6e527781772c92e8ea11a3bf432421d2b90c8bb45729a79f6e82ca823",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "308768b6f720d8ad062f16aa0ed8d77be15abbd65f4d4094210d99da044df9ec",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a white van in a narrow street lined with market stalls and pedestrians. Throughout the 10-second unit, multiple pedestrians and motorcyclists are seen crossing or entering the path directly ahead and to the sides, including a person on a scooter moving into the lane from the left at 0:05 and another scooter approaching from the right at 0:07. The road is congested with people and vehicles, and the lead van is moving slowly, indicating a need for the ego driver to slow down or brake to avoid collisions. The presence of market stalls and people on both sides further restricts the available space, requiring cautious maneuvering.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "f013e8e918376392a78013093898dc98f28bd14d50d03a3fa6b42c5d6adc29a8",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a white van in a narrow street lined with market stalls and pedestrians. Throughout the 10-second unit, multiple pedestrians and motorcyclists are seen crossing or entering the path directly ahead and to the sides, including a person on a scooter moving into the lane from the left at 0:05 and another scooter approaching from the right at 0:07. The road is congested with people and vehicles, and the lead van is moving slowly, indicating a need for the ego driver to slow down or brake to avoid collisions. The presence of market stalls and people on both sides further restricts the available space, requiring cautious maneuvering.\"\n}",
+  "raw_response_sha256": "a54d9c9357d3ae96f67f2649c9771ad3b6f7c027bbb5ad8404f10ec34c8c499a",
+  "record_payload_sha256": "934114ba0f7cc26d4ba901207dd6f3e16af70ae2dcf57a118d69dfe7f5698b49",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 23.21837306699308,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 25.072623535001185,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0370",
+  "unit_ordinal": 370,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

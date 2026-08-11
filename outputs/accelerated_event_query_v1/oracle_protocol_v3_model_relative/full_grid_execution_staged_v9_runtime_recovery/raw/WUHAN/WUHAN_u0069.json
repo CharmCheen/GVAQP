@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0069:1786372046993181435",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "27aedd97920fa528c21369d6997d3d14467d98ef384bb223aa5004d0a689aaf8",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "7f31c1b15856da45d4446b34041dd34180b6ed01bc51b3ab52315939cea905ad",
+  "generated_token_ids_sha256": "4f7812891d118e76bd67875eb2c72ca0d8390717880ed34bda6e0302518c1c1c",
+  "input_identity_sha256": "1bca4d842ecd64f70660753d746f4e4b59d077fcc0d16f73f4fc6ba267f5d652",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "a88f2ccbe2f871010d691a7366606320f4514ec44040bf5833144d00c37ba26e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is stopped at a red traffic light, and pedestrians are actively crossing the intersection in front of the vehicle. The traffic light remains red throughout the unit, requiring the driver to maintain a stop. Additionally, a black SUV (Renault KADJAR) directly ahead begins to turn right after the light changes, indicating a need for the ego driver to remain attentive and possibly adjust position or speed to avoid conflict. The presence of multiple pedestrians and cyclists crossing the intersection also necessitates caution and potential braking or slowing to ensure safety.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "fa5798b17d03c75b393e7c5910ed49a8ce35c28026a950845855464ee2f7f1e9",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is stopped at a red traffic light, and pedestrians are actively crossing the intersection in front of the vehicle. The traffic light remains red throughout the unit, requiring the driver to maintain a stop. Additionally, a black SUV (Renault KADJAR) directly ahead begins to turn right after the light changes, indicating a need for the ego driver to remain attentive and possibly adjust position or speed to avoid conflict. The presence of multiple pedestrians and cyclists crossing the intersection also necessitates caution and potential braking or slowing to ensure safety.\"\n}",
+  "raw_response_sha256": "a7c5777b8cfc719bc1dfe3eac5bcf43e472d016a6d56ad263242a73054ded341",
+  "record_payload_sha256": "e0b9c3b278786d2a0b1a0e7b3ba998fd19166bd7b3231e9b16f5a5e3bdf4a152",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 20.157303690000845,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 21.758467268002278,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0069",
+  "unit_ordinal": 1197,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

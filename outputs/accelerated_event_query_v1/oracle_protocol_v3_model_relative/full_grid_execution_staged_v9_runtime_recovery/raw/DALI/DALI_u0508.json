@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0508:1786380785249282277",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "fcafc90c353dc00577767a3105e9a886bd6bc44c1fa3f26767711d08672eb54e",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "c7ff2f8026d3da1c6271e91b6e4f4f33b43cedd8bb03f78a7f4cfb0a234adea5",
+  "generated_token_ids_sha256": "948597130114847b25fda2a0a75415344c68dacd9437e9aeb180b029441cb984",
+  "input_identity_sha256": "e69e74b941b6f59a186dab05bf16cf8e8acbcc77af6be8a910f9a5a06d95bd52",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "704f8c8e52bf9dee8e130b3a637d2b0a369b0751ae93b9d8b6aadeab736bd970",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "A pedestrian carrying a large bag is seen crossing the road directly in the ego vehicle's path around 0:09-0:10, requiring an attentive driver to slow down or brake to avoid collision. Additionally, a scooter is also present in the lane ahead, further necessitating a cautious response. The pedestrian is not on a crosswalk and is in the middle of the road, making this a clear and immediate hazard requiring a marked driving response.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "55be08ab3e04ef7fc47a5648d265db11f4361323ca82a494dc0fb8affd21003d",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"A pedestrian carrying a large bag is seen crossing the road directly in the ego vehicle's path around 0:09-0:10, requiring an attentive driver to slow down or brake to avoid collision. Additionally, a scooter is also present in the lane ahead, further necessitating a cautious response. The pedestrian is not on a crosswalk and is in the middle of the road, making this a clear and immediate hazard requiring a marked driving response.\"\n}",
+  "raw_response_sha256": "81e9a4af08ba28fe94897ebe43c9fb04766435849bd15ec49f65683f5caa5534",
+  "record_payload_sha256": "38a79de88669f795a1ea1dfba9b9146af6c450594a2e8563bb23cc258d3cafec",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 17.703465951999533,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 19.584871269005816,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0508",
+  "unit_ordinal": 508,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0512:1786380862015202559",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "8b2fe27d16d04c06098e0f3847621e265afecc1a6f9699f43e282beefea200a9",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "e782f5f9772596b92895bf1f337a29b9fbf86dda3143412ab44d745e447aaede",
+  "generated_token_ids_sha256": "fe9b40da7b2fe2de0d88ef4571e852b213e946d9844dfdd0f80145faa7e681f5",
+  "input_identity_sha256": "78df26eb6d5e35ea7b0762d872973ee1fb85476b975f63f18c180ad595443dbc",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "c3f4373140880c81c2d852d24d247ff922e90379f09e864b961e44b91221c306",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily through an urban night scene with clear road markings, traffic signs, and no sudden obstacles or hazards. The road ahead is visible and unobstructed, with no vehicles or pedestrians entering the path or requiring a marked response. The speed limit signs (15 km/h and 2.8m height restriction) are visible but do not indicate an immediate need for braking or avoidance within this unit. The vehicle continues forward without any visible need for a noticeable slowdown or maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "2739a90d1db5ca2b529f0e328ecb5bbcb4d04699084e05973df5799427ca8727",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily through an urban night scene with clear road markings, traffic signs, and no sudden obstacles or hazards. The road ahead is visible and unobstructed, with no vehicles or pedestrians entering the path or requiring a marked response. The speed limit signs (15 km/h and 2.8m height restriction) are visible but do not indicate an immediate need for braking or avoidance within this unit. The vehicle continues forward without any visible need for a noticeable slowdown or maneuver.\"\n}",
+  "raw_response_sha256": "6c6c4430bb2d255e5dab40e6da64a9415afc701bc54ab6ef87299d75921c527a",
+  "record_payload_sha256": "0684fb0a73b880c6126886ee6b70acd25ea0d802a1f4c8d5b6f1847aebdb24e6",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 19.405471320002107,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 21.317069038996124,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0512",
+  "unit_ordinal": 512,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

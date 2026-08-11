@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0439:1786378318984068194",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "ec0d41d9a9557007430663440b9693b5b1d140ef6c84a1f5b552f36227a10639",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "874f5eba912cb3fef0723501157847d3fcaf74802a6777fba7bc3b269ef28c90",
+  "generated_token_ids_sha256": "cc06939c7bc72ee3a9ec50b1ddbd87dd6cb4864885c1c48232762065cb866b4e",
+  "input_identity_sha256": "ab9233caa2ecf04bcc5705e16e67e52b8faba945ae559637102b2a843b9f0717",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "f51bfd44ace817634fcfd2edd4081d77011bb9f7109151a87cb86871053e57b8",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light changes from red to green at frame 0:06, and the ego vehicle proceeds through the intersection. However, a white van is seen making a left turn across the ego vehicle's path at frame 0:08, requiring the ego driver to slow down or brake to avoid a potential collision. This maneuver is necessary due to the van's sudden entry into the intersection and its trajectory intersecting with the ego vehicle's path.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "9f1146fea75f40688d25703161dd1b0237a077f4f23e286bbe62b01040b15a70",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light changes from red to green at frame 0:06, and the ego vehicle proceeds through the intersection. However, a white van is seen making a left turn across the ego vehicle's path at frame 0:08, requiring the ego driver to slow down or brake to avoid a potential collision. This maneuver is necessary due to the van's sudden entry into the intersection and its trajectory intersecting with the ego vehicle's path.\"\n}",
+  "raw_response_sha256": "02b1e3945557799b460345ce2d674ee8d3f142d3fca99d6b710989371451551d",
+  "record_payload_sha256": "fd7b6b652bc249f552b37b3aef561ddf0aa22c50021c6f7d6f83eb401edb78f6",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.86746186700475,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.71888766498887,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0439",
+  "unit_ordinal": 1006,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

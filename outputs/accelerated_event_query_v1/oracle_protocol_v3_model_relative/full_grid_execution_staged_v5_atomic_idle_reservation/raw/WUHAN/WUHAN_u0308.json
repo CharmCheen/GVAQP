@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0308:1785448881361866913",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "2b86e87e533f4054dea6e96dcaa10f1a496eef1e260c48194b6133d07bc3eb87",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "af15b04e69988f024780dd88763549046e7503dbe4cea9231a5e4a8b90ac12af",
+  "generated_token_ids_sha256": "1bc6dd2c362759d3d7ea0bf83268fa1c0d5fd13661997485fde9757c3211b9bc",
+  "input_identity_sha256": "4954ff74516d4463e81a4f8ed31d2e8fff3d5d920e57996a28893538184b2544",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "3f28943d7f50376c7b541712b4a6b756c42d2cf7748afdc9a02051bb9170e9f3",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with visible traffic signals that turn red in the later frames (e.g., frame 0:09-0:10), indicating a required stop. Additionally, the lead vehicle in the same lane slows down and comes to a stop at the intersection, necessitating a braking action by the ego driver to maintain safe following distance. The presence of traffic signals and the behavior of the lead vehicle clearly require a noticeable slowdown or braking action within this unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "f8f58513e6570dc1c3b1e3a1c4c508e0fc94f278be91467f0483adee778c34c0",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with visible traffic signals that turn red in the later frames (e.g., frame 0:09-0:10), indicating a required stop. Additionally, the lead vehicle in the same lane slows down and comes to a stop at the intersection, necessitating a braking action by the ego driver to maintain safe following distance. The presence of traffic signals and the behavior of the lead vehicle clearly require a noticeable slowdown or braking action within this unit.\"\n}",
+  "raw_response_sha256": "691530bf4c0827250f419b8a31f1612509913b6994227f89a30a9aac05e7fb82",
+  "record_payload_sha256": "78dda535facd7d6bc68e84137ce3e6c456f681c7020b5a72be9b28a0851f2386",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.77868664264679,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.75133866071701,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0308",
+  "unit_ordinal": 1436,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

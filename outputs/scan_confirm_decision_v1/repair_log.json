@@ -1,0 +1,32 @@
+{
+  "max_repair_cycles": 1,
+  "repairs": [
+    {
+      "cycle": 1,
+      "issue": "Quadratic causal-score recomputation made the first matrix run impractically slow; the initial summary also counted utility committed after a realized deadline overrun.",
+      "root_cause": "Visible-prefix scores were recomputed independently for identical reset prefixes, and summary utility used terminal state rather than the last on-time durable ledger state.",
+      "affected_artifacts": [
+        "src/garc_eval/scan_confirm_controller/runner.py",
+        "scripts/run_scan_confirm_decision_benchmark.py",
+        "scripts/analyze_scan_confirm_decision_v1.py"
+      ],
+      "before_hash": {
+        "runner.py": "45548359e284cb192d4aaa63c32a3d773f1c7d98ca9e1025627b0ad08491dc74",
+        "run_scan_confirm_decision_benchmark.py": "52773b6156af4bef909c75cc88dd76296e1023af5d389fd037118c9662a85dc1"
+      },
+      "after_hash": {
+        "runner.py": "ef7174ac7a00d58a33864bab30e4ed6c7acc58faae78fc0e9a2da58120fe50d5",
+        "run_scan_confirm_decision_benchmark.py": "e9a9ed7ec215e749f4e0755546bf20d05a2972b042e8a623892c8f8f85fcaee1",
+        "analyze_scan_confirm_decision_v1.py": "2d9b2e1a00b8ae3325fd23baf684d0e5b6c4fe07577ad987087bcd3a1f167f6a"
+      },
+      "experiments_rerun": [
+        "all fixed baselines",
+        "Myopic-VPS",
+        "all A0-A10 ablations",
+        "one-step Oracle",
+        "multi-step beam Oracle"
+      ],
+      "claim_impact": "Removed optimistic post-deadline utility and improved runtime only; frozen state, actions, outcomes, Frontier, policies, and costs were unchanged."
+    }
+  ]
+}

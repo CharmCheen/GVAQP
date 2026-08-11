@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0181:1786374223074050521",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "239838efadd69add3cd9317a92991af0e50cbc8f6f6147d58f251d622cc3efcf",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "6c12ed8f312c307631afe212d727cddb1c495eb282040db375eadf7d94237499",
+  "generated_token_ids_sha256": "5ded5ed4927cb1088b376284d3b763f51073f40b36364506d5771cf89b43b20a",
+  "input_identity_sha256": "70b4256433737b6afdf76d111f9e02472ffa4b90f1580ca32530d1434166a2fa",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "e448220a85b560e507a3ff5b5a41076e45fd37211cc8e7c92d954bb84c24bfde",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a road barrier with a height restriction sign (2.0m) and multiple traffic signs indicating speed limits (40 km/h) and prohibitions (e.g., no trucks, no motorcycles). The barrier structure spans the road and includes a vertical post with reflective markings, requiring the driver to slow down significantly or stop to assess clearance and compliance. Additionally, the road narrows and curves slightly under the barrier, necessitating a marked speed reduction and cautious maneuvering. These visible conditions require an attentive driver to respond with a noticeable slowdown or braking action.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "7f1acaeef6c04e93bddb4e66a67d91e16e2fcfbe1c4f1b3d06a63e4e19284965",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a road barrier with a height restriction sign (2.0m) and multiple traffic signs indicating speed limits (40 km/h) and prohibitions (e.g., no trucks, no motorcycles). The barrier structure spans the road and includes a vertical post with reflective markings, requiring the driver to slow down significantly or stop to assess clearance and compliance. Additionally, the road narrows and curves slightly under the barrier, necessitating a marked speed reduction and cautious maneuvering. These visible conditions require an attentive driver to respond with a noticeable slowdown or braking action.\"\n}",
+  "raw_response_sha256": "7e23b45118d257a2857e77d140359b21d6b8b28c8ab126f2ac365905e221ed72",
+  "record_payload_sha256": "1c34c774e717477ba29e487634675cfb27ea8c2a0d6268d2e4a6dad7d72ea1ae",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 20.73146898399864,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 22.39052880401141,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0181",
+  "unit_ordinal": 1309,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

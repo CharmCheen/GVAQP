@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0024:1786348467660891044",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "848057c00dee0e031cf8a96564e4690561011f0fa55cf939e339f3df6482637b",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "726b0a5a1db5390c0878dfe5607384bcb1c2d676079763defdd53e3ff2df178c",
+  "generated_token_ids_sha256": "1b0be9a872663023d2d521fe4caebe8c8fec1af154d3a8d773c5105af17ed1ac",
+  "input_identity_sha256": "59c25ca8813dc72560c192577271e4e0141209ebdb97e9b9c87760b1096f09d7",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "a089114b6dd487351a164325f500293e9f27c6d49a8c48328d137d9fba8622be",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane urban road with clear visibility. Traffic flow is smooth, and there are no sudden changes in speed or path from the lead vehicle or surrounding traffic. Road signs and signals are visible and indicate normal driving conditions (e.g., speed limit 50 km/h, no immediate stops or turns required). The pedestrian overpass is crossed without any obstruction or need for braking. No visible obstacles, sudden lane changes, or traffic control requiring a marked response are present within the unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "561ae3b223240584ff78efbb849e97dc6b6088d516e06289cf0a26db54149dad",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane urban road with clear visibility. Traffic flow is smooth, and there are no sudden changes in speed or path from the lead vehicle or surrounding traffic. Road signs and signals are visible and indicate normal driving conditions (e.g., speed limit 50 km/h, no immediate stops or turns required). The pedestrian overpass is crossed without any obstruction or need for braking. No visible obstacles, sudden lane changes, or traffic control requiring a marked response are present within the unit.\"\n}",
+  "raw_response_sha256": "03730153188d6c7dfc48896f4df084301aae25815bd9f1f3f37a58ba8321f598",
+  "record_payload_sha256": "fbc4f99a7694514780a011210cd30359574f47652e06752c4b49666b0c3f1a5f",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.5646042820008,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 21.205223026001477,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0024",
+  "unit_ordinal": 1152,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

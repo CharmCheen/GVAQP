@@ -1,0 +1,51 @@
+{
+  "contract_version": "ACCELERATED_EVENT_QUERY_V1",
+  "query": {
+    "query_id": "Q_DRIVER_RESPONSE_V1",
+    "semantics_zh": "查找需要驾驶员明显减速、制动或避让的事件。",
+    "prompt_path": "outputs/accelerated_event_query_v1/configs/query_prompt_v1.txt"
+  },
+  "unit_grid": {
+    "window_seconds": 10.0,
+    "stride_seconds": 10.0,
+    "origin_seconds": 0.0,
+    "last_unit_policy": "truncate_at_video_duration",
+    "lineage": "reuse existing PSVR center10 non-overlapping unit semantics"
+  },
+  "oracle": {
+    "role": "fallible operational oracle, not human ground truth",
+    "model_path": "models/Qwen3-VL-32B-Instruct-FP8",
+    "model_content_hash": "3febe26ff0cee468bf48dc733e4bca559c8f13f8fe09f931a1e0808ba7c58873",
+    "host_execution": "FP8 checkpoint dequantized to BF16 on two A100-80GB GPUs",
+    "frame_sampling_fps": 2.0,
+    "include_both_endpoints": true,
+    "do_sample": false,
+    "max_new_tokens": 256,
+    "labels": ["relevant", "not_relevant", "unknown"],
+    "parse_failure_policy": "retain as unknown/parse_failure"
+  },
+  "k3": {
+    "probable_threshold_main": 0.8,
+    "precision_sensitivity_thresholds": [0.7, 0.9],
+    "max_neighbor_gap_seconds": 10.0,
+    "max_core_duration_seconds": 40.0,
+    "max_event_duration_seconds": 60.0,
+    "verified_negative_barrier": true,
+    "event_score_aggregation": "maximum calibrated candidate probability (conservative against correlated-window inflation)"
+  },
+  "matching": {
+    "eligibility": "strict_positive_temporal_overlap",
+    "minimum_temporal_iou": 0.0,
+    "assignment": "one_to_one_max_cardinality_then_tiou",
+    "duplicate_handling": "unmatched overlapping predictions are false-positive duplicates",
+    "boundary_tolerance_seconds": 0.0,
+    "lineage": "existing frozen benchmark_lib overlap-any rule"
+  },
+  "objective": {
+    "primary": "deadline 32B-operational-oracle-relative event recall",
+    "precision_floor_main": 0.8,
+    "precision_floor_sensitivity": [0.7, 0.9],
+    "secondary": "AnytimeEventRecallAUC",
+    "hard_constraints": ["zero deadline overrun", "zero post-deadline commit"]
+  }
+}

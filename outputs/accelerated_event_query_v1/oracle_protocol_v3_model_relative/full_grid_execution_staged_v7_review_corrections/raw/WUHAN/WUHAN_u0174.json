@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0174:1786351329475385157",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "bc5528126c181438800796f9713a9a157534390eb9448213094cc8f74a8fff90",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "e7a24841d362797a3e4ff279d180a3e308fb0cf8c02d538de8f5c3f711460a89",
+  "generated_token_ids_sha256": "6164430b694a159ec230d586804a97ec7488cc4a5565db7f2cf50fccc8cebc9f",
+  "input_identity_sha256": "f8b8ac2a8a36beec04c675c824de18d6b04d0b57a149e76211df06072e07c487",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "a756fb3be9656ac7157384ffba6a19042598801c9157cb8944f4997ff0282f84",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic lights for the ego direction change from red to green between 0:06 and 0:07, indicating a transition from stopping to proceeding. Additionally, pedestrians and cyclists are actively crossing the intersection during this time, requiring the ego driver to be attentive and potentially slow down or stop to yield, especially as the crosswalk is active and the traffic signal for perpendicular traffic turns green. The presence of multiple cyclists and pedestrians in the crosswalk at 0:07-0:10 necessitates a cautious response to avoid collision, making a noticeable slowdown or braking action relevant.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "0e1487e5947727374315189abb55f1570d665439f6ce5b1f219d13c803fc3130",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic lights for the ego direction change from red to green between 0:06 and 0:07, indicating a transition from stopping to proceeding. Additionally, pedestrians and cyclists are actively crossing the intersection during this time, requiring the ego driver to be attentive and potentially slow down or stop to yield, especially as the crosswalk is active and the traffic signal for perpendicular traffic turns green. The presence of multiple cyclists and pedestrians in the crosswalk at 0:07-0:10 necessitates a cautious response to avoid collision, making a noticeable slowdown or braking action relevant.\"\n}",
+  "raw_response_sha256": "61e5f1313acbe005167645bffaad9df79ff77bcb82a9f7db02d0c42ede876d18",
+  "record_payload_sha256": "5dcbe872b284e28a859e8fd140f86b3fb2db7fb363756d48d90dbcce800cf264",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 21.024083108000923,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 22.632711033002124,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0174",
+  "unit_ordinal": 1302,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

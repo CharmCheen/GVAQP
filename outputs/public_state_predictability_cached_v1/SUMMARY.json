@@ -1,0 +1,128 @@
+{
+  "best_eligible_decision_regret": 0.0008852163461538481,
+  "best_eligible_method": "always_verify",
+  "best_fixed_ratio_decision_regret": 0.003021822916666669,
+  "classification": "cached_abstract_cost_leave_one_source_out_not_physical",
+  "input_sha256": "a08527f5da44c82cfdda5e87512afa991719de6842f0f64dffd254e41e42ddb5",
+  "limitations": [
+    "only two independent source videos",
+    "Q targets use older cached query/reference and abstract action costs",
+    "branch states were sampled rather than population-weighted",
+    "predictive utility does not establish closed-loop utility",
+    "HistGradientBoosting is the available tree control; LightGBM is not required"
+  ],
+  "macro_metrics": [
+    {
+      "brier": 0.4732142857142857,
+      "decision_regret": 0.022251282051282052,
+      "ece_5bin": 0.4732142857142857,
+      "method": "always_scan",
+      "top_margin_accuracy": 0.41666666666666663,
+      "weighted_sign_accuracy": 0.18608481361524887
+    },
+    {
+      "brier": 0.5267857142857143,
+      "decision_regret": 0.0008852163461538481,
+      "ece_5bin": 0.5267857142857143,
+      "method": "always_verify",
+      "top_margin_accuracy": 0.5833333333333333,
+      "weighted_sign_accuracy": 0.8139151863847511
+    },
+    {
+      "brier": 0.5267857142857143,
+      "decision_regret": 0.0008852163461538481,
+      "ece_5bin": 0.5267857142857143,
+      "method": "best_fixed_action",
+      "top_margin_accuracy": 0.5833333333333333,
+      "weighted_sign_accuracy": 0.8139151863847511
+    },
+    {
+      "brier": 0.43142857142857144,
+      "decision_regret": 0.003021822916666669,
+      "ece_5bin": 0.42678571428571427,
+      "method": "best_fixed_ratio",
+      "top_margin_accuracy": 0.5666666666666667,
+      "weighted_sign_accuracy": 0.7511321491078009
+    },
+    {
+      "brier": 0.31378854059514727,
+      "decision_regret": 0.010325412420272368,
+      "ece_5bin": 0.27833907257459667,
+      "method": "contextual_bandit",
+      "top_margin_accuracy": 0.5256244452187008,
+      "weighted_sign_accuracy": 0.5433795169644985
+    },
+    {
+      "brier": 0.2502921720862512,
+      "decision_regret": 0.011008887218556647,
+      "ece_5bin": 0.11022069580351107,
+      "method": "hist_gradient_boosting",
+      "top_margin_accuracy": 0.5075148306735794,
+      "weighted_sign_accuracy": 0.5218071363110721
+    },
+    {
+      "brier": 0.2632088743501658,
+      "decision_regret": 0.011917631059218392,
+      "ece_5bin": 0.1707277324093946,
+      "method": "id_only",
+      "top_margin_accuracy": 0.5033065026702007,
+      "weighted_sign_accuracy": 0.4961668834805554
+    },
+    {
+      "brier": 0.36461516544227934,
+      "decision_regret": 0.009693008796197342,
+      "ece_5bin": 0.3700717607288576,
+      "method": "linear",
+      "top_margin_accuracy": 0.5311172733367586,
+      "weighted_sign_accuracy": 0.5579624083548997
+    },
+    {
+      "brier": 0.27016293261694746,
+      "decision_regret": 0.015226938258929757,
+      "ece_5bin": 0.22817876660300235,
+      "method": "logistic",
+      "top_margin_accuracy": 0.514657516871593,
+      "weighted_sign_accuracy": 0.40662102628762653
+    },
+    {
+      "brier": 0.0,
+      "decision_regret": 1.927470528863119e-19,
+      "ece_5bin": 0.0,
+      "method": "oracle_upper_bound",
+      "top_margin_accuracy": 1.0,
+      "weighted_sign_accuracy": 1.0
+    },
+    {
+      "brier": 0.4007077497509226,
+      "decision_regret": 0.011600441353547276,
+      "ece_5bin": 0.4257569560946194,
+      "method": "shuffled_state",
+      "top_margin_accuracy": 0.492621391009464,
+      "weighted_sign_accuracy": 0.5244033368622534
+    },
+    {
+      "brier": 0.48772536353894325,
+      "decision_regret": 0.015185545636251541,
+      "ece_5bin": 0.47584191901327244,
+      "method": "small_mlp",
+      "top_margin_accuracy": 0.4780064187189442,
+      "weighted_sign_accuracy": 0.4179919637209322
+    }
+  ],
+  "public_features": [
+    "elapsed_fraction",
+    "remaining_fraction",
+    "scanned_fraction",
+    "frontier_size",
+    "frontier_top_score",
+    "frontier_mean_score",
+    "committed_event_count",
+    "scan_count",
+    "verify_count",
+    "scan_verify_balance"
+  ],
+  "relative_regret_reduction_vs_best_fixed_ratio": 0.707058828208796,
+  "schema_version": "CACHED_PUBLIC_STATE_PREDICTABILITY_V1",
+  "source_video_count": 2,
+  "state_count": 108
+}

@@ -1,0 +1,23 @@
+{
+  "status": "FROZEN_BEFORE_NEW_QUERY_ORACLE_EXECUTION",
+  "review_type": "independent adversarial annotation of exact V2 sheets; not human ground truth",
+  "reviewer": "independent research subagent",
+  "information_boundary": "Reviewer was instructed not to read primary V1/V2 label files while annotating V2. Prior exposure to V1 artifacts means the review is not memory-blind.",
+  "new_query_32b_outputs_observed": 0,
+  "contact_sheet_manifest_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/CONTACT_SHEET_MANIFEST_V2.json",
+  "contact_sheet_manifest_sha256": "c8ebf5eddeb00de2b1b8cb74eae16db16bad1df7e79e2fd640816231384c1b67",
+  "reviews": [
+    {"candidate_id": "DALI_u0437", "label": "not_relevant", "confidence": "high", "required_response": [], "cause": null, "evidence": "Steady following through green; adjacent van and scooters do not visibly intrude.", "warning": "Still frames do not measure speed."},
+    {"candidate_id": "DALI_u0501", "label": "not_relevant", "confidence": "medium", "required_response": [], "cause": null, "evidence": "Ordinary following of a red car; the rider remains near the left edge as ego passes.", "warning": "Lateral clearance and relative motion are ambiguous."},
+    {"candidate_id": "DALI_u0548", "label": "relevant", "confidence": "medium", "required_response": ["slowdown", "brake"], "cause": "Pedestrians move from the right into the roadway near the ego path at 9.5–10 seconds.", "evidence": "Roadway entry is visible at the unit endpoint.", "warning": "The trigger is late and continuation beyond the clip is unknown; earlier scooters are not clearly causal."},
+    {"candidate_id": "DALI_u0555", "label": "relevant", "confidence": "high", "required_response": ["slowdown", "brake"], "cause": "A pedestrian in yellow occupies/crosses the roadway while a scooter is directly ahead.", "evidence": "The pedestrian is in the roadway around 2–4.5 seconds.", "warning": "Pedestrian and close-scooter contributions cannot be separated."},
+    {"candidate_id": "HANGZHOU_u0140", "label": "not_relevant", "confidence": "high", "required_response": [], "cause": null, "evidence": "Normal divided-road following behind a yellow car; oncoming cars remain separated.", "warning": null},
+    {"candidate_id": "HANGZHOU_u0234", "label": "not_relevant", "confidence": "high", "required_response": [], "cause": null, "evidence": "Stable multilane approach through green with a lead car and no conflict.", "warning": null},
+    {"candidate_id": "HANGZHOU_u0280", "label": "relevant", "confidence": "high", "required_response": ["slowdown", "brake"], "cause": "Cross-traffic vehicles traverse immediately ahead while ego enters the broad intersection.", "evidence": "Lateral path occupation is repeatedly visible.", "warning": "Right-of-way and signal phase are unclear."},
+    {"candidate_id": "HANGZHOU_u0420", "label": "not_relevant", "confidence": "medium", "required_response": [], "cause": null, "evidence": "Stable following; the black sedan remains in the right lane/gets passed without intrusion.", "warning": "Relative lane motion is somewhat ambiguous."},
+    {"candidate_id": "WUHAN_u0134", "label": "unknown", "confidence": "medium", "required_response": [], "cause": "A queue, bus, and possible signal constraint appear late.", "evidence": "The possible constraint appears near 8.5–10 seconds.", "warning": "Ego-lane blockage or marked-response onset before the boundary cannot be established."},
+    {"candidate_id": "WUHAN_u0171", "label": "relevant", "confidence": "high", "required_response": ["slowdown", "brake"], "cause": "A red/control-stop context with cyclists and pedestrians crossing the crosswalk.", "evidence": "Crossing users occupy the path from about 5.5 seconds onward.", "warning": "The signal aspect is small, but crossing users corroborate the stopping need."},
+    {"candidate_id": "WUHAN_u0217", "label": "relevant", "confidence": "medium", "required_response": ["slowdown", "avoid"], "cause": "An oncoming red-clad rider approaches through a constrained narrow street.", "evidence": "The rider approaches closely from about 7–10 seconds.", "warning": "Precise lane geometry and direction remain imperfect in stills."},
+    {"candidate_id": "WUHAN_u0298", "label": "not_relevant", "confidence": "high", "required_response": [], "cause": null, "evidence": "Ego is already stopped at red at clip start and departs normally after green.", "warning": "The early red signal reflects a response completed before this clip."}
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0528:1786379888033248688",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "54d07af6e8a8a264844694465a71c530d9e351586845cae47f154de689efa6ed",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "69d33a2bd459e82790e871d120b0c3d3724fd04eb11e7f47075d6010065d2502",
+  "generated_token_ids_sha256": "0def885c4676d9890e2c3fd336de07cced06c194bcf85330557cea7f005b7c74",
+  "input_identity_sha256": "b1932633a76f7ee250d78f921d64635e7c1df2b09abc24075b52bd6800e16fd4",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "7019b419b0512dfd6a616f06d3ddd44cf1ddc4ea51d3c8278e58bc1ac2160ef9",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light changes from red to green during the unit, and the ego vehicle proceeds through the intersection. The lead vehicle (black van) begins to accelerate forward as the light turns green, indicating a noticeable response to the traffic signal change. Additionally, the ego vehicle must navigate through the intersection with other vehicles and pedestrians, requiring attentive driving and potential braking or slowing to maintain safe spacing and avoid conflicts, especially as the intersection opens up and cross-traffic appears.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "48730379363abb63042429acd4b735cdf62c0f9071679686eff7964ba3c484ae",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light changes from red to green during the unit, and the ego vehicle proceeds through the intersection. The lead vehicle (black van) begins to accelerate forward as the light turns green, indicating a noticeable response to the traffic signal change. Additionally, the ego vehicle must navigate through the intersection with other vehicles and pedestrians, requiring attentive driving and potential braking or slowing to maintain safe spacing and avoid conflicts, especially as the intersection opens up and cross-traffic appears.\"\n}",
+  "raw_response_sha256": "d5bbf1de90bd2de1871d299141106e99638611af34fa8affc085aeffd93a40f4",
+  "record_payload_sha256": "b342a93e8739ea060ce36238712e33bc7c0d9e9f753f125aaff485e1a269c0b2",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.526072009000927,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.397949637990678,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0528",
+  "unit_ordinal": 1095,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

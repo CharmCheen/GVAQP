@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0422:1786378024533686315",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "3c470c53ff5b3b68b3a375db7fcece89faa0f91334e29966a90044adc3483a80",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "e202ec7f5bf602fcdd50bc5fb30541c1916dc2f877e38167e99dfce44b5c7f04",
+  "generated_token_ids_sha256": "50113fde0fe13c8306c8678b55a0615c8772aeed229da0f5d88da66d4d0c2d19",
+  "input_identity_sha256": "0c680482582fac27d56447eb4c2ab0b07a04d778552e7c3499be58548f133d6f",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "47fb001c6b3862b9e1812c6c989b5a3136f86bd19ab1e0f8c321c0467f354a08",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with visible traffic signals and lane markings. At 0:08, the traffic light for the current lane turns red, requiring a noticeable braking action to stop before the crosswalk. Additionally, the presence of pedestrians crossing the street and vehicles in adjacent lanes changing positions indicates a need for attentive driving and potential speed reduction to ensure safety. The traffic control (red light) visibly requires a marked response within this unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "ea5489d16176adb039ea1ab66ca9065bbd18a65256b616da2448f2b8330fc93a",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with visible traffic signals and lane markings. At 0:08, the traffic light for the current lane turns red, requiring a noticeable braking action to stop before the crosswalk. Additionally, the presence of pedestrians crossing the street and vehicles in adjacent lanes changing positions indicates a need for attentive driving and potential speed reduction to ensure safety. The traffic control (red light) visibly requires a marked response within this unit.\"\n}",
+  "raw_response_sha256": "b0ed69846b0ecc36b2b7631fae79617f1c2a498d498773293a61f6623f0904c5",
+  "record_payload_sha256": "90a61f61fcecb724dc9ac4af58738ea9c5d5982d5e291ca63047c15f600a4994",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.244268473994453,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.08772485300142,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0422",
+  "unit_ordinal": 989,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

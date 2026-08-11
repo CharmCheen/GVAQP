@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0164:1786373892815388492",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "a5e80b8e1bdfd80f0a98acd17a0b44bbeffb9218e699ebc73d0f8814969e23f3",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "7a0a262aed7262959d3f83b037b39e4b082d9cb9b36b42059ddf5450b0124758",
+  "generated_token_ids_sha256": "d97764092344550038a54f274dc4bf73165a398776b32488c92b1a2644f95909",
+  "input_identity_sha256": "8901f937beb4ea8f730ed6adfa508309c1366fc9a037b547503ebdbee5f9c721",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "e7eeec24ae106f6f715ebeba5c9e7ec7e83128627c6f62c5306a90cd62ea63d7",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a clear, multi-lane road with visible traffic flow ahead. There are no sudden changes in traffic, no vehicles entering the ego path, no traffic signals requiring immediate response (the green light is visible and remains consistent), and no visible obstacles or road conditions requiring a marked speed or path change. The surrounding environment includes trees, flower beds, and buildings, but all are static and non-threatening. The road ahead is open and unobstructed, and the lead vehicles are maintaining consistent speeds without sudden braking or slowing.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "046b01bef8eae088ae375a1f4861f58e9a532b76f7e628f9a1de7d7ec6dd1578",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a clear, multi-lane road with visible traffic flow ahead. There are no sudden changes in traffic, no vehicles entering the ego path, no traffic signals requiring immediate response (the green light is visible and remains consistent), and no visible obstacles or road conditions requiring a marked speed or path change. The surrounding environment includes trees, flower beds, and buildings, but all are static and non-threatening. The road ahead is open and unobstructed, and the lead vehicles are maintaining consistent speeds without sudden braking or slowing.\"\n}",
+  "raw_response_sha256": "10dbd4e6a7e41da0d5ccf73c65cd8c400367acf8c074ce1a3bd8c1e918a01470",
+  "record_payload_sha256": "efc5ed993c5040a14d253098f3ff6cad4056367aa55c4aa334ea729a4c3e3a31",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 20.17110829601006,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 21.868049604992848,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0164",
+  "unit_ordinal": 164,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

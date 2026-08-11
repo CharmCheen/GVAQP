@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0523:1786357112096232235",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "0e0b308f0ed39c25cd57675b700b1ec4004e49808f59ab821f8c33ec5b4dc002",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "ee0dccc92149d34cb5c49182930d0e6b922f1066ff4878ea303384da83c54500",
+  "generated_token_ids_sha256": "a734241d978883f948930065604a5d81105f9c3a2cc66edbe40bc1d2994bd766",
+  "input_identity_sha256": "89e338d69e31c8e6d8dfd7244861db896aff5fb6fb5a11d460d90410e86e20e2",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "740e595b94fc0ddc6404a645502e0a548a447827eca6357f555703c9d926b62b",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane road with clear traffic signals showing green for straight movement. There are no sudden changes in traffic flow, no vehicles abruptly entering the ego path, and no visible obstacles or road conditions requiring a marked speed or path change. The traffic light countdown is decreasing normally, and the ego vehicle appears to be maintaining a consistent speed without needing to brake or slow down significantly. Pedestrians and other road users are visible but not in immediate conflict with the ego path.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "f5b7e071783811d19313383daf3eb0dc33891c5bcaa29a6858b2bffe7cfb5812",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane road with clear traffic signals showing green for straight movement. There are no sudden changes in traffic flow, no vehicles abruptly entering the ego path, and no visible obstacles or road conditions requiring a marked speed or path change. The traffic light countdown is decreasing normally, and the ego vehicle appears to be maintaining a consistent speed without needing to brake or slow down significantly. Pedestrians and other road users are visible but not in immediate conflict with the ego path.\"\n}",
+  "raw_response_sha256": "830ebbda85d8911b03bbb3dc397485129b3ba7bdbe5924e51fc1925d4e7be511",
+  "record_payload_sha256": "64c8bbfc4968127ebdc5cc8f0cb8b924ba97d828481826d643aea7fb6e6907de",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.537046413999633,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.388873385003535,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0523",
+  "unit_ordinal": 1090,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

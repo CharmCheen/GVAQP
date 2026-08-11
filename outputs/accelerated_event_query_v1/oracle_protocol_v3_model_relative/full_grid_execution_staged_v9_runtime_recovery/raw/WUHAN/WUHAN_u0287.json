@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0287:1786376273869696626",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "d92ddb5f639b6aa53d5397c5b7922048663275590c9920390c70bac55e35eb84",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "7e8a8878e3639f5dcf790e752b6b9a01a0d2c7d8583625f7d693cb91c8922d80",
+  "generated_token_ids_sha256": "6cdf1c88a3b7384e91b24a9c8ce9095496b5d264e7b8e62b51da78123c8ddfc8",
+  "input_identity_sha256": "4c43292bc061e24f25cb110010ab180db6068f3781f7b922af797e7d7d191469",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "573ee2c68edbb0b7ac1979fbc1f74b0e3a2f60d2e58611ba59a9dcf1de57775f",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily in a multi-lane urban road with clear visibility. The lead vehicles are maintaining consistent speeds, and there are no sudden braking, slowing, or path-threatening maneuvers observed. Traffic signs indicate a pedestrian crossing ahead, but no immediate action is required within this unit as the vehicles are still approaching it at a normal pace. No visible obstacles, sudden road conditions, or road users entering the path are present. The driving behavior remains normal and steady throughout the 10-second unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "afce24c6befb54db2a72478def18f2116b778799e46e56b2a1a53b816e03e672",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily in a multi-lane urban road with clear visibility. The lead vehicles are maintaining consistent speeds, and there are no sudden braking, slowing, or path-threatening maneuvers observed. Traffic signs indicate a pedestrian crossing ahead, but no immediate action is required within this unit as the vehicles are still approaching it at a normal pace. No visible obstacles, sudden road conditions, or road users entering the path are present. The driving behavior remains normal and steady throughout the 10-second unit.\"\n}",
+  "raw_response_sha256": "5a5dba647a9348351de30b7d379686f03d118ea8c0a8ffe02d5f68d764b948a4",
+  "record_payload_sha256": "e1fa5102ec4f6319787ec890c8a25b85071e5b3210ef2962b9585df70c358d5a",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.99544895500003,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.711810498993145,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0287",
+  "unit_ordinal": 1415,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

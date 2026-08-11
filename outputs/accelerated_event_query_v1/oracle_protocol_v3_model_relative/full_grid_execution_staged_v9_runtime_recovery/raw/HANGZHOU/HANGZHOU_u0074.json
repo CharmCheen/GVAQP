@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0074:1786372012374376133",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "0f161c6e12983b22a3a49dac9aa7434692778e4a3b411295a9a55a3847a0dba4",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "78e26640894bbbba51be996e43a8c699bbeba5c95d34f5f0a4037d53f018c02a",
+  "generated_token_ids_sha256": "89eae8d8bc9cf3cf8328c2d5662bfe452d7916d511007d2629febfcfe5fc04bb",
+  "input_identity_sha256": "7d8618dac7634884e18dc08f20f00c58f3d9af7113e9d5855c7a3a8d5dad51b4",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "d591a90d28882e816655f7bbc1c60c0932bb6279f1bceada1f5b59872f43ce27",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with a visible stop sign on the right side of the road. The road markings include a stop line and crosswalk, and there are traffic cones placed across the intersection, indicating a controlled or restricted passage. Additionally, a scooter is seen crossing the intersection, which requires the ego driver to slow down or stop to yield. These conditions necessitate a noticeable slowdown or braking action to comply with traffic control and ensure safety.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "6dafcba86d5140eaf24ace6d89325980902b7168b72042dfd8309d0311904708",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with a visible stop sign on the right side of the road. The road markings include a stop line and crosswalk, and there are traffic cones placed across the intersection, indicating a controlled or restricted passage. Additionally, a scooter is seen crossing the intersection, which requires the ego driver to slow down or stop to yield. These conditions necessitate a noticeable slowdown or braking action to comply with traffic control and ensure safety.\"\n}",
+  "raw_response_sha256": "c8a19d6e6403feda47f818edd1a07ea9a9f865969c1fae4ef63204d852cc502a",
+  "record_payload_sha256": "60f5c2f447c8cb5ee6baef147e60f42d240986ac3ee46b0574d98c328d3b57ab",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.32082384899695,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 16.98366541699943,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0074",
+  "unit_ordinal": 641,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

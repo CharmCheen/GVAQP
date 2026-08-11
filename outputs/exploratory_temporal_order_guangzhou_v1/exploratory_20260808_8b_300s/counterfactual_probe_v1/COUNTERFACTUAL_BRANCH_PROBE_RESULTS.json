@@ -1,0 +1,1124 @@
+{
+  "counts": {
+    "NEUTRAL": 2,
+    "POTENTIAL_FUTURE_HEADROOM": 7,
+    "STRONG_LOCAL_POSITIVE": 0,
+    "WORSE": 9
+  },
+  "decision": "TARGETED_REACHABLE_HEADROOM_SIGNAL_INCONCLUSIVE",
+  "executed_branch_count": 18,
+  "full_policy_rerun": false,
+  "mab_implemented": false,
+  "next_step": "DO_NOT_IMPLEMENT_MAB_YET",
+  "planned_branch_count": 18,
+  "reference_used_only_after_execution": true,
+  "rows": [
+    {
+      "alternative": {
+        "kind": "SCAN",
+        "target": 26
+      },
+      "alternative_completion_seconds": 76.5676428489387,
+      "alternative_cost_seconds": 5.6200144700706005,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "exposed": [
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.20512694461465142,
+            "mean_frame_difference": 0.17358278063347252,
+            "score": 0.17358278063347252,
+            "unit_id": 260
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.20134609460103486,
+            "mean_frame_difference": 0.16920570930918663,
+            "score": 0.16920570930918663,
+            "unit_id": 261
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.185255072167756,
+            "mean_frame_difference": 0.16294748074770032,
+            "score": 0.16294748074770032,
+            "unit_id": 262
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.23894893365332245,
+            "mean_frame_difference": 0.1892359645439966,
+            "score": 0.1892359645439966,
+            "unit_id": 263
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.333478996459695,
+            "mean_frame_difference": 0.23957323580473858,
+            "score": 0.23957323580473858,
+            "unit_id": 264
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.2619752008442266,
+            "mean_frame_difference": 0.20967318606647903,
+            "score": 0.20967318606647903,
+            "unit_id": 265
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.30050143399373636,
+            "mean_frame_difference": 0.23535238138465264,
+            "score": 0.23535238138465264,
+            "unit_id": 266
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.22825155739379085,
+            "mean_frame_difference": 0.21730458915819414,
+            "score": 0.21730458915819414,
+            "unit_id": 267
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.24520452495234205,
+            "mean_frame_difference": 0.22173060917075163,
+            "score": 0.22173060917075163,
+            "unit_id": 268
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.232699903833061,
+            "mean_frame_difference": 0.21759517264660497,
+            "score": 0.21759517264660497,
+            "unit_id": 269
+          }
+        ]
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_009/SCAN_26.json",
+      "branch_sha256": "d3cdc8317338d1d16722c2784daebbe8d8719da8e3549db96a6e1a5eaf15a686",
+      "cost_delta_seconds": -2.8549545742571354,
+      "local_verdict": "POTENTIAL_FUTURE_HEADROOM",
+      "parent_b_action": {
+        "kind": "VERIFY",
+        "target": 321
+      },
+      "parent_completion_seconds": 79.42259742319584,
+      "parent_cost_seconds": 8.474969044327736,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_009",
+      "stratum": "early"
+    },
+    {
+      "alternative": {
+        "kind": "VERIFY",
+        "target": 159
+      },
+      "alternative_completion_seconds": 80.7521783336997,
+      "alternative_cost_seconds": 9.8045499548316,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "frame_count": 20,
+        "inference_seconds": 7.7487521432340145,
+        "label": "negative",
+        "parsed": {
+          "abstain_reason": null,
+          "boundary_status": "not_applicable",
+          "complete_event_visible": true,
+          "confidence": "high",
+          "ego_relevant": false,
+          "event_end": null,
+          "event_start": null,
+          "event_type": "none",
+          "evidence": "The video shows normal driving on a multi-lane road with vehicles maintaining their lanes. No object enters or overlaps the ego vehicle's path, and all traffic follows standard lane discipline without spatial conflict.",
+          "involved_object": "none",
+          "label": "negative",
+          "negative_reason": "normal_following"
+        },
+        "raw_sha256": "25bbb66337bb52b961a2e790c8a7b5fa5a78b69a5dcbcea139b24876040dffba",
+        "total_seconds": 8.260832773521543,
+        "unit_id": 159
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_009/VERIFY_159.json",
+      "branch_sha256": "2ef5fc408acf2d249082a5b9c50b9822b9a08c355c72c092f8635f00f29bc66a",
+      "cost_delta_seconds": 1.3295809105038643,
+      "local_verdict": "WORSE",
+      "parent_b_action": {
+        "kind": "VERIFY",
+        "target": 321
+      },
+      "parent_completion_seconds": 79.42259742319584,
+      "parent_cost_seconds": 8.474969044327736,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_009",
+      "stratum": "early"
+    },
+    {
+      "alternative": {
+        "kind": "VERIFY",
+        "target": 159
+      },
+      "alternative_completion_seconds": 89.20252757146955,
+      "alternative_cost_seconds": 9.77891387976706,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "frame_count": 20,
+        "inference_seconds": 7.523095186799765,
+        "label": "negative",
+        "parsed": {
+          "abstain_reason": null,
+          "boundary_status": "not_applicable",
+          "complete_event_visible": true,
+          "confidence": "high",
+          "ego_relevant": false,
+          "event_end": null,
+          "event_start": null,
+          "event_type": "none",
+          "evidence": "The video shows normal driving on a multi-lane road with vehicles maintaining their lanes. No object enters or overlaps the ego vehicle's path, and all traffic follows standard lane discipline without spatial conflict.",
+          "involved_object": "none",
+          "label": "negative",
+          "negative_reason": "normal_following"
+        },
+        "raw_sha256": "25bbb66337bb52b961a2e790c8a7b5fa5a78b69a5dcbcea139b24876040dffba",
+        "total_seconds": 8.350578701123595,
+        "unit_id": 159
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_010/VERIFY_159.json",
+      "branch_sha256": "f2e0d1bb03926872eb488cf794c0db7a47a249b567c530c2d207f9b3e8f3ad50",
+      "cost_delta_seconds": 3.6798757277429104,
+      "local_verdict": "WORSE",
+      "parent_b_action": {
+        "kind": "SCAN",
+        "target": 26
+      },
+      "parent_completion_seconds": 85.52265184372663,
+      "parent_cost_seconds": 6.09903815202415,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_010",
+      "stratum": "early"
+    },
+    {
+      "alternative": {
+        "kind": "SCAN",
+        "target": 37
+      },
+      "alternative_completion_seconds": 92.45430126786232,
+      "alternative_cost_seconds": 6.930609839037061,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "exposed": [
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.17259877961601305,
+            "mean_frame_difference": 0.13566859662460662,
+            "score": 0.13566859662460662,
+            "unit_id": 370
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.1725870949074074,
+            "mean_frame_difference": 0.13079199336949285,
+            "score": 0.13079199336949285,
+            "unit_id": 371
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.28813006791258167,
+            "mean_frame_difference": 0.17904343729196925,
+            "score": 0.17904343729196925,
+            "unit_id": 372
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.20554178581154683,
+            "mean_frame_difference": 0.1489344320193355,
+            "score": 0.1489344320193355,
+            "unit_id": 373
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.2839507676334423,
+            "mean_frame_difference": 0.1588926008192629,
+            "score": 0.1588926008192629,
+            "unit_id": 374
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.15819360191993465,
+            "mean_frame_difference": 0.14308090410160978,
+            "score": 0.14308090410160978,
+            "unit_id": 375
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.17471053751361657,
+            "mean_frame_difference": 0.1510809594188756,
+            "score": 0.1510809594188756,
+            "unit_id": 376
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.16542476000816994,
+            "mean_frame_difference": 0.14492811970467198,
+            "score": 0.14492811970467198,
+            "unit_id": 377
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.16767093886165577,
+            "mean_frame_difference": 0.15134999848704914,
+            "score": 0.15134999848704914,
+            "unit_id": 378
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.16954633459286492,
+            "mean_frame_difference": 0.15302292735188208,
+            "score": 0.15302292735188208,
+            "unit_id": 379
+          }
+        ]
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_011/SCAN_37.json",
+      "branch_sha256": "fec4d584eeae1558d6c4201074713b3bdd954bcfd83e8a0a6c9bb5fcd068fe9c",
+      "cost_delta_seconds": -1.818352935835719,
+      "local_verdict": "POTENTIAL_FUTURE_HEADROOM",
+      "parent_b_action": {
+        "kind": "VERIFY",
+        "target": 264
+      },
+      "parent_completion_seconds": 94.27265420369804,
+      "parent_cost_seconds": 8.74896277487278,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_011",
+      "stratum": "early"
+    },
+    {
+      "alternative": {
+        "kind": "VERIFY",
+        "target": 266
+      },
+      "alternative_completion_seconds": 93.74405255354941,
+      "alternative_cost_seconds": 8.22036112472415,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "frame_count": 20,
+        "inference_seconds": 6.39680608548224,
+        "label": "negative",
+        "parsed": {
+          "abstain_reason": null,
+          "boundary_status": "not_applicable",
+          "complete_event_visible": true,
+          "confidence": "high",
+          "ego_relevant": false,
+          "event_end": null,
+          "event_start": null,
+          "event_type": "none",
+          "evidence": "The video shows normal driving with vehicles and pedestrians in their respective lanes, no object enters the ego vehicle's path.",
+          "involved_object": "none",
+          "label": "negative",
+          "negative_reason": "normal_following"
+        },
+        "raw_sha256": "685c27eb1d5b080a2c894d1e6e77ec8be2cac9324a145f3b1851086a71c0792e",
+        "total_seconds": 6.85584057867527,
+        "unit_id": 266
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_011/VERIFY_266.json",
+      "branch_sha256": "a208237768634bbb4566f5a1b1d84629ad2006c3552a2bd222febf3477d77f94",
+      "cost_delta_seconds": -0.5286016501486301,
+      "local_verdict": "POTENTIAL_FUTURE_HEADROOM",
+      "parent_b_action": {
+        "kind": "VERIFY",
+        "target": 264
+      },
+      "parent_completion_seconds": 94.27265420369804,
+      "parent_cost_seconds": 8.74896277487278,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_011",
+      "stratum": "early"
+    },
+    {
+      "alternative": {
+        "kind": "VERIFY",
+        "target": 266
+      },
+      "alternative_completion_seconds": 103.30739272385836,
+      "alternative_cost_seconds": 9.033590456470847,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "frame_count": 20,
+        "inference_seconds": 6.813580485060811,
+        "label": "negative",
+        "parsed": {
+          "abstain_reason": null,
+          "boundary_status": "not_applicable",
+          "complete_event_visible": true,
+          "confidence": "high",
+          "ego_relevant": false,
+          "event_end": null,
+          "event_start": null,
+          "event_type": "none",
+          "evidence": "The video shows normal driving with vehicles and pedestrians in their respective lanes, no object enters the ego vehicle's path.",
+          "involved_object": "none",
+          "label": "negative",
+          "negative_reason": "normal_following"
+        },
+        "raw_sha256": "685c27eb1d5b080a2c894d1e6e77ec8be2cac9324a145f3b1851086a71c0792e",
+        "total_seconds": 7.5824982561171055,
+        "unit_id": 266
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_012/VERIFY_266.json",
+      "branch_sha256": "3a99e576790360381b93eda13c9ded5591a34f3e6277e7d0f2e7d0946b97cf6f",
+      "cost_delta_seconds": 2.060384765267372,
+      "local_verdict": "WORSE",
+      "parent_b_action": {
+        "kind": "SCAN",
+        "target": 37
+      },
+      "parent_completion_seconds": 101.24700795859098,
+      "parent_cost_seconds": 6.973205691203475,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_012",
+      "stratum": "early"
+    },
+    {
+      "alternative": {
+        "kind": "VERIFY",
+        "target": 265
+      },
+      "alternative_completion_seconds": 181.21117474325,
+      "alternative_cost_seconds": 8.842757619917393,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "frame_count": 20,
+        "inference_seconds": 7.241095870733261,
+        "label": "negative",
+        "parsed": {
+          "abstain_reason": null,
+          "boundary_status": "not_applicable",
+          "complete_event_visible": true,
+          "confidence": "high",
+          "ego_relevant": false,
+          "event_end": null,
+          "event_start": null,
+          "event_type": "none",
+          "evidence": "The video shows normal driving on a tree-lined street with vehicles ahead and pedestrians on sidewalks. No object enters or overlaps the ego vehicle's path.",
+          "involved_object": "none",
+          "label": "negative",
+          "negative_reason": "normal_following"
+        },
+        "raw_sha256": "1c8625fd8985f15ef2c7bb4d27dd204d5eedebfab46b37a7337b3a1573d57b32",
+        "total_seconds": 7.719857746735215,
+        "unit_id": 265
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_022/VERIFY_265.json",
+      "branch_sha256": "b648f8a29964d996051026e07af34a1db8d5b15028d2b8876013feeea8168ab0",
+      "cost_delta_seconds": 0.8960457034409046,
+      "local_verdict": "WORSE",
+      "parent_b_action": {
+        "kind": "SCAN",
+        "target": 23
+      },
+      "parent_completion_seconds": 180.3151290398091,
+      "parent_cost_seconds": 7.946711916476488,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_022",
+      "stratum": "middle"
+    },
+    {
+      "alternative": {
+        "kind": "SCAN",
+        "target": 29
+      },
+      "alternative_completion_seconds": 187.7736200261861,
+      "alternative_cost_seconds": 7.456847483292222,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "exposed": [
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.16664319512527234,
+            "mean_frame_difference": 0.13898312397875814,
+            "score": 0.13898312397875814,
+            "unit_id": 290
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.2298274824686819,
+            "mean_frame_difference": 0.17881569327190752,
+            "score": 0.17881569327190752,
+            "unit_id": 291
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.19334714988425927,
+            "mean_frame_difference": 0.15159705627042483,
+            "score": 0.15159705627042483,
+            "unit_id": 292
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.1482995089528867,
+            "mean_frame_difference": 0.13650755104317963,
+            "score": 0.13650755104317963,
+            "unit_id": 293
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.15072952835648146,
+            "mean_frame_difference": 0.13879257112760227,
+            "score": 0.13879257112760227,
+            "unit_id": 294
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.24631966996868193,
+            "mean_frame_difference": 0.19092018805979183,
+            "score": 0.19092018805979183,
+            "unit_id": 295
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.17503981992102396,
+            "mean_frame_difference": 0.16141601893458002,
+            "score": 0.16141601893458002,
+            "unit_id": 296
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.20427122480936818,
+            "mean_frame_difference": 0.17846552363229243,
+            "score": 0.17846552363229243,
+            "unit_id": 297
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.18772284773284315,
+            "mean_frame_difference": 0.17009849404653837,
+            "score": 0.17009849404653837,
+            "unit_id": 298
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.24571441397739652,
+            "mean_frame_difference": 0.20707510004387558,
+            "score": 0.20707510004387558,
+            "unit_id": 299
+          }
+        ]
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_023/SCAN_29.json",
+      "branch_sha256": "c42422a805ac9509f220883dbb0d2344727f5c2a4168b624a539e93dc42d25e3",
+      "cost_delta_seconds": -1.4608783069998026,
+      "local_verdict": "POTENTIAL_FUTURE_HEADROOM",
+      "parent_b_action": {
+        "kind": "VERIFY",
+        "target": 265
+      },
+      "parent_completion_seconds": 189.2344983331859,
+      "parent_cost_seconds": 8.917725790292025,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_023",
+      "stratum": "middle"
+    },
+    {
+      "alternative": {
+        "kind": "VERIFY",
+        "target": 159
+      },
+      "alternative_completion_seconds": 190.45180306397378,
+      "alternative_cost_seconds": 10.135030521079898,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "frame_count": 20,
+        "inference_seconds": 7.891431018710136,
+        "label": "negative",
+        "parsed": {
+          "abstain_reason": null,
+          "boundary_status": "not_applicable",
+          "complete_event_visible": true,
+          "confidence": "high",
+          "ego_relevant": false,
+          "event_end": null,
+          "event_start": null,
+          "event_type": "none",
+          "evidence": "The video shows normal driving on a multi-lane road with vehicles maintaining their lanes. No object enters or overlaps the ego vehicle's path, and all traffic follows standard lane discipline without spatial conflict.",
+          "involved_object": "none",
+          "label": "negative",
+          "negative_reason": "normal_following"
+        },
+        "raw_sha256": "25bbb66337bb52b961a2e790c8a7b5fa5a78b69a5dcbcea139b24876040dffba",
+        "total_seconds": 8.636690802872181,
+        "unit_id": 159
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_023/VERIFY_159.json",
+      "branch_sha256": "f5a02688ef272901327918ff9909d3942e3d07e4e32892dbada13a32678bc41e",
+      "cost_delta_seconds": 1.2173047307878733,
+      "local_verdict": "WORSE",
+      "parent_b_action": {
+        "kind": "VERIFY",
+        "target": 265
+      },
+      "parent_completion_seconds": 189.2344983331859,
+      "parent_cost_seconds": 8.917725790292025,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_023",
+      "stratum": "middle"
+    },
+    {
+      "alternative": {
+        "kind": "VERIFY",
+        "target": 159
+      },
+      "alternative_completion_seconds": 199.66245438344777,
+      "alternative_cost_seconds": 10.425290355458856,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "frame_count": 20,
+        "inference_seconds": 8.354354655370116,
+        "label": "negative",
+        "parsed": {
+          "abstain_reason": null,
+          "boundary_status": "not_applicable",
+          "complete_event_visible": true,
+          "confidence": "high",
+          "ego_relevant": false,
+          "event_end": null,
+          "event_start": null,
+          "event_type": "none",
+          "evidence": "The video shows normal driving on a multi-lane road with vehicles maintaining their lanes. No object enters or overlaps the ego vehicle's path, and all traffic follows standard lane discipline without spatial conflict.",
+          "involved_object": "none",
+          "label": "negative",
+          "negative_reason": "normal_following"
+        },
+        "raw_sha256": "25bbb66337bb52b961a2e790c8a7b5fa5a78b69a5dcbcea139b24876040dffba",
+        "total_seconds": 9.077179046347737,
+        "unit_id": 159
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_024/VERIFY_159.json",
+      "branch_sha256": "3bb001ac68cd48bb288b83f9401d4ea7e9bdc5aa9c88b22d6d3f23dc674109fb",
+      "cost_delta_seconds": 2.4050383996218443,
+      "local_verdict": "WORSE",
+      "parent_b_action": {
+        "kind": "SCAN",
+        "target": 29
+      },
+      "parent_completion_seconds": 197.25741598382592,
+      "parent_cost_seconds": 8.020251955837011,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_024",
+      "stratum": "middle"
+    },
+    {
+      "alternative": {
+        "kind": "SCAN",
+        "target": 34
+      },
+      "alternative_completion_seconds": 205.47762760706246,
+      "alternative_cost_seconds": 8.218456016853452,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "exposed": [
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.20784709031181917,
+            "mean_frame_difference": 0.17625941622791091,
+            "score": 0.17625941622791091,
+            "unit_id": 340
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.18261982570806098,
+            "mean_frame_difference": 0.16850290628404138,
+            "score": 0.16850290628404138,
+            "unit_id": 341
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.16064809283088236,
+            "mean_frame_difference": 0.1528846341873941,
+            "score": 0.1528846341873941,
+            "unit_id": 342
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.1759054032203159,
+            "mean_frame_difference": 0.15579524574104334,
+            "score": 0.15579524574104334,
+            "unit_id": 343
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.19624729796432464,
+            "mean_frame_difference": 0.1853543865173384,
+            "score": 0.1853543865173384,
+            "unit_id": 344
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.1727182308687364,
+            "mean_frame_difference": 0.15384033876860928,
+            "score": 0.15384033876860928,
+            "unit_id": 345
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.27787862115332246,
+            "mean_frame_difference": 0.22481534056523847,
+            "score": 0.22481534056523847,
+            "unit_id": 346
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.1635112294049564,
+            "mean_frame_difference": 0.13064192944731903,
+            "score": 0.13064192944731903,
+            "unit_id": 347
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.15715727124183007,
+            "mean_frame_difference": 0.11580498441660615,
+            "score": 0.11580498441660615,
+            "unit_id": 348
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.14066428376906318,
+            "mean_frame_difference": 0.12344446004675019,
+            "score": 0.12344446004675019,
+            "unit_id": 349
+          }
+        ]
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_025/SCAN_34.json",
+      "branch_sha256": "3ed74e4045e9320f905258b47b1e97434d64b9292874b2ca551891406b7f1fb2",
+      "cost_delta_seconds": -1.8803862929344177,
+      "local_verdict": "POTENTIAL_FUTURE_HEADROOM",
+      "parent_b_action": {
+        "kind": "VERIFY",
+        "target": 299
+      },
+      "parent_completion_seconds": 207.35801389999688,
+      "parent_cost_seconds": 10.09884230978787,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_025",
+      "stratum": "middle"
+    },
+    {
+      "alternative": {
+        "kind": "VERIFY",
+        "target": 159
+      },
+      "alternative_completion_seconds": 205.98334401473403,
+      "alternative_cost_seconds": 8.724172424525023,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "frame_count": 20,
+        "inference_seconds": 7.090836236253381,
+        "label": "negative",
+        "parsed": {
+          "abstain_reason": null,
+          "boundary_status": "not_applicable",
+          "complete_event_visible": true,
+          "confidence": "high",
+          "ego_relevant": false,
+          "event_end": null,
+          "event_start": null,
+          "event_type": "none",
+          "evidence": "The video shows normal driving on a multi-lane road with vehicles maintaining their lanes. No object enters or overlaps the ego vehicle's path, and all traffic follows standard lane discipline without spatial conflict.",
+          "involved_object": "none",
+          "label": "negative",
+          "negative_reason": "normal_following"
+        },
+        "raw_sha256": "25bbb66337bb52b961a2e790c8a7b5fa5a78b69a5dcbcea139b24876040dffba",
+        "total_seconds": 7.577100865542889,
+        "unit_id": 159
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_025/VERIFY_159.json",
+      "branch_sha256": "55c8486bb2778787aedb996f55b21cb91a601f9716569dacdc95edd20b9e7670",
+      "cost_delta_seconds": -1.374669885262847,
+      "local_verdict": "POTENTIAL_FUTURE_HEADROOM",
+      "parent_b_action": {
+        "kind": "VERIFY",
+        "target": 299
+      },
+      "parent_completion_seconds": 207.35801389999688,
+      "parent_cost_seconds": 10.09884230978787,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_025",
+      "stratum": "middle"
+    },
+    {
+      "alternative": {
+        "kind": "VERIFY",
+        "target": 232
+      },
+      "alternative_completion_seconds": 278.1901896558702,
+      "alternative_cost_seconds": 8.577954208478332,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "frame_count": 20,
+        "inference_seconds": 6.534222396090627,
+        "label": "negative",
+        "parsed": {
+          "abstain_reason": null,
+          "boundary_status": "not_applicable",
+          "complete_event_visible": true,
+          "confidence": "high",
+          "ego_relevant": false,
+          "event_end": null,
+          "event_start": null,
+          "event_type": "none",
+          "evidence": "The video shows normal traffic flow with no object entering the ego vehicle's path. All vehicles are maintaining their lanes and following traffic rules.",
+          "involved_object": "none",
+          "label": "negative",
+          "negative_reason": "normal_following"
+        },
+        "raw_sha256": "23f9250f2e4b33cec26336d0ad51797ab1cc68fd85e3256607ecb93fbbce77fe",
+        "total_seconds": 7.015221606940031,
+        "unit_id": 232
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_034/VERIFY_232.json",
+      "branch_sha256": "28c74a3f645cf5f78ae45830d96769419fb4c347d173b1e6915ae4224234246e",
+      "cost_delta_seconds": 1.6973982602357864,
+      "local_verdict": "WORSE",
+      "parent_b_action": {
+        "kind": "SCAN",
+        "target": 5
+      },
+      "parent_completion_seconds": 276.4927913956344,
+      "parent_cost_seconds": 6.880555948242545,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_034",
+      "stratum": "late"
+    },
+    {
+      "alternative": {
+        "kind": "SCAN",
+        "target": 8
+      },
+      "alternative_completion_seconds": 285.1002985406667,
+      "alternative_cost_seconds": 8.605107460170984,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "exposed": [
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.14912781692538127,
+            "mean_frame_difference": 0.12666055718197775,
+            "score": 0.12666055718197775,
+            "unit_id": 80
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.17052625442538127,
+            "mean_frame_difference": 0.1334800645084423,
+            "score": 0.1334800645084423,
+            "unit_id": 81
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.1373228911356209,
+            "mean_frame_difference": 0.11580718245052651,
+            "score": 0.11580718245052651,
+            "unit_id": 82
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.12709126923338782,
+            "mean_frame_difference": 0.10283460137527234,
+            "score": 0.10283460137527234,
+            "unit_id": 83
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.14116842830882353,
+            "mean_frame_difference": 0.12605425583620794,
+            "score": 0.12605425583620794,
+            "unit_id": 84
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.21309567333877993,
+            "mean_frame_difference": 0.16788879858463446,
+            "score": 0.16788879858463446,
+            "unit_id": 85
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.17757641441993463,
+            "mean_frame_difference": 0.141548050846496,
+            "score": 0.141548050846496,
+            "unit_id": 86
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.15877302474809368,
+            "mean_frame_difference": 0.13612922066010047,
+            "score": 0.13612922066010047,
+            "unit_id": 87
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.21355868736383443,
+            "mean_frame_difference": 0.1802650798648935,
+            "score": 0.1802650798648935,
+            "unit_id": 88
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.2260028467116013,
+            "mean_frame_difference": 0.19969088239076493,
+            "score": 0.19969088239076493,
+            "unit_id": 89
+          }
+        ]
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_035/SCAN_8.json",
+      "branch_sha256": "8f6ac40133205aeebbe26b63ddfd95cf86276ebde54a40fb622edcec19a53f15",
+      "cost_delta_seconds": -0.6580803785473108,
+      "local_verdict": "POTENTIAL_FUTURE_HEADROOM",
+      "parent_b_action": {
+        "kind": "VERIFY",
+        "target": 232
+      },
+      "parent_completion_seconds": 285.758378919214,
+      "parent_cost_seconds": 9.263187838718295,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_035",
+      "stratum": "late"
+    },
+    {
+      "alternative": {
+        "kind": "VERIFY",
+        "target": 235
+      },
+      "alternative_completion_seconds": 286.11249182000756,
+      "alternative_cost_seconds": 9.617300739511847,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "frame_count": 20,
+        "inference_seconds": 7.436365019530058,
+        "label": "negative",
+        "parsed": {
+          "abstain_reason": null,
+          "boundary_status": "not_applicable",
+          "complete_event_visible": true,
+          "confidence": "high",
+          "ego_relevant": false,
+          "event_end": null,
+          "event_start": null,
+          "event_type": "none",
+          "evidence": "The video shows normal traffic flow with no object entering the ego vehicle's path. All vehicles and pedestrians are maintaining their lanes or paths without crossing into the ego vehicle's trajectory.",
+          "involved_object": "none",
+          "label": "negative",
+          "negative_reason": "normal_following"
+        },
+        "raw_sha256": "bf2706129d8e00db5e1db0d4f7475fbc1d812c32e36632f64826fd20bd783be9",
+        "total_seconds": 8.16142569668591,
+        "unit_id": 235
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_035/VERIFY_235.json",
+      "branch_sha256": "9543050e2a4af562dbcbc53c6aea452bda79b80459f4e362a10961b434ab816b",
+      "cost_delta_seconds": 0.3541129007935524,
+      "local_verdict": "WORSE",
+      "parent_b_action": {
+        "kind": "VERIFY",
+        "target": 232
+      },
+      "parent_completion_seconds": 285.758378919214,
+      "parent_cost_seconds": 9.263187838718295,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_035",
+      "stratum": "late"
+    },
+    {
+      "alternative": {
+        "kind": "VERIFY",
+        "target": 235
+      },
+      "alternative_completion_seconds": 295.072985900566,
+      "alternative_cost_seconds": 9.312258712947369,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "frame_count": 20,
+        "inference_seconds": 7.118004061281681,
+        "label": "negative",
+        "parsed": {
+          "abstain_reason": null,
+          "boundary_status": "not_applicable",
+          "complete_event_visible": true,
+          "confidence": "high",
+          "ego_relevant": false,
+          "event_end": null,
+          "event_start": null,
+          "event_type": "none",
+          "evidence": "The video shows normal traffic flow with no object entering the ego vehicle's path. All vehicles and pedestrians are maintaining their lanes or paths without crossing into the ego vehicle's trajectory.",
+          "involved_object": "none",
+          "label": "negative",
+          "negative_reason": "normal_following"
+        },
+        "raw_sha256": "bf2706129d8e00db5e1db0d4f7475fbc1d812c32e36632f64826fd20bd783be9",
+        "total_seconds": 7.693376837298274,
+        "unit_id": 235
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_036/VERIFY_235.json",
+      "branch_sha256": "d339ca054f37fd7c1aa2bb3b620989c96ffb2813d4f567c62f44e802841f4341",
+      "cost_delta_seconds": 1.3643068224191666,
+      "local_verdict": "WORSE",
+      "parent_b_action": {
+        "kind": "SCAN",
+        "target": 8
+      },
+      "parent_completion_seconds": 293.7086790781468,
+      "parent_cost_seconds": 7.947951890528202,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_036",
+      "stratum": "late"
+    },
+    {
+      "alternative": {
+        "kind": "SCAN",
+        "target": 11
+      },
+      "alternative_completion_seconds": 300.42782416567206,
+      "alternative_cost_seconds": 6.7157148495316505,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "exposed": [
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.15595818014705884,
+            "mean_frame_difference": 0.1106012173580852,
+            "score": 0.1106012173580852,
+            "unit_id": 110
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.2015004765795207,
+            "mean_frame_difference": 0.13886681588144517,
+            "score": 0.13886681588144517,
+            "unit_id": 111
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.2769777156522331,
+            "mean_frame_difference": 0.20930660611080854,
+            "score": 0.20930660611080854,
+            "unit_id": 112
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.17714271003540305,
+            "mean_frame_difference": 0.13395156382383203,
+            "score": 0.13395156382383203,
+            "unit_id": 113
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.17973011131535946,
+            "mean_frame_difference": 0.14583141188574192,
+            "score": 0.14583141188574192,
+            "unit_id": 114
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.1966331316380719,
+            "mean_frame_difference": 0.16443833543255262,
+            "score": 0.16443833543255262,
+            "unit_id": 115
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.2354424572780501,
+            "mean_frame_difference": 0.16648340576585574,
+            "score": 0.16648340576585574,
+            "unit_id": 116
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.2665599681712963,
+            "mean_frame_difference": 0.18074170713810217,
+            "score": 0.18074170713810217,
+            "unit_id": 117
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.20421032049972765,
+            "mean_frame_difference": 0.17694963433868918,
+            "score": 0.17694963433868918,
+            "unit_id": 118
+          },
+          {
+            "frame_count": 10,
+            "max_frame_difference": 0.19681665730528322,
+            "mean_frame_difference": 0.16307075361973494,
+            "score": 0.16307075361973494,
+            "unit_id": 119
+          }
+        ]
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_037/SCAN_11.json",
+      "branch_sha256": "8be382796e299542ad1e6dde7f2c328653bdac74412e47e534cc64011381ff1d",
+      "cost_delta_seconds": -1.608432026579976,
+      "local_verdict": "NEUTRAL",
+      "parent_b_action": {
+        "kind": "VERIFY",
+        "target": 235
+      },
+      "parent_completion_seconds": 302.03625619225204,
+      "parent_cost_seconds": 8.324146876111627,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_037",
+      "stratum": "late"
+    },
+    {
+      "alternative": {
+        "kind": "VERIFY",
+        "target": 89
+      },
+      "alternative_completion_seconds": 303.0198902785778,
+      "alternative_cost_seconds": 9.307780962437391,
+      "alternative_event_delta": 0,
+      "alternative_outcome": {
+        "frame_count": 20,
+        "inference_seconds": 6.7870114129036665,
+        "label": "negative",
+        "parsed": {
+          "abstain_reason": null,
+          "boundary_status": "not_applicable",
+          "complete_event_visible": true,
+          "confidence": "high",
+          "ego_relevant": false,
+          "event_end": null,
+          "event_start": null,
+          "event_type": "none",
+          "evidence": "The video shows normal driving with no object entering the ego vehicle's path. All vehicles are following traffic rules and maintaining safe distances.",
+          "involved_object": "none",
+          "label": "negative",
+          "negative_reason": "normal_following"
+        },
+        "raw_sha256": "760707bf1dc06c2f081e083c8f4be72ea4e0b162296236e5858590d88cc35561",
+        "total_seconds": 7.396580692380667,
+        "unit_id": 89
+      },
+      "branch_path": "outputs/exploratory_temporal_order_guangzhou_v1/exploratory_20260808_8b_300s/counterfactual_probe_v1/branches/B_DECISION_037/VERIFY_89.json",
+      "branch_sha256": "007c51a457a4442357b201ee9112ae475d9304fc9fbb69d47bd9573623bd0722",
+      "cost_delta_seconds": 0.9836340863257647,
+      "local_verdict": "NEUTRAL",
+      "parent_b_action": {
+        "kind": "VERIFY",
+        "target": 235
+      },
+      "parent_completion_seconds": 302.03625619225204,
+      "parent_cost_seconds": 8.324146876111627,
+      "parent_event_delta": 0,
+      "state_id": "B_DECISION_037",
+      "stratum": "late"
+    }
+  ],
+  "scan_branch_count": 6,
+  "schema_version": "COUNTERFACTUAL_BRANCH_PROBE_RESULTS_V1",
+  "verify_branch_count": 12
+}

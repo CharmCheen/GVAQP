@@ -1,0 +1,31 @@
+{
+  "status": "FROZEN_BEFORE_NEW_QUERY_ORACLE_EXECUTION",
+  "evidence_level": "two-agent pre-outcome adversarial consensus; not human ground truth or an accuracy reference",
+  "new_query_32b_outputs_observed": 0,
+  "consensus_rule": "Use a relevant or not_relevant screen only when both reviewers give the same polarity. Any disagreement or either unknown becomes consensus unknown and cannot be scored as a model error.",
+  "primary_review_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/PRE_OUTCOME_REVIEW_PRIMARY_V2.json",
+  "independent_review_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/PRE_OUTCOME_REVIEW_INDEPENDENT_V2.json",
+  "aggregate": {
+    "exact_label_agreement": 10,
+    "clip_count": 12,
+    "consensus_relevant": 4,
+    "consensus_not_relevant": 5,
+    "consensus_unknown": 3,
+    "pre_outcome_adjudication_cases": 2
+  },
+  "reviews": [
+    {"candidate_id": "DALI_u0437", "label": "not_relevant", "reviewers_agree": true, "pre_outcome_adjudication_required": false},
+    {"candidate_id": "DALI_u0501", "label": "unknown", "reviewers_agree": false, "primary_label": "relevant", "independent_label": "not_relevant", "pre_outcome_adjudication_required": true},
+    {"candidate_id": "DALI_u0548", "label": "relevant", "reviewers_agree": true, "pre_outcome_adjudication_required": false, "warning": "Agreed polarity but causal scope and late-boundary interpretation differ."},
+    {"candidate_id": "DALI_u0555", "label": "relevant", "reviewers_agree": true, "pre_outcome_adjudication_required": false},
+    {"candidate_id": "HANGZHOU_u0140", "label": "not_relevant", "reviewers_agree": true, "pre_outcome_adjudication_required": false},
+    {"candidate_id": "HANGZHOU_u0234", "label": "not_relevant", "reviewers_agree": true, "pre_outcome_adjudication_required": false},
+    {"candidate_id": "HANGZHOU_u0280", "label": "unknown", "reviewers_agree": false, "primary_label": "unknown", "independent_label": "relevant", "pre_outcome_adjudication_required": true},
+    {"candidate_id": "HANGZHOU_u0420", "label": "not_relevant", "reviewers_agree": true, "pre_outcome_adjudication_required": false},
+    {"candidate_id": "WUHAN_u0134", "label": "unknown", "reviewers_agree": true, "pre_outcome_adjudication_required": false},
+    {"candidate_id": "WUHAN_u0171", "label": "relevant", "reviewers_agree": true, "pre_outcome_adjudication_required": false},
+    {"candidate_id": "WUHAN_u0217", "label": "relevant", "reviewers_agree": true, "pre_outcome_adjudication_required": false},
+    {"candidate_id": "WUHAN_u0298", "label": "not_relevant", "reviewers_agree": true, "pre_outcome_adjudication_required": false}
+  ],
+  "post_oracle_use": "Bidirectional model/review polarity disagreements are review triggers only. Every model-positive cause/evidence claim still requires post-output grounding review; no automatic pass is permitted from label comparison alone."
+}

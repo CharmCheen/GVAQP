@@ -1,0 +1,80 @@
+{
+  "status": "FROZEN_BEFORE_NEW_QUERY_ORACLE_EXECUTION",
+  "experiment_id": "AEQ_ORACLE_PREFLIGHT_V1",
+  "purpose": "test parse validity and identical-input stability before authorizing the full 1475-unit operational oracle",
+  "query_id": "Q_DRIVER_RESPONSE_V1",
+  "config_path": "outputs/accelerated_event_query_v1/configs/stage1_freeze_v1.json",
+  "unit_grid_path": "outputs/accelerated_event_query_v1/video_manifests/frozen_unit_grid_v1.csv",
+  "unit_grid_sha256": "570ba03ce2678ec9168fb213f92d4ef30ec8306369c93159827e33ea3cc5b908",
+  "selection_policy": {
+    "DALI": "one deterministic hash-ranked old-query positive, one old-query negative, one negative-to-positive boundary unit, and one positive-to-negative boundary unit",
+    "WUHAN": "one deterministic hash-ranked old-query positive, one old-query negative, one negative-to-positive boundary unit, and one positive-to-negative boundary unit",
+    "HANGZHOU": "content-blind quarter, half, and three-quarter grid units plus one SHA256-ranked content-blind unit; the three-quarter unit also preserves the prior disputed-positive location",
+    "semantic_use_of_old_labels": "stratification only; old labels are forbidden as outcomes, references, controller features, or accuracy truth for the new query"
+  },
+  "stratification_source_hashes": {
+    "DALI_old_generic_oracle": "407913b15e594da36b483217bf0bdb19475ea6222ae784ba91d199824eebc8b6",
+    "WUHAN_old_generic_oracle": "45bc4dc2d63e75512d655e528e71d29edaa3aa3ede7f2e8884734ae6d6224116"
+  },
+  "clips": [
+    {"video_id": "DALI", "unit_id": 437, "candidate_id": "DALI_u0437", "start_time": 4370.0, "end_time": 4380.0, "stratum": "old_query_negative_hash_ranked"},
+    {"video_id": "DALI", "unit_id": 501, "candidate_id": "DALI_u0501", "start_time": 5010.0, "end_time": 5020.0, "stratum": "old_query_positive_hash_ranked"},
+    {"video_id": "DALI", "unit_id": 548, "candidate_id": "DALI_u0548", "start_time": 5480.0, "end_time": 5490.0, "stratum": "old_query_negative_to_positive_boundary"},
+    {"video_id": "DALI", "unit_id": 555, "candidate_id": "DALI_u0555", "start_time": 5550.0, "end_time": 5560.0, "stratum": "old_query_positive_to_negative_boundary"},
+    {"video_id": "HANGZHOU", "unit_id": 140, "candidate_id": "HANGZHOU_u0140", "start_time": 1400.0, "end_time": 1410.0, "stratum": "content_blind_quarter"},
+    {"video_id": "HANGZHOU", "unit_id": 234, "candidate_id": "HANGZHOU_u0234", "start_time": 2340.0, "end_time": 2350.0, "stratum": "content_blind_sha256_ranked"},
+    {"video_id": "HANGZHOU", "unit_id": 280, "candidate_id": "HANGZHOU_u0280", "start_time": 2800.0, "end_time": 2810.0, "stratum": "content_blind_half"},
+    {"video_id": "HANGZHOU", "unit_id": 420, "candidate_id": "HANGZHOU_u0420", "start_time": 4200.0, "end_time": 4210.0, "stratum": "content_blind_three_quarter_prior_disputed_location"},
+    {"video_id": "WUHAN", "unit_id": 134, "candidate_id": "WUHAN_u0134", "start_time": 1340.0, "end_time": 1350.0, "stratum": "old_query_negative_hash_ranked"},
+    {"video_id": "WUHAN", "unit_id": 171, "candidate_id": "WUHAN_u0171", "start_time": 1710.0, "end_time": 1720.0, "stratum": "old_query_positive_hash_ranked"},
+    {"video_id": "WUHAN", "unit_id": 217, "candidate_id": "WUHAN_u0217", "start_time": 2170.0, "end_time": 2180.0, "stratum": "old_query_negative_to_positive_boundary"},
+    {"video_id": "WUHAN", "unit_id": 298, "candidate_id": "WUHAN_u0298", "start_time": 2980.0, "end_time": 2990.0, "stratum": "old_query_positive_to_negative_boundary"}
+  ],
+  "repeat_policy": {
+    "repeats_per_clip": 2,
+    "identical_prompt_frames_generation_and_seed": true,
+    "seed": 20260729,
+    "base_physical_calls": 24
+  },
+  "frame_sampling_sensitivity": {
+    "base_fps": 2.0,
+    "sensitivity_fps": 4.0,
+    "single_sensitivity_call_candidate_ids": [
+      "DALI_u0548",
+      "DALI_u0555",
+      "HANGZHOU_u0280",
+      "HANGZHOU_u0420",
+      "WUHAN_u0217",
+      "WUHAN_u0298"
+    ],
+    "selection_reason": "old-query transition boundaries or prior disputed/probe locations",
+    "sensitivity_physical_calls": 6,
+    "total_physical_calls": 30,
+    "gate": "zero high-confidence relevant/not_relevant polarity flips between the 2fps repeat consensus and 4fps call"
+  },
+  "pass_gate": {
+    "parse_success_fraction": 1.0,
+    "minimum_exact_repeat_label_agreement": 0.9,
+    "maximum_high_confidence_polarity_flips": 0,
+    "maximum_repeat_boundary_difference_seconds_for_relevant_pairs": 1.0,
+    "require_exact_repeat_response_set_for_relevant_pairs": true,
+    "unsupported_high_confidence_positive_policy": {
+      "review_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v1/BLINDED_CONTACT_SHEET_REVIEW_V1.json",
+      "model_positive_consensus": "both identical 2 fps base calls parse successfully, return relevant, and report high confidence",
+      "contradiction": "frozen review is not_relevant with medium or high confidence",
+      "unknown_policy": "review unknown never counts as a contradiction or negative",
+      "single_contradiction_action": "REVIEW_REQUIRED; no preflight pass without independent adjudication",
+      "systematic_failure": "at least two contradiction candidates across at least two videos",
+      "same_video_cluster_action": "REVIEW_REQUIRED"
+    },
+    "unknown_policy": "retain; never score as negative"
+  },
+  "failure_action": "do not launch the full oracle; choose oracle-protocol revision or INSUFFICIENT_EVIDENCE",
+  "pass_action": "launch full oracle, then test YOLO+K3 event-recall ceiling before controller learning",
+  "compute_estimate_from_prior_direct_measurement": {
+    "mean_32b_inference_seconds": 24.725762,
+    "estimated_total_preflight_inference_seconds": 741.77286,
+    "idealized_three_replica_wall_seconds": 247.25762,
+    "excludes": ["model load", "decode", "preprocess", "content hashing", "synchronization"]
+  }
+}

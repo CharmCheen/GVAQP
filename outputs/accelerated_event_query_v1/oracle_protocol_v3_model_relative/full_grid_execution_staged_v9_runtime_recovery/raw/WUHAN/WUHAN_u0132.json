@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0132:1786373266864410542",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "a0f4d39cac147a573a6bf1e7877928d0f85c1d09ec09c6d7ad0559a029eb2f9e",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "9298d87647a9750e46ffa02f2109cc6cd6676638b57e8b58a416aed26479436c",
+  "generated_token_ids_sha256": "3152f3699adabbcc2ca7b638f0ba764c25b0171f0416a3cec2d997f99f21be69",
+  "input_identity_sha256": "31cd8485541cbc88e351874bb2f47f145b4cc1dcfbc8c143ed096052724b582c",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "14944e2e2a0b2eab457ad6b1bf3b2c3cf6c4c7c79f69106429931b128288fe1f",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with red traffic signals visible in frames 0-9, indicating a required stop. Additionally, in frame 5, a scooter enters the intersection from the right, and by frame 6, multiple scooters and a white car are crossing the intersection, requiring the ego driver to slow down or stop to avoid collision. The presence of active traffic signals and crossing road users necessitates a noticeable braking or slowdown action.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "1e29a7e92a958d8204ef247dd5fc5b090520c7f92befa18fe4ba163a5a6eea77",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with red traffic signals visible in frames 0-9, indicating a required stop. Additionally, in frame 5, a scooter enters the intersection from the right, and by frame 6, multiple scooters and a white car are crossing the intersection, requiring the ego driver to slow down or stop to avoid collision. The presence of active traffic signals and crossing road users necessitates a noticeable braking or slowdown action.\"\n}",
+  "raw_response_sha256": "d8464a98f7b2a913252c2b7f88ca44614f3aec0ae7a719fe28986fdac33a2488",
+  "record_payload_sha256": "3b670188e2a9215d077e480f84254ce71c0304a31371c0f847a93e2d01be6749",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 16.994877714998438,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 18.702034449001076,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0132",
+  "unit_ordinal": 1260,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

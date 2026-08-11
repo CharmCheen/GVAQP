@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0204:1786374678146575315",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "89877ff1e58248dfc58dbf549fd8c984700169e2928c635ba6097e13d601ab7b",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "425d017cf5222772891f9b20485540b40963cb6e1f2e674bca37b8874871f5db",
+  "generated_token_ids_sha256": "82354c023bf6cb0aad2d4933193a209ce9b687fefd703866badb92e3caae2800",
+  "input_identity_sha256": "6a36cb6346c13bde422e24d83116952a027cf05acc793ee307c3df659cbfdea7",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "d50bb6048d7c3ed4dfe0d3c12413394979c22cee9dc0d1cbedfa0bf1f167d5c2",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a white sedan (license plate \u4e91L BE969) in steady traffic flow. There are no sudden changes in speed or lane position from the lead vehicle, no visible obstacles in the path, and no traffic signals or signs requiring immediate braking or avoidance. The road ahead is clear with multiple lanes of traffic moving forward, and no road users are entering or threatening the ego path. The traffic conditions are typical for urban driving with no marked response required.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "c7ad14a9195afb187401c5c8fc2600cc21cb142de9df2eac477abbef982775f0",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a white sedan (license plate \u4e91L BE969) in steady traffic flow. There are no sudden changes in speed or lane position from the lead vehicle, no visible obstacles in the path, and no traffic signals or signs requiring immediate braking or avoidance. The road ahead is clear with multiple lanes of traffic moving forward, and no road users are entering or threatening the ego path. The traffic conditions are typical for urban driving with no marked response required.\"\n}",
+  "raw_response_sha256": "cdb482c21051166ab5784d17f9e7d2c56c7cc828627e3c2a70f82c585acc06a5",
+  "record_payload_sha256": "b7b983b714ebc38dd86e7fd7fd56e43527fe6505a0226a9e8cd20a9d8782a7d5",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 19.122710742012714,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 20.875844793001306,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0204",
+  "unit_ordinal": 204,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

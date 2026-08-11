@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0169:1786373991683909139",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "29a6b837d3b2a56fdb2ad20299cfe2190f4263d0f54b4cdbcb996fc02ffed9ba",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "d8c6d42f74b369a53ecbce7dd2f3d8f70b190c0d7e79d68906638e3c5d9c034d",
+  "generated_token_ids_sha256": "9690b941ab458d2e863e34fda109e5529526906907b92b2e20e9f64a72100cfe",
+  "input_identity_sha256": "5816290af1f81ab2cc2d52c5dc81746899ca76261a894e50943bf892a07e128c",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "8d9e0d3b725e89d1da9aa216ee37f1914ca2f786c50bd9b6b20b0e20171d4e05",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "As the ego vehicle approaches the intersection, multiple electric scooters and pedestrians are seen entering the crosswalk from the right side, directly into the path of the ego vehicle. Additionally, a white van is turning left from the left side, creating a potential conflict. The presence of these road users in the intersection requires the ego driver to slow down or brake to safely navigate the intersection without collision.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "7798b2bd4d9670c4ed1c47e36882320a6c72b60bd6f972dfa93b23c7245f3efc",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"As the ego vehicle approaches the intersection, multiple electric scooters and pedestrians are seen entering the crosswalk from the right side, directly into the path of the ego vehicle. Additionally, a white van is turning left from the left side, creating a potential conflict. The presence of these road users in the intersection requires the ego driver to slow down or brake to safely navigate the intersection without collision.\"\n}",
+  "raw_response_sha256": "48617f1b79dc7bcc3d00443bc533045b8baee286229e26a836025d4aeedd1a52",
+  "record_payload_sha256": "8cbc5dbbbb2cd8a054dd27f3c904c178df3694705e4bb599c7985a24defe2f02",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 15.909060310994391,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 17.615327999999863,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0169",
+  "unit_ordinal": 169,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

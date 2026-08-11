@@ -1,0 +1,45 @@
+{
+  "existing_full_scan_features_rejected": [
+    "outputs/scan_optimization_headroom_audit_v1/temporal_correlation_audit/unit_visible_features.csv",
+    "outputs/psvr_proxy_finalization_v0/psvr_physical/proxy_scores_all_347.csv"
+  ],
+  "forbidden_input_intersection": [],
+  "legal_preview_feature_artifacts": [
+    "preview/region_features/SELECTED.parquet",
+    "preview/operator_manifests/P0_SELECTION.json"
+  ],
+  "reason": "DERIVED_FROM_FULL_HIGH_FIDELITY_SCAN_OR_TRACKER",
+  "selected_feature_columns": [
+    "preview_sample_count",
+    "preview_expected_sample_count",
+    "preview_support_fraction",
+    "luma_mean__mean",
+    "luma_mean__std",
+    "luma_mean__max",
+    "luma_std__mean",
+    "luma_std__std",
+    "luma_std__max",
+    "entropy__mean",
+    "entropy__std",
+    "entropy__max",
+    "edge_density__mean",
+    "edge_density__std",
+    "edge_density__max",
+    "saturation_mean__mean",
+    "saturation_mean__std",
+    "saturation_mean__max",
+    "center_border_contrast__mean",
+    "center_border_contrast__std",
+    "center_border_contrast__max",
+    "frame_diff_mean__mean",
+    "frame_diff_mean__std",
+    "frame_diff_mean__max",
+    "histogram_l1_change__mean",
+    "histogram_l1_change__std",
+    "histogram_l1_change__max"
+  ],
+  "selected_main_model_inputs": [
+    "luma_std__std"
+  ],
+  "status": "PASS"
+}

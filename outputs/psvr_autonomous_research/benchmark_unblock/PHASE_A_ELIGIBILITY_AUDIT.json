@@ -1,0 +1,464 @@
+{
+  "B0_A1_A4_EXECUTION": "PROHIBITED",
+  "CONFIRMATORY_EXECUTION_STATUS": "PAUSED_INPUT_REQUIRED",
+  "NEW_QUALIFIED_VIDEOS": 1,
+  "audit_id": "ONLINE_MACRO_ACTIVITY_PHASE_A_BLIND_v1",
+  "candidate_discovery": {
+    "input_root": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data",
+    "new_candidates": [
+      "杭州.mp4",
+      "杭州YouTube.mp4"
+    ],
+    "old_manifest": "/qiuyeqing/llama_prl/G-ARC/outputs/psvr_autonomous_research/benchmark_unblock/VIDEO_CANDIDATES.csv"
+  },
+  "created_utc": "2026-07-24T09:53:28.955453+00:00",
+  "criteria": [
+    "RAW_CONTIGUOUS_VIDEO",
+    "FULL_TIMELINE_AVAILABLE",
+    "SOURCE_DECLARATION_PRESENT",
+    "SOURCE_IDENTITY_VERIFIABLE",
+    "ORIGINAL_SESSION_ID_VERIFIABLE",
+    "SESSION_INDEPENDENT_FROM_OTHER_NEW_VIDEO",
+    "INDEPENDENT_FROM_EXISTING_DESIGN_VIDEOS",
+    "INDEPENDENT_FROM_LONG_VIDEO_DATASET3",
+    "NOT_EVENT_CENTERED_CLIP",
+    "NOT_PRECLIPPED_BY_TARGET_EVENT",
+    "VIDEO_HASH_VALID",
+    "METADATA_VALID",
+    "RANDOM_SEEK_SUPPORTED",
+    "ALL_SOURCE_RANGES_DECODABLE",
+    "FIXED_SCAN_OPERATOR_SMOKE_TEST"
+  ],
+  "selection_blindness": {
+    "forbidden_inputs_not_opened": [
+      "held-out reference events",
+      "full-context Oracle results",
+      "candidate-event mappings",
+      "method outputs",
+      "B0/A1/A2/A3/A4 metrics",
+      "event count",
+      "target-event density"
+    ],
+    "status": "PASS"
+  },
+  "selection_order_frozen": true,
+  "selection_order_sha256": "c255818ca1c453858af6f3ad0bba2887f75bb2843c9f7049511f09a11e43dee8",
+  "videos": [
+    {
+      "INDEPENDENT_WEB_VERIFICATION": "NOT_AVAILABLE",
+      "PROVENANCE_EVIDENCE_TYPE": "PROJECT_OWNER_ATTESTATION",
+      "criteria": {
+        "ALL_SOURCE_RANGES_DECODABLE": {
+          "reason": "full sequential decode of all video bytes",
+          "status": "PASS"
+        },
+        "FIXED_SCAN_OPERATOR_SMOKE_TEST": {
+          "reason": "two identical unit-local frozen SCAN calls",
+          "status": "PASS"
+        },
+        "FULL_TIMELINE_AVAILABLE": {
+          "reason": "monotonic packet DTS",
+          "status": "PASS"
+        },
+        "INDEPENDENT_FROM_EXISTING_DESIGN_VIDEOS": {
+          "reason": "explicit project-owner attestation bound to the frozen video hash",
+          "status": "PASS"
+        },
+        "INDEPENDENT_FROM_LONG_VIDEO_DATASET3": {
+          "reason": "explicit project-owner attestation bound to the frozen video hash",
+          "status": "PASS"
+        },
+        "METADATA_VALID": {
+          "reason": "ffprobe metadata",
+          "status": "PASS"
+        },
+        "NOT_EVENT_CENTERED_CLIP": {
+          "reason": "original_continuous_capture plus admissible provenance evidence required",
+          "status": "PASS"
+        },
+        "NOT_PRECLIPPED_BY_TARGET_EVENT": {
+          "reason": "null parent and derivation fields required",
+          "status": "PASS"
+        },
+        "ORIGINAL_SESSION_ID_VERIFIABLE": {
+          "reason": "capture_session_id plus admissible provenance evidence required",
+          "status": "PASS"
+        },
+        "RANDOM_SEEK_SUPPORTED": {
+          "reason": "12 deterministic ffmpeg seeks",
+          "status": "PASS"
+        },
+        "RAW_CONTIGUOUS_VIDEO": {
+          "reason": "complete decode plus monotonic packet timeline; provenance remains separately required",
+          "status": "PASS"
+        },
+        "SESSION_INDEPENDENT_FROM_OTHER_NEW_VIDEO": {
+          "reason": "explicit project-owner attestation bound to the frozen video hash",
+          "status": "PASS"
+        },
+        "SOURCE_DECLARATION_PRESENT": {
+          "reason": "",
+          "status": "PASS"
+        },
+        "SOURCE_IDENTITY_VERIFIABLE": {
+          "reason": "a source asset identifier and independent verification are required",
+          "status": "PASS"
+        },
+        "VIDEO_HASH_VALID": {
+          "reason": "exact hash checked against old blind manifest",
+          "status": "PASS"
+        }
+      },
+      "eligibility_status": "QUALIFIED_OWNER_ATTESTED",
+      "exclusion_reason": "",
+      "metadata": {
+        "avg_frame_rate": "84008500/2800283",
+        "codec": "h264",
+        "duration_seconds": 5600.566,
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_tags": {
+          "compatible_brands": "isomiso2avc1mp41",
+          "description": "Packed by Bilibili XCoder v2.0.2",
+          "encoder": "Lavf61.9.107",
+          "major_brand": "isom",
+          "minor_version": "512"
+        },
+        "height": 480,
+        "nb_frames": "168017",
+        "status": "PASS",
+        "video_tags": {
+          "handler_name": "Bento4 Video Handler",
+          "language": "und",
+          "vendor_id": "[0][0][0][0]"
+        },
+        "width": 852
+      },
+      "selection_order": 1,
+      "source_declaration_error": null,
+      "source_declaration_sha256": "5e22606f9bd66f34e240025e3c651051601fa3272b3b0dd657e77c28aa85ac6c",
+      "source_json_path": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/杭州.mp4.source.json",
+      "technical_evidence": {
+        "full_decode": {
+          "decoder_error": "",
+          "elapsed_seconds": 91.11865447834134,
+          "status": "PASS"
+        },
+        "packet_timeline": {
+          "dts_regressions": 0,
+          "error": "",
+          "packet_count": 168017,
+          "status": "PASS"
+        },
+        "random_seeks": {
+          "rows": [
+            {
+              "elapsed_seconds": 0.17272356152534485,
+              "error": "",
+              "ratio": 0.001,
+              "status": "PASS",
+              "timestamp_seconds": 5.600566
+            },
+            {
+              "elapsed_seconds": 0.16860245168209076,
+              "error": "",
+              "ratio": 0.01,
+              "status": "PASS",
+              "timestamp_seconds": 56.00566
+            },
+            {
+              "elapsed_seconds": 0.15355969592928886,
+              "error": "",
+              "ratio": 0.05,
+              "status": "PASS",
+              "timestamp_seconds": 280.0283
+            },
+            {
+              "elapsed_seconds": 0.1831674687564373,
+              "error": "",
+              "ratio": 0.13,
+              "status": "PASS",
+              "timestamp_seconds": 728.07358
+            },
+            {
+              "elapsed_seconds": 0.1584445908665657,
+              "error": "",
+              "ratio": 0.25,
+              "status": "PASS",
+              "timestamp_seconds": 1400.1415
+            },
+            {
+              "elapsed_seconds": 0.16930260881781578,
+              "error": "",
+              "ratio": 0.37,
+              "status": "PASS",
+              "timestamp_seconds": 2072.2094199999997
+            },
+            {
+              "elapsed_seconds": 0.14929190650582314,
+              "error": "",
+              "ratio": 0.5,
+              "status": "PASS",
+              "timestamp_seconds": 2800.283
+            },
+            {
+              "elapsed_seconds": 0.16538606584072113,
+              "error": "",
+              "ratio": 0.63,
+              "status": "PASS",
+              "timestamp_seconds": 3528.35658
+            },
+            {
+              "elapsed_seconds": 0.14143845066428185,
+              "error": "",
+              "ratio": 0.75,
+              "status": "PASS",
+              "timestamp_seconds": 4200.4245
+            },
+            {
+              "elapsed_seconds": 0.15858037024736404,
+              "error": "",
+              "ratio": 0.87,
+              "status": "PASS",
+              "timestamp_seconds": 4872.49242
+            },
+            {
+              "elapsed_seconds": 0.13985354453325272,
+              "error": "",
+              "ratio": 0.95,
+              "status": "PASS",
+              "timestamp_seconds": 5320.5377
+            },
+            {
+              "elapsed_seconds": 0.16719919070601463,
+              "error": "",
+              "ratio": 0.99,
+              "status": "PASS",
+              "timestamp_seconds": 5544.56034
+            }
+          ],
+          "status": "PASS"
+        },
+        "scan_smoke": {
+          "operator": "frozen_partial_scan_pilot_v1.ScanEngine",
+          "operator_sha256": "51dc575702d10c490dbe63955326b3552e205191a105202d844b97090e711e0a",
+          "repeat_hashes": [
+            "021309d6bc79ca55878010b74caff1cfeead97400f984eb6ea7da6038d906517",
+            "021309d6bc79ca55878010b74caff1cfeead97400f984eb6ea7da6038d906517"
+          ],
+          "status": "PASS"
+        }
+      },
+      "video_filename": "杭州.mp4",
+      "video_path": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/杭州.mp4",
+      "video_sha256": "69649cd2fbd9d6fde3786627781f8f8ee959b4571c40b6d512d7e574cf4c0155"
+    },
+    {
+      "INDEPENDENT_WEB_VERIFICATION": "NOT_ESTABLISHED",
+      "PROVENANCE_EVIDENCE_TYPE": "NOT_QUALIFIED",
+      "criteria": {
+        "ALL_SOURCE_RANGES_DECODABLE": {
+          "reason": "full sequential decode of all video bytes",
+          "status": "UNVERIFIED_OR_FAIL"
+        },
+        "FIXED_SCAN_OPERATOR_SMOKE_TEST": {
+          "reason": "two identical unit-local frozen SCAN calls",
+          "status": "PASS"
+        },
+        "FULL_TIMELINE_AVAILABLE": {
+          "reason": "monotonic packet DTS",
+          "status": "PASS"
+        },
+        "INDEPENDENT_FROM_EXISTING_DESIGN_VIDEOS": {
+          "reason": "requires verifiable source/session identity",
+          "status": "UNVERIFIED_OR_FAIL"
+        },
+        "INDEPENDENT_FROM_LONG_VIDEO_DATASET3": {
+          "reason": "requires verifiable source/session identity",
+          "status": "UNVERIFIED_OR_FAIL"
+        },
+        "METADATA_VALID": {
+          "reason": "ffprobe metadata",
+          "status": "PASS"
+        },
+        "NOT_EVENT_CENTERED_CLIP": {
+          "reason": "original_continuous_capture plus admissible provenance evidence required",
+          "status": "UNVERIFIED_OR_FAIL"
+        },
+        "NOT_PRECLIPPED_BY_TARGET_EVENT": {
+          "reason": "null parent and derivation fields required",
+          "status": "UNVERIFIED_OR_FAIL"
+        },
+        "ORIGINAL_SESSION_ID_VERIFIABLE": {
+          "reason": "capture_session_id plus admissible provenance evidence required",
+          "status": "UNVERIFIED_OR_FAIL"
+        },
+        "RANDOM_SEEK_SUPPORTED": {
+          "reason": "12 deterministic ffmpeg seeks",
+          "status": "UNVERIFIED_OR_FAIL"
+        },
+        "RAW_CONTIGUOUS_VIDEO": {
+          "reason": "complete decode plus monotonic packet timeline; provenance remains separately required",
+          "status": "UNVERIFIED_OR_FAIL"
+        },
+        "SESSION_INDEPENDENT_FROM_OTHER_NEW_VIDEO": {
+          "reason": "distinct declared capture_session_id required",
+          "status": "UNVERIFIED_OR_FAIL"
+        },
+        "SOURCE_DECLARATION_PRESENT": {
+          "reason": "source sidecar missing or invalid",
+          "status": "UNVERIFIED_OR_FAIL"
+        },
+        "SOURCE_IDENTITY_VERIFIABLE": {
+          "reason": "a source asset identifier and independent verification are required",
+          "status": "UNVERIFIED_OR_FAIL"
+        },
+        "VIDEO_HASH_VALID": {
+          "reason": "exact hash checked against old blind manifest",
+          "status": "PASS"
+        }
+      },
+      "eligibility_status": "UNVERIFIED_OR_FAIL",
+      "exclusion_reason": "ALL_SOURCE_RANGES_DECODABLE; INDEPENDENT_FROM_EXISTING_DESIGN_VIDEOS; INDEPENDENT_FROM_LONG_VIDEO_DATASET3; NOT_EVENT_CENTERED_CLIP; NOT_PRECLIPPED_BY_TARGET_EVENT; ORIGINAL_SESSION_ID_VERIFIABLE; RANDOM_SEEK_SUPPORTED; RAW_CONTIGUOUS_VIDEO; SESSION_INDEPENDENT_FROM_OTHER_NEW_VIDEO; SOURCE_DECLARATION_PRESENT; SOURCE_IDENTITY_VERIFIABLE",
+      "metadata": {
+        "avg_frame_rate": "84008500/2800283",
+        "codec": "h264",
+        "duration_seconds": 5600.566,
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_tags": {
+          "compatible_brands": "isomiso2avc1mp41",
+          "description": "Packed by Bilibili XCoder v2.0.2",
+          "encoder": "Lavf59.27.100",
+          "major_brand": "isom",
+          "minor_version": "512"
+        },
+        "height": 720,
+        "nb_frames": "168017",
+        "status": "PASS",
+        "video_tags": {
+          "handler_name": "VideoHandler",
+          "language": "und",
+          "vendor_id": "[0][0][0][0]"
+        },
+        "width": 1280
+      },
+      "selection_order": 2,
+      "source_declaration_error": "MISSING_SOURCE_DECLARATION",
+      "source_declaration_sha256": null,
+      "source_json_path": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/杭州YouTube.mp4.source.json",
+      "technical_evidence": {
+        "full_decode": {
+          "decoder_error": "[h264 @ 0x5573ac28a340] Invalid NAL unit size (-1710503900 > 1725).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 1729\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (1534735258 > 3315).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 3319\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (-861271256 > 1652).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 1656\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (259222518 > 1714).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 1718\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (-1770216339 > 6043).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 6047\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (569069917 > 2501).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 2505\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (972711030 > 1571).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 1575\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (1739165126 > 1191).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 1195\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (2125054644 > 2877).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 2881\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (1459624136 > 1524).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 1528\n[h264 @ 0x5573ac27b940] Invalid NAL unit size (-1710503900 > 1725).\n[h264 @ 0x5573ac27b940] Error splitting the input into NAL units.\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (-404387775 > 1569).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 1573\n[h264 @ 0x5573abf15b80] Invalid NAL unit size (1534735258 > 3315).\n[h264 @ 0x5573abf15b80] Error splitting the input into NAL units.\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (-1582854625 > 28952).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 28956\n[h264 @ 0x5573abf291c0] Invalid NAL unit size (-861271256 > 1652).\n[h264 @ 0x5573abf291c0] Error splitting the input into NAL units.\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (1402821695 > 9768).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 9772\n[h264 @ 0x5573abf3c8c0] Invalid NAL unit size (259222518 > 1714).\n[h264 @ 0x5573abf3c8c0] Error splitting the input into NAL units.\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (-908332375 > 5582).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 5586\n[h264 @ 0x5573abf4ff80] Invalid NAL unit size (-1770216339 > 6043).\n[h264 @ 0x5573abf4ff80] Error splitting the input into NAL units.\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (1199683651 > 2865).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 2869\n[h264 @ 0x5573abf63640] Invalid NAL unit size (569069917 > 2501).\n[h264 @ 0x5573abf63640] Error splitting the input into NAL units.\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (1602898395 > 1495).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 1499\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (669573041 > 1558).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 1562\n[h264 @ 0x5573abf76d00] Invalid NAL unit size (972711030 > 1571).\n[h264 @ 0x5573abf76d00] Error splitting the input into NAL units.\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (-86539609 > 2785).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 2789\n[h264 @ 0x5573abf8a3c0] Invalid NAL unit size (1739165126 > 1191).\n[h264 @ 0x5573abf8a3c0] Error splitting the input into NAL units.\n[h264 @ 0x5573abfb0ac0] Invalid NAL unit size (2125054644 > 2877).\n[h264 @ 0x5573abfb0ac0] Error splitting the input into NAL units.\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (1947841440 > 1486).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 1490\n[h264 @ 0x5573ac28a340] Invalid NAL unit size (1918618894 > 1500).\n[h264 @ 0x5573ac28a340] missing picture in access unit with size 1504\n[h264 @ 0x5573abfdd700] Invalid NAL unit size (1459624136 > 1524).\n[h264 @ 0x5573abfdd700] Error splitting the input into NAL units.\n[h264 @ 0x5573abf03440] Inv\n[diagnostic_truncated original_bytes=4211 sha256=bd5b3106636900ba210e8901932b892c3b587ce81881c0fa45714a4d53126f55]",
+          "elapsed_seconds": 19.72525877505541,
+          "status": "FAIL"
+        },
+        "packet_timeline": {
+          "dts_regressions": 0,
+          "error": "[h264 @ 0x55ff03587340] Invalid NAL unit size (-1710503900 > 1725).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1729\n[h264 @ 0x55ff03587340] Invalid NAL unit size (1534735258 > 3315).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 3319\n[h264 @ 0x55ff03587340] Invalid NAL unit size (-861271256 > 1652).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1656\n[h264 @ 0x55ff03587340] Invalid NAL unit size (259222518 > 1714).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1718\n[h264 @ 0x55ff03587340] Invalid NAL unit size (-1770216339 > 6043).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 6047\n[h264 @ 0x55ff03587340] Invalid NAL unit size (569069917 > 2501).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 2505\n[h264 @ 0x55ff03587340] Invalid NAL unit size (972711030 > 1571).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1575\n[h264 @ 0x55ff03587340] Invalid NAL unit size (1739165126 > 1191).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1195\n[h264 @ 0x55ff03587340] Invalid NAL unit size (2125054644 > 2877).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 2881\n[h264 @ 0x55ff03587340] Invalid NAL unit size (1459624136 > 1524).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1528\n[h264 @ 0x55ff03587340] Invalid NAL unit size (-404387775 > 1569).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1573\n[h264 @ 0x55ff03587340] Invalid NAL unit size (-1582854625 > 28952).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 28956\n[h264 @ 0x55ff03587340] Invalid NAL unit size (1402821695 > 9768).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 9772\n[h264 @ 0x55ff03587340] Invalid NAL unit size (-908332375 > 5582).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 5586\n[h264 @ 0x55ff03587340] Invalid NAL unit size (1199683651 > 2865).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 2869\n[h264 @ 0x55ff03587340] Invalid NAL unit size (1602898395 > 1495).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1499\n[h264 @ 0x55ff03587340] Invalid NAL unit size (669573041 > 1558).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1562\n[h264 @ 0x55ff03587340] Invalid NAL unit size (-86539609 > 2785).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 2789\n[h264 @ 0x55ff03587340] Invalid NAL unit size (1947841440 > 1486).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1490\n[h264 @ 0x55ff03587340] Invalid NAL unit size (1918618894 > 1500).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1504\n[h264 @ 0x55ff03587340] Invalid NAL unit size (-248518817 > 4676).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 4680\n[h264 @ 0x55ff03587340] Invalid NAL unit size (-2112898236 > 2621).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 2625\n[h264 @ 0x55ff03587340] Invalid NAL unit size (-920368070 > 1481).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1485\n[h264 @ 0x55ff03587340] Invalid NAL unit size (-1991748898 > 1432).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1436\n[h264 @ 0x55ff03587340] Invalid NAL unit size (-1584829175 > 2322).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 2326\n[h264 @ 0x55ff03587340] Invalid NAL unit size (-1195859394 > 1419).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1423\n[h264 @ 0x55ff03587340] Invalid NAL unit size (-2034663751 > 1470).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 1474\n[h264 @ 0x55ff03587340] Invalid NAL unit size (1548815110 > 23557).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 23561\n[h264 @ 0x55ff03587340] Invalid NAL unit size (1607499504 > 9672).\n[h264 @ 0x55ff03587340] missing picture in access unit with size 9676\n[h264 @ 0x55ff03587340] Invalid NAL unit size (-2022142039 > 5146).\n[h264 @ 0x55ff03587340] missing picture in acces\n[diagnostic_truncated original_bytes=4211 sha256=45943aa971f0ecc6a8c5220f35385bbad156b5610d73cf6a4782895a473cd7c8]",
+          "packet_count": 168017,
+          "status": "PASS"
+        },
+        "random_seeks": {
+          "rows": [
+            {
+              "elapsed_seconds": 0.2687012553215027,
+              "error": "",
+              "ratio": 0.001,
+              "status": "PASS",
+              "timestamp_seconds": 5.600566
+            },
+            {
+              "elapsed_seconds": 0.220642551779747,
+              "error": "",
+              "ratio": 0.01,
+              "status": "PASS",
+              "timestamp_seconds": 56.00566
+            },
+            {
+              "elapsed_seconds": 0.17112349346280098,
+              "error": "",
+              "ratio": 0.05,
+              "status": "PASS",
+              "timestamp_seconds": 280.0283
+            },
+            {
+              "elapsed_seconds": 5.31961639598012,
+              "error": "[h264 @ 0x5637c837e1c0] Invalid NAL unit size (875512150 > 29089).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 29093\n[h264 @ 0x5637c8095480] Invalid NAL unit size (875512150 > 29089).\n[h264 @ 0x5637c8095480] Error splitting the input into NAL units.\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (1204313508 > 31468).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 31472\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (-1738964071 > 21401).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 21405\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (-782342586 > 14787).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 14791\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (332509124 > 9100).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 9104\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (1802313206 > 4551).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 4555\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (1016121084 > 4811).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 4815\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (1974907626 > 9327).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 9331\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (222990048 > 4615).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 4619\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (-372734150 > 4877).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 4881\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (-2130306230 > 15564).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 15568\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (-961478938 > 9304).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 9308\n[h264 @ 0x5637c7ff7c40] Invalid NAL unit size (1204313508 > 31468).\n[h264 @ 0x5637c7ff7c40] Error splitting the input into NAL units.\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (333534637 > 4646).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 4650\n[h264 @ 0x5637c80964c0] Invalid NAL unit size (-1738964071 > 21401).\n[h264 @ 0x5637c80964c0] Error splitting the input into NAL units.\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (-1073959584 > 4665).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 4669\n[h264 @ 0x5637c7fdd300] Invalid NAL unit size (-782342586 > 14787).\n[h264 @ 0x5637c7fdd300] Error splitting the input into NAL units.\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (-1130164212 > 9076).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 9080\n[h264 @ 0x5637c7ff0880] Invalid NAL unit size (332509124 > 9100).\n[h264 @ 0x5637c7ff0880] Error splitting the input into NAL units.\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (262704260 > 4761).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 4765\n[h264 @ 0x5637c8308400] Invalid NAL unit size (1802313206 > 4551).\n[h264 @ 0x5637c8308400] Error splitting the input into NAL units.\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (-783529069 > 4365).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 4369\n[h264 @ 0x5637c831ba00] Invalid NAL unit size (1016121084 > 4811).\n[h264 @ 0x5637c831ba00] Error splitting the input into NAL units.\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (438635195 > 31295).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 31299\n[h264 @ 0x5637c832f100] Invalid NAL unit size (1974907626 > 9327).\n[h264 @ 0x5637c832f100] Error splitting the input into NAL units.\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (-1494023166 > 22971).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 22975\n[h264 @ 0x5637c83427c0] Invalid NAL unit size (222990048 > 4615).\n[h264 @ 0x5637c83427c0] Error splitting the input into NAL units.\n[h264 @ 0x5637c837e1c0] Invalid NAL unit size (2071534048 > 16684).\n[h264 @ 0x5637c837e1c0] missing picture in access unit with size 16688\n[h264 @ 0x5637c8355e80] Invalid NAL unit size (-372734150 > 4877).\n[h264 @ 0x5637c8355e80] Error splitting the input into NAL units.\n[h264 @ 0\n[diagnostic_truncated original_bytes=4211 sha256=c0aab4ad78a44c1b4036ae546c3ddc101d98c349f97a2fb3fd1b8c21078185cb]",
+              "ratio": 0.13,
+              "status": "FAIL",
+              "timestamp_seconds": 728.07358
+            },
+            {
+              "elapsed_seconds": 5.476667538285255,
+              "error": "[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (875512150 > 34951).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 34955\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (-801983639 > 35586).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 35590\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (-879409358 > 22171).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 22175\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (-38976875 > 17689).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 17693\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (1641726440 > 10768).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 10772\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (1404255163 > 5395).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 5399\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (-830372159 > 5449).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 5453\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (-384056964 > 10202).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 10206\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (-1595506139 > 5572).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 5576\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (-176080827 > 5216).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 5220\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (1303199087 > 16840).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 16844\n[h264 @ 0x55aa2f48a480] Invalid NAL unit size (875512150 > 34951).\n[h264 @ 0x55aa2f48a480] Error splitting the input into NAL units.\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (-121446588 > 10235).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 10239\n[h264 @ 0x55aa2f3ecc40] Invalid NAL unit size (-801983639 > 35586).\n[h264 @ 0x55aa2f3ecc40] Error splitting the input into NAL units.\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (15734568 > 5418).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 5422\n[h264 @ 0x55aa2f48b4c0] Invalid NAL unit size (-879409358 > 22171).\n[h264 @ 0x55aa2f48b4c0] Error splitting the input into NAL units.\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (-1423661786 > 5423).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 5427\n[h264 @ 0x55aa2f3d2300] Invalid NAL unit size (-38976875 > 17689).\n[h264 @ 0x55aa2f3d2300] Error splitting the input into NAL units.\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (1194979391 > 10767).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 10771\n[h264 @ 0x55aa2f3e5880] Invalid NAL unit size (1641726440 > 10768).\n[h264 @ 0x55aa2f3e5880] Error splitting the input into NAL units.\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (-472015258 > 5067).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 5071\n[h264 @ 0x55aa2f6fd400] Invalid NAL unit size (1404255163 > 5395).\n[h264 @ 0x55aa2f6fd400] Error splitting the input into NAL units.\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (-1135880597 > 5075).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 5079\n[h264 @ 0x55aa2f710a00] Invalid NAL unit size (-830372159 > 5449).\n[h264 @ 0x55aa2f710a00] Error splitting the input into NAL units.\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (933421660 > 34907).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 34911\n[h264 @ 0x55aa2f724100] Invalid NAL unit size (-384056964 > 10202).\n[h264 @ 0x55aa2f724100] Error splitting the input into NAL units.\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (-1835066573 > 24133).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 24137\n[h264 @ 0x55aa2f7377c0] Invalid NAL unit size (-1595506139 > 5572).\n[h264 @ 0x55aa2f7377c0] Error splitting the input into NAL units.\n[h264 @ 0x55aa2f7731c0] Invalid NAL unit size (-406968261 > 17340).\n[h264 @ 0x55aa2f7731c0] missing picture in access unit with size 17344\n[h264 @ 0x55aa2f74ae80] Invalid NAL unit size (-176080827 > 5216).\n[h264 @ 0x55aa2f74ae80] Error splitting the input into NAL units\n[diagnostic_truncated original_bytes=4211 sha256=b4319af673f7deeb365321d58990485ac462d220e2e146c6e2286e931d011a6f]",
+              "ratio": 0.25,
+              "status": "FAIL",
+              "timestamp_seconds": 1400.1415
+            },
+            {
+              "elapsed_seconds": 3.9117818400263786,
+              "error": "[h264 @ 0x55565edbc1c0] Invalid NAL unit size (875512150 > 40041).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 40045\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (-1149796158 > 38675).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 38679\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (-2006391007 > 18331).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 18335\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (-416539815 > 10247).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 10251\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (847178296 > 4762).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 4766\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (435822555 > 1671).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 1675\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (-1988279301 > 1904).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 1908\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (-373779910 > 5023).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 5027\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (1974869333 > 1833).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 1837\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (1635349530 > 1713).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 1717\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (-1758863042 > 10656).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 10660\n[h264 @ 0x55565ead3480] Invalid NAL unit size (875512150 > 40041).\n[h264 @ 0x55565ead3480] Error splitting the input into NAL units.\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (-1270835994 > 4854).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 4858\n[h264 @ 0x55565ea35c40] Invalid NAL unit size (-1149796158 > 38675).\n[h264 @ 0x55565ea35c40] Error splitting the input into NAL units.\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (-2061153434 > 1766).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 1770\n[h264 @ 0x55565ead44c0] Invalid NAL unit size (-2006391007 > 18331).\n[h264 @ 0x55565ead44c0] Error splitting the input into NAL units.\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (1465952088 > 1932).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 1936\n[h264 @ 0x55565ea1b300] Invalid NAL unit size (-416539815 > 10247).\n[h264 @ 0x55565ea1b300] Error splitting the input into NAL units.\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (-1491016691 > 4965).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 4969\n[h264 @ 0x55565ea2e880] Invalid NAL unit size (847178296 > 4762).\n[h264 @ 0x55565ea2e880] Error splitting the input into NAL units.\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (175026292 > 1566).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 1570\n[h264 @ 0x55565ed46400] Invalid NAL unit size (435822555 > 1671).\n[h264 @ 0x55565ed46400] Error splitting the input into NAL units.\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (-2052670787 > 1761).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 1765\n[h264 @ 0x55565ed59a00] Invalid NAL unit size (-1988279301 > 1904).\n[h264 @ 0x55565ed59a00] Error splitting the input into NAL units.\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (-1668900284 > 41514).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 41518\n[h264 @ 0x55565ed6d100] Invalid NAL unit size (-373779910 > 5023).\n[h264 @ 0x55565ed6d100] Error splitting the input into NAL units.\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (1866345775 > 17942).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 17946\n[h264 @ 0x55565ed807c0] Invalid NAL unit size (1974869333 > 1833).\n[h264 @ 0x55565ed807c0] Error splitting the input into NAL units.\n[h264 @ 0x55565edbc1c0] Invalid NAL unit size (1789550474 > 10671).\n[h264 @ 0x55565edbc1c0] missing picture in access unit with size 10675\n[h264 @ 0x55565ed93e80] Invalid NAL unit size (1635349530 > 1713).\n[h264 @ 0x55565ed93e80] Error splitting the input into NAL units.\n[\n[diagnostic_truncated original_bytes=4211 sha256=14a4bcb25c1961f546455bb82c92b85b83e596ca25c84ff27914a53a304e52ab]",
+              "ratio": 0.37,
+              "status": "FAIL",
+              "timestamp_seconds": 2072.2094199999997
+            },
+            {
+              "elapsed_seconds": 3.326975788921118,
+              "error": "[h264 @ 0x56157a68a1c0] Invalid NAL unit size (875512150 > 41116).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 41120\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (-1197444596 > 38194).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 38198\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (1207259656 > 14805).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 14809\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (844672882 > 8358).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 8362\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (-656459313 > 4330).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 4334\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (-142623475 > 2009).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 2013\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (958425266 > 1895).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 1899\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (-628310134 > 4024).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 4028\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (534105469 > 1856).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 1860\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (-1718922014 > 2017).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 2021\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (-292500852 > 8105).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 8109\n[h264 @ 0x56157a3a1480] Invalid NAL unit size (875512150 > 41116).\n[h264 @ 0x56157a3a1480] Error splitting the input into NAL units.\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (-1834015902 > 4266).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 4270\n[h264 @ 0x56157a303c40] Invalid NAL unit size (-1197444596 > 38194).\n[h264 @ 0x56157a303c40] Error splitting the input into NAL units.\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (732022570 > 2075).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 2079\n[h264 @ 0x56157a3a24c0] Invalid NAL unit size (1207259656 > 14805).\n[h264 @ 0x56157a3a24c0] Error splitting the input into NAL units.\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (39919560 > 2125).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 2129\n[h264 @ 0x56157a2e9300] Invalid NAL unit size (844672882 > 8358).\n[h264 @ 0x56157a2e9300] Error splitting the input into NAL units.\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (-37475290 > 4030).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 4034\n[h264 @ 0x56157a2fc880] Invalid NAL unit size (-656459313 > 4330).\n[h264 @ 0x56157a2fc880] Error splitting the input into NAL units.\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (1260470980 > 2230).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 2234\n[h264 @ 0x56157a614400] Invalid NAL unit size (-142623475 > 2009).\n[h264 @ 0x56157a614400] Error splitting the input into NAL units.\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (-1178619578 > 2182).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 2186\n[h264 @ 0x56157a627a00] Invalid NAL unit size (958425266 > 1895).\n[h264 @ 0x56157a627a00] Error splitting the input into NAL units.\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (1480733735 > 37909).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 37913\n[h264 @ 0x56157a63b100] Invalid NAL unit size (-628310134 > 4024).\n[h264 @ 0x56157a63b100] Error splitting the input into NAL units.\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (406097546 > 13501).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 13505\n[h264 @ 0x56157a64e7c0] Invalid NAL unit size (534105469 > 1856).\n[h264 @ 0x56157a64e7c0] Error splitting the input into NAL units.\n[h264 @ 0x56157a68a1c0] Invalid NAL unit size (60080148 > 8158).\n[h264 @ 0x56157a68a1c0] missing picture in access unit with size 8162\n[h264 @ 0x56157a661e80] Invalid NAL unit size (-1718922014 > 2017).\n[h264 @ 0x56157a661e80] Error splitting the input into NAL units.\n[h264 @ 0x56157a68a1c0\n[diagnostic_truncated original_bytes=4211 sha256=176750eaf77f71b5151f768a9946916a4cf03d63183dfdead3f45e8e78b4b74b]",
+              "ratio": 0.5,
+              "status": "FAIL",
+              "timestamp_seconds": 2800.283
+            },
+            {
+              "elapsed_seconds": 2.667110115289688,
+              "error": "[h264 @ 0x562867e3c1c0] Invalid NAL unit size (875512150 > 38915).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 38919\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (1031849693 > 26564).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 26568\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (-1766496920 > 10596).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 10600\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (-1432616746 > 5490).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 5494\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (-1436579508 > 2914).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 2918\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (-2073582047 > 1524).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 1528\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (1478764879 > 1543).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 1547\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (1794374376 > 2884).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 2888\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (765309490 > 1619).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 1623\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (-1210230599 > 1580).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 1584\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (1161131638 > 5472).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 5476\n[h264 @ 0x562867b53480] Invalid NAL unit size (875512150 > 38915).\n[h264 @ 0x562867b53480] Error splitting the input into NAL units.\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (835219324 > 2924).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 2928\n[h264 @ 0x562867ab5c40] Invalid NAL unit size (1031849693 > 26564).\n[h264 @ 0x562867ab5c40] Error splitting the input into NAL units.\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (1843517825 > 1633).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 1637\n[h264 @ 0x562867b544c0] Invalid NAL unit size (-1766496920 > 10596).\n[h264 @ 0x562867b544c0] Error splitting the input into NAL units.\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (1970499175 > 1739).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 1743\n[h264 @ 0x562867a9b300] Invalid NAL unit size (-1432616746 > 5490).\n[h264 @ 0x562867a9b300] Error splitting the input into NAL units.\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (-1058739225 > 3379).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 3383\n[h264 @ 0x562867aae880] Invalid NAL unit size (-1436579508 > 2914).\n[h264 @ 0x562867aae880] Error splitting the input into NAL units.\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (-1515602123 > 1782).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 1786\n[h264 @ 0x562867dc6400] Invalid NAL unit size (-2073582047 > 1524).\n[h264 @ 0x562867dc6400] Error splitting the input into NAL units.\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (1053338783 > 1836).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 1840\n[h264 @ 0x562867dd9a00] Invalid NAL unit size (1478764879 > 1543).\n[h264 @ 0x562867dd9a00] Error splitting the input into NAL units.\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (-637634638 > 27912).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 27916\n[h264 @ 0x562867ded100] Invalid NAL unit size (1794374376 > 2884).\n[h264 @ 0x562867ded100] Error splitting the input into NAL units.\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (437471380 > 10739).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 10743\n[h264 @ 0x562867e007c0] Invalid NAL unit size (765309490 > 1619).\n[h264 @ 0x562867e007c0] Error splitting the input into NAL units.\n[h264 @ 0x562867e3c1c0] Invalid NAL unit size (1090108362 > 5955).\n[h264 @ 0x562867e3c1c0] missing picture in access unit with size 5959\n[h264 @ 0x562867e13e80] Invalid NAL unit size (-1210230599 > 1580).\n[h264 @ 0x562867e13e80] Error splitting the input into NAL units.\n[h264 @\n[diagnostic_truncated original_bytes=4211 sha256=cf0f42fae89f536786e350e3cfc59ec573c792077e62e2c951e91830f8389ee3]",
+              "ratio": 0.63,
+              "status": "FAIL",
+              "timestamp_seconds": 3528.35658
+            },
+            {
+              "elapsed_seconds": 1.8016618192195892,
+              "error": "[h264 @ 0x563f941391c0] Invalid NAL unit size (875512150 > 47417).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 47421\n[h264 @ 0x563f941391c0] Invalid NAL unit size (-1070550623 > 45382).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 45386\n[h264 @ 0x563f941391c0] Invalid NAL unit size (2021678187 > 23070).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 23074\n[h264 @ 0x563f941391c0] Invalid NAL unit size (-178422504 > 13990).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 13994\n[h264 @ 0x563f941391c0] Invalid NAL unit size (179282273 > 7326).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 7330\n[h264 @ 0x563f941391c0] Invalid NAL unit size (2096219684 > 3206).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 3210\n[h264 @ 0x563f941391c0] Invalid NAL unit size (-614175146 > 2991).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 2995\n[h264 @ 0x563f941391c0] Invalid NAL unit size (234537645 > 7160).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 7164\n[h264 @ 0x563f941391c0] Invalid NAL unit size (-1055189069 > 2949).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 2953\n[h264 @ 0x563f941391c0] Invalid NAL unit size (5917554 > 3376).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 3380\n[h264 @ 0x563f941391c0] Invalid NAL unit size (436932113 > 13821).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 13825\n[h264 @ 0x563f93e50480] Invalid NAL unit size (875512150 > 47417).\n[h264 @ 0x563f93e50480] Error splitting the input into NAL units.\n[h264 @ 0x563f941391c0] Invalid NAL unit size (732108440 > 7032).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 7036\n[h264 @ 0x563f93db2c40] Invalid NAL unit size (-1070550623 > 45382).\n[h264 @ 0x563f93db2c40] Error splitting the input into NAL units.\n[h264 @ 0x563f941391c0] Invalid NAL unit size (-420013437 > 2907).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 2911\n[h264 @ 0x563f93e514c0] Invalid NAL unit size (2021678187 > 23070).\n[h264 @ 0x563f93e514c0] Error splitting the input into NAL units.\n[h264 @ 0x563f941391c0] Invalid NAL unit size (-152114945 > 3093).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 3097\n[h264 @ 0x563f93d98300] Invalid NAL unit size (-178422504 > 13990).\n[h264 @ 0x563f93d98300] Error splitting the input into NAL units.\n[h264 @ 0x563f941391c0] Invalid NAL unit size (905375541 > 7193).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 7197\n[h264 @ 0x563f93dab880] Invalid NAL unit size (179282273 > 7326).\n[h264 @ 0x563f93dab880] Error splitting the input into NAL units.\n[h264 @ 0x563f941391c0] Invalid NAL unit size (-233540025 > 3429).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 3433\n[h264 @ 0x563f940c3400] Invalid NAL unit size (2096219684 > 3206).\n[h264 @ 0x563f940c3400] Error splitting the input into NAL units.\n[h264 @ 0x563f941391c0] Invalid NAL unit size (-1389933507 > 3289).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 3293\n[h264 @ 0x563f940d6a00] Invalid NAL unit size (-614175146 > 2991).\n[h264 @ 0x563f940d6a00] Error splitting the input into NAL units.\n[h264 @ 0x563f941391c0] Invalid NAL unit size (303545762 > 42757).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 42761\n[h264 @ 0x563f940ea100] Invalid NAL unit size (234537645 > 7160).\n[h264 @ 0x563f940ea100] Error splitting the input into NAL units.\n[h264 @ 0x563f941391c0] Invalid NAL unit size (188317467 > 25590).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 25594\n[h264 @ 0x563f940fd7c0] Invalid NAL unit size (-1055189069 > 2949).\n[h264 @ 0x563f940fd7c0] Error splitting the input into NAL units.\n[h264 @ 0x563f941391c0] Invalid NAL unit size (-314501718 > 13801).\n[h264 @ 0x563f941391c0] missing picture in access unit with size 13805\n[h264 @ 0x563f94110e80] Invalid NAL unit size (5917554 > 3376).\n[h264 @ 0x563f94110e80] Error splitting the input into NAL units.\n[h264 @ 0x563f9413\n[diagnostic_truncated original_bytes=4211 sha256=719d963b6415de32d16696ebe8e9c3ad244edac5988d72fea4c24f22cd6799ef]",
+              "ratio": 0.75,
+              "status": "FAIL",
+              "timestamp_seconds": 4200.4245
+            },
+            {
+              "elapsed_seconds": 0.9677230417728424,
+              "error": "[h264 @ 0x5627013c11c0] Invalid NAL unit size (875512150 > 62425).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 62429\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (1355001094 > 63035).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 63039\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (-47281944 > 26108).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 26112\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (-254851533 > 11216).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 11220\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (1473395479 > 4166).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 4170\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (1200200085 > 1559).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 1563\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (1942382508 > 1595).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 1599\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (-2108993956 > 4538).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 4542\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (1451757121 > 1578).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 1582\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (1802704746 > 1784).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 1788\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (-1102938753 > 11096).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 11100\n[h264 @ 0x5627010d8480] Invalid NAL unit size (875512150 > 62425).\n[h264 @ 0x5627010d8480] Error splitting the input into NAL units.\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (226140117 > 4273).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 4277\n[h264 @ 0x56270103ac40] Invalid NAL unit size (1355001094 > 63035).\n[h264 @ 0x56270103ac40] Error splitting the input into NAL units.\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (1900559578 > 1580).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 1584\n[h264 @ 0x5627010d94c0] Invalid NAL unit size (-47281944 > 26108).\n[h264 @ 0x5627010d94c0] Error splitting the input into NAL units.\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (-751404152 > 1767).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 1771\n[h264 @ 0x562701020300] Invalid NAL unit size (-254851533 > 11216).\n[h264 @ 0x562701020300] Error splitting the input into NAL units.\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (-1685632804 > 4535).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 4539\n[h264 @ 0x562701033880] Invalid NAL unit size (1473395479 > 4166).\n[h264 @ 0x562701033880] Error splitting the input into NAL units.\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (1574309630 > 1619).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 1623\n[h264 @ 0x56270134b400] Invalid NAL unit size (1200200085 > 1559).\n[h264 @ 0x56270134b400] Error splitting the input into NAL units.\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (-427274285 > 1879).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 1883\n[h264 @ 0x56270135ea00] Invalid NAL unit size (1942382508 > 1595).\n[h264 @ 0x56270135ea00] Error splitting the input into NAL units.\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (1481680014 > 63695).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 63699\n[h264 @ 0x562701372100] Invalid NAL unit size (-2108993956 > 4538).\n[h264 @ 0x562701372100] Error splitting the input into NAL units.\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (-1197804458 > 29233).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 29237\n[h264 @ 0x5627013857c0] Invalid NAL unit size (1451757121 > 1578).\n[h264 @ 0x5627013857c0] Error splitting the input into NAL units.\n[h264 @ 0x5627013c11c0] Invalid NAL unit size (-406039010 > 13029).\n[h264 @ 0x5627013c11c0] missing picture in access unit with size 13033\n[h264 @ 0x562701398e80] Invalid NAL unit size (1802704746 > 1784).\n[h264 @ 0x562701398e80] Error splitting the input into NAL units.\n[h264 \n[diagnostic_truncated original_bytes=4211 sha256=4b0b35b00bae1469a1905f6075f30be6e953c74c3bc9f4b938545a5043e92a31]",
+              "ratio": 0.87,
+              "status": "FAIL",
+              "timestamp_seconds": 4872.49242
+            },
+            {
+              "elapsed_seconds": 0.35280993953347206,
+              "error": "[h264 @ 0x55de2ce021c0] Invalid NAL unit size (875512150 > 45852).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 45856\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (1215970135 > 50530).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 50534\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (-579547737 > 31401).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 31405\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (-558964814 > 20834).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 20838\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (430613978 > 11421).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 11425\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (-1339534637 > 4815).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 4819\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (-129564595 > 4585).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 4589\n[h264 @ 0x55de2cb19480] Invalid NAL unit size (875512150 > 45852).\n[h264 @ 0x55de2cb19480] Error splitting the input into NAL units.\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (-1686669175 > 11485).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 11489\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (62457044 > 4214).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 4218\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (1492983127 > 4776).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 4780\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (-385950943 > 20349).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 20353\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (1589944993 > 11754).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 11758\n[h264 @ 0x55de2ca7bc40] Invalid NAL unit size (1215970135 > 50530).\n[h264 @ 0x55de2ca7bc40] Error splitting the input into NAL units.\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (602785432 > 4818).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 4822\n[h264 @ 0x55de2cb1a4c0] Invalid NAL unit size (-579547737 > 31401).\n[h264 @ 0x55de2cb1a4c0] Error splitting the input into NAL units.\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (-708904970 > 4809).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 4813\n[h264 @ 0x55de2ca61300] Invalid NAL unit size (-558964814 > 20834).\n[h264 @ 0x55de2ca61300] Error splitting the input into NAL units.\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (499909275 > 12670).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 12674\n[h264 @ 0x55de2ca74880] Invalid NAL unit size (430613978 > 11421).\n[h264 @ 0x55de2ca74880] Error splitting the input into NAL units.\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (996141442 > 5270).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 5274\n[h264 @ 0x55de2cd8c400] Invalid NAL unit size (-1339534637 > 4815).\n[h264 @ 0x55de2cd8c400] Error splitting the input into NAL units.\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (-1612379834 > 5407).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 5411\n[h264 @ 0x55de2cd9fa00] Invalid NAL unit size (-129564595 > 4585).\n[h264 @ 0x55de2cd9fa00] Error splitting the input into NAL units.\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (294892650 > 52376).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 52380\n[h264 @ 0x55de2cdb3100] Invalid NAL unit size (-1686669175 > 11485).\n[h264 @ 0x55de2cdb3100] Error splitting the input into NAL units.\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (685823710 > 32639).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 32643\n[h264 @ 0x55de2cdc67c0] Invalid NAL unit size (62457044 > 4214).\n[h264 @ 0x55de2cdc67c0] Error splitting the input into NAL units.\n[h264 @ 0x55de2ce021c0] Invalid NAL unit size (-598747154 > 20903).\n[h264 @ 0x55de2ce021c0] missing picture in access unit with size 20907\n[h264 @ 0x55de2cdd9e80] Invalid NAL unit size (1492983127 > 4776).\n[h264 @ 0x55de2cdd9e80] Error splitting the input into NAL units.\n[h26\n[diagnostic_truncated original_bytes=4211 sha256=807e82589a65a2d9d1c8ed82d6abd48adb268677318502866df02d6a99a9c017]",
+              "ratio": 0.95,
+              "status": "FAIL",
+              "timestamp_seconds": 5320.5377
+            },
+            {
+              "elapsed_seconds": 0.17370757833123207,
+              "error": "[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (875512150 > 58112).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 58116\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (-1770143573 > 23532).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 23536\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (-2065836386 > 5726).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 5730\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (-1397858810 > 3186).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 3190\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (-2079678688 > 1642).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 1646\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (531195283 > 915).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 919\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (-1473471969 > 915).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 919\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (718763780 > 1664).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 1668\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (1603551779 > 888).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 892\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (-2060114665 > 795).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 799\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (-923882447 > 2886).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 2890\n[h264 @ 0x558ae6bd7480] Invalid NAL unit size (875512150 > 58112).\n[h264 @ 0x558ae6bd7480] Error splitting the input into NAL units.\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (788129271 > 1604).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 1608\n[h264 @ 0x558ae6b39c40] Invalid NAL unit size (-1770143573 > 23532).\n[h264 @ 0x558ae6b39c40] Error splitting the input into NAL units.\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (1526233607 > 784).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 788\n[h264 @ 0x558ae6bd84c0] Invalid NAL unit size (-2065836386 > 5726).\n[h264 @ 0x558ae6bd84c0] Error splitting the input into NAL units.\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (-2009909728 > 846).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 850\n[h264 @ 0x558ae6b1f300] Invalid NAL unit size (-1397858810 > 3186).\n[h264 @ 0x558ae6b1f300] Error splitting the input into NAL units.\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (-1006076915 > 1337).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 1341\n[h264 @ 0x558ae6b32880] Invalid NAL unit size (-2079678688 > 1642).\n[h264 @ 0x558ae6b32880] Error splitting the input into NAL units.\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (410927526 > 737).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 741\n[h264 @ 0x558ae6e4a400] Invalid NAL unit size (531195283 > 915).\n[h264 @ 0x558ae6e4a400] Error splitting the input into NAL units.\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (-1421517917 > 653).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 657\n[h264 @ 0x558ae6e5da00] Invalid NAL unit size (-1473471969 > 915).\n[h264 @ 0x558ae6e5da00] Error splitting the input into NAL units.\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (-511483910 > 23971).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 23975\n[h264 @ 0x558ae6e71100] Invalid NAL unit size (718763780 > 1664).\n[h264 @ 0x558ae6e71100] Error splitting the input into NAL units.\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (-754520088 > 5386).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 5390\n[h264 @ 0x558ae6e847c0] Invalid NAL unit size (1603551779 > 888).\n[h264 @ 0x558ae6e847c0] Error splitting the input into NAL units.\n[h264 @ 0x558ae6ec01c0] Invalid NAL unit size (-1418460323 > 2500).\n[h264 @ 0x558ae6ec01c0] missing picture in access unit with size 2504\n[h264 @ 0x558ae6e97e80] Invalid NAL unit size (-2060114665 > 795).\n[h264 @ 0x558ae6e97e80] Error splitting the input into NAL units.\n[h264 @ 0x558ae6ec01c0] Invali\n[diagnostic_truncated original_bytes=4211 sha256=904cc6235fcd9a63fd00b4a3db2717fea0e7fef5c1850cf1d81bc078336c99a5]",
+              "ratio": 0.99,
+              "status": "FAIL",
+              "timestamp_seconds": 5544.56034
+            }
+          ],
+          "status": "FAIL"
+        },
+        "scan_smoke": {
+          "operator": "frozen_partial_scan_pilot_v1.ScanEngine",
+          "operator_sha256": "51dc575702d10c490dbe63955326b3552e205191a105202d844b97090e711e0a",
+          "repeat_hashes": [
+            "e474d7f8894c41a100a9fc1bc33d06ba5828b1061fcb310013ed64a7d258c658",
+            "e474d7f8894c41a100a9fc1bc33d06ba5828b1061fcb310013ed64a7d258c658"
+          ],
+          "status": "PASS"
+        }
+      },
+      "video_filename": "杭州YouTube.mp4",
+      "video_path": "/qiuyeqing/llama_prl/G-ARC/data/realcam/long_video_data/杭州YouTube.mp4",
+      "video_sha256": "a27a7b42b832cc872943d959477fa3d64cf2ac9ac43b16adae65a8da0d0592ac"
+    }
+  ]
+}

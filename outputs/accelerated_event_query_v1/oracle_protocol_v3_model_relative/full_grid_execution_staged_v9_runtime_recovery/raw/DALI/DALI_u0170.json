@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0170:1786374009372938185",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "d9660a5b0fd96e9c96d0b8c280b141e25f6a77d20658c7b3dd3519c430eadee4",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "1a83b0c026279f4c299a041203fdf4c29dca6b6e6b5d364524f0b06a80c2e03c",
+  "generated_token_ids_sha256": "8f14cd0abbfd81a48747894da5f8b27784233a38727bd111298e6db9698e9e36",
+  "input_identity_sha256": "3716159904d4d0e5ba15344da698b50eefd532e0de9e98be6e86d06937de044e",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "c5ed9ca65c12224f6cc9f7eec6757dd8c6031d2c1cecce635c18bea30986b3b3",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "Multiple electric scooters are crossing the pedestrian crosswalk directly in the path of the ego vehicle. The scooters are moving slowly and occupy the lane, requiring the ego driver to slow down or brake to avoid collision. Additionally, a pedestrian is seen crossing the road in the later frames, further necessitating a cautious response. These road users are in close proximity and actively entering the ego vehicle's path, demanding a noticeable slowdown or braking action.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "1800adb90eec6d1db34abcb645d5d6b2d261596c2ffe975b8d596dfb564dd789",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"Multiple electric scooters are crossing the pedestrian crosswalk directly in the path of the ego vehicle. The scooters are moving slowly and occupy the lane, requiring the ego driver to slow down or brake to avoid collision. Additionally, a pedestrian is seen crossing the road in the later frames, further necessitating a cautious response. These road users are in close proximity and actively entering the ego vehicle's path, demanding a noticeable slowdown or braking action.\"\n}",
+  "raw_response_sha256": "e3cd57a4bcf8241f4de0ebc6a63aeb5ded5726db8f2d24d506ee0795b2513ca1",
+  "record_payload_sha256": "0c070f90e5e6caaa2817dc61519dbafa5cca55e9d116d6334416ac1fd7173b3f",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 17.323155896010576,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 19.03566908198991,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0170",
+  "unit_ordinal": 170,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

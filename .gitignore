@@ -180,6 +180,29 @@ try_or_no/**/__pycache__/
 !try_or_no/requirements.txt
 
 # =========================
+# Audited partial-SCAN research snapshot exceptions
+# =========================
+# Keep raw media ignored while allowing hash-bound provenance sidecars.
+!/data/
+/data/*
+!/data/realcam/
+/data/realcam/*
+!/data/realcam/long_video_data/
+/data/realcam/long_video_data/*
+!/data/realcam/long_video_data/*.source.json
+!/data/realcam/long_video_data/*.source_attestation.md
+!/data/realcam/psvr_dev_inputs/
+/data/realcam/psvr_dev_inputs/*
+!/data/realcam/psvr_dev_inputs/*.source.json
+!/data/realcam/psvr_dev_inputs/*.source_attestation.md
+
+# Frozen benchmark/result Parquet tables are compact, reproducible artifacts.
+!benchmarks/partial_scan_pilot_v1/**/*.parquet
+!outputs/scan_innovation_agentic_loop_v1/**/*.parquet
+!outputs/macro_region_proxy_optimization_v1/**/*.parquet
+!outputs/multi_fidelity_region_preview_v1/**/*.parquet
+
+# =========================
 # datasets/ — ignore large data, keep manifests
 # =========================
 datasets/DrivingDojo-mini/
@@ -234,6 +257,19 @@ pnpm-lock.yaml
 
 # Generated evaluation outputs
 src/garc_eval/outputs/
+
+# =========================
+# Dataset payloads / partial downloads
+# =========================
+# Keep lightweight dataset manifests, mapping docs, and preparation scripts
+# above; do not version the payloads themselves.
+datasets/**/*.part
+datasets/**/*.xlsx
+datasets/**/raw/
+datasets/**/videos/
+datasets/**/frames/
+datasets/**/images/
+datasets/**/clips/
 
 # Large generated baseline candidate scores
 Audited_Event_Hypothesis_AQP_Design_Pack_v1/agent_run/clean_baseline_benchmark_v1/baselines/baseline_candidate_scores.csv

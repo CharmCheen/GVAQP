@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0058:1786349106669854777",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "ce433a8a2047f3820b8ce0515fb198f9a2298209a33ab096e3c525a873a1b43f",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "2bab76cfc47b05e2b5dd3226431215d0b185b3aa5a64e7e3bb7cb4859c9ba13e",
+  "generated_token_ids_sha256": "1f15b15b8ffa6ff523d3449d30d5296d52cc86139055fd9015c73b34a3e105c9",
+  "input_identity_sha256": "28b03b2cbe0f78fa03c8e25dc6deb341728eeb36a4faa430d7da63c1a145093f",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "8ce426676336c84a0c14c249e102c40bc09fc1ac5ff884a98f4e6cb4343d5364",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on a clear, multi-lane urban road with no visible obstacles, sudden changes in traffic, or traffic control requiring a marked response. Traffic flow is steady, with only a few vehicles and a scooter visible at a distance. Road signs and lane markings are clear, and no sudden maneuvers or braking are required. The environment remains consistent throughout the unit, indicating normal driving conditions.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "f0d7aee6db7dce8e998431780350be8570eac24e3b9edcd31527fbb8697f770e",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on a clear, multi-lane urban road with no visible obstacles, sudden changes in traffic, or traffic control requiring a marked response. Traffic flow is steady, with only a few vehicles and a scooter visible at a distance. Road signs and lane markings are clear, and no sudden maneuvers or braking are required. The environment remains consistent throughout the unit, indicating normal driving conditions.\"\n}",
+  "raw_response_sha256": "79f9410af3067e8c385dc619b078cad79791f9c82525bf1ad98deb4d441cd9b1",
+  "record_payload_sha256": "af131bef076dd86db3a9072aaf3adefa52dc31ea2f470a99324b8b3dfa9ee114",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 15.875655791001918,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 17.55680734699854,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0058",
+  "unit_ordinal": 1186,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

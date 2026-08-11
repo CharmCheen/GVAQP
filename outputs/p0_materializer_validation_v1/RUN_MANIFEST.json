@@ -1,0 +1,54 @@
+{
+  "branch": "dspro",
+  "commit": "2c0d35c888f9711cacab964672c6094fc98e5c49",
+  "cuda_version": "535.129.03\n535.129.03\n535.129.03\n535.129.03\n535.129.03\n535.129.03\n535.129.03\n535.129.03",
+  "dirty_files": [
+    "?? MAB_RESEARCH_DIRECTION_DECISION.md",
+    "?? outputs/p0_materializer_validation_v1/",
+    "?? scripts/prepare_p0_materializer_validation_pause.py"
+  ],
+  "dirty_worktree_risk": true,
+  "gate_reason": "Formal V3 full-grid reference is not published; partial/fail-stop outputs cannot be used as a reference.",
+  "gate_result": "PAUSED_INPUT_REQUIRED",
+  "gpu": "NVIDIA A100-SXM4-80GB\nNVIDIA A100-SXM4-80GB\nNVIDIA A100-SXM4-80GB\nNVIDIA A100-SXM4-80GB\nNVIDIA A100-SXM4-80GB\nNVIDIA A100-SXM4-80GB\nNVIDIA A100-SXM4-80GB\nNVIDIA A100-SXM4-80GB",
+  "hostname": "di-20260319102938-8gqr9",
+  "platform": "Linux-5.4.250-2-velinux1u1-amd64-x86_64-with-glibc2.39",
+  "python_version": "3.13.2 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:56:02) [GCC 11.2.0]",
+  "repo": "/root/charm/GVAQP",
+  "schema_version": "P0_MATERIALIZER_VALIDATION_MANIFEST_V1",
+  "timestamp_utc": "2026-08-10T05:19:42+00:00",
+  "torch_version": "NOT_QUERIED_NO_EXPERIMENT_RUN",
+  "v3_k3_config": {
+    "construct_validity_limit": "Adjacent relevant units from distinct latent human events are observationally indistinguishable from one event under unit labels alone and merge until the frozen cap.",
+    "k3_config_sha256": "7906ab2da20cab7edbe0f379224b60160c7a857cd81ab7f4fec42f54ab9629b9",
+    "matching": {
+      "assignment": "one_to_one_max_cardinality_then_tiou",
+      "boundary_tolerance_seconds": 0.0,
+      "duplicate_rule": "unmatched overlapping prediction is a duplicate false positive",
+      "eligibility": "strict_positive_temporal_overlap",
+      "minimum_tiou": 0.0
+    },
+    "parameters": {
+      "adjacent_distinct_event_rule": "merge_observationally_indistinguishable_adjacent_positives_until_duration_cap",
+      "boundary_rule": "min_positive_unit_start_to_max_positive_unit_end",
+      "dedup_rule": "deduplicate_exact_unit_id_then_canonical_temporal_grouping",
+      "event_identity_rule": "sha256(query,video,earliest_positive_unit,k3_config)",
+      "maximum_core_duration_seconds": 40.0,
+      "maximum_event_duration_seconds": 60.0,
+      "maximum_merge_gap_seconds": 10.0,
+      "maximum_unknown_gap_units": 1,
+      "merge_adjacent_positive_units": true,
+      "negative_gap_rule": "hard_barrier",
+      "overlap_rule": "merge_overlapping_positive_windows",
+      "parse_failure_gap_rule": "indeterminate_hard_barrier_not_negative",
+      "protocol_id": "AEQ_MODEL_RELATIVE_K3_V3_1",
+      "unit_duration_seconds": 10.0,
+      "unit_stride_seconds": 10.0,
+      "unknown_gap_rule": "bridge_one_fully_covering_unknown_unit_within_maximum_gap"
+    },
+    "probable_identity_scope": "Existing IncrementalK3 owns online PROBABLE_EVENT identity; exhaustive V3 reference materialization emits only VERIFIED_EVENT records from relevant unit labels.",
+    "status": "FROZEN_BEFORE_V3_ORACLE_EXECUTION"
+  },
+  "v3_k3_config_path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/k3_eventization/K3_UNIT_EVENT_CONFIG_V3.json",
+  "v3_k3_config_sha256": "ebcc3907a64b463060ce36ec5e4b4c188ecc12c3c1e434e1e8554b22112be200"
+}

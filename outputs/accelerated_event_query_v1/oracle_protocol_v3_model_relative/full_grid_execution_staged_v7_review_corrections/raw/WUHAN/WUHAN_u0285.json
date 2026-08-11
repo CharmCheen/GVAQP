@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0285:1786353477258172244",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "ec7981e0a81e1805438f8dfa86284fb6bb8fa10ff25a1efe0d7f4f33de75407f",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "d88b035791b92d28c1fdf8082d17466edce8e0792fa32bbd4b01dc7a151440e7",
+  "generated_token_ids_sha256": "a03b179f3f4b47ff647f25c7880b6ff89492494e1d92f7015d46d383150675c0",
+  "input_identity_sha256": "8db85127472c251d267117ca67dc615ecaccd11cbe88e5e56445a8394fdff5e1",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "70a4cc2492a4f67862e2747dbfc13b28e946c2f13dd76ead050d537a92a842a3",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a traffic signal that turns red at 0:04, and the lead vehicles begin to slow down and stop by 0:07. The traffic light for the ego lane is clearly red by 0:08, requiring a noticeable braking action to stop safely. Additionally, the presence of a 'No Left Turn' sign and a '50 km/h' speed limit sign indicates traffic control requiring a marked response. The vehicles ahead are visibly decelerating, and the ego driver must respond with braking to comply with the traffic signal.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "2e25f0457fab5884854b7d7db2cb61cdad6eccd0c5ff9125058f75c43ceac5f4",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a traffic signal that turns red at 0:04, and the lead vehicles begin to slow down and stop by 0:07. The traffic light for the ego lane is clearly red by 0:08, requiring a noticeable braking action to stop safely. Additionally, the presence of a 'No Left Turn' sign and a '50 km/h' speed limit sign indicates traffic control requiring a marked response. The vehicles ahead are visibly decelerating, and the ego driver must respond with braking to comply with the traffic signal.\"\n}",
+  "raw_response_sha256": "dbc1874a4724f4c668add6d3fe83d5fd1e5ac6fe518ee0baf2303835f68eb544",
+  "record_payload_sha256": "8f383ad2f9d48b8935a48ab410488e44288732c2bc1c4ae349fe786aeb3f0ff0",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 20.485327335001784,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 22.173799879994476,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0285",
+  "unit_ordinal": 1413,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

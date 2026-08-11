@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0143:1786350763253311376",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "d437709a7dce47f7458785438da3657eec810dd6695d8fc1a43d880ae66e4826",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "68e56f83555da4180a55e77d94b53866bd5d314992012c951e1e9c69c71e545c",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "fa7689738df7f1a406a1d7bd0faa27f0e13da543c9e012ccd1b748aa4205b720",
+  "generated_token_ids_sha256": "8dfb70c0e2575aa269f365c35b33093706a3e99c0e550822d83a4d108b541489",
+  "input_identity_sha256": "637c170a1ca2898e60b7c9975abeddd157eb882fb1a216be7890d5c1a396adb4",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "e2e06e84a41b660bba1d2960ee32538c8e26d74e3a2f69cd7ee1842e09941157",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on a clear, curved road with visible lane markings and guardrails. There are no sudden obstacles, stopped vehicles, or traffic controls requiring a marked response. Other vehicles, including a white car ahead and a motorcycle entering the intersection later, are moving normally and not threatening the ego path. The road conditions and traffic flow appear steady and predictable throughout the unit. The sun glare is present but does not create a hazard requiring a braking or avoidance maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "75f0529ecd2f7c68155602e6148470c398b004d3661c54aec79356100354a0a8",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on a clear, curved road with visible lane markings and guardrails. There are no sudden obstacles, stopped vehicles, or traffic controls requiring a marked response. Other vehicles, including a white car ahead and a motorcycle entering the intersection later, are moving normally and not threatening the ego path. The road conditions and traffic flow appear steady and predictable throughout the unit. The sun glare is present but does not create a hazard requiring a braking or avoidance maneuver.\"\n}",
+  "raw_response_sha256": "ba2bbda032fb3fa813c22585d6a2e897251d36f92a8d490ab74d10b9d94290cc",
+  "record_payload_sha256": "dd7dfb15e4443ed97fc36966dfd6e6fe261389e31e43b9ee6b7468a7b764e742",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 18.227182777998678,
+    "model_load_seconds": 20.342561935998674,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 19.87542572300299,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0143",
+  "unit_ordinal": 143,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

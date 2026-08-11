@@ -1,0 +1,37 @@
+{
+  "environment_creation": "PASS",
+  "path": "/root/charm/fresh-arcwork/.venv",
+  "python": "3.12.3",
+  "isolation": "venv; editable project install",
+  "project_install": "PASS",
+  "requested_constraints": {
+    "requires-python": ">=3.10",
+    "runtime": [
+      "PyYAML>=6"
+    ],
+    "test": [
+      "pytest>=7"
+    ]
+  },
+  "installed_project_dependencies": {
+    "G-ARC-Core": "0.1.0",
+    "PyYAML": "6.0.3",
+    "pytest": "9.1.1"
+  },
+  "torch_install": "PASS",
+  "torch": "2.5.1+cu121",
+  "torchvision": "0.20.1+cu121",
+  "cuda_runtime": "12.1",
+  "pip_check": "PASS",
+  "selection_reason": "A100 with driver 535.129.03; CUDA 12.1 prebuilt runtime is compatible and independent of nvcc 12.9",
+  "non_project_optional_dependencies_not_installed": [
+    "ultralytics",
+    "transformers",
+    "accelerate",
+    "huggingface-hub",
+    "safetensors",
+    "qwen-vl-utils",
+    "vllm"
+  ],
+  "reason_optional_not_installed": "No runtime import/config/model identity exists in this clone; do not add unrelated model stack."
+}

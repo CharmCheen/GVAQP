@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0258:1786352464742466264",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "9c1a1ded36b9dadabdc2afc71d38fbc8f3ae0b7f982e93918816252abe490a19",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "5efa0f93828b397baa296db6964a502edc1c10f467bf1b6e2ec9a1eef406dffd",
+  "generated_token_ids_sha256": "52b4cb7ead284e40d024e22f73917a236a826db6ceacad77fb4588366c5583cc",
+  "input_identity_sha256": "737ec90db86132ce3f99677107e505d7af4fb1340e8f0a6d3d277d82d4d553bc",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "588071b66d31ecf6ba2e72683757a76bc235fd830d83aa0c9a992f71492bd1d7",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily in a multi-lane urban road with clear traffic signals and no sudden changes in traffic flow or obstacles. The lead vehicle maintains a consistent speed, and there are no visible road users entering the ego path, no sudden braking, and no traffic controls requiring a marked response within this unit. The traffic light is red, but the ego vehicle is not approaching an intersection where a stop is required; it is proceeding in a lane that appears to be for through traffic or turning, and the countdown is decreasing steadily without any abrupt changes. All conditions suggest normal, steady driving without the need for a noticeable slowdown, braking, or avoidance maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "7bac3e7a7d8772cc9206b481a9ba2561aa16cd46ea0a31bd638f92d1b43cd2a6",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily in a multi-lane urban road with clear traffic signals and no sudden changes in traffic flow or obstacles. The lead vehicle maintains a consistent speed, and there are no visible road users entering the ego path, no sudden braking, and no traffic controls requiring a marked response within this unit. The traffic light is red, but the ego vehicle is not approaching an intersection where a stop is required; it is proceeding in a lane that appears to be for through traffic or turning, and the countdown is decreasing steadily without any abrupt changes. All conditions suggest normal, steady driving without the need for a noticeable slowdown, braking, or avoidance maneuver.\"\n}",
+  "raw_response_sha256": "a60bfcd86e36ffc2204c941fee9ced3802a34080af865be7366f0eef04ab6c1c",
+  "record_payload_sha256": "eac9fa4cce48e0e20776ec2c3cdaef821a9e679f7d0e9f5e3a2a4ed97f81e321",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 22.15876190799463,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 22.906260918993212,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0258",
+  "unit_ordinal": 825,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

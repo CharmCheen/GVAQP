@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0518:1786380991959122502",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "0e9e39d89cf892167ebe8b0ead5f18ac7a4d8395bd770f797db844cb47ca8e66",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "f683e156879710aaa5c9114372f7841b099a0d8d71ca9f1931155e2850664d79",
+  "generated_token_ids_sha256": "aaa5198645771b23c99fe6497f60aea751c26689e06dde0a448d185153b51177",
+  "input_identity_sha256": "9aef13634be6260365525bb00d8cc563f7a98c36b4106140e5a1160517872196",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "58c48177efb43048b421304db2a9cf27ec55471e694eda76172fb620b5076f23",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a delivery scooter at a steady pace through an urban night environment. There are no sudden changes in traffic, no visible obstacles in the path, no traffic signals requiring immediate response (e.g., red light), and no vehicles or pedestrians entering the path or causing a need for braking or avoidance. The road is clear, and the scooter ahead maintains a consistent speed. The only visible traffic control is a height restriction sign (2.8m) under an overpass, but the ego vehicle is not approaching it closely enough to require a marked response within this unit. All conditions suggest normal, steady driving without need for a noticeable slowdown, braking, or avoidance.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "10954e51153018308718c1dfed37dabde5f3b85a72f801de03b570f3149ab950",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a delivery scooter at a steady pace through an urban night environment. There are no sudden changes in traffic, no visible obstacles in the path, no traffic signals requiring immediate response (e.g., red light), and no vehicles or pedestrians entering the path or causing a need for braking or avoidance. The road is clear, and the scooter ahead maintains a consistent speed. The only visible traffic control is a height restriction sign (2.8m) under an overpass, but the ego vehicle is not approaching it closely enough to require a marked response within this unit. All conditions suggest normal, steady driving without need for a noticeable slowdown, braking, or avoidance.\"\n}",
+  "raw_response_sha256": "f8c331ed741567d79f24fd6fbeb9ff8fa06147d09b1396a80f986a64a2809cb2",
+  "record_payload_sha256": "8478c9ff5f1bf298830dc502311d52fa62a037a3f4ffdfa4767cfb1ae9756c78",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 24.132887055995525,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 25.996159182002884,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0518",
+  "unit_ordinal": 518,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

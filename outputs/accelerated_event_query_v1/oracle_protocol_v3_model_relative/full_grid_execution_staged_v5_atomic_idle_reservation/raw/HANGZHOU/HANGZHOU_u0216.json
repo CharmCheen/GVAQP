@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0216:1785446543032916649",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "90d754adb3b4cbf4e70fff810dd1c341b833f011a569dd6932fc6e8c1957a122",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "4e051253c5dd6555a1dbaefa97c8ee2340287ffd192bfedf2b768c8ca0b05cea",
+  "generated_token_ids_sha256": "326cc6085e836a616b118ba209ac7c6248f62a7914faccf96dac5664fc8b5774",
+  "input_identity_sha256": "a60a74fa5f7aae454a6242917c2f22ee54120e6f0d5bf8dc1f88a5b3f9bdb217",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "b72811ca1afde9cf2012074bceebe2cd9680975dfd55a8db617f72ebcd098c4e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with traffic signals that change from green to red during the unit. At frame 0:05, the traffic light for the straight-ahead direction turns red, requiring the ego driver to slow down and stop. The countdown timer on the traffic signal also decreases from 18 to 13 seconds, indicating an imminent stop. This constitutes a visible traffic control requiring a marked response (braking and stopping) within the unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "30f576f3411e3cf4029429a83dd252c76623fa7ac8990b5b62c1a02618b8ce3a",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with traffic signals that change from green to red during the unit. At frame 0:05, the traffic light for the straight-ahead direction turns red, requiring the ego driver to slow down and stop. The countdown timer on the traffic signal also decreases from 18 to 13 seconds, indicating an imminent stop. This constitutes a visible traffic control requiring a marked response (braking and stopping) within the unit.\"\n}",
+  "raw_response_sha256": "2b381d4cc504008d4daa8b10dc1f0ccb8b32125a80a4e44ba5fec56f7d8e478b",
+  "record_payload_sha256": "bf052de052278afd8275700280d383b70433166699ce07181e96aee18d0d9736",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.510663805529475,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.31541976891458,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0216",
+  "unit_ordinal": 783,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

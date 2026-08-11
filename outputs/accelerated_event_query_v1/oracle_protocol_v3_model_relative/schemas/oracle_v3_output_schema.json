@@ -1,0 +1,38 @@
+{
+  "schema": {
+    "$id": "urn:gvaqp:aeq:model-relative-oracle-v3:output",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "additionalProperties": false,
+    "properties": {
+      "confidence": {
+        "enum": [
+          "high",
+          "low",
+          "medium"
+        ],
+        "type": "string"
+      },
+      "evidence": {
+        "minLength": 1,
+        "pattern": "\\S",
+        "type": "string"
+      },
+      "label": {
+        "enum": [
+          "not_relevant",
+          "relevant",
+          "unknown"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "label",
+      "confidence",
+      "evidence"
+    ],
+    "title": "AEQ Model-Relative Oracle V3 Output",
+    "type": "object"
+  },
+  "schema_version": "AEQ_MODEL_RELATIVE_ORACLE_V3_SCHEMA_1"
+}

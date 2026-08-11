@@ -1,0 +1,48 @@
+{
+  "baselines": [
+    "CURRENT_TWO_STAGE_RAW",
+    "ARC_TWO_STAGE_COMMON"
+  ],
+  "budgets": [
+    5.0,
+    10.0,
+    20.0,
+    50.0,
+    80.0,
+    100.0
+  ],
+  "candidate_methods": [
+    "FIXED_SCAN1_VERIFY1",
+    "FIXED_SCAN1_VERIFY3",
+    "DYNAMIC_PROXY_VALUE_V1",
+    "DYNAMIC_K3_VALUE_V2",
+    "DYNAMIC_ADAPTIVE_K3_VALUE_V3"
+  ],
+  "classification": "cached_causal_mechanism_replay_not_physical",
+  "config_hash": "7ad427296d28345ad13a45041be288c87d6ce11a4713049e52bb7db81f5f69ea",
+  "costs": {
+    "scan_cell_units": 10,
+    "scan_cost": 0.1,
+    "scan_requires_verify_reserve": true,
+    "verify_cost": 1.0
+  },
+  "development_prompt_identity": "missing_in_derivative",
+  "evaluator_hash": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+  "frozen_input_manifest_hash": "9d1b2a7201a2087e685899b8171805edadde38720d85da385d8059652e56f821",
+  "k3": {
+    "d_core_max": 40.0,
+    "d_seg_max": 60.0,
+    "g_max": 1,
+    "name": "k3_bridge_safe"
+  },
+  "primary_prompt_identity": "complete",
+  "schema_version": "SEQUENTIAL_UNKNOWN_VIDEO_STUDY_V1",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "selected_method": "DYNAMIC_ADAPTIVE_K3_VALUE_V3"
+}

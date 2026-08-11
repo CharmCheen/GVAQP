@@ -1,0 +1,38 @@
+{
+  "status": "FAIL",
+  "supersedes": "the pre-correction value-object-only policy isolation audit",
+  "isolation_boundary_claimed": "immutable PublicScanState value object",
+  "isolation_boundary_observed": "unrestricted policy code in the evaluator Python process",
+  "active_leakage_attempts": {
+    "reference_file_read": {
+      "access_succeeded": true,
+      "expected": false
+    },
+    "future_runtime_file_read": {
+      "access_succeeded": true,
+      "expected": false
+    },
+    "unscanned_output_path_enumeration": {
+      "access_succeeded": true,
+      "expected": false
+    },
+    "reference_inference_map_read_via_candidate_id": {
+      "access_succeeded": true,
+      "expected": false
+    }
+  },
+  "successful_forbidden_attempts": 4,
+  "attempted_forbidden_accesses": 4,
+  "leakage_test_pass_rate": 0.0,
+  "policy_interface_compatibility": {
+    "ANYTIME_LARGEST_GAP": true,
+    "RANDOM_WITHOUT_REPLACEMENT": true,
+    "SEQUENTIAL": true,
+    "UNIFORM_PREFIX": true
+  },
+  "policy_source_has_reference_loader": false,
+  "root_cause": "The API value object omits forbidden fields, but policies execute in the same unrestricted process and can import the benchmark module and read evaluator files directly.",
+  "acceptance_rule": "Any successful active leakage attempt fails POLICY_INFORMATION_ISOLATION.",
+  "repair_disposition": "No repair attempted: the single controlled repair cycle was already consumed by the reference metadata repair. This is a post-freeze audit correction only.",
+  "immutable_evidence_changed": false
+}

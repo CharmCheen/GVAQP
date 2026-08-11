@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0533:1786379976921496383",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "8438899fee1087ff15f6f55156a96f3bd5bded2de2835bcea0721aa2c79f41cf",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "531b73a292ed084b02002149642630ac9658af16894d2383849e64f346edf25e",
+  "generated_token_ids_sha256": "51175591937f52d16ea6f0582349df643740b00c3db2b6c49beeb3ed99a0485a",
+  "input_identity_sha256": "7f9488690fcf1c22785290c0504ccc37549c8de8e9ea5eef26cd8809971e29b6",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "0f192ec336a8c2fd5689ebd74ee113cc3cf5316cf8c13465609b63aea4522a82",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "Pedestrians are actively crossing the street in the crosswalk directly in front of the ego vehicle, and the traffic light for vehicles is red, indicating a stop condition. The presence of pedestrians in the crosswalk and the red light require the ego driver to slow down or stop to avoid collision and comply with traffic rules. The countdown timer on the traffic light also confirms the need for a marked response within this unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "65321893cec8d3c125467dffa22fbbe0720bf2ef3690625e7e166119cfcf5e5c",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"Pedestrians are actively crossing the street in the crosswalk directly in front of the ego vehicle, and the traffic light for vehicles is red, indicating a stop condition. The presence of pedestrians in the crosswalk and the red light require the ego driver to slow down or stop to avoid collision and comply with traffic rules. The countdown timer on the traffic light also confirms the need for a marked response within this unit.\"\n}",
+  "raw_response_sha256": "285d9e34119293587c729aac676d740f633bff2cb7306d3091830ed3e6678b3a",
+  "record_payload_sha256": "6cc5739bc41c399c37a3540b5bdf3e27fab82f654410db0b71d67b44266617a2",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 15.546311192010762,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 16.42670753398852,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0533",
+  "unit_ordinal": 1100,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

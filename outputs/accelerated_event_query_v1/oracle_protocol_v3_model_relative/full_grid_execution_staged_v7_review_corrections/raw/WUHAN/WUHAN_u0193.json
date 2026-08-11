@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0193:1786351698522563593",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "aa41043e3ac72c84b921df57950a0cfbc83a3e8d55a3df14f6f6a80449e672bd",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "6f9d5a4bfe85b32dfc16ef8376c848746d0ecb13fb56a7f4e1ec2245381ff24c",
+  "generated_token_ids_sha256": "89b7d546a45515d12ef2706210e6f9a0ec135df619c498f4dd4c18c99c604e40",
+  "input_identity_sha256": "998ac8357dab61aee72fd375a63a51397a53155b5c38af8b72061b8f05c79176",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "39a07352f1ab91141fead1620daf99bdafb59a65e6c6930af82815f452930256",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving on a clear, open road with a green traffic light and no visible obstacles, sudden road users, or traffic control requiring a marked response. The road ahead is unobstructed, and there are no signs of sudden slowing, braking, or avoidance maneuvers needed. The speed limit sign (60 km/h) is visible but does not require a noticeable slowdown as the vehicle appears to be within legal limits. The environment is stable and predictable throughout the unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "4cb26b2f29e5c1af001bb2b8f890ff71b8ffde6199b2e14fa8475e437a90b392",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving on a clear, open road with a green traffic light and no visible obstacles, sudden road users, or traffic control requiring a marked response. The road ahead is unobstructed, and there are no signs of sudden slowing, braking, or avoidance maneuvers needed. The speed limit sign (60 km/h) is visible but does not require a noticeable slowdown as the vehicle appears to be within legal limits. The environment is stable and predictable throughout the unit.\"\n}",
+  "raw_response_sha256": "6a1d54187a5372f6d64a77f48b1e662e99890e420af0bb64dc97ef0a6e83b955",
+  "record_payload_sha256": "1aaddd2358b3c5745beeffad9625b90d44458f5eb259e08c52848b2b500088c9",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.373242012996343,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 19.95831987100246,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0193",
+  "unit_ordinal": 1321,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

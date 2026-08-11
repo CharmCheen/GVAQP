@@ -1,0 +1,40 @@
+{
+  "review_version": "BLINDED_HUMAN_EVENT_REVIEW_V1",
+  "status": "PROTOCOL_ONLY_NO_HUMAN_LABELS_COLLECTED",
+  "minimum_independent_reviewers_per_window": 2,
+  "reviewer_visible_fields": [
+    "sample_id",
+    "video_window",
+    "visible_frame_labels"
+  ],
+  "reviewer_forbidden_fields": [
+    "selection_stratum",
+    "selection_reason",
+    "legacy_label",
+    "single_stage_output",
+    "stage_a_output",
+    "stage_b_output"
+  ],
+  "per_event_fields": [
+    "human_event_id",
+    "event_family",
+    "event_type",
+    "proposed_event_type",
+    "risk_level",
+    "is_hazard",
+    "start_frame_index",
+    "peak_frame_index",
+    "end_frame_index",
+    "boundary_status",
+    "observable_evidence",
+    "confidence"
+  ],
+  "consistency_rules": [
+    "is_hazard is true if and only if risk_level is L2 or L3",
+    "unknown taxonomy uses other plus proposed_event_type",
+    "no-event windows have an empty event list",
+    "reviewers choose only visible frame indices"
+  ],
+  "disagreement_resolution": "A third blinded adjudicator reviews disagreements without seeing VLM outputs or reviewer identities.",
+  "ground_truth_claim": "Only the adjudicated sampled windows may be called human reference; unreviewed VLM outputs remain pseudo-reference."
+}

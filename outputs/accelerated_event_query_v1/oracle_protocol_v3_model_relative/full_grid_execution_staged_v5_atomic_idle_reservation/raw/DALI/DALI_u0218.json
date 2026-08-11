@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0218:1785446959151430718",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "80ccddf2c9b789f4e1058b4c785a2748506abdfbc57cd3f58916d0112b5f5849",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "b1bc00b9c4e39cbf75cb329b72f982664a2d6b25e704ee576c2d571ee99047de",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "8ee33c4394bd3fda7f56ba69acbf379c7ff391955117f78d10feb1531d411622",
+  "generated_token_ids_sha256": "dd702994d6306c6921568866c928e3bd30b33b00365e66937ed8d9a88137c70c",
+  "input_identity_sha256": "3cb01a5be1deebdd19387f180b8e2cf25e7e104a778e90c8b93d184e39b9e9eb",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "0549648eea234911f725b993810687509fafd050b393c699eb9bd31b7a9c51ec",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a white sedan in steady traffic flow. The lead vehicle maintains consistent speed and distance, with no sudden braking or slowing observed. Traffic signals ahead are not visible or indicate any immediate stop requirement. Road conditions are clear, and no road users are entering or threatening the ego path. Motorcycles and pedestrians are present but not encroaching on the ego vehicle's lane or path. The scene depicts normal urban driving without any visible need for a marked response such as braking, slowing, or avoidance.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "18060f7623d70477912a0ddf12691c9a35d8c08f7874ee5e1025a1de76c01a96",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a white sedan in steady traffic flow. The lead vehicle maintains consistent speed and distance, with no sudden braking or slowing observed. Traffic signals ahead are not visible or indicate any immediate stop requirement. Road conditions are clear, and no road users are entering or threatening the ego path. Motorcycles and pedestrians are present but not encroaching on the ego vehicle's lane or path. The scene depicts normal urban driving without any visible need for a marked response such as braking, slowing, or avoidance.\"\n}",
+  "raw_response_sha256": "51226ac3762b4468d4d2f0e0659c6bdacc5ce85a2f647427d42177175363b7eb",
+  "record_payload_sha256": "42dc77404d000bd210191903f0fa29c7ec2ad2f515269fda00459897c8128c47",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 21.066080044955015,
+    "model_load_seconds": 26.894216861575842,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 23.013327727094293,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0218",
+  "unit_ordinal": 218,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

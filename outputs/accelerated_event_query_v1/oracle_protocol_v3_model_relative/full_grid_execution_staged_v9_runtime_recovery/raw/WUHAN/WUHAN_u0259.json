@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0259:1786375730093796799",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "e226137559361ef440e8ad613d64a18804a952d3c6fdc7d4707d5c2d7f910600",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "76bfa6048729f6ea8443a0d75ab0e236f3a7c1f39550124352cd73f3aa6d2b95",
+  "generated_token_ids_sha256": "90e9833f1cf7b99640d53fc0f9ed8e8378e9869e1635d9c884e1965bb842f6d8",
+  "input_identity_sha256": "530d2090364ea63d8b41bf7e9e79446c291655815055804d64f762ceee1809ff",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "9867bf478bbe3b952a52f3f35018b0ef579a810112bf1996971761c34eb777c3",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light ahead transitions from red to green during the unit, indicating a change in traffic control that requires the ego driver to respond by accelerating or proceeding through the intersection. Additionally, the ego vehicle is approaching a crosswalk and intersection with other vehicles and potential pedestrians, necessitating a noticeable slowdown or braking action to safely navigate the intersection as traffic conditions change.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "b061c0c6bb09b1bbba28f1c533a98d63f22e121a31f9d8006aae3efa11953404",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light ahead transitions from red to green during the unit, indicating a change in traffic control that requires the ego driver to respond by accelerating or proceeding through the intersection. Additionally, the ego vehicle is approaching a crosswalk and intersection with other vehicles and potential pedestrians, necessitating a noticeable slowdown or braking action to safely navigate the intersection as traffic conditions change.\"\n}",
+  "raw_response_sha256": "8b77a37e04ba5300b0594e97762434678b1446a6e1e09706f3bb8772d07a9c01",
+  "record_payload_sha256": "7e2c764e801cf49920dbf0cf4c7d3892c09f819f091297e763fa6b1d3f3ff4dc",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 15.033213880000403,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 16.7150069240015,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0259",
+  "unit_ordinal": 1387,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

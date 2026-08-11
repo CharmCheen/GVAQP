@@ -1,0 +1,61 @@
+{
+  "benchmark_id": "SAFETY_CRITICAL_DRIVING_EVENT_REFERENCE_PILOT_V1",
+  "objective": "Test feasibility and calibration of an extensible safety-event pseudo-reference before any online SCAN redesign.",
+  "parent_assets": {
+    "partial_scan_pilot_v1": "read_only_sampling_source",
+    "partial_scan_pilot_v2": "separate_application_protocol_repair_not_modified"
+  },
+  "reference_status_if_executed": "TWO_STAGE_VLM_PSEUDO_REFERENCE_NOT_HUMAN_GROUND_TRUTH",
+  "stages": [
+    "BLINDED_SAMPLE_CONSTRUCTION",
+    "SINGLE_STAGE_CONTROL_ARM",
+    "STAGE_A_EVENT_DISCOVERY",
+    "STAGE_B_PROPOSAL_ADJUDICATION",
+    "BLINDED_HUMAN_ADJUDICATION",
+    "REFERENCE_GATE"
+  ],
+  "comparison_arms": {
+    "A": "single_stage_control_v1",
+    "B": "stage_a_discovery_v1_then_stage_b_adjudication_v1"
+  },
+  "forbidden_in_this_pilot": [
+    "modify_partial_scan_pilot_v1",
+    "modify_partial_scan_pilot_v2_application_contract",
+    "modify_online_candidate_generator",
+    "rank_scan_policies",
+    "call_vlm_before_sample_availability_and_gate_freeze",
+    "describe_vlm_outputs_as_ground_truth_or_gold_labels"
+  ],
+  "independence_rules": {
+    "sample_selector_may_read": [
+      "source_video_metadata",
+      "frozen_v1_pseudo_reference_provenance",
+      "frozen_v1_window_outputs"
+    ],
+    "vlm_annotator_must_not_read": [
+      "selection_stratum",
+      "selection_reason",
+      "old_labels",
+      "human_labels"
+    ],
+    "human_adjudicator_must_not_read": [
+      "vlm_stage_a_output",
+      "vlm_stage_b_output",
+      "selection_stratum",
+      "selection_reason",
+      "old_labels"
+    ],
+    "stage_b_may_read_from_stage_a": [
+      "proposal_id",
+      "start_frame_index",
+      "peak_frame_index",
+      "end_frame_index"
+    ],
+    "stage_b_must_not_read_from_stage_a": [
+      "event_family_hint",
+      "observable_transition",
+      "confidence",
+      "ambiguity_reason"
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0067:1786372010448868554",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "c6bee4417147be7d8ca3a513e90abba85fc43de95a67e9d300a9c2fac0e0aaaf",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "7363391c2f16fee76a9d833eceb056222f1d09e455eee230f50313abb8f83e62",
+  "generated_token_ids_sha256": "a66560870f113f52bf5879aa7735a641bd42a8d357fb95d01a6ac5d32cf3b199",
+  "input_identity_sha256": "6c4b6d4e352e9c458031a239d69a5261df2c662bfe2a7ea873586bb4761b34a1",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "b937e3adf20996718be88d8d43f7f699f2371906422ea9f9f7f705088e0c2af9",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light above the overpass changes from red to green during the sequence, indicating a transition that requires the ego driver to prepare for acceleration or proceed through the intersection. Additionally, the presence of multiple vehicles and motorbikes in close proximity, especially as the traffic light turns green, necessitates cautious driving and potential braking or slowing to avoid collisions or maintain safe following distance. The ego vehicle is positioned behind a Tesla Model Y and other vehicles, and the sudden increase in traffic flow upon the green light requires attentive driving and possible speed adjustment.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "e098b6fdfb69a87a217a25b55f9bc26645199179c23cae3c3aa15d5341862848",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light above the overpass changes from red to green during the sequence, indicating a transition that requires the ego driver to prepare for acceleration or proceed through the intersection. Additionally, the presence of multiple vehicles and motorbikes in close proximity, especially as the traffic light turns green, necessitates cautious driving and potential braking or slowing to avoid collisions or maintain safe following distance. The ego vehicle is positioned behind a Tesla Model Y and other vehicles, and the sudden increase in traffic flow upon the green light requires attentive driving and possible speed adjustment.\"\n}",
+  "raw_response_sha256": "94af88454302db78a2da8aa960cda1e59a756f9c08de6009aa92c8913f6fbddd",
+  "record_payload_sha256": "dbc8c4938859a80d3bfc61a0ab94ba276f10005ec0a0f998d494b404dfbeb6f8",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 19.66290651300369,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 21.31746715200279,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0067",
+  "unit_ordinal": 67,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

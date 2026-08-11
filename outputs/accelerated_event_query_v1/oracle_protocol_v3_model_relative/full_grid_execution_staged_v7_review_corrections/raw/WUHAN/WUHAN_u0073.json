@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0073:1786349397601756248",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "a69a807be5f22f36742ff09c3502a98408c9a8f72a1257077bd1b3eabe974b14",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "110f909e816724a013863bcd60e1d95549b2083f11edf54fba38667b0b851f59",
+  "generated_token_ids_sha256": "91cc6eb245ce977d48543fc4328cadc76b63e449ef302c153a492c3d572da70f",
+  "input_identity_sha256": "f0cf45c6e97ad57644527805c727bcd351cb142f386ac8d8e5f20cabf82b017a",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "4182b5504df6957e944d6f43af334409a6296ff2ec26e9b31301110b6311eb35",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a black SUV at a steady pace, and there are no sudden changes in speed or path required. The road ahead is clear, with no visible obstacles, sudden braking, or traffic control requiring a marked response. The overpass with a 5m height restriction is visible, but the ego vehicle is not approaching it closely enough to require a slowdown or avoidance maneuver within this unit. Pedestrians and cyclists are present but not in the immediate path or causing any threat. The traffic flow appears normal and steady.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "4aa2c0edccc2d9d28ce6eccb5d5052d28a987f033e8bfedcc5ce18d02625582a",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a black SUV at a steady pace, and there are no sudden changes in speed or path required. The road ahead is clear, with no visible obstacles, sudden braking, or traffic control requiring a marked response. The overpass with a 5m height restriction is visible, but the ego vehicle is not approaching it closely enough to require a slowdown or avoidance maneuver within this unit. Pedestrians and cyclists are present but not in the immediate path or causing any threat. The traffic flow appears normal and steady.\"\n}",
+  "raw_response_sha256": "21702a6dd4f55ed48e41790b3a2535476c6f845d2f3506d24f95a2a01776f9c0",
+  "record_payload_sha256": "75555531d1938c638881d6a739f0d2d498589fc05c178625456517cd07c10033",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.26046419799968,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.91316314800497,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0073",
+  "unit_ordinal": 1201,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

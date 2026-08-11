@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0425:1786378075227063315",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "e1d36a024a925bcb82cef392cf5d5383ad218eebaa531c43d3bc826f25d2e4f6",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "34e8780a3a96f677fb11371ccffb03e1524c0ea112286d08bd3acf6d0dc71c6a",
+  "generated_token_ids_sha256": "70a6a57df52e94e27d46cbc811bb4d5b3949d6d28ed9833295877c871117879a",
+  "input_identity_sha256": "4e0c95a813c66868261611728d9c44369ca892a6765a53bb1c6b021f53fa6bb6",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "e450d3543f7470757aa807b546bf715d591d6ab7f2a44e3612fa1b8e0beef833",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light ahead transitions from red to green during the unit, and the ego vehicle is approaching an intersection with pedestrians crossing. The countdown timer on the traffic light decreases from 26 to 8 seconds, indicating a change in signal state. Additionally, pedestrians are actively crossing the street, requiring the driver to slow down or stop to yield, especially as the light turns green and vehicles begin to move. The presence of multiple pedestrians in the crosswalk and the need to respond to the traffic signal change necessitate a noticeable slowdown or braking action.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "327b32f41bbb52b2328c9de90fc25dc752b3f29721ebf0ec53b1c61cffa91330",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light ahead transitions from red to green during the unit, and the ego vehicle is approaching an intersection with pedestrians crossing. The countdown timer on the traffic light decreases from 26 to 8 seconds, indicating a change in signal state. Additionally, pedestrians are actively crossing the street, requiring the driver to slow down or stop to yield, especially as the light turns green and vehicles begin to move. The presence of multiple pedestrians in the crosswalk and the need to respond to the traffic signal change necessitate a noticeable slowdown or braking action.\"\n}",
+  "raw_response_sha256": "41d48f3b92835f7a07b0122c5bc52aa9b61991602f916182b7f0027219bf7b5a",
+  "record_payload_sha256": "83d4d9405dab4238b1085820a1c44172d73b7f29ecc192b0c7df6b127a80b669",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 19.409892668001703,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 20.25694622899755,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0425",
+  "unit_ordinal": 992,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

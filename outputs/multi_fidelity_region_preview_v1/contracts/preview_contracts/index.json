@@ -1,0 +1,57 @@
+{
+  "P0": {
+    "dnn": false,
+    "operator": "P0_KEYFRAME_5S_160X90",
+    "resolution": "160x90",
+    "source": "outputs/macro_region_proxy_optimization_v1",
+    "status": "EXISTING_FRAMESTAT_BASELINE_CLOSED_TO_TUNING",
+    "target_rate_fps": 0.2
+  },
+  "P1_L": {
+    "family": "LOW_RATE_LOW_RESOLUTION_DETECTOR",
+    "full_scan_cache": false,
+    "model_path": "models/yolo/yolov8n.pt",
+    "model_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "operator": "YOLOV8N_DETECTION_ONLY_0P2FPS_320",
+    "repeat_count": 2,
+    "resolution": "320x180_letterbox_to_320",
+    "target_rate_fps": 0.2,
+    "tracking": false
+  },
+  "P1_M": {
+    "family": "LOW_RATE_LOW_RESOLUTION_DETECTOR",
+    "full_scan_cache": false,
+    "model_path": "models/yolo/yolov8n.pt",
+    "model_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+    "operator": "YOLOV8N_DETECTION_ONLY_0P5FPS_320",
+    "repeat_count": 2,
+    "resolution": "320x180_letterbox_to_320",
+    "target_rate_fps": 0.5,
+    "tracking": false
+  },
+  "P2": {
+    "family": "SPARSE_LOW_COST_MOTION_PREVIEW",
+    "operator": "SPARSE_FRAME_DIFFERENCE_1FPS_160X90",
+    "optical_flow": false,
+    "repeat_count": 2,
+    "resolution": "160x90",
+    "target_rate_fps": 1.0,
+    "tracking": false
+  },
+  "P3": {
+    "status": "NOT_IMPLEMENTED_UNLESS_P1_AND_P2_COMPONENT_GATES_PASS"
+  },
+  "cost_fields": [
+    "decode_time_sec",
+    "model_time_sec",
+    "feature_time_sec",
+    "total_wallclock_sec",
+    "seconds_per_video_hour",
+    "peak_cpu_memory",
+    "peak_gpu_memory",
+    "determinism",
+    "missingness"
+  ],
+  "full_timeline_coverage_required": true,
+  "max_preview_cost_ratio": 0.1
+}

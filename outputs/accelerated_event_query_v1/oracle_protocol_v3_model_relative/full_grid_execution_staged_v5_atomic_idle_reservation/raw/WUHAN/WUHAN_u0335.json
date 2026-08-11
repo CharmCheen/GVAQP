@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0335:1785449429405392096",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "dfa6492d46688650cf62bd64ea68049f7c5d4b817fca33b1919cd107169aae36",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "b492197b06ad42dc9eb271ffdde76fbb81dec35022c6226d60e150059698e19b",
+  "generated_token_ids_sha256": "dfcb94bb917ad0fcd19ba3e05d49c28b7eb646e561be0acdc41f2bf012cb4735",
+  "input_identity_sha256": "e9e033f5f61121aab69584dd35232ed474ca73aca1f034822cd748993e843937",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "93b5da41f6d35669e09d2383c4c8fcbde2cbaf1b6b289b1563dde050d6af950f",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light changes from red to green at the beginning of the unit, indicating that the ego vehicle and following vehicles are permitted to proceed. However, the vehicles are initially stopped at the intersection, and the transition to green requires a noticeable acceleration or resumption of motion. Additionally, the ego vehicle must navigate under an overpass with visible height restrictions (5m signs) and potential lane narrowing, requiring attentive driving and possible slight adjustments in speed or path to safely pass under the structure. These conditions necessitate a marked response from the driver within the unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "274b178f34ccba59d086f0e9a7394a0addfc8f53318469d6ca9b6e1b7cab6bc3",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light changes from red to green at the beginning of the unit, indicating that the ego vehicle and following vehicles are permitted to proceed. However, the vehicles are initially stopped at the intersection, and the transition to green requires a noticeable acceleration or resumption of motion. Additionally, the ego vehicle must navigate under an overpass with visible height restrictions (5m signs) and potential lane narrowing, requiring attentive driving and possible slight adjustments in speed or path to safely pass under the structure. These conditions necessitate a marked response from the driver within the unit.\"\n}",
+  "raw_response_sha256": "bdd7ded05b112bd88034d7105d5356699efff294b8cbb516fd14b53cf0463973",
+  "record_payload_sha256": "6bff6e926da9dbc21ce3a7a7565adabc9d58242a5c1fed3e79c7aa8d6c5cd128",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 20.70976452343166,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 22.6686179228127,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0335",
+  "unit_ordinal": 1463,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

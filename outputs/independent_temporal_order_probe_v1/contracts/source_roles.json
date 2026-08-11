@@ -1,0 +1,60 @@
+{
+  "schema_version": "INDEPENDENT_TEMPORAL_ORDER_SOURCE_ROLES_V1",
+  "status": "UNBOUND_EXECUTION_BLOCKED",
+  "created_utc": "2026-08-07T04:47:18Z",
+  "role_transition_rule": "source_A changes automatically from opportunity_probe to development immediately after the O decision artifact is emitted",
+  "existing_sources": {
+    "role": "hypothesis_generation_only",
+    "may_support_confirmation": false,
+    "known_lineage": [
+      "realcartest development slices",
+      "long_video_dataset3 / dataset3_development",
+      "PSVR V0/V1 development videos",
+      "all sources listed in prior scan-order diagnostics"
+    ]
+  },
+  "source_A": {
+    "role_before_O": "opportunity_probe",
+    "role_after_O": "development",
+    "path": "TBD_NOT_BOUND",
+    "video_sha256": "TBD_NOT_BOUND",
+    "source_manifest_path": "TBD_NOT_BOUND",
+    "capture_session_id": "TBD_NOT_BOUND",
+    "independence_audit": "TBD_NOT_BOUND",
+    "continuous_long_video_required": true,
+    "event_centered_selection_forbidden": true,
+    "semantic_opened": false,
+    "proxy_opened": false,
+    "may_be_called_heldout_after_O": false
+  },
+  "source_B": {
+    "role": "future_H_L_R_confirmation_unopened",
+    "path": "TBD_NOT_BOUND",
+    "video_sha256": "TBD_NOT_BOUND",
+    "source_manifest_path": "TBD_NOT_BOUND",
+    "capture_session_id": "TBD_NOT_BOUND",
+    "semantic_opened": false,
+    "proxy_opened": false,
+    "must_remain_unopened_during_O": true
+  },
+  "source_C": {
+    "role": "future_H_L_R_confirmation_unopened",
+    "path": "TBD_NOT_BOUND",
+    "video_sha256": "TBD_NOT_BOUND",
+    "source_manifest_path": "TBD_NOT_BOUND",
+    "capture_session_id": "TBD_NOT_BOUND",
+    "semantic_opened": false,
+    "proxy_opened": false,
+    "must_remain_unopened_during_O": true
+  },
+  "execution_blockers": [
+    "source_A hash/provenance/independence not bound",
+    "source_B and source_C preservation identities not bound",
+    "target hardware identity not bound",
+    "numeric deadline not derived and hashed",
+    "three policy implementations not hash-bound",
+    "physical runner integrity tests not passed"
+  ],
+  "new_oracle_calls_authorized": false,
+  "primary_policy_runs_authorized": false
+}

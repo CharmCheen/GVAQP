@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0451:1786379598488982356",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "efc2c4eecd566a17023439439685ffde26bbca632190bee29340f6adaa5f2ff0",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "70d5989f4baa01d74a8a470770f69ce43ad7cb1f6cebed175ab72017339e7f12",
+  "generated_token_ids_sha256": "e82e58230a547b2ba7505bfc1cb354c3c0c846ace5bb73ded1c849e8114944bb",
+  "input_identity_sha256": "8039892d36d78ebf06fa1e08042c35cc2c7389136eabb58d32eace3da88c567b",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "29ffd65471cb00bc7642f91e4d7623064dc1a25a065fc4b721ab8aea812ea935",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a black SUV (license plate \u4e91L\u00b7T7738) at a steady pace. There are no sudden changes in speed or braking from the lead vehicle. Traffic flow appears consistent, with no visible obstacles, sudden lane changes, or road users entering the ego path. Pedestrians and scooters are present on the sidewalk and in the bike lane, but they are not encroaching on the vehicle lane. The traffic signal ahead is not visible, but there is no indication of a need for a marked response such as braking or avoidance. The scene depicts normal urban driving conditions without any immediate hazard requiring a noticeable slowdown or maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "22faa24da1ab062ecf294eda5f1464847500051dcf2d7c2669aa6c25c21ab35e",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a black SUV (license plate \u4e91L\u00b7T7738) at a steady pace. There are no sudden changes in speed or braking from the lead vehicle. Traffic flow appears consistent, with no visible obstacles, sudden lane changes, or road users entering the ego path. Pedestrians and scooters are present on the sidewalk and in the bike lane, but they are not encroaching on the vehicle lane. The traffic signal ahead is not visible, but there is no indication of a need for a marked response such as braking or avoidance. The scene depicts normal urban driving conditions without any immediate hazard requiring a noticeable slowdown or maneuver.\"\n}",
+  "raw_response_sha256": "1cf4b20d5e1c4671980c684d281d6d55c12027bae270af162994fca1a68c92e9",
+  "record_payload_sha256": "508ae3e35fe300ddf280dacba899789852613f4659138168544a7a741dbe76d1",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 24.46981394100294,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 26.285995121012093,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0451",
+  "unit_ordinal": 451,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

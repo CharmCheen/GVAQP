@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0324:1785449203848531657",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "a16c226cdef9af0b8899bb2a551672c916f9a217fab675d22b077d0728900495",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "a8a34cbd8d31c58ebd61203cdbbdf3de3b67e7c4957e1adf232d0ec0e90799f1",
+  "generated_token_ids_sha256": "9d748d9d68ecfea3e3dd981f17cc2baed46c8f354ca7580aceb058e3d4e59087",
+  "input_identity_sha256": "e276a7563da44ae00961b9d1071f27f4f9c232ce82a309c2ce0ac768b1c50563",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "f71eacdb9a93a2592bf985998381a0464759d25ee5d0e9e30f6b60f5bf69960e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily under an overpass with clear visibility of the road ahead. There are no sudden changes in traffic, no visible obstacles in the path, no traffic signals requiring immediate action (e.g., red light), and no vehicles or pedestrians entering or threatening the ego path. The lead vehicles maintain consistent spacing, and the road markings and conditions are normal. The green bus and other vehicles are moving normally without any indication of braking or slowing that would require a response from the ego driver. The environment is stable and does not necessitate a noticeable slowdown, braking, or avoidance maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "3c9960131b85252da0101cfba9796666af24dacc00d0835301de70a6d00f9d13",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily under an overpass with clear visibility of the road ahead. There are no sudden changes in traffic, no visible obstacles in the path, no traffic signals requiring immediate action (e.g., red light), and no vehicles or pedestrians entering or threatening the ego path. The lead vehicles maintain consistent spacing, and the road markings and conditions are normal. The green bus and other vehicles are moving normally without any indication of braking or slowing that would require a response from the ego driver. The environment is stable and does not necessitate a noticeable slowdown, braking, or avoidance maneuver.\"\n}",
+  "raw_response_sha256": "99fefd5e1020d9206b06c52539e9a27c1f81f98a12801709312dd15e325a0484",
+  "record_payload_sha256": "d1674585e9ef4eb982801375d77bd73db51c121a885acbb37d38c70319e9b1a8",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 22.906214851886034,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 24.929040975868702,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0324",
+  "unit_ordinal": 1452,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

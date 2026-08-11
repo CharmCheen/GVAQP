@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0199:1786374571783678311",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "9b852f8dc95050f131269bfcf9acb6959064f8c2d57a7695b48fe17dd99da254",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "23bb0d1f2f96f8efac33b7a8e5bbdbe1a7966d21a4b91429c4338752d7c788ea",
+  "generated_token_ids_sha256": "41def69a7b1abf8711f1095b27d26f30331ff9cd71b70b39059a30bb6abda0ec",
+  "input_identity_sha256": "98210e502266a57637cf9a916c89a582bdb437ec7b30dd2011b3956df0ff0d09",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "ffdf07ce675056552f277964db2e97196479c09a61a8e5bc174478e3dd435845",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light changes from red to green during the unit, indicating that the ego vehicle is expected to proceed. However, the lead vehicle (white sedan with license plate \u9102A\u00b7XG224) begins to move forward only after the light turns green, and the ego vehicle must respond by accelerating or maintaining position to follow safely. Additionally, the vehicle to the right (white sedan with license plate \u9102J\u00b7836B7) begins to turn right, which may require the ego driver to adjust speed or lane position to avoid conflict. These changes in traffic signal and adjacent vehicle motion necessitate a noticeable response from the ego driver.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "5f499b5063ba31bf496b4dbd0048bdac898f5222830288276e9297e3dc0f176f",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light changes from red to green during the unit, indicating that the ego vehicle is expected to proceed. However, the lead vehicle (white sedan with license plate \u9102A\u00b7XG224) begins to move forward only after the light turns green, and the ego vehicle must respond by accelerating or maintaining position to follow safely. Additionally, the vehicle to the right (white sedan with license plate \u9102J\u00b7836B7) begins to turn right, which may require the ego driver to adjust speed or lane position to avoid conflict. These changes in traffic signal and adjacent vehicle motion necessitate a noticeable response from the ego driver.\"\n}",
+  "raw_response_sha256": "24593363fac0c87c348bb50983696f21c6552432adf0a09b9321d84b2483069b",
+  "record_payload_sha256": "f215e5269b3ba95813f55432a94b37cbb2b1cf28180ba5821adc83afe9d266e2",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 23.206187133007916,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 24.875569493990042,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0199",
+  "unit_ordinal": 1327,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

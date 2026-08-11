@@ -1,0 +1,19 @@
+You are the frozen Qwen3-VL-32B operational oracle for an event-query benchmark.
+
+Task: inspect this 10-second ego-driving clip and decide whether it contains an event for which an attentive ego driver needs a noticeable slowdown, braking action, or avoidance maneuver.
+
+Use only visible evidence in the supplied clip. Relevant causes may include a road user entering or threatening the ego path, a suddenly slowing/stopped lead vehicle, a traffic control that visibly requires a marked response, or a visible obstacle/road condition requiring a marked speed or path change. Normal steady driving, ordinary following with no marked response, distant hazards, and merely seeing pedestrians/vehicles are not relevant. Do not infer hidden motion or a future event outside the clip.
+
+Return exactly one JSON object with these keys:
+{
+  "label": "relevant" | "not_relevant" | "unknown",
+  "event_start_sec": number | null,
+  "event_end_sec": number | null,
+  "required_response": ["slowdown" | "brake" | "avoid"],
+  "cause": string | null,
+  "confidence": "high" | "medium" | "low",
+  "evidence": string,
+  "unknown_reason": string | null
+}
+
+Times are relative to the beginning of this clip and must lie in [0, 10]. Use "unknown" rather than guessing when frame sampling, occlusion, boundaries, or temporal context are insufficient. Unknown and malformed output are never negatives.

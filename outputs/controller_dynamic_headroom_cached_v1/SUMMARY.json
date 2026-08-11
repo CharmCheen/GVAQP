@@ -1,0 +1,33 @@
+{
+  "class_counts": {
+    "EFFECTIVELY_TIED": 57,
+    "SCAN_BETTER": 25,
+    "VERIFY_BETTER": 26
+  },
+  "classification": "cached_abstract_cost_replay_not_physical_or_confirmatory",
+  "costs": {
+    "scan": 0.1,
+    "unit": "abstract cached-replay cost, not seconds",
+    "verify": 1.0
+  },
+  "evaluator_sha256": "0a7a8ad4a13cc4404b0cfe7dfb1aef8958197267e22ff1df545ac4dbbf744610",
+  "frozen_input_manifest_sha256": "4a9efa27f40df1c05eb733ad69585282d13636b6c604d5f52787355c0f34148e",
+  "gate": {
+    "cached_headroom_gate_pass": true,
+    "deadline_overrun_count": 0,
+    "non_tie_fraction": 0.4722222222222222,
+    "scan_better_fraction": 0.23148148148148148,
+    "source_videos_with_both_directions": 2,
+    "verify_better_fraction": 0.24074074074074073
+  },
+  "limitations": [
+    "only two independent source videos across three cached domains",
+    "costs are abstract and no physical deadline is exercised",
+    "one deterministic continuation policy and one rollout per branch",
+    "older cached oracle/query/reference, not the active Oracle V3 full-grid"
+  ],
+  "q_definition": "0.5*terminal_event_recall + 0.5*anytime_event_recall_auc; subtract 1 if nonempty output violates precision>=0.8",
+  "record_count": 108,
+  "schema_version": "CACHED_CONTROLLER_HEADROOM_SUMMARY_V1",
+  "tie_tolerance": 1e-12
+}

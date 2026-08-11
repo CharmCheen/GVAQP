@@ -1,0 +1,101 @@
+{
+  "DOWNSTREAM_RESULTS_OBSERVED": false,
+  "PROTOCOL_FROZEN": true,
+  "THIS_IS_NOT_A_RECOVERED_HISTORICAL_PREREGISTRATION": true,
+  "candidate_semantics": {
+    "candidate_id": "{video_id}::{unit_id}",
+    "candidate_type": "frozen_v3_unit",
+    "creation_rule": "exactly one candidate for every frozen V3 unit",
+    "dedup_rule": "unit ID uniqueness; duplicates fail finalization",
+    "ordering_rule": "frozen unit ordinal",
+    "temporal_support": "exact frozen V3 unit interval"
+  },
+  "contract_type": "NEW_PROSPECTIVE_PREREGISTRATION",
+  "created_at_utc": "2026-08-10T06:06:04.785236+00:00",
+  "dirty_worktree": [
+    "?? MAB_RESEARCH_DIRECTION_DECISION.md",
+    "?? outputs/p0_materializer_validation_v1/",
+    "?? outputs/v3_reference_release_v1/",
+    "?? outputs/v3_runtime_recovery_v1/",
+    "?? scripts/finalize_v3_prospective_scan_proxy.py",
+    "?? scripts/prepare_p0_materializer_validation_pause.py",
+    "?? scripts/prepare_v3_reference_release_pause.py",
+    "?? scripts/prepare_v3_runtime_recovery.py",
+    "?? scripts/preregister_v3_scan_proxy.py",
+    "?? scripts/run_v3_prospective_scan_proxy.py"
+  ],
+  "implementation": {
+    "finalizer_path": "scripts/finalize_v3_prospective_scan_proxy.py",
+    "historical_config_promotion": false,
+    "name": "prospective_unit_midpoint_yolov8n_proxy_v1",
+    "runner_path": "scripts/run_v3_prospective_scan_proxy.py",
+    "selection_reason": "simplest maintained repository-compatible YOLO interface; one deterministic unit-local sample; no semantic-oracle/reference input; stable one-candidate-per-V3-unit identity"
+  },
+  "materializer_results_used": false,
+  "model": {
+    "THRESHOLD_NOT_TUNED_ON_EVALUATION_VIDEOS": true,
+    "class_filter": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      7
+    ],
+    "confidence_threshold": 0.25,
+    "device": "cuda:0",
+    "input_resolution": 640,
+    "max_detections": 300,
+    "name": "YOLOv8n",
+    "nms_iou": 0.45,
+    "precision": "backend_default_FP32",
+    "runtime": "ultralytics==8.4.51 (previously fixed non-target engineering runtime; new prospective binding)",
+    "source": "Ultralytics",
+    "weight_available_at_freeze": false,
+    "weight_path": "models/yolo/yolov8n.pt",
+    "weight_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36"
+  },
+  "output": {
+    "candidate_table": "Parquet",
+    "finalizer": "deterministic sort by unit_id then immutable tables",
+    "proxy_table": "Parquet",
+    "raw_schema": "one JSON record per frozen unit"
+  },
+  "protocol_hash": "83642c42ed0ab578cdf5db81ccbf29fbcfbd3458b98909c92190fb88920dceab",
+  "proxy_semantics": {
+    "features": {
+      "conf_sum": "sum of retained detector confidences",
+      "det_count": "number of retained COCO classes at deterministic midpoint",
+      "max_conf": "maximum retained detector confidence",
+      "proxy_score": "0.5 * min(det_count, 20) / 20 + 0.5 * max_conf"
+    },
+    "normalization": "none; raw bounded score",
+    "uses_future_semantic_outcome": false,
+    "uses_reference_GT": false,
+    "uses_semantic_oracle": false
+  },
+  "reference_GT_used_for_parameter_choice": false,
+  "sampling": {
+    "decode_backend": "OpenCV VideoCapture; seek by CAP_PROP_POS_MSEC then sequential read",
+    "first_last_behavior": "midpoint is strictly inside every nonempty unit; decode failure is terminal and not coerced",
+    "future_visual_context": "offline-video-query-visible single midpoint frame; no future semantic outcome",
+    "sample_rule": "one midpoint timestamp per V3 unit: start_sec + duration_seconds / 2",
+    "unitization": "frozen V7 unit manifest"
+  },
+  "selector_results_used": false,
+  "source_commit": "2c0d35c888f9711cacab964672c6094fc98e5c49",
+  "source_hashes": {
+    "finalizer": "2130154268bcd9d6bd19619dc8bd1fbbac3026b3b2bb5110969ec48edd7c2ae4",
+    "runner": "771d0ef664d0c94c5196f079b0978eb79bfc7294486cfc9582146ab2a7b43996",
+    "runtime_models": "ca5bf1d7d86d47a02b81bae2c6a0d9d78288e19daa4734743b71647ea3fb7917",
+    "unit_manifest": "c336445da89401fdbae6174785c0cf4cac32416d4c881f1b5d2102b3ba3e7179",
+    "video_manifest": "2953eba0ca1bffd7bfad0e5681cc6242d01143ac2665820a89c9a203116c0ec9"
+  },
+  "unit_manifest_path": "outputs/accelerated_event_query_v1/oracle_protocol_v3_model_relative/full_grid_preregistration_staged_v7_review_corrections/FULL_GRID_UNIT_MANIFEST.json",
+  "video_ids": [
+    "DALI",
+    "HANGZHOU",
+    "WUHAN"
+  ],
+  "video_manifest_path": "outputs/accelerated_event_query_v1/video_manifests/frozen_videos_v1.json"
+}

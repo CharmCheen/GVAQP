@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0105:1785444428740595646",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "6880b48850141a77c7a03fd597a2d8afb0a9b3d5abf1172882b9854bcff40641",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "b9137c5f2913565e0b29ac03d52c2c81f45576cb0154fce7b61e88c491af168c",
+  "generated_token_ids_sha256": "1aed0b248c4e559ea1f7d0025f0b8cc9b352179264285fba3eea5b3c8c2c269c",
+  "input_identity_sha256": "54277242028976c6fe8f599ae5cb0ae0806b7d5c78aa414841b2db589ee00e54",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "b4330f3ff4e10d56889891dee3f99d94aa6c1e7a66250226c77eb2863531d829",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane road with clear visibility. The lead vehicle ahead maintains a consistent speed, and there are no sudden changes in traffic signals, road conditions, or obstacles requiring a noticeable slowdown, braking, or avoidance maneuver. The traffic light transitions from red to green, but the ego vehicle is not required to brake or slow down significantly as it is not at an intersection or stop line. The surrounding environment is stable with no visible threats or sudden changes.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "52d5a424b6bb7b2dadebf4c920b2907cc86e943b258908c8e7139dd1f45c2b75",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane road with clear visibility. The lead vehicle ahead maintains a consistent speed, and there are no sudden changes in traffic signals, road conditions, or obstacles requiring a noticeable slowdown, braking, or avoidance maneuver. The traffic light transitions from red to green, but the ego vehicle is not required to brake or slow down significantly as it is not at an intersection or stop line. The surrounding environment is stable with no visible threats or sudden changes.\"\n}",
+  "raw_response_sha256": "4fba878db52a0f2465fff563f09c0dc219548928ee6ab97d32090b9611285589",
+  "record_payload_sha256": "b7cbbcbeed0e4b5466b5c480c1ef088cbe2664e4fb22b0781bc73ab0303c969c",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 20.670058803632855,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 21.48033837787807,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0105",
+  "unit_ordinal": 672,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

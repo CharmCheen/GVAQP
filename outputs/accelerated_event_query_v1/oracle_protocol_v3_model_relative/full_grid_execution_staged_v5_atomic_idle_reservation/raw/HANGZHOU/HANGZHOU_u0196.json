@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0196:1785446169523777058",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "cd7368322d81f0a11113f3ceed15b9ec401a845444e976ca2e7f6a219f58c7d8",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "2c33acc85641d91e1f7387310ff3c1e02ac3fd51a5df23a25b09e8f36b071db1",
+  "generated_token_ids_sha256": "4184f036757cc64837a653be3daeb14a2f0689778685a022434f34cc37872cc0",
+  "input_identity_sha256": "6886e3fc617e6bd75c4d39f5eba70ea2e636f66e16f6bb3a97aabe10f41973fb",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "11462264c2369bdd1e6189167b296b4591d451a771faa45d77431bf7ec0adfc8",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "A cyclist enters the ego vehicle's lane from the right side, moving into the path of the ego vehicle between 0:05 and 0:08. The cyclist is riding directly in the traffic lane, not in a designated bike lane, and is positioned close to the ego vehicle's trajectory, requiring an attentive driver to slow down or maneuver to avoid a collision. This constitutes a visible and immediate threat to safe driving within the unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "a4294bbfca74d64198dee9e7a119cfc72b742f617b5e6196f042f7749e686aa8",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"A cyclist enters the ego vehicle's lane from the right side, moving into the path of the ego vehicle between 0:05 and 0:08. The cyclist is riding directly in the traffic lane, not in a designated bike lane, and is positioned close to the ego vehicle's trajectory, requiring an attentive driver to slow down or maneuver to avoid a collision. This constitutes a visible and immediate threat to safe driving within the unit.\"\n}",
+  "raw_response_sha256": "0848b626eb8ae4811780ff8173b763c8920acc02b0f261975503cc49fb5c1e49",
+  "record_payload_sha256": "1bfe77a78c65089415539814738d4f253c671976c3e516a407be16ae266c3ccb",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.867617946118116,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.763554768636823,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0196",
+  "unit_ordinal": 763,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

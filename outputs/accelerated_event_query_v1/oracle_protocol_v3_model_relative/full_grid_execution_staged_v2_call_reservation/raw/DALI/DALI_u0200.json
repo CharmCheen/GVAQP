@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0200:1785423948566849732",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "bcb0b6b8fdb680b2c3cecf4c9b8586723654840c41c1151768214a92395288ab",
+  "execution_seal_sha256": "2189d821eba4b0e0022da4f0a1113e51ed2128351def12c4e310ffd36569c9ee",
+  "execution_session_id": "b1d874dad9633943da9182baee77bb3366cda2f0d6407e982a26dfc65e45aac8",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "76ce6e34c1e57940dfe288099ac2d358d58bca32b9c0483e0124f3d91165da9c",
+  "generated_token_ids_sha256": "7696f90f13ee3d684c87c812f735d6048fe66cff27429cc52f6f14d2075c5ace",
+  "input_identity_sha256": "598ba27e3c49c48b3f5fd9c2e732f5d73f817b5ca3f15893a2bcbdbe15f02dd6",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "2c00f18bb5c18454e510b3760fff32e9eb0e29f8f353698644cdd72b2bf55f96",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a white sedan (license plate \u7ca4L BE969) in steady traffic flow. There are no sudden changes in speed, braking, or maneuvers by the lead vehicle or surrounding traffic. The road ahead is clear with no visible obstacles, traffic control requiring immediate response, or road users entering the ego path. All vehicles are moving in a consistent manner, and the traffic appears to be flowing normally without any need for a noticeable slowdown or avoidance maneuver within this 10-second unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "4cf0891026454aa9bf894f4c0799c1b7158101ebe972815a4286882dc55a5786",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a white sedan (license plate \u7ca4L BE969) in steady traffic flow. There are no sudden changes in speed, braking, or maneuvers by the lead vehicle or surrounding traffic. The road ahead is clear with no visible obstacles, traffic control requiring immediate response, or road users entering the ego path. All vehicles are moving in a consistent manner, and the traffic appears to be flowing normally without any need for a noticeable slowdown or avoidance maneuver within this 10-second unit.\"\n}",
+  "raw_response_sha256": "b9074f72fd16ae866f67664d3caf6430b767b48eb6d8bdf1c72b9548be63fcb4",
+  "record_payload_sha256": "7c870e7345a12f1425c5d495d7cbe9f4b332609e0336b51da9d30b68220604b8",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 19.597743943333626,
+    "model_load_seconds": 14.661523081362247,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 21.331419991329312,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0200",
+  "unit_ordinal": 200,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

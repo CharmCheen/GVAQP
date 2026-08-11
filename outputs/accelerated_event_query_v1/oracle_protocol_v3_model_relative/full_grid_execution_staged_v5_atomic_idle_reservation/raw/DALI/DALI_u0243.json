@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0243:1785447476954595071",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "a11579d46b9f135f9a3f36b6cfa20fb7355e16a6eae560061155a16f81cd9779",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "b1bc00b9c4e39cbf75cb329b72f982664a2d6b25e704ee576c2d571ee99047de",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "35ee40454bda71a0673288ae8a868e932aec7a08560d6341aa9b511a558c1eea",
+  "generated_token_ids_sha256": "bea4c182421408659bd3741092dacc312228fa91398b9580ca09a83e7569b020",
+  "input_identity_sha256": "09a35c8a9b258f419d426b5e5e5b3194c5002e0467ee126526693870875542f2",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "67ad14bc5c367be904be71038166cbfc33a8be732a69e19892dc5c43416768eb",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily in a multi-lane urban road with clear visibility. Traffic is flowing smoothly, and there are no sudden changes in speed or path from the lead vehicles. Pedestrians are visible on the sidewalks and crosswalks, but they are not entering the ego vehicle's path. Traffic signals are visible and appear to be green, allowing continued forward motion without requiring a noticeable slowdown, braking, or avoidance maneuver. The road conditions are clear, and no obstacles or sudden hazards are present within the unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "d0517a3ebc497105c17937602c26015088ed6c880299b8c5f8d6439fbc9881c2",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily in a multi-lane urban road with clear visibility. Traffic is flowing smoothly, and there are no sudden changes in speed or path from the lead vehicles. Pedestrians are visible on the sidewalks and crosswalks, but they are not entering the ego vehicle's path. Traffic signals are visible and appear to be green, allowing continued forward motion without requiring a noticeable slowdown, braking, or avoidance maneuver. The road conditions are clear, and no obstacles or sudden hazards are present within the unit.\"\n}",
+  "raw_response_sha256": "a4ea751f3c1200c01196429bcf3878119d916b85a790d0da778b44cd3d97ccb3",
+  "record_payload_sha256": "361c191e78fbe9789f446b7149150eff6fc0b6e40535c31cb70a7327e20bae9e",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 20.31172290816903,
+    "model_load_seconds": 26.894216861575842,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 22.283417873084545,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0243",
+  "unit_ordinal": 243,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

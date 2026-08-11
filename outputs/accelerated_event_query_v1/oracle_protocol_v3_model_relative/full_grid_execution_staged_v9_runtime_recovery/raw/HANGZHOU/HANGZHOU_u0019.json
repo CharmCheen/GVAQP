@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0019:1786371077535536520",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "0224677427d471568243ce75a4946a0c13db9b7f09c5cc66918f6ac7a1bff628",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "1eecf5e93558efa59027a706a3830dc27e18a4c74ca569a047acc585dec2dfd6",
+  "generated_token_ids_sha256": "93cee7acf23b2b43c05f691dd97dace493b4c960e741a74ecb6aa382a47a8054",
+  "input_identity_sha256": "cd870b11a78b390092c9eff4bba075bee14c4a10374e83b1db067db8382fd4aa",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "7b4c999b6775ce4583a7f9c21538960cff4081cbfa15529745227cf7d8a86890",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane urban road with clear visibility. Traffic flow is smooth, and there are no sudden changes in speed, braking, or maneuvers required. The navigation overlay indicates a straight path with no immediate turns or stops. No vehicles are encroaching on the ego path, and all road users are maintaining consistent lanes and speeds. The road conditions are clear, and traffic signals are not indicating any immediate need for action. Therefore, no noticeable slowdown, braking, or avoidance maneuver is required within this unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "ddb6e1d41eca3c915b271119402164e42f5c4cb6df16792efebb98a1c3e860ab",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane urban road with clear visibility. Traffic flow is smooth, and there are no sudden changes in speed, braking, or maneuvers required. The navigation overlay indicates a straight path with no immediate turns or stops. No vehicles are encroaching on the ego path, and all road users are maintaining consistent lanes and speeds. The road conditions are clear, and traffic signals are not indicating any immediate need for action. Therefore, no noticeable slowdown, braking, or avoidance maneuver is required within this unit.\"\n}",
+  "raw_response_sha256": "be689050e2b57e6d4662137d884fcf6393aa4eb8f1485b853cdc8216eda3c101",
+  "record_payload_sha256": "e71b7f250ebbc807e5147fe931cad80ab4767c54031324d3055a3e537ebe1f9d",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 19.274838745004672,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.9175628219964,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0019",
+  "unit_ordinal": 586,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0369:1786355262704975193",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "744e40fb2c0782db4474367909f7f478904cd4dff26cf57e476cc3d67c30322f",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "68e56f83555da4180a55e77d94b53866bd5d314992012c951e1e9c69c71e545c",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "5cb3b3eb6a2ba60d08b232d354912e507d9a59176e95dc06baf1ae2c7457831a",
+  "generated_token_ids_sha256": "1d66c74259d2838d2780d73c956af0be626a502efffeb00dd79c594f18c3de83",
+  "input_identity_sha256": "f6e1de7ef84724cdce8152f583eaa4776c614953f8aa74ae2608ac325c55cb89",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "6577a1673babd790edc7875cdefce0628231680cfd991b65b19d372a5dac89ad",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a white van in a congested street market environment with numerous pedestrians, motorbikes, and street vendors. Throughout the 10-second unit, the white van remains stationary or moves very slowly, and the surrounding area is filled with people and vehicles crossing or entering the path. The presence of pedestrians walking directly in front of the van, motorbikes maneuvering closely, and vendors operating near the roadway creates a high-risk scenario requiring noticeable slowdown, braking, or avoidance maneuvers to prevent collision. The traffic conditions are not conducive to steady driving, and an attentive driver must respond to the dynamic and unpredictable environment.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "a951ca460ef0b44e103d3d4c79d12667d77322144f371741a978da25d3ca40ce",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a white van in a congested street market environment with numerous pedestrians, motorbikes, and street vendors. Throughout the 10-second unit, the white van remains stationary or moves very slowly, and the surrounding area is filled with people and vehicles crossing or entering the path. The presence of pedestrians walking directly in front of the van, motorbikes maneuvering closely, and vendors operating near the roadway creates a high-risk scenario requiring noticeable slowdown, braking, or avoidance maneuvers to prevent collision. The traffic conditions are not conducive to steady driving, and an attentive driver must respond to the dynamic and unpredictable environment.\"\n}",
+  "raw_response_sha256": "ad8cf3257b784a9e969f3bb0cab354c2e6e78d08f7286a7abc9f80d65da01692",
+  "record_payload_sha256": "f0cf01dd42f9d44d5773bd291e5db87496ad3a035b6ce1f0bc82d6828a0c146f",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 22.134198361993185,
+    "model_load_seconds": 20.342561935998674,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 23.92478778300574,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0369",
+  "unit_ordinal": 369,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

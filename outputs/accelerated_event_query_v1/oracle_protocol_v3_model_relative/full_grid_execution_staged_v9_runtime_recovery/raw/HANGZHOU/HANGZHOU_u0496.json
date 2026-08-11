@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0496:1786379334006592997",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "f69bd1be3c69a18720fed8b3a9df07dd369717bc1a4d5bde658f5513074dcec7",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "930e4d045cb7304af944bbfa11e635cdadd9a35e96beb8f964ee2036a971478d",
+  "generated_token_ids_sha256": "05d3ea0e512fbec807c989b511714a4023801d453b656e4e33afa0b413e71e33",
+  "input_identity_sha256": "a043cb48c5992eb3be25398bbd5a540602e6bb6e5ee6d28da106d4ae06ddd661",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "8d1234b78f0ab4729409b1594ec12e5552431f2c7cb9f027e1f355ccdc913329",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a taxi at a steady pace with no sudden changes in speed or direction. The road ahead is clear, with no visible obstacles, sudden stops, or traffic controls requiring a marked response. Pedestrians are present on the sidewalk but are not entering the roadway or posing a threat to the ego path. The lead vehicle maintains a consistent speed, and there are no signs of braking or slowing that would require an immediate response from the ego driver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "cf4b56954cbc17f7ec1103c23391443f778ff64518c3044ef0bbce5ec488bdf0",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a taxi at a steady pace with no sudden changes in speed or direction. The road ahead is clear, with no visible obstacles, sudden stops, or traffic controls requiring a marked response. Pedestrians are present on the sidewalk but are not entering the roadway or posing a threat to the ego path. The lead vehicle maintains a consistent speed, and there are no signs of braking or slowing that would require an immediate response from the ego driver.\"\n}",
+  "raw_response_sha256": "d3ae82e7656cf1fbb5056528ff86e8f2bd78fc1edd9c856657ec8a591881abb5",
+  "record_payload_sha256": "75ef0336e8540ebed7ebaa6dddca6484bf37af061d364b4e038e7c092fda8fec",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.208372761000646,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.072312985997996,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0496",
+  "unit_ordinal": 1063,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

@@ -1,0 +1,3 @@
+# Failure analysis
+
+Strongest supported conclusion: common utility fixes the dimensional error but is not estimable robustly enough from the current two-video support. Decisive evidence is Brier degradation versus a constant predictor and informative action differences in only two groups. The main alternative—query-specific rates—was tested as a post-failure diagnostic and worsened aggregate Brier. The likely remaining mechanism is selection/history shift: exhaustive candidate usefulness does not equal the probability that the current highest-score, possibly duplicate Frontier witness adds a new event. Revision trigger: a third independent video (preferably multiple per query) must show stable selected-Frontier conversion calibration before controller replay.

@@ -1,0 +1,62 @@
+{
+  "attempts_before_valid_probe": [
+    {
+      "model": "8b",
+      "physical_vlm_calls": 0,
+      "status": "STARTUP_FAILED",
+      "reason": "ModuleNotFoundError: cv2",
+      "disposition": "installed opencv-python-headless 4.13.0.92 and retried unchanged protocol"
+    },
+    {
+      "model": "8b",
+      "physical_vlm_calls": 4,
+      "status": "INVALIDATED_BEFORE_32B_COMPARISON",
+      "reason": "Transformers 5.9 warned that PIL-frame video metadata was absent and defaulted fps to 24",
+      "disposition": "excluded; pass frozen qwen-vl-utils video kwargs with do_sample_frames=false and rerun identical decoded frames"
+    },
+    {
+      "model": "8b",
+      "physical_vlm_calls": 0,
+      "status": "PREPROCESS_FAILED_AFTER_MODEL_LOAD",
+      "reason": "qwen-vl-utils 0.0.14 emitted per-video fps list incompatible with Transformers 5.9 scalar validation",
+      "disposition": "omit redundant fps list because frozen extractor already produced 21 frames; retain do_sample_frames=false"
+    },
+    {
+      "model": "8b",
+      "physical_vlm_calls": 4,
+      "status": "INVALIDATED_BEFORE_32B_COMPARISON",
+      "reason": "all frames were retained but Qwen3-VL temporal position IDs defaulted to 24 fps without paired video metadata",
+      "disposition": "excluded; request qwen-vl-utils return_video_metadata=True so each tensor carries frozen 2 fps metadata"
+    },
+    {
+      "model": "8b",
+      "physical_vlm_calls": 0,
+      "status": "PREPROCESS_FAILED_AFTER_MODEL_LOAD",
+      "reason": "Transformers 5.9 does not accept qwen-vl-utils (tensor, metadata) tuples directly as videos",
+      "disposition": "unpack tensors and pass the metadata through the processor video_metadata argument"
+    },
+    {
+      "model": "32b",
+      "physical_vlm_calls": 0,
+      "status": "SINGLE_GPU_MODEL_LOAD_OOM",
+      "reason": "A100 compute capability 8.0 cannot execute local FP8 weights; Transformers dequantized to BF16 and model load exhausted one 80GB GPU",
+      "observed_process_memory_gib": 78.97,
+      "disposition": "retry same frozen probe with balanced sharding across two independently free A100 GPUs"
+    },
+    {
+      "model": "32b",
+      "physical_vlm_calls": 0,
+      "status": "STARTUP_FAILED",
+      "reason": "both integer and explicit torch.device forms were rejected while pre-resetting multi-GPU peak memory counters in the probe process",
+      "disposition": "omit reset because each probe uses a fresh process whose CUDA peak counters begin at zero; no model load or VLM call occurred"
+    },
+    {
+      "model": "32b",
+      "physical_vlm_calls_attempted": 1,
+      "physical_vlm_calls_completed": 0,
+      "status": "FORWARD_FAILED_AFTER_BALANCED_LOAD",
+      "reason": "FP8-to-BF16 fallback retained float32 ignored layers, producing BF16/float32 linear dtype mismatch",
+      "disposition": "one final retry after dtype-only normalization of all parameters to BF16; stop if unsuccessful"
+    }
+  ]
+}

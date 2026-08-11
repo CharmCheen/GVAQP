@@ -1,0 +1,28 @@
+{
+  "absolute_deadline_seconds": 300.0,
+  "admission_semantics": "exploratory_start_before_deadline",
+  "completion_semantics": "logical_start + measured_physical_cost",
+  "confirmatory": false,
+  "continuation_policy": "temporal-bisection fixed SCAN1:VERIFY1",
+  "contract_sha256": "ebcfb3d4e63c8ec6a98d45e0d6399aa0860360c881cf75ba8169cc1acfbd8de8",
+  "execution_authorized": false,
+  "gpu_allocation": [
+    1
+  ],
+  "max_additional_completed_actions": 6,
+  "max_continuation_physical_seconds": 60.0,
+  "oracle": "Qwen3-VL-8B-Instruct BF16",
+  "parent_b_trace_sha256": "bbfac511654fd308d5bac9dd6a8b1ce3e3caadc928c602918823e3a1e3fd6993",
+  "protocol_class": "EXPLORATORY_SEQUENTIAL_COST_TO_UTILITY_CONTINUATION",
+  "reference_prohibited_during_runtime": true,
+  "runtime_convention": "CAUSALLY_EQUIVALENT_LOGICAL_STATE_WITH_NORMALIZED_MODEL_RESIDENT_GPU1_RUNTIME",
+  "scan": "deterministic OpenCV frame-difference proxy",
+  "schema_version": "COUNTERFACTUAL_CONTINUATION_PROBE_CONTRACT_V1",
+  "selection_basis": "FOLLOW_UP_OF_PREVIOUSLY_OBSERVED_COST_ONLY_BRANCHES",
+  "source_probe_hashes": {
+    "contract": "46befc36bdf08b01a32d518f3591ed55f95bebf48bf5d21cc1d2f72942b65ed6",
+    "plan": "853f6a4c6c11a06f53a39f48a3b66c7b024429deb41fd215f4472aa41a5f8ac4",
+    "results": "f3d6468d4c8edf0f34abc94952ba9a857b1d6ac333a7ddafa3ef1e4ccbcc2070"
+  },
+  "source_sha256": "4cef5c884ac879fd00bcc7962707b5f0f5e6dec6ac97e5ec8d247561ce2ec1c6"
+}

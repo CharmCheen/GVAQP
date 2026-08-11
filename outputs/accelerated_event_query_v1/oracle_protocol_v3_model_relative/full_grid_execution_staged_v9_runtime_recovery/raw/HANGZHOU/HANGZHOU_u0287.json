@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0287:1786375685761850008",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "32194261f3994ff8eb16525863b130bb32735ecb0d7f26e44604dcd87bd1727e",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "6ce853b8ad8e37c4af427d07435d78aa46baf815bdfdde332a0b2ff417f1c2ac",
+  "generated_token_ids_sha256": "734fe301cb1a66856ee52c8f01e0d88d81eeec7580874586c44628cf357ac755",
+  "input_identity_sha256": "4bdc07b49da89ec6ed84e64338f9e8ede2190564557593c526b2929f97668b44",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "4d54651cf245716673ac3bb639135e2cc3dcd63e73f20361be0cb3cb66c52c84",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching an intersection with a green traffic light, and the countdown timer is decreasing steadily (from 28 to 18 seconds). Pedestrians are crossing the street on the left, but they are well outside the ego vehicle's path. There are no sudden changes in traffic, no vehicles abruptly entering the path, and no visible obstacles or road conditions requiring a marked speed or path change. The traffic flow appears normal and steady, with no need for a noticeable slowdown, braking, or avoidance maneuver within this unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "0d4907b0781d7bd80b8e1fe61c62afe11c76a169c29e23a0472f89f720fefa0a",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching an intersection with a green traffic light, and the countdown timer is decreasing steadily (from 28 to 18 seconds). Pedestrians are crossing the street on the left, but they are well outside the ego vehicle's path. There are no sudden changes in traffic, no vehicles abruptly entering the path, and no visible obstacles or road conditions requiring a marked speed or path change. The traffic flow appears normal and steady, with no need for a noticeable slowdown, braking, or avoidance maneuver within this unit.\"\n}",
+  "raw_response_sha256": "8785bd8de9be733184c0e973f9065d41b64c42a49309b33b245d598dbe694482",
+  "record_payload_sha256": "85848750931ae32a79b66dec23c2406fac923078fad11cc7667df9728d0bf110",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 19.414258698991034,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 20.18005089700455,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0287",
+  "unit_ordinal": 854,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

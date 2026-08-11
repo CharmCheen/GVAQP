@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0299:1786375900265383922",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "7546d3488b8522b154715b53b297fd9443567280680fafba0f2961b02bf94165",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "d2c84e5ed89fe96fb02c02c8e87f3f2c5b780c066e6b1546a5f7c410a1e678b4",
+  "generated_token_ids_sha256": "491ad3c62f9fab4119dd9d08554ae52afccad5c1346ea24304c2d0dee94b126d",
+  "input_identity_sha256": "069b94de69a23cbd08ffedadbd9a0d40acbc4c7fb81b66dfc11c84d52c3b3638",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "6c36117a83d8046784d64378f3c45e433e334fead9fd8085205db39d3b11f180",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a clear, multi-lane urban road with visible traffic signals and lane markings. There are no sudden obstacles, stopped vehicles, or road users entering the path. Traffic flow appears smooth, and the road ahead is unobstructed. The presence of orange cones along the right side indicates a designated lane or construction zone, but it does not require a noticeable slowdown or avoidance maneuver within this unit. The traffic signals are green, and no braking or path adjustment is visibly necessary.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "f987dc33f5112a8562ce01b825937b3e821737752e53e4375c0e99709767a6c9",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a clear, multi-lane urban road with visible traffic signals and lane markings. There are no sudden obstacles, stopped vehicles, or road users entering the path. Traffic flow appears smooth, and the road ahead is unobstructed. The presence of orange cones along the right side indicates a designated lane or construction zone, but it does not require a noticeable slowdown or avoidance maneuver within this unit. The traffic signals are green, and no braking or path adjustment is visibly necessary.\"\n}",
+  "raw_response_sha256": "db4ded96fdf9e30bcc24e4793c803261434129e49420c487a97ffa2e6f6ead2e",
+  "record_payload_sha256": "53d0f1587d22f73fe754b76a727feddbb90c37c0f8bfd74b2605b8d327db8213",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 18.452684609001153,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 19.22491568699479,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0299",
+  "unit_ordinal": 866,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0125:1786350383313896609",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "14e81fc815aca994558f762283001d801e12789d3ed75b35531e9ff9f3fd8165",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "4f0f38d308137b71902d10ff495a70c323af10609f788425c428c218c399da11",
+  "generated_token_ids_sha256": "f597d58907b8a2b09f3ff5f563fedb87b363b0319b95dcc8a8174023a32c5410",
+  "input_identity_sha256": "00335b895f5aad7b1a10633525cdf4bea27ea14060d89d4d4cf656f98955d8dd",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "38db68d6c37e26c51d939958d176a02888abf27de5f94a6c764cb34ea7dcfef9",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a black SUV that is driving steadily ahead. Traffic lights are green for straight and left turns, and there are no sudden changes in traffic signals, road conditions, or obstacles requiring a slowdown, braking, or avoidance maneuver. The road is clear, and no road users are entering or threatening the ego path. The speed limit sign (50 km/h) is visible but does not require an immediate response as the vehicle appears to be within legal speed limits. The scene remains consistent with normal steady driving throughout the unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "b6716765a78ba2dc7d9750d6080df57a7ddfc9b2342bb981ae8bd389d544ff1f",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a black SUV that is driving steadily ahead. Traffic lights are green for straight and left turns, and there are no sudden changes in traffic signals, road conditions, or obstacles requiring a slowdown, braking, or avoidance maneuver. The road is clear, and no road users are entering or threatening the ego path. The speed limit sign (50 km/h) is visible but does not require an immediate response as the vehicle appears to be within legal speed limits. The scene remains consistent with normal steady driving throughout the unit.\"\n}",
+  "raw_response_sha256": "b813200fe0e45d2f03155156afbe260ca3f352eecb6c2c2cec22eb327cb536a1",
+  "record_payload_sha256": "4fe8f157d3746239d447b75ff67421b03eb0c05ed51c6f11a7483c1cc4f1748c",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.650329526004498,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 21.27597344700189,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0125",
+  "unit_ordinal": 1253,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

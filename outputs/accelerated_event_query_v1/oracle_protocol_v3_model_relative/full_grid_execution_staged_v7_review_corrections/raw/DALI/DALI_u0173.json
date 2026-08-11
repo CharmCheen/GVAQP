@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0173:1786351356754840820",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "77f6c58a8ce42a797bf6a210ab6426ea8fc41e1ae0debb2b7a227d94a488c504",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "68e56f83555da4180a55e77d94b53866bd5d314992012c951e1e9c69c71e545c",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "03fdc8fdcd39fa071055382d537ad1eb8292a743a083d9f349f2c58e549a783d",
+  "generated_token_ids_sha256": "63416cdaaf937b1575d8d9d3fbfd49b1409564d05d6cbd1defced40063e79f3d",
+  "input_identity_sha256": "a0108fff5a1f304b0deef445997e3c60dcfbe0031af07c88e62bc38796e841ae",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "313a8fa560f05c72b02369f1c48c6964e1e7bfd26a69e8b9ee604d78cb84baee",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "As the ego vehicle approaches the intersection, traffic cones and barriers are visible across the road, indicating a temporary road closure or construction zone. Additionally, pedestrians are crossing the road in the crosswalk, and vehicles ahead are slowing or stopping. These conditions require an attentive driver to perform a noticeable slowdown or braking action to safely navigate the intersection and avoid potential conflicts with pedestrians or obstacles.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "32e7241b5e57bf5df4a5fa0d096f1b03095d1beaa35754e7ece8b17f1fa99cb0",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"As the ego vehicle approaches the intersection, traffic cones and barriers are visible across the road, indicating a temporary road closure or construction zone. Additionally, pedestrians are crossing the road in the crosswalk, and vehicles ahead are slowing or stopping. These conditions require an attentive driver to perform a noticeable slowdown or braking action to safely navigate the intersection and avoid potential conflicts with pedestrians or obstacles.\"\n}",
+  "raw_response_sha256": "e1be8cc0ed408b3ac378cdc0779c71941fbed84c06d87e635942a035e74a0106",
+  "record_payload_sha256": "d8d764e8173a884a18d3233dd4d66032ed6fa288635ce9af3367a2352fb1a189",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 16.068824644004053,
+    "model_load_seconds": 20.342561935998674,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 17.76462354499381,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0173",
+  "unit_ordinal": 173,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

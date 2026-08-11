@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0286:1786352970969406186",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "ee20aee5257341d5589c941af196381f5cc92005fd79244118affbeaa807f96c",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "453fc4e538e6c16f785891d7e50df124a5d055de88dda99ecfc2cbe62c93f99c",
+  "generated_token_ids_sha256": "7c07d46fa013336520e6affcc99595757de55c1ea19ed5104ee2b9e33c5abb76",
+  "input_identity_sha256": "e2ad47b3b63d5d00aec63ffbc28707e3087854b019e54c1baf8d0cf6d379be78",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "2210e0d60044835899105f3eec9c25065ff588935e6b74396016affc16d31f01",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a traffic signal that turns from red to green during the unit, indicating a required braking action to stop before the crosswalk when the signal is red (frames 0-8), followed by a potential acceleration or resumption of motion as the signal turns green (frame 9-10). The presence of a countdown timer and visible crosswalk further confirms the need for a marked response to the traffic control.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "4657c414d406055f7871401924fb975b8addf3c2ad85846ab99910ac848c715f",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a traffic signal that turns from red to green during the unit, indicating a required braking action to stop before the crosswalk when the signal is red (frames 0-8), followed by a potential acceleration or resumption of motion as the signal turns green (frame 9-10). The presence of a countdown timer and visible crosswalk further confirms the need for a marked response to the traffic control.\"\n}",
+  "raw_response_sha256": "d580acf6e9c03e384d441cfd70a21cee99c4c9812dbfb3442a71d82f313c1775",
+  "record_payload_sha256": "4481444755a9139437767b8c063f4c52b1acdf1154126591d17642eb9133a240",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.000531789002707,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 16.75770619899413,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0286",
+  "unit_ordinal": 853,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

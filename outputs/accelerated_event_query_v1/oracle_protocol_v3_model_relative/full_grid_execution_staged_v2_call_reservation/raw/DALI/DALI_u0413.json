@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0413:1785428194038642851",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "b4b6c074353200cb9de57542959c671e32d4314f865fd8ff096f86211f6af510",
+  "execution_seal_sha256": "2189d821eba4b0e0022da4f0a1113e51ed2128351def12c4e310ffd36569c9ee",
+  "execution_session_id": "b1d874dad9633943da9182baee77bb3366cda2f0d6407e982a26dfc65e45aac8",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "c92b1df2f1d7ad7cdc9050a420dfc2411ec388031df957f740bcf27493f7a47e",
+  "generated_token_ids_sha256": "14c35ce41b842cf13d7ef8d62588dd34fc467f454b65408afbf62dd5509fd7f5",
+  "input_identity_sha256": "3c90af8fc752bf891be41147c38327a581ab91db90ce6bb435263671e51eb527",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "ec8d6a19e215a974fb0d9f14a476feff37f3522c5c970f41a2d896d080f6924e",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane road during sunset with clear visibility. Traffic ahead is flowing normally, and there are no sudden stops, obstacles, or traffic control signals requiring a marked response such as braking or avoidance. The road markings and signs are visible and do not indicate any immediate need for a change in speed or path. Pedestrians and other road users are at a safe distance and not entering the ego path. The conditions remain consistent throughout the 10-second unit, indicating normal driving without any noticeable hazards requiring a response.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "805422bc82d1bd086e62e6eba2e777c978bd17fe5939246fe5ca6edf01160efd",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane road during sunset with clear visibility. Traffic ahead is flowing normally, and there are no sudden stops, obstacles, or traffic control signals requiring a marked response such as braking or avoidance. The road markings and signs are visible and do not indicate any immediate need for a change in speed or path. Pedestrians and other road users are at a safe distance and not entering the ego path. The conditions remain consistent throughout the 10-second unit, indicating normal driving without any noticeable hazards requiring a response.\"\n}",
+  "raw_response_sha256": "41063ae25e94888a4cbefd771036aa212eaa1c4be3d1ee3028c50491836e3b3e",
+  "record_payload_sha256": "f960dab9b2aef62b73f963a07ef828b8ca100834bbce4e9bf4884711c864618a",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 20.176006834954023,
+    "model_load_seconds": 14.661523081362247,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 21.92489019408822,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 7,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0413",
+  "unit_ordinal": 413,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

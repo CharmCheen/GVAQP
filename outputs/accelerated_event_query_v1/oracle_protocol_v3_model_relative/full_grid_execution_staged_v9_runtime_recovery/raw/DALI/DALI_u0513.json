@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0513:1786380883519321485",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "0bfca9adc4ba1fb1011b368e3164de96fea45da07d82c0054989027ce810ae89",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "b9fc78776d4f4c892770b91e63de5c38e1746f418e6c9035b8a2873e3e5fec05",
+  "generated_token_ids_sha256": "4e1325455c0d58bcfe36c283b00280edafc766642bd517748f9e92dc0055cf10",
+  "input_identity_sha256": "98a483799ff2f676360426d9bfbb5f740a969793055d289a735aba7f5737d4e2",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "20f9149b5fb04499583a72ae6468abd03752fa0494a70d114954eed00bacb76f",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily under an overpass and then on a clear road at night. There are no visible obstacles, sudden changes in traffic signals requiring braking, or road users entering the path. The traffic lights ahead are red, but the ego vehicle is not approaching an intersection within this unit and appears to be continuing straight on a non-intersection road. The road markings and signs indicate a straight path with no immediate need for a marked response. The environment is well-lit by streetlights, and the path is clear.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "7d9155be62e0c8b225dd2956cfad70b488a17bd7e6425949cbf2b5be4e43ebf8",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily under an overpass and then on a clear road at night. There are no visible obstacles, sudden changes in traffic signals requiring braking, or road users entering the path. The traffic lights ahead are red, but the ego vehicle is not approaching an intersection within this unit and appears to be continuing straight on a non-intersection road. The road markings and signs indicate a straight path with no immediate need for a marked response. The environment is well-lit by streetlights, and the path is clear.\"\n}",
+  "raw_response_sha256": "cd8731d9ea2ffc96815e73681de4db57ad55a91523b054b2ae8e0a613f2b3253",
+  "record_payload_sha256": "879472177bcd7d379c446ca6dee4248239fff38fe1d5b14c031ecc67acc7039d",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 20.450353013991844,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 22.31745725599467,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0513",
+  "unit_ordinal": 513,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0274:1785448141494118399",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "90255f50bb87fa9c2889873fa4a96e690147a3a0b5a7d72904e210482840b537",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "b1bc00b9c4e39cbf75cb329b72f982664a2d6b25e704ee576c2d571ee99047de",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "99a18d42e71d0832525bd45c55acf6bffbabc060209ba25f619f803865662afc",
+  "generated_token_ids_sha256": "bd87106161f7d84c609fdf17517cece361bb0b04cc76ce8bcd783f7927e5302a",
+  "input_identity_sha256": "0d419a1b0bbbbf0f9ad5585ddf1bc71266436bcf09b2eaa6e5d1fcf13fc4d4dd",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "1c308687096767f66d82b1f67e108e7806b86b5103fff9501eafe6f02d389521",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a traffic signal that transitions from red to green during the unit. At the beginning of the sequence, the traffic light is red, requiring the vehicle to stop or slow down. As the frames progress, the light turns green, indicating a required braking or slowdown action to stop at the intersection before proceeding. This constitutes a noticeable response required by the traffic control within the unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "f5ef0ca8a5b30e9f441c9d8ce9c8bbb80a9e1ef285ea5b0c381b59ef2e0b89bf",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a traffic signal that transitions from red to green during the unit. At the beginning of the sequence, the traffic light is red, requiring the vehicle to stop or slow down. As the frames progress, the light turns green, indicating a required braking or slowdown action to stop at the intersection before proceeding. This constitutes a noticeable response required by the traffic control within the unit.\"\n}",
+  "raw_response_sha256": "c5a8554ff1104bf5f8320be2f2235dcc8502f4bc678a3e7896971245ca063284",
+  "record_payload_sha256": "8c829f78bd8971b3e4f664b249297be3004b862f8db85c96cae00b4a71a790ff",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 16.9734215028584,
+    "model_load_seconds": 26.894216861575842,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 18.92255817167461,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0274",
+  "unit_ordinal": 274,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

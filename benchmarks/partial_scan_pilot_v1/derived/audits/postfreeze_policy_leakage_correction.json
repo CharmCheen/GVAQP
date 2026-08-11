@@ -1,0 +1,25 @@
+{
+  "correction_type": "TERMINAL_AUDIT_CORRECTION",
+  "reason": "The initial audit tested only whether forbidden values were fields of PublicScanState. It did not execute the required adversarial filesystem and module-access attempts.",
+  "observed_forbidden_accesses": {
+    "reference_file_read": true,
+    "future_runtime_file_read": true,
+    "unscanned_output_path_enumeration": true,
+    "candidate_to_reference_map_read": true
+  },
+  "prior_policy_isolation_status": "PASS",
+  "corrected_policy_isolation_status": "FAIL",
+  "prior_overall_status": "PARTIALLY_SUPPORTED",
+  "corrected_overall_status": "BLOCKED",
+  "repair_cycle_used": false,
+  "controlled_repair_cycles_already_used": 1,
+  "maximum_controlled_repair_cycles": 1,
+  "immutable_tree_modified": false,
+  "scope": [
+    "derived policy isolation audit",
+    "policy isolation report",
+    "terminal pilot decision"
+  ],
+  "supersedes_independent_review": true,
+  "note": "The independent read-only review accepted the earlier narrow audit. Direct active leakage evidence is stronger and therefore supersedes that conclusion."
+}

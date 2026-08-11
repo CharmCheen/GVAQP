@@ -1,0 +1,29 @@
+{
+  "capacity_rule": "floor((budget_seconds-cold_load_seconds)/mean_complete_path_verify_seconds)",
+  "classification": "physical_latency_calibrated_cached_replay_not_physical",
+  "domain": "dataset3_development",
+  "empty_prediction_precision_convention": 0.0,
+  "k3": {
+    "d_core_max": 40.0,
+    "d_seg_max": 60.0,
+    "g_max": 1,
+    "name": "k3_bridge_safe"
+  },
+  "max_cached_trace_calls": 100,
+  "schema_version": "ARC_RCSEM_TIME_BUDGET_REPLAY_V1",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "time_budget_minutes": [
+    2,
+    5,
+    10,
+    20,
+    30,
+    40
+  ]
+}

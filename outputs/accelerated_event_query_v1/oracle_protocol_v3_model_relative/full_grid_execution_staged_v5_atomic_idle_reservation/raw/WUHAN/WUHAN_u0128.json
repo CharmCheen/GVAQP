@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0128:1785445159982233300",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "dd9d9ca5c196e2637a6fb346486473a2268061d318d8c426696f690b95d3a4ce",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "52d986680e982dae42ed127ffd10435cecffd355f95edc05676f727cdec03e0d",
+  "generated_token_ids_sha256": "3659d3a1762a865e59c8faf168d3a0f483b75c614cf33de938599604c6150c94",
+  "input_identity_sha256": "d2aa24cfd748f8a45ff535c33cfe68be9b99f850e8131ff2f6e751ebcdf1cb93",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "b69e76020e4b3bbe57ab1b69b5fc02385fa09135ab966d89c468e3462eeac14d",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "Multiple pedestrians and a scooter are crossing the road directly in the path of the ego vehicle as the traffic light turns green for vehicles. The pedestrians are mid-crossing and the scooter is actively moving across the intersection, requiring the ego driver to slow down or brake to avoid collision. The traffic signal for vehicles is green, but the presence of road users in the crosswalk necessitates a marked response to ensure safety.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "b2de990e06e41896b26acf5bf6a8fdda795b4997972074e19d87dada6f242041",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"Multiple pedestrians and a scooter are crossing the road directly in the path of the ego vehicle as the traffic light turns green for vehicles. The pedestrians are mid-crossing and the scooter is actively moving across the intersection, requiring the ego driver to slow down or brake to avoid collision. The traffic signal for vehicles is green, but the presence of road users in the crosswalk necessitates a marked response to ensure safety.\"\n}",
+  "raw_response_sha256": "b68d9bd55b1ffe63f1baf51bcdeee7cf194132ad731c9e8a4f30303a78a1a925",
+  "record_payload_sha256": "716cd8045cba2f50c813017121a696218d3110eb9f95b5329ba1733a7170ed4d",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.13944082520902,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.058086624369025,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0128",
+  "unit_ordinal": 1256,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

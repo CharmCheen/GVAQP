@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0394:1786377538517024442",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "36d209d224361bdc87dbb28314c0f083197183ec65cd190bc36b227da06ddc44",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "9f5427eec1cdc9dc42aea23a2d1163761671cb3420df71ee288a0b299ba82eaf",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "92bca69efe6de14af5503ff224c700082ac43078492445863c264d063e056035",
+  "generated_token_ids_sha256": "6dd26105a1f89e998493da4a6f247e7e64fa9c09bc9530df97bd31623c610056",
+  "input_identity_sha256": "9afa618df79fb707df45195fd96968a400931bb9fdbbe925981ecb0c44c1ce6d",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "e45423069da39dadfefc6957eb22031c324f57870b4c0290b3bee9e557d48136",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The white van directly ahead begins to slow and turn right at the intersection, requiring the ego vehicle to decelerate to avoid collision. Additionally, pedestrians are crossing the road in the crosswalk, and the traffic light for the ego direction appears to be changing or already red, necessitating a braking action. The presence of multiple road users (pedestrians, cyclists, and turning vehicles) in close proximity to the ego path demands an attentive response with noticeable slowdown or braking.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "f9b48aaf33316e315444e2fc19ffe9efe588168aa2f56ea9d818bd27e9800228",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The white van directly ahead begins to slow and turn right at the intersection, requiring the ego vehicle to decelerate to avoid collision. Additionally, pedestrians are crossing the road in the crosswalk, and the traffic light for the ego direction appears to be changing or already red, necessitating a braking action. The presence of multiple road users (pedestrians, cyclists, and turning vehicles) in close proximity to the ego path demands an attentive response with noticeable slowdown or braking.\"\n}",
+  "raw_response_sha256": "efb26009aed7acadf552be9443d948b9b58b8657a3a16cd99caf0f80390abab3",
+  "record_payload_sha256": "daeae0059ccff13dd39f76d7682b9bd41e2022a7b4c427273c42159ccfa24caf",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.41231758899812,
+    "model_load_seconds": 18.957913135003764,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.24550273398927,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0394",
+  "unit_ordinal": 961,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

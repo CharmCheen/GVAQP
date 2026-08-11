@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0282:1785448333402155818",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "1e1507be41a5a07ade397876aa7eb7d7ce706c19737853aadb59a6d6a7221a7f",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "9a61df9292542cd29134f6a41233d4484a02173751f3d21f62df7d64e05c55a5",
+  "generated_token_ids_sha256": "252cb2a59f2d8352f7dfaba0baafbcd3ec033c1d334db294806998bf9d5b4ddf",
+  "input_identity_sha256": "b3adb0f7e82c432e5b3e072467f2e2944e15abd21d6d67ab146a74670cc1f32e",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "c728fef6674e732f42269b5780bb618f04c6b77c19a92e861c08b0d9443068a3",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection under an overpass with visible traffic signals. The traffic light for the straight-ahead direction turns red at approximately 0:06, requiring the driver to brake and stop. Additionally, the vehicle is approaching a pedestrian crosswalk with yellow and white stripes, and a green bus is turning right at the intersection, which may require caution. The presence of a countdown timer on the traffic light (showing 45 seconds) and the transition from green to red indicates a clear need for a braking action within this unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "3cd7c04b236dce911bf2aef0d62de2da64c8cba0e6f712a9b275552ec51874eb",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection under an overpass with visible traffic signals. The traffic light for the straight-ahead direction turns red at approximately 0:06, requiring the driver to brake and stop. Additionally, the vehicle is approaching a pedestrian crosswalk with yellow and white stripes, and a green bus is turning right at the intersection, which may require caution. The presence of a countdown timer on the traffic light (showing 45 seconds) and the transition from green to red indicates a clear need for a braking action within this unit.\"\n}",
+  "raw_response_sha256": "888d239b9a8559b114fad0e685dc80842dba2b8344f99764c71bb529ceac1a58",
+  "record_payload_sha256": "300fd4be7d6f053dddb82557af14db1bb11fd30e426793decf27596b1f0fe30d",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 20.092787135392427,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 21.94419852271676,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0282",
+  "unit_ordinal": 1410,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

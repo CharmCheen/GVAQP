@@ -1,0 +1,74 @@
+{
+  "all_required_replay_checks_passed": true,
+  "arc_helper_hashes": {
+    "pruning_phase.py": {
+      "actual": "395be122d56d764528ec3ea7672809d2e81a24f5e864c43fd9f189ab22c00750",
+      "expected": "395be122d56d764528ec3ea7672809d2e81a24f5e864c43fd9f189ab22c00750",
+      "match": true
+    },
+    "refinement_phase.py": {
+      "actual": "7c5bed418ec42a03dae678f8a90c27bd32c1e02e21c79bd3ac179a80486cbb04",
+      "expected": "7c5bed418ec42a03dae678f8a90c27bd32c1e02e21c79bd3ac179a80486cbb04",
+      "match": true
+    },
+    "tools.py": {
+      "actual": "16a9010eef2cf8329600b324b2a58ac5bc8a75096b3649b7d501472a92444617",
+      "expected": "16a9010eef2cf8329600b324b2a58ac5bc8a75096b3649b7d501472a92444617",
+      "match": true
+    }
+  },
+  "cluster_assignment_match": {
+    "dataset3_development": true,
+    "realcartest_0_1570": true,
+    "realcartest_2000_3200": true
+  },
+  "frozen_evaluator_hash_matches_manifest": true,
+  "input_hashes_match_frozen_manifest": true,
+  "known_provenance_limitations": [
+    "The exact ignored instrumented ARC entry point hashed in the prior manifest is unavailable.",
+    "The selected realcartest derivative does not retain prompt/parser hashes.",
+    "dataset3 unit 346 is a preserved overlapping 5-second terminal record."
+  ],
+  "reference_alignment": {
+    "dataset3_development": true,
+    "realcartest_0_1570": true,
+    "realcartest_2000_3200": true
+  },
+  "run_checks": {
+    "all_event_matches_recomputed": true,
+    "all_predictions_recomputed": true,
+    "complete": true,
+    "completed_runs": 180,
+    "expected_runs": 180,
+    "logical_calls_within_budget": true,
+    "no_duplicate_logical_queries": true,
+    "oracle_access_after_selection_only": true,
+    "propagated_positives_excluded_from_eventrelation": true,
+    "total_scheduling_propagations": 108
+  },
+  "status": "PASS_WITH_DISCLOSED_LIMITATIONS",
+  "unit_alignment": {
+    "dataset3_development": {
+      "contiguous_ids": true,
+      "non_ten_second_units": 1,
+      "positive_durations": true,
+      "ten_second_units": 346,
+      "terminal_overlap_exception": true
+    },
+    "realcartest_0_1570": {
+      "contiguous_ids": true,
+      "non_ten_second_units": 0,
+      "positive_durations": true,
+      "ten_second_units": 157,
+      "terminal_overlap_exception": false
+    },
+    "realcartest_2000_3200": {
+      "contiguous_ids": true,
+      "non_ten_second_units": 0,
+      "positive_durations": true,
+      "ten_second_units": 120,
+      "terminal_overlap_exception": false
+    }
+  },
+  "worktree_inputs_match_read_only_source": true
+}

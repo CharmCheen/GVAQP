@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0455:1786355910830587485",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "e0fd666f0320191d559eace1eb4194e5ab0ea156de6191dc6806890045df5ceb",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "40b1bc4fadeddf8d4e7dedabfbe5b076e411865890bfef912d23df38d8fa5b3c",
+  "generated_token_ids_sha256": "96cb7143c0235c59f482035a69e2bbced6dcf43340de34cfb9877fadbb2daa6f",
+  "input_identity_sha256": "2d06a1b72261db199ffae5874062c4181008afca9f3b67b0d8a907dd615b0993",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "efd59f4ce8900828db38297625cac71ba676431f7fba58667c3a6b647f2a4ebe",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching a crosswalk with visible orange traffic cones and pedestrians on the sidewalk, indicating a potential need for slowing or stopping. Additionally, the lead blue bus is slowing down as it approaches the crosswalk, and a traffic officer is present on the right side of the road, suggesting traffic control requiring a marked response. The presence of a pedestrian crossing sign and the proximity to the crosswalk further support the need for an attentive driver to slow down or brake.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "7ac4d6f7e26b51ecd6f74b3e6f7cc955aae036c350bbf31f569a9cb4f14b78bb",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching a crosswalk with visible orange traffic cones and pedestrians on the sidewalk, indicating a potential need for slowing or stopping. Additionally, the lead blue bus is slowing down as it approaches the crosswalk, and a traffic officer is present on the right side of the road, suggesting traffic control requiring a marked response. The presence of a pedestrian crossing sign and the proximity to the crosswalk further support the need for an attentive driver to slow down or brake.\"\n}",
+  "raw_response_sha256": "afdd2c0c86e5333eb042d304a3d9e9cce22d88cf98357c8cc7d5eff2829dd1ea",
+  "record_payload_sha256": "11aa5159baea0e71d42ecf0620093f98eb8a1d998381ce4b10749a94c3130077",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 16.98622938200424,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 17.83510779200151,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0455",
+  "unit_ordinal": 1022,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

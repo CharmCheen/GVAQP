@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0062:1785443579521511778",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "dbcf5e926de1d7d26bc0209e25edc7769f6e944720f235c1aeaf35d3aedfef1d",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "6147ea4dd5b867e35391699574fe19e8d28f92c6dca690d5f7f302428cbae8bc",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "fd3ae485140a967f340e7869651d4f25aee78e938b5f7e2dfc7f59791ea23f53",
+  "generated_token_ids_sha256": "5cd4b696bfa67b0928fb91b4db1df239fe9da6bf60969ce9b14b62fa9e2aaa57",
+  "input_identity_sha256": "a3412f840954cf4aa71ecc07b2edda6762b62c263d2fa467c8488bc32257f7a3",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "23febc208f904ec753879f6cd99db9af10661295882cbe0cfcd7cebb78427ecc",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching an intersection with a visible stop sign (\u505c) and a right-turn-only sign. Pedestrians are actively crossing the road in the crosswalk, and the ego vehicle must slow down or stop to yield to them. Additionally, the traffic light for the ego direction is not visible, but the presence of the stop sign and pedestrians crossing indicates a required braking or slowdown action. The white car ahead is also slowing or stopping, reinforcing the need for a marked response.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "00204fc9303f7a2c27695353e7602fb0d35cccc0e3511cf8aead6f055443aab6",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching an intersection with a visible stop sign (\u505c) and a right-turn-only sign. Pedestrians are actively crossing the road in the crosswalk, and the ego vehicle must slow down or stop to yield to them. Additionally, the traffic light for the ego direction is not visible, but the presence of the stop sign and pedestrians crossing indicates a required braking or slowdown action. The white car ahead is also slowing or stopping, reinforcing the need for a marked response.\"\n}",
+  "raw_response_sha256": "f3e3049e1a7f8696ec5d404ed48f6c600e050fbe7db3e8c199902631ed47471a",
+  "record_payload_sha256": "a2e45f147950f2d8772d7da69b9110fba29a5f25134ff2625eb512839327a8d9",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 21.6640707179904,
+    "model_load_seconds": 27.178447457030416,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 22.468566857278347,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0062",
+  "unit_ordinal": 629,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

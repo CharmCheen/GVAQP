@@ -1,0 +1,59 @@
+{
+  "created_utc": "2026-08-08T04:58:02.299514+00:00",
+  "deadline_frozen_before_results": true,
+  "deadline_seconds": 300.0,
+  "deadline_selection_basis": "pre-result fixed 300-second exploratory budget; approximately 30 prior 8B VERIFY calls",
+  "execution_authorized_by_researcher": true,
+  "hardware": {
+    "gpu_ids": [
+      1
+    ],
+    "hostname": "di-20260319102938-8gqr9",
+    "snapshot_before": [
+      "0, NVIDIA A100-SXM4-80GB, GPU-db166141-2021-1d3a-c842-46efe9265488, 81920 MiB, 69363 MiB, 535.129.03",
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38, 81920 MiB, 15561 MiB, 535.129.03",
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2, 81920 MiB, 69361 MiB, 535.129.03",
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7, 81920 MiB, 15561 MiB, 535.129.03",
+      "4, NVIDIA A100-SXM4-80GB, GPU-2be92563-7ccb-5edd-fb7e-1b880fbe7b80, 81920 MiB, 69361 MiB, 535.129.03",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed, 81920 MiB, 15561 MiB, 535.129.03",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531, 81920 MiB, 69361 MiB, 535.129.03",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a, 81920 MiB, 15561 MiB, 535.129.03"
+    ]
+  },
+  "input": {
+    "duration_seconds": 4238.25,
+    "path": "/root/charm/GVAQP/data/realcam/guangzhou.mp4",
+    "sha256": "4cef5c884ac879fd00bcc7962707b5f0f5e6dec6ac97e5ec8d247561ce2ec1c6"
+  },
+  "known_deviations": [
+    "Source B/C preservation not bound",
+    "formal hardware reservation not frozen",
+    "numeric deadline not derived from frozen Gate-O calibration",
+    "exact frozen BF16 Qwen artifact unavailable",
+    "existing Qwen3-VL-8B-Instruct used after 32B FP8 was infeasible on currently available GPUs",
+    "exact YOLOv8n artifact unavailable; existing deterministic OpenCV frame-difference proxy used"
+  ],
+  "oracle_runtime": {
+    "dtype": "bfloat16",
+    "model": "Qwen3-VL-8B-Instruct",
+    "not_frozen_bf16_equivalent": true,
+    "path": "/root/charm/GVAQP/models/Qwen3-VL-8B-Instruct"
+  },
+  "policies": [
+    "A_CHRONOLOGICAL_FIXED_SCAN1_VERIFY1",
+    "B_TEMPORAL_BISECTION_FIXED_SCAN1_VERIFY1",
+    "C_CHRONOLOGICAL_SCAN_THEN_VERIFY"
+  ],
+  "protocol_class": "EXPLORATORY_DEVELOPMENT",
+  "run_id": "exploratory_20260808_8b_300s",
+  "scan_runtime": {
+    "implementation": "OpenCV frame-difference proxy",
+    "learned_detector_used": false,
+    "parameters": {
+      "sample_fps": 1.0
+    }
+  },
+  "schema_version": "EXPLORATORY_DEVELOPMENT_PHYSICAL_RUN_V1",
+  "strict_gate_o_confirmatory": false,
+  "strict_gate_o_execution_authorized": false
+}

@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0099:1786372633945995614",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "f0a077a0a0e01c3cf17ee8d8b52a2e4781a01b1ed8621698060d298c72fa93e6",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "84704696c3c0209cee939a0079d9c0340629051e4f2574bb772a4623e5b9865d",
+  "generated_token_ids_sha256": "0c29afcf9451344ea17bc75d29908b6c66f842bd7e3d58459b8c3912d359c994",
+  "input_identity_sha256": "9aa10ba882e1be9badc28d61ab1eac009a38c5479c0a24838fcf5c951b258bc4",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "40a5eb52cdf4ae3c5b57011821302b515797da5cbeba4a4d8b2995919dc1f587",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane elevated road under an overpass, following a white bus and maintaining a consistent distance. There are no sudden changes in speed, braking, or avoidance maneuvers required. Traffic signs indicate a speed limit of 40 km/h, but the vehicle appears to be traveling at a safe, steady pace without needing to slow down or react to any immediate hazard. Other vehicles are present but not encroaching on the ego path or causing any visible threat. The road conditions are clear, and no obstacles or sudden changes in traffic flow are observed within the unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "849949ab332cc72773c7d94ec86a5c114e5ae86318ad8df8a4c2032d2cbcbdc7",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane elevated road under an overpass, following a white bus and maintaining a consistent distance. There are no sudden changes in speed, braking, or avoidance maneuvers required. Traffic signs indicate a speed limit of 40 km/h, but the vehicle appears to be traveling at a safe, steady pace without needing to slow down or react to any immediate hazard. Other vehicles are present but not encroaching on the ego path or causing any visible threat. The road conditions are clear, and no obstacles or sudden changes in traffic flow are observed within the unit.\"\n}",
+  "raw_response_sha256": "dee3e51fa656dccc34d7344606639ca677a8298470b8499183c81ba59935beeb",
+  "record_payload_sha256": "4d115e5781bba28c7c6bd99a2faac1797acab80c1d185291fae61cc63f02b43d",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 21.79948213500029,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 23.350978330992803,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0099",
+  "unit_ordinal": 1227,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

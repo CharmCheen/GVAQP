@@ -1,0 +1,24 @@
+{
+  "gate_version": "SAFETY_REFERENCE_GATE_DRAFT_V1",
+  "status": "WORKING_THRESHOLDS_NOT_PREREGISTERED_DO_NOT_LAUNCH_ORACLE",
+  "metrics": {
+    "human_event_recall_min": 0.9,
+    "human_hazard_precision_min": 0.85,
+    "hard_negative_false_positive_rate_max": 0.1,
+    "multi_event_miss_rate_max": 0.15,
+    "high_confidence_error_rate_max": 0.05,
+    "family_agreement_min": 0.8,
+    "hazard_agreement_min": 0.85,
+    "boundary_mae_frames_max": 3.0,
+    "repeat_event_f1_min": 0.8,
+    "json_parser_success_rate_min": 0.98
+  },
+  "automatic_failures": [
+    "all_positive_events_have_high_confidence",
+    "no_medium_low_or_ambiguous_output_on_the_frozen_stratified_sample",
+    "event_boundaries_collapse_to_a_fixed_window_offset",
+    "required_sample_strata_are_missing",
+    "human_review_is_absent"
+  ],
+  "decision_rule": "All thresholds and all automatic-failure checks must pass. Thresholds require explicit freeze before the first VLM call."
+}

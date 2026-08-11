@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0101:1786372685097410091",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "cb2e49587e5c392a65708188ab60043aadb82f9b7961351850f41fee1dd722da",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "2ab5dc5932645ef0d8be95f3aa4c0d781277ea1ff4465e51b23b01ce56b45227",
+  "generated_token_ids_sha256": "863d3fccccffe08722179a7de46f856ba66675085c7f01656c4afd3863289e8e",
+  "input_identity_sha256": "33d9e9735584a17c05b1da8284ae6b9977b1dc0a9fe814a58ea789185604dd0f",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "c8f1f930bc092902b980eb1046f25a62de6dda0c99858c068352c9e2b9279d68",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching an intersection with traffic signals. At 0:08, the traffic light for the forward direction turns red, requiring the ego driver to brake and stop. The lead vehicles, including a white sedan and a blue bus, begin to slow down and stop in response to the red light. This necessitates a noticeable braking action by the ego driver to safely stop at the intersection.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "a7df694686bfeba9dc27e2b8659e7a689a0c388dadf70f586b408a6c18ff36e6",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching an intersection with traffic signals. At 0:08, the traffic light for the forward direction turns red, requiring the ego driver to brake and stop. The lead vehicles, including a white sedan and a blue bus, begin to slow down and stop in response to the red light. This necessitates a noticeable braking action by the ego driver to safely stop at the intersection.\"\n}",
+  "raw_response_sha256": "cc1b48b6df44dc7a53cc92356eeed5923256cc7e3130576c54948b5a50417cff",
+  "record_payload_sha256": "05a994db8ddd1ad93e9be27d71c52cda3e14bcb024bb44d1027a5bcd6a202b4b",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 16.10961595900153,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 17.741975018005178,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0101",
+  "unit_ordinal": 101,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

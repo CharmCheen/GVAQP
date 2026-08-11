@@ -1,0 +1,28 @@
+{
+  "actual_gpu_residency_accounting": "continuous coordinator-side two-GPU residency segments from model-load reservation through call/durable acceptance, every coordinator and inter-call gap, explicit model release, and supervisor-observed process-exit tail",
+  "aggregate_reserved_a100_gpu_hours": 19.385801544431597,
+  "authorization_envelope_a100_gpu_hours": 19.4,
+  "base_operations_plus_simultaneous_emergency_reservations_a100_gpu_hours": 19.385801544431597,
+  "cost_estimate_payload_sha256": "020d2f49b3a81bb9859afd133bf9eec907841e8449f4600a246d0dd3cba92e73",
+  "cost_shield": "call reservation remains open from pre-decode through durable raw and ACCEPTED persistence; a reusable prospective emergency reservation remains active per loaded worker; a coordinator-side continuous residency clock, not caller timing, accounts lock/hash-chain/persistence gaps; elapsed idle consumes and must refresh the emergency reservation before another call; no start above envelope",
+  "estimated_a100_gpu_hours": 16.09712320568816,
+  "estimated_parallel_wall_hours": 3.0931814077885096,
+  "exact_call_count": 1475,
+  "gpu_profile_authentication": "all sealed GPUs must have zero compute contexts, zero utilization, and <=16 MiB used memory before initialization and again on each pair before model load",
+  "mean_2fps_call_wall_seconds": 19.607711827941237,
+  "observed_preflight_load_seconds": {
+    "DALI": 17.88046159595251,
+    "HANGZHOU": 18.119151646271348,
+    "WUHAN": 17.44721078313887
+  },
+  "per_call_hard_reservation_wall_seconds": 23.579961206763983,
+  "per_load_hard_reservation_wall_seconds": 30.0,
+  "per_loaded_worker_reusable_emergency_reservation_wall_seconds": 8.0,
+  "planned_model_load_count": 3,
+  "post_session_process_exit_lease_wall_seconds_per_worker": 2.0,
+  "reload_count": 0,
+  "reservation_fits_envelope": true,
+  "retry_count": 0,
+  "status": "FROZEN_FULL_GRID_COST_AND_RESERVATION_PLAN",
+  "unused_envelope_cannot_authorize_extra_calls_reloads_or_retries": true
+}

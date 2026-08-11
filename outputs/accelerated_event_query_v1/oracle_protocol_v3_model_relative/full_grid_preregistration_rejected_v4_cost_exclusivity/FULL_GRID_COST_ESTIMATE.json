@@ -1,0 +1,25 @@
+{
+  "actual_gpu_residency_accounting": "two GPUs times model load, every call, every inter-call output/ledger gap, and explicit model release through session close; the bounded post-close/process-exit tail is included in the aggregate reservation",
+  "aggregate_reserved_a100_gpu_hours": 19.375801544431596,
+  "authorization_envelope_a100_gpu_hours": 19.4,
+  "cost_estimate_payload_sha256": "e4fdc23c9d6ca5062aa1634a2d98fd931c0725f317d8b40dfce515bfc28c688e",
+  "cost_shield": "hash-chained actual GPU residency plus in-flight reservation accounting; calls reserve before decode/processing; loaded idle gaps are timed and bounded; no start above envelope",
+  "estimated_a100_gpu_hours": 16.09712320568816,
+  "estimated_parallel_wall_hours": 3.0931814077885096,
+  "exact_call_count": 1475,
+  "mean_2fps_call_wall_seconds": 19.607711827941237,
+  "observed_preflight_load_seconds": {
+    "DALI": 17.88046159595251,
+    "HANGZHOU": 18.119151646271348,
+    "WUHAN": 17.44721078313887
+  },
+  "per_call_hard_reservation_wall_seconds": 23.579961206763983,
+  "per_load_hard_reservation_wall_seconds": 30.0,
+  "planned_model_load_count": 3,
+  "post_session_process_exit_lease_wall_seconds_per_worker": 2.0,
+  "reload_count": 0,
+  "reservation_fits_envelope": true,
+  "retry_count": 0,
+  "status": "FROZEN_FULL_GRID_COST_AND_RESERVATION_PLAN",
+  "unused_envelope_cannot_authorize_extra_calls_reloads_or_retries": true
+}

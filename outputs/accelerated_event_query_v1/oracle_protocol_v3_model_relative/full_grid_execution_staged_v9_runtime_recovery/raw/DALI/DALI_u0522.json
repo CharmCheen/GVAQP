@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0522:1786381080060457438",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "692fb37a8dba82208030c147169033ddd17dbdbc492b54858108485d41de7e32",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "3b8325dfb49abe9f8b5676a2d01026166ff5fe071dfa65a2f5932805b4df7dea",
+  "generated_token_ids_sha256": "9714daff4dd02fa9c6774b940b2561b195f768271dd4ede316c8405f7931ba20",
+  "input_identity_sha256": "9425c882fbee6c35a87fb2449e750f26b3ea05423a8b3f83f6d52f721c2869fd",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "8493d2cd678fcb028dcf5cd686686fe8852f9376d9faa0052ceeb40d7dbdaffa",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "Multiple pedestrians are actively crossing the road directly in front of the ego vehicle's path, including a group crossing at the crosswalk and others entering the roadway from the right side. The pedestrians are within the vehicle's immediate forward trajectory, requiring a noticeable slowdown or braking action to avoid collision. The traffic light for the ego direction is red, indicating a stop is required, and the presence of pedestrians in the crosswalk further necessitates a marked response.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "3c2c2bafd76016cac378d69d6606311c505188e0f010ba19171c20d82c130db3",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"Multiple pedestrians are actively crossing the road directly in front of the ego vehicle's path, including a group crossing at the crosswalk and others entering the roadway from the right side. The pedestrians are within the vehicle's immediate forward trajectory, requiring a noticeable slowdown or braking action to avoid collision. The traffic light for the ego direction is red, indicating a stop is required, and the presence of pedestrians in the crosswalk further necessitates a marked response.\"\n}",
+  "raw_response_sha256": "e40a4afc8a302cb095d035de134056ff1d13fb1f9e1b5ba8157b1dd449d7d195",
+  "record_payload_sha256": "d0a310411de0c5f350dfeb6497a13c3361c926a54750f88a75437f5be7ca6d5f",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 17.22959516699484,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 19.099942396991537,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0522",
+  "unit_ordinal": 522,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

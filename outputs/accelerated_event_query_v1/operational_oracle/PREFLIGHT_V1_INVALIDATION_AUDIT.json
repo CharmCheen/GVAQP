@@ -1,0 +1,26 @@
+{
+  "status": "REJECTED_BEFORE_PHYSICAL_EXECUTION",
+  "decision": "REVISE_ORACLE_PROTOCOL",
+  "decision_scope": "nonterminal research-loop decision; not one of the final project decisions",
+  "physical_calls_expected": 30,
+  "physical_calls_observed": 0,
+  "preserved_snapshot": {
+    "git_commit": "3cf559648",
+    "preregistration_path": "outputs/accelerated_event_query_v1/operational_oracle/PREFLIGHT_V1_PREREGISTRATION.json",
+    "contact_sheet_manifest_sha256": "e748cfd02913e1217b723e162741326c8768c16203a52d0d2488a42e1c836c16",
+    "pre_outcome_review_sha256_at_commit": "7b50afd362a028995cd330c2c8a6766e5ac8690d536f9aa3fac9432f61c4a2ba"
+  },
+  "independent_review_verdict": "REJECT AS EXECUTION GATE",
+  "decisive_observations": [
+    "V1 contact sheets contain 20 endpoint-exclusive 2 fps frames, while the physical runner would supply 21 endpoint-inclusive frames.",
+    "The nominal 4 fps runner path uses floor(30/4)=7-frame stepping, yielding 43 frames at approximately 4.286 fps rather than an exact 41-frame 4 fps grid.",
+    "The V1 analyzer can pass all-unknown, all-negative, or otherwise single-class operational outputs because it lacks usable-class-support gates.",
+    "The V1 parser accepts prose-wrapped JSON and label-inconsistent fields for unknown and not_relevant outputs.",
+    "The V1 analyzer does not authenticate raw records, frame identities, prompt/config/model bindings, or equal model inputs across repeats.",
+    "Identical greedy repeats measure same-process reproducibility, not independent semantic stability.",
+    "The V1 review was pre-outcome but not blinded to legacy strata or independent of sample selection.",
+    "The twelve-clip targeted sample is too small and biased to authorize a full 1475-unit run from a pass alone."
+  ],
+  "interpretation": "No V1 outcome exists and no negative result was overwritten. The invalidation is a pre-execution falsification of the measurement protocol. V2 must repair exact input identity, schema validation, artifact authentication, degenerate-pass logic, semantic screening, and authorization scope before compute is requested again.",
+  "next_action": "Freeze and independently audit AEQ_ORACLE_PREFLIGHT_V2. A V2 pilot pass may authorize only a larger representative audit or another explicitly justified stage, not the full oracle automatically."
+}

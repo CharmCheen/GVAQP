@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0249:1786352298258902381",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "43310312036adb02c428bdcc9825009ef0226fdde373ef4f926007087b780605",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "70e898cb876e2042239aeab3b3795d4722fe9448f7a27ec949f6c3a217ebdefd",
+  "generated_token_ids_sha256": "1577d4b59c0a64e46168d572bc96f254cc2828dd8e4f84aa8f3a371ae237b27a",
+  "input_identity_sha256": "de86d23b59bc1d83aab6b5005e3971c3bfb6e7048154f8f5ba17b7054e9f8866",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "c1f01dec22853854a658fd4842464b7b19475569dcaf6e606e81939e105efc4c",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is approaching a traffic signal that changes from red to green during the unit. The countdown timer on the left side of the screen indicates a transition from 30 seconds to 28 seconds, suggesting the signal is about to turn green. The lead vehicle (a pink SUV) remains stationary at the intersection for the first few seconds, indicating the driver is waiting for the signal to change. As the signal turns green, the lead vehicle begins to move forward, and the ego vehicle must respond by accelerating to maintain following distance. This requires a noticeable response in speed and possibly a slight adjustment in path to avoid collision or maintain safe following distance. The presence of traffic signals and the need to respond to their change constitutes a relevant event requiring an attentive driver to take action.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "0cba415452943cc99c4ee737444babad9edf7dbb18737a3e44fea5c903a3e2ca",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is approaching a traffic signal that changes from red to green during the unit. The countdown timer on the left side of the screen indicates a transition from 30 seconds to 28 seconds, suggesting the signal is about to turn green. The lead vehicle (a pink SUV) remains stationary at the intersection for the first few seconds, indicating the driver is waiting for the signal to change. As the signal turns green, the lead vehicle begins to move forward, and the ego vehicle must respond by accelerating to maintain following distance. This requires a noticeable response in speed and possibly a slight adjustment in path to avoid collision or maintain safe following distance. The presence of traffic signals and the need to respond to their change constitutes a relevant event requiring an attentive driver to take action.\"\n}",
+  "raw_response_sha256": "caea68c11ac64fc4d51206a7c91a428510bd3fb29f21246031d7660bd057cd6e",
+  "record_payload_sha256": "fae7a27ce51dedbc40d830b9764c12c45fe7662a5658ebe38b492a2b6e415547",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 25.580463544996746,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 26.41665705700143,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0249",
+  "unit_ordinal": 816,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

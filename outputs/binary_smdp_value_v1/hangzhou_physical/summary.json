@@ -1,0 +1,87 @@
+{
+  "clips": [
+    "HZ_1400",
+    "HZ_2800",
+    "HZ_4200"
+  ],
+  "cross_model_label_agreement": {
+    "agreed_clips": 2,
+    "disagreement_clips": [
+      "HZ_4200"
+    ],
+    "fraction": 0.6666666666666666,
+    "total_clips": 3
+  },
+  "decoded_frame_hashes_and_tensor_shapes_equal_across_models": true,
+  "deployment_observation": "the local 32B FP8 checkpoint cannot execute FP8 on A100 (SM 8.0); Transformers dequantized it and required two A100s after BF16 dtype normalization",
+  "formal_call_failure_rate": {
+    "32b": 0.0,
+    "8b": 0.0
+  },
+  "identical_raw_repeat": {
+    "32b": true,
+    "8b": true
+  },
+  "inference_seconds": {
+    "32b": [
+      27.11647702753544,
+      23.60884757526219,
+      24.382471980527043,
+      23.794985692948103
+    ],
+    "8b": [
+      8.516783282160759,
+      8.016299491748214,
+      8.413114357739687,
+      8.17637100815773
+    ]
+  },
+  "labels": {
+    "32b": {
+      "HZ_1400": "negative",
+      "HZ_2800": "positive",
+      "HZ_4200": "positive"
+    },
+    "8b": {
+      "HZ_1400": "negative",
+      "HZ_2800": "positive",
+      "HZ_4200": "negative"
+    }
+  },
+  "load_seconds": {
+    "32b": 14.20339709147811,
+    "8b": 5.518729610368609
+  },
+  "manual_contact_sheet_audit": {
+    "HZ_2800": "visible cross-traffic supports an entering-vehicle interpretation",
+    "HZ_4200": "no pedestrian crossing from the left into the ego lane is visible at the 32B-claimed 5-6 second interval; the 32B positive is not visually supported",
+    "scope": "qualitative 1-fps contact-sheet review, not human annotation"
+  },
+  "mean_inference_seconds": {
+    "32b": 24.725695569068193,
+    "8b": 8.280642034951597
+  },
+  "memory": {
+    "32b_peak_allocated_bytes_two_gpus": [
+      63296983552,
+      66515883520
+    ],
+    "8b_peak_allocated_bytes_one_gpu": 19247731200
+  },
+  "not_established": [
+    "human-ground-truth accuracy",
+    "candidate-pipeline recall",
+    "closed-loop controller improvement",
+    "physical validation gate"
+  ],
+  "parse_success": {
+    "32b": "4/4",
+    "8b": "4/4"
+  },
+  "policy_comparison": "NOT_RUN_HEADROOM_GATE_FAILED",
+  "status": "COMPLETE_PHYSICAL_COST_AGREEMENT_PROBE",
+  "throughput_clips_per_second": {
+    "32b": 0.04044375605962723,
+    "8b": 0.12076358279697635
+  }
+}

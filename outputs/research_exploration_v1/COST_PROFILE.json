@@ -1,0 +1,57 @@
+{
+  "schema_version": "RESEARCH_COST_PROFILE_V1",
+  "snapshot_utc": "2026-07-30T12:28:10Z",
+  "formal_v3": {
+    "status": "ABORTED_RUNTIME_COST_ENVELOPE_EXCEEDED",
+    "estimated_a100_gpu_hours": 16.09712320568816,
+    "reservation_envelope_a100_gpu_hours": 19.385801544431597,
+    "estimated_parallel_wall_hours": 3.0931814077885096,
+    "per_call_hard_reservation_wall_seconds": 23.579961206763983,
+    "planned_calls": 1475,
+    "planned_loads": 3,
+    "retries": 0,
+    "completed_units": 136,
+    "failed_in_flight_unit": "DALI_u0136",
+    "failed_call_elapsed_seconds": 23.754265,
+    "failed_call_limit_seconds": 23.579961,
+    "failed_call_overrun_seconds": 0.174304,
+    "coordinator_actual_gpu_seconds_at_stop": 5142.251542078002,
+    "completed_call_wall_seconds": {
+      "count": 136,
+      "mean": 18.782775,
+      "p50": 18.761514,
+      "p90": 20.711090,
+      "p95": 22.030782,
+      "p99": 22.723631,
+      "maximum": 23.304528
+    },
+    "warning": "The sealed per-call bound was falsified. Do not use partial realized cost as a downstream safety bound."
+  },
+  "older_physical_verify_probe": {
+    "query_prompt_sha256": "12187489e65828f1a5af829b649877e8e60927eff269c19278704f858781cf33",
+    "unique_clips": 3,
+    "repeat_calls_per_model": 1,
+    "8b_mean_inference_seconds": 8.280642034951597,
+    "8b_load_seconds": 5.518729610368609,
+    "8b_gpus": 1,
+    "32b_mean_inference_seconds": 24.725695569068193,
+    "32b_load_seconds": 14.20339709147811,
+    "32b_gpus": 2,
+    "classification": "physical_probe_not_representative_not_v3"
+  },
+  "cached_replay": {
+    "scan_cost": 0.1,
+    "verify_cost": 1.0,
+    "unit": "abstract mechanism units",
+    "decode_k3_commit_controller_wall_clock_included": false
+  },
+  "missing": [
+    "V3 SCAN complete-path wall clock",
+    "V3 VERIFY complete-path distribution",
+    "model switching/loading for selective escalation",
+    "K3 materialization wall clock",
+    "durable commit wall clock",
+    "controller inference wall clock",
+    "frozen physical deadline set"
+  ]
+}

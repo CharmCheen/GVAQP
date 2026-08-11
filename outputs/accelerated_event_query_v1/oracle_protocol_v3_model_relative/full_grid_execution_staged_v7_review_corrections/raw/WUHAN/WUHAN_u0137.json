@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0137:1786350616557209277",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "f592e763de67adb050dd7ce0e6a1ad59efa8931e09794cf5faf209573512bcbf",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "8f1b4707044555d178cb83e0bf381299f3b591091289e057ee669272a1face14",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "8a8e9d6ea25eedc1a70ed06162ecf7eb2b1eaf15b84666b3fc790ba46602f5b4",
+  "generated_token_ids_sha256": "071a421aff75bc466172f576593564333841ea740c67edb13a1851fc17ecb474",
+  "input_identity_sha256": "c932b369a6d9c0248d4b1723e53fddfd9a8c4d82a1c24eebc1c39f51e2b50e14",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "fc3caa45701ae3fa762a0d13e36c16514077029a6c373b8cb8a573248853137a",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is driving steadily on a multi-lane urban road with clear visibility. Traffic flow is smooth, with no sudden braking, slowing, or obstacles in the path. Lead vehicles maintain consistent speed, and no traffic signals or signs require an immediate response. Pedestrians and other road users are at a safe distance and not encroaching on the ego path. The navigation overlay indicates a continuous forward route without imminent turns or stops. All conditions suggest normal driving without need for a noticeable slowdown, braking, or avoidance maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "2b08c20c3a4d3ea9de66716798e717d55d28d55ff0eb6d57db95042e51984605",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is driving steadily on a multi-lane urban road with clear visibility. Traffic flow is smooth, with no sudden braking, slowing, or obstacles in the path. Lead vehicles maintain consistent speed, and no traffic signals or signs require an immediate response. Pedestrians and other road users are at a safe distance and not encroaching on the ego path. The navigation overlay indicates a continuous forward route without imminent turns or stops. All conditions suggest normal driving without need for a noticeable slowdown, braking, or avoidance maneuver.\"\n}",
+  "raw_response_sha256": "c2b9258f3c39f675a0bef551cadcd4389802a43c4f5e1c94a25598fedab06ab0",
+  "record_payload_sha256": "ef55dd1b558464d859d2ca8300ec29f90b4a61ec323ebdf556afe62653bde697",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 19.298373274999904,
+    "model_load_seconds": 18.639309566999145,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.927113555997494,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0137",
+  "unit_ordinal": 1265,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

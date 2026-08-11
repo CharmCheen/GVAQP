@@ -1,0 +1,640 @@
+{
+  "artifact_sha256": {
+    "AUTHORIZED_CALL_MANIFEST_V2.json": "c5a7188ce6ff2d5386b7a8c6845c26081de9fe5adc3c360ce6fa7ababad7418f",
+    "COMPUTE_APPROVAL_V2.json": "3704ba8d2c3eec3cc8ed85e6476b4ab17eb9528817451ab5646d5750989b1c41",
+    "GROUNDING_QUEUE_V2.json": "478f4ca3611c13af1b21af37c372263cd34da30b1f9e0790d7cb1efbec590204",
+    "GROUNDING_REVIEW_V2.json": "a2a3ced204a3a596f342668bac973cbf5eebbf1bc599d61aa4247246c1ab87e9",
+    "PREFLIGHT_FINAL_DECISION_V2.json": "cee366f580d7d510d0cd1935310f81e60e301e534c0be4e8b2aa7c98c4afb528",
+    "PREFLIGHT_METRICS_V2.json": "e0cb9a14453b539e743b16ce453a9e5de613f9a1cb765d0eb67ea2daa1f0ef36",
+    "PREFLIGHT_V2_EXECUTION_SEAL.json": "58f84d2ce389aa3cf8122137911b0ec8429d6db80d84766afd88ee870b6b7576",
+    "TARGETED_PILOT_DECISION_V2.json": "f5ae72e3da5e2aac44a44e9fd604673894add71cbad666d25d0ec554435f3cc0",
+    "USER_DECISION_MAPPING_V2.json": "10ed8d9c3ef22e9db4378af5cecee3c03b432706b40958dd11601dca982ae4e8"
+  },
+  "attempt_ledgers": [
+    {
+      "event_counts": {
+        "ACCEPTED": 10,
+        "INFERENCE_COMPLETED": 10,
+        "INFERENCE_STARTED": 10,
+        "PREPARED": 10
+      },
+      "execution_shard": "DALI",
+      "path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/attempts/DALI.jsonl",
+      "sha256": "70a9c556ab099509e3a27fa98980d41a8fd711b136ec526bf23e3f0b4df0edf0"
+    },
+    {
+      "event_counts": {
+        "ACCEPTED": 11,
+        "INFERENCE_COMPLETED": 11,
+        "INFERENCE_STARTED": 11,
+        "PREPARED": 11
+      },
+      "execution_shard": "HANGZHOU",
+      "path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/attempts/HANGZHOU.jsonl",
+      "sha256": "4e6d96294b5a8ff4ddbd3d164ddc1b4f0bdfa873910626781afe230e0f55f94e"
+    },
+    {
+      "event_counts": {
+        "ACCEPTED": 11,
+        "INFERENCE_COMPLETED": 11,
+        "INFERENCE_STARTED": 11,
+        "PREPARED": 11
+      },
+      "execution_shard": "WUHAN",
+      "path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/attempts/WUHAN.jsonl",
+      "sha256": "45205d73813755bf78ebcc69ee61e191e489fdbf11f4164a51e605e1a6729961"
+    }
+  ],
+  "authorized_calls": 32,
+  "decision": "REVISE_ORACLE_PROTOCOL",
+  "decision_payload_sha256": "6c9d1c8b5ace55c1bdd1877678b1f1b904b1379cb183b101bdb7423ea47f11ca",
+  "declared_gpu_pairs_by_shard": {
+    "DALI": [
+      1,
+      2
+    ],
+    "HANGZHOU": [
+      3,
+      5
+    ],
+    "WUHAN": [
+      6,
+      7
+    ]
+  },
+  "experiment_id": "AEQ_ORACLE_PREFLIGHT_V2",
+  "failure_or_uncertain_generation_events": 0,
+  "inference_seconds": 790.6710716802627,
+  "manifest_payload_sha256": "25bb03779b5f6fdd1d37cf5583b8c61c04a56794fedf2b95cbbdb4bec2bdaedb",
+  "model_load_seconds_by_shard": {
+    "DALI": 14.942427515983582,
+    "HANGZHOU": 15.173805676400661,
+    "WUHAN": 15.946267031133175
+  },
+  "model_load_seconds_total": 46.06250022351742,
+  "observed_raw_records": 32,
+  "parse_status_counts": {
+    "invalid_relevant_boundary": 1,
+    "ok": 31
+  },
+  "physical_event_counts": {
+    "ACCEPTED": 32,
+    "INFERENCE_COMPLETED": 32,
+    "INFERENCE_STARTED": 32,
+    "PREPARED": 32
+  },
+  "raw_label_counts": {
+    "not_relevant": 23,
+    "parse_failure": 1,
+    "relevant": 8
+  },
+  "raw_records": [
+    {
+      "artifact_file_sha256": "d96c3dd9e2e8bd4dee4d1d45dd38cba1d36c0d1ffbdd9f82a168cb8f3f173f1d",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/DALI/DALI_u0437_fps2_r0.json",
+      "declared_physical_gpus": [
+        1,
+        2
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "02aab04a9dbd235335ecbc93f44c93ffb0ee9070d575a339c7c200d280a41668",
+      "inference_seconds": 23.19410232268274,
+      "input_identity_sha256": "d13c62b707c6239a009c1bafe4cd483dc66d5cfb19a667c55c0dd70cbcaeeba8",
+      "model_input_identity_sha256": "188b3dfd041dd47b23589eafa6e3d21a22d93ccef9c94061780df24db81ba564",
+      "parse_status": "ok",
+      "processed_input_sha256": "2ac81ea3f86e15107ac685ac2e8c638ba57b5946d690e2e7f7ce221d9c7c6674",
+      "raw_response_sha256": "f4c8037df0d230a8916f11f94144b8982a396d9df3945ca60884c9b5a70bcbb9",
+      "record_sha256": "3a0772b290e18f1115680f9cd72ac73353c32f729ed42dc097d77eabf68afa2e"
+    },
+    {
+      "artifact_file_sha256": "8840611d852cdbcf7ea84d48ace43dc142bb7ab12307afb1794c88b799b2bbb2",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/DALI/DALI_u0437_fps2_r1.json",
+      "declared_physical_gpus": [
+        1,
+        2
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "02aab04a9dbd235335ecbc93f44c93ffb0ee9070d575a339c7c200d280a41668",
+      "inference_seconds": 22.039635026827455,
+      "input_identity_sha256": "a30104b15a1cef6dd17655f256bee562ba622342c16565fa82fe3c7840f938a8",
+      "model_input_identity_sha256": "188b3dfd041dd47b23589eafa6e3d21a22d93ccef9c94061780df24db81ba564",
+      "parse_status": "ok",
+      "processed_input_sha256": "2ac81ea3f86e15107ac685ac2e8c638ba57b5946d690e2e7f7ce221d9c7c6674",
+      "raw_response_sha256": "f4c8037df0d230a8916f11f94144b8982a396d9df3945ca60884c9b5a70bcbb9",
+      "record_sha256": "1ba15ebac35aff76ec7e5d4a58be8772c2fa8059844b2791ec882e672d9786d8"
+    },
+    {
+      "artifact_file_sha256": "3f52c79de40afc6f5f6b9b7d43b99ca993ca108bd24792caf64afd3d8d6d83fc",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/DALI/DALI_u0501_fps2_r0.json",
+      "declared_physical_gpus": [
+        1,
+        2
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "aa785a81516174b46f07a6e26cdc6d6f49c80788bc7411c6b550b2a1aee7cc87",
+      "inference_seconds": 23.075095303356647,
+      "input_identity_sha256": "492533d894fa9f29bee399d6cbbfdbff8c8bdff4e86dc8b714c98e7252dcd00f",
+      "model_input_identity_sha256": "0b6141cf4595596e7591a3e6216ec6775f9470f608d4f1ad15eb5e8963757b7d",
+      "parse_status": "ok",
+      "processed_input_sha256": "1ee4853b1b3b35dba691e2a51f2bfee3ccb5b55a3138331d68b35a2be7724af8",
+      "raw_response_sha256": "bacbe9bc05d021828bd0c937135a9576f546e7b33c7fd6b3c9c3be7a485cb882",
+      "record_sha256": "512e6dd585045a1b1cd08f3a920f5b2c27f0ebe7efeb5413a0dabbda1b661c00"
+    },
+    {
+      "artifact_file_sha256": "843258c1dd4f5c965dddbf1ac5af954035023341fd42da98a851761cdadd5935",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/DALI/DALI_u0501_fps2_r1.json",
+      "declared_physical_gpus": [
+        1,
+        2
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "aa785a81516174b46f07a6e26cdc6d6f49c80788bc7411c6b550b2a1aee7cc87",
+      "inference_seconds": 23.126823838800192,
+      "input_identity_sha256": "0477eb0db227076d951483523efad20aff33573751a41626908702d08861714f",
+      "model_input_identity_sha256": "0b6141cf4595596e7591a3e6216ec6775f9470f608d4f1ad15eb5e8963757b7d",
+      "parse_status": "ok",
+      "processed_input_sha256": "1ee4853b1b3b35dba691e2a51f2bfee3ccb5b55a3138331d68b35a2be7724af8",
+      "raw_response_sha256": "bacbe9bc05d021828bd0c937135a9576f546e7b33c7fd6b3c9c3be7a485cb882",
+      "record_sha256": "ab24bb72826887f3d3dd605404507aeab58fd94177df0211e41e0e8b8f662720"
+    },
+    {
+      "artifact_file_sha256": "6ce981186590b89d799d00397417d091802258eccd7b240b279ee68f46f258f8",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/DALI/DALI_u0548_fps2_r0.json",
+      "declared_physical_gpus": [
+        1,
+        2
+      ],
+      "effective_label": "relevant",
+      "generated_token_ids_sha256": "2394f8ef3552ecdb1b3665dee62015bc55596199963317834823ce2d3cdf369c",
+      "inference_seconds": 24.707886485382915,
+      "input_identity_sha256": "2b582a03ff7cf79e4ab820caa189ac4258506b2d951759a0d981f68f469c0c8b",
+      "model_input_identity_sha256": "ad6984513610cf3003e55e90e8ae422c27ec8cb8d1909377b8ab27004bb6b2e2",
+      "parse_status": "ok",
+      "processed_input_sha256": "0123b6ef53b7ef8cbaa38da913ffb1a300174f1f7919c1ce59a7323c8b62183d",
+      "raw_response_sha256": "3fc1eb1f65b3ff91986cd9a08d15e33c81a756e0bf3f5e4cdf3f8d4b5d9e8658",
+      "record_sha256": "e6859f34d1e2f4efa5197933d38e7cc2e83e33438fc85ea1d84a8c4b2a9612da"
+    },
+    {
+      "artifact_file_sha256": "af50fbead1c0435aa467ee01a277d136b74a027ee28a369b00d4c8f56fb9a49b",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/DALI/DALI_u0548_fps2_r1.json",
+      "declared_physical_gpus": [
+        1,
+        2
+      ],
+      "effective_label": "relevant",
+      "generated_token_ids_sha256": "2394f8ef3552ecdb1b3665dee62015bc55596199963317834823ce2d3cdf369c",
+      "inference_seconds": 24.398050712421536,
+      "input_identity_sha256": "48369345442f4651d452457dd94a55285f468752f64d934c1ec29b8b927a23b8",
+      "model_input_identity_sha256": "ad6984513610cf3003e55e90e8ae422c27ec8cb8d1909377b8ab27004bb6b2e2",
+      "parse_status": "ok",
+      "processed_input_sha256": "0123b6ef53b7ef8cbaa38da913ffb1a300174f1f7919c1ce59a7323c8b62183d",
+      "raw_response_sha256": "3fc1eb1f65b3ff91986cd9a08d15e33c81a756e0bf3f5e4cdf3f8d4b5d9e8658",
+      "record_sha256": "728d4852c357ee9b68b93571ebd5f97793b773de1006481dc23bd20ac21a7576"
+    },
+    {
+      "artifact_file_sha256": "279a448c79185d057197a591f3a129989f3976af1c7fac1fe476347cac36d912",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/DALI/DALI_u0548_fps4_sensitivity.json",
+      "declared_physical_gpus": [
+        1,
+        2
+      ],
+      "effective_label": "parse_failure",
+      "generated_token_ids_sha256": "baba4ea9d0213a3c9ff464a6cc78f06f47baa0cf81ce8d2b7ba9d9324a289c91",
+      "inference_seconds": 30.853460183367133,
+      "input_identity_sha256": "41990701aa2b7348d415bcec0350951928128e392ad2698c790fb61abe4562cf",
+      "model_input_identity_sha256": "22a47c685af8aa6e0bd4229503d178db7f3d4fa6a7030e914943a29b65c8f3ac",
+      "parse_status": "invalid_relevant_boundary",
+      "processed_input_sha256": "5fa9d25203c28917b4583bac64b0c4c366702a04f008b4a68559846e7ea1cddf",
+      "raw_response_sha256": "7cbb5541c441e48023f7d6b92d23650d9f2b313b9432c9e8f4e2b7588b1bde15",
+      "record_sha256": "91b3a2b419ef307b8bb5f87167d7d75643416ea9af2b4855d5985a71f08b167f"
+    },
+    {
+      "artifact_file_sha256": "800f481a61cbeeaa91fc67ed394d57e0bc95f9709af6b76ab4c8069f2740e789",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/DALI/DALI_u0555_fps2_r0.json",
+      "declared_physical_gpus": [
+        1,
+        2
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "1992bef47df4665bd181a11ec3be4b55418cb8a27d96261421073e8241f144ac",
+      "inference_seconds": 26.48634296655655,
+      "input_identity_sha256": "251cd581f7472b1f28be0feab99c0e63ffe9f7cc60780557a4aa568b787dc69c",
+      "model_input_identity_sha256": "d78fb4c8b83292f7eb9ca6b40576092db33147127ffdda948e14e07d2d99556c",
+      "parse_status": "ok",
+      "processed_input_sha256": "f18b2ce96706c834f1b9db16356ee9b49a5796944d7d81d6b23c8c87f77bf11a",
+      "raw_response_sha256": "f44387f6af1d0bbbc28054f9cff5c00bda3a9564af37a8102164de9a80f258d7",
+      "record_sha256": "59e601fd2f121684f608db25040d1a729fbaeb0689e2a84e00dd13dbf0468d12"
+    },
+    {
+      "artifact_file_sha256": "70195d6dceec467d7b73cd83b9eb7b703ebe8d59dcaa6f60e7a2ef2e6e0be563",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/DALI/DALI_u0555_fps2_r1.json",
+      "declared_physical_gpus": [
+        1,
+        2
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "1992bef47df4665bd181a11ec3be4b55418cb8a27d96261421073e8241f144ac",
+      "inference_seconds": 24.86611911840737,
+      "input_identity_sha256": "07eccbbf22ca44ccf26b8dac26938b4f21dc08ad454c80276693812dfebb6579",
+      "model_input_identity_sha256": "d78fb4c8b83292f7eb9ca6b40576092db33147127ffdda948e14e07d2d99556c",
+      "parse_status": "ok",
+      "processed_input_sha256": "f18b2ce96706c834f1b9db16356ee9b49a5796944d7d81d6b23c8c87f77bf11a",
+      "raw_response_sha256": "f44387f6af1d0bbbc28054f9cff5c00bda3a9564af37a8102164de9a80f258d7",
+      "record_sha256": "74349a1121028becdf13cc6e8cfe817ca952f123ea6b315088b047acee0bc2b8"
+    },
+    {
+      "artifact_file_sha256": "658b8fc365b9bb534f1a3ddcb89c2e74f83042fdfd4ff88babb9529d56fd5e6f",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/DALI/DALI_u0555_fps4_sensitivity.json",
+      "declared_physical_gpus": [
+        1,
+        2
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "b88a75a302a91d74eab557f8b751afc0f97b2ef2bdf23e20f53866b80984cbd8",
+      "inference_seconds": 27.62572832405567,
+      "input_identity_sha256": "152deb4df4eedfd22490d4cccdfa71e5f320cc09c5886d1e71f3923f941ddd37",
+      "model_input_identity_sha256": "ad0e13e08cc97bb0855a21734e733892d5a01455b6db898e6638c34b4850c3fc",
+      "parse_status": "ok",
+      "processed_input_sha256": "38759c93fe771c31eae3a7e0675513fa272ccf4c11e5fa96ad3d68d69a2a1ec4",
+      "raw_response_sha256": "b18e8edc659110b27964a4305287970046b93071dab9416193562a59550486d9",
+      "record_sha256": "6b90120efa2164d7f4fbcf7c58a3fc7e0df2cd0511ac3a0f5d4906b49483e31a"
+    },
+    {
+      "artifact_file_sha256": "b33e755fd5dc653feb484648f1c3c913c85a4c8892645d95cb82fd9fd2e6ce33",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/HANGZHOU/HANGZHOU_u0140_fps2_r0.json",
+      "declared_physical_gpus": [
+        3,
+        5
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "79cf48b2a4e9179eb58b25efc27d5f985448fce06c2f99be296092626f514e7a",
+      "inference_seconds": 26.235307343304157,
+      "input_identity_sha256": "a0920f7ad838358848437af5315e6ac203d8f31896903e19b7ad87b1d95238c4",
+      "model_input_identity_sha256": "58311ffe1be44c3476726f89171c79ffc808746550dcc859ada2890723d0ab65",
+      "parse_status": "ok",
+      "processed_input_sha256": "d8f6ed69b3a8598eee6eca48fc31200dd4fee068f05422083438c567b484d6fc",
+      "raw_response_sha256": "2579fc8e997917d47ca90a1e9112619068fd197e43f725d1f4d11430352a55e1",
+      "record_sha256": "37a0a0c46d7ddffed5bf7a3fff4d6628c4f4f2915e860628e201389f8fef5411"
+    },
+    {
+      "artifact_file_sha256": "3310a51da79cb35ec57ffd6edfbf03888172ceee31ae9e74c34f076b9f0a41d0",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/HANGZHOU/HANGZHOU_u0140_fps2_r1.json",
+      "declared_physical_gpus": [
+        3,
+        5
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "79cf48b2a4e9179eb58b25efc27d5f985448fce06c2f99be296092626f514e7a",
+      "inference_seconds": 25.375149440020323,
+      "input_identity_sha256": "42d46d8829d1b1cd615832c45c400f566c08a6cd6a38fb789986da81dbfa5660",
+      "model_input_identity_sha256": "58311ffe1be44c3476726f89171c79ffc808746550dcc859ada2890723d0ab65",
+      "parse_status": "ok",
+      "processed_input_sha256": "d8f6ed69b3a8598eee6eca48fc31200dd4fee068f05422083438c567b484d6fc",
+      "raw_response_sha256": "2579fc8e997917d47ca90a1e9112619068fd197e43f725d1f4d11430352a55e1",
+      "record_sha256": "301edc4905864932b8dc2e475ec8550823663ca4629c7d03cde7d2df91966366"
+    },
+    {
+      "artifact_file_sha256": "a54dcdd191c9a66c8a11ef06f887f31342a677edefd69107d3a18c7a10a7845c",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/HANGZHOU/HANGZHOU_u0234_fps2_r0.json",
+      "declared_physical_gpus": [
+        3,
+        5
+      ],
+      "effective_label": "relevant",
+      "generated_token_ids_sha256": "ee770531f3ac17ef28262f154cc7fdd32e6537a8bc5ace5a324779620d8f704e",
+      "inference_seconds": 23.388375306501985,
+      "input_identity_sha256": "ee1506dc6446be6e5d638e670abb810f7214991f4743170b4d1b03a4662f0cbc",
+      "model_input_identity_sha256": "4068efdfa742fe26d209c0f3542c98e6615abe389d56cf9bb2f5d9deb9ff3837",
+      "parse_status": "ok",
+      "processed_input_sha256": "b4916081e2623885c63a1d8a525d06e8f5987372deb8bb9ddeb210b31bf173e7",
+      "raw_response_sha256": "bb445afbc854e95f68969e836d56d5a4cfe34d44038a9712a6614c65335e50d1",
+      "record_sha256": "4dfcb938ae4a49d97900aaa171eb00281a9437247f4f6beba6a86180a0f22161"
+    },
+    {
+      "artifact_file_sha256": "72ee9cc0da24bdd2b3be9859e7aeea6fb9a0de49e83e542eba5bc6497041e729",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/HANGZHOU/HANGZHOU_u0234_fps2_r1.json",
+      "declared_physical_gpus": [
+        3,
+        5
+      ],
+      "effective_label": "relevant",
+      "generated_token_ids_sha256": "ee770531f3ac17ef28262f154cc7fdd32e6537a8bc5ace5a324779620d8f704e",
+      "inference_seconds": 23.355898037552834,
+      "input_identity_sha256": "57d86b50ba31f3b866d25fbd823c7649722cc4509ac2d71d6fe69394ff930433",
+      "model_input_identity_sha256": "4068efdfa742fe26d209c0f3542c98e6615abe389d56cf9bb2f5d9deb9ff3837",
+      "parse_status": "ok",
+      "processed_input_sha256": "b4916081e2623885c63a1d8a525d06e8f5987372deb8bb9ddeb210b31bf173e7",
+      "raw_response_sha256": "bb445afbc854e95f68969e836d56d5a4cfe34d44038a9712a6614c65335e50d1",
+      "record_sha256": "8e337c9f23c85808e46fd0d0eac9a716048c25664029c8f365da31d29e6921ab"
+    },
+    {
+      "artifact_file_sha256": "092efc11e8ea77cb5df8c6ccd5f36f6e8d6ea19c34c09659e00f0872d726e62d",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/HANGZHOU/HANGZHOU_u0280_fps2_r0.json",
+      "declared_physical_gpus": [
+        3,
+        5
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "014d997b1660901ebfd794aeb7008b6a6f8d688ac6b0a9f3aa5ac68de5118cc3",
+      "inference_seconds": 24.676586830988526,
+      "input_identity_sha256": "f9626852ab76d3c8d84c6cf7e375f0995ee4fdd1fafb3623d83642bdc30cfdbd",
+      "model_input_identity_sha256": "eb72134f29a6c30d0ab3d449fa87f5522f28ab9d2e60bf21c56b7c7890ba6931",
+      "parse_status": "ok",
+      "processed_input_sha256": "e30ff213440ce1dd8b67a1ef4ff7ea9b8f26c36a91401c1f4b8d29fc15baa2e5",
+      "raw_response_sha256": "67bfef1f14d579f3413b688aec53ce19eb80d22a8f803f2d5843fe6a3c6f2a3d",
+      "record_sha256": "fe08df539f724e45103e49eed54c64e25b133ac3f4cebe627a796c17d125e3ed"
+    },
+    {
+      "artifact_file_sha256": "717978edaf0ccd46e770d147a375905d5ff75450c3a37adce09077d4dc4e6589",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/HANGZHOU/HANGZHOU_u0280_fps2_r1.json",
+      "declared_physical_gpus": [
+        3,
+        5
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "014d997b1660901ebfd794aeb7008b6a6f8d688ac6b0a9f3aa5ac68de5118cc3",
+      "inference_seconds": 24.486667165532708,
+      "input_identity_sha256": "1d5be034f9741d8c5d8a0939f60279b7da5ae77ec032e2ebdebfd940e4876bcb",
+      "model_input_identity_sha256": "eb72134f29a6c30d0ab3d449fa87f5522f28ab9d2e60bf21c56b7c7890ba6931",
+      "parse_status": "ok",
+      "processed_input_sha256": "e30ff213440ce1dd8b67a1ef4ff7ea9b8f26c36a91401c1f4b8d29fc15baa2e5",
+      "raw_response_sha256": "67bfef1f14d579f3413b688aec53ce19eb80d22a8f803f2d5843fe6a3c6f2a3d",
+      "record_sha256": "d142f00693a68d9130455553e68108808a56f141469852913759555d4bf014b8"
+    },
+    {
+      "artifact_file_sha256": "9c9e85bdba0637848e25f10e7aa652f8a405231e172838aab81f1308b6e2688c",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/HANGZHOU/HANGZHOU_u0280_fps4_sensitivity.json",
+      "declared_physical_gpus": [
+        3,
+        5
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "b16e2cfa7eea9ef93880302370788dee495a4d35be6f5a61322d0200c401a242",
+      "inference_seconds": 24.79994808882475,
+      "input_identity_sha256": "0787b01881cfdafd3c485b8b57c9f49c58a272c9a5a5206d3474a74a17e206dd",
+      "model_input_identity_sha256": "b465256c3ed872b55225b03cc7e1c5bc2dedaf0b968f9edf835d9703ff01c74e",
+      "parse_status": "ok",
+      "processed_input_sha256": "b68f719054f01c2a7e0a61a1bf507a0c0b8c82086e00fb9099e94cebba11d50b",
+      "raw_response_sha256": "88719c5e7b556b6e39c46fad31018bde2954a9e45855a30a4a9bbad16c7dcb54",
+      "record_sha256": "bad6c1825a52b817cc195983a78e257712f1dc261c9a6a9a8a51fe858c905432"
+    },
+    {
+      "artifact_file_sha256": "840d2c84c825b3d9591bfdf5cad5b6d77479b17828fb25ce757974c90b8cad78",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/HANGZHOU/HANGZHOU_u0420_fps2_r0.json",
+      "declared_physical_gpus": [
+        3,
+        5
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "dc0224731c91bfa65c94a82015fa71b56415358185d4c8b4e4d7ff3dce9db3dc",
+      "inference_seconds": 23.936669362708926,
+      "input_identity_sha256": "82519364d86a955441218c79ae3640ed8f01bf7ff235a384892b0c60448f9628",
+      "model_input_identity_sha256": "6bab98337c757b14af3211ce2397f309e9c28494e01268458b41a1b596adfac7",
+      "parse_status": "ok",
+      "processed_input_sha256": "2fd82396ea1c0f1d9fb702e96176cb9e564fc53efb2598e635ecc0d6457d90b7",
+      "raw_response_sha256": "1e72f025678d3469bf17b03efc971271c97a70b7bfddebade8d0d6bee298b54c",
+      "record_sha256": "722f7e5e28bf2e110f0d66a8dabae6ed727d3b64fa9d813dc15732e09e31101f"
+    },
+    {
+      "artifact_file_sha256": "bd771b1c501ff11b6027214bbb49f2d9933dd50b87833c0c2b0c1d85f857cd6e",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/HANGZHOU/HANGZHOU_u0420_fps2_r1.json",
+      "declared_physical_gpus": [
+        3,
+        5
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "dc0224731c91bfa65c94a82015fa71b56415358185d4c8b4e4d7ff3dce9db3dc",
+      "inference_seconds": 22.902179960161448,
+      "input_identity_sha256": "7ec2f55e0dbf2e63741c159d498c69e2291e067dd65de661d2dbae49958fbff4",
+      "model_input_identity_sha256": "6bab98337c757b14af3211ce2397f309e9c28494e01268458b41a1b596adfac7",
+      "parse_status": "ok",
+      "processed_input_sha256": "2fd82396ea1c0f1d9fb702e96176cb9e564fc53efb2598e635ecc0d6457d90b7",
+      "raw_response_sha256": "1e72f025678d3469bf17b03efc971271c97a70b7bfddebade8d0d6bee298b54c",
+      "record_sha256": "fcabe775cfee5cc613a8ac7be408925e4efdd83a3783d49ea860161fddcc93d5"
+    },
+    {
+      "artifact_file_sha256": "5c0af7f74efa122521377e3bf669c39513307387e23180f1285a8d43c6ce77f0",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/HANGZHOU/HANGZHOU_u0420_fps4_sensitivity.json",
+      "declared_physical_gpus": [
+        3,
+        5
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "74a6408a4aa442c814baf066fccd5aa15a079592fe3caf637f8facacf14ba085",
+      "inference_seconds": 21.69699700549245,
+      "input_identity_sha256": "028961060a587df4dfc97b45516497ba7d43335af0accac5dfc759c76e0d8c84",
+      "model_input_identity_sha256": "41955a410ed7ad1ad1badff5a37e3cded8c6594a5f42ca0769ec0025fa205256",
+      "parse_status": "ok",
+      "processed_input_sha256": "b20de69e2fae07c4e0a0ce5c2b39408b961816b466538c98ea8bf3e2944dedfb",
+      "raw_response_sha256": "cf3e9bd694057e6bec9d0d9de117d80e36d3468727ef41dd8720f7ab6b7dd76c",
+      "record_sha256": "9ab047528b01a4353bcca629b7694bea646f73e5f9077944faee169bc506de13"
+    },
+    {
+      "artifact_file_sha256": "319a351d7bc4c29f669d82c11bfe3c24a261c4914504e631a0ba984ff65c5ee2",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/HANGZHOU/DALI_u0555_fps2_cross_replica_HANGZHOU.json",
+      "declared_physical_gpus": [
+        3,
+        5
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "1992bef47df4665bd181a11ec3be4b55418cb8a27d96261421073e8241f144ac",
+      "inference_seconds": 24.283304093405604,
+      "input_identity_sha256": "62bdc602962bcbc1c86b8c96538f16ceaa6b1f62f7e39b9b16d0f429731fbd72",
+      "model_input_identity_sha256": "d78fb4c8b83292f7eb9ca6b40576092db33147127ffdda948e14e07d2d99556c",
+      "parse_status": "ok",
+      "processed_input_sha256": "f18b2ce96706c834f1b9db16356ee9b49a5796944d7d81d6b23c8c87f77bf11a",
+      "raw_response_sha256": "f44387f6af1d0bbbc28054f9cff5c00bda3a9564af37a8102164de9a80f258d7",
+      "record_sha256": "1273bf71992fc61c17bd969a920fa6c0e3cfbe82a3947a72b206cff27a2b9d7e"
+    },
+    {
+      "artifact_file_sha256": "22536a09962c88fc52052bfc24735567b7d851a1f978657726d0eb27b1812ef7",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/WUHAN/WUHAN_u0134_fps2_r0.json",
+      "declared_physical_gpus": [
+        6,
+        7
+      ],
+      "effective_label": "relevant",
+      "generated_token_ids_sha256": "cb4f42f717a0a0326e601ef597d64ee00d8f2392c4c1e0b8ae0a4efa08ad5d1f",
+      "inference_seconds": 24.998187569901347,
+      "input_identity_sha256": "4e352b31aa019ee4268056754c36996e54876ee37a41702c69fe710a71d66368",
+      "model_input_identity_sha256": "418f9ce189832639fc45a2abbd9031cb823229e9de6ba6fa110a0520a843bd5f",
+      "parse_status": "ok",
+      "processed_input_sha256": "e094ed3a8d0a8b7cebe4ed82a7936c5c76364ab3885abe5d6c279fb43ed9a940",
+      "raw_response_sha256": "753459d315fb9d315edf718e5542ff98fe2daa63af1fe460fbfc2b8319608675",
+      "record_sha256": "9b9b460fdd2d5db10dcf9d5cadeb0025482f7a2d20f5c61d514bfb683d9bd01f"
+    },
+    {
+      "artifact_file_sha256": "311291351be15fd8066a771b22245a7b1f134741ba6b6e82bef3a300d212f998",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/WUHAN/WUHAN_u0134_fps2_r1.json",
+      "declared_physical_gpus": [
+        6,
+        7
+      ],
+      "effective_label": "relevant",
+      "generated_token_ids_sha256": "cb4f42f717a0a0326e601ef597d64ee00d8f2392c4c1e0b8ae0a4efa08ad5d1f",
+      "inference_seconds": 24.724657176062465,
+      "input_identity_sha256": "9918e80d7831685584f73eb286a9a67929341b745308eee009f38d65658a4d73",
+      "model_input_identity_sha256": "418f9ce189832639fc45a2abbd9031cb823229e9de6ba6fa110a0520a843bd5f",
+      "parse_status": "ok",
+      "processed_input_sha256": "e094ed3a8d0a8b7cebe4ed82a7936c5c76364ab3885abe5d6c279fb43ed9a940",
+      "raw_response_sha256": "753459d315fb9d315edf718e5542ff98fe2daa63af1fe460fbfc2b8319608675",
+      "record_sha256": "d2f8fbe9d001de849d12c1b9eecb95ecd3d380a348805241b78806a98ed30f2b"
+    },
+    {
+      "artifact_file_sha256": "27040c5b0d4a30baa01854b519e9e5f88a03ad78e3194cba1cfae65856bcd87f",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/WUHAN/WUHAN_u0171_fps2_r0.json",
+      "declared_physical_gpus": [
+        6,
+        7
+      ],
+      "effective_label": "relevant",
+      "generated_token_ids_sha256": "c1762aa16100a38e17d5eebfb2d1999b1c5b57a841b00959e4abdbf87494ed75",
+      "inference_seconds": 25.407248321920633,
+      "input_identity_sha256": "3bca33410ddf5907b4a9af559bba8e801b3d74d2f9417221b98cd9963e0e7581",
+      "model_input_identity_sha256": "84d5d29bcc4ad80d9cb1a5d93bbe156f71616fae25588b84f1cd0f9713abe5ba",
+      "parse_status": "ok",
+      "processed_input_sha256": "208242ab5d8ca2e97d8727febc9e0fae952a72a7f694f4abedfb48bd0e3dff1b",
+      "raw_response_sha256": "cfe53801bbee9f2a1d7bf8ac2a77965bb136353ff6745a3426775d794cf77c7c",
+      "record_sha256": "f51c52f939e9ce92dea95ab2b77d0d84f046c8e3abd665532ed9876aa2df700b"
+    },
+    {
+      "artifact_file_sha256": "32cf792ef68aca8fb8de34805953cbcf1b6c5333c8ad59c1c5facd100368a4a2",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/WUHAN/WUHAN_u0171_fps2_r1.json",
+      "declared_physical_gpus": [
+        6,
+        7
+      ],
+      "effective_label": "relevant",
+      "generated_token_ids_sha256": "c1762aa16100a38e17d5eebfb2d1999b1c5b57a841b00959e4abdbf87494ed75",
+      "inference_seconds": 26.27414089255035,
+      "input_identity_sha256": "22eb636f89aca4b08d0f94b5b39c3f1be84426fc5eb100361122bf5737ab04fd",
+      "model_input_identity_sha256": "84d5d29bcc4ad80d9cb1a5d93bbe156f71616fae25588b84f1cd0f9713abe5ba",
+      "parse_status": "ok",
+      "processed_input_sha256": "208242ab5d8ca2e97d8727febc9e0fae952a72a7f694f4abedfb48bd0e3dff1b",
+      "raw_response_sha256": "cfe53801bbee9f2a1d7bf8ac2a77965bb136353ff6745a3426775d794cf77c7c",
+      "record_sha256": "8562c32f59415443428c0c510c859a6a06ebd39ffcca0120fb1d87016bc92419"
+    },
+    {
+      "artifact_file_sha256": "6540613a42a15c9c9a7b816ed1be7ed03d0978f242502d31928a38883d5ad971",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/WUHAN/WUHAN_u0217_fps2_r0.json",
+      "declared_physical_gpus": [
+        6,
+        7
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "b2f1629c0d9b9e651ba606656755fc42c8582d22015d0575a50e4e488bd17707",
+      "inference_seconds": 25.282205088064075,
+      "input_identity_sha256": "92c15414787f4149e9c60518aebad586e99295c0e46beb5ead0bbe30ce571d9f",
+      "model_input_identity_sha256": "93eca21293531115158f5dc176a553851550e60b5ff3a106553cbdf5ea09f1b0",
+      "parse_status": "ok",
+      "processed_input_sha256": "2f90d23543d4fe80c6247d1cad4db2cb2b187a27bada44b67063ead3da5acb89",
+      "raw_response_sha256": "36a80857fe7dfeb73c14e3812cd5895759de97a53b1d79261af64321eb2120a6",
+      "record_sha256": "a395f462727aef7a1f779412114ea6367a8d6be26c8627d5c26c508fe5cbfb20"
+    },
+    {
+      "artifact_file_sha256": "12f7b9b6ed475a99aebd989b945502811b14d1aba33f28c9fff57a2043f2275e",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/WUHAN/WUHAN_u0217_fps2_r1.json",
+      "declared_physical_gpus": [
+        6,
+        7
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "b2f1629c0d9b9e651ba606656755fc42c8582d22015d0575a50e4e488bd17707",
+      "inference_seconds": 25.568743132054806,
+      "input_identity_sha256": "801c00b645bd4397adf76b2ec6acbdfe5967627f2a7e377ccd7f7b5393345495",
+      "model_input_identity_sha256": "93eca21293531115158f5dc176a553851550e60b5ff3a106553cbdf5ea09f1b0",
+      "parse_status": "ok",
+      "processed_input_sha256": "2f90d23543d4fe80c6247d1cad4db2cb2b187a27bada44b67063ead3da5acb89",
+      "raw_response_sha256": "36a80857fe7dfeb73c14e3812cd5895759de97a53b1d79261af64321eb2120a6",
+      "record_sha256": "4e70880d3113083e717c3946a6ec64b5f8eed02b46aa5ca746f105f3990c6850"
+    },
+    {
+      "artifact_file_sha256": "aad80c663eb316601596b6f4f8c0fea44f577d37d6fcbd179ea67796d73d55fc",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/WUHAN/WUHAN_u0217_fps4_sensitivity.json",
+      "declared_physical_gpus": [
+        6,
+        7
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "870437205ff295d41e69dd5b2d2ea9cd0a168cefb7cc55ed58c7b848f9ce1b70",
+      "inference_seconds": 27.990832544863224,
+      "input_identity_sha256": "ee223d98daa433c89dc654cd27a177407efc2bd58071d5ce2bfbb79ec5bf2c16",
+      "model_input_identity_sha256": "0e6b76fd573397d1378a627781a55fe7ddc1962edd9bc7ce4e24dca364374e3d",
+      "parse_status": "ok",
+      "processed_input_sha256": "e3d2dd6cb21d9b9a7fa7b079758bc6ef9c4f2ebc38a42ca34f8a90d3bb941f76",
+      "raw_response_sha256": "2a5340079e5152f9d8db8497b29ca6fefeac4ef127b1ae112c3e49b7d240741c",
+      "record_sha256": "928c6fc11e11f245c8f384a3570657aacda4c69dfd0740a88cdb50d16b134c82"
+    },
+    {
+      "artifact_file_sha256": "4863502f74738f9ec24c98ee2dd325abd613a6027a750256bbe6e116037fa260",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/WUHAN/WUHAN_u0298_fps2_r0.json",
+      "declared_physical_gpus": [
+        6,
+        7
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "98489dc0e50dd8296fc34fcf8074640ffd9c32159f745bf8095e3738b123a55d",
+      "inference_seconds": 21.99312688037753,
+      "input_identity_sha256": "2614dc0ca13e432aa55453c788f7649ef582da90e5177d16be90a8e15be5e380",
+      "model_input_identity_sha256": "7b8f15861e043a69ab075bd3364e5197293a86a225288399b00d406543927d7b",
+      "parse_status": "ok",
+      "processed_input_sha256": "5e2b70abe41f24075154f497bca630a3fe2e6909310ce0d82c1de032e84331fc",
+      "raw_response_sha256": "e9775c6847bec9c5cb448d14e28efc2dae489b087f288b196f3417420721b2e8",
+      "record_sha256": "1b77e22e04fa9365144094b0d1ba3f793dd10af841d347a43615e61b7b3399e6"
+    },
+    {
+      "artifact_file_sha256": "2c922271dd0ab68ed4cd5260b6c1ebd3931185199599035b1290b067ac744c35",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/WUHAN/WUHAN_u0298_fps2_r1.json",
+      "declared_physical_gpus": [
+        6,
+        7
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "98489dc0e50dd8296fc34fcf8074640ffd9c32159f745bf8095e3738b123a55d",
+      "inference_seconds": 22.087071051821113,
+      "input_identity_sha256": "6e86b967a431b8e62bfe7c186f944865df3005a9f3f92a76d2a1c590a2eefe25",
+      "model_input_identity_sha256": "7b8f15861e043a69ab075bd3364e5197293a86a225288399b00d406543927d7b",
+      "parse_status": "ok",
+      "processed_input_sha256": "5e2b70abe41f24075154f497bca630a3fe2e6909310ce0d82c1de032e84331fc",
+      "raw_response_sha256": "e9775c6847bec9c5cb448d14e28efc2dae489b087f288b196f3417420721b2e8",
+      "record_sha256": "57a1d713570e466fe0060cbbeeefaaef3f7e40e6e1ff64ef474e2d7e17788e7b"
+    },
+    {
+      "artifact_file_sha256": "873477ca07bc376a2f38255223d8bd46001c27e629cb8ce59d9475c38e57f4c5",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/WUHAN/WUHAN_u0298_fps4_sensitivity.json",
+      "declared_physical_gpus": [
+        6,
+        7
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "2cae236809d5c184695215ee6b1d9a3ed3f32de51aa07ed20deb3ec06bea860f",
+      "inference_seconds": 25.60809595324099,
+      "input_identity_sha256": "102996c1e27b2367dc0ec16a3b53f9533ddbbd90b61988ca9e377ed6e778e230",
+      "model_input_identity_sha256": "936b129642cde47ad9e18822d281c6cbd918dfbbc11cbafbdf770424b5302fa2",
+      "parse_status": "ok",
+      "processed_input_sha256": "dbe0de1a69537114781e5bdad5c6c3abad2a7da44cfb4c9e5d1cec7bc553866e",
+      "raw_response_sha256": "ce4865dc0d6dcc9aef26702a57611fed4c0b23728d644f9b104ef724a8f304e6",
+      "record_sha256": "6e3965897ac66db2b3d276d8c9f854ec76dfd71e6ae815af3aada42f73ac56dd"
+    },
+    {
+      "artifact_file_sha256": "c9304adc5d6517f5953a67546d698d088b7b9b604e599f79ad619d5c403be740",
+      "artifact_path": "outputs/accelerated_event_query_v1/operational_oracle/preflight_v2/raw/WUHAN/DALI_u0555_fps2_cross_replica_WUHAN.json",
+      "declared_physical_gpus": [
+        6,
+        7
+      ],
+      "effective_label": "not_relevant",
+      "generated_token_ids_sha256": "1992bef47df4665bd181a11ec3be4b55418cb8a27d96261421073e8241f144ac",
+      "inference_seconds": 25.226436153054237,
+      "input_identity_sha256": "5897c9f09cd2dd9f9773c2326102e9261bf97d764b4876d5b80848777848c9c9",
+      "model_input_identity_sha256": "d78fb4c8b83292f7eb9ca6b40576092db33147127ffdda948e14e07d2d99556c",
+      "parse_status": "ok",
+      "processed_input_sha256": "f18b2ce96706c834f1b9db16356ee9b49a5796944d7d81d6b23c8c87f77bf11a",
+      "raw_response_sha256": "f44387f6af1d0bbbc28054f9cff5c00bda3a9564af37a8102164de9a80f258d7",
+      "record_sha256": "8bad5cab4a7426ab263ba6eacf2dea47bea2a9df33a34084f9af390a9d3cb39c"
+    }
+  ],
+  "scope": "completed targeted 32-call pilot only",
+  "status": "PASS_COMPLETE_INTEGRITY_INVENTORY",
+  "two_gpu_inference_hours": 0.43926170648903484
+}

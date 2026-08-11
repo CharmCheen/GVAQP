@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0303:1786376585071439025",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "4ae38a5d07d045cf55f75c5abcd54c619593b1d133af0809202f5b1136bedc25",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "ab946a1f81506f6bb7cee1535acdabf4d7ddd8454c396ade7df53875b84f1b18",
+  "generated_token_ids_sha256": "952de0f2e24b76763f4b34026e69e205aaca4262fce2736962ec4a3bf876a4ea",
+  "input_identity_sha256": "be7b93c211c9c6034d102cdb0c26092de8099295b334a987d5ceaa7e0c8aa63f",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "5d32170654cde3e57f487da14e2a386225c26436d119ae703682232a7ce8d3a0",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a white Mazda at a steady pace in a multi-lane urban road. Traffic signals ahead are red, indicating a stop is required, but the lead vehicle has not yet begun to brake significantly within this unit. The ego vehicle is not required to perform a noticeable slowdown, braking, or avoidance maneuver within this 10-second unit, as the red light is visible and the lead vehicle is still moving forward. No sudden obstacles, road users entering the path, or other hazards are present that would require an immediate response. The situation is typical of normal traffic flow approaching a red light, with no urgent action needed within the unit.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "2c8643b9e58f50bf3b827709a914f6ae72f0c74bc9f74901a85af076264a264b",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a white Mazda at a steady pace in a multi-lane urban road. Traffic signals ahead are red, indicating a stop is required, but the lead vehicle has not yet begun to brake significantly within this unit. The ego vehicle is not required to perform a noticeable slowdown, braking, or avoidance maneuver within this 10-second unit, as the red light is visible and the lead vehicle is still moving forward. No sudden obstacles, road users entering the path, or other hazards are present that would require an immediate response. The situation is typical of normal traffic flow approaching a red light, with no urgent action needed within the unit.\"\n}",
+  "raw_response_sha256": "8444efc601c0e7b6634dabe5e160f62285b1b7c67a5e05ea3109b87f4a9e8080",
+  "record_payload_sha256": "31454abd681b49df489d3f3238ca3cc03f0782759ef0c73a6f47736157496560",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 22.586240058997646,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 24.326861011999426,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0303",
+  "unit_ordinal": 1431,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

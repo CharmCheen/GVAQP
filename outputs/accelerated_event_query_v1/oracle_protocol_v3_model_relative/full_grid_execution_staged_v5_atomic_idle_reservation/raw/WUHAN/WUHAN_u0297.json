@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0297:1785448652255176558",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "34f379d6495de626e790498e8f39a6344866a25efb3444a178d7e02f255fe2da",
+  "execution_seal_sha256": "8f1884ac84609aab86e726c5c2caf2c4c2739329fed89f7f0db8e5af1b9ac184",
+  "execution_session_id": "c8cf5e72ef462073bc1a2437e46ca03d8ba68da5935bc317d27da74d33206fad",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "f472ef7734102ea5555481961687ba3fac1dee0ee2a0987f81d5bdae50838f8e",
+  "generated_token_ids_sha256": "d331960ed565cb7dbd4f600e8716787b7e9618db65cdf5158a40aedb5167d5fe",
+  "input_identity_sha256": "0e1f872c77e2a199a533aa5cb2f36187e5398334845776f63ca8f99f939cd284",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "d3f64fc8d02b5ddde9ee426acf2ba2a3c8376446ba53ca57a76f8b63721da2c3",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection under an overpass with visible traffic signals. At 0:07, the traffic light for the straight-ahead direction turns red, requiring the driver to brake and stop before the crosswalk. The presence of pedestrians crossing the street at 0:08-0:09 further necessitates a marked response to ensure safety. The signal change and pedestrian activity are clear, visible, and require an immediate braking action within the unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "95ee845de20e0ee5722c0f5dbcf2067af1bcb37b52882d2bd6ecb5e3190d91a0",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection under an overpass with visible traffic signals. At 0:07, the traffic light for the straight-ahead direction turns red, requiring the driver to brake and stop before the crosswalk. The presence of pedestrians crossing the street at 0:08-0:09 further necessitates a marked response to ensure safety. The signal change and pedestrian activity are clear, visible, and require an immediate braking action within the unit.\"\n}",
+  "raw_response_sha256": "8f9afc9df82341aa4ba13103fb2ac26635411a9d7f37234a0de58852c6d811c2",
+  "record_payload_sha256": "fd31f2ff588d56becc141738a7e658ab47112313e21835f2b9a9a9bbe780f075",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 18.210102705284953,
+    "model_load_seconds": 26.069364823400974,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 20.27081273123622,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0297",
+  "unit_ordinal": 1425,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

@@ -1,0 +1,22 @@
+{
+  "status": "FROZEN_BEFORE_PHYSICAL_ORACLE_EXECUTION",
+  "experiment_id": "AEQ_ORACLE_PREFLIGHT_V2",
+  "execution_seal_sha256": "58f84d2ce389aa3cf8122137911b0ec8429d6db80d84766afd88ee870b6b7576",
+  "compute_approval_sha256": "3704ba8d2c3eec3cc8ed85e6476b4ab17eb9528817451ab5646d5750989b1c41",
+  "mapper_source_path": "scripts/decide_accelerated_event_query_oracle_preflight_v2.py",
+  "mapper_source_sha256": "f491ba51bf28a01a97c3d811dba7cdbb9fab8567e1aa97f3df396abd453aed40",
+  "allowed_user_decisions": [
+    "REVISE_ORACLE_PROTOCOL",
+    "INSUFFICIENT_EVIDENCE",
+    "TARGETED_ORACLE_PILOT_PASS_REPRESENTATIVE_AUDIT_REQUIRED"
+  ],
+  "finalizer_status_mapping": {
+    "PASS_TARGETED_PILOT": "TARGETED_ORACLE_PILOT_PASS_REPRESENTATIVE_AUDIT_REQUIRED",
+    "REVIEW_REQUIRED": "INSUFFICIENT_EVIDENCE",
+    "FAIL_NUMERIC_OR_SUPPORT_GATE": "REVISE_ORACLE_PROTOCOL",
+    "FAIL_SYSTEMATIC_SEMANTIC_GATE": "REVISE_ORACLE_PROTOCOL",
+    "FAIL_CLAIM_GROUNDING_GATE": "REVISE_ORACLE_PROTOCOL"
+  },
+  "incomplete_or_unauthenticated_run_decision": "INSUFFICIENT_EVIDENCE",
+  "interpretation": "The mapping is frozen before oracle output. It cannot turn a finalizer failure or unresolved review into a targeted pass."
+}

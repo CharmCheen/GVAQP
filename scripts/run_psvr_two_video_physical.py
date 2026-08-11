@@ -645,8 +645,17 @@ def run_one(
     policy,
     proxy_runtime,
     deadline_runtime,
+    run_start_ns: int | None = None,
+    runtime_input_overrides: dict[str, Any] | None = None,
+    attempt_override: Path | None = None,
+    ledger_override: ActionLedger | None = None,
+    initial_checkpoint_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    attempt = next_attempt(raw, job)
+    attempt = (
+        next_attempt(raw, job)
+        if attempt_override is None
+        else Path(attempt_override)
+    )
     run_id = (
         f"{job['method']}__{job['family']}__{job['task_id']}__"
         f"{job['deadline_name']}__r{int(job['replicate']):02d}__{attempt.name}"
@@ -674,7 +683,12 @@ def run_one(
     # warm-up, all actions, materialization, and durable commit share one hard
     # query deadline.  Historical runs deliberately remain untouched and are
     # invalidated for MF-PSVR publication comparisons by the Cycle-0 audit.
-    run_start = time.perf_counter_ns()
+    # Paired physical integrations may start this clock before persistent
+    # service/model initialization.  Legacy matrices retain their original
+    # boundary when no external start is supplied.
+    run_start = (
+        time.perf_counter_ns() if run_start_ns is None else int(run_start_ns)
+    )
     ledger = None
     active_session = False
     try:
@@ -683,11 +697,19 @@ def run_one(
         )
         active_session = True
         predeadline_start = time.perf_counter_ns()
+        input_overrides = runtime_input_overrides or {}
+        video_path = Path(
+            input_overrides.get("video_paths", {}).get(
+                video_id, videos[video_id]["absolute_path"]
+            )
+        )
+        proxy_prereg = json.loads(PREREG.read_text())
+        proxy_prereg.update(input_overrides.get("proxy_prereg_overrides", {}))
         engine = proxy_runtime.UnitProxyEngine(
             job["family"],
             video_id,
-            Path(videos[video_id]["absolute_path"]),
-            json.loads(PREREG.read_text()),
+            video_path,
+            proxy_prereg,
         )
         proxy_initialization_seconds = (
             time.perf_counter_ns() - predeadline_start
@@ -712,13 +734,16 @@ def run_one(
         proxy_warmup_gpu_seconds = sum(
             row["detector_gpu_seconds"] for row in warmup_rows
         )
-        ledger = ActionLedger(attempt / "ACTION_LEDGER.jsonl", run_start)
-        ledger.append(
-            "RUN_STARTED",
-            run_id=run_id,
-            deadline_seconds=deadline,
-            config_hash=config["config_hash"],
-        )
+        if ledger_override is None:
+            ledger = ActionLedger(attempt / "ACTION_LEDGER.jsonl", run_start)
+            ledger.append(
+                "RUN_STARTED",
+                run_id=run_id,
+                deadline_seconds=deadline,
+                config_hash=config["config_hash"],
+            )
+        else:
+            ledger = ledger_override
         queried_rows: list[dict[str, Any]] = []
         queried_results: list[dict[str, Any]] = []
         raw_candidates: list[dict[str, Any]] = []
@@ -728,7 +753,11 @@ def run_one(
         candidate_track_bindings: dict[int, int] = {}
         candidate_lifecycle: dict[int, dict[str, Any]] = {}
         actions: list[dict[str, Any]] = []
-        checkpoints: list[dict[str, Any]] = []
+        checkpoints: list[dict[str, Any]] = (
+            []
+            if initial_checkpoint_override is None
+            else [dict(initial_checkpoint_override)]
+        )
         score_history: list[dict[str, Any]] = []
         proxy_unit_costs: list[dict[str, Any]] = []
         scheduler_cpu_seconds = 0.0
@@ -752,31 +781,32 @@ def run_one(
         policy_decision = None
         stop_reason = "scan_exhausted"
 
-        initial_snapshot = attempt / "checkpoint_000_snapshot.json"
-        events, _ = materialize_and_commit(
-            materializer_path=MATERIALIZER,
-            materializer_service=materializer,
-            units=units,
-            queried_rows=queried_rows,
-            snapshot_path=initial_snapshot,
-            run_config={
-                "benchmark_id": job["task_id"],
-                "run_id": run_id,
-                "method": job["method"],
-                "method_variant": job["method"],
-                "seed": int(job["replicate"]),
-                "horizon_budget": 0,
-            },
-        )
-        checkpoints.append({
-            "checkpoint_index": 0,
-            "action": "initial_commit",
-            "elapsed_seconds": (time.perf_counter_ns() - run_start) / 1e9,
-            "snapshot_path": str(initial_snapshot),
-            "confirmed_events": len(events),
-            "physical_oracle_calls": 0,
-            **checkpoint_state(units, observed_units, None),
-        })
+        if initial_checkpoint_override is None:
+            initial_snapshot = attempt / "checkpoint_000_snapshot.json"
+            events, _ = materialize_and_commit(
+                materializer_path=MATERIALIZER,
+                materializer_service=materializer,
+                units=units,
+                queried_rows=queried_rows,
+                snapshot_path=initial_snapshot,
+                run_config={
+                    "benchmark_id": job["task_id"],
+                    "run_id": run_id,
+                    "method": job["method"],
+                    "method_variant": job["method"],
+                    "seed": int(job["replicate"]),
+                    "horizon_budget": 0,
+                },
+            )
+            checkpoints.append({
+                "checkpoint_index": 0,
+                "action": "initial_commit",
+                "elapsed_seconds": (time.perf_counter_ns() - run_start) / 1e9,
+                "snapshot_path": str(initial_snapshot),
+                "confirmed_events": len(events),
+                "physical_oracle_calls": 0,
+                **checkpoint_state(units, observed_units, None),
+            })
 
         planned_target_scan_actions = int(job["target_scan_actions"])
         target_scan_actions = len(units) if stage_conditioned else planned_target_scan_actions
@@ -1153,6 +1183,13 @@ def run_one(
         oracle_gpu = sum(
             float(row["oracle_inference_seconds"]) for row in queried_results
         )
+        if (runtime_input_overrides or {}).get(
+            "require_final_cuda_synchronize", False
+        ):
+            import torch
+
+            if torch.cuda.is_available():
+                torch.cuda.synchronize()
         session_summary = oracle.end_session(session_id)
         active_session = False
         if session_summary["physical_calls"] != len(queried_results):
@@ -1215,6 +1252,14 @@ def run_one(
             "future_proxy_accesses": 0,
             "candidate_observation_violations": 0,
             "reference_visibility_violations": 0,
+            "clock_accounting": {
+                "external_run_start": run_start_ns is not None,
+                "final_cuda_synchronization": bool(
+                    (runtime_input_overrides or {}).get(
+                        "require_final_cuda_synchronize", False
+                    )
+                ),
+            },
             "completed_at_utc": now_utc(),
         }
         ledger.append(

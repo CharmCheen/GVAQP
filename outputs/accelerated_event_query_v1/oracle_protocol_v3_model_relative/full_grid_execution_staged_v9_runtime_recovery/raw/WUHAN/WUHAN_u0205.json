@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0205:1786374693097711234",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "26c0ae68fd75e5d68992fe919592d15ea52776e1f2dd851f025b38e7560cf49d",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "01e44fd854aa0f8523eebc53d89acb37bdc7309920894ec761174e6193cc3042",
+  "generated_token_ids_sha256": "6c67f6fd23dd4619d44a374946e3c4cf5552229860ccfec713d48ecc102426cb",
+  "input_identity_sha256": "5e92c41922f8482d46ab2aa68efd9050a470eb4b98695f7eda2fa9ac57a97a26",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "beb92ecd32914829d27ffc073b62aba2c94a2e25cd7a8f8b8e33f9bc99bd4780",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a traffic signal that turns red (visible at 0:07-0:08), and the lead vehicles begin to slow and stop. The digital display shows '\u7ea2\u706f' (red light) and a countdown, indicating a required braking action. The ego driver must slow down and stop to comply with the traffic control, which constitutes a noticeable braking response within the unit.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "d08125ccb7283304a7727528a93e4a5f6a14a914d4d992de522b703ad9707df3",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a traffic signal that turns red (visible at 0:07-0:08), and the lead vehicles begin to slow and stop. The digital display shows '\u7ea2\u706f' (red light) and a countdown, indicating a required braking action. The ego driver must slow down and stop to comply with the traffic control, which constitutes a noticeable braking response within the unit.\"\n}",
+  "raw_response_sha256": "7b7dbf47e5a69423a2935353bf1e17b384f5853635a30b51a2689b3c6c4fabd4",
+  "record_payload_sha256": "c34ae413e1148ea75e2b16913e43437f6402f2a3b663667db2086d9d691b8326",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 16.254002232002676,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 17.883592681988375,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0205",
+  "unit_ordinal": 1333,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}

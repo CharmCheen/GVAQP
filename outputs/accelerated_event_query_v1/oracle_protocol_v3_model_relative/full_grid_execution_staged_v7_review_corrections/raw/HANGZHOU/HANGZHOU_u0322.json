@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0322:1786353597677971921",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "3089198ae34a7dd9822016bca4b8973a4883da4da1319cd343153be43989f0ee",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "fde2a5a30fa5f5898a951588ea6a0ab1141e46a480bebcb5b7eeadaa7217f21d",
+  "generated_token_ids_sha256": "2c904554e1ea8cf6b495ed6d2072826c0f8dbdcffa84191ed6ac847b8a26450a",
+  "input_identity_sha256": "eb09cba611d168db5f4d74360297b8405158b566c0c1fbedb4a5fcc8a4275462",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "16467019209bb2fd338be3cf65b9b08f7b2393de44706855ecf20be09e4f32e2",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches an intersection with traffic signals that change from red to green during the unit. The traffic light for the straight-ahead lane turns green at approximately frame 0:07, indicating a need for the driver to prepare for acceleration or proceed through the intersection. Additionally, the presence of a pedestrian crossing and vehicles in adjacent lanes requires attentive driving and potential braking or slowing to ensure safe passage. The traffic control visibly requires a marked response as the vehicle approaches and passes through the intersection.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "a8c78c5e5eb2b032d15e3ee10ee84d7faed32a1085a72db98f98badeae754ed6",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches an intersection with traffic signals that change from red to green during the unit. The traffic light for the straight-ahead lane turns green at approximately frame 0:07, indicating a need for the driver to prepare for acceleration or proceed through the intersection. Additionally, the presence of a pedestrian crossing and vehicles in adjacent lanes requires attentive driving and potential braking or slowing to ensure safe passage. The traffic control visibly requires a marked response as the vehicle approaches and passes through the intersection.\"\n}",
+  "raw_response_sha256": "a25c8fc299ab65a2c963aed135dd858c8c1d411f854dfbaddc7f008ff9e6fd87",
+  "record_payload_sha256": "57ac4732fd40f3fd58f7e4f367573b6134797d86486f9d088f396a165a2f9b65",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.90695613299613,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.68745759599551,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0322",
+  "unit_ordinal": 889,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

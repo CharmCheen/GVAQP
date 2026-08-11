@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_DALI:DALI_u0480:1786380212629219874",
+  "authoritative_label": "not_relevant",
+  "call_spec_sha256": "bff49bfbd7a03eb6a63f93a5bb051520417a492ef163ac4e831ab46e4c374415",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "0475c44af1373232a49e75f42d3e442ecfff574f1e09778aed201741b5c88399",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "fe45e4a83a68069957a0debac990910c0587474f7d620e0f9ce5352221099947",
+  "generated_token_ids_sha256": "c3b19dfb5d9ef2ccbc636fae6c7d68205c2acaed8e5c39c21a8261b870130629",
+  "input_identity_sha256": "39bbedfd69b7da7e52fc218b6ed1005a20373f0dd7a6bc57b3545d0dc445ca97",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "cdab8140c1e9d9a94fa3c97bb11f0214fccc800b2ed006633f5caf36848a64b4",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle is following a line of traffic that is moving slowly but steadily, with brake lights illuminated on multiple vehicles ahead, indicating a general traffic slowdown rather than an abrupt stop or hazard. There are no sudden changes in traffic flow, no vehicles cutting into the ego lane, no visible obstacles, and no traffic signals requiring an immediate response within the unit. Pedestrians and scooters are present but not encroaching on the ego path. The scene depicts typical urban congestion during dusk, with no need for a marked braking or avoidance maneuver.",
+    "label": "not_relevant"
+  },
+  "physical_gpu_ids": [
+    2,
+    6
+  ],
+  "processed_input_sha256": "dfb2fc10e0045bc56c9bda44c20f9aee7931f6ea5dc8ada09fd9a4d91036a088",
+  "raw": "{\n  \"label\": \"not_relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle is following a line of traffic that is moving slowly but steadily, with brake lights illuminated on multiple vehicles ahead, indicating a general traffic slowdown rather than an abrupt stop or hazard. There are no sudden changes in traffic flow, no vehicles cutting into the ego lane, no visible obstacles, and no traffic signals requiring an immediate response within the unit. Pedestrians and scooters are present but not encroaching on the ego path. The scene depicts typical urban congestion during dusk, with no need for a marked braking or avoidance maneuver.\"\n}",
+  "raw_response_sha256": "9f41504184f78516190ffba6497138842e05c8a1fd9e3e9747baf37c0d8ecc05",
+  "record_payload_sha256": "ceb9f5b03bd687505adef1f69d94176b5b6541ce8669323ae7371feb19fc60bd",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "2, NVIDIA A100-SXM4-80GB, GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2",
+      "6, NVIDIA A100-SXM4-80GB, GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+    ],
+    "inference_seconds": 20.20826453200425,
+    "model_load_seconds": 18.57601546800288,
+    "physical_gpu_ids": [
+      2,
+      6
+    ],
+    "pre_persistence_call_seconds": 22.056285827988177,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_DALI",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 2,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-d5a6ed74-ac24-b858-390b-8933c0a177a2"
+        },
+        {
+          "index": 6,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6de06b87-675d-78bc-2ae9-baa189884531"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        2,
+        6
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "DALI_u0480",
+  "unit_ordinal": 480,
+  "video_id": "DALI",
+  "worker_id": "V3_FULL_GRID_DALI"
+}

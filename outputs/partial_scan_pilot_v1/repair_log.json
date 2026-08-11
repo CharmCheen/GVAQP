@@ -1,0 +1,22 @@
+{
+  "controlled_repair_cycles_used": 1,
+  "maximum_allowed": 1,
+  "repairs": [
+    {
+      "issue": "Reference Oracle smoke test warned that processor video FPS metadata was absent and defaulted to 24 FPS.",
+      "root_cause": "Pre-sampled frames were supplied without the explicit video metadata required by Qwen3VL for temporal prompts. Source inspection of both qwen_vl_utils and the installed Qwen3VLVideoProcessor established that the utility tuple must be separated into the `videos` tensor list and the `video_metadata` keyword list for this transformers version. The implementation now supplies sample_fps/raw_fps=2.0, requests metadata, and forwards those two structures separately; protocol-versioned retry accounting keeps all pre-repair attempts excluded.",
+      "affected_files": [
+        "scripts/run_partial_scan_reference.py",
+        "benchmarks/partial_scan_pilot_v1/derived/reference_construction/raw/PSP_V0_SHORT_rw0000.json"
+      ],
+      "before_hash": "6e37333d490441da1760f865b1f9ec3cb41efe66964f97fc74337f594f3603ce",
+      "after_hash": "73ebb9320b689f9e69f799c807751ec20f5dc113fafa433ef03cde7feb5baaf0",
+      "experiments_rerun": [
+        "reference prepare independence audit",
+        "PSP_V0_SHORT_rw0000 Oracle smoke inference",
+        "all reference windows"
+      ],
+      "claim_impact": "Pre-repair Oracle output is excluded. No benchmark query, partition, model, merge rule, or policy claim changed."
+    }
+  ]
+}

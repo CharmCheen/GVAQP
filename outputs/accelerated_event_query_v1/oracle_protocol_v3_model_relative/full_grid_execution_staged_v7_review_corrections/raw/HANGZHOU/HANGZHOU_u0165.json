@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_HANGZHOU:HANGZHOU_u0165:1786350873835606481",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "31af2f2f42a5d23593486ea3bcfa9c48319673e4e043852c1e84794b3da8c893",
+  "execution_seal_sha256": "a564cb5b0e24d7c143e7f5430298f61b1f31f6781edfb5b6a5701d2e53605819",
+  "execution_session_id": "9e90bebb154eb818102ede41a30880294f437c7f715b910a3d928c5cd295ecbb",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "3f6c1ac83ec9244efaad75235e7f7b5b9006ee6fc666970d21b44fdb5b707b38",
+  "generated_token_ids_sha256": "b6dee2b33a63fc3dd50bf2a7391fd78044badbe87a9272ccb6daf05bdce415d4",
+  "input_identity_sha256": "29c0885fac4d13a67ef3fa47eae963aedabff3c6a73226a8c82c389578a96af1",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "fe2fe55e93eb86c842c0360b0e08a86759a23f2e11197a4177472e5b987418e9",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The ego vehicle approaches a stop sign (\u7ea2\u8272 '\u505c' sign) at an intersection, which requires a noticeable slowdown or braking action. The stop sign is clearly visible and positioned directly in the path of the ego vehicle, indicating a mandatory traffic control requiring a marked response. Additionally, the presence of a blue right-turn-only sign further indicates a need for controlled maneuvering. The vehicle is approaching the intersection with no visible lead vehicle or obstacle, so the response is solely due to the traffic control.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    3,
+    5
+  ],
+  "processed_input_sha256": "d0f1f2f1f34d52f0afc4879e6304fab2712cac3b82b999ba3a3f42dc015163ec",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The ego vehicle approaches a stop sign (\u7ea2\u8272 '\u505c' sign) at an intersection, which requires a noticeable slowdown or braking action. The stop sign is clearly visible and positioned directly in the path of the ego vehicle, indicating a mandatory traffic control requiring a marked response. Additionally, the presence of a blue right-turn-only sign further indicates a need for controlled maneuvering. The vehicle is approaching the intersection with no visible lead vehicle or obstacle, so the response is solely due to the traffic control.\"\n}",
+  "raw_response_sha256": "754d235ced8f2838d32ac8f6534759de0b69e48452f684d9943e2fef43f08d1c",
+  "record_payload_sha256": "6a56c9c0795ba3a37b294e6ae7cd05002911f4369981bb9c69a9be48bccea0ef",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "3, NVIDIA A100-SXM4-80GB, GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7",
+      "5, NVIDIA A100-SXM4-80GB, GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+    ],
+    "inference_seconds": 17.507628054001543,
+    "model_load_seconds": 20.081464851995406,
+    "physical_gpu_ids": [
+      3,
+      5
+    ],
+    "pre_persistence_call_seconds": 18.208284749001905,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_HANGZHOU",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 3,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0f4b6640-5f3f-2e5f-f05e-47f8186005f7"
+        },
+        {
+          "index": 5,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-0c0a5f62-4d7e-ae3a-aac3-e443011e6aed"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        3,
+        5
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "HANGZHOU_u0165",
+  "unit_ordinal": 732,
+  "video_id": "HANGZHOU",
+  "worker_id": "V3_FULL_GRID_HANGZHOU"
+}

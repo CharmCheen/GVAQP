@@ -1,0 +1,77 @@
+{
+  "attempt_id": "V3_FULL_GRID_WUHAN:WUHAN_u0093:1786372514784256277",
+  "authoritative_label": "relevant",
+  "call_spec_sha256": "5f13c4225e90f36f5b999ba9ddc8664d046d9f257407be7eb7617ac8e16fed8d",
+  "execution_seal_sha256": "57538d23ecfce5df23c58ba471e7efce206df4fb60f1dd226b549773e4233f9e",
+  "execution_session_id": "e8ac5b7726a6e722b0a30808592ffbd37de82925955e3a19fde1a257f82c290e",
+  "experiment_id": "AEQ_MODEL_RELATIVE_ORACLE_V3_FULL_GRID",
+  "frame_count": 21,
+  "frame_set_sha256": "93ce8b57afe86eb5f87e9eaf04bde451762617f22ffa1ce36d2704885351fbab",
+  "generated_token_ids_sha256": "f3489553e5408a6c4a861cdc6cfa0a03fe3b830051eb8f6ed2d622c7c357ccae",
+  "input_identity_sha256": "c4139d6a027782e27e36bc4cbce5fb950de87bc0082c408bee0bc898403d436a",
+  "mock_not_oracle": false,
+  "model_input_identity_sha256": "85ab6bb4ca41a4437cae1741a0cda10711aa2511dcefc6296290da8d5016aec7",
+  "parse_status": "ok",
+  "parsed": {
+    "confidence": "high",
+    "evidence": "The traffic light ahead transitions from green to yellow and then to red within the 10-second unit, indicating an imminent stop requirement. The ego vehicle is approaching an intersection with a traffic signal that changes to red, necessitating a noticeable slowdown or braking action to comply with traffic control. The presence of multiple vehicles ahead also suggests that a braking maneuver is required to maintain safe following distance as the lead vehicles will stop.",
+    "label": "relevant"
+  },
+  "physical_gpu_ids": [
+    1,
+    7
+  ],
+  "processed_input_sha256": "383e1d3cfb98cb71285b17691076834c1ca17b8c877954490cf8795d052801e7",
+  "raw": "{\n  \"label\": \"relevant\",\n  \"confidence\": \"high\",\n  \"evidence\": \"The traffic light ahead transitions from green to yellow and then to red within the 10-second unit, indicating an imminent stop requirement. The ego vehicle is approaching an intersection with a traffic signal that changes to red, necessitating a noticeable slowdown or braking action to comply with traffic control. The presence of multiple vehicles ahead also suggests that a braking maneuver is required to maintain safe following distance as the lead vehicles will stop.\"\n}",
+  "raw_response_sha256": "771d5ece30463f15f315735bc10f3d2b174af2bfc348572aaa4d935c9509246a",
+  "record_payload_sha256": "3e801e05c103e746386c692f65948e53b2df0442bdebb1a7e5c6b8d7092e395e",
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "gpu_identities": [
+      "1, NVIDIA A100-SXM4-80GB, GPU-aa40f128-389d-e609-34ca-9a5f90f46d38",
+      "7, NVIDIA A100-SXM4-80GB, GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+    ],
+    "inference_seconds": 16.42303544900642,
+    "model_load_seconds": 19.301538159998017,
+    "physical_gpu_ids": [
+      1,
+      7
+    ],
+    "pre_persistence_call_seconds": 18.032057971999166,
+    "processor_class": "transformers.models.qwen3_vl.processing_qwen3_vl.Qwen3VLProcessor",
+    "python": "3.13.2",
+    "qwen_vl_utils": "0.0.14",
+    "torch": "2.10.0+cu129",
+    "transformers": "5.9.0",
+    "worker_id": "V3_FULL_GRID_WUHAN",
+    "worker_preload_gpu_exclusivity": {
+      "authenticated_exclusive_idle": true,
+      "compute_contexts": [],
+      "gpus": [
+        {
+          "index": 1,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-aa40f128-389d-e609-34ca-9a5f90f46d38"
+        },
+        {
+          "index": 7,
+          "memory_used_mib": 4,
+          "utilization_percent": 0,
+          "uuid": "GPU-6b62da31-d81b-8bb7-eadd-cb56b1fc079a"
+        }
+      ],
+      "maximum_memory_used_mib": 16,
+      "maximum_utilization_percent": 0,
+      "physical_gpu_ids": [
+        1,
+        7
+      ]
+    }
+  },
+  "status": "AUTHENTICATED_FULL_GRID_RAW_OUTPUT",
+  "unit_id": "WUHAN_u0093",
+  "unit_ordinal": 1221,
+  "video_id": "WUHAN",
+  "worker_id": "V3_FULL_GRID_WUHAN"
+}
