@@ -1,5 +1,14 @@
 # AGENTS.md
 
+## Mandatory Project-State Entry Point
+
+Before interpreting historical plans, proposing an experiment, or changing a
+research claim, read `PROJECT_STATE_OF_TRUTH.md` and its linked ledgers.  Those
+root-level files are the current project-level source of truth.  Older reports
+remain evidence, but their conclusions are superseded where the state-of-truth
+files explicitly say so.  No downstream stage may begin without the gate in
+`NEXT_STAGE_STATE_MACHINE.md`.
+
 ## Role
 
 Act as an autonomous scientific reasoning agent.

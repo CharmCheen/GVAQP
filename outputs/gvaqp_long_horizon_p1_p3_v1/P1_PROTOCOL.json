@@ -1,0 +1,52 @@
+{
+  "protocol_id": "GVAQP_P1_INDEPENDENT_EVENT_EVIDENCE_GEOMETRY_REPLICATION_V1",
+  "status": "FROZEN_BEFORE_P1_TRACE_FEASIBILITY_RESULTS",
+  "primary_question": "At equal semantic-positive yield, does online-visible temporal evidence geometry consistently improve recovery of independently defined temporal events?",
+  "phase_sequence": ["P1-A trace-diversity feasibility", "P1-B independent human reference", "P1-C second natural proxy", "P1-D/P1 primary analysis"],
+  "frozen_components": {
+    "candidate_unit_semantics": "one released V3 candidate per 10-second V3 unit",
+    "event_relation_evaluator": "P0 one-to-one maximum-cardinality then tIoU evaluator; human-reference outcomes also include direct evidence-touch endpoints",
+    "materializer": "C1_gap_limited: merge consecutive queried relevant units iff temporal gap <= 10 seconds; no duration cap, negative barrier, or K3 extras",
+    "budgets": [5, 10, 20, 50, 80, 100],
+    "budget_semantics": "cached semantic-oracle QUERY_BUDGET, not wall-clock time"
+  },
+  "prohibited": ["retune C1 gap", "modify K3", "change matching threshold after results", "fit geometry-aware selector", "train MAB/RL", "choose traces from semantic outcomes", "change human event boundaries or query definitions after method results"],
+  "trace_generators": ["UniformTemporal", "StaticProxyRank", "CoverageFirst", "MMR_w025", "MMR_w050", "MMR_w075", "SeededTemporalHash seeds 0..7"],
+  "trace_generator_visibility": "candidate order/timestamps and frozen Proxy-A score only; no semantic label, reference event, or human label is read during trace construction",
+  "primary_equal_yield_stratum": ["video_id", "query_id", "proxy_family", "budget", "exact verified_positive_count"],
+  "primary_geometry": ["number_of_temporal_regions_touched", "temporal_dispersion", "coverage_fraction", "largest_unqueried_gap_units", "distance_to_existing_verified_evidence", "query_redundancy"],
+  "feature_visibility_classes": {
+    "POLICY_VISIBLE": ["candidate timestamps/order", "proxy score", "queried temporal regions/span/coverage/gaps", "query redundancy"],
+    "ORACLE_OBSERVED_AFTER_VERIFY": ["verified-positive count/yield", "geometry of already verified positive evidence", "distance to existing verified evidence"],
+    "REFERENCE_ONLY": ["human event IDs", "human boundaries", "future or unqueried semantic labels"]
+  },
+  "P1-A_preflight_gate": {
+    "pass_rule": ">=12 exact-yield geometry-varying strata, all three currently available video-query clusters represented, and >=3 strata per video",
+    "fail_rule": "P1_DESIGN_INSUFFICIENT; do not acquire new human reference under the insufficient design",
+    "interpretation": "A pass establishes only that the available single-query Proxy-A design can form candidate matched contrasts. It does not establish P1 PASS."
+  },
+  "P1_scientific_pass_gate": [
+    "yield-only is clearly insufficient on independent human data",
+    "online-visible geometry gives stable held-out video/query explanatory lift",
+    "equal-yield high- vs low-geometry traces show consistent independent human-recovery effects",
+    "the effect occurs across multiple independent video-query clusters",
+    "two natural proxy families agree directionally",
+    "the primary effect does not use reference-only features"
+  ],
+  "P1_no_go_conditions": ["geometry predicts C1 but not human recovery", "equal-yield effect fails across video-query", "effect disappears under second natural proxy", "positive yield explains nearly all quality difference", "geometry advantage uses reference-only information"],
+  "available_scope_at_freeze": {
+    "videos": ["DALI", "HANGZHOU", "WUHAN"],
+    "released_query_ids": ["Q_DRIVER_RESPONSE_V1"],
+    "natural_proxy_families": ["Proxy A: prospective YOLOv8n object/track/motion-oriented proxy"],
+    "known_scope_gap": "The released substrate has three video-query clusters, not the requested six, and only one natural proxy family. P1 cannot be scientifically passed from this substrate alone."
+  },
+  "source_artifacts_sha256": {
+    "scripts/run_p1_trace_feasibility.py": "1319f8ca0d77d32dc604744bd2cc94d1825a915744d1efd320d5fd7f8c0cd656",
+    "outputs/event_evidence_geometry_v1/ANALYSIS_PROTOCOL.json": "0a771c275ea9388ae6c9bb686e7cd3acdf938971f1044bf1ad53a1c44f5800b2",
+    "outputs/main_thesis_alignment_v1/AUDIT_PROTOCOL.json": "f0ca30debeadfca971e07f2bcd857feff0770e677da9def3208b5447728a2d43",
+    "outputs/p0_materializer_validation_v3/EXPERIMENT_PROTOCOL.json": "a396b61edb1773dc7222b8abbb81aed9d9d9ecd7f19d5fd284a8db87b202773a",
+    "outputs/p0_materializer_mechanism_ablation_v1/MECHANISM_PROTOCOL.json": "7ecba0bb151d5325980f645d12ee9601c9c7eea42fa25b46434426dfb5305622",
+    "outputs/v10_multiseal_reference_v1/REFERENCE_MANIFEST.json": "53bceb8be451e8ac853810bdde75ad25f6e0f89477621260d178d2dfbbef6ed2",
+    "outputs/v3_scan_proxy_preregistration_v1/FROZEN_V3_SCAN_PROXY_PROTOCOL.json": "089f44f5e27dc398f2b10018b39ddb00eff1c7f277ad023af7015d4fac5e34f1"
+  }
+}

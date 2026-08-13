@@ -1,0 +1,174 @@
+{
+  "amended_at_utc": "2026-08-13T08:09:28.804392+00:00",
+  "amendment_id": "SHADOW_INFRASTRUCTURE_AMENDMENT_1",
+  "amendment_reason": "SmolVLM2-500M exceeded its 8192-token context with the frozen multi-frame input and produced schema-invalid repetitive text in every completed preflight window; it cannot supply a usable temporal reference. No trace, pair, proxy, semantic-unit outcome, C1/K3, or geometry result had been opened. Both annotation streams restart from zero.",
+  "annotators": {
+    "VLM_A": {
+      "family": "Qwen3-VL",
+      "identity_hash": "12a6adb0c9b58aaf49170b81f7beaa503f6317bf1c2defed87aad72bcb90e163",
+      "model": "Qwen/Qwen3-VL-8B-Instruct",
+      "path": "/root/charm/GVAQP/models/Qwen3-VL-8B-Instruct"
+    },
+    "VLM_B": {
+      "family": "Qwen3-VL",
+      "identity_hash": "12a6adb0c9b58aaf49170b81f7beaa503f6317bf1c2defed87aad72bcb90e163",
+      "model": "Qwen/Qwen3-VL-8B-Instruct independent session B",
+      "path": "/root/charm/GVAQP/models/Qwen3-VL-8B-Instruct",
+      "session_prompt_variant": "B"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "P1::DALI::Q_DRIVER_RESPONSE_V1",
+      "duration_sec": 5665.535,
+      "query_definition": "— Driver response required\n\nInclude a maximal continuous episode in which an attentive ego driver needs a noticeable slowdown, braking action, or avoidance maneuver because of visible conditions: a road user entering/threatening the ego path, a suddenly slowing/stopped lead vehicle, traffic control requiring a marked response, or a visible obstacle/road condition requiring a marked speed/path change.\n\nExclude normal steady driving, ordinary following without a marked response, distant hazards, and responses completed before the visible episode. Start at the first visible onset of the condition that makes a marked response necessary; end when the conflict/constraint has cleared and normal progress can resume. Merge uninterrupted manifestations of the same cause; split episodes separated by a return to normal driving. Mark a boundary ambiguous when its best estimate could reasonably move by more than 2 seconds.",
+      "query_id": "Q_DRIVER_RESPONSE_V1",
+      "video_id": "DALI",
+      "video_path": "/root/charm/GVAQP/data/realcam/dali.mp4",
+      "video_sha256": "64cb0cfac6c37e52045552b4ed24e8aa20fd2c1fddc22509cf33dd957d14fd09"
+    },
+    {
+      "case_id": "P1::DALI::Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "duration_sec": 5665.535,
+      "query_definition": "— Vulnerable-road-user conflict\n\nInclude a maximal continuous episode in which a pedestrian, cyclist, motorcyclist, or scooter rider enters, crosses, or occupies the ego vehicle's immediate travel path such that the ego driver must yield, brake, slow markedly, or steer to avoid conflict.\n\nExclude road users clearly separated from the ego path, ordinary adjacent traffic, and conflicts completed before the displayed episode. Start when path conflict first becomes visible and actionable; end when the road user clears the immediate path or the ego vehicle has safely passed and the conflict no longer constrains motion. Multiple road users are one event only while they form one uninterrupted conflict episode. Mark a boundary ambiguous when its best estimate could reasonably move by more than 2 seconds.",
+      "query_id": "Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "video_id": "DALI",
+      "video_path": "/root/charm/GVAQP/data/realcam/dali.mp4",
+      "video_sha256": "64cb0cfac6c37e52045552b4ed24e8aa20fd2c1fddc22509cf33dd957d14fd09"
+    },
+    {
+      "case_id": "P1::HANGZHOU::Q_DRIVER_RESPONSE_V1",
+      "duration_sec": 5600.566,
+      "query_definition": "— Driver response required\n\nInclude a maximal continuous episode in which an attentive ego driver needs a noticeable slowdown, braking action, or avoidance maneuver because of visible conditions: a road user entering/threatening the ego path, a suddenly slowing/stopped lead vehicle, traffic control requiring a marked response, or a visible obstacle/road condition requiring a marked speed/path change.\n\nExclude normal steady driving, ordinary following without a marked response, distant hazards, and responses completed before the visible episode. Start at the first visible onset of the condition that makes a marked response necessary; end when the conflict/constraint has cleared and normal progress can resume. Merge uninterrupted manifestations of the same cause; split episodes separated by a return to normal driving. Mark a boundary ambiguous when its best estimate could reasonably move by more than 2 seconds.",
+      "query_id": "Q_DRIVER_RESPONSE_V1",
+      "video_id": "HANGZHOU",
+      "video_path": "/root/charm/GVAQP/data/realcam/hangzhou.mp4",
+      "video_sha256": "69649cd2fbd9d6fde3786627781f8f8ee959b4571c40b6d512d7e574cf4c0155"
+    },
+    {
+      "case_id": "P1::HANGZHOU::Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "duration_sec": 5600.566,
+      "query_definition": "— Vulnerable-road-user conflict\n\nInclude a maximal continuous episode in which a pedestrian, cyclist, motorcyclist, or scooter rider enters, crosses, or occupies the ego vehicle's immediate travel path such that the ego driver must yield, brake, slow markedly, or steer to avoid conflict.\n\nExclude road users clearly separated from the ego path, ordinary adjacent traffic, and conflicts completed before the displayed episode. Start when path conflict first becomes visible and actionable; end when the road user clears the immediate path or the ego vehicle has safely passed and the conflict no longer constrains motion. Multiple road users are one event only while they form one uninterrupted conflict episode. Mark a boundary ambiguous when its best estimate could reasonably move by more than 2 seconds.",
+      "query_id": "Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "video_id": "HANGZHOU",
+      "video_path": "/root/charm/GVAQP/data/realcam/hangzhou.mp4",
+      "video_sha256": "69649cd2fbd9d6fde3786627781f8f8ee959b4571c40b6d512d7e574cf4c0155"
+    },
+    {
+      "case_id": "P1::WUHAN::Q_DRIVER_RESPONSE_V1",
+      "duration_sec": 3462.93,
+      "query_definition": "— Driver response required\n\nInclude a maximal continuous episode in which an attentive ego driver needs a noticeable slowdown, braking action, or avoidance maneuver because of visible conditions: a road user entering/threatening the ego path, a suddenly slowing/stopped lead vehicle, traffic control requiring a marked response, or a visible obstacle/road condition requiring a marked speed/path change.\n\nExclude normal steady driving, ordinary following without a marked response, distant hazards, and responses completed before the visible episode. Start at the first visible onset of the condition that makes a marked response necessary; end when the conflict/constraint has cleared and normal progress can resume. Merge uninterrupted manifestations of the same cause; split episodes separated by a return to normal driving. Mark a boundary ambiguous when its best estimate could reasonably move by more than 2 seconds.",
+      "query_id": "Q_DRIVER_RESPONSE_V1",
+      "video_id": "WUHAN",
+      "video_path": "/root/charm/GVAQP/data/realcam/wuhan.mp4",
+      "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+    },
+    {
+      "case_id": "P1::WUHAN::Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "duration_sec": 3462.93,
+      "query_definition": "— Vulnerable-road-user conflict\n\nInclude a maximal continuous episode in which a pedestrian, cyclist, motorcyclist, or scooter rider enters, crosses, or occupies the ego vehicle's immediate travel path such that the ego driver must yield, brake, slow markedly, or steer to avoid conflict.\n\nExclude road users clearly separated from the ego path, ordinary adjacent traffic, and conflicts completed before the displayed episode. Start when path conflict first becomes visible and actionable; end when the road user clears the immediate path or the ego vehicle has safely passed and the conflict no longer constrains motion. Multiple road users are one event only while they form one uninterrupted conflict episode. Mark a boundary ambiguous when its best estimate could reasonably move by more than 2 seconds.",
+      "query_id": "Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "video_id": "WUHAN",
+      "video_path": "/root/charm/GVAQP/data/realcam/wuhan.mp4",
+      "video_sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+    }
+  ],
+  "created_at_utc": "2026-08-13T08:03:55.812656+00:00",
+  "failed_preflight_archive": {
+    "VLM_A_RAW.jsonl": {
+      "rows": 63,
+      "sha256": "8caf9832e6a7ffbf708f5c5eee4773d9e67e67267f515f8c28749c6c803ae8c5"
+    },
+    "VLM_A_RUN.log": {
+      "rows": null,
+      "sha256": "a0e9942046b19ed895a0a61b01f02da3f1307b499d6222113fd6e1e821dd5eff"
+    },
+    "VLM_B_RAW.jsonl": {
+      "rows": 13,
+      "sha256": "7df25dd78e99c819d16503b3ed4ad0d7ec9ad174c262fdc51c4ab84aba86634e"
+    },
+    "VLM_B_RUN.log": {
+      "rows": null,
+      "sha256": "dee8467eecacf0841fd0fd8bc6f5be66ef6d6d4675de6b140ad436afb9498623"
+    }
+  },
+  "fallback_at_utc": "2026-08-13T08:14:10.992226+00:00",
+  "fallback_id": "SAME_CHECKPOINT_INDEPENDENT_SESSION_FALLBACK",
+  "fallback_reason": "Cross-family SmolVLM2 failed context/schema feasibility; Qwen32 generated valid-looking but repeatedly overlong truncated JSON under the frozen cap. User protocol explicitly permits same-checkpoint independent sessions. Both failed streams are excluded.",
+  "formal_p1_modified": false,
+  "frozen_analysis": {
+    "inference_unit": "video-query cluster",
+    "pair_count": 198,
+    "pair_manifest_sha256": "19dca8bba6a8cb2179dcd8c1a5b4162dee95ea5719045591d8e13211b4ea5922",
+    "primary_attribution": "ANCHOR_ASSIGNED_EVENT",
+    "primary_generalization": "LOVO",
+    "primary_geometry": "number_of_temporal_regions_touched",
+    "secondary_attribution": "OVERLAP_ANY_EVENT",
+    "secondary_generalization": "LOVQ"
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "parse_failure": "empty uncertain window; never retry semantic output",
+    "parse_once": true
+  },
+  "human_reference": false,
+  "independence": "same frozen Qwen3-VL-8B checkpoint; fully separate session and raw log; B never reads A; B uses a separately frozen semantically equivalent prompt ordering",
+  "input_hashes": {
+    "annotation_guide": "5b96052aa0496fd5bd9e25359efa9ae19c8a35e1703b39e31ac5b66162354fdb",
+    "cases": "8474a686933d5bcc83003740ff19e223c00e4394943fe2566a3eb644ac2ae2be",
+    "pair_manifest": "19dca8bba6a8cb2179dcd8c1a5b4162dee95ea5719045591d8e13211b4ea5922",
+    "query_definitions": "0938b5e28caf08c936d9b0dcccc6e6b2d23db2baeebbbd8f727f923d8accd023"
+  },
+  "method_blinding": {
+    "hidden": [
+      "proxy",
+      "policy",
+      "candidate trace",
+      "verified positives",
+      "geometry",
+      "pair manifest",
+      "C0/C1/K3",
+      "pseudo-reference",
+      "EventF1",
+      "algorithm output"
+    ],
+    "visible": [
+      "raw video frames",
+      "frozen query text",
+      "video-window timestamps"
+    ]
+  },
+  "prior_protocol_hash": "bd9564ac615e14656f488fd2f4cbbb06a42f38856a131f756499e525dbcfef26",
+  "prior_protocol_hash_32b": "0447f2dc2169eb729687d0a5b0cd93b10cd0ef5929208ae5477b89dd5c6fa507",
+  "prior_vlm_b": {
+    "family": "SmolVLM2",
+    "identity_hash": "9331ff8e73faeb4004c7acf7a090a52793fd0079fd0097e93a86d1414347b000",
+    "model": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+    "path": "/root/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467"
+  },
+  "prior_vlm_b_32b": {
+    "family": "Qwen3-VL",
+    "identity_hash": "7ebddf2d6bf20e251b763e8b219735b26f2654239223bd1644fcbd0a1c1175d0",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "path": "/root/charm/GVAQP/models/Qwen3-VL-32B-Instruct-FP8"
+  },
+  "prompt_template": "You are a blinded temporal-event annotator. The images are chronological samples from one raw driving-video window. The window begins at ABS_START seconds and ends at ABS_END seconds in the full video. Apply only the frozen semantic query below. Do not use a fixed temporal-gap rule. Identify maximal semantic occurrences visible in this window. Return exactly one JSON object and no markdown:\n{\"events\":[{\"start_offset_sec\":0.0,\"end_offset_sec\":0.0,\"boundary_ambiguous\":false,\"semantic_ambiguous\":false,\"notes\":\"short visible rationale\"}]}\n\nOffsets are seconds from the window start, constrained to [0, WINDOW_DURATION]. If no qualifying occurrence is visible, return {\"events\":[]}. Do not infer events from timestamps or sampling; use visible semantics. If an occurrence crosses the window edge, clip it to that edge and set boundary_ambiguous=true.\n\nFROZEN QUERY:\nQUERY_TEXT\n",
+  "prompt_template_b": "Act as an independent blinded event annotator for chronological frames sampled from one raw driving-video window, spanning ABS_START to ABS_END seconds. Use only the frozen query below. Return exactly one compact JSON object, no markdown or commentary: {\"events\":[{\"start_offset_sec\":0.0,\"end_offset_sec\":0.0,\"boundary_ambiguous\":false,\"semantic_ambiguous\":false,\"notes\":\"brief visible evidence\"}]}. Times are offsets within [0, WINDOW_DURATION]. Use {\"events\":[]} if absent. Annotate maximal semantic occurrences, never a fixed gap. Clip an event crossing the window edge and mark its boundary ambiguous. Judge visible semantics only.\n\nFROZEN QUERY:\nQUERY_TEXT\n",
+  "protocol_frozen": true,
+  "protocol_hash": "1b81a83a9a218cee195dda6f91bf6e129e6b472e0646b20a2c2e5f48152a4181",
+  "protocol_id": "GVAQP_P1_SHADOW_VLM_DIRECT_V1",
+  "pseudo_adjudication": {
+    "method_outcomes_visible": false,
+    "rule": "one-to-one maximum-IoU matching at IoU>0; matched interval is union; unmatched events retained; deterministic sort and renumber"
+  },
+  "reference_type": "VLM_DIRECT_SHADOW",
+  "windowing": {
+    "boundary": "half-open except final window",
+    "frame_cap": 15,
+    "sample_fps": 0.25,
+    "stitch": "within annotator/query, merge only positive-overlap proposals; no fixed gap",
+    "stride_sec": 50.0,
+    "window_sec": 60.0
+  }
+}

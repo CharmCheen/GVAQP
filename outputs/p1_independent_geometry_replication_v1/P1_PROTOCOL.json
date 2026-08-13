@@ -1,0 +1,176 @@
+{
+  "budgets": [
+    5,
+    10,
+    20,
+    50,
+    80,
+    100
+  ],
+  "claim_boundary": "P1 PASS establishes structured-evidence dependence, not a new query policy or controller",
+  "feature_visibility": {
+    "ORACLE_OBSERVED_AFTER_VERIFY": [
+      "verified_positive_count",
+      "positive_yield",
+      "positive_evidence_span",
+      "positive_evidence_dispersion",
+      "median_positive_gap",
+      "max_positive_gap",
+      "positive_region_count",
+      "positive_concentration",
+      "distance_to_existing_verified_evidence"
+    ],
+    "POLICY_VISIBLE": [
+      "number_of_temporal_regions_touched",
+      "temporal_dispersion",
+      "coverage_fraction",
+      "largest_unqueried_gap",
+      "median_unqueried_gap",
+      "query_redundancy",
+      "near_duplicate_query_fraction",
+      "queried_temporal_span"
+    ],
+    "REFERENCE_ONLY": [
+      "human event IDs",
+      "human event boundaries",
+      "future or unqueried semantic labels"
+    ]
+  },
+  "frozen_components": {
+    "candidate_unit_semantics": "released V3 one-candidate-per-10-second-unit interface",
+    "controller_default": "FIXED_SCAN1_VERIFY1; execution baseline only and outside P1",
+    "evaluator": "frozen P0 one-to-one maximum-cardinality then tIoU implementation",
+    "materializer": "C1 GAP-ONLY, gap <=10 seconds; secondary endpoint only",
+    "oracle_semantics": "released Q1 cache and completed frozen Q2 cache",
+    "query_budget_semantics": "cached semantic invocation count, not wall clock"
+  },
+  "inference": {
+    "aggregation_order": [
+      "pairs within video-query \u00d7 proxy",
+      "proxies/shared-control-deduplicated within video-query",
+      "macro across 6 video-query clusters",
+      "direction across 3 source videos"
+    ],
+    "bootstrap": "10000 whole video-query cluster resamples, seed 20260813",
+    "cell_level_p_value_cannot_drive_pass": true,
+    "generalization_primary": "Leave-One-Video-Out",
+    "generalization_secondary": "Leave-One-VideoQuery-Out",
+    "lovq_cannot_rescue_negative_lovo": true,
+    "models": [
+      "linear",
+      "ridge primary diagnostic",
+      "depth-2 small tree"
+    ],
+    "primary_unit": "video-query cluster (6)",
+    "source_robustness": "source video (3)"
+  },
+  "natural_proxies": [
+    "PROXY_A_YOLOV8N_OBJECT_MOTION",
+    "PROXY_B_OPTICAL_FLOW_VISUAL_DYNAMICS"
+  ],
+  "p1_final_gate": [
+    "yield-only clearly insufficient on independent human reference",
+    "public geometry adds held-out video/query explanatory value",
+    "equal-yield matched human-event effects are directionally stable across clusters",
+    "effect is not driven by one video/pair",
+    "both natural proxies agree directionally",
+    "primary result uses no reference-only feature",
+    "effect appears in direct materializer-independent human-event coverage"
+  ],
+  "p1_final_gate_operationalization": {
+    "all_required": true,
+    "cross_proxy": "proxy-collapsed median delta human_event_coverage >0 for both frozen natural proxies",
+    "matched_effect": "video-query-collapsed median delta human_event_coverage >0 and median delta distinct_human_events_touched >0, with positive coverage direction in >=4/6 clusters",
+    "materializer_independent": "matched_effect is evaluated on direct positive-evidence touch/coverage, not C1 EventF1",
+    "minimum_exact_pairs_per_proxy": 12,
+    "minimum_video_query_clusters_with_exact_pairs_per_proxy": 4,
+    "public_geometry_lift": "yield-only minus public-geometry MAE >=0.02 in primary LOVO; LOVQO is secondary and cannot rescue negative LOVO",
+    "yield_only_insufficient": "LOVO and LOVQO macro yield-only R2 <= 0.50, or public-geometry MAE lift >=0.05 in both splits"
+  },
+  "p1a_gate": {
+    "interpretation": "trace-identifiability gate only; within-cluster strata are not independent samples",
+    "minimum_budgets_per_video_query_proxy": 4,
+    "minimum_exact_pairs": 48,
+    "minimum_exact_pairs_per_video_query_proxy": 6,
+    "minimum_median_region_contrast": 2.0,
+    "minimum_pair_endpoint_generator_families": 4,
+    "required_proxy_families": 2,
+    "required_video_query_clusters": 6
+  },
+  "pair_selection": "maximize number_of_temporal_regions_touched contrast; public dispersion/coverage/gap/redundancy are fixed tie-breaks; EventF1 and references are unavailable",
+  "primary_endpoints": {
+    "C1_EventF1": "secondary materializer endpoint only",
+    "distinct_human_events_anchor_assigned": "primary one-unit-at-most-one-event endpoint",
+    "human_event_coverage_anchor_assigned": "primary coverage endpoint",
+    "overlap_any": "secondary sensitivity only"
+  },
+  "primary_match": [
+    "same video",
+    "same query",
+    "same proxy",
+    "same budget",
+    "exact verified_positive_count"
+  ],
+  "primary_question": "At equal semantic-positive yield, does online-visible temporal evidence geometry consistently improve recovery of independently defined temporal events?",
+  "primary_unit_of_inference": "video-query cluster",
+  "prohibited": [
+    "controller/MAB/RL research",
+    "SCAN/VERIFY ratio search",
+    "event-aware selector",
+    "C1/K3/evaluator retuning",
+    "per-video or per-proxy policy tuning",
+    "human/reference-guided trace construction",
+    "post-result gate changes"
+  ],
+  "protocol_hash": "c26bf62f2a0d99209bf493d2baccbd08e483865604976a96ed2efec7d27bd057",
+  "protocol_id": "GVAQP_P1_INDEPENDENT_EVENT_EVIDENCE_GEOMETRY_REPLICATION_V1_2",
+  "queries": [
+    "Q_DRIVER_RESPONSE_V1",
+    "Q_VULNERABLE_ROAD_USER_CONFLICT_V1"
+  ],
+  "secondary_match": "absolute verified_positive_count difference <= 1",
+  "source_artifacts_sha256": {
+    "GVAQP/outputs/event_evidence_geometry_v1/FINAL_GEOMETRY_REPORT.md": "f8bee353399e1117ac37084e34084c085a767e246955cbd618bc9d5618687f98",
+    "GVAQP/outputs/gvaqp_long_horizon_p1_p3_v1/P1_OUTCOME_BLIND_TRACE_MANIFEST.csv": "70fa9db89b185d1322a4f1d0e2738ac98f1e01f21655e052c0c32ad46fe30c1d",
+    "GVAQP/outputs/gvaqp_long_horizon_p1_p3_v1/P1_PROXY_CHARACTERIZATION.csv": "a1e8de7bf7ef549f82c75efbcc84fe9eea091bef83fa57507985d416b5ba22e5",
+    "GVAQP/outputs/gvaqp_long_horizon_p1_p3_v1/P1_PROXY_SCORE_DISTRIBUTIONS.csv": "53130d695dfcd476cd686e46e9a67c39800e31ea8b35f22d280bbd14718a2bd3",
+    "GVAQP/outputs/gvaqp_long_horizon_p1_p3_v1/P1_TRACE_POPULATION_PROTOCOL.json": "80b6d03eb3a93063e78878f96ab1176322da5f1bacfb2f4fdb1c9bfccf21e24d",
+    "GVAQP/outputs/gvaqp_long_horizon_p1_p3_v1/proxy_b_kinematic/PROXY_B_COMPLETION.json": "766fc7e4570c8661b9fdcf668fc24008a7b59c3d965a08c42dccb49082db045d",
+    "GVAQP/outputs/gvaqp_long_horizon_p1_p3_v1/proxy_b_kinematic/PROXY_B_KINEMATIC_SCORES.parquet": "997982b64e02eb41c492f23f5d08bb052a241c90d235f91a8ede12ad62ecaf39",
+    "GVAQP/outputs/gvaqp_long_horizon_p1_p3_v1/proxy_b_kinematic/PROXY_B_PROTOCOL.json": "41e5aee314ed71aeb5e27d0841328c81c34218a55c4869eb34855c5ada41a8b9",
+    "GVAQP/outputs/gvaqp_long_horizon_p1_p3_v1/qwen32_oracle/P1_QWEN32_ORACLE_COMPLETION.json": "c1a355ba0334ec0125648a3e5c2e4f4868e5f7e12de71771c37fdd498f34da10",
+    "GVAQP/outputs/gvaqp_long_horizon_p1_p3_v1/qwen32_oracle/P1_QWEN32_UNIT_OUTCOMES.parquet": "9dfb1f9b7cdf50e0f3a0db1238078d31197867d6fb4eacab4e0451e99d9b11cd",
+    "GVAQP/outputs/main_thesis_alignment_v1/FINAL_ALIGNMENT_REPORT.md": "aa53acbbee7ac9b2b7477cfda523068dbf27e2b263db7a6408df009c38dfc4f6",
+    "GVAQP/outputs/p0_materializer_mechanism_ablation_v1/MECHANISM_REPORT.md": "6a0a63ba2eb9e3e53b09f671988c50d505346a8eee179bb7847f6d8dc7d4e23a",
+    "GVAQP/outputs/p0_materializer_validation_v3/FINAL_RESEARCH_REPORT.md": "a60482ddfbf8151efc173d8b3c23f28114771fe8619ca7e5ecaf3b5497916673",
+    "GVAQP/outputs/research_contribution_convergence_v1/PAPER_MAINLINE_DECISION.md": "05472369e5c9a88a605b72b97920f5e0ac3deaa3a4c49550e58a8e79daf3718d",
+    "GVAQP/outputs/v10_multiseal_reference_v1/FINAL_UNIT_REFERENCE.parquet": "4f732859e7aaca6a4d8098b3da653620c777e85b5fcc31dae5c2b91fb2260fcf",
+    "GVAQP/outputs/v10_multiseal_reference_v1/REFERENCE_CIRCULARITY_AUDIT.md": "bb3b8a99d5fdc73ffa2045e4aec304dda8d2997e2c9f3f15faff9b259bc407b2",
+    "GVAQP/scripts/prepare_p1_independent_geometry_replication.py": "5a565b797d4d39427181f8cf7d676303f8de029342a6faf7d76733a89c7cbf55",
+    "GVAQP/scripts/resume_p1_independent_geometry_replication.py": "196788eb8ea652e3b7b07d9f1c76a805c50a12ff2bfe09f24665046a584cf8d3",
+    "GVAQP/scripts/serve_p1_independent_geometry_reference.py": "a2f64f3ea225f6f84865127fc814ee5db378c9325180cf006329f8a80ce92300",
+    "GVAQP_side_rcsem/docs/SELECTIVE_DEVIATION_PREDICTABILITY_AUDIT_V1.md": "3a5ba628b961e780f6acaa4aef112fea104e51fd7bb9a67a8ddc970523faf968"
+  },
+  "status": "FROZEN_BEFORE_P1_HUMAN_REFERENCE",
+  "trace_construction_prohibited_inputs": [
+    "semantic outcomes",
+    "human labels",
+    "reference events",
+    "C1/K3 output",
+    "EventF1"
+  ],
+  "trace_generators": {
+    "B0_UniformTemporal": "evenly spaced temporal positions",
+    "B1_StaticProxyRank": "descending named frozen proxy",
+    "B2_CoverageFirst": "recursive temporal bisection",
+    "B3_ProxyPlusTemporalCoverage_MMR": "fixed weights 0.25/0.50/0.75; normalized relevance plus minimum temporal distance",
+    "B4_existing_frozen_policy_traces": "B0/B1/B2 are exact frozen-policy lineages; represented once to avoid duplicate pseudo-replication",
+    "B5_SeededTemporalHash": "all frozen seeds 0..7; no seed selection"
+  },
+  "version": "1.2",
+  "videos": [
+    "DALI",
+    "HANGZHOU",
+    "WUHAN"
+  ]
+}

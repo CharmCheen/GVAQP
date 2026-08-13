@@ -1,0 +1,39 @@
+{
+  "code": {
+    "path": "scripts/characterize_p1_proxies.py",
+    "sha256": "20f17c616ce0c39951171284f909ce15f6f341d6eadb121a4190e81c6e304540"
+  },
+  "inputs": {
+    "original_outcomes_sha256": "4f732859e7aaca6a4d8098b3da653620c777e85b5fcc31dae5c2b91fb2260fcf",
+    "proxy_b_sha256": "997982b64e02eb41c492f23f5d08bb052a241c90d235f91a8ede12ad62ecaf39",
+    "second_query_protocol_sha256": "320f775b712d60eaf077331d30c30cd82226fa8cd2589348360ecd1e065ce7f0"
+  },
+  "metrics": [
+    "AUPRC",
+    "Recall@5",
+    "Recall@10",
+    "Recall@20",
+    "Recall@50",
+    "Recall@80",
+    "Recall@100",
+    "Spearman proxy-score vs binary outcome",
+    "per-video score distribution",
+    "Proxy A-vs-B rank Spearman"
+  ],
+  "protocol_hash": "e7ac598f561577f20df0574b367b731f5fb10e82d8891873e4c5ef687ab9d061",
+  "protocol_id": "P1_TWO_NATURAL_PROXY_CHARACTERIZATION_V1",
+  "proxies": {
+    "Proxy_A": "released YOLOv8n object/motion score",
+    "Proxy_B": "frozen optical-flow/visual-dynamics score"
+  },
+  "queries": {
+    "Q_DRIVER_RESPONSE_V1": "released V10 Qwen32 unit outcomes",
+    "Q_VULNERABLE_ROAD_USER_CONFLICT_V1": "P1 frozen Qwen32 full-grid unit outcomes"
+  },
+  "rules": {
+    "no_tuning": "metrics are characterization only; no model, threshold, trace, or human-reference change is permitted",
+    "positive": "label == relevant",
+    "unknown_and_parse_failure": "retained as non-positive for descriptive ranking characterization and counted/reported separately"
+  },
+  "status": "FROZEN_BEFORE_SECOND_QUERY_PROXY_CHARACTERIZATION"
+}

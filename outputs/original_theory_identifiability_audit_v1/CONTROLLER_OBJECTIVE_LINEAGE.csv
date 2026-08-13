@@ -1,0 +1,6 @@
+experiment,policy,optimized_score,proxy_for_utility,terminal_metric,materializer_in_loop,human_event_semantics
+main_thesis_proxy_stress,Uniform/StaticProxyRank/TemporalCoverage,proxy ordering or temporal coverage,selected positive yield / coverage,C1 EventF1,yes,no
+sequential_unknown_video,fixed and adaptive SCAN/VERIFY,policy-specific heuristic/action schedule,"proxy score, frontier, verified history",pseudo-reference event recall/F1/AUC,strict K3,no
+controller_dynamic_headroom,forced one-step branches,Q terminal recall + recall AUC - hard precision penalty,event-level pseudo-utility,pseudo-reference event metrics,strict K3,no
+selective_deviation_predictability,classifier of beneficial deviation,predict frozen delta_deviation,one-step Q label,net Q vs fixed 1:1,inherited,no
+event_evidence_geometry,no policy optimization,explanatory regression,yield + public geometry,model-relative C1 EventF1,C1,no

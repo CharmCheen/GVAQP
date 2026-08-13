@@ -1,0 +1,15 @@
+concept,intended_semantics,actual_semantics,artifact_source,verified_status,scientific_consequence
+candidate existence,created only through SCAN,one row per released unit precomputed before runtime,PROXY_REGIME_MANIFEST.csv; sequential.py,VERIFIED,removes natural candidate-generation uncertainty
+candidate exposure,unknown until sensing,"policy sees units/proxy only after cell release, but universe is fixed",sequential.py,VERIFIED,partial observability is emulated
+proxy availability,computed by online cheap sensing,private complete proxy map delayed until SCAN,sequential.py,VERIFIED,information release without online computation
+SCAN observation generation,decode and run cheap model,dictionary lookup of precomputed scores,sequential.py::step,VERIFIED,no natural sensing stochasticity/failure
+SCAN false-negative possibility,cheap sensing may fail to expose evidence,"every unit is released; poor score causes ranking delay, not missing identity",PROXY_QUALITY_METRICS.csv,VERIFIED,natural exposure miss unidentified
+frontier generation,candidate identities arise endogenously,all unit identities exist; released scores make them verifiable,sequential.py,VERIFIED,"new legal actions, not new artifact identities"
+VERIFY semantics,expensive authoritative observation on exposed evidence,cached label released only for scanned unit,sequential.py,VERIFIED,logical legality faithful; oracle is cached/model-relative
+action costs,measured heterogeneous physical costs,"constant abstract scan=0.1, verify=1.0",sequential_unknown_video_study.py,VERIFIED,physical resource tradeoff unidentified
+policy-induced observations,actions change future sensing outcomes/distribution,"actions change released subset and state, values remain fixed cached map",sequential.py; controller_dynamic_headroom.py,VERIFIED,"closed-loop release partial, endogenous observations absent"
+event objective,human-valid EventRelation utility,"0.5 terminal pseudo-event recall + 0.5 recall AUC, hard precision penalty",controller_dynamic_headroom.py,VERIFIED,event-level but discontinuous/model-relative
+reference semantics,independent human temporal events,older VLM pseudo-reference and strict K3 grouping,selective report; sequential.py,VERIFIED,human validity absent
+state distribution,natural prospective runtime distribution,108 dual-legal states sampled/capped from four behavior policies,controller_dynamic_headroom.py,VERIFIED,natural prevalence cannot be inferred
+continuation horizon,terminal utility under policy continuation,one forced action then fixed 1:1 to budget,controller_dynamic_headroom.py,VERIFIED,"valid one-step estimand, not adaptive closed loop"
+action-value metric,smooth practical EventRelation utility,Q with -1 jump below precision 0.8,controller_dynamic_headroom.py,VERIFIED,rare boundary crossings dominate headroom

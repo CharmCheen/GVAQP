@@ -1,0 +1,52 @@
+{
+  "budgets": [
+    5,
+    10,
+    20,
+    50,
+    80,
+    100
+  ],
+  "candidate_semantics": "one released V3 candidate per original 10-second unit",
+  "code": {
+    "path": "scripts/freeze_p1_trace_population.py",
+    "sha256": "e9a2e80378e0e367ec9b0d453ce8449b000b6a111110768bda59d3873dfaa3f8"
+  },
+  "generators": {
+    "CoverageFirst": "recursive temporal bisection; no proxy",
+    "MMR_w025": "fixed proxy relevance + 0.25 temporal novelty",
+    "MMR_w050": "fixed proxy relevance + 0.50 temporal novelty",
+    "MMR_w075": "fixed proxy relevance + 0.75 temporal novelty",
+    "SeededTemporalHash": "candidate-id hash ordering, seeds 0..7",
+    "StaticProxyRank": "descending score within the named frozen proxy family",
+    "UniformTemporal": "evenly spaced positions; no proxy"
+  },
+  "protocol_hash": "8f11f2dadfc1aa9cabd84f1f4f938337e5d3e60dd0ce812c1d68c5b05db5433b",
+  "protocol_id": "P1_OUTCOME_BLIND_TRACE_POPULATION_V2",
+  "proxy_families": [
+    "PROXY_A_YOLOV8N_OBJECT_MOTION",
+    "PROXY_B_OPTICAL_FLOW_VISUAL_DYNAMICS"
+  ],
+  "query_ids_for_later_outcome_join": [
+    "Q_DRIVER_RESPONSE_V1",
+    "Q_VULNERABLE_ROAD_USER_CONFLICT_V1"
+  ],
+  "source_artifacts_sha256": {
+    "outputs/gvaqp_long_horizon_p1_p3_v1/proxy_b_kinematic/PROXY_B_KINEMATIC_SCORES.parquet": "997982b64e02eb41c492f23f5d08bb052a241c90d235f91a8ede12ad62ecaf39",
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/DALI/candidate_table.parquet": "2d9feaf0cf87e51198aa2d2ee3d3d3150b53f77aecec208b49640743c89651a1",
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/DALI/proxy_table.parquet": "ed1121c7bef775370b5cef541b0781d2287b70781a7b0d0900bfbb10e72bc21e",
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/HANGZHOU/candidate_table.parquet": "9e3da3ae245bdbcc2bd53ba24cc9d72dcf5e23525336294703fc5d3a6d22f1d1",
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/HANGZHOU/proxy_table.parquet": "d5fffe45ebe1816d22cc94080f978d0d8deb9fb96ed557ecd898316243db0ec5",
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/WUHAN/candidate_table.parquet": "ca5d6348bf19fc1d4be7dbfeaa6de272c532b3486ece1233cfdf86c49a1cf952",
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/WUHAN/proxy_table.parquet": "0e762cc07c49c6c4786812492bb376f105172e2c97e441e9705cf5b14f6cac16"
+  },
+  "status": "FROZEN_BEFORE_SECOND_QUERY_OUTCOMES_AND_HUMAN_LABELS",
+  "uses_event_reference": false,
+  "uses_human_reference": false,
+  "uses_semantic_oracle_outcomes": false,
+  "video_ids": [
+    "DALI",
+    "HANGZHOU",
+    "WUHAN"
+  ]
+}

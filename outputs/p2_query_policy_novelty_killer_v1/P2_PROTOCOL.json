@@ -1,0 +1,213 @@
+{
+  "budget_semantics": "semantic oracle call/query count; not wall-clock or physical deadline",
+  "budgets": [
+    5,
+    10,
+    20,
+    50,
+    80,
+    100
+  ],
+  "candidate_universe": "frozen V3 one-candidate-per-10-second-unit tables, identical for every legal baseline",
+  "decision_rules": {
+    "ESTABLISHED": "stable oracle headroom >=0.05 in >=4/6 video-query clusters, generic coverage does not capture >=90%, residual semantic-state model improves both LOVO and LOVQ MAE by >=0.02, and residual evidence is present in both proxies; otherwise prohibited",
+    "GENERIC_COVERAGE_ONLY": "material_generic_gain and headroom_capture",
+    "INCONCLUSIVE": "all remaining comparable-data cases; never used merely because result is unfavorable",
+    "NOT_ESTABLISHED": "no material generic gain and no stable oracle headroom (median <=0.02 or positive in <4/6 clusters)",
+    "headroom_capture": "median FractionCapturedByGenericCoverage>=0.90 across stable denominators, where stable means oracle-minus-static final F1>0.02",
+    "material_generic_gain": "canonical L050 median final \u0394F1>=0.02, median \u0394AnytimeAUC>=0.01, positive proxy-median \u0394F1 in >=4/6 video-query clusters, and each natural proxy median final \u0394F1>=0.02",
+    "practical_thresholds": {
+      "AnytimeAUC": 0.01,
+      "F1": 0.02,
+      "denominator_stability": 0.02,
+      "oracle_headroom": 0.05
+    }
+  },
+  "dirty_worktree": [
+    "?? outputs/event_evidence_geometry_v1/",
+    "?? outputs/gvaqp_long_horizon_p1_p3_v1/",
+    "?? scripts/analyze_event_evidence_geometry.py",
+    "?? scripts/analyze_p1_independent_geometry.py",
+    "?? scripts/audit_p1_automated_completion.py",
+    "?? scripts/build_p1_human_reference_package.py",
+    "?? scripts/characterize_p1_proxies.py",
+    "?? scripts/finalize_p1_human_reference.py",
+    "?? scripts/finalize_p1_no_go.py",
+    "?? scripts/freeze_p1_analysis_implementation.py",
+    "?? scripts/freeze_p1_trace_population.py",
+    "?? scripts/run_p1_proxy_b_kinematic.py",
+    "?? scripts/run_p1_qwen32_oracle.py",
+    "?? scripts/run_p1_trace_feasibility.py",
+    "?? scripts/run_p2_query_policy_novelty_killer.py",
+    "?? scripts/serve_p1_human_reference.py",
+    "?? scripts/verify_p1_qwen32_oracle.py",
+    "?? scripts/watch_p1_gate_completion.py",
+    "?? scripts/watch_p1_qwen32_oracle.py"
+  ],
+  "evaluation_scope": "CACHED_MODEL_RELATIVE_REPLAY_ONLY; no human semantic claim and no physical deadline claim",
+  "evaluator": {
+    "matching": "one-to-one maximum-cardinality / overlap-any MatchConfig(minimum_tiou=0,boundary_tolerance_sec=0)",
+    "name": "official garc_eval accelerated_event_query matcher"
+  },
+  "geometry_diagnostics": [
+    "verified_positive_yield",
+    "temporal_regions_touched",
+    "coverage_fraction",
+    "temporal_dispersion",
+    "largest_evidence_hole",
+    "query_redundancy",
+    "positive_anchor_dispersion",
+    "offline full-grid C1 event coverage"
+  ],
+  "input_artifacts": {
+    "outputs/gvaqp_long_horizon_p1_p3_v1/P1_AUTOMATED_ONLY_COMPLETION_AUDIT.json": {
+      "bytes": 1940,
+      "sha256": "c9f4c60bee5398bdf53efe7aba5c8fb17b194a94081ca6f3dcecf04437fc1da2"
+    },
+    "outputs/gvaqp_long_horizon_p1_p3_v1/P1_OUTCOME_BLIND_TRACE_MANIFEST.csv": {
+      "bytes": 526503,
+      "sha256": "70fa9db89b185d1322a4f1d0e2738ac98f1e01f21655e052c0c32ad46fe30c1d"
+    },
+    "outputs/gvaqp_long_horizon_p1_p3_v1/P1_PROXY_CHARACTERIZATION_PROTOCOL.json": {
+      "bytes": 1540,
+      "sha256": "a6d0994903177c9fc9eacddd199b0bdabb72619c393a1cb914eca09953aa1fda"
+    },
+    "outputs/gvaqp_long_horizon_p1_p3_v1/P1_PROXY_CHARACTERIZATION_REPORT.md": {
+      "bytes": 2828,
+      "sha256": "5a24c78e2fb5cca1489cd75b4409defbe85f8aa7cf64398db5d3103199f1611c"
+    },
+    "outputs/gvaqp_long_horizon_p1_p3_v1/proxy_b_kinematic/PROXY_B_KINEMATIC_SCORES.parquet": {
+      "bytes": 129757,
+      "sha256": "997982b64e02eb41c492f23f5d08bb052a241c90d235f91a8ede12ad62ecaf39"
+    },
+    "outputs/gvaqp_long_horizon_p1_p3_v1/qwen32_oracle/P1_QWEN32_ORACLE_COMPLETION.json": {
+      "bytes": 288,
+      "sha256": "c1a355ba0334ec0125648a3e5c2e4f4868e5f7e12de71771c37fdd498f34da10"
+    },
+    "outputs/gvaqp_long_horizon_p1_p3_v1/qwen32_oracle/P1_QWEN32_UNIT_OUTCOMES.parquet": {
+      "bytes": 509594,
+      "sha256": "9dfb1f9b7cdf50e0f3a0db1238078d31197867d6fb4eacab4e0451e99d9b11cd"
+    },
+    "outputs/p0_materializer_mechanism_ablation_v1/mechanism_summary.csv": {
+      "bytes": 326,
+      "sha256": "9367c69dcca683652bc10f003af4d97df04fc1e24fcb461c5c42b1f059bdb98f"
+    },
+    "outputs/p0_materializer_validation_v3/EXPERIMENT_PROTOCOL.json": {
+      "bytes": 8231,
+      "sha256": "a396b61edb1773dc7222b8abbb81aed9d9d9ecd7f19d5fd284a8db87b202773a"
+    },
+    "outputs/p0_materializer_validation_v3/event_metrics.csv": {
+      "bytes": 282594,
+      "sha256": "42270ba4ae061aefd056ef25158295103a1c5c8d3170e6b96654863e12e85a8b"
+    },
+    "outputs/v10_multiseal_reference_v1/FINAL_UNIT_REFERENCE.parquet": {
+      "bytes": 243228,
+      "sha256": "4f732859e7aaca6a4d8098b3da653620c777e85b5fcc31dae5c2b91fb2260fcf"
+    },
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/DALI/candidate_table.parquet": {
+      "bytes": 9087,
+      "sha256": "2d9feaf0cf87e51198aa2d2ee3d3d3150b53f77aecec208b49640743c89651a1"
+    },
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/DALI/proxy_table.parquet": {
+      "bytes": 13748,
+      "sha256": "ed1121c7bef775370b5cef541b0781d2287b70781a7b0d0900bfbb10e72bc21e"
+    },
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/HANGZHOU/candidate_table.parquet": {
+      "bytes": 9147,
+      "sha256": "9e3da3ae245bdbcc2bd53ba24cc9d72dcf5e23525336294703fc5d3a6d22f1d1"
+    },
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/HANGZHOU/proxy_table.parquet": {
+      "bytes": 13532,
+      "sha256": "d5fffe45ebe1816d22cc94080f978d0d8deb9fb96ed557ecd898316243db0ec5"
+    },
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/WUHAN/candidate_table.parquet": {
+      "bytes": 6500,
+      "sha256": "ca5d6348bf19fc1d4be7dbfeaa6de272c532b3486ece1233cfdf86c49a1cf952"
+    },
+    "outputs/v3_scan_proxy_preregistration_v1/frozen_tables/WUHAN/proxy_table.parquet": {
+      "bytes": 9432,
+      "sha256": "0e762cc07c49c6c4786812492bb376f105172e2c97e441e9705cf5b14f6cac16"
+    }
+  },
+  "lambda_discipline": {
+    "all_values_reported": true,
+    "basis": "fixed equal-scale convex mixing; values inherited from outcome-blind P1 trace feasibility family",
+    "canonical_core_comparison": "ProxyTemporalCoverage_L050",
+    "values": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "winner_selection_forbidden": true
+  },
+  "legal_baselines": {
+    "CoverageFirst": "nested deterministic farthest-first temporal coverage ordering; timestamps only",
+    "ProxyTemporalCoverage_L025": "normalized frozen proxy plus 0.25 min-distance temporal novelty",
+    "ProxyTemporalCoverage_L050": "canonical primary generic relevance+coverage baseline: normalized frozen proxy plus 0.50 min-distance temporal novelty",
+    "ProxyTemporalCoverage_L075": "sensitivity generic relevance+coverage baseline: normalized frozen proxy plus 0.75 min-distance temporal novelty",
+    "StaticProxyRank": "descending frozen proxy score, candidate_order/candidate_id tie breaks; no semantic feedback",
+    "UniformTemporal": "nested deterministic dyadic temporal ordering; timestamps only"
+  },
+  "materializer": {
+    "definition": "merge selected relevant 10-second anchors iff adjacent temporal gap <=10.0s; no K3 extras",
+    "gap_sec": 10.0,
+    "name": "C1_gap_limited"
+  },
+  "offline_oracle_diagnostic": "knows full cached labels and full-grid C1 reference events to greedily cover unseen reference events; illegal policy, excluded from legal ranking, headroom only",
+  "primary_metrics": [
+    "EventPrecision",
+    "EventRecall",
+    "EventF1",
+    "AnytimeAUC_F1",
+    "UniqueEventsPerOracleCall"
+  ],
+  "prohibited": [
+    "new VLM inference",
+    "new semantic labels",
+    "human labels",
+    "C1/K3 tuning",
+    "per-video/query/budget tuning",
+    "post-result lambda selection",
+    "learned policy",
+    "MAB",
+    "RL",
+    "SMDP",
+    "neural policy",
+    "counterfactual planner"
+  ],
+  "protocol_hash": "bdc9fea52401423207a0ff484f8410ad92e1d882bf52d325ff6fdef515d3a570",
+  "protocol_id": "GVAQP_P2_QUERY_POLICY_NOVELTY_KILLER_V1",
+  "proxy_families": [
+    "PROXY_A_YOLOV8N_OBJECT_MOTION",
+    "PROXY_B_OPTICAL_FLOW_VISUAL_DYNAMICS"
+  ],
+  "queries": [
+    "Q_DRIVER_RESPONSE_V1",
+    "Q_VULNERABLE_ROAD_USER_CONFLICT_V1"
+  ],
+  "research_question": "Can generic proxy relevance plus temporal coverage/diversity explain the remaining model-relative query-policy opportunity?",
+  "runner": {
+    "path": "scripts/run_p2_query_policy_novelty_killer.py",
+    "sha256": "698828dbea05eb280daca67d27f68bf6362f7a89d2973f63eca5ee7a3307c2b3"
+  },
+  "semantic_outcomes": {
+    "Q_DRIVER_RESPONSE_V1": "V10 FINAL_UNIT_REFERENCE authoritative_label",
+    "Q_VULNERABLE_ROAD_USER_CONFLICT_V1": "P1 Qwen3-VL-32B completed outcome table"
+  },
+  "source_branch": "main",
+  "source_commit": "aa9a6ab1692137333c5a6898144ee1ebd21c2ea9",
+  "statistics": {
+    "LOVO": true,
+    "LOVQ": true,
+    "cluster_bootstrap_resamples": 10000,
+    "cluster_bootstrap_seed": 20260813,
+    "statistical_unit": "video-query cluster"
+  },
+  "status": "FROZEN_BEFORE_P2_BASELINE_RESULT_COMPUTATION",
+  "trace_rule": "every policy/video/query/proxy/budget is an ordering prefix; deterministic seed=0; traces store IDs, order, outcomes and hashes",
+  "videos": [
+    "DALI",
+    "HANGZHOU",
+    "WUHAN"
+  ]
+}

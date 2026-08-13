@@ -1,0 +1,74 @@
+{
+  "adjudication": "after two independent complete submissions; preserve original records",
+  "annotation_unit": "maximal human-defined temporal event",
+  "annotators_recommended": 2,
+  "cases": [
+    {
+      "query_id": "Q_DRIVER_RESPONSE_V1",
+      "video_id": "DALI"
+    },
+    {
+      "query_id": "Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "video_id": "DALI"
+    },
+    {
+      "query_id": "Q_DRIVER_RESPONSE_V1",
+      "video_id": "HANGZHOU"
+    },
+    {
+      "query_id": "Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "video_id": "HANGZHOU"
+    },
+    {
+      "query_id": "Q_DRIVER_RESPONSE_V1",
+      "video_id": "WUHAN"
+    },
+    {
+      "query_id": "Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "video_id": "WUHAN"
+    }
+  ],
+  "prohibitions": [
+    "redefine query after annotation begins",
+    "modify boundary to improve an algorithm",
+    "delete difficult cases",
+    "reveal method results to annotators"
+  ],
+  "protocol_id": "P1_INDEPENDENT_HUMAN_EVENT_REFERENCE_V1",
+  "protocol_sha256": "cb6e51c6a9c24606df1d73a3adc69673b5ef37d1426889f2cb848fac690b28dc",
+  "reference_is_independent_of": [
+    "C0",
+    "C1",
+    "K3",
+    "proxy policies",
+    "geometry hypothesis",
+    "semantic oracle outcomes",
+    "event-recovery results"
+  ],
+  "required_fields": [
+    "query_id",
+    "video_id",
+    "event_exists",
+    "start_time",
+    "end_time",
+    "boundary_ambiguous"
+  ],
+  "source_videos": {
+    "DALI": {
+      "duration_sec": 5665.535,
+      "path": "data/realcam/dali.mp4",
+      "sha256": "64cb0cfac6c37e52045552b4ed24e8aa20fd2c1fddc22509cf33dd957d14fd09"
+    },
+    "HANGZHOU": {
+      "duration_sec": 5600.566,
+      "path": "data/realcam/hangzhou.mp4",
+      "sha256": "69649cd2fbd9d6fde3786627781f8f8ee959b4571c40b6d512d7e574cf4c0155"
+    },
+    "WUHAN": {
+      "duration_sec": 3462.93,
+      "path": "data/realcam/wuhan.mp4",
+      "sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+    }
+  },
+  "status": "FROZEN_BEFORE_HUMAN_LABELS"
+}

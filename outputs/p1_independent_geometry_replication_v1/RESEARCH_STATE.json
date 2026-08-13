@@ -1,0 +1,48 @@
+{
+  "adjudication_status": "NOT_STARTED",
+  "agreement_status": "NOT_RUN",
+  "annotation_protocol_hash": "1f2c09d657d90f03a2a0978345996b87ae8a54dd670718aaf759c5c0b69c6dd0",
+  "completed": [
+    "source-of-truth audit",
+    "protocol freeze",
+    "outcome-blind trace verification",
+    "six-cluster/two-proxy P1-A feasibility audit",
+    "proxy characterization",
+    "blinded human-reference package and validation entrypoints"
+  ],
+  "completed_cases": {
+    "ANNOTATOR_A": 0,
+    "ANNOTATOR_B": 0
+  },
+  "current_gate": "FORMAL_HUMAN_ANNOTATION",
+  "current_phase": "P1-B_INDEPENDENT_HUMAN_REFERENCE",
+  "formal_annotation_start_authorized": true,
+  "full_repo_tests": "PASS_706",
+  "human_outcome_seen": false,
+  "p1b_special_tests": "PASS_15",
+  "human_protocol_hash": "5b4d61b55e95a2de3f120e8edd344374b0810402988f0ad8cb6851baf036b831",
+  "human_reference_frozen": false,
+  "human_reference_status": "REQUIRED",
+  "next_entrypoint": "python scripts/serve_p1_independent_geometry_reference.py",
+  "objective": "At equal semantic-positive yield, does online-visible temporal evidence geometry consistently improve recovery of independently defined temporal events?",
+  "p1_event_evidence_geometry": "WAITING_HUMAN_REFERENCE",
+  "p1_trace_feasibility": "PASS",
+  "p1a_trace_hash": "accaaca93b2796faf60b5809710497c0e56ac2fd71015f8fb57c25a7a23f1802",
+  "p1b_protocol_version": "1.2",
+  "phase_status": "WAITING_HUMAN_REFERENCE",
+  "primary_pair_manifest_hash": "33179b0d3db9f5355bdd2652c217f0becc8d2a5797495fdd361c49771ef1c6a5",
+  "prohibited_while_waiting": [
+    "inspect method outcomes to alter queries/pairs",
+    "change P1 gates",
+    "run controller/MAB/RL/selector development",
+    "run P2"
+  ],
+  "protocol_hash": "c26bf62f2a0d99209bf493d2baccbd08e483865604976a96ed2efec7d27bd057",
+  "resume_after_annotation": "python scripts/resume_p1_independent_geometry_replication.py",
+  "top_findings": [
+    "P1-A trace feasibility PASS",
+    "198 primary exact-yield pairs frozen on number_of_temporal_regions_touched",
+    "No formal human labels; second independent annotator required"
+  ],
+  "user_input_required": "ANNOTATOR_A and ANNOTATOR_B must independently complete all six cases."
+}

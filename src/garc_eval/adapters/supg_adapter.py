@@ -18,7 +18,12 @@ try:
     from supg.sampler import ImportanceSampler
     from supg.selector import ApproxQuery, RecallSelector, ImportancePrecisionTwoStageSelector
 except ImportError:
-    _supg_root = str(Path(__file__).resolve().parents[2] / "refe_repos" / "supg")
+    _repo_root = Path(__file__).resolve().parents[3]
+    candidates = [
+        _repo_root / "try_or_no" / "arc_source" / "arc",
+        _repo_root / "refe_repos",
+    ]
+    _supg_root = str(next((path for path in candidates if (path / "supg").is_dir()), candidates[0]))
     if _supg_root not in sys.path:
         sys.path.insert(0, _supg_root)
     from supg.datasource import DataSource, DFDataSource, load_csv_source

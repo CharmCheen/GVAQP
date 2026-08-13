@@ -1,0 +1,26 @@
+{
+  "protocol_id": "P1_INDEPENDENT_GEOMETRY_PRIMARY_ANALYSIS_V1",
+  "status": "FROZEN_BEFORE_SECOND_QUERY_OUTCOMES_AND_HUMAN_REFERENCE",
+  "analysis_unit": "video-query cluster; traces within a cluster are not treated as independent samples",
+  "primary_stratum": ["video_id", "query_id", "proxy_family", "budget", "exact verified_positive_count"],
+  "primary_trace_pair": "one deterministic high-vs-low number_of_temporal_regions_touched contrast per eligible stratum; trace-hash tie break",
+  "primary_endpoints": ["delta_distinct_human_events_touched", "delta_human_event_coverage", "delta_human_events_with_zero_evidence", "delta_human_event_recall_C1", "delta_human_event_F1_C1"],
+  "geometry_features": {
+    "POLICY_VISIBLE": ["number_of_temporal_regions_touched", "temporal_dispersion", "coverage_fraction", "largest_unqueried_gap_units", "query_redundancy"],
+    "ORACLE_OBSERVED_AFTER_VERIFY": ["verified_positive_count", "positive_yield", "positive_temporal_dispersion", "distance_to_existing_verified_evidence"],
+    "REFERENCE_ONLY_FORBIDDEN_AS_PREDICTOR": ["human event IDs", "human event boundaries", "human coverage", "future/unqueried labels"]
+  },
+  "diagnostic_models": ["yield_only", "yield_plus_policy_visible_geometry", "yield_plus_policy_visible_and_oracle_observed_geometry"],
+  "held_out_evaluation": ["leave-one-video-out", "leave-one-video-query-out", "cluster bootstrap by video-query, 10000 resamples, seed 20260812"],
+  "P1_pass_rule": {
+    "yield_only_insufficient": "LOVO and LOVQO yield-only macro R2 each <= 0.50 OR yield-only has >=0.05 worse MAE than its corresponding policy-visible geometry model",
+    "geometry_explanatory_lift": "policy-visible geometry improves both LOVO and LOVQO macro MAE by >=0.02 versus yield-only without reference-only predictors",
+    "matched_effect": "median matched delta human-event coverage > 0 and median matched delta distinct human events touched > 0, with positive direction in >=4/6 video-query clusters",
+    "proxy_replication": "the matched coverage direction is positive for both Proxy A and Proxy B and is not driven by one video-query cluster",
+    "minimum_evidence": ">=12 eligible exact-yield strata across >=4 video-query clusters for each proxy family",
+    "decision": "PASS only when all rules are met; otherwise FAIL/NO_GO."
+  },
+  "P1_fail_conditions": ["only C1 endpoint associates with geometry", "matched human effect lacks cross-cluster replication", "effect fails for either natural proxy", "yield-only satisfies explanatory criterion", "reference-only variables are required for primary lift"],
+  "frozen_inputs_required": ["P1_OUTCOME_BLIND_TRACE_MANIFEST.csv", "frozen Proxy A and Proxy B scores", "complete Qwen32 second-query outcome table", "released original-query outcomes", "frozen adjudicated human event reference"],
+  "prohibited": ["post-outcome trace selection", "changing C1 or matching rule", "human-boundary changes to improve method score", "reference-only feature as predictor", "policy development"]
+}

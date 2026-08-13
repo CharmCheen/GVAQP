@@ -1,0 +1,17 @@
+original_theoretical_requirement,current_substrate,identified,evidence,consequence
+partial observability,stored proxy hidden until SCAN,PARTIAL,sequential.py,release gating but precomputed universe
+costly SCAN,abstract cost 0.1,PARTIAL,SequentialCostConfig,cost exists but is unmeasured/constant
+online cheap sensing,no raw read/model call in replay,NO,sequential.py::step,true sensing VOI absent
+candidate-generation uncertainty,one row per unit,NO,proxy regime manifest,existence known in artifact
+proxy false negatives,low scores and synthetic thinning only,PARTIAL,proxy metrics/regimes,ranking FN-like behavior; no natural exposure FN
+proxy false positives,imperfect rankings against cached labels,YES,proxy quality metrics,cheap evidence can mislead VERIFY ordering
+endogenous frontier creation,stored units released by cell,PARTIAL,sequential.py,legal frontier grows; identities not created
+expensive VERIFY,"cached label, cost 1.0, scanned-only",PARTIAL,sequential.py,"logical semantics faithful, physical cost/reference not"
+feedback-driven future observation,verified labels enter state,PARTIAL,PublicSequentialState,"future actions respond, sensing distribution fixed"
+heterogeneous action cost,constant 0.1/1.0,NO,SequentialCostConfig,no region/candidate cost heterogeneity
+event-level terminal objective,pseudo-event recall/AUC + precision gate,PARTIAL,controller_dynamic_headroom.py,event level but discontinuous/model-relative
+event-aware state,strict K3 groups and geometry summaries,PARTIAL,state feature table,not human-valid; omitted sensing uncertainty
+resource scaling,budgets 20/50/100 abstract,PARTIAL,branch summary,"multiple budgets, not physical"
+natural high-regret state prevalence,behavior-sampled capped states,UNKNOWN,behavior_states,cannot estimate prevalence
+policy-visible regret predictability,M0/M1/M2 weak on current table,YES,selective summary,identified only for current cached distribution
+human-valid EventRelation,P1 pending and unread,NO,P1 pre-human protocol,no independent result available

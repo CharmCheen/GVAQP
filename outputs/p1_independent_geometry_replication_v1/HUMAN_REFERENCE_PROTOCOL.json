@@ -1,0 +1,102 @@
+{
+  "adjudication_required": true,
+  "agreement_iou_sensitivity": [
+    0.1,
+    0.3,
+    0.5
+  ],
+  "agreement_metrics": [
+    "event existence agreement",
+    "one-to-one overlap event agreement",
+    "matched interval tIoU",
+    "absolute boundary disagreement",
+    "unmatched event count",
+    "ambiguous boundary rate"
+  ],
+  "amendment_hash": "e367e56e0d881a4f227490339d17088e91f5e62a38377d5496f34f72aaf8dc54",
+  "annotation_protocol_frozen": true,
+  "annotation_unit": "maximal continuous human-defined temporal event",
+  "annotators_required": 2,
+  "boundary_rule": "query-specific first actionable visible onset to cleared constraint; >2 second reasonable uncertainty is marked ambiguous",
+  "cases": [
+    {
+      "query_id": "Q_DRIVER_RESPONSE_V1",
+      "video_id": "DALI"
+    },
+    {
+      "query_id": "Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "video_id": "DALI"
+    },
+    {
+      "query_id": "Q_DRIVER_RESPONSE_V1",
+      "video_id": "HANGZHOU"
+    },
+    {
+      "query_id": "Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "video_id": "HANGZHOU"
+    },
+    {
+      "query_id": "Q_DRIVER_RESPONSE_V1",
+      "video_id": "WUHAN"
+    },
+    {
+      "query_id": "Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "video_id": "WUHAN"
+    }
+  ],
+  "human_reference_frozen": false,
+  "primary_attribution": "ANCHOR_ASSIGNED_EVENT",
+  "protocol_hash": "1f2c09d657d90f03a2a0978345996b87ae8a54dd670718aaf759c5c0b69c6dd0",
+  "protocol_id": "P1_INDEPENDENT_HUMAN_EVENT_REFERENCE_V1_2",
+  "reference_independent_of": [
+    "proxy",
+    "policy",
+    "C0",
+    "C1",
+    "K3",
+    "geometry hypothesis",
+    "semantic-oracle outcomes",
+    "method results"
+  ],
+  "reference_quality_gate": {
+    "hard_failure_A": "event existence differs in >=3/6 cases",
+    "hard_failure_B": "count difference >max(2,50% larger count) in >=3/6 cases",
+    "hard_failure_C": "global matched-event fraction at IoU>0 <0.50",
+    "hard_failure_D": "systematic semantic misunderstanding in multiple cases",
+    "otherwise": "ADJUDICATION_ELIGIBLE"
+  },
+  "required_event_fields": [
+    "annotation_id",
+    "annotator_id",
+    "video_id",
+    "query_id",
+    "event_index",
+    "start_time",
+    "end_time",
+    "boundary_ambiguous",
+    "semantic_ambiguity",
+    "optional_note",
+    "adjudication_status"
+  ],
+  "secondary_attribution": "OVERLAP_ANY_EVENT",
+  "semantic_rules_independent_of_fixed_temporal_gap": true,
+  "source_videos": {
+    "DALI": {
+      "duration_sec": 5665.535,
+      "path": "data/realcam/dali.mp4",
+      "sha256": "64cb0cfac6c37e52045552b4ed24e8aa20fd2c1fddc22509cf33dd957d14fd09"
+    },
+    "HANGZHOU": {
+      "duration_sec": 5600.566,
+      "path": "data/realcam/hangzhou.mp4",
+      "sha256": "69649cd2fbd9d6fde3786627781f8f8ee959b4571c40b6d512d7e574cf4c0155"
+    },
+    "WUHAN": {
+      "duration_sec": 3462.93,
+      "path": "data/realcam/wuhan.mp4",
+      "sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+    }
+  },
+  "status": "ANNOTATION_PROTOCOL_FROZEN",
+  "version": "1.2"
+}

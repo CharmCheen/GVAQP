@@ -3,7 +3,6 @@ from collections import defaultdict
 import pandas as pd
 import numpy as np
 import scipy.special
-import feather
 
 from supg import datasource
 

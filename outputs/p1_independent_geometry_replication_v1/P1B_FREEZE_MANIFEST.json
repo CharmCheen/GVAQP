@@ -1,0 +1,56 @@
+{
+  "annotation_ui": {
+    "default_port": 8767,
+    "sha256": "4656142225707570d88cae4c118364cfce947cbcde63c0dafbaf0507b8917c59",
+    "source": "scripts/serve_p1_independent_geometry_reference.py"
+  },
+  "artifact_hashes": {
+    "ANNOTATION_EXPORT_SCHEMA.json": "a14556df4ff811e3a1269a692c0db37b1cb45cd7c15b45d66a6e60a74efe4864",
+    "ANNOTATION_GUIDE.md": "5b96052aa0496fd5bd9e25359efa9ae19c8a35e1703b39e31ac5b66162354fdb",
+    "ANNOTATION_PACKAGE_README.md": "591ffa2ff8faa6c56b929ee64e573bde8dbf2eb51543687a3ea99c5b3a87dda8",
+    "HUMAN_REFERENCE_PROTOCOL.json": "b7467f11e80a6f188123430528c0269f39e5e95475f868e696e2b54611e8776e",
+    "MATCHED_EQUAL_YIELD_STRATA.csv": "68883d84db461e3738d122281bddecbd528678c59cacf1c5feb7b2128b49e32d",
+    "P1_DESIGN_DECISION.md": "144a571e989d0f1981044b7d532eb06d41dc39e1944911df3b8de79714608b81",
+    "P1_PROTOCOL.json": "2b491ff417bc21e22e52b7f95a38a6625ef67dce9d8f1d2bdc5a79d49ee06ad4",
+    "P1_TRACE_FEASIBILITY.md": "7b4b52aeba9229dd0cd6464b955df0b265f719fa0a5671b52b407ad29f33819b",
+    "PRIMARY_GEOMETRY_PAIR_MANIFEST.csv": "33179b0d3db9f5355bdd2652c217f0becc8d2a5797495fdd361c49771ef1c6a5",
+    "QUERY_DEFINITIONS.md": "0938b5e28caf08c936d9b0dcccc6e6b2d23db2baeebbbd8f727f923d8accd023",
+    "SOURCE_OF_TRUTH.md": "1f96927aa34246f2fac0434a86525d9e1fe5e10b7fa13e389de190b759df0ed7",
+    "TRACE_GEOMETRY_FEATURES.csv": "a0ddd9d8b6de49ee28abe15be1ccb10f64114f64e680415cf33eff1870b9f472",
+    "TRACE_PAIR_MANIFEST.csv": "3963a81ea6df21dd2bfa89eb11b76d73df49b671d788ba1101f32fd41f03b005",
+    "TRACE_POPULATION.csv": "accaaca93b2796faf60b5809710497c0e56ac2fd71015f8fb57c25a7a23f1802"
+  },
+  "c1": {
+    "definition": "GAP-ONLY merge consecutive positive evidence iff temporal gap <=10 seconds; secondary only",
+    "implementation_source": "scripts/resume_p1_independent_geometry_replication.py",
+    "sha256": "8e9b89f8ba548ec63734fc5dba752bfdc4f0c100eb075e870c85d17076a84e0a"
+  },
+  "created_at_utc": "2026-08-13T05:21:29.521355+00:00",
+  "evaluator": {
+    "sha256": "0ad0b0205e7a88e75b7c555f7063246883aed64816612a8c669cb72dbd3bf9b0",
+    "source": "src/garc_eval/accelerated_event_query/matching.py"
+  },
+  "final_gate_note": "PASS/PARTIAL/FAIL follows frozen P1_PROTOCOL plus >=2/3 positive source videos and >=2 positive budgets; PARTIAL never authorizes P2",
+  "freeze_id": "GVAQP_P1B_PREANNOTATION_FREEZE_V1",
+  "human_label_records": 0,
+  "preannotation_engineering_refresh_at_utc": "2026-08-13T05:41:22.379851+00:00",
+  "primary_analysis": "exact yield; primary regions axis; materializer-independent human event touch/coverage; video-query inference",
+  "primary_geometry_axis": "number_of_temporal_regions_touched",
+  "primary_pairs": 198,
+  "proxy_identities": [
+    "PROXY_A_YOLOV8N_OBJECT_MOTION",
+    "PROXY_B_OPTICAL_FLOW_VISUAL_DYNAMICS"
+  ],
+  "query_budget_semantics": "cached semantic invocation count; not wall clock",
+  "reference_quality_triage_gate": {
+    "event_correspondence_fraction_iou_ge_0p1_min": 0.5,
+    "event_count_difference_le_1_min_clusters": 4,
+    "event_existence_agreement_min_clusters": 4,
+    "failure_action": "protocol amendment plus full six-case reannotation; no case deletion or outcome analysis"
+  },
+  "region_definition_hash": "e5a990a7e9d152fab23117a0e64e381381be29c13123eaafe301017acdedd1dc",
+  "region_implementation_hash": "0fefd116c33dd3a3334c56fe2ea39faedd48922976e1b3c8b58e524da9a502d2",
+  "secondary_analysis": "near-yield, multivariate geometry, frozen C1 human reference, LOVO/LOVQO models",
+  "superseded_by": "P1B_PROTOCOL_V1_2_FREEZE.json",
+  "unit_semantics": "released V3 one-candidate-per-10-second unit"
+}

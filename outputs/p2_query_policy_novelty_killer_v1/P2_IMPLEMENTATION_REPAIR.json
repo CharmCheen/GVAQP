@@ -1,0 +1,11 @@
+{
+  "original_protocol_hash": "bdc9fea52401423207a0ff484f8410ad92e1d882bf52d325ff6fdef515d3a570",
+  "original_runner_sha256": "698828dbea05eb280daca67d27f68bf6362f7a89d2973f63eca5ee7a3307c2b3",
+  "repaired_runner_sha256": "e0835d066b58fa1f7b15d9b5c8961623aa55e9776b07977b79106b2af1bcb7b9",
+  "repair_scope": "Pandas unit_id index/column ambiguity in sorting and merging; vectorized equivalent implementation of the same deterministic ordering tie-break rules; plus fail-closed repair binding only",
+  "scientific_protocol_changed": false,
+  "baseline_definition_changed": false,
+  "decision_rule_changed": false,
+  "result_rows_observed_before_repair": false,
+  "evidence": "Both initial attempts aborted while materializing the first trace; a later pure-CPU run was terminated after 18 minutes because it had not emitted any result file. EVENT_METRICS.csv, TRACE_MANIFEST.csv, and all P2 baseline result rows were absent before the vectorized equivalent implementation was introduced."
+}

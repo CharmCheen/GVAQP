@@ -1,0 +1,49 @@
+{
+  "code": {
+    "path": "scripts/run_p1_proxy_b_kinematic.py",
+    "sha256": "31c728371baa52680de84b76505888cfdfa0e2421d2ac0726162c366c7c93d04"
+  },
+  "features": {
+    "difference_mean": "mean absolute grayscale difference over adjacent pairs",
+    "flow_median": "median per-pixel Farneback magnitude over three adjacent frame pairs",
+    "flow_p90": "90th percentile per-pixel Farneback magnitude pooled over adjacent pairs",
+    "score": "rank-normalized mean of flow_median, flow_p90, difference_mean within each video; fixed equal weights"
+  },
+  "independence_from_proxy_A": "Proxy A uses YOLOv8n retained COCO detections at one unit midpoint. Proxy B uses grayscale Farneback optical flow and frame-difference statistics at four evenly spaced unit samples, with no detector, text model, or semantic outcome.",
+  "prohibited_inputs": [
+    "semantic oracle labels",
+    "human labels",
+    "K3/reference events",
+    "C1/EventF1",
+    "trace feasibility outcomes"
+  ],
+  "protocol_hash": "4726f78e34e4ee333ff533945393b5b2a7d51f7aa260538f6fdb6d57bdcfa3ed",
+  "protocol_id": "P1_PROXY_B_KINEMATIC_VISUAL_DYNAMICS_V1",
+  "proxy_family": "PROXY_B_CHEAP_OPTICAL_FLOW_VISUAL_DYNAMICS",
+  "role": "natural cheap visual proxy; not semantic oracle or event reference",
+  "sampling": {
+    "opencv": "Farneback fixed parameters pyr_scale=0.5 levels=3 winsize=15 iterations=3 poly_n=5 poly_sigma=1.2 flags=0",
+    "resize": "320x180 grayscale",
+    "samples_per_unit": 4,
+    "timestamps": "start + (i+0.5)*(end-start)/4, i=0..3"
+  },
+  "status": "FROZEN_BEFORE_PROXY_SCORES",
+  "unit_universe": {
+    "count": 1475,
+    "sha256": "3616177619f2f94f40169c48a9a162715bad1a37778e656d19761b775d210f8c"
+  },
+  "videos": {
+    "DALI": {
+      "path": "data/realcam/dali.mp4",
+      "sha256": "64cb0cfac6c37e52045552b4ed24e8aa20fd2c1fddc22509cf33dd957d14fd09"
+    },
+    "HANGZHOU": {
+      "path": "data/realcam/hangzhou.mp4",
+      "sha256": "69649cd2fbd9d6fde3786627781f8f8ee959b4571c40b6d512d7e574cf4c0155"
+    },
+    "WUHAN": {
+      "path": "data/realcam/wuhan.mp4",
+      "sha256": "bad229001034002404fc82a44962b6daa2a5743457a53767db39772d705df610"
+    }
+  }
+}
