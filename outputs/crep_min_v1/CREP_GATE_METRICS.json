@@ -1,0 +1,110 @@
+{
+  "must_pass": true,
+  "must_satisfy": {
+    "M1_zero_wrong_certifications": {
+      "checker_errors": 0,
+      "counterexamples": 8,
+      "engine_fidelity_anchor": "252/252 exact vs frozen P2 manifest (validated in mab/eraea gates)",
+      "pass": true
+    },
+    "M2_all_closures_have_witnesses": {
+      "covered": [
+        "ACTION_SUPPORT",
+        "CANDIDATE_CREATION",
+        "COMPLETION_CLOCK",
+        "FUTURE_IDENTITY_LEAKAGE",
+        "HIDDEN_GROUPING_TRANSITION",
+        "INFORMATION_FLOW",
+        "LEGAL_ACTION_TRANSITION",
+        "VERSION"
+      ],
+      "missing": [],
+      "pass": true
+    },
+    "M3_three_way_distinction": {
+      "certificate_statuses": [
+        "CERTIFIED_REPLAYABLE",
+        "NOT_IDENTIFIABLE",
+        "PARTIALLY_IDENTIFIABLE"
+      ],
+      "partial_interval_exact_width_rows": 252,
+      "pass": true
+    },
+    "M4_claim_coverage": {
+      "claim_ids": [
+        "CLAIM_1_FIXED_VS_DYNAMIC",
+        "CLAIM_2_MAB_V0_VS_RELATION_GREEDY",
+        "CLAIM_3_RELATION_VS_GENERIC",
+        "CLAIM_4_MATERIALIZER_RANKING",
+        "CLAIM_5_ORACLE_HEADROOM",
+        "CLAIM_6_GRANULARITY",
+        "CLAIM_7_CANDIDATE_EXPOSURE",
+        "CLAIM_8_DEADLINE_UTILITY"
+      ],
+      "claims": 8,
+      "pass": true
+    },
+    "M5_sandbox_leakage_capture": {
+      "pass": true,
+      "policy_oracle_isolation_test": "tests/mab_cpu_gate::test_policy_cannot_read_oracle_columns (passing)",
+      "real_failure_witness": "partial_scan_pilot POLICY_INFORMATION_ISOLATION=FAIL (C5)"
+    }
+  },
+  "n_must_pass": 5,
+  "n_potential": 4,
+  "paper_potential": {
+    "P1_ranking_reversal": {
+      "evidence": "ERAEA E4 reversal_rate_across_materializers = 0.2222 (sign flips of gap_aware-agnostic within cluster-budget across C1/C3/K0); E4GAP: relation-top delta 0.0001 (gap5) vs 0.0016 (gap10); C4 deadline before/after flip (Guangzhou B vs C)",
+      "satisfied": true
+    },
+    "P2_OPE_closure_inexpressibility": {
+      "evidence": "C2/C3 witnesses: logged-bandit OPE assumes a fixed arm set with logged outcomes for chosen arms; candidate creation (C2) and legal-action transitions (C3) have no representation in (context, action, reward) tuples; local absence of endogenous substrate (P4 NOT_STARTED) is the empirical corollary",
+      "satisfied": true
+    },
+    "P3_nontrivial_partial_intervals": {
+      "evidence": "queried-universe interval width = 0.0 (exact) on 252 Q_DRIVER traces; legal-to-oracle headroom interval [0.1618, 0.485] (best legal baseline AUC to oracle AUC) is a genuine interval far narrower than [0,1]; full-universe Q_DRIVER status NOT_IDENTIFIABLE (provenance gap, recorded sha256 4f732859...)",
+      "satisfied": true
+    },
+    "P4_log_prescriptions": {
+      "satisfied": true,
+      "table": [
+        {
+          "closure": "C1 ACTION_SUPPORT",
+          "missing_log_field": "outcome law of non-selected actions",
+          "prescription": "log full legal action set + outcome of every attempted action (or propensity weights)"
+        },
+        {
+          "closure": "C2 CANDIDATE_CREATION",
+          "missing_log_field": "candidate set per SCAN completion",
+          "prescription": "log candidate identities + creation timestamps per SCAN action"
+        },
+        {
+          "closure": "C3 LEGAL_ACTION_TRANSITION",
+          "missing_log_field": "legal action set per step",
+          "prescription": "log Gamma_t snapshot per decision step"
+        },
+        {
+          "closure": "C4 COMPLETION_CLOCK",
+          "missing_log_field": "finish/materialize/commit timestamps",
+          "prescription": "log monotonic-clock finish time per action (never only start time)"
+        },
+        {
+          "closure": "C5 INFORMATION_FLOW",
+          "missing_log_field": "sandbox boundary evidence",
+          "prescription": "record sandbox audit trail; fail-closed if policy process touches evaluator state"
+        },
+        {
+          "closure": "C6/C7 VERSION/GROUPING",
+          "missing_log_field": "materializer/evaluator version pin",
+          "prescription": "hash-pin materializer+matcher+reference per trace (as P0/P2 protocol hashes)"
+        },
+        {
+          "closure": "C8 FUTURE_IDENTITY",
+          "missing_log_field": "candidate id generation rule",
+          "prescription": "record id assignment policy; forbid outcome-derived ids"
+        }
+      ]
+    }
+  },
+  "paper_potential_reached": true
+}

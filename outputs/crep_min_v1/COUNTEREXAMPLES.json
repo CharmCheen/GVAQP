@@ -1,0 +1,314 @@
+[
+  {
+    "closure": "ACTION_SUPPORT",
+    "flip": {
+      "W1": "V(pi_A)=3 < V(pi_B)=4",
+      "W2": "V(pi_A)=3 > V(pi_B)=0"
+    },
+    "id": "C1",
+    "log": {
+      "outcomes_of_recorded": [
+        1,
+        1,
+        1
+      ],
+      "recorded_actions": [
+        "A1",
+        "A3",
+        "A5"
+      ]
+    },
+    "name": "unlogged action outcomes",
+    "real_witness": "MAB gate: physical probes (0/18) had no logged propensities; branch outcomes for non-selected actions unlogged in behavior logs",
+    "worlds": {
+      "W1": {
+        "B_actions_unlogged_outcome": [
+          1,
+          1,
+          1
+        ],
+        "V_pi_A": 3,
+        "V_pi_B": 4,
+        "hidden": "B_unlogged_outcomes"
+      },
+      "W2": {
+        "B_actions_unlogged_outcome": [
+          0,
+          0,
+          0
+        ],
+        "V_pi_A": 3,
+        "V_pi_B": 0,
+        "hidden": "B_unlogged_outcomes"
+      }
+    }
+  },
+  {
+    "closure": "CANDIDATE_CREATION",
+    "flip": {
+      "W1": "pi_A wins (1>0)",
+      "W2": "pi_B wins (1>0)"
+    },
+    "id": "C2",
+    "log": {
+      "scan_observations": [
+        {
+          "obs": "X",
+          "t": 0
+        },
+        {
+          "obs": "X",
+          "t": 1
+        }
+      ]
+    },
+    "name": "same SCAN -> different candidate sets",
+    "real_witness": "endogenous SCAN never instantiated locally (P4 NOT_STARTED); fixed-candidate replay cannot certify any endogenous candidate-creation claim",
+    "worlds": {
+      "W1": {
+        "V_pi_A_verifies_c1": 1,
+        "V_pi_B_verifies_c2": 0,
+        "candidates_created": [
+          "c1"
+        ],
+        "outcome(c1)": 1
+      },
+      "W2": {
+        "V_pi_A_verifies_c1": 0,
+        "V_pi_B_verifies_c2": 1,
+        "candidates_created": [
+          "c2"
+        ],
+        "outcome(c1)": null
+      }
+    }
+  },
+  {
+    "closure": "LEGAL_ACTION_TRANSITION",
+    "flip": {
+      "W1": "pi_A wins (2>1)",
+      "W2": "pi_B wins (2>1)"
+    },
+    "id": "C3",
+    "log": {
+      "actions": [
+        [
+          "step0",
+          "SCAN(r)"
+        ],
+        [
+          "step1",
+          "SCAN(r)"
+        ]
+      ]
+    },
+    "name": "VERIFY legal in one world, illegal in another",
+    "real_witness": "INTENDED_VS_ACTUAL_CONTRACT: VERIFY legality gated on scanned-only exposure is emulated, not endogenously created",
+    "worlds": {
+      "W1": {
+        "V_pi_A": 2,
+        "V_pi_B": 1,
+        "c_legal_at_step2": true,
+        "outcome(c)": 1
+      },
+      "W2": {
+        "V_pi_A": 1,
+        "V_pi_B": 2,
+        "c_legal_at_step2": false,
+        "outcome(c)": null
+      }
+    }
+  },
+  {
+    "closure": "COMPLETION_CLOCK",
+    "flip": {
+      "W1": "pi_A wins (1>0)",
+      "W2": "pi_B wins (1>0)"
+    },
+    "id": "C4",
+    "log": {
+      "actions": [
+        {
+          "a": "VERIFY(x)",
+          "duration_observed": "?",
+          "start": 290.0
+        }
+      ],
+      "deadline": 300.0
+    },
+    "name": "identical outcome, completion before/after deadline",
+    "real_witness": "Guangzhou: B's event at 224.68s counts; C's at 308.77s excluded -> A/C zero deadline utility",
+    "worlds": {
+      "W1": {
+        "V_pi_A": 1,
+        "V_pi_B": 0,
+        "finish": 298.0,
+        "included": true
+      },
+      "W2": {
+        "V_pi_A": 0,
+        "V_pi_B": 1,
+        "finish": 308.0,
+        "included": false
+      }
+    }
+  },
+  {
+    "closure": "INFORMATION_FLOW",
+    "flip": {
+      "W1": "tie (2=2)",
+      "W2": "leaked pi_A wins (4>2)"
+    },
+    "id": "C5",
+    "log": {
+      "actions": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "verified_outcomes": [
+        0,
+        1,
+        0
+      ]
+    },
+    "name": "cache peek unobservable from log",
+    "real_witness": "partial_scan_pilot: POLICY_INFORMATION_ISOLATION = FAIL (policy code could read evaluator state) -> benchmark BLOCKED",
+    "worlds": {
+      "W1": {
+        "V_pi_A": 2,
+        "V_pi_B": 2,
+        "peeked_unqueried": false,
+        "sandbox": true
+      },
+      "W2": {
+        "V_pi_A": 4,
+        "V_pi_B": 2,
+        "peeked_unqueried": true,
+        "sandbox": false
+      }
+    }
+  },
+  {
+    "closure": "HIDDEN_GROUPING_TRANSITION",
+    "flip": {
+      "W1": "pi_A wins (1>0)",
+      "W2": "pi_B wins (1>0)"
+    },
+    "id": "C6",
+    "log": {
+      "unit_outcomes": [
+        [
+          "u1",
+          "relevant",
+          0,
+          10
+        ],
+        [
+          "u2",
+          "relevant",
+          15,
+          25
+        ],
+        [
+          "u3",
+          "relevant",
+          30,
+          40
+        ]
+      ]
+    },
+    "name": "same outcomes, different EventRelation",
+    "real_witness": "ERAEA E4GAP: relation_greedy - top_proxy = 0.0001 (gap5) vs 0.0016 (gap10/15) vs 0.0014 (gap20)",
+    "worlds": {
+      "W1": {
+        "V_pi_A": 1,
+        "V_pi_B": 0,
+        "events": [
+          [
+            0,
+            10
+          ],
+          [
+            15,
+            40
+          ]
+        ],
+        "materializer": "C1_gap10"
+      },
+      "W2": {
+        "V_pi_A": 0,
+        "V_pi_B": 1,
+        "events": [
+          [
+            0,
+            40
+          ]
+        ],
+        "materializer": "gap20"
+      }
+    }
+  },
+  {
+    "closure": "VERSION",
+    "flip": {
+      "W1": "pi_A > pi_B",
+      "W2": "tie (K0 collapses)"
+    },
+    "id": "C7",
+    "log": {
+      "outcomes": "identical",
+      "trace": [
+        "q1..qN"
+      ]
+    },
+    "name": "identical trace, different materializer -> ranking reversal",
+    "real_witness": "ERAEA E4: reversal_rate_across_materializers = 0.2222; K0 mean AUC 0.0396 vs C1 0.1618",
+    "worlds": {
+      "W1": {
+        "V_pi_A": 0.1455,
+        "V_pi_B": 0.1406,
+        "evaluator": "C1"
+      },
+      "W2": {
+        "V_pi_A": 0.0345,
+        "V_pi_B": 0.0345,
+        "evaluator": "K0"
+      }
+    }
+  },
+  {
+    "closure": "FUTURE_IDENTITY_LEAKAGE",
+    "flip": {
+      "W1": "tie (1=1)",
+      "W2": "leaked pi_A wins (2>1)"
+    },
+    "id": "C8",
+    "log": {
+      "actions": [
+        "c1",
+        "c3"
+      ],
+      "candidate_ids": [
+        "c0",
+        "c1",
+        "c2",
+        "c3"
+      ]
+    },
+    "name": "candidate identity encodes future truth",
+    "real_witness": "candidate_order in frozen tables is chronological; no outcome-encoded ids observed locally (guard for future endogenous substrates)",
+    "worlds": {
+      "W1": {
+        "V_pi_A": 1,
+        "V_pi_B": 1,
+        "id_encodes_outcome": false
+      },
+      "W2": {
+        "V_pi_A": 2,
+        "V_pi_B": 1,
+        "id_encodes_outcome": true
+      }
+    }
+  }
+]

@@ -1,0 +1,58 @@
+{
+  "audit": "GVAQP_LOCAL_SCIENTIFIC_AUDIT_V1",
+  "audit_date": "2026-08-13",
+  "machine": "CPU-only local checkout /Users/charmcheen/FDU/入学前/GVAQP",
+  "git_commit": "973900696",
+  "no_model_inference_run": true,
+  "no_project_state_files_modified": true,
+  "evidence_hierarchy_used": "A LOCAL_MACHINE_VERIFIED / B LOCAL_REPORT_ONLY / C REPORTED_REMOTE_UNVERIFIED / D HISTORICAL_NARRATIVE_ONLY / E CONFLICTED / F NOT_FOUND",
+  "verification": {
+    "deterministic_checks": 56,
+    "failed_checks": 0,
+    "script": "outputs/local_scientific_audit_v1/verify_core_numbers.py",
+    "results": "outputs/local_scientific_audit_v1/VERIFICATION_RESULTS.json",
+    "materializer_independent_recompute": "confirmed by subagent script recompute_materializer_effects.py",
+    "controller_learning_metrics_recomputed_to": "~1e-11"
+  },
+  "provenance_health": "PARTIAL",
+  "provenance_health_reason": "All major frozen ledgers/tables local and hash-verified; single dominant gap: claimed endogenous-SCAN preflight absent locally; remote paths (/root/charm/GVAQP, /root/charm/GVAQP_side_rcsem) referenced but unreachable",
+  "local_evidence_completeness": {
+    "frozen_core_tables_verified_local": true,
+    "protocol_hashes_verified": 4,
+    "human_labels_present": false,
+    "human_labels_expected_missing_by_design": true,
+    "endogenous_preflight_present": false,
+    "physical_probe_artifacts_present_with_matching_hashes": true,
+    "blocked_physical_scan_pilot_present": true
+  },
+  "original_claims": {
+    "A_imperfect_proxy": "PARTIALLY_SUPPORTED (ranking scope only; verified)",
+    "B_endogenous_scan_controller": "NOT_ESTABLISHED (never faithfully instantiated; unverifiable preflight changes nothing)",
+    "C_event_aware_acquisition": "NOT_ESTABLISHED (model-relative geometry strong, VLM shadow and P2 weak/negative, human P1 pending with 0 labels)"
+  },
+  "proxy_failure_verified_locally": "RANKING",
+  "exposure_failure_verified_locally": "NOT_MEASURED (structurally impossible on audited substrate; synthetic stress only)",
+  "materialization_status": "BOUNDED_MODEL_RELATIVE_FINDING: K3 vs K0 median +0.1457 (40/14/0); nearly all gain from 10s gap-only C1 (+0.1377); complex K3 marginals 0.0",
+  "complex_k3_status": "NOT_ESTABLISHED (novelty closed on current evidence)",
+  "reference_circularity": "HIGH for unconditional event-level claims (reference built by same model + same K3 adapter as method side; no human ground truth)",
+  "geometry_status": "G1 SUPPORTED (model-relative), G2 DISFAVORED, G3 PENDING (0 labels), G4 ABSENT",
+  "human_p1_status": "WAITING_HUMAN_REFERENCE; protocol FROZEN and hash-verified; label log 0 rows; analysis NOT authorized",
+  "controller_status": "NO-GO / CLOSED on current substrate (learned regret 0.009693 vs fixed 0.000885; 0/18; 1/7); 108-state numbers RECONCILED (25/26/57 at 1e-12 vs 5/5/98 at 0.005, same deltas)",
+  "endogenous_scan_preflight_status": "REPORTED_REMOTE_UNVERIFIED",
+  "can_0_36_be_used_scientifically": "NO",
+  "root_cause_audit_of_0_36_authorized": "NO",
+  "root_project_question_answer": "E (combination): primary = budgeted semantic evidence-selection + event materialization under a model-relative reference (bounded systems finding); secondary = partially-observable sensing+verification query processing (original theory, unfaithfully instantiated); adaptive controller branch CLOSED",
+  "paper_worthy_question_still_exists": "MAYBE",
+  "best_supported_direction": "Faithful endogenous sensing-verification formulation as the only untested load-bearing assumption (P4 spec exists; requires GPU + human reference), with the current evidence package retained as a bounded systems finding",
+  "top_missing_artifacts": [
+    "outputs/endogenous_scan_preflight_v1/ (13 named files)",
+    "Independent human event labels (2 annotators x 6 clusters + adjudication)",
+    "PHYSICAL_COST_PROFILE.csv (measured SCAN/VERIFY costs)"
+  ],
+  "single_highest_information_next_action_no_gpu": "Recover the 13 preflight artifacts from the prior environment and hash-verify; if unrecoverable, formally record the claim as UNVERIFIABLE in the ledger",
+  "single_highest_information_future_action_gpu": "Minimal faithful endogenous-SCAN probe on 2-3 held-out videos: natural exposure-miss measurement + hindsight action-regret prevalence/magnitude/predictability with measured costs",
+  "claim_to_downgrade_most_urgently": "Any use of the reported 0/36 preflight numbers as scientific evidence (downgrade to UNVERIFIABLE / DO_NOT_USE)",
+  "termination_trigger": "A faithful probe showing natural exposure recall near 1.0 or hindsight regret that is rare, small, unpredictable across held-out videos, or vanishing after measured physical costs",
+  "investment_trigger": "Human P1 PASS with stable cross-cluster cross-proxy equal-yield benefit, OR a faithful probe showing non-rare material predictable action regret after physical costs",
+  "outputs_directory": "outputs/local_scientific_audit_v1/"
+}

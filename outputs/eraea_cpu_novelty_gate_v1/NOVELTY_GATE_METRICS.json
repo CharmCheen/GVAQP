@@ -1,0 +1,106 @@
+{
+  "equal_yield": {
+    "per_cluster": {
+      "DALI": {
+        "abs_ge_0_03_share": 0.2857142857142857,
+        "median_delta_F1": 0.0,
+        "n_pairs": 14,
+        "positive_direction_share": 0.07142857142857142
+      },
+      "HANGZHOU": {
+        "abs_ge_0_03_share": 0.1111111111111111,
+        "median_delta_F1": 0.0,
+        "n_pairs": 27,
+        "positive_direction_share": 0.14814814814814814
+      },
+      "WUHAN": {
+        "abs_ge_0_03_share": 0.0967741935483871,
+        "median_delta_F1": 0.0,
+        "n_pairs": 31,
+        "positive_direction_share": 0.0967741935483871
+      }
+    },
+    "pooled": {
+      "abs_ge_0_03_share": 0.1388888888888889,
+      "median_delta_F1": 0.0,
+      "n_pairs": 72,
+      "positive_direction_share": 0.1111111111111111
+    }
+  },
+  "g_generic_median": -0.0194,
+  "g_generic_per_cluster": [
+    {
+      "best_generic": "stratified",
+      "best_generic_auc": 0.1699,
+      "cluster": "DALI",
+      "eta_explained": 6.0026,
+      "g_generic": -0.0244,
+      "relation_greedy_auc": 0.1455,
+      "top_proxy_auc": 0.1406
+    },
+    {
+      "best_generic": "mmr",
+      "best_generic_auc": 0.1669,
+      "cluster": "HANGZHOU",
+      "eta_explained": NaN,
+      "g_generic": 0.0,
+      "relation_greedy_auc": 0.1669,
+      "top_proxy_auc": 0.1669
+    },
+    {
+      "best_generic": "seiden_ucb",
+      "best_generic_auc": 0.1971,
+      "cluster": "WUHAN",
+      "eta_explained": NaN,
+      "g_generic": -0.0194,
+      "relation_greedy_auc": 0.1778,
+      "top_proxy_auc": 0.1778
+    }
+  ],
+  "materializer_decoupling": {
+    "gain_gap_aware_C1": 0.0016,
+    "gain_gap_aware_C3": 0.0005,
+    "gain_gap_aware_K0": 0.0,
+    "gap_threshold_delta_rel_minus_top": {
+      "5.0": 0.0001,
+      "10.0": 0.0016,
+      "15.0": 0.0016,
+      "20.0": 0.0014
+    },
+    "retention_gap": 1.0,
+    "reversal_rate_across_materializers": 0.2222
+  },
+  "reward_ablation": {
+    "median_gain_R1_over_R0": 0.0,
+    "median_gain_R2_over_R1": 0.0,
+    "median_gain_R3_over_R2": 0.0,
+    "median_gain_R4_over_R3": 0.0,
+    "per_cluster_R_auc": {
+      "R0": {
+        "DALI": 0.1406,
+        "HANGZHOU": 0.1669,
+        "WUHAN": 0.1778
+      },
+      "R1": {
+        "DALI": 0.1455,
+        "HANGZHOU": 0.1669,
+        "WUHAN": 0.1778
+      },
+      "R2": {
+        "DALI": 0.1455,
+        "HANGZHOU": 0.1669,
+        "WUHAN": 0.1778
+      },
+      "R3": {
+        "DALI": 0.1455,
+        "HANGZHOU": 0.1669,
+        "WUHAN": 0.1778
+      },
+      "R4": {
+        "DALI": 0.1455,
+        "HANGZHOU": 0.1669,
+        "WUHAN": 0.1778
+      }
+    }
+  }
+}

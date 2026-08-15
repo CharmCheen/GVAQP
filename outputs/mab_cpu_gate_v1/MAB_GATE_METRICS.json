@@ -1,0 +1,339 @@
+{
+  "anytime_auc_rows": [
+    {
+      "best_fixed_auc": 0.29979,
+      "cluster": "DALI_Q_VULN",
+      "g_lookahead": 0.0,
+      "g_oracle": 0.474,
+      "oracle1_auc": 0.77379,
+      "oracle2_auc": 0.77379
+    },
+    {
+      "best_fixed_auc": 0.33323,
+      "cluster": "HANGZHOU_Q_VULN",
+      "g_lookahead": 0.0,
+      "g_oracle": 0.46514,
+      "oracle1_auc": 0.79838,
+      "oracle2_auc": 0.79838
+    },
+    {
+      "best_fixed_auc": 0.33963,
+      "cluster": "WUHAN_Q_VULN",
+      "g_lookahead": 0.0,
+      "g_oracle": 0.51344,
+      "oracle1_auc": 0.85307,
+      "oracle2_auc": 0.85307
+    }
+  ],
+  "baseline_gain_mean": 0.0,
+  "g_lookahead_median": 0.0,
+  "g_oracle_median": 0.474,
+  "headroom_correction_note": "headroom_recovered uses baseline=0 (top-proxy baseline action terminal delta is 0 by construction); earlier draft used worst-action baseline and is superseded",
+  "headroom_recovered": 0.3184,
+  "lovo_rows": [
+    {
+      "heldout_video": "DALI",
+      "mean_selected_regret": 0.01891,
+      "n_test_rows": 18720,
+      "n_train_states": 37440,
+      "oracle_gain_mean": 0.0245,
+      "pairwise_accuracy": 0.2143,
+      "spearman": -0.1703
+    },
+    {
+      "heldout_video": "HANGZHOU",
+      "mean_selected_regret": 0.0103,
+      "n_test_rows": 18720,
+      "n_train_states": 37440,
+      "oracle_gain_mean": 0.02528,
+      "pairwise_accuracy": 0.2314,
+      "spearman": 0.2027
+    },
+    {
+      "heldout_video": "WUHAN",
+      "mean_selected_regret": 0.0296,
+      "n_test_rows": 18720,
+      "n_train_states": 37440,
+      "oracle_gain_mean": 0.03651,
+      "pairwise_accuracy": 0.188,
+      "spearman": -0.0094
+    }
+  ],
+  "model_selected_gain_mean": 0.00916,
+  "oracle_gain_mean": 0.02876,
+  "per_cluster": {
+    "DALI_Q_VULN": {
+      "auc": {
+        "coverage_first": 0.29979,
+        "oracle1": 0.77379,
+        "oracle2": 0.77379,
+        "relation_greedy": 0.27808,
+        "top_proxy": 0.25375,
+        "uniform": 0.05357
+      },
+      "best_fixed": "coverage_first",
+      "g_lookahead": 0.0,
+      "g_oracle": 0.474
+    },
+    "HANGZHOU_Q_VULN": {
+      "auc": {
+        "coverage_first": 0.31307,
+        "oracle1": 0.79838,
+        "oracle2": 0.79838,
+        "relation_greedy": 0.33323,
+        "top_proxy": 0.33323,
+        "uniform": 0.19135
+      },
+      "best_fixed": "top_proxy",
+      "g_lookahead": 0.0,
+      "g_oracle": 0.46514
+    },
+    "WUHAN_Q_VULN": {
+      "auc": {
+        "coverage_first": 0.2164,
+        "oracle1": 0.85307,
+        "oracle2": 0.85307,
+        "relation_greedy": 0.33963,
+        "top_proxy": 0.33963,
+        "uniform": 0.08258
+      },
+      "best_fixed": "top_proxy",
+      "g_lookahead": 0.0,
+      "g_oracle": 0.51344
+    }
+  },
+  "reward_alignment_rows": [
+    {
+      "cluster": "DALI_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "harmful_dev_rate_r0": 1.0,
+      "harmful_dev_rate_r1": 1.0,
+      "harmful_dev_rate_r2": 1.0,
+      "harmful_dev_rate_r3": 1.0,
+      "harmful_dev_rate_r4": 1.0,
+      "spearman_r0": 0.0311,
+      "spearman_r1": -0.0121,
+      "spearman_r2": -0.0121,
+      "spearman_r3": -0.0121,
+      "spearman_r4": -0.0121,
+      "top_action_acc_r0": 0.9712,
+      "top_action_acc_r1": 0.8301,
+      "top_action_acc_r2": 0.8301,
+      "top_action_acc_r3": 0.8301,
+      "top_action_acc_r4": 0.8301
+    },
+    {
+      "cluster": "HANGZHOU_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "harmful_dev_rate_r0": 1.0,
+      "harmful_dev_rate_r1": 1.0,
+      "harmful_dev_rate_r2": 1.0,
+      "harmful_dev_rate_r3": 1.0,
+      "harmful_dev_rate_r4": 1.0,
+      "spearman_r0": 0.5275,
+      "spearman_r1": 0.1587,
+      "spearman_r2": 0.1587,
+      "spearman_r3": 0.1587,
+      "spearman_r4": 0.1587,
+      "top_action_acc_r0": 0.8494,
+      "top_action_acc_r1": 0.2292,
+      "top_action_acc_r2": 0.2292,
+      "top_action_acc_r3": 0.2292,
+      "top_action_acc_r4": 0.2292
+    },
+    {
+      "cluster": "WUHAN_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "harmful_dev_rate_r0": 1.0,
+      "harmful_dev_rate_r1": 1.0,
+      "harmful_dev_rate_r2": 1.0,
+      "harmful_dev_rate_r3": 1.0,
+      "harmful_dev_rate_r4": 1.0,
+      "spearman_r0": 0.5145,
+      "spearman_r1": 0.1427,
+      "spearman_r2": 0.1427,
+      "spearman_r3": 0.1427,
+      "spearman_r4": 0.1427,
+      "top_action_acc_r0": 0.9038,
+      "top_action_acc_r1": 0.1018,
+      "top_action_acc_r2": 0.1018,
+      "top_action_acc_r3": 0.1018,
+      "top_action_acc_r4": 0.1018
+    }
+  ],
+  "rho": {
+    "beneficial": 2208,
+    "harmful_action_rate": 0.06732549857549858,
+    "indifferent": 1536,
+    "n_states": 3744,
+    "rho_0.01": 0.5996260683760684,
+    "rho_0.02": 0.5897435897435898,
+    "rho_0.05": 0.11778846153846154
+  },
+  "rho_rows": [
+    {
+      "cluster": "DALI_Q_DRIVER_RESPONSE_V1",
+      "eps": 0.01,
+      "n_states": 1248,
+      "rho": 0.8301282051282052
+    },
+    {
+      "cluster": "DALI_Q_DRIVER_RESPONSE_V1",
+      "eps": 0.02,
+      "n_states": 1248,
+      "rho": 0.8277243589743589
+    },
+    {
+      "cluster": "DALI_Q_DRIVER_RESPONSE_V1",
+      "eps": 0.05,
+      "n_states": 1248,
+      "rho": 0.0
+    },
+    {
+      "beneficial": 1033,
+      "cluster": "DALI_Q_DRIVER_RESPONSE_V1",
+      "eps": "counts_0.02",
+      "harmful": 0.031997863247863245,
+      "indifferent": 215,
+      "n_states": 1248,
+      "rho": NaN
+    },
+    {
+      "cluster": "DALI_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "eps": 0.01,
+      "n_states": 1248,
+      "rho": 0.7732371794871795
+    },
+    {
+      "cluster": "DALI_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "eps": 0.02,
+      "n_states": 1248,
+      "rho": 0.7612179487179487
+    },
+    {
+      "cluster": "DALI_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "eps": 0.05,
+      "n_states": 1248,
+      "rho": 0.0
+    },
+    {
+      "beneficial": 950,
+      "cluster": "DALI_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "eps": "counts_0.02",
+      "harmful": 0.06233974358974359,
+      "indifferent": 298,
+      "n_states": 1248,
+      "rho": NaN
+    },
+    {
+      "cluster": "HANGZHOU_Q_DRIVER_RESPONSE_V1",
+      "eps": 0.01,
+      "n_states": 1248,
+      "rho": 0.359775641025641
+    },
+    {
+      "cluster": "HANGZHOU_Q_DRIVER_RESPONSE_V1",
+      "eps": 0.02,
+      "n_states": 1248,
+      "rho": 0.3213141025641026
+    },
+    {
+      "cluster": "HANGZHOU_Q_DRIVER_RESPONSE_V1",
+      "eps": 0.05,
+      "n_states": 1248,
+      "rho": 0.0
+    },
+    {
+      "beneficial": 401,
+      "cluster": "HANGZHOU_Q_DRIVER_RESPONSE_V1",
+      "eps": "counts_0.02",
+      "harmful": 0.004754273504273504,
+      "indifferent": 847,
+      "n_states": 1248,
+      "rho": NaN
+    },
+    {
+      "cluster": "HANGZHOU_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "eps": 0.01,
+      "n_states": 1248,
+      "rho": 0.4375
+    },
+    {
+      "cluster": "HANGZHOU_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "eps": 0.02,
+      "n_states": 1248,
+      "rho": 0.42467948717948717
+    },
+    {
+      "cluster": "HANGZHOU_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "eps": 0.05,
+      "n_states": 1248,
+      "rho": 0.0
+    },
+    {
+      "beneficial": 530,
+      "cluster": "HANGZHOU_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "eps": "counts_0.02",
+      "harmful": 0.03327991452991453,
+      "indifferent": 718,
+      "n_states": 1248,
+      "rho": NaN
+    },
+    {
+      "cluster": "WUHAN_Q_DRIVER_RESPONSE_V1",
+      "eps": 0.01,
+      "n_states": 1248,
+      "rho": 0.40625
+    },
+    {
+      "cluster": "WUHAN_Q_DRIVER_RESPONSE_V1",
+      "eps": 0.02,
+      "n_states": 1248,
+      "rho": 0.39503205128205127
+    },
+    {
+      "cluster": "WUHAN_Q_DRIVER_RESPONSE_V1",
+      "eps": 0.05,
+      "n_states": 1248,
+      "rho": 0.0
+    },
+    {
+      "beneficial": 493,
+      "cluster": "WUHAN_Q_DRIVER_RESPONSE_V1",
+      "eps": "counts_0.02",
+      "harmful": 0.03295940170940171,
+      "indifferent": 755,
+      "n_states": 1248,
+      "rho": NaN
+    },
+    {
+      "cluster": "WUHAN_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "eps": 0.01,
+      "n_states": 1248,
+      "rho": 0.5881410256410257
+    },
+    {
+      "cluster": "WUHAN_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "eps": 0.02,
+      "n_states": 1248,
+      "rho": 0.5833333333333334
+    },
+    {
+      "cluster": "WUHAN_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "eps": 0.05,
+      "n_states": 1248,
+      "rho": 0.35336538461538464
+    },
+    {
+      "beneficial": 728,
+      "cluster": "WUHAN_Q_VULNERABLE_ROAD_USER_CONFLICT_V1",
+      "eps": "counts_0.02",
+      "harmful": 0.1063568376068376,
+      "indifferent": 520,
+      "n_states": 1248,
+      "rho": NaN
+    }
+  ],
+  "routes": {
+    "action_space": "ACTION_SPACE_GO",
+    "context": "INCONCLUSIVE_CONTEXT",
+    "lookahead": "MYOPIC_CONTEXTUAL_MAB_IS_ADEQUATE"
+  }
+}
