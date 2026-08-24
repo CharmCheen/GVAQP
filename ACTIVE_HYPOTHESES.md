@@ -1,60 +1,61 @@
 # Active hypotheses
 
-Only the hypotheses below remain active. “Active” means scientifically open,
-not automatically authorized for execution.
+“Active” means scientifically open, not automatically authorized.
 
-## H1 — Independent human event utility of evidence geometry
+## H0 — DirectVerify or a fixed policy is sufficient
 
-At equal verified-positive count, traces with broader policy-visible temporal
-evidence geometry recover more independently human-defined events.
+A simple region-level DirectVerify schedule or a fixed scan/verify policy may
+capture all deployable value once costs and evaluator semantics are matched.
+This is the mandatory killer baseline, not a straw man.
 
-- Empirical status: **NOT ESTABLISHED**.
-- Current gate: `P1 = WAITING_HUMAN_REFERENCE`.
-- Primary unit: video × query cluster, not trace or budget cell.
-- Primary endpoints: distinct human events touched, human-event coverage,
-  zero-evidence events, positive-anchor events, and frozen-C1 human EventRecall
-  and EventF1.
-- Required support: stable benefit across multiple clusters and both natural
-  proxy families under the frozen P1 rule.
-- Reject/revise trigger: human P1 PARTIAL or FAIL; proxy-specific, single-video,
-  C1-only, or reference-only effects do not pass.
+## H1 / B0 — Faithful action creation
 
-Competing H0: yield and generic temporal coverage explain the apparent effect,
-or the old signal is induced by C1/K3 and model-relative reference geometry.
-The VLM shadow and completed model-relative P2 diagnostic currently favor
-caution, but neither replaces the human test.
+A query-visible, reference-blind SCAN/PROPOSE action can return zero to many
+fallible candidates and thereby create future candidate-VERIFY capabilities
+that differ from region-level DirectVerify.
 
-Evidence:
-`outputs/gvaqp_long_horizon_p1_p3_v1/P1_ANALYSIS_READINESS.md` and
-`outputs/p1_shadow_vlm_direct_reference_v1/FINAL_SHADOW_REPORT.md`.
+- Status: **CPU INFRASTRUCTURE QUALIFIED; natural utility NOT ESTABLISHED**.
+- Completed action: CPU-only contract implementation and invariant tests.
+- CPU PASS requires: zero-candidate support with no hidden fallback; candidate
+  VERIFY illegal before exposure; DirectVerify remains distinct; query is
+  public but reference truth is absent; materialization uses observed local
+  relations only; identical traces receive identical scores.
+- Revision trigger: any invariant cannot be implemented without reference
+  access, forced candidates, unequal clocks, or evaluator asymmetry.
 
-## H2 — Faithful endogenous SCAN creates exploitable action regret
+## H2 / B1 — Natural opportunity
 
-In a real online cheap-sensing process, SCAN creates fallible evidence and
-future VERIFY actions at measured cost; naturally visited states may contain
-non-rare, material, policy-visible SCAN-versus-VERIFY regret.
+After B0 passes, fresh workloads may contain non-rare, material advantage for
+SCAN-created candidates over DirectVerify. Existing synthetic and six consumed
+T2 workloads cannot establish this.
 
-- Empirical status: **NOT ESTABLISHED**.
-- Current gate: deferred future P4; **not authorized now**.
-- Required substrate: online raw-video sensing, endogenous candidates,
-  measurable natural misses, measured SCAN/VERIFY costs, independent-human
-  utility, prospective state logging, and behavior propensities.
-- Required support before any controller: regret must be non-rare, practically
-  large, predictable across held-out videos, and robust to wrong-deviation cost.
-- Reject/revise trigger: low prevalence, trivial magnitude, failure of
-  cross-video prediction, or no net value after physical costs.
+- Current gate: `B1A_PROTOCOL_FROZEN_EXECUTION_BLOCKED_INPUTS_UNBOUND`.
+- Minimum screen: three new independent continuous videos × all six frozen
+  discovery queries; no human reference.
+- Immediate need: bind video, scanner, verifier, prompt, runtime, and hardware
+  hashes before requesting external-compute authorization.
 
-Competing H0: fixed deterministic coverage plus interleaved VERIFY already
-captures nearly all usable value, and remaining hindsight regret is not
-predictable from legal state.
+## H3 / B2 — Online observability
 
-Evidence:
-`outputs/original_theory_identifiability_audit_v1/FINAL_IDENTIFIABILITY_REPORT.md`
-and `MINIMUM_FAITHFUL_P4_SUBSTRATE.md` in the same directory.
+If B1 exists, its action advantage may be predictable from legal public state
+on held-out videos. Competing H0 is that hindsight headroom is not observable.
 
-## Current experimental authorization
+## H4 / B3 — Deployable policy benefit
 
-There is no authorized autonomous experiment. The only live confirmatory
-protocol is human P1, which requires external human annotation. P2/P3/P4/P5
-must not start from agent initiative under the present state.
+Only after B0-B2 pass may a policy be tested against DirectVerify, fixed
+interleavings, fixed ExSample variants, and proxy-greedy baselines. The current
+DATB identities are closed and are not incumbents to tune.
 
+## Deferred human hypothesis
+
+Independent-human event utility remains unresolved. The user has deferred
+human audit; absence of labels is neither PASS nor FAIL.
+
+## Current authorization boundary
+
+Authorized: local CPU code, synthetic fixtures, invariant tests, read-only
+cached audits, protocol and manifest freezes.
+
+Not authorized: GPU/VLM/API inference, human work, new raw semantic outcomes,
+physical-cost collection, tuning on the six consumed T2 workloads, or adaptive
+planner/controller training.

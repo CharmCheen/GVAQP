@@ -1,0 +1,7 @@
+baseline,decision_role,action_space,selection_rule,current_status
+DirectVerifyUniform,primary_killer,DIRECT_VERIFY,"earliest unverified region",IMPLEMENTED_CPU_CONTRACT
+ScanThenProxyGreedy,cheap_sensing_baseline,"SCAN then candidate VERIFY","scan all regions then highest exposed proxy score",IMPLEMENTED_CPU_CONTRACT
+FixedInterleave,future_simple_schedule,"SCAN and candidate VERIFY","preregistered fixed ratio",SPEC_ONLY
+FixedExSample,future_external_baseline,"matched sensing and verification","single preregistered chunk or training-only selection",SPEC_ONLY
+PerRowExSampleEnvelope,diagnostic_upper_comparator,"row-specific hindsight selection","oracle best chunk per row",NEVER_DEPLOYABLE_BASELINE
+CurrentDATB,retired_incumbent,"legacy SCAN and VERIFY","retired implementation",CLOSED

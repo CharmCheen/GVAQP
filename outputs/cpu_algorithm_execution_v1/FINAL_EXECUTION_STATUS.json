@@ -1,0 +1,52 @@
+{
+  "date": "2026-08-24",
+  "scope": "frozen_cpu_only_execution_through_t2_c1",
+  "canonical_state_modified": false,
+  "final_algorithmic_status": "FAIL_RETIRE_CURRENT_DATB_ALGORITHMIC_CLAIM",
+  "venue_readiness": "NOT_READY_FOR_VLDB_OR_SIGMOD",
+  "cost_tier": "C1_SIMULATED_COST_ONLY",
+  "reference_type": "cached_vlm_relative_10_second_unit_outcomes",
+  "event_type": "contiguous_model_relative_relevant_units",
+  "independent_descriptive_workloads": 6,
+  "unique_videos": 3,
+  "unique_queries": 2,
+  "policy_replays": 2880,
+  "paired_datb_exsample_rows": 360,
+  "datb_minus_exsample": {
+    "mean_auc_delta": -0.04084211260391411,
+    "median_auc_delta": -0.03998334341531906,
+    "positive_pairs": 44,
+    "equal_pairs": 0,
+    "negative_pairs": 316,
+    "workloads_with_positive_mean_delta": 0,
+    "total_workloads": 6
+  },
+  "prior_gate_status": {
+    "t0_provenance": "RETIRED_FOR_CLAIM_USE",
+    "t0_5_evaluator_parity": "EVALUATOR_PARITY_UNRESOLVED",
+    "h2_original_mechanism": "FAIL",
+    "h2_coupling_mechanism": "FAIL",
+    "synthetic_exsample_killer": "PASS_SYNTHETIC_EXSAMPLE_KILLER",
+    "t2_c1_existing_corpus": "FAIL_CURRENT_DATB_SUPERIORITY_CLAIM"
+  },
+  "allowed_interpretation": "On the existing six-cell cached corpus under C1 simulated costs and model-relative events, the adapted ExSample envelope consistently outperforms DATB-SV in anytime committed utility.",
+  "forbidden_interpretations": [
+    "DATB-SV is superior on natural workloads",
+    "C1 establishes real deadline safety",
+    "six video-query cells establish generalization",
+    "cached VLM-relative events are independent human ground truth",
+    "the result disproves every causal scan-verify planner"
+  ],
+  "prohibited_rescue_actions": [
+    "post-outcome DATB tuning on the six cells",
+    "workload or query removal",
+    "seed selection",
+    "controller training",
+    "MAB or RL training",
+    "threshold search",
+    "redefinition of the failed mechanism"
+  ],
+  "exact_next_action": "Freeze DATB-SV as a negative algorithmic result, complete independent human-event annotations under the already frozen protocol, and run the preregistered human-event utility pipeline without changing metrics, pair selection, or statistical procedures.",
+  "primary_report": "docs/cpu_only_algorithm_consolidation_20260824/14_FINAL_CPU_EXECUTION_AND_IDEA_VERDICT.md",
+  "t2_result_directory": "outputs/t2_c1_existing_corpus_replay_v1_retry2"
+}

@@ -1,0 +1,24 @@
+{
+  "algorithm_id": "DATB_SV_CPU_REPLAY_V1",
+  "research_question": "How should an open-semantic video query engine interleave candidate discovery and semantic verification under a hard deadline when only durable committed events count?",
+  "oracle_contract": "replaceable confirm(candidate, query) adapter; oracle identity is not a scheduling feature",
+  "primary_metric": "DistinctCommittedEvents@Deadline",
+  "human_external_validation": "deferred_not_removed",
+  "cpu_only": true,
+  "training": false,
+  "new_inference": false,
+  "git_commit": "3fcd801be2b22da7ec2309038bd89724d3e1378a",
+  "git_dirty": true,
+  "timestamp": "2026-08-24T00:00:00+08:00",
+  "sha256": {
+    "src/garc/datb_sv.py": "0e0a362767bd9e298df69941001c3662d5b696077eb84609e6c94878cadcfa35",
+    "scripts/run_datb_sv_cpu_replay.py": "f8d30b592f1fadca122169662f8368ad3dda0bb1311657b44e127c47a79b9676",
+    "tests/test_datb_sv.py": "afcf189c04c27604a932f3d2dc4df2d93a712f81d11fdf846a803ffc7a688540",
+    "src/garc/__init__.py": "b853df6c489f09927403488e131836f7f2c5fce16d699d10e51fb80342b4c961",
+    "docs/cpu_only_algorithm_consolidation_20260824/01_REPO_ALGORITHM_AND_EVIDENCE_AUDIT.md": "169f5d168ad97a22f6a855da2015afe52b3b9a95f465f91f7041361792d63e24",
+    "docs/cpu_only_algorithm_consolidation_20260824/02_ORACLE_AGNOSTIC_DATB_SV_SPEC.md": "5c4906dfdffdef55d6d65bd0a19d12e1a8656228ae86be1aec613b7e01bd8131",
+    "docs/cpu_only_algorithm_consolidation_20260824/03_CPU_ONLY_EXECUTION_REPORT.md": "2b3b6df455336dd314983cb057602788d853ce2ef29ad98c13c5b1c503d80078",
+    "docs/cpu_only_algorithm_consolidation_20260824/04_CCF_IDEA_OPTIMIZATION_AND_EXPERIMENT_PLAN.md": "921a6ccec9a744b609baaaece4838ca8150afdd994c161c6d5d18f746ebde3e0",
+    "docs/cpu_only_algorithm_consolidation_20260824/FINAL_ADVISOR_REPORT.md": "f9211ac7a1bc3bca38c3c1e7ceb442fdab4d4183058520490d6770bbdfd6f83e"
+  }
+}

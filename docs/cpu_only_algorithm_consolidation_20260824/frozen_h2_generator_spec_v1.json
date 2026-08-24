@@ -1,0 +1,40 @@
+{
+  "schema_version": "H2_SYNTHETIC_GENERATOR_SPEC_V1",
+  "status": "FROZEN_BEFORE_FULL_H2_OUTCOMES",
+  "design_matrix": "docs/cpu_only_algorithm_consolidation_20260824/frozen_h2_design_matrix_v1.csv",
+  "relation": "F=(A+B+C+D) mod 3",
+  "core_rows": 81,
+  "cost_ratios": [1, 3, 10, 30],
+  "total_design_points": 324,
+  "seeds": [1729, 3253, 4999, 7919, 104729],
+  "primary_policies": [
+    "datb_sv_1_to_1",
+    "sequential_1_to_1",
+    "uniform_stride_1_to_1",
+    "largest_gap_1_to_1",
+    "random_1_to_1"
+  ],
+  "factor_levels": {
+    "event_density": ["sparse", "medium", "dense"],
+    "temporal_modes": [1, 3, 6],
+    "event_duration": ["short", "medium", "long"],
+    "proxy_exposure_noise": ["none", "false_negative", "false_positive"],
+    "verify_scan_cost_ratio": [1, 3, 10, 30],
+    "deadline_tightness": [0.2, 0.4, 0.6]
+  },
+  "exclusion_rules": [
+    "schema_invalid_trace",
+    "causal_frontier_invariant_violation",
+    "impossible_offline_reference",
+    "non_finite_timestamp_or_cost"
+  ],
+  "forbidden_exclusions": [
+    "zero_effect",
+    "negative_effect",
+    "unexpected_direction",
+    "inconvenient_regime"
+  ],
+  "cost_tier": "C1_SIMULATED_BOUND",
+  "new_inference": false,
+  "training": false
+}
